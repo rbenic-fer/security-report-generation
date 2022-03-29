@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<!--[if IE 7]>
+<html class="ie ie7" lang="en-US">
+<![endif]-->
+<!--[if IE 8]>
+<html class="ie ie8" lang="en-US">
+<![endif]-->
+<!--[if !(IE 7) | !(IE 8)  ]><!-->
+<html lang="en-US">
+<!--<![endif]-->
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width" />
+<link rel="profile" href="http://gmpg.org/xfn/11" />
+<!--[if lt IE 9]>
+<script src="https://krebsonsecurity.com/wp-content/themes/kos-mar2021/js/html5.js" type="text/javascript"></script>
+<![endif]-->
+<title>Krebs on Security &#8211; Page 71 &#8211; In-depth security news and investigation</title>
+<meta name='robots' content='max-image-preview:large' />
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="Krebs on Security &raquo; Feed" href="https://krebsonsecurity.com/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Krebs on Security &raquo; Comments Feed" href="https://krebsonsecurity.com/comments/feed/" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.1.0\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.1.0\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/krebsonsecurity.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=5.8.2"}};
+			!function(e,a,t){var n,r,o,i=a.createElement("canvas"),p=i.getContext&&i.getContext("2d");function s(e,t){var a=String.fromCharCode;p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,e),0,0);e=i.toDataURL();return p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,t),0,0),e===i.toDataURL()}function c(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(o=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},r=0;r<o.length;r++)t.supports[o[r]]=function(e){if(!p||!p.fillText)return!1;switch(p.textBaseline="top",p.font="600 32px Arial",e){case"flag":return s([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])?!1:!s([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!s([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]);case"emoji":return!s([10084,65039,8205,55357,56613],[10084,65039,8203,55357,56613])}return!1}(o[r]),t.supports.everything=t.supports.everything&&t.supports[o[r]],"flag"!==o[r]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[o[r]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(n=t.source||{}).concatemoji?c(n.concatemoji):n.wpemoji&&n.twemoji&&(c(n.twemoji),c(n.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+	<link rel='stylesheet' id='colorbox-theme1-css'  href='https://krebsonsecurity.com/wp-content/plugins/jquery-lightbox-for-native-galleries/colorbox/theme1/colorbox.css?ver=1.3.14' type='text/css' media='screen' />
+<link rel='stylesheet' id='wp-block-library-css'  href='https://krebsonsecurity.com/wp-includes/css/dist/block-library/style.min.css?ver=5.8.2' type='text/css' media='all' />
+<link rel='stylesheet' id='contact-form-7-css'  href='https://krebsonsecurity.com/wp-content/plugins/contact-form-7/includes/css/styles.css?ver=5.5.3' type='text/css' media='all' />
+<link rel='stylesheet' id='publisho-style-css'  href='https://krebsonsecurity.com/wp-content/themes/kos-mar2021/style.css?subver=1.2&#038;ver=5.8.2' type='text/css' media='all' />
+<style id='publisho-style-inline-css' type='text/css'>
+
+	.themonic-nav .current-menu-item > a, .themonic-nav .current-menu-ancestor > a, .themonic-nav .current_page_item > a, .themonic-nav .current_page_ancestor > a {
+		background: #cc6600;
+	}
+	.themonic-nav ul.nav-menu, .themonic-nav div.nav-menu > ul {
+		border-bottom: 5px solid #cc6600;
+	}
+	#site-navigation .topheadmenu a {
+    background: rgba(0, 0, 0, 0);
+	}
+	.themonic-nav li a:hover {
+		background: #cc6600;
+	}
+	.themonic-nav li:hover {
+		background: #cc6600;
+	}.wrapper .flexslider {margin: 0 0 30px;}.frontp .btm-wrap {
+    border-top: 1px solid #e9e9e9;
+	}
+	.entry-summary {
+    border-top: none;
+	}.frontp .btm-wrap { margin-bottom: 30px;}.site { font-size:14px;}.site { font-family:'Roboto', arial ;}
+</style>
+<link rel='stylesheet' id='publisho-custom-style-css'  href='https://krebsonsecurity.com/wp-content/themes/kos-mar2021/custom.css?subver=1.2&#038;ver=5.8.2' type='text/css' media='all' />
+<!--[if lt IE 9]>
+<link rel='stylesheet' id='publisho-ie-css'  href='https://krebsonsecurity.com/wp-content/themes/kos-mar2021/css/ie.css?ver=20160606' type='text/css' media='all' />
+<![endif]-->
+<link rel='stylesheet' id='fontawesome-css-css'  href='https://krebsonsecurity.com/wp-content/themes/kos-mar2021/fonts/font-awesome.min.css?ver=5.8.2' type='text/css' media='all' />
+<link rel='stylesheet' id='publisho_custom_fonts-css'  href='//fonts.googleapis.com/css?family=Roboto%3Aregular%2Citalic%2C500%26subset%3Dlatin%2C' type='text/css' media='screen' />
+<script type='text/javascript' src='https://krebsonsecurity.com/wp-includes/js/jquery/jquery.min.js?ver=3.6.0' id='jquery-core-js'></script>
+<script type='text/javascript' src='https://krebsonsecurity.com/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.3.2' id='jquery-migrate-js'></script>
+<script type='text/javascript' src='https://krebsonsecurity.com/wp-content/plugins/jquery-lightbox-for-native-galleries/colorbox/jquery.colorbox-min.js?ver=1.3.14' id='colorbox-js'></script>
+<link rel="https://api.w.org/" href="https://krebsonsecurity.com/wp-json/" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://krebsonsecurity.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://krebsonsecurity.com/wp-includes/wlwmanifest.xml" /> 
+<meta name="generator" content="WordPress 5.8.2" />
+<!-- JavaScript Pull-Quotes plugin v2.2 -->
+	<link rel="stylesheet" href="https://krebsonsecurity.com/wp-content/plugins/jspullquotes/resources/jspullquotes-core.css" type="text/css" />
+	<link rel="stylesheet" href="https://krebsonsecurity.com/wp-content/plugins/jspullquotes/resources/jspullquotes-default.css" type="text/css" />
+	<script type="text/javascript" src="https://krebsonsecurity.com/wp-content/plugins/jspullquotes/resources/jspullquotes.js"></script>
+	<script type="text/javascript">
+		var arrOptions = new Array("1", "1", "right", "1", "1", "blockquote", "pullquote", "pullquote pqRight");
+		pullQuoteOpts(arrOptions);
+	</script>
+<!-- end pull-quote additions -->
+<!-- jQuery Lightbox For Native Galleries v3.1.3 | http://www.viper007bond.com/wordpress-plugins/jquery-lightbox-for-native-galleries/ -->
+<script type="text/javascript">
+// <![CDATA[
+	jQuery(document).ready(function($){
+		$(".gallery").each(function(index, obj){
+			var galleryid = Math.floor(Math.random()*10000);
+			$(obj).find("a").colorbox({rel:galleryid, maxWidth:"95%", maxHeight:"95%"});
+		});
+		$("a.lightbox").colorbox({maxWidth:"95%", maxHeight:"95%"});
+	});
+// ]]>
+</script>
+<style type="text/css" id="custom-background-css">
+body.custom-background { background-color: #ffffff; }
+</style>
+	<link rel="me" href="https://twitter.com/briankrebs" /><meta name="twitter:widgets:link-color" content="#000000" /><meta name="twitter:widgets:border-color" content="#000000" /><meta name="twitter:partner" content="tfwp" />
+<meta name="twitter:card" content="summary" /><meta name="twitter:title" content="Krebs on Security" /><meta name="twitter:site" content="@briankrebs" /><meta name="twitter:description" content="In-depth security news and investigation" />
+</head>
+<body class="home blog paged custom-background paged-71 custom-background-white single-author frontp hfeed">
+<div id="page" class="site">
+	<!-- <div class="publisho-top-mobile-nav clear"></div> -->
+	<div class="themonic-logo themonic-ad3"><div class="a-statement">Advertisement</div><a href="https://securityscorecard.com/instant-security-scorecard?utm_source=krebs+on+security&amp;utm_medium=display&amp;utm_campaign=instant+scorecard&amp;utm_term=B&amp;utm_content=1240x110">
+<img src="/b-securityscorecard/5.jpg">
+</a></div>
+	<div class="themonic-logo themonic-ad6"><div class="a-statement">Advertisement</div><a href="https://securityscorecard.com/instant-security-scorecard?utm_source=krebs+on+security&amp;utm_medium=display&amp;utm_campaign=instant+scorecard&amp;utm_term=B&amp;utm_content=1240x160">
+<img src="/b-securityscorecard/6.jpg">
+</a></div>
+	<nav id="site-navigation" class="themonic-nav" role="navigation">
+	</nav><!-- #site-navigation -->
+	<div class="clear"></div>
+	<header id="masthead" class="site-header" role="banner">
+ 					<div class="desktop-social">
+						<div class="socialmedia">
+							<a href="http://twitter.com/briankrebs" target="_blank"><i class="fa fa-twitter"></i></a> 
+															<a class="rss" href="https://krebsonsecurity.com/feed/" target="_blank"><i class="fa fa-rss"></i></a>	
+									<a class="rss" href="https://www.linkedin.com/in/bkrebs/" target="_blank"><i class="fa fa-linkedin"></i></a>	
+								</div>
+				 	</div>
+																						   
+		
+		<div class="themonic-logo responsive-img-container">
+			<a href="https://krebsonsecurity.com/" title="Krebs on Security" rel="home"><img src="https://krebsonsecurity.com/wp-content/uploads/2021/03/kos-27-03-2021.jpg" alt="Krebs on Security"></a>
+		</div>
+
+					<div class="mobile-social">
+						<div class="socialmedia">
+							<a href="http://twitter.com/briankrebs" target="_blank"><i class="fa fa-twitter"></i></a> 
+															<a class="rss" href="https://krebsonsecurity.com/feed/" target="_blank"><i class="fa fa-rss"></i></a>	
+									<a class="rss" href="https://www.linkedin.com/in/bkrebs/" target="_blank"><i class="fa fa-linkedin"></i></a>	
+								</div>
+					</div>
+		
+				<!-- <div class="publisho-mobile-nav clear"></div> -->
+		<nav id="site-navigation" class="themonic-nav" role="navigation">
+			<a class="assistive-text" href="#content" title="Skip to content">Skip to content</a>
+			<div id="menu-top" class="nav-menu"><ul>
+<li ><a href="https://krebsonsecurity.com/">Home</a></li><li class="page_item page-item-2"><a href="https://krebsonsecurity.com/about/">About the Author</a></li>
+<li class="page_item page-item-645"><a href="https://krebsonsecurity.com/cpm/">Advertising/Speaking</a></li>
+</ul></div>
+		</nav><!-- #site-navigation -->
+		<div class="clear"></div>
+	</header><!-- #masthead -->
+	<div id="main" class="wrapper">
+		<div id="primary" class="site-content">
+	
+
+	
+		<div id="content" role="main">
+
+		<article id="post-37412" class="post-37412 post type-post status-publish format-standard hentry category-other tag-allison-nixon tag-ammar-zuberi tag-anime tag-anna-senpai tag-applej4ck tag-bashlite tag-blazingfast tag-bulletproof-hoster tag-cj-sculti tag-datawagon tag-ddos tag-ddos-for-hire tag-dox tag-dreadiscool tag-exfocus tag-fastreturn tag-fracisco-dias tag-frantech tag-golang tag-hackforums tag-hypixel tag-incapsula tag-jesse-wu tag-josiah-white tag-lelddos tag-litespeed tag-minecraft tag-minetime tag-mirai-nikki tag-namecentral tag-ogexfocus tag-ogmemes123123gmail-com tag-og_richard_stallman tag-p1st0 tag-paras-jha tag-pierre-lamy tag-protraf tag-protraf-solutions tag-proxypipe tag-qbot tag-richard-stallman tag-robert-coelho tag-rutgers-university-ddos tag-supermicro tag-swatting tag-switchnet-io tag-vdos tag-verisign tag-vyp0r">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2017/01/who-is-anna-senpai-the-mirai-worm-author/" title="Permalink to Who is Anna-Senpai, the Mirai Worm Author?" rel="bookmark">Who is Anna-Senpai, the Mirai Worm Author?</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">January 18, 2017</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2017/01/who-is-anna-senpai-the-mirai-worm-author/#comments">248 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>On September 22, 2016, this site was <a href="https://krebsonsecurity.com/2016/09/the-democratization-of-censorship/" target="_blank">forced offline</a> for nearly four days after it was hit with “<strong>Mirai</strong>,” a malware strain that enslaves poorly secured Internet of Things (IoT) devices like wireless routers and security cameras into a botnet for use in large cyberattacks. Roughly a week after that assault, the individual(s) who launched that attack &#8212; using the name “<strong>Anna-Senpai</strong>” &#8212; <a href="https://krebsonsecurity.com/2016/10/source-code-for-iot-botnet-mirai-released/" target="_blank">released the source code</a> for Mirai, spawning dozens of copycat attack armies online.</p>
+<p>After months of digging, KrebsOnSecurity is now confident to have uncovered Anna-Senpai’s real-life identity, and the identity of at least one co-conspirator who helped to write and modify the malware.</p>
+<div id="attachment_36550" style="width: 590px" class="wp-caption aligncenter"><a class="lightbox" href="https://krebsonsecurity.com/wp-content/uploads/2016/10/mirai-hf.png"><img aria-describedby="caption-attachment-36550" loading="lazy" class="wp-image-36550 size-medium" src="https://krebsonsecurity.com/wp-content/uploads/2016/10/mirai-hf-580x232.png" alt="The Hackforums post that includes links to the Mirai source code." width="580" height="232" srcset="https://krebsonsecurity.com/wp-content/uploads/2016/10/mirai-hf-580x232.png 580w, https://krebsonsecurity.com/wp-content/uploads/2016/10/mirai-hf-768x308.png 768w, https://krebsonsecurity.com/wp-content/uploads/2016/10/mirai-hf-940x377.png 940w, https://krebsonsecurity.com/wp-content/uploads/2016/10/mirai-hf.png 1956w" sizes="(max-width: 580px) 100vw, 580px" /></a><p id="caption-attachment-36550" class="wp-caption-text">Mirai co-author Anna-Senpai leaked the source code for Mirai on Sept. 30, 2016.</p></div>
+<p>Before we go further, a few disclosures are probably in order. First, this is easily the longest story I&#8217;ve ever written on this blog. It&#8217;s lengthy because I wanted to walk readers through my process of discovery, which has taken months to unravel. The details help in understanding the financial motivations behind Mirai and the botnet wars that preceded it. Also, I realize there are a great many names to keep track of as you read this post, <a href="https://krebsonsecurity.com/who-is-anna-senpai-mirai-story-glossary/" target="_blank">so I&#8217;ve included a glossary</a>.</p>
+<p>The story you&#8217;re reading now is the result of hundreds of hours of research.  At times, I was desperately seeking the missing link between seemingly unrelated people and events; sometimes I was inundated with huge amounts of information &#8212; much of it intentionally false or misleading &#8212; and left to search for kernels of truth hidden among the dross.  If you&#8217;ve ever wondered why it seems that so few Internet criminals are brought to justice, I can tell you that the sheer amount of persistence and investigative resources required to piece together who&#8217;s done what to whom (and why) in the online era is tremendous.</p>
+<p>As noted in previous KrebsOnSecurity articles, botnets like Mirai are used to knock individuals, businesses, governmental agencies, and non-profits offline on a daily basis. These so-called &#8220;<strong>distributed denial-of-service</strong> (<strong>DDoS) </strong>attacks<strong> </strong>are digital sieges in which an attacker causes thousands of hacked systems to hit a target with so much junk traffic that it falls over and remains unreachable by legitimate visitors. While DDoS attacks typically target a single Web site or Internet host, they often result in widespread collateral Internet disruption.</p>
+<p>A great deal of DDoS activity on the Internet originates from so-called &#8216;<a href="https://krebsonsecurity.com/tag/booter/" target="_blank">booter/stresser&#8217; services</a>, which are essentially DDoS-for-hire services which allow even unsophisticated users to launch high-impact attacks.  And as we will see, the incessant competition for profits in the blatantly illegal DDoS-for-hire industry can lead those involved down some very strange paths, indeed.</p>
+<h4>THE FIRST CLUES</h4>
+<p>The first clues to Anna-Senpai’s identity didn’t become clear until I understood that Mirai was just the latest incarnation of an IoT botnet family that has been in development and relatively broad use for nearly three years.</p>
+<p>Earlier this summer, my site was hit with several huge attacks from a collection of hacked IoT systems compromised by a family of botnet code that served as a precursor to Mirai. The malware went by several names, including “<strong>Bashlite</strong>,” “<strong>Gafgyt</strong>,” “<strong>Qbot</strong>,” “<strong>Remaiten</strong>,” and “<strong>Torlus</strong>.”</p>
+<p>All of these related IoT botnet varieties infect new systems in a fashion similar to other well-known Internet worms &#8212; propagating from one infected host to another. And like those earlier Internet worms, sometimes the Internet scanning these systems perform to identify other candidates for inclusion into the botnet is so aggressive that it constitutes an unintended DDoS on the very home routers, Web cameras and DVRs that the bot code is trying to subvert and recruit into the botnet. This kind of self-defeating behavior will be familiar to those who recall the original <a href="https://en.wikipedia.org/wiki/Morris_worm" target="_blank">Morris Worm</a>, <a href="https://en.wikipedia.org/wiki/Nimda" target="_blank">NIMDA</a>, <a href="https://en.wikipedia.org/wiki/Code_Red_(computer_worm)" target="_blank">CODE RED</a>, <a href="https://en.wikipedia.org/wiki/Welchia" target="_blank">Welchia</a>, <a href="https://en.wikipedia.org/wiki/Blaster_(computer_worm)" target="_blank">Blaster</a> and <a href="https://en.wikipedia.org/wiki/SQL_Slammer" target="_blank">SQL Slammer</a> disruptions of yesteryear.</p>
+<p>Infected IoT devices constantly scan the Web for other IoT things to compromise, wriggling into devices that are protected by little more than insecure factory-default settings and passwords. The infected devices are then forced to participate in DDoS attacks (ironically, many of the devices most commonly infected by Mirai and similar IoT worms are security cameras).</p>
+<p>Mirai’s ancestors had so many names because each name corresponded to a variant that included new improvements over time. In 2014, a group of Internet hooligans operating under the banner “<strong>lelddos</strong>” very publicly used the code to launch large, sustained attacks that knocked many Web sites offline.</p>
+<p>The most frequent target of the lelddos gang were Web servers used to host <strong><a href="http://Minecraft" target="_blank">Minecraft</a></strong>, a wildly popular computer game sold by <strong>Microsoft</strong> that can be played from any device and on any Internet connection.</p>
+<p>The object of Minecraft is to run around and build stuff, block by large pixelated block. That may sound simplistic and boring, but an impressive number of people positively adore this game – particularly pre-teen males. Microsoft <a href="http://www.theverge.com/2016/6/2/11838036/minecraft-sales-100-million" target="_blank">has sold more than a 100 million copies of Minecraft</a>, and at any given time there are over a million people playing it online. Players can build their own worlds, or visit a myriad other blocky realms by logging on to their favorite Minecraft server to play with friends.</p>
+<div id="attachment_37423" style="width: 590px" class="wp-caption aligncenter"><img aria-describedby="caption-attachment-37423" loading="lazy" class="size-medium wp-image-37423" src="https://krebsonsecurity.com/wp-content/uploads/2017/01/minecraft-580x250.png" alt="Image: Minecraft.net" width="580" height="250" srcset="https://krebsonsecurity.com/wp-content/uploads/2017/01/minecraft-580x250.png 580w, https://krebsonsecurity.com/wp-content/uploads/2017/01/minecraft-768x330.png 768w, https://krebsonsecurity.com/wp-content/uploads/2017/01/minecraft-940x404.png 940w, https://krebsonsecurity.com/wp-content/uploads/2017/01/minecraft.png 1204w" sizes="(max-width: 580px) 100vw, 580px" /><p id="caption-attachment-37423" class="wp-caption-text">Image: Minecraft.net</p></div>
+<p>A large, successful Minecraft server with more than a thousand players logging on each day can easily earn the server’s owners upwards of $50,000 per month, mainly from players renting space on the server to build their Minecraft worlds, and purchasing in-game items and special abilities.</p>
+<p>Perhaps unsurprisingly, the top-earning Minecraft servers eventually attracted the attention of ne’er-do-wells and extortionists like the lelddos gang. Lelddos would launch a huge DDoS attack against a Minecraft server, knowing that the targeted Minecraft server owner was likely losing thousands of dollars for each day his gaming channel remained offline.</p>
+<p>Adding urgency to the ordeal, many of the targeted server’s loyal customers would soon find other Minecraft servers to patronize if they could not get their Minecraft fix at the usual online spot.</p>
+<p><strong>Robert Coelho</strong> is vice president of <strong>ProxyPipe, Inc.</strong>, a San Francisco company that specializes in protecting Minecraft servers from attacks.</p>
+<p>&#8220;The Minecraft industry is so competitive,&#8221; Coelho said. &#8220;If you’re a player, and your favorite Minecraft server gets knocked offline, you can switch to another server. But for the server operators, it&#8217;s all about maximizing the number of players and running a large, powerful server. The more players you can hold on the server, the more money you make. But if you go down, you start to lose Minecraft players very fast &#8212; maybe for good.&#8221;</p>
+<p>In June 2014, ProxyPipe was hit with a 300 gigabit per second DDoS attack launched by lelddos, which had a penchant for publicly taunting its victims on Twitter just as it began launching DDoS assaults at the taunted.</p>
+<div id="attachment_37433" style="width: 586px" class="wp-caption aligncenter"><a class="lightbox" href="https://krebsonsecurity.com/wp-content/uploads/2017/01/lelddostwitter.png"><img aria-describedby="caption-attachment-37433" loading="lazy" class="wp-image-37433 size-full" src="https://krebsonsecurity.com/wp-content/uploads/2017/01/lelddostwitter.png" alt="The hacker group &quot;lelddos&quot; tweeted at its victims before launching huge DDoS attacks against them." width="576" height="745" /></a><p id="caption-attachment-37433" class="wp-caption-text">The hacker group &#8220;lelddos&#8221; tweeted at its victims before launching huge DDoS attacks against them.</p></div>
+<p>At the time, ProxyPipe was buying DDoS protection from Reston, Va. -based security giant <strong>Verisign</strong>. In a quarterly report published in 2014, Verisign called the attack the largest it had ever seen, although it didn’t name ProxyPipe in the report – referring to it only as a customer in the media and entertainment business.</p>
+<p>Verisign said the 2014 attack was launched by a botnet of more than 100,000 servers running on <a href="http://www.supermicro.com/products/nfo/IPMI.cfm?pg=list" target="_blank">SuperMicro IPMI boards</a>. Days before the huge attack on ProxyPipe, a security researcher <a href="https://blog.cari.net/carisirt-yet-another-bmc-vulnerability-and-some-added-extras/" target="_blank">published information</a> about a vulnerability in the SuperMicro devices that could allow them to be remotely hacked and commandeered for these sorts of attacks.</p>
+<h4>THE CENTRALITY OF PROTRAF</h4>
+<p>Coelho recalled that in mid-2015 his company’s Minecraft customers began coming under attack from a botnet made up of IoT devices infected with Qbot. He said the attacks were directly preceded by a threat made by a then-17-year-old <strong>Christopher &#8220;CJ&#8221; Sculti, Jr.</strong>, the owner and sole employee of a competing DDoS protection company called <strong>Datawagon</strong>.</p>
+<p>Datawagon also courted Minecraft servers as customers, and its servers were hosted on Internet space claimed by yet another Minecraft-focused DDoS protection provider &#8212; <strong>ProTraf Solutions</strong>.</p>
+<div id="attachment_37424" style="width: 243px" class="wp-caption alignright"><img aria-describedby="caption-attachment-37424" loading="lazy" class=" wp-image-37424" src="https://krebsonsecurity.com/wp-content/uploads/2017/01/cjlinkedin-580x782.png" alt="CJ Sculti, Jr." width="233" height="314" srcset="https://krebsonsecurity.com/wp-content/uploads/2017/01/cjlinkedin-580x782.png 580w, https://krebsonsecurity.com/wp-content/uploads/2017/01/cjlinkedin.png 614w" sizes="(max-width: 233px) 100vw, 233px" /><p id="caption-attachment-37424" class="wp-caption-text">Christopher &#8220;CJ&#8221; Sculti, Jr.</p></div>
+<p>According to Coelho, ProTraf was trying to woo many of his biggest Minecraft server customers away from ProxyPipe. Coelho said in mid-2015, Sculti reached out to him on Skype and said he was getting ready to disable Coelho’s Skype account. At the time, an exploit for a software weakness in Skype was being traded online, and this exploit could be used to remotely and instantaneously disable any Skype account.</p>
+<p>Sure enough, Coelho recalled, his Skype account and two others used by co-workers were shut off just minutes after that threat, effectively severing a main artery of support for ProxyPipe’s customers – many of whom were accustomed to communicating with ProxyPipe via Skype.</p>
+<p>“CJ messaged me about five minutes before the DDoS started, saying he was going to disable my skype,” Coelho said. “The scary thing about when this happens is you don’t know if your Skype account has been hacked and under control of someone else or if it just got disabled.”</p>
+<p>Once ProxyPipe’s Skype accounts were disabled, the company’s servers were hit with a massive, constantly changing DDoS attack that disrupted ProxyPipe’s service to its Minecraft server customers. Coelho said within a few days of the attack, many of ProxyPipe’s most lucrative Minecraft servers had moved over to servers protected by ProTraf Solutions.</p>
+<p>“In 2015, the ProTraf guys hit us offline tons, so a lot of our customers moved over to them,” Coelho said. “We told our customers that we knew [ProTraf] were the ones doing it, but some of the customers didn’t care and moved over to ProTraf anyway because they were losing money from being down.”</p>
+<p>I found Coelho’s story fascinating because it eerily echoed the events leading up to <a href="https://krebsonsecurity.com/2016/09/krebsonsecurity-hit-with-record-ddos/" target="_blank">my Sept. 2016 record 620 Gbps attack</a>. I, too, was contacted via Skype by Sculti &#8212; on two occasions. The first was on July 7, 2015, when Sculti reached out apropos of nothing to brag about scanning the Internet for IoT devices running default usernames and passwords, saying he had uploaded some kind of program to more than a quarter-million systems that his scans found.</p>
+<p>Here’s a snippet of that conversation:</p>
+<p>July 7, 2015:</p>
+<p>21:37 CJ: http://krebsonsecurity.com/2015/06/crooks-use-hacked-routers-to-aid-cyberheists/<br />
+21:37 CJ: vulnerable routers are a HUGE issue<br />
+21:37 CJ: a few months ago<br />
+21:37 CJ: I scanned the internet with a few sets of defualt logins<br />
+21:37 CJ: for telnet<br />
+21:37 CJ: and I was able to upload and execute a binary<br />
+21:38 CJ: on 250k devices<br />
+21:38 CJ: most of which were routers<br />
+21:38 Brian Krebs: o_0</p>
+<p>The second time I heard from Sculti on Skype was Sept. 20, 2016 &#8212; the day of <a href="https://krebsonsecurity.com/2016/09/krebsonsecurity-hit-with-record-ddos/" target="_blank">my 620 Gbps attack</a>. Sculti was angry over <a href="https://krebsonsecurity.com/2016/09/ddos-mitigation-firm-has-history-of-hijacks/" target="_blank">a story I’d just published</a> that mentioned his name, and he began rather saltily maligning the reputation of a source and friend who had helped me with that story.</p>
+<p>Indignant on behalf of my source and annoyed at Sculti’s rant, I simply blocked his Skype account from communicating with mine and went on with my day. Just minutes after that conversation, however, my Skype account was flooded with thousands of contact requests from compromised or junk Skype accounts, making it virtually impossible to use the software for making phone calls or instant messaging.</p>
+<p>Six hours after that Sept. 20 conversation with Sculti, the huge 620 Gbps DDoS attack commenced on this site. <a href="https://krebsonsecurity.com/2017/01/who-is-anna-senpai-the-mirai-worm-author/#more-37412" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+	<div id="between_article_ad" class="themonic-ad5"><a href="https://info.knowbe4.com/phishing-forensics-krebs?utm_source=Krebs&amp;utm_medium=display&amp;utm_campaign=website&amp;utm_content=PhishingForensics">
+<img src="/b-knowbe4/15.jpg" />
+</a></div>	<article id="post-37499" class="post-37499 post type-post status-publish format-standard hentry category-other tag-adobe-flash-player-update tag-chrome tag-microsoft-edge tag-microsoft-patch-tuesday-january-2017">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2017/01/adobe-microsoft-push-critical-security-fixes-9/" title="Permalink to Adobe, Microsoft Push Critical Security Fixes" rel="bookmark">Adobe, Microsoft Push Critical Security Fixes</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">January 11, 2017</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2017/01/adobe-microsoft-push-critical-security-fixes-9/#comments">47 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p><strong>Adobe</strong> and <strong>Microsoft</strong> on Tuesday each released security updates for software installed on hundreds of millions of devices. Adobe issued an update for <strong>Flash Player</strong> and for <strong>Acrobat/Reader</strong>. Microsoft released just <a href="https://technet.microsoft.com/en-us/library/security/ms17-jan.aspx" target="_blank">four updates</a> to plug some 15 security holes in <strong>Windows</strong> and related software.</p>
+<p><img loading="lazy" class="alignright wp-image-26837" src="https://krebsonsecurity.com/wp-content/uploads/2014/07/brokenwindows.png" alt="brokenwindows" width="185" height="194" />Microsoft&#8217;s batch includes updates for Windows, <strong>Office</strong> and <strong>Microsoft Edge</strong> (Redmond&#8217;s replacement for <strong>Internet Explorer</strong>). Also interesting is that January 2017 is the last month Microsoft plans to publish individual bulletins for each patch. From now on, some of the data points currently in the individual updates will be lumped into a &#8220;<a href="https://portal.msrc.microsoft.com/en-us/" target="_blank">Security Updates Guide</a>&#8221; published with each Patch Tuesday.</p>
+<p>This change mirrors a shift in the way Microsoft is deploying updates. Last year Microsoft stopped making individual security updates available for home users, giving those users instead a single monthly security rollup that includes all available security updates.</p>
+<p>Windows users and anyone else with Flash installed will need to make sure that Adobe Flash Player is updated (or suitably bludgeoned, more on that in a bit). Adobe&#8217;s Flash update addresses <a href="https://helpx.adobe.com/security/products/flash-player/apsb17-02.html" target="_blank">13 flaws</a> in the widely-installed browser plugin. The patch brings Flash to <em>v. 24.0.0.194 </em>for Windows, Mac and Linux users alike. <a href="https://krebsonsecurity.com/2017/01/adobe-microsoft-push-critical-security-fixes-9/#more-37499" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+	<div class="themonic-ad2"><div class="a-statement">Advertisement</div><a href="https://www.akamai.com/blog/security/attacking-a-macro-security-problem-with-micro-segmentation?utm_source=krebsonsecurity&amp;utm_medium=display&amp;utm_id=GL_SecureWorkforce_Guardicore&amp;utm_campaign=F-MC-52610&amp;utm_content=Guardicore">
+<img src="/b-akamai/140.png">
+</a></div>	<article id="post-37597" class="post-37597 post type-post status-publish format-standard hentry category-other tag-extortion tag-mongodb tag-niall-merrigan tag-victor-gevers">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2017/01/extortionists-wipe-thousands-of-databases-victims-who-pay-up-get-stiffed/" title="Permalink to Extortionists Wipe Thousands of Databases, Victims Who Pay Up Get Stiffed" rel="bookmark">Extortionists Wipe Thousands of Databases, Victims Who Pay Up Get Stiffed</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">January 10, 2017</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2017/01/extortionists-wipe-thousands-of-databases-victims-who-pay-up-get-stiffed/#comments">45 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>Tens of thousands of personal and possibly proprietary databases that were left accessible to the public online have just been wiped from the Internet, replaced with ransom notes demanding payment for the return of the files. Adding insult to injury, it appears that virtually none of the victims who have paid the ransom have gotten their files back because multiple fraudsters are now wise to the extortion attempts and are competing to replace each other&#8217;s ransom notes.</p>
+<p>At the eye of this developing data destruction maelstrom is an online database platform called <a href="https://en.wikipedia.org/wiki/MongoDB" target="_blank">MongoDB</a><strong>. </strong>Tens of thousands of organizations use MongoDB to store data, but it is easy to misconfigure and leave the database exposed online. If installed on a server with the default settings, for example, MongoDB allows anyone to browse the databases, download them, or even write over them and delete them.</p>
+<div id="attachment_37598" style="width: 590px" class="wp-caption aligncenter"><a class="lightbox" href="https://krebsonsecurity.com/wp-content/uploads/2017/01/shodanmongo.png"><img aria-describedby="caption-attachment-37598" loading="lazy" class="wp-image-37598 size-medium" src="https://krebsonsecurity.com/wp-content/uploads/2017/01/shodanmongo-580x328.png" alt="Shodan, a specialized search engine designed to find things that probably won't be picked up by Google, lists the number of open, remotely accessible MongDB databases available as of Jan. 10, 2017." width="580" height="328" srcset="https://krebsonsecurity.com/wp-content/uploads/2017/01/shodanmongo-580x328.png 580w, https://krebsonsecurity.com/wp-content/uploads/2017/01/shodanmongo-768x435.png 768w, https://krebsonsecurity.com/wp-content/uploads/2017/01/shodanmongo-940x532.png 940w, https://krebsonsecurity.com/wp-content/uploads/2017/01/shodanmongo.png 1755w" sizes="(max-width: 580px) 100vw, 580px" /></a><p id="caption-attachment-37598" class="wp-caption-text">Shodan, a specialized search engine designed to find things that probably won&#8217;t be picked up by Google, lists the number of open, remotely accessible MongDB databases available as of Jan. 10, 2017.</p></div>
+<p>This blog has featured <a href="https://krebsonsecurity.com/?s=mongodb&amp;x=0&amp;y=0" target="_blank">several stories</a> over the years about companies accidentally publishing user data via incorrectly configured MongoDB databases. In March 2016, for example, KrebsOnSecurity broke the news that <strong>Verizon Enterprise Solutions</strong> managed to <a href="https://krebsonsecurity.com/2016/03/crooks-steal-sell-verizon-enterprise-customer-data/" target="_blank">leak the contact information on some 1.5 million customers</a> because of a publicly accessible MongoDB installation.</p>
+<p>Point is, this is a known problem, and almost once a week some security researcher is Tweeting that he&#8217;s discovered another huge open MongoDB database. There are simple queries that anyone can run via search engines like <a href="https://shodan.io" target="_blank">Shodan</a> that will point to all of the open MongoDB databases out there at any given time. For example, the latest query via Shodan (see image above) shows that there are more than 52,000 publicly accessible MongoDB databases on the Internet right now. The largest share of open MongoDB databases are here in the United States.</p>
+<p>Normally, when one runs a query on Shodan to list all available MongoDB databases, what one gets in return is a list of variously-named databases, and many databases with default filenames like &#8220;local.&#8221;</p>
+<p>But when researcher <a href="https://twitter.com/0xDUDE" target="_blank">Victor Gevers</a> ran that same query earlier this week, he noticed that far too many of the database listings returned by the query had names like &#8220;readme,&#8221; &#8220;readnow,&#8221; &#8220;encrypted&#8221; and &#8220;readplease.&#8221; Inside each of these databases is exactly one file: a database file that includes a contact email address and/or a bitcoin address and a payment demand.</p>
+<p>Researcher <a href="https://twitter.com/nmerrigan" target="_blank">Niall Merrigan</a>, a solutions architect for French consulting giant <strong>Cap Gemini</strong>, has been working with Gevers to help victims on his personal time, and to help maintain a public document that&#8217;s live-chronicling the damage from the now widespread extortion attack. Merrigan said it seems clear that multiple actors are wise to the scam because if you wait a few minutes after running the Shodan query and then re-run the query, you&#8217;ll find the same Internet addresses that showed up in the database listings from the previous query, but you&#8217;ll also notice that many now have a different database title and a new ransom note.</p>
+<p>Merrigan and Gevers are maintaining <a href="https://docs.google.com/spreadsheets/d/1QonE9oeMOQHVh8heFIyeqrjfKEViL0poLnY8mAakKhM/edit#gid=2122582863" target="_blank">a public Google Drive document</a> (read-only) that is tracking the various victims and ransom demands. Merrigan said it appears that at least 29,000 MongoDB databases that were previously published online are now erased. Worse, hardly anyone who&#8217;s paid the ransom demands has yet received their files back.</p>
+<div id="attachment_37599" style="width: 590px" class="wp-caption aligncenter"><a class="lightbox" href="https://krebsonsecurity.com/wp-content/uploads/2017/01/victs.png"><img aria-describedby="caption-attachment-37599" loading="lazy" class="wp-image-37599 size-medium" src="https://krebsonsecurity.com/wp-content/uploads/2017/01/victs-580x300.png" alt="A screen shot of the Google Drive document that Merrigan is maintaining to track the various ransom campaigns. This tab lists victims by industry. As we can see, many have paid the ransom but none have reported receiving their files back." width="580" height="300" srcset="https://krebsonsecurity.com/wp-content/uploads/2017/01/victs-580x300.png 580w, https://krebsonsecurity.com/wp-content/uploads/2017/01/victs-768x397.png 768w, https://krebsonsecurity.com/wp-content/uploads/2017/01/victs-940x486.png 940w, https://krebsonsecurity.com/wp-content/uploads/2017/01/victs.png 1747w" sizes="(max-width: 580px) 100vw, 580px" /></a><p id="caption-attachment-37599" class="wp-caption-text">A screen shot of the Google Drive document that Merrigan is maintaining to track the various ransom campaigns. This tab lists victims by industry. As we can see, many have paid the ransom but none have reported receiving their files back.</p></div>
+<p>&#8220;It&#8217;s like the kidnappers keep delivering the ransom notes, but you don&#8217;t know who has the actual original data,&#8221; Merrigan said. &#8220;That&#8217;s why we&#8217;re tracking the notes, so that if we see the [databases] are being exfiltrated by the thieves, we can know the guys who should actually get paid if they want to get their data back.&#8221; <a href="https://krebsonsecurity.com/2017/01/extortionists-wipe-thousands-of-databases-victims-who-pay-up-get-stiffed/#more-37597" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-37573" class="post-37573 post type-post status-publish format-standard hentry category-other tag-cybercriminal-code-of-ethics tag-immutable-truths-of-data-breaches">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2017/01/krebss-immutable-truths-about-data-breaches/" title="Permalink to Krebs&#8217;s Immutable Truths About Data Breaches" rel="bookmark">Krebs&#8217;s Immutable Truths About Data Breaches</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">January 9, 2017</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2017/01/krebss-immutable-truths-about-data-breaches/#comments">57 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>I&#8217;ve had several requests for a fresh blog post to excerpt something that got crammed into the corner of <a href="https://krebsonsecurity.com/2017/01/dni-putin-led-cyberattack-propaganda-effort-to-elect-trump-denigrate-clinton/" target="_blank">a lengthy story published here Sunday</a>: A list of immutable truths about data breaches, cybersecurity and the consequences of inaction.</p>
+<p>Here&#8217;s the excerpt requested from yesterday&#8217;s story:</p>
+<p><img loading="lazy" class="alignright wp-image-37585" src="https://krebsonsecurity.com/wp-content/uploads/2017/01/coecopy.jpg" alt="coecopy" width="244" height="213" />&#8220;There are some fairly simple, immutable truths that each of us should keep in mind, truths that apply equally to political parties, organizations and corporations alike:</p>
+<p>-If you connect it to the Internet, someone will try to hack it.</p>
+<p>-If what you put on the Internet has value, someone will invest time and effort to steal it.</p>
+<p>-Even if what is stolen does not have immediate value to the thief, he can easily find buyers for it.</p>
+<p>-The price he secures for it will almost certainly be a tiny slice of its true worth to the victim.</p>
+<p>-Organizations and individuals unwilling to spend a small fraction of what those assets are worth to secure them against cybercrooks can expect to eventually be relieved of said assets.&#8221;</p>
+<p>They may not be complete, but as a set of truisms these tenets probably will age pretty well. After all, taken as a whole they are practically a model <em>Cybercriminal Code of Ethics</em>, or a cybercrook&#8217;s social contract. <a href="https://krebsonsecurity.com/2017/01/krebss-immutable-truths-about-data-breaches/#more-37573" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-37542" class="post-37542 post type-post status-publish format-standard hentry category-other tag-crowdstrike tag-daily-beast tag-dcleaks-com tag-dhs tag-dnc tag-dni tag-fbi tag-guccifer-2-0 tag-jonanthan-zdziarksi tag-kevin-poulsen tag-los-angeles-times tag-new-york-times tag-nina-agrawal tag-officer-of-the-director-of-national-intelligence tag-rt tag-russia-today tag-vladimir-putin tag-voice-of-america tag-wired">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2017/01/dni-putin-led-cyberattack-propaganda-effort-to-elect-trump-denigrate-clinton/" title="Permalink to DNI: Putin Led Cyber, Propaganda Effort to Elect Trump, Denigrate Clinton" rel="bookmark">DNI: Putin Led Cyber, Propaganda Effort to Elect Trump, Denigrate Clinton</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">January 8, 2017</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2017/01/dni-putin-led-cyberattack-propaganda-effort-to-elect-trump-denigrate-clinton/#comments">139 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p><strong>Russian President Vladimir Putin</strong> directed a massive propaganda and cyber operation aimed at discrediting <strong>Hillary Clinton</strong> and getting <strong>Donald Trump</strong> elected, the top U.S. intelligence agencies said in a remarkable yet unshocking report released on Friday.</p>
+<div id="attachment_37553" style="width: 261px" class="wp-caption alignright"><img aria-describedby="caption-attachment-37553" loading="lazy" class=" wp-image-37553" src="https://krebsonsecurity.com/wp-content/uploads/2017/01/VPofRT.png" alt="Russian President Vladimir Putin tours RT facilities. Image: DNI" width="251" height="273" /><p id="caption-attachment-37553" class="wp-caption-text">Russian President Vladimir Putin tours RT facilities. Image: DNI</p></div>
+<p>The 25-page dossier from the <strong>Office of the Director of National Intelligence</strong> stopped short of saying the Russians succeeded at influencing the outcome of the election, noting that the report did not attempt to make an assessment on that front. But it makes the case that &#8220;Russia’s intelligence services conducted cyber operations against targets associated with the 2016 US presidential election, including targets associated with both major US political parties.&#8221;</p>
+<p>&#8220;We assess with high confidence that Russian military intelligence (General Staff Main Intelligence Directorate or GRU) used the <strong>Guccifer 2.0</strong> persona and <strong>DCLeaks.com</strong> to release US victim data obtained in cyber operations publicly and in exclusives to media outlets and relayed material to WikiLeaks,&#8221; the DNI report reads.</p>
+<p>The report is a quick and fascinating read. One example: It includes a fairly detailed appendix which concludes that the U.S.-based but Kremlin-financed media outlet <strong>RT</strong> (formerly <strong>Russia Today</strong>) is little more than a propaganda machine controlled by Russian intelligence agencies.</p>
+<p>&#8220;Moscow’s influence campaign followed a Russian messaging strategy that blends covert intelligence operations—such as cyber activity—with overt efforts by Russian Government agencies, state-funded media, third-party intermediaries, and paid social media users or &#8216;trolls,'&#8221; reads the report.</p>
+<p>The DNI report is remarkable for several reasons. First, it publicly accuses Russia&#8217;s President of trying to meddle with the U.S. election and to hack both political parties. Also, as <em>The New York Times</em> observed, it offers &#8220;a virtually unheard-of, real-time revelation by the American intelligence agencies that undermined the legitimacy of the president who is about to direct them.&#8221;</p>
+<p>However, those who&#8217;ve been <a href="https://krebsonsecurity.com/2017/01/the-download-on-the-dnc-hack/" target="_blank">clamoring for more technical evidence</a> to support a conclusion that Russian intelligence agencies were behind the <a href="https://wikileaks.org/podesta-emails/emailid/36355" target="_blank">phishing</a>, malware attacks and email leaks at The <strong>Democratic National Committee</strong> (DNC) and Clinton campaign likely will be unmoved by this report. Those details will remain safely hidden from public view in the classified version of the report.</p>
+<p>Last week, the<strong> FBI</strong> and <strong>Department of Homeland Security</strong> issued a <a href="https://www.us-cert.gov/sites/default/files/publications/JAR_16-20296A_GRIZZLY%20STEPPE-2016-1229.pdf" target="_blank">joint report</a> (PDF) on some of the malware and Internet resources used in the DNC intrusion. But many experts criticized it as a <a href="http://www.robertmlee.org/critiques-of-the-dhsfbis-grizzly-steppe-report/" target="_blank">poorly-written</a>, jumbled collection of threat indicators and digital clues that didn&#8217;t all quite lead where they should.</p>
+<p>Others were perplexed by the high confidence level the agencies assigned to the findings in their unclassified report, noting that neither the FBI nor DHS examined the DNC hard drives that were compromised in the break-in (that work was done by private security firm <strong>Crowdstrike</strong>).</p>
+<p>Former black-hat hacker turned <em>Wired</em> and <em>Daily Beast</em> contributing editor <strong>Kevin Poulsen</strong> <a href="http://www.thedailybeast.com/articles/2017/01/06/how-the-u-s-enabled-russian-hack-truthers.html" target="_blank">slammed</a> the FBI/DHS report as &#8220;so aimless that it muddies the clear public evidence that Russia hacked the Democratic Party to affect the election, and so wrong it enables the Trump-friendly conspiracy theorists trying to explain away that evidence.&#8221;</p>
+<p>Granted, trying to reconstruct a digital crime scene absent some of the most important pieces of evidence is a bit like attempting to assemble a jigsaw puzzle with only half of the pieces. But as digital forensics and security expert <strong>Jonanthan Zdziarksi </strong><a href="https://twitter.com/JZdziarski/status/817759784992702465" target="_blank">noted</a> via Twitter last night, good old fashioned spying and human intelligence seems to have played a bigger role in pinning the DNC hack on the Russians.</p>
+<p>&#8220;The DNI report subtly implied that more weight was put on our intelligence coming from espionage operations than on cyber warfare,&#8221; Zdziarski wrote. &#8220;As someone who’s publicly called out the FBI over misleading the public and the court system, I believe the DNI report to be reliable. I also believe @CrowdStrike’s findings to be reliable based on the people there and their experience with threat intelligence.&#8221;</p>
+<div id="attachment_37554" style="width: 590px" class="wp-caption aligncenter"><img aria-describedby="caption-attachment-37554" loading="lazy" class="size-medium wp-image-37554" src="https://krebsonsecurity.com/wp-content/uploads/2017/01/russinfl-580x743.png" alt="Key findings from the DNI report. " width="580" height="743" srcset="https://krebsonsecurity.com/wp-content/uploads/2017/01/russinfl-580x743.png 580w, https://krebsonsecurity.com/wp-content/uploads/2017/01/russinfl.png 635w" sizes="(max-width: 580px) 100vw, 580px" /><p id="caption-attachment-37554" class="wp-caption-text">Key findings from the DNI report.</p></div>
+<p> <a href="https://krebsonsecurity.com/2017/01/dni-putin-led-cyberattack-propaganda-effort-to-elect-trump-denigrate-clinton/#more-37542" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-37497" class="post-37497 post type-post status-publish format-standard hentry category-other tag-atm-fraud tag-avivah-litan tag-cardless-atm tag-chase-bank tag-fox28 tag-gartner tag-kristina-markula tag-mike-fusco tag-regulation-e tag-twofactorauth-org">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2017/01/stolen-passwords-fuel-cardless-atm-fraud/" title="Permalink to Stolen Passwords Fuel Cardless ATM Fraud" rel="bookmark">Stolen Passwords Fuel Cardless ATM Fraud</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">January 5, 2017</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2017/01/stolen-passwords-fuel-cardless-atm-fraud/#comments">91 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>Some financial institutions are now offering so-called &#8220;cardless ATM&#8221; transactions that allow customers to withdraw cash using nothing more than their mobile phones. But as the following story illustrates, this new technology also creates an avenue for thieves to quickly and quietly convert stolen customer bank account usernames and passwords into cold hard cash. Worse still, fraudulent cardless ATM withdrawals may prove more difficult for customers to dispute because they place the victim at the scene of the crime.</p>
+<div id="attachment_37512" style="width: 268px" class="wp-caption alignright"><a class="lightbox" href="https://krebsonsecurity.com/wp-content/uploads/2017/01/markula.png"><img aria-describedby="caption-attachment-37512" loading="lazy" class="wp-image-37512" src="https://krebsonsecurity.com/wp-content/uploads/2017/01/markula-580x715.png" alt="A portion of the third rejection letter that Markula received from Chase about her $2,900 fraud claim. The bank ultimately reversed itself and refunded the money after being contacted by KrebsOnsecurity, stating that Markula's account was one of several that were pilfered by a crime gang that has since been arrested by authorities." width="258" height="318" srcset="https://krebsonsecurity.com/wp-content/uploads/2017/01/markula-580x715.png 580w, https://krebsonsecurity.com/wp-content/uploads/2017/01/markula.png 693w" sizes="(max-width: 258px) 100vw, 258px" /></a><p id="caption-attachment-37512" class="wp-caption-text">A portion of the third rejection letter that Markula received from Chase about her $2,900 fraud claim.</p></div>
+<p>San Francisco resident <strong>Kristina Markula</strong> told KrebsOnSecurity that it wasn&#8217;t until shortly after a vacation in Cancun, Mexico in early November 2016 that she first learned that <strong>Chase Bank </strong>even offered cardless ATM access. Markula said that while she was still in Mexico she tried to view her bank balance using a Chase app on her smartphone, but that the app blocked her from accessing her account.</p>
+<p>Markula said she thought at the time that Chase had blocked her from using the app because the request came from an unusual location. After all, she didn&#8217;t have an international calling or data plan and was trying to access the account via Wi-Fi at her hotel in Mexico.</p>
+<p>Upon returning to the United States, Markula called the number on the back of her card and was told she needed to visit the nearest Chase bank branch and present two forms of identification. At a Chase branch in San Francisco, she handed the teller a California driver&#8217;s license and her passport. The branch manager told her that someone had used her Chase online banking username and password to add a new mobile phone number to her account, and then move $2,900 from her savings to her checking account.</p>
+<p>The manager told Markula that whoever made the change then requested that a new mobile device be added to the account, and changed the contact email address for the account. Very soon after, that same new mobile device was used to withdraw $2,900 in cash from her checking account at the <a href="https://locator.chase.com/search/fl/pembroke+pines" target="_blank">Chase Bank ATM in Pembroke Pines, Fla</a>.</p>
+<p>A handful of U.S. banks, including Chase, have deployed ATMs that are capable of dispensing cash without requiring an ATM card. In the case of Chase ATMs, the customer approaches the cash machine with a smart phone that is already associated with a Chase account. Associating an account with the mobile app merely requires the customer to supply the app with their online banking username and password.</p>
+<p>Users then tell the Chase app how much they want to withdraw, and the app creates a unique 7-digit code that needs to be entered at the Chase ATM (instead of numeric code, some banks offering cardless ATM withdrawals will have the app display a QR code that needs to be read by a scanner on the ATM). Assuming the code checks out, the machine dispenses the requested cash and the transaction is complete. At no time is the Chase customer asked to enter his or her 4-digit ATM card PIN.</p>
+<p>Most financial institutions will limit traditional ATM customers to withdrawing $300-$600 per transaction, but some banks have set cardless transaction limits at much higher amounts under certain circumstances. For example, at the time Markula&#8217;s fraud occurred, the limit was set at $3,000 for withdrawals during normal bank business hours and made at Chase ATMs located at Chase branches.</p>
+<p>Markula said the bank employees helped her close the account and file a claim to dispute the withdrawal. She said the teller and the bank manager reviewed her passport and confirmed that the disputed transaction took place during the time between which her passport was stamped by U.S. and Mexican immigration authorities. However, Markula said Chase repeatedly denied her claims.</p>
+<p>&#8220;We wanted to thank you for providing your information while we thoroughly researched your dispute,&#8221; Chase&#8217;s customer claims department wrote in the third rejection letter sent to Markula, dated January 5, 2017. &#8220;We confirmed that the disputed charges were correct and we will not be making an adjustment to your account.&#8221;</p>
+<p>Markula said she was dumbfounded by the rejection letter because the last time she spoke with a fraud claims manager at Chase, the manager told her that the transaction had all of the hallmarks of an account takeover.</p>
+<p>&#8220;I&#8217;m pretty frustrated at the process so far,&#8221; said Markula, who shared with this author a detailed timeline of events before and after the disputed transaction. &#8220;Not captured in this timeline are the countless phone calls to the fraud department which is routed overseas. The time it takes to reach someone and poor communication seems designed to make one want to give up.&#8221;</p>
+<p>KrebsOnSecurity contacted Chase today about Markula&#8217;s case. Chase spokesman <strong>Mike Fusco</strong> said Markula&#8217;s rejection letter was incorrect, and that further investigation revealed she had been victimized by a group of a half-dozen fraudsters who were caught using the above-described technique to empty out Chase bank accounts.</p>
+<p>Fusco forwarded this author <a href="http://myfox28columbus.com/news/local/upper-arlington-police-arrest-6-people-in-multi-state-bank-fraud-scheme" target="_blank">a link to a Fox28 story</a> about six men from Miami, Fla. who were arrested late last year in Columbus, Ohio in connection with what authorities there called a &#8220;multi-state crime spree&#8221; targeting Chase accounts. <a href="https://krebsonsecurity.com/2017/01/stolen-passwords-fuel-cardless-atm-fraud/#more-37497" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-37484" class="post-37484 post type-post status-publish format-standard hentry category-other tag-federal-trade-commission tag-ftc tag-gartner-inc tag-internet-of-things tag-iot tag-iot-home-inspector-challenge tag-lg">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2017/01/the-ftcs-internet-of-things-iot-challenge/" title="Permalink to The FTC&#8217;s Internet of Things (IoT) Challenge" rel="bookmark">The FTC&#8217;s Internet of Things (IoT) Challenge</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">January 4, 2017</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2017/01/the-ftcs-internet-of-things-iot-challenge/#comments">58 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>One of the biggest cybersecurity stories of 2016 was the surge in online attacks caused by poorly-secured &#8220;<strong>Internet of Things</strong>&#8221; (IoT) devices such as Internet routers, security cameras, digital video recorders (DVRs) and smart appliances. Many readers here have commented with ideas about how to counter vulnerabilities caused by out-of-date software in IoT devices, so why not pitch your idea for money? Who knows, you could win up to $25,000 in a new contest put on by the <strong>U.S. Federal Trade Commission</strong> (FTC).</p>
+<div id="attachment_37488" style="width: 564px" class="wp-caption aligncenter"><img aria-describedby="caption-attachment-37488" loading="lazy" class="size-full wp-image-37488" src="https://krebsonsecurity.com/wp-content/uploads/2017/01/100percentwifi.png" alt="Electronics giant LG said at the Consumer Electronics Show (CES) today that all of its devices from now on will have Wi-Fi built in. Image: @Karissabe" width="554" height="412" /><p id="caption-attachment-37488" class="wp-caption-text">Electronics giant LG said today at the Consumer Electronics Show (CES) that all of its appliances from now on will have Wi-Fi built in and be connected to the cloud. Image: Mashable</p></div>
+<p>The FTC&#8217;s <strong>IoT Home Inspector Challenge</strong> is seeking ideas for a tool of some sort that would address <a href="https://krebsonsecurity.com/?s=iot&amp;x=0&amp;y=0" target="_blank">the burgeoning IoT mess</a>. The agency says it&#8217;s offering a cash prize of up to $25,000 for the best technical solution, with up to $3,000 available for as many as three honorable mention winner(s). <a href="https://krebsonsecurity.com/2017/01/the-ftcs-internet-of-things-iot-challenge/#more-37484" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-37410" class="post-37410 post type-post status-publish format-standard hentry category-other tag-andrew-kramer tag-dmitry-artimovich tag-dnc-hack tag-donald-trump tag-festi tag-forbes tag-kaleev-leetaru tag-king-servers tag-nina-agrawal tag-power-grid-hack tag-rolling-stone tag-spam-nation tag-the-los-angeles-times tag-the-new-york-times tag-the-washington-post tag-threatconnect tag-vladimir-m-fomenko">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2017/01/the-download-on-the-dnc-hack/" title="Permalink to The Download on the DNC Hack" rel="bookmark">The Download on the DNC Hack</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">January 3, 2017</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2017/01/the-download-on-the-dnc-hack/#comments">145 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>Over the past few days, several longtime readers have asked why I haven&#8217;t written about two stories that have consumed the news media of late: The alleged Russian hacking attacks against the U.S. <strong>Democratic National Committee</strong> (DNC) and, more recently, the discovery of malware on a laptop at a Vermont power utility that has been attributed to Russian hacker groups.</p>
+<p>I&#8217;ve avoided covering these stories mainly because I don&#8217;t have any original reporting to add to them, and because I generally avoid chasing the story of the day &#8212; preferring instead to focus on producing original journalism on cybercrime and computer security.</p>
+<p><img loading="lazy" class="aligncenter size-medium wp-image-37473" src="https://krebsonsecurity.com/wp-content/uploads/2017/01/dnc-580x355.png" alt="dnc" width="580" height="355" srcset="https://krebsonsecurity.com/wp-content/uploads/2017/01/dnc-580x355.png 580w, https://krebsonsecurity.com/wp-content/uploads/2017/01/dnc-768x470.png 768w, https://krebsonsecurity.com/wp-content/uploads/2017/01/dnc.png 922w" sizes="(max-width: 580px) 100vw, 580px" />But there is another reason for my reticence: Both of these stories are so politically fraught that to write about them means signing up for gobs of vitriolic hate mail from readers who assume I have some political axe to grind no matter what I publish on the matter.</p>
+<p><a href="http://www.rollingstone.com/politics/features/something-about-this-russia-story-stinks-w458439" target="_blank">An article</a> in <em>Rolling Stone</em> over the weekend aptly captures my unease with reporting on both of these stories in the absence of new, useful information (the following quote refers specifically to the Obama administration&#8217;s sanctions against Russia related to the DNC incident).</p>
+<p>&#8220;The problem with this story is that, like the Iraq-WMD mess, it takes place in the middle of a highly politicized environment during which the motives of all the relevant actors are suspect,&#8221; Rolling Stone political reporter <strong>Matt Taibbi</strong> wrote. &#8220;Absent independent verification, reporters will have to rely upon the secret assessments of intelligence agencies to cover the story at all. Many reporters I know are quietly freaking out about having to go through that again.&#8221;</p>
+<p>Alas, one can only nurse a New Year&#8217;s holiday vacation for so long. Here are some of the things I&#8217;ve been ruminating about over the past few days regarding each of these topics. Please be kind.</p>
+<p>Gaining sufficient public support for a conclusion that other countries are responsible for hacking important U.S. assets can be difficult &#8211; even when the alleged aggressor is already despised and denounced by the entire civilized world.</p>
+<p>The remarkable hacking of <strong>Sony Pictures Entertainment</strong> in late 2014 and the Obama administration&#8217;s quick fingering of hackers in North Korea as the culprits is a prime example: When the Obama administration released its findings that North Korean hackers were responsible for breaking into SPE, few security experts I spoke to about the incident were convinced by the intelligence data coming from the White House.</p>
+<p>That seemed to change somewhat following the <a href="http://www.nytimes.com/2015/01/19/world/asia/nsa-tapped-into-north-korean-networks-before-sony-attack-officials-say.html?_r=0" target="_blank">leak of a National Security Agency document</a> which suggested the United States had planted malware capable of tracking the inner workings of the computers and networks used by the North&#8217;s hackers. Nevertheless, I&#8217;d wager that if we took a scientific poll among computer security experts today, a fair percentage of them probably still strongly doubt the administration&#8217;s conclusions.</p>
+<p>If you were to ask those doubting experts to explain why they persist in their unbelief, my guess is you would find these folks break down largely into two camps: Those who believe the administration will never release any <em>really detailed</em> (and likely classified) information needed to draw a more definitive conclusion, and those who because of their political leanings tend to disbelieve virtually everything that comes out of the current administration.</p>
+<p>Now, the American public is being asked to accept the White House&#8217;s technical assessment of another international hacking incident, only this time the apparent intention of said hacking is nothing less than to influence the outcome of a historically divisive presidential election in which the sitting party lost.</p>
+<p>It probably doesn&#8217;t matter how many indicators of compromise and digital fingerprints the Obama administration releases on this incident: Chances are decent that if you asked a panel of security experts a year from now whether the march of time and additional data points released or leaked in the interim have influenced their opinion, you&#8217;ll find them just as evenly divided as they are today.</p>
+<p>The mixed messages coming from the camp of President-elect Trump haven&#8217;t added any clarity to the matter, either. Trump has publicly mocked American intelligence assessments that Russia meddled with the U.S. election on his behalf, and said recently that he doubts the U.S. government can be certain it was hackers backed by the Russian government who hacked and leaked emails from the DNC.</p>
+<p>However, one of Trump&#8217;s top advisers &#8212; former <strong>CIA Director</strong> <strong>James Woolsey</strong> &#8212; <a href="http://www.cnn.com/2017/01/02/politics/digital-fingerprints-russia-hacking/" target="_blank">now says</a> he believes the Russians (and possibly others) <em>were</em> in fact involved in the DNC hack.</p>
+<p>It&#8217;s worth noting that the U.S. government has offered some additional perspective on why it is so confident in its conclusion that Russian military intelligence services were involved in the DNC hack. A <a href="https://www.whitehouse.gov/the-press-office/2016/12/29/fact-sheet-actions-response-russian-malicious-cyber-activity-and" target="_blank">White House fact sheet</a> published alongside the <a href="https://www.us-cert.gov/sites/default/files/publications/JAR_16-20296A_GRIZZLY%20STEPPE-2016-1229.pdf" target="_blank">FBI/DHS Joint Analysis Report</a> (PDF) says the report &#8220;includes information on computers around the world that Russian intelligence services have co-opted without the knowledge of their owners in order conduct their malicious activity in a way that makes it difficult to trace back to Russia. In some cases, the cybersecurity community was aware of this infrastructure, in other cases, this information is newly declassified by the U.S. government.&#8221; <a href="https://krebsonsecurity.com/2017/01/the-download-on-the-dnc-hack/#more-37410" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-37393" class="post-37393 post type-post status-publish format-standard hentry category-other tag-ceo-fraud tag-ddos tag-krebsonsecurity-birthday tag-ransomware">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2016/12/happy-seventh-birthday-krebsonsecurity/" title="Permalink to Happy Seventh Birthday, KrebsOnSecurity!" rel="bookmark">Happy Seventh Birthday, KrebsOnSecurity!</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">December 29, 2016</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2016/12/happy-seventh-birthday-krebsonsecurity/#comments">131 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>Hard to believe it&#8217;s time to celebrate another go &#8217;round the Sun for KrebsOnSecurity! Today marks exactly seven years since I left <em>The Washington Post</em> and started this here solo thing. And what a remarkable year 2016 has been!</p>
+<p><img loading="lazy" class="aligncenter wp-image-37395" src="https://krebsonsecurity.com/wp-content/uploads/2016/12/7-2016.png" alt="7-2016" width="590" height="613" /></p>
+<p>The word cloud above includes a sampling of tags used in stories on KrebsOnSecurity throughout the past year. It&#8217;s been a wild one, riddled with huge attacks, <a href="https://krebsonsecurity.com/?s=arrest&amp;x=0&amp;y=0" target="_blank">big cybercriminal busts</a> and of course a <a href="https://krebsonsecurity.com/?s=breach&amp;x=0&amp;y=0" target="_blank">whole mess of data breaches</a>.</p>
+<p>The biggest attack of all &#8212; the <a href="https://krebsonsecurity.com/2016/09/krebsonsecurity-hit-with-record-ddos/" target="_blank">620 Gbps distributed denial-of-service (DDoS) assault against this site on Sept. 22</a> &#8212; resulted in KrebsOnSecurity being unplugged for several days. The silver lining? I now have a stronger site and readership. Through it all, the community that has grown up around this site was extremely supportive and encouraging. I couldn&#8217;t be prouder of this community, so a huge THANK YOU to all of my readers, both new and old.</p>
+<p>It&#8217;s fair to say that many of the subjects in the word cloud above are going to continue to haunt us in 2017, particularly <a href="https://krebsonsecurity.com/?s=ransomware&amp;x=0&amp;y=0" target="_blank">ransomware</a>, <a href="https://krebsonsecurity.com/tag/ceo-fraud/" target="_blank">CEO fraud</a> and <a href="https://krebsonsecurity.com/?s=ddos&amp;x=0&amp;y=0" target="_blank">DDoS attacks</a>. I am hopeful to have more on the &#8220;who&#8221; behind the September attacks against this site in the New Year. I promise it&#8217;s going to be a story worth waiting for. Stay tuned. <a href="https://krebsonsecurity.com/2016/12/happy-seventh-birthday-krebsonsecurity/#more-37393" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-37383" class="post-37383 post type-post status-publish format-standard hentry category-other tag-holiday-inn-breach tag-ihg-breach tag-intercontinental-hotels-group">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2016/12/holiday-inn-parent-ihg-probes-breach-claims/" title="Permalink to Holiday Inn Parent IHG Probes Breach Claims" rel="bookmark">Holiday Inn Parent IHG Probes Breach Claims</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">December 28, 2016</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2016/12/holiday-inn-parent-ihg-probes-breach-claims/#comments">49 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p><strong>InterContinental Hotels Group (IHG)</strong>, the parent company for more than 5,000 hotels worldwide including <strong>Holiday Inn</strong>, says it is investigating claims of a possible credit card breach at some U.S. locations.</p>
+<div id="attachment_37384" style="width: 590px" class="wp-caption aligncenter"><img aria-describedby="caption-attachment-37384" loading="lazy" class="wp-image-37384 size-medium" src="https://krebsonsecurity.com/wp-content/uploads/2016/12/ihg-ny-580x356.png" alt="An Intercontinental hotel in New York City. Image: IHG" width="580" height="356" srcset="https://krebsonsecurity.com/wp-content/uploads/2016/12/ihg-ny-580x356.png 580w, https://krebsonsecurity.com/wp-content/uploads/2016/12/ihg-ny-768x471.png 768w, https://krebsonsecurity.com/wp-content/uploads/2016/12/ihg-ny-940x576.png 940w, https://krebsonsecurity.com/wp-content/uploads/2016/12/ihg-ny.png 943w" sizes="(max-width: 580px) 100vw, 580px" /><p id="caption-attachment-37384" class="wp-caption-text">An Intercontinental hotel in New York City. Photo: IHG.</p></div>
+<p>Last week, KrebsOnSecurity began hearing from sources who work in fraud prevention at different financial institutions. Those sources said they were seeing a pattern of fraud on customer credit and debit cards that suggested a breach at some IHG properties &#8212; particularly Holiday Inn and <strong>Holiday Inn Express</strong> locations.</p>
+<p>Asked about the fraud patterns reported by my sources, a spokesperson for IHG said the company had received similar reports, and that it has hired an outside security firm to help investigate. IHG also issued the following statement:</p>
+<blockquote><p>&#8220;IHG takes the protection of payment card data very seriously. We were made aware of a report of unauthorized charges occurring on some payment cards that were recently used at a small number of U.S.-based hotel locations.  We immediately launched an investigation, which includes retaining a leading computer security firm to provide us with additional support.  We continue to work with the payment card networks.&#8221;</p>
+<p>&#8220;We are committed to swiftly resolving this matter. In the meantime, and in line with best practice, we recommend that individuals closely monitor their payment card account statements.  If there are unauthorized charges, individuals should immediately notify their bank. Payment card network rules generally state that cardholders are not responsible for such charges.&#8221;</p></blockquote>
+<p>Headquartered in Denham, U.K., IHG operates more than 5,000 hotels across nearly 100 countries. The company&#8217;s <a href="https://www.ihgplc.com/our-brands" target="_blank">dozen brands</a> include Holiday Inn, Holiday Inn Express, <strong>InterContinental</strong>, <strong>Kimpton Hotels</strong>, and <strong>Crowne Plaza</strong>. <a href="https://krebsonsecurity.com/2016/12/holiday-inn-parent-ihg-probes-breach-claims/#more-37383" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+				
+			
+								<div class="themonic-pagination"><div class='pagination'><ul><li><a href='https://krebsonsecurity.com/'>&laquo; First</a></li><li><a href='https://krebsonsecurity.com/page/70/' class='inactive'>&lsaquo; Previous</a></li><li><a href='https://krebsonsecurity.com/page/68/' class='inactive'>68</a></li><li><a href='https://krebsonsecurity.com/page/69/' class='inactive'>69</a></li><li><a href='https://krebsonsecurity.com/page/70/' class='inactive'>70</a></li><li class='current'><span class='currenttext'>71</span></li><li><a href='https://krebsonsecurity.com/page/72/' class='inactive'>72</a></li><li><a href='https://krebsonsecurity.com/page/73/' class='inactive'>73</a></li><li><a href='https://krebsonsecurity.com/page/74/' class='inactive'>74</a></li><li><a href='https://krebsonsecurity.com/page/72/' class='inactive'>Next &rsaquo;</a></li><a class='inactive' href='https://krebsonsecurity.com/page/209/'>Last &raquo;</a></ul></div></div>
+					<div style="display: block; clear: both;"></div>
+			
+		
+
+	
+
+		</div><!-- #content -->
+	</div><!-- #primary -->
+
+
+			<div id="secondary" class="widget-area" role="complementary">
+
+        <div id="sidebar_ad" class="widget themonic-ad5"><div class="a-statement">Advertisement</div><a href="https://securityscorecard.com/instant-security-scorecard?utm_source=krebs+on+security&amp;utm_medium=display&amp;utm_campaign=instant+scorecard&amp;utm_term=B&amp;utm_content=335x300">
+<img src="/b-securityscorecard/7.jpg">
+</a></div>
+
+                        <br><div class="widget themonic-ad1"><div class="a-statement">Advertisement</div><a href="https://www.akamai.com/why-akamai/the-internet-of-possibilities?utm_source=krebsonsecurity&amp;utm_medium=display&amp;utm_campaign=F-MC-54978">
+<img src="/b-akamai/146.png">
+</a></div><br>
+
+			<aside id="custom_html-2" class="widget_text widget widget_custom_html"><p class="widget-title">Mailing List</p><div class="textwidget custom-html-widget"><a href="/subscribe/">Subscribe here</a></div></aside><aside id="search-2" class="widget widget_search"><p class="widget-title">Search KrebsOnSecurity</p><form role="search" method="get" id="searchform" class="searchform" action="https://krebsonsecurity.com/">
+				<div>
+					<label class="screen-reader-text" for="s">Search for:</label>
+					<input type="text" value="" name="s" id="s" />
+					<input type="submit" id="searchsubmit" value="Search" />
+				</div>
+			</form></aside>
+		<aside id="recent-posts-3" class="widget widget_recent_entries">
+		<p class="widget-title">Recent Posts</p>
+		<ul>
+											<li>
+					<a href="https://krebsonsecurity.com/2021/12/canada-charges-its-most-prolific-cybercriminal/">Canada Charges Its &#8220;Most Prolific Cybercriminal&#8221;</a>
+									</li>
+											<li>
+					<a href="https://krebsonsecurity.com/2021/12/who-is-the-network-access-broker-babam/">Who Is the Network Access Broker &#8216;Babam&#8217;?</a>
+									</li>
+											<li>
+					<a href="https://krebsonsecurity.com/2021/12/ubiquiti-developer-charged-with-extortion-causing-2020-breach/">Ubiquiti Developer Charged With Extortion, Causing 2020 &#8220;Breach&#8221;</a>
+									</li>
+											<li>
+					<a href="https://krebsonsecurity.com/2021/11/the-internet-is-held-together-with-spit-baling-wire/">The Internet is Held Together With Spit &#038; Baling Wire</a>
+									</li>
+											<li>
+					<a href="https://krebsonsecurity.com/2021/11/arrest-in-ransom-your-employer-email-scheme/">Arrest in &#8216;Ransom Your Employer&#8217; Email Scheme</a>
+									</li>
+					</ul>
+
+		</aside><aside id="text-2" class="widget widget_text">			<div class="textwidget"><a name="subscribe2"></a></div>
+		</aside><aside id="widget_sp_image-15" class="widget widget_sp_image"><p class="widget-title">Spam Nation</p><a href="https://www.amazon.com/Spam-Nation-Organized-Cybercrime-Epidemic-ebook/dp/B00L5QGBL0/ref=dp_kinw_strp_1" target="_blank" class="widget_sp_image-image-link" title="Spam Nation"><img width="266" height="404" alt="Spam Nation" class="attachment-266x404 aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2015/04/spamnation-nyt.png" /></a><div class="widget_sp_image-description" ><p>A New York Times Bestseller! </p>
+</div></aside><aside id="widget_sp_image-25" class="widget widget_sp_image"><p class="widget-title">Thinking of a Cybersecurity Career?</p><a href="https://krebsonsecurity.com/2020/07/thinking-of-a-cybersecurity-career-read-this/" target="_blank" class="widget_sp_image-image-link" title="Thinking of a Cybersecurity Career? Read This."><img width="625" height="424" alt="Thinking of a Cybersecurity Career?" class="attachment-full" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2020/07/codepeople.png 625w, https://krebsonsecurity.com/wp-content/uploads/2020/07/codepeople-580x393.png 580w" sizes="(max-width: 625px) 100vw, 625px" src="https://krebsonsecurity.com/wp-content/uploads/2020/07/codepeople.png" /></a><div class="widget_sp_image-description" ><p>Read this.</p>
+</div></aside><aside id="widget_sp_image-3" class="widget widget_sp_image"><p class="widget-title">All About Skimmers </p><a href="https://krebsonsecurity.com/all-about-skimmers/" target="_blank" class="widget_sp_image-image-link" title="All About Skimmers "><img width="299" height="232" alt="All About Skimmers" class="attachment-299x232 aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2010/08/skimgallery1.jpg" /></a><div class="widget_sp_image-description" ><p>Click image for my skimmer series.</p>
+</div></aside><aside id="categories-2" class="widget widget_categories"><p class="widget-title">Story Categories</p>
+			<ul>
+					<li class="cat-item cat-item-5"><a href="https://krebsonsecurity.com/category/sunshine/" title="Includes investigative blog posts meant to shine a light on the darker corners of the Internet.">A Little Sunshine</a>
+</li>
+	<li class="cat-item cat-item-2240"><a href="https://krebsonsecurity.com/category/all-about-skimmers/">All About Skimmers</a>
+</li>
+	<li class="cat-item cat-item-9085"><a href="https://krebsonsecurity.com/category/ashley-madison-breach/">Ashley Madison breach</a>
+</li>
+	<li class="cat-item cat-item-3191"><a href="https://krebsonsecurity.com/category/breadcrumbs/">Breadcrumbs</a>
+</li>
+	<li class="cat-item cat-item-3771"><a href="https://krebsonsecurity.com/category/data-breaches/" title="Stories about data breaches at retailers, corporations, governments and organizations of all sizes.">Data Breaches</a>
+</li>
+	<li class="cat-item cat-item-4624"><a href="https://krebsonsecurity.com/category/ddos-for-hire/">DDoS-for-Hire</a>
+</li>
+	<li class="cat-item cat-item-9173"><a href="https://krebsonsecurity.com/category/employment-fraud/">Employment Fraud</a>
+</li>
+	<li class="cat-item cat-item-2151"><a href="https://krebsonsecurity.com/category/how-to-break-into-security/" title="If you&#039;ve ever wanted career advice on how to make a shift into the security industry, look no further.">How to Break Into Security</a>
+</li>
+	<li class="cat-item cat-item-87"><a href="https://krebsonsecurity.com/category/latest-warnings/">Latest Warnings</a>
+</li>
+	<li class="cat-item cat-item-4071"><a href="https://krebsonsecurity.com/category/neer-do-well-news/">Ne&#039;er-Do-Well News</a>
+</li>
+	<li class="cat-item cat-item-9"><a href="https://krebsonsecurity.com/category/other/">Other</a>
+</li>
+	<li class="cat-item cat-item-1306"><a href="https://krebsonsecurity.com/category/pharma-wars/">Pharma Wars</a>
+</li>
+	<li class="cat-item cat-item-8240"><a href="https://krebsonsecurity.com/category/ransomware/">Ransomware</a>
+</li>
+	<li class="cat-item cat-item-599"><a href="https://krebsonsecurity.com/category/security-tools/">Security Tools</a>
+</li>
+	<li class="cat-item cat-item-8298"><a href="https://krebsonsecurity.com/category/sim-swapping/">SIM Swapping</a>
+</li>
+	<li class="cat-item cat-item-4079"><a href="https://krebsonsecurity.com/category/spam-nation/">Spam Nation</a>
+</li>
+	<li class="cat-item cat-item-1"><a href="https://krebsonsecurity.com/category/smallbizvictims/" title="Posts in this category will include new stories similar to those told in the Small Business Victims category on The Washington Post&#039;s Security Fix blog, which chronicled the methods organized cyber thieve are using to steal hundreds of thousands of dollars from dozens of small- to mid-sized companies around the country.">Target: Small Businesses</a>
+</li>
+	<li class="cat-item cat-item-5167"><a href="https://krebsonsecurity.com/category/tax-refund-fraud/">Tax Refund Fraud</a>
+</li>
+	<li class="cat-item cat-item-3"><a href="https://krebsonsecurity.com/category/comingstorm/" title="This category includes blog posts about computer and Internet security threats now and on the horizon.">The Coming Storm</a>
+</li>
+	<li class="cat-item cat-item-4"><a href="https://krebsonsecurity.com/category/patches/" title="Short posts on the latest security updates for widely-used software.
+">Time to Patch</a>
+</li>
+	<li class="cat-item cat-item-21"><a href="https://krebsonsecurity.com/category/web-fraud-2-0/">Web Fraud 2.0</a>
+</li>
+			</ul>
+
+			</aside><aside id="widget_sp_image-5" class="widget widget_sp_image"><p class="widget-title">The Value of a Hacked PC</p><a href="https://krebsonsecurity.com/2012/10/the-scrap-value-of-a-hacked-pc-revisited/" target="_blank" class="widget_sp_image-image-link" title="The Value of a Hacked PC"><img width="285" height="180" alt="valuehackedpc " class="attachment-285x180 aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2012/12/valuehackedpc-285x180.png" /></a><div class="widget_sp_image-description" ><p>Badguy uses for your PC</p>
+</div></aside><aside id="widget_sp_image-9" class="widget widget_sp_image"><p class="widget-title">Badguy Uses for Your Email </p><a href="https://krebsonsecurity.com/2013/06/the-value-of-a-hacked-email-account/" target="_self" class="widget_sp_image-image-link" title="Badguy Uses for Your Email "><img width="296" height="170" alt="Badguy Uses for Your Email " class="attachment-full aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2013/06/badguyemail.png 296w, https://krebsonsecurity.com/wp-content/uploads/2013/06/badguyemail-285x163.png 285w" sizes="(max-width: 296px) 100vw, 296px" src="https://krebsonsecurity.com/wp-content/uploads/2013/06/badguyemail.png" /></a><div class="widget_sp_image-description" ><p>Your email account may be worth far more than you imagine.</p>
+</div></aside><aside id="widget_sp_image-24" class="widget widget_sp_image"><a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&#038;hosted_button_id=MCCRKHWRX57HS" id="donate" target="_self" class="widget_sp_image-image-link"><img width="250" height="55" alt="Donate to Krebs On Security" class="attachment-medium aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2016/09/donatepaypal2-1.png" /></a></aside><aside id="most_popular_posts-3" class="widget widget_most_popular_posts">
+<p class="widget-title">Most Popular Posts</p>
+<ul>	<li><a href="https://krebsonsecurity.com/2018/07/sextortion-scam-uses-recipients-hacked-passwords/">Sextortion Scam Uses Recipient's Hacked Passwords</a> (1076)</li>
+	<li><a href="https://krebsonsecurity.com/2015/07/online-cheating-site-ashleymadison-hacked/">Online Cheating Site AshleyMadison Hacked</a> (798)</li>
+	<li><a href="https://krebsonsecurity.com/2013/12/sources-target-investigating-data-breach/">Sources: Target Investigating Data Breach</a> (620)</li>
+	<li><a href="https://krebsonsecurity.com/2020/11/trump-fires-security-chief-christopher-krebs/">Trump Fires Security Chief Christopher Krebs</a> (534)</li>
+	<li><a href="https://krebsonsecurity.com/2013/12/cards-stolen-in-target-breach-flood-underground-markets/">Cards Stolen in Target Breach Flood Underground Markets</a> (445)</li>
+	<li><a href="https://krebsonsecurity.com/2013/05/reports-liberty-reserve-founder-arrested-site-shuttered/">Reports: Liberty Reserve Founder Arrested, Site Shuttered</a> (416)</li>
+	<li><a href="https://krebsonsecurity.com/2015/08/was-the-ashley-madison-database-leaked/">Was the Ashley Madison Database Leaked?</a> (376)</li>
+	<li><a href="https://krebsonsecurity.com/2021/01/ddos-guard-to-forfeit-internet-space-occupied-by-parler/">DDoS-Guard To Forfeit Internet Space Occupied by Parler</a> (374)</li>
+	<li><a href="https://krebsonsecurity.com/2014/05/true-goodbye-using-truecrypt-is-not-secure/">True Goodbye: 'Using TrueCrypt Is Not Secure'</a> (363)</li>
+	<li><a href="https://krebsonsecurity.com/2015/08/who-hacked-ashley-madison/">Who Hacked Ashley Madison?</a> (361)</li>
+</ul>
+</aside>
+<aside id="media_image-2" class="widget widget_media_image"><p class="widget-title">Why So Many Top Hackers Hail from Russia</p><a href="https://krebsonsecurity.com/2017/06/why-so-many-top-hackers-hail-from-russia/"><img width="580" height="389" src="https://krebsonsecurity.com/wp-content/uploads/2017/06/computered-580x389.png" class="image wp-image-39684  attachment-medium size-medium" alt="" loading="lazy" style="max-width: 100%; height: auto;" srcset="https://krebsonsecurity.com/wp-content/uploads/2017/06/computered-580x389.png 580w, https://krebsonsecurity.com/wp-content/uploads/2017/06/computered-768x514.png 768w, https://krebsonsecurity.com/wp-content/uploads/2017/06/computered-940x630.png 940w, https://krebsonsecurity.com/wp-content/uploads/2017/06/computered.png 1551w" sizes="(max-width: 580px) 100vw, 580px" /></a></aside><aside id="widget_sp_image-11" class="widget widget_sp_image"><p class="widget-title">Category: Web Fraud 2.0</p><a href="https://krebsonsecurity.com/category/web-fraud-2-0/" target="_blank" class="widget_sp_image-image-link" title="Category: Web Fraud 2.0"><img width="227" height="400" alt="Criminnovations" class="attachment-medium aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2013/11/cybercrimeinnovations-227x400.png" /></a><div class="widget_sp_image-description" ><p>Innovations from the Underground</p>
+</div></aside><aside id="widget_sp_image-12" class="widget widget_sp_image"><a href="https://krebsonsecurity.com/2014/03/are-credit-monitoring-services-worth-it/" target="_blank" class="widget_sp_image-image-link"><img width="285" height="189" class="attachment-medium aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2014/03/shreddedID-copy-285x189.png 285w, https://krebsonsecurity.com/wp-content/uploads/2014/03/shreddedID-copy-600x399.png 600w, https://krebsonsecurity.com/wp-content/uploads/2014/03/shreddedID-copy.png 849w" sizes="(max-width: 285px) 100vw, 285px" src="https://krebsonsecurity.com/wp-content/uploads/2014/03/shreddedID-copy-285x189.png" /></a><div class="widget_sp_image-description" ><p>ID Protection Services Examined</p>
+</div></aside><aside id="widget_sp_image-13" class="widget widget_sp_image"><p class="widget-title">Is Antivirus Dead?</p><a href="https://krebsonsecurity.com/2014/05/antivirus-is-dead-long-live-antivirus/" target="_blank" class="widget_sp_image-image-link" title="Is Antivirus Dead?"><img width="285" height="161" alt="Is Antivirus Dead?" class="attachment-medium aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2014/05/cryptservices-285x161.png 285w, https://krebsonsecurity.com/wp-content/uploads/2014/05/cryptservices-600x339.png 600w, https://krebsonsecurity.com/wp-content/uploads/2014/05/cryptservices.png 945w" sizes="(max-width: 285px) 100vw, 285px" src="https://krebsonsecurity.com/wp-content/uploads/2014/05/cryptservices-285x161.png" /></a><div class="widget_sp_image-description" ><p>The reasons for its decline</p>
+</div></aside><aside id="widget_sp_image-14" class="widget widget_sp_image"><p class="widget-title">The Growing Tax Fraud Menace</p><a href="https://krebsonsecurity.com/category/tax-refund-fraud/" target="_blank" class="widget_sp_image-image-link" title="The Growing Tax Fraud Menace"><img width="285" height="285" alt="The Growing Tax Fraud Menace" class="attachment-medium aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2014/04/taxfraud-285x285.jpg 285w, https://krebsonsecurity.com/wp-content/uploads/2014/04/taxfraud-150x150.jpg 150w, https://krebsonsecurity.com/wp-content/uploads/2014/04/taxfraud-600x600.jpg 600w, https://krebsonsecurity.com/wp-content/uploads/2014/04/taxfraud.jpg 693w" sizes="(max-width: 285px) 100vw, 285px" src="https://krebsonsecurity.com/wp-content/uploads/2014/04/taxfraud-285x285.jpg" /></a><div class="widget_sp_image-description" ><p>File 'em Before the Bad Guys Can </p>
+</div></aside><aside id="widget_sp_image-17" class="widget widget_sp_image"><p class="widget-title">Inside a Carding Shop</p><a href="https://krebsonsecurity.com/2014/06/peek-inside-a-professional-carding-shop/" target="_blank" class="widget_sp_image-image-link" title="Inside a Carding Shop"><img width="194" height="340" alt="Inside a Carding Shop" class="attachment-medium aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2014/06/mcdumpalsjoined.png" /></a><div class="widget_sp_image-description" ><p>A crash course in carding. </p>
+</div></aside><aside id="widget_sp_image-18" class="widget widget_sp_image"><p class="widget-title">Beware Social Security Fraud</p><a href="https://krebsonsecurity.com/2013/09/crooks-hijack-retirement-funds-via-ssa-portal/" target="_blank" class="widget_sp_image-image-link" title="Beware Social Security Fraud"><img width="285" height="293" alt="Beware Social Security Fraud" class="attachment-full aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2016/09/myssn-285x293.png" /></a><div class="widget_sp_image-description" ><p>Sign up, or Be Signed Up! </p>
+</div></aside><aside id="widget_sp_image-2" class="widget widget_sp_image"><p class="widget-title">How Was Your Card Stolen?</p><a href="https://krebsonsecurity.com/2015/01/how-was-your-credit-card-stolen/" target="_blank" class="widget_sp_image-image-link" title="How Was Your Card Stolen?"><img width="285" height="285" alt="How Was Your Card Stolen?" class="attachment-full aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2016/09/carddominoes-285x285.jpg 285w, https://krebsonsecurity.com/wp-content/uploads/2016/09/carddominoes-285x285-150x150.jpg 150w" sizes="(max-width: 285px) 100vw, 285px" src="https://krebsonsecurity.com/wp-content/uploads/2016/09/carddominoes-285x285.jpg" /></a><div class="widget_sp_image-description" ><p>Finding out is not so easy. </p>
+</div></aside><aside id="widget_sp_image-22" class="widget widget_sp_image"><p class="widget-title">Krebs&#8217;s 3 Rules&#8230;</p><a href="https://krebsonsecurity.com/2011/05/krebss-3-basic-rules-for-online-safety/" target="_blank" class="widget_sp_image-image-link" title="Krebs&#8217;s 3 Rules&#8230;"><img width="300" height="300" alt="Krebs&#8217;s 3 Rules&#8230;" class="attachment-medium aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2011/05/three-300x300.jpg 300w, https://krebsonsecurity.com/wp-content/uploads/2011/05/three-150x150.jpg 150w, https://krebsonsecurity.com/wp-content/uploads/2011/05/three.jpg 347w" sizes="(max-width: 300px) 100vw, 300px" src="https://krebsonsecurity.com/wp-content/uploads/2011/05/three-300x300.jpg" /></a><div class="widget_sp_image-description" ><p>...For Online Safety. </p>
+</div></aside>		</div><!-- #secondary -->
+		</div><!-- #main .wrapper -->
+	
+	<div id="publisho-footer" class="widget-area">
+				<div class="footer-widget">
+                				</div>
+				<div class="footer-widget">
+								</div>
+				<div class="footer-widget">
+								</div>
+	</div>
+
+	<div class="site-wordpress">
+					&copy; Krebs on Security<br>
+	</div>
+	<!-- .site-info --><div class="clear"></div>
+</div><!-- #page -->
+
+<script type='text/javascript' src='https://krebsonsecurity.com/wp-content/themes/kos-mar2021/js/slicknav.js?ver=5.8.2' id='publisho-mobile-navigation-js'></script>
+<script type='text/javascript' src='https://krebsonsecurity.com/wp-includes/js/wp-embed.min.js?ver=5.8.2' id='wp-embed-js'></script>
+</body>
+</html>
+<!--
+Performance optimized by W3 Total Cache. Learn more: https://www.boldgrid.com/w3-total-cache/
+
+Object Caching 254/462 objects using memcached
+Page Caching using memcached 
+Database Caching 7/29 queries in 0.018 seconds using memcached
+
+Served from: krebsonsecurity.com @ 2021-12-10 14:44:57 by W3 Total Cache
+-->

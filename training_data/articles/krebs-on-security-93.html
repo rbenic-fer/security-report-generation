@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<!--[if IE 7]>
+<html class="ie ie7" lang="en-US">
+<![endif]-->
+<!--[if IE 8]>
+<html class="ie ie8" lang="en-US">
+<![endif]-->
+<!--[if !(IE 7) | !(IE 8)  ]><!-->
+<html lang="en-US">
+<!--<![endif]-->
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width" />
+<link rel="profile" href="http://gmpg.org/xfn/11" />
+<!--[if lt IE 9]>
+<script src="https://krebsonsecurity.com/wp-content/themes/kos-mar2021/js/html5.js" type="text/javascript"></script>
+<![endif]-->
+<title>Krebs on Security &#8211; Page 93 &#8211; In-depth security news and investigation</title>
+<meta name='robots' content='max-image-preview:large' />
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="Krebs on Security &raquo; Feed" href="https://krebsonsecurity.com/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Krebs on Security &raquo; Comments Feed" href="https://krebsonsecurity.com/comments/feed/" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.1.0\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.1.0\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/krebsonsecurity.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=5.8.2"}};
+			!function(e,a,t){var n,r,o,i=a.createElement("canvas"),p=i.getContext&&i.getContext("2d");function s(e,t){var a=String.fromCharCode;p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,e),0,0);e=i.toDataURL();return p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,t),0,0),e===i.toDataURL()}function c(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(o=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},r=0;r<o.length;r++)t.supports[o[r]]=function(e){if(!p||!p.fillText)return!1;switch(p.textBaseline="top",p.font="600 32px Arial",e){case"flag":return s([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])?!1:!s([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!s([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]);case"emoji":return!s([10084,65039,8205,55357,56613],[10084,65039,8203,55357,56613])}return!1}(o[r]),t.supports.everything=t.supports.everything&&t.supports[o[r]],"flag"!==o[r]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[o[r]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(n=t.source||{}).concatemoji?c(n.concatemoji):n.wpemoji&&n.twemoji&&(c(n.twemoji),c(n.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+	<link rel='stylesheet' id='colorbox-theme1-css'  href='https://krebsonsecurity.com/wp-content/plugins/jquery-lightbox-for-native-galleries/colorbox/theme1/colorbox.css?ver=1.3.14' type='text/css' media='screen' />
+<link rel='stylesheet' id='wp-block-library-css'  href='https://krebsonsecurity.com/wp-includes/css/dist/block-library/style.min.css?ver=5.8.2' type='text/css' media='all' />
+<link rel='stylesheet' id='contact-form-7-css'  href='https://krebsonsecurity.com/wp-content/plugins/contact-form-7/includes/css/styles.css?ver=5.5.3' type='text/css' media='all' />
+<link rel='stylesheet' id='publisho-style-css'  href='https://krebsonsecurity.com/wp-content/themes/kos-mar2021/style.css?subver=1.2&#038;ver=5.8.2' type='text/css' media='all' />
+<style id='publisho-style-inline-css' type='text/css'>
+
+	.themonic-nav .current-menu-item > a, .themonic-nav .current-menu-ancestor > a, .themonic-nav .current_page_item > a, .themonic-nav .current_page_ancestor > a {
+		background: #cc6600;
+	}
+	.themonic-nav ul.nav-menu, .themonic-nav div.nav-menu > ul {
+		border-bottom: 5px solid #cc6600;
+	}
+	#site-navigation .topheadmenu a {
+    background: rgba(0, 0, 0, 0);
+	}
+	.themonic-nav li a:hover {
+		background: #cc6600;
+	}
+	.themonic-nav li:hover {
+		background: #cc6600;
+	}.wrapper .flexslider {margin: 0 0 30px;}.frontp .btm-wrap {
+    border-top: 1px solid #e9e9e9;
+	}
+	.entry-summary {
+    border-top: none;
+	}.frontp .btm-wrap { margin-bottom: 30px;}.site { font-size:14px;}.site { font-family:'Roboto', arial ;}
+</style>
+<link rel='stylesheet' id='publisho-custom-style-css'  href='https://krebsonsecurity.com/wp-content/themes/kos-mar2021/custom.css?subver=1.2&#038;ver=5.8.2' type='text/css' media='all' />
+<!--[if lt IE 9]>
+<link rel='stylesheet' id='publisho-ie-css'  href='https://krebsonsecurity.com/wp-content/themes/kos-mar2021/css/ie.css?ver=20160606' type='text/css' media='all' />
+<![endif]-->
+<link rel='stylesheet' id='fontawesome-css-css'  href='https://krebsonsecurity.com/wp-content/themes/kos-mar2021/fonts/font-awesome.min.css?ver=5.8.2' type='text/css' media='all' />
+<link rel='stylesheet' id='publisho_custom_fonts-css'  href='//fonts.googleapis.com/css?family=Roboto%3Aregular%2Citalic%2C500%26subset%3Dlatin%2C' type='text/css' media='screen' />
+<script type='text/javascript' src='https://krebsonsecurity.com/wp-includes/js/jquery/jquery.min.js?ver=3.6.0' id='jquery-core-js'></script>
+<script type='text/javascript' src='https://krebsonsecurity.com/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.3.2' id='jquery-migrate-js'></script>
+<script type='text/javascript' src='https://krebsonsecurity.com/wp-content/plugins/jquery-lightbox-for-native-galleries/colorbox/jquery.colorbox-min.js?ver=1.3.14' id='colorbox-js'></script>
+<link rel="https://api.w.org/" href="https://krebsonsecurity.com/wp-json/" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://krebsonsecurity.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://krebsonsecurity.com/wp-includes/wlwmanifest.xml" /> 
+<meta name="generator" content="WordPress 5.8.2" />
+<!-- JavaScript Pull-Quotes plugin v2.2 -->
+	<link rel="stylesheet" href="https://krebsonsecurity.com/wp-content/plugins/jspullquotes/resources/jspullquotes-core.css" type="text/css" />
+	<link rel="stylesheet" href="https://krebsonsecurity.com/wp-content/plugins/jspullquotes/resources/jspullquotes-default.css" type="text/css" />
+	<script type="text/javascript" src="https://krebsonsecurity.com/wp-content/plugins/jspullquotes/resources/jspullquotes.js"></script>
+	<script type="text/javascript">
+		var arrOptions = new Array("1", "1", "right", "1", "1", "blockquote", "pullquote", "pullquote pqRight");
+		pullQuoteOpts(arrOptions);
+	</script>
+<!-- end pull-quote additions -->
+<!-- jQuery Lightbox For Native Galleries v3.1.3 | http://www.viper007bond.com/wordpress-plugins/jquery-lightbox-for-native-galleries/ -->
+<script type="text/javascript">
+// <![CDATA[
+	jQuery(document).ready(function($){
+		$(".gallery").each(function(index, obj){
+			var galleryid = Math.floor(Math.random()*10000);
+			$(obj).find("a").colorbox({rel:galleryid, maxWidth:"95%", maxHeight:"95%"});
+		});
+		$("a.lightbox").colorbox({maxWidth:"95%", maxHeight:"95%"});
+	});
+// ]]>
+</script>
+<style type="text/css" id="custom-background-css">
+body.custom-background { background-color: #ffffff; }
+</style>
+	<link rel="me" href="https://twitter.com/briankrebs" /><meta name="twitter:widgets:link-color" content="#000000" /><meta name="twitter:widgets:border-color" content="#000000" /><meta name="twitter:partner" content="tfwp" />
+<meta name="twitter:card" content="summary" /><meta name="twitter:title" content="Krebs on Security" /><meta name="twitter:site" content="@briankrebs" /><meta name="twitter:description" content="In-depth security news and investigation" />
+</head>
+<body class="home blog paged custom-background paged-93 custom-background-white single-author frontp hfeed">
+<div id="page" class="site">
+	<!-- <div class="publisho-top-mobile-nav clear"></div> -->
+	<div class="themonic-logo themonic-ad3"><div class="a-statement">Advertisement</div><a href="https://info.knowbe4.com/phishing-forensics-krebs?utm_source=Krebs&amp;utm_medium=display&amp;utm_campaign=website&amp;utm_content=PhishingForensics">
+<img src="/b-knowbe4/13.jpg" />
+</a></div>
+	<div class="themonic-logo themonic-ad6"><div class="a-statement">Advertisement</div><a href="https://securityscorecard.com/instant-security-scorecard?utm_source=krebs+on+security&amp;utm_medium=display&amp;utm_campaign=instant+scorecard&amp;utm_term=A&amp;utm_content=1240x160">
+<img src="/b-securityscorecard/2.jpg">
+</a></div>
+	<nav id="site-navigation" class="themonic-nav" role="navigation">
+	</nav><!-- #site-navigation -->
+	<div class="clear"></div>
+	<header id="masthead" class="site-header" role="banner">
+ 					<div class="desktop-social">
+						<div class="socialmedia">
+							<a href="http://twitter.com/briankrebs" target="_blank"><i class="fa fa-twitter"></i></a> 
+															<a class="rss" href="https://krebsonsecurity.com/feed/" target="_blank"><i class="fa fa-rss"></i></a>	
+									<a class="rss" href="https://www.linkedin.com/in/bkrebs/" target="_blank"><i class="fa fa-linkedin"></i></a>	
+								</div>
+				 	</div>
+																						   
+		
+		<div class="themonic-logo responsive-img-container">
+			<a href="https://krebsonsecurity.com/" title="Krebs on Security" rel="home"><img src="https://krebsonsecurity.com/wp-content/uploads/2021/03/kos-27-03-2021.jpg" alt="Krebs on Security"></a>
+		</div>
+
+					<div class="mobile-social">
+						<div class="socialmedia">
+							<a href="http://twitter.com/briankrebs" target="_blank"><i class="fa fa-twitter"></i></a> 
+															<a class="rss" href="https://krebsonsecurity.com/feed/" target="_blank"><i class="fa fa-rss"></i></a>	
+									<a class="rss" href="https://www.linkedin.com/in/bkrebs/" target="_blank"><i class="fa fa-linkedin"></i></a>	
+								</div>
+					</div>
+		
+				<!-- <div class="publisho-mobile-nav clear"></div> -->
+		<nav id="site-navigation" class="themonic-nav" role="navigation">
+			<a class="assistive-text" href="#content" title="Skip to content">Skip to content</a>
+			<div id="menu-top" class="nav-menu"><ul>
+<li ><a href="https://krebsonsecurity.com/">Home</a></li><li class="page_item page-item-2"><a href="https://krebsonsecurity.com/about/">About the Author</a></li>
+<li class="page_item page-item-645"><a href="https://krebsonsecurity.com/cpm/">Advertising/Speaking</a></li>
+</ul></div>
+		</nav><!-- #site-navigation -->
+		<div class="clear"></div>
+	</header><!-- #masthead -->
+	<div id="main" class="wrapper">
+		<div id="primary" class="site-content">
+	
+
+	
+		<div id="content" role="main">
+
+		<article id="post-31699" class="post-31699 post type-post status-publish format-standard hentry category-sunshine category-web-fraud-2-0 tag-drops tag-fbi tag-money-mules tag-reshipping-mules tag-stuffers tag-u-s-postal-investigative-service">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2015/09/with-stolen-cards-fraudsters-shop-to-drop/" title="Permalink to With Stolen Cards, Fraudsters Shop to Drop" rel="bookmark">With Stolen Cards, Fraudsters Shop to Drop</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">September 28, 2015</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2015/09/with-stolen-cards-fraudsters-shop-to-drop/#comments">40 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>A time-honored method of extracting cash from stolen credit cards involves &#8220;reshipping&#8221; scams, which manage the purchase, reshipment and resale of carded consumer goods from America to Eastern Europe &#8212; primarily Russia. A new study suggests that some 1.6 million credit and debit cards are used to commit at least $1.8 billion in reshipping fraud each year, and identifies some choke points for disrupting this lucrative money laundering activity.</p>
+<p>Many retailers long ago stopped allowing direct shipments of consumer goods from the United States to Russia and Eastern Europe, citing the high rate of fraudulent transactions for goods destined to those areas. As a result, fraudsters have perfected the reshipping service, a criminal enterprise that allows card thieves and the service operators essentially split the profits from merchandise ordered with stolen credit and debit cards.</p>
+<div id="attachment_32450" style="width: 590px" class="wp-caption aligncenter"><a href="https://krebsonsecurity.com/wp-content/uploads/2015/09/reshippinggraphic.png"><img aria-describedby="caption-attachment-32450" loading="lazy" class="size-medium wp-image-32450" src="https://krebsonsecurity.com/wp-content/uploads/2015/09/reshippinggraphic-580x328.png" alt="Source: Drops for Stuff research paper." width="580" height="328" srcset="https://krebsonsecurity.com/wp-content/uploads/2015/09/reshippinggraphic-580x328.png 580w, https://krebsonsecurity.com/wp-content/uploads/2015/09/reshippinggraphic-940x531.png 940w, https://krebsonsecurity.com/wp-content/uploads/2015/09/reshippinggraphic.png 942w" sizes="(max-width: 580px) 100vw, 580px" /></a><p id="caption-attachment-32450" class="wp-caption-text">Source: Drops for Stuff research paper.</p></div>
+<p>Much of the insight in this story comes from a study released last week called &#8220;<em>Drops for Stuff: An Analysis of Reshipping Mule Scams</em>,&#8221; which has multiple contributors (including this author). To better understand reshipping scheme, it helps to have a quick primer on the terminology thieves use to describe different actors in the scam.</p>
+<p>The &#8220;operator&#8221; of the reshipping service specializes in recruiting &#8220;reshipping mules&#8221; or &#8220;drops&#8221; &#8212; essentially unwitting consumers in the United States who are enlisted through work-at-home job scams and promised up to $2,500 per month salary just for receiving and reshipping packages.</p>
+<p>In practice, virtually all drops are cut loose after approximately 30 days of their first shipment &#8212; just before the promised paycheck is due. Because of this constant churn, the operator must be constantly recruiting new drops.</p>
+<p>The operator sells access to his stable of drops to card thieves, also known as &#8220;stuffers.&#8221; The stuffers use stolen cards to purchase high-value products from merchants and have the merchants ship the items to the drops&#8217; address. Once the drops receive the packages, the stuffers provide them with prepaid shipping labels that the mules will use to ship the packages to the stuffers themselves. After they receive the packaged relayed by the drops, the stuffers then sell the products on the local black market.</p>
+<p>The shipping service operator will either take a percentage cut (up to 50 percent) where stuffers pay a portion of the product&#8217;s retail value to the site operator as the reshipping fee. On the other hand, those operations that target lower-priced products (clothing, e.g.) may simply charge a flat-rate fee of $50 to $70 per package. Depending on the sophistication of the reshipping service, stuffers can either buy shipping labels directly from the service &#8212; generally at a volume discount &#8212; or provide their own [for a discussion of ancillary criminal services that resell stolen USPS labels purchased wholesale, check out <a href="http://krebsonsecurity.com/2014/08/white-label-money-laundering-services/" target="_blank">this story</a> from 2014].</p>
+<p>The researchers found that reshipping sites typically guarantee a certain level of customer satisfaction for successful package delivery, with some important caveats. If a drop who is not marked as problematic embezzles the package, reshipping sites offer free shipping for the next package or pay up to 15% of the item’s value as compensation to stuffers (e.g., as compensation for “burning” the credit card or the already-paid reshipping label).</p>
+<p>However, in cases where the authorities identify the drop and intercept the package, the reshipping sites provide no compensation &#8212; it calls these incidents “acts of God” over which it has no control.</p>
+<p>&#8220;For a premium, stuffers can rent private drops that no other stuffers will have access to,&#8221; the researchers wrote. &#8220;Such private drops are presumably more reliable and are shielded from interference by other stuffers and, in turn, have a reduced risk to be discovered (hence, lower risk of losing packages).&#8221; <a href="https://krebsonsecurity.com/2015/09/with-stolen-cards-fraudsters-shop-to-drop/#more-31699" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+	<div id="between_article_ad" class="themonic-ad5"><a href="https://go.infrascale.com/lp/get-ransomware-ebook-krebsonsecurity/?utm_source=banner&amp;utm_medium=display&amp;utm_campaign=krebssecurity_influencer_300">
+<img src="/b-infrascale/8.png">
+</a></div>	<article id="post-32406" class="post-32406 post type-post status-publish format-standard hentry category-data-breaches tag-hilton-hotel-breach">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2015/09/banks-card-breach-at-hilton-hotel-properties/" title="Permalink to Banks: Card Breach at Hilton Hotel Properties" rel="bookmark">Banks: Card Breach at Hilton Hotel Properties</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">September 25, 2015</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2015/09/banks-card-breach-at-hilton-hotel-properties/#comments">55 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>Multiple sources in the banking industry say they have traced a pattern of credit card fraud that suggests hackers have compromised point-of-sale registers in gift shops and restaurants at a large number of <strong>Hilton Hotel</strong> and franchise properties across the United States. Hilton says it is investigating the claims.</p>
+<p><a href="https://krebsonsecurity.com/wp-content/uploads/2015/09/hilton.png"><img loading="lazy" class="alignright size-full wp-image-32429" src="https://krebsonsecurity.com/wp-content/uploads/2015/09/hilton.png" alt="hilton" width="300" height="217" /></a>In August, <strong>Visa</strong> sent confidential alerts to numerous financial institutions warning of a breach at a brick-and-mortar entity that is known to have extended from April 21, 2015 to July 27, 2015. The alerts to each bank included card numbers that were suspected of being compromised, but per Visa policy those notifications did not name the breached entity.</p>
+<p>However, sources at five different banks say they have now determined that the common point-of-purchase for cards included in that alert had only one commonality: They were all were used at Hilton properties, including the company&#8217;s flagship Hilton locations as well as <strong>Embassy Suites</strong>, <strong>Doubletree</strong>, <strong>Hampton Inn and Suites</strong>,<strong> </strong>and the upscale <strong>Waldorf Astoria Hotels &amp; Resorts</strong>.</p>
+<p>In a written statement, a Hilton spokesperson said the company is investigating the breach claims.</p>
+<p>“Hilton Worldwide is strongly committed to protecting our customers’ credit card information,&#8221; the company said. &#8220;We have many systems in place and work with some of the top experts in the field to address data security.  Unfortunately the possibility of fraudulent credit card activity is all too common for every company in today’s marketplace.  We take any potential issue very seriously, and we are looking into this matter.”</p>
+<p>As with other recent card breaches at major hotel chains &#8212; including <a href="http://krebsonsecurity.com/2015/03/credit-card-breach-at-mandarian-oriental/" target="_blank">Mandarin Oriental</a> and <a href="http://krebsonsecurity.com/?s=white+lodging&amp;x=0&amp;y=0" target="_blank">White Lodging</a> properties &#8212; the breach does not appear to be related to the guest reservation systems at the affected locations. Rather, sources say the fraud seems to stem from compromised point-of-sale devices inside of franchised restaurants, coffee bars and gift shops within Hilton properties.</p>
+<p>It remains unclear how many Hilton properties may be affected by this apparent breach. Several sources in the financial industry told KrebsOnSecurity that the incident may date back to November 2014, and may still be ongoing.</p>
+<p>This is a developing story. More as updates become available.</p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+	<div class="themonic-ad2"><div class="a-statement">Advertisement</div><a href="https://www.akamai.com/?utm_source=krebsonsecurity&amp;utm_medium=display&amp;utm_id=GL_Platform&amp;utm_campaign=F-MC-52606&amp;utm_content=IDC_InfoBrief">
+<img src="/b-akamai/134.png">
+</a></div>	<article id="post-31465" class="post-31465 post type-post status-publish format-standard hentry category-sunshine category-web-fraud-2-0 tag-ashleymadison-hack tag-avivah-litan tag-diskin-advanced-technologies tag-enigma-forum tag-gartner tag-gentlemens-club tag-keyser-soze tag-noam-jolles tag-shin-bet tag-spam-nation tag-the-samurai tag-yuval-diskin">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2015/09/bidding-for-breaches-redefining-targeted-attacks/" title="Permalink to Bidding for Breaches, Redefining Targeted Attacks" rel="bookmark">Bidding for Breaches, Redefining Targeted Attacks</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">September 23, 2015</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2015/09/bidding-for-breaches-redefining-targeted-attacks/#comments">28 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>A growing community of private and highly-vetted cybercrime forums is redefining the very meaning of &#8220;targeted attacks.&#8221; These bid-and-ask forums match crooks who are looking for access to specific data, resources or systems within major corporations with hired muscle who are up to the task or who already have access to those resources.</p>
+<p>A good example of this until recently could be found at a secretive online forum called &#8220;Enigma,&#8221; a now-defunct community that was built as kind of eBay for data breach targets. Vetted users on Enigma were either bidders or buyers &#8212; posting requests for data from or access to specific corporate targets, or answering such requests with a bid to provide the requested data. The forum, operating on the open Web for months until recently, was apparently scuttled when the forum administrators (rightly) feared that the community had been infiltrated by spies.</p>
+<p>The screen shot below shows several bids on Enigma from March through June 2015, requesting data and services related to <strong>HSBC UK</strong>, <strong>Citibank</strong>, <strong>Air Berlin</strong> and <strong>Bank of America</strong>:</p>
+<div id="attachment_31950" style="width: 590px" class="wp-caption aligncenter"><a class="lightbox" href="https://krebsonsecurity.com/wp-content/uploads/2015/08/enigmabw.png"><img aria-describedby="caption-attachment-31950" loading="lazy" class="size-medium wp-image-31950" src="https://krebsonsecurity.com/wp-content/uploads/2015/08/enigmabw-580x157.png" alt="Enigma, an exclusive forum for cyber thieves to buy and sell access to or data stolen from companies. " width="580" height="157" srcset="https://krebsonsecurity.com/wp-content/uploads/2015/08/enigmabw-580x157.png 580w, https://krebsonsecurity.com/wp-content/uploads/2015/08/enigmabw-940x255.png 940w, https://krebsonsecurity.com/wp-content/uploads/2015/08/enigmabw.png 1018w" sizes="(max-width: 580px) 100vw, 580px" /></a><p id="caption-attachment-31950" class="wp-caption-text">Enigma, an exclusive forum for cyber thieves to buy and sell access to or data stolen from companies.</p></div>
+<p>One particularly active member, shown in the screen shot above and the one below using the nickname &#8220;Demander,&#8221; posts on Jan. 10, 2015 that he is looking for credentials from Cisco and that the request is urgent (it&#8217;s unclear from the posting whether he&#8217;s looking for access to <strong>Cisco Corp.</strong> or simply to a specific Cisco router). Demander also was searching for services related to <strong>Bank of America</strong> ATMs and unspecified data or services from <strong>Wells Fargo</strong>.</p>
+<div id="attachment_31951" style="width: 590px" class="wp-caption aligncenter"><a class="lightbox" href="https://krebsonsecurity.com/wp-content/uploads/2015/08/enigmagreen.png"><img aria-describedby="caption-attachment-31951" loading="lazy" class="size-medium wp-image-31951" src="https://krebsonsecurity.com/wp-content/uploads/2015/08/enigmagreen-580x300.png" alt="More bids on Enigma forum for services." width="580" height="300" srcset="https://krebsonsecurity.com/wp-content/uploads/2015/08/enigmagreen-580x300.png 580w, https://krebsonsecurity.com/wp-content/uploads/2015/08/enigmagreen-940x486.png 940w, https://krebsonsecurity.com/wp-content/uploads/2015/08/enigmagreen.png 1111w" sizes="(max-width: 580px) 100vw, 580px" /></a><p id="caption-attachment-31951" class="wp-caption-text">More bids on Enigma forum for services, data, and access to major corporations.</p></div>
+<p>Much of the information about Enigma comes from<strong> Noam Jolles</strong>, a senior intelligence expert at <a href="http://Diskinat.com" target="_blank">Diskin Advanced Technologies</a>. The employees at Jolles&#8217; firm are all former members of <a href="https://en.wikipedia.org/wiki/Shin_Bet" target="_blank">Shin Bet</a>, a.k.a. the Israel Security Agency/General Security Service &#8212; Israel&#8217;s counterespionage and counterterrorism agency, and similar to the British MI5 or the American FBI. The firm&#8217;s namesake comes from its founder, <strong>Yuval Diskin</strong>, who headed Shin Bet from 2005 to 2011.</p>
+<p>&#8220;On Enigma, members post a bid and call on people to attack certain targets or that they are looking for certain databases for which they are willing to pay,&#8221; Jolles said. &#8220;And people are answering it and offering their merchandise.&#8221;</p>
+<p>Those bids can take many forms, Jolles said, from requests to commit a specific cyberattack to bids for access to certain Web servers or internal corporate networks.</p>
+<p>&#8220;I even saw bids regarding names of people who could serve as insiders,&#8221; she said. &#8220;Lists of people who might be susceptible to being recruited or extorted.&#8221;</p>
+<p>Many experts believe <a href="http://krebsonsecurity.com/2015/07/online-cheating-site-ashleymadison-hacked/" target="_blank">the breach that exposed tens of millions user accounts at AshleyMadison.com</a> &#8212; an infidelity site that promises to hook up cheating spouses &#8212; originated from or was at least assisted by an insider at the company. Interestingly, on June 25, 2015 &#8212; three weeks before news of the breach broke &#8212; a member on a related secret data-trading forum called the &#8220;Gentlemen&#8217;s Club&#8221; solicits &#8220;data and service&#8221; related to AshleyMadison, saying &#8220;Don&#8217;t waste time if you don&#8217;t know what I&#8217;m talking about. Big job opportunity.&#8221;</p>
+<div id="attachment_32401" style="width: 526px" class="wp-caption aligncenter"><a class="lightbox" href="https://krebsonsecurity.com/wp-content/uploads/2015/09/diablo_asheley.jpg"><img aria-describedby="caption-attachment-32401" loading="lazy" class="size-full wp-image-32401" src="https://krebsonsecurity.com/wp-content/uploads/2015/09/diablo_asheley.jpg" alt="On June 26, 2015, a forum member named &quot;Diablo&quot; requests data and services related to AshleyMadison.com. " width="516" height="180" /></a><p id="caption-attachment-32401" class="wp-caption-text">On June 26, 2015, a &#8220;Gentlemen&#8217;s Club&#8221; forum member named &#8220;Diablo&#8221; requests data and services related to AshleyMadison.com.</p></div>
+<p>Cybercrime forums like Enigma vet new users and require non-refundable deposits of virtual currency (such as Bitcoin). More importantly, they have strict rules: If the forum administrators notice you&#8217;re not trading with others on the forum, you&#8217;ll soon be expelled from the community. This policy means that users who are not actively involved in illicit activities &#8212; such as buying or selling access to hacked resources &#8212; aren&#8217;t allowed to remain on the board for long. <a href="https://krebsonsecurity.com/2015/09/bidding-for-breaches-redefining-targeted-attacks/#more-31465" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-32393" class="post-32393 post type-post status-publish format-standard hentry category-patches tag-adobe-flash-player-patch tag-flash-19-0-0-185 tag-shockwave-player">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2015/09/adobe-flash-patch-plus-shockwave-shocker/" title="Permalink to Adobe Flash Patch, Plus Shockwave Shocker" rel="bookmark">Adobe Flash Patch, Plus Shockwave Shocker</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">September 21, 2015</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2015/09/adobe-flash-patch-plus-shockwave-shocker/#comments">60 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p><strong>Adobe</strong> has released a critical software update to fix nearly two-dozen security holes in its <strong>Flash Player</strong> browser plugin. Separately, I want to take a moment to encourage users who have <strong>Adobe Shockwave Player</strong> installed to finally junk this program; turns out Shockwave &#8212; which comes with its own version of Flash &#8212; is still many versions behind in bundling the latest Flash fixes.</p>
+<p><a href="https://krebsonsecurity.com/wp-content/uploads/2013/02/brokenflash-a.png"><img loading="lazy" class="alignright size-full wp-image-18875" src="https://krebsonsecurity.com/wp-content/uploads/2013/02/brokenflash-a.png" alt="brokenflash-a" width="211" height="180" /></a>If you use and need Flash Player, it&#8217;s time to update the program (the latest version is <em>19.0.0.185</em> for Windows and Mac users). <strong>Google Chrome</strong> and <strong>Internet Explorer</strong> bundle their own versions of Flash (also now at v. 19.0.0.185); each should auto-update to the latest. Find out if you have Flash installed and its current version number by visiting <a href="https://www.adobe.com/software/flash/about/" target="_blank">this page</a>.</p>
+<p>Adobe said it was unaware of any exploits in the wild for the vulnerabilities fixed in this Flash release. Nevertheless, I would recommend that if you use Flash that you strongly <a href="http://krebsonsecurity.com/2015/06/a-month-without-adobe-flash-player/" target="_blank">consider removing it</a>, or at least hobbling it until and unless you need it. Disabling Flash in Chrome is simple enough, and can be easily reversed: On a Windows, Mac, Linux or Chrome OS installation of Chrome, type “chrome:plugins” into the address bar, and on the Plug-ins page look for the “Flash” listing: To disable Flash, click the disable link (to re-enable it, click “enable”). Windows users can remove Flash from the Add/Remove Programs panel, or <a href="https://helpx.adobe.com/flash-player/kb/uninstall-flash-player-windows.html" target="_blank">use Adobe’s uninstaller</a> for Flash Player.</p>
+<p>If you’re concerned about removing Flash altogether, consider a dual-browser approach. That is, unplugging Flash from the browser you use for everyday surfing, and leaving it plugged in to a second browser that you only use for sites that require Flash.</p>
+<p>If you decide to proceed with Flash and update, the most recent versions of Flash should be available from the <a title="http://get.adobe.com/flashplayer/" href="http://get.adobe.com/flashplayer/" target="_blank">Flash home page</a>, but beware potentially unwanted add-ons, like <strong>McAfee Security Scan</strong>. To avoid this, uncheck the pre-checked box before downloading, or grab your OS-specific Flash download from <a title="https://www.adobe.com/products/flashplayer/distribution3.html" href="https://www.adobe.com/products/flashplayer/distribution3.html" target="_blank">here</a>. Windows users who browse the Web with anything other than Internet Explorer may need to apply this patch twice, once with IE and again using the alternative browser (<strong>Firefox</strong>, <strong>Opera</strong>, e.g.).</p>
+<p><span style="text-decoration: underline;">SHOCKWAVE SHOCKER</span></p>
+<p>In other Adobe patch news, on Sept. 8, 2015 I <a href="http://krebsonsecurity.com/2015/09/microsoft-pushes-a-dozen-security-updates/" target="_blank">urged readers</a> who have the Shockwave media player installed to update to the latest version or else junk the program altogether. In a post more than a year ago, I outlined <a href="http://krebsonsecurity.com/2014/05/why-you-should-ditch-adobe-shockwave/" target="_blank">Why You Should Ditch Adobe Shockwave</a>, noting that the program bundles a component of Adobe Flash that was more than 15 months behind on security updates. <a href="https://krebsonsecurity.com/2015/09/adobe-flash-patch-plus-shockwave-shocker/#more-32393" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-32276" class="post-32276 post type-post status-publish format-standard hentry category-sunshine category-data-breaches tag-fazio-mechanical tag-molly-snyder tag-target-breach tag-verizon">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2015/09/inside-target-corp-days-after-2013-breach/" title="Permalink to Inside Target Corp., Days After 2013 Breach" rel="bookmark">Inside Target Corp., Days After 2013 Breach</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">September 21, 2015</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2015/09/inside-target-corp-days-after-2013-breach/#comments">102 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>In December 2013, just days after a data breach exposed 40 million customer debit and credit card accounts, <strong>Target Corp.</strong> hired security experts at <strong>Verizon</strong> to probe its networks for weaknesses. The results of that confidential investigation &#8212; until now never publicly revealed &#8212; confirm what pundits have long suspected: Once inside Target&#8217;s network, there was nothing to stop attackers from gaining direct and complete access to every single cash register in every Target store.</p>
+<p><a href="https://krebsonsecurity.com/wp-content/uploads/2014/01/targetsmash.jpg"><img loading="lazy" class="alignright wp-image-24411" src="https://krebsonsecurity.com/wp-content/uploads/2014/01/targetsmash-285x187.jpg" alt="targetsmash" width="238" height="156" srcset="https://krebsonsecurity.com/wp-content/uploads/2014/01/targetsmash-285x187.jpg 285w, https://krebsonsecurity.com/wp-content/uploads/2014/01/targetsmash.jpg 427w" sizes="(max-width: 238px) 100vw, 238px" /></a>According to an internal corporate report obtained by KrebsOnSecurity, Target commissioned the study &#8220;in anticipation of litigation&#8221; from banks that might join together to sue the retailer in a bid to recoup the costs of reissuing cards to their customers. Last week, a federal judge <a href="http://consumerist.com/2015/09/16/target-to-face-class-action-lawsuit-from-banks-over-data-breach/" target="_blank">cleared those claims to go forward</a> in a class action suit.</p>
+<p>The Verizon assessment, conducted between December 21, 2013 to March 1, 2014, notably found &#8220;<em>no controls limiting their access to any system, including devices within stores such as point of sale (POS) registers and servers</em>.&#8221;</p>
+<p>The report noted that Verizon consultants were able to directly communicate with point-of-sale registers and servers from the core network. In one instance, they were able to communicate directly with cash registers in checkout lanes after <em>compromising a deli meat scale located in a different store.</em></p>
+<p>Verizon&#8217;s findings lend credence to the working theory about how hackers initially broke into Target. In February 2014, KrebsOnSecurity <a href="http://krebsonsecurity.com/2014/02/target-hackers-broke-in-via-hvac-company/" target="_blank">was the first to report</a> that investigators had zeroed in on the source of the breach: <strong>Fazio Mechanical</strong>, a small heating and air conditioning firm in Pennsylvania that worked with Target and had suffered its own breach <a href="http://krebsonsecurity.com/2014/02/email-attack-on-vendor-set-up-breach-at-target/" target="_blank">via malware delivered in an email</a>. In that intrusion, the thieves managed to steal the virtual private network credentials that Fazio&#8217;s technicians used to remotely connect to Target&#8217;s network.</p>
+<p>Verizon&#8217;s report offers a likely playbook for how the Target hackers used that initial foothold provided by Fazio&#8217;s hack to push malicious software down to all of the cash registers at more than 1,800 stores nationwide.</p>
+<p>Target spokesperson <strong>Molly Snyder</strong> would neither confirm nor deny the authenticity of the documents referenced in this report, but she maintained that Target has made great strides and is now an industry leader on cybersecurity.</p>
+<p>&#8220;We&#8217;ve brought in new leaders, built teams, and opened a state-of-the-art cyber fusion center,&#8221; Snyder said. &#8220;We are proud of where we stand as a company and will be absolutely committed to being a leader on cybersecurity going forward.&#8221;</p>
+<p>Snyder said Target believes &#8220;that sharing accurate and actionable information – with consumers, policy makers, and even other companies and industries – will help make all of us safer and stronger,&#8221; she said in an emailed statement. &#8220;Sometimes that means providing information directly to consumers, other times that means sharing information about possible industry threats with other companies or through our participation in the Financial Services and Retail Information Sharing and Analysis Centers (ISACs), and sometimes that means working with law enforcement. What we don’t think it means is continuing to rehash a narrative that is nearly two years old.&#8221;</p>
+<div id="attachment_32371" style="width: 590px" class="wp-caption aligncenter"><a class="lightbox" href="https://krebsonsecurity.com/wp-content/uploads/2015/09/path.png"><img aria-describedby="caption-attachment-32371" loading="lazy" class="size-medium wp-image-32371" src="https://krebsonsecurity.com/wp-content/uploads/2015/09/path-580x523.png" alt="A high-level graphic showing the various routes that Verizon penetration testers were able to use to get all the way down to Target's cash registers in 2013 and 2014." width="580" height="523" srcset="https://krebsonsecurity.com/wp-content/uploads/2015/09/path-580x523.png 580w, https://krebsonsecurity.com/wp-content/uploads/2015/09/path.png 934w" sizes="(max-width: 580px) 100vw, 580px" /></a><p id="caption-attachment-32371" class="wp-caption-text">A high-level graphic showing the various routes that Verizon penetration testers were able to use to get all the way down to Target&#8217;s cash registers in 2013 and 2014.</p></div>
+<p><span style="text-decoration: underline;">THE ROLE OF DEFAULT AND WEAK PASSWORDS</span></p>
+<p>The report notes that &#8220;while Target has a password policy, the Verizon security consultants discovered that it was not being followed. The Verizon consultants discovered a file containing valid network credentials being stored on several servers. The Verizon consultants also discovered systems and services utilizing either weak or default passwords. Utilizing these weak passwords the consultants were able to instantly gain access to the affected systems.&#8221;</p>
+<p>Default passwords in key internal systems and servers also allowed the Verizon consultants to assume the role of a system administrator with complete freedom to move about Target&#8217;s sprawling internal network.</p>
+<p>&#8220;The Verizon security consultants identified several systems that were using misconfigured services, such as several Microsoft SQL servers that had a weak administrator password, and Apache Tomcat servers using the default administrator password,&#8221; the report observes. &#8220;Through these weaknesses, the Verizon consultants were able to gain initial access to the corporate network and to eventually gain domain administrator access.&#8221;</p>
+<p>Within one week, the security consultants reported that they were able to crack 472,308 of Target&#8217;s 547,470 passwords (86 percent) that allowed access to various internal networks, including; target.com, corp.target.com; email.target.com; stores.target.com;  hq.target.com; labs.target.com; and olk.target.com. <a href="https://krebsonsecurity.com/2015/09/inside-target-corp-days-after-2013-breach/#more-32276" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-32278" class="post-32278 post type-post status-publish format-standard hentry category-sunshine category-all-about-skimmers tag-atm-skimmer tag-bluetooth-skimmer tag-free2move tag-intacash tag-multiva">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2015/09/whos-behind-bluetooth-skimming-in-mexico/" title="Permalink to Who&#8217;s Behind Bluetooth Skimming in Mexico?" rel="bookmark">Who&#8217;s Behind Bluetooth Skimming in Mexico?</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">September 17, 2015</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2015/09/whos-behind-bluetooth-skimming-in-mexico/#comments">87 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>In the previous <a href="http://krebsonsecurity.com/2015/09/tracking-bluetooth-skimmers-in-mexico-part-ii/" target="_blank">two</a> <a href="http://krebsonsecurity.com/2015/09/tracking-a-bluetooth-skimmer-gang-in-mexico/" target="_blank">stories</a>, I documented the damage wrought by an organized crime gang in Mexico that has been systematically bribing ATM technicians to install Bluetooth skimming components that allow thieves to steal card and PIN data wirelessly. What follows is a look at a mysterious new ATM company in Mexico that sources say may be tied to the skimming activity.</p>
+<p>One ATM company operating in the Cancun area whose machines were apparently free from these skimming devices is a relatively new entity called <strong>Intacash</strong>. This company&#8217;s ATMs positively blanketed many of the areas I visited, particularly in the heavy tourist and commercial areas of downtown Cancun and Playa Del Carmen. For example, in <a href="https://www.google.com/maps/@21.1346194,-86.7472305,17.79z" target="_blank">a single city block on Boulevard Kukulcan in Zona Hotelera</a> &#8212; probably the busiest tourist spot in Cancun &#8212; I counted no fewer than ten Intacash ATMs, most of which were all less than a couple hundred yards from each another.</p>
+<div id="attachment_32343" style="width: 289px" class="wp-caption alignright"><a class="lightbox" href="https://krebsonsecurity.com/wp-content/uploads/2015/09/IMG_3954.jpg"><img aria-describedby="caption-attachment-32343" loading="lazy" class=" wp-image-32343" src="https://krebsonsecurity.com/wp-content/uploads/2015/09/IMG_3954-580x773.jpg" alt="Intacash ATMs positively blanket downtown Cancun." width="279" height="372" srcset="https://krebsonsecurity.com/wp-content/uploads/2015/09/IMG_3954-580x773.jpg 580w, https://krebsonsecurity.com/wp-content/uploads/2015/09/IMG_3954-940x1253.jpg 940w" sizes="(max-width: 279px) 100vw, 279px" /></a><p id="caption-attachment-32343" class="wp-caption-text">Intacash ATMs positively blanket the most busy area of downtown Cancun and in very tight proximity to one another.</p></div>
+<p>The experts I spoke with said they were mystified by Intacash&#8217;s strategy of placing so many cash machines in the region. Even for areas like Zona Hotelera with plenty of continuous foot traffic, adding so many cash machines in such a small space produces diminishing returns.</p>
+<p>Two different ATM experts familiar with rates charged to place ATMs in the area and who asked to remain anonymous said there is no way Intacash could afford the rent required to place so many ATMs in such close proximity on public property and still turn a monthly profit. No way, that is, unless the company had a different profit motive in mind.</p>
+<p>Intacash is a relative newcomer to the ATM scene in Mexico, bringing its first ATMs online there a little more than a year ago. It&#8217;s not at all clear who runs or owns Intacash, and there is precious little public information available about this company.</p>
+<p><strong>Intacash.com</strong>, registered in early 2014, consists of just <a href="https://www.google.com/search?q=inurl%3Aintacash.mx&amp;rlz=1C1CHFX_enUS568US568&amp;oq=inurl%3Aintacash.mx&amp;aqs=chrome..69i57j69i58.3902j0j4&amp;sourceid=chrome&amp;es_sm=93&amp;ie=UTF-8#q=site:intacash.com" target="_blank"> four Web pages</a>. There is no contact information for the firm on its site, which to this day has exactly zero sites linking in to it. From its inception, the site&#8217;s registration records have been hidden behind WHOIS privacy protection services. Intacash hosts its sites along with more than 6,000 other sites on a shared server at GoDaddy.com (for security and other reasons, financial institutions and service providers more typically spring for their own, dedicated servers).</p>
+<p>Despite the presence of nearly 70 Intacash ATMs in Cancun, Playa Del Carmen, Tulum and other tourist areas in the Yucatan Peninsula, this company seems to have gone out of its way not to be noticed online. What&#8217;s more, a review of the text on Intacash.com suggests that much of the Web content on the site has been copied verbatim from other sites that preceded Intacash&#8217;s existence on the Internet.</p>
+<p>Multiple emails sent to the contact addresses and forms on Intacash&#8217;s Web site went unreturned. Intacash&#8217;s sponsor bank in Mexico &#8211; <a href="http://www.multiva.com.mx/wps/wcm/connect/GrupoFinanciero/Grupo%20Financiero/home" target="_blank">Multiva</a> &#8212; also did not respond to messages seeking comment.</p>
+<p><span style="text-decoration: underline;">THE INTACASH CONNECTION</span></p>
+<p>Why was I so keen to learn more about Intacash? My source in the ATM industry who tipped me off about the Bluetooth skimming activity showcased in the first two stories here said his technicians began receiving bribes to let strangers install skimming components inside their machines around the same time that Intacash came online in Mexico. By early this year, <em>all</em> of my source&#8217;s ATM technicians had reported being approached by one of two guys who were trying to buy access to ATMs. The employees who reported these incidents to my ATM industry source said the men had Eastern European accents.</p>
+<div id="attachment_32358" style="width: 590px" class="wp-caption aligncenter"><a class="lightbox" href="https://krebsonsecurity.com/wp-content/uploads/2015/09/intahome.png"><img aria-describedby="caption-attachment-32358" loading="lazy" class="size-medium wp-image-32358" src="https://krebsonsecurity.com/wp-content/uploads/2015/09/intahome-580x473.png" alt="Intacash.com's home page" width="580" height="473" srcset="https://krebsonsecurity.com/wp-content/uploads/2015/09/intahome-580x473.png 580w, https://krebsonsecurity.com/wp-content/uploads/2015/09/intahome.png 934w" sizes="(max-width: 580px) 100vw, 580px" /></a><p id="caption-attachment-32358" class="wp-caption-text">Intacash.com&#8217;s home page</p></div>
+<p>Several of my source&#8217;s employees later identified the men who approached them after managing to locate their profile pages on <strong>Whatsapp</strong>, a popular mobile messaging service.</p>
+<p>&#8220;My partner was at a meeting with the operating manager of [a major hotel] in Cancun, doing his sales pitch,&#8221; my source recalled in a recent interview. &#8220;And the fellow at the hotel told my guy that just the day before he&#8217;d been approached by another ATM company, and that the guys were Eastern European.&#8221;</p>
+<p>My source said that, when pressed, the hotel manager acknowledged that the other company was indeed Intacash. My source said his business partner happened to have bookmarked on his smartphone the Whatsapp profiles of the men who&#8217;d tried to bribe his technicians, and that he opened the profiles one by one and showed them to the hotel manager.</p>
+<p>&#8220;My partner asked, &#8216;Just out of curiosity was it one of these guys?'&#8221; my source said. &#8220;The hotel manager said why, yes it was.&#8221; <a href="https://krebsonsecurity.com/2015/09/whos-behind-bluetooth-skimming-in-mexico/#more-32278" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-32267" class="post-32267 post type-post status-publish format-standard hentry category-sunshine category-all-about-skimmers tag-atm-skimmer tag-bluetooth-skimmer tag-free2move">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2015/09/tracking-bluetooth-skimmers-in-mexico-part-ii/" title="Permalink to Tracking Bluetooth Skimmers in Mexico, Part II" rel="bookmark">Tracking Bluetooth Skimmers in Mexico, Part II</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">September 15, 2015</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2015/09/tracking-bluetooth-skimmers-in-mexico-part-ii/#comments">138 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p class="p1"><span class="s1">I spent four days last week in Mexico, <a href="http://krebsonsecurity.com/2015/09/tracking-a-bluetooth-skimmer-gang-in-mexico/" target="_blank">tracking the damage</a> wrought by an organized crime ring that is bribing ATM technicians to place <a href="https://en.wikipedia.org/wiki/Bluetooth" target="_blank">Bluetooth</a> skimmers inside of cash machines in and around the tourist areas of Cancun. Today&#8217;s piece chronicles the work of this gang in coastal regions farther south, following a trail of hacked ATMs from <a href="https://en.wikipedia.org/wiki/Playa_del_Carmen" target="_blank">Playa Del Camen</a> down to the ancient Mayan ruins in <a href="https://en.wikipedia.org/wiki/Tulum" target="_blank">Tulum</a>.</span></p>
+<p class="p1">As I noted in yesterday&#8217;s story, the skimmers that this gang is placing in hacked ATMs consist of two Bluetooth components: One connected to the card reader inside each machine, and another attached to the PIN pad. Both components beacon out a Bluetooth signal called &#8220;Free2Move.&#8221; The thieves can retrieve the purloined card and PIN data just by strolling up to the hacked ATM with a smartphone, entering a secret passcode, and downloading all of the collected information.</p>
+<div align="center"><iframe loading="lazy" src="https://www.youtube.com/embed/K5hLmaVKpts" width="560" height="315" frameborder="0" allowfullscreen="allowfullscreen"></iframe></div>
+<p class="p1"><span class="s1">Having found two hacked ATMs in Cancun &#8212; including one in the lobby of my hotel (the <strong>Marriott CasaMagna</strong>) &#8212; I decided to check out other tourist destinations in the region. On the way to Tulum, I dropped in at the <a href="http://www.barcelo.com/BarceloHotels/en_US/hotels/mexico/cancun/hotel-barcelo-costa-cancun/general-description.aspx" target="_blank">Barcelo</a>, a huge, all-inclusive resort. The security guards at the front gate at the resort initially prevented me from entering the complex because I didn’t have reservations. </span></p>
+<p class="p1"><span class="s1">After 10 minutes of Googling on my phone and a call to the front desk, the guards seemed satisfied that I was interested in buying a day pass to the hotel’s various facilities. The gate lifted and I was let in. </span><span class="s1">Five minutes later, the very first ATM I stopped at was found to be emanating the telltale Free2Move Bluetooth signals indicating a compromise. </span></p>
+<p class="p1"><span class="s1">No sooner had I finished documenting that hacked ATM than a security guard rode up on a motorcycle and asked if I was having trouble finding the day-pass desk. I replied that I&#8217;d be headed that way shortly.</span></p>
+<p class="p1"><span class="s1">The Barcelo security guard followed me closely as I returned to my rented Jetta and drove to a different building in the complex. Multiple security guards were beginning to shadow me at a respectful distance. I decided it was best to at least demonstrate that I had an intention of buying a day pass. </span></p>
+<p class="p1"><span class="s1">The Barcelo reception desk said the price would be USD $80 per person. Feigning shock over the hefty price tag, I declared loudly that I had to hit the hotel’s ATM to withdraw more cash in order to pay such exorbitant prices. That ATM also was beaconing the Free2Move Bluetooth signal, but the ATM itself returned errors stating that it was temporarily offline and unable to dispense cash.</span></p>
+<p class="p1"><span class="s1">That outage turned out to be the perfect excuse to visit a third ATM in the complex, as I again loudly explained to the security guy following a few paces behind.<span class="Apple-converted-space">  </span>By this point, a much more stern and beefy guard began following me around on foot, his walkie-talkie buzzing periodically as I crossed the hotel campus. The third and final ATM I checked also was compromised. While I was sure there were more ATMs I hadn’t checked in other areas of the resort, I decided not to press my luck, and hopped back in the Jetta and resumed my journey to Tulum.</span></p>
+<p class="p1"><span style="text-decoration: underline;">TULUM</span></p>
+<p class="p1">Halfway down the southbound four-lane highway from Cancun to the ancient ruins in Tulum, traffic inexplicably slowed to a halt. There was some sort of checkpoint ahead by the Mexican Federal Police. I began to wonder whether it was a good idea to have brought along the ATM skimmer I&#8217;d received from a source instead of leaving it in the hotel safe. If the cops searched my stuff, how could I explain having ultra-sophisticated Bluetooth ATM skimmer components in my backpack?</p>
+<div id="attachment_32318" style="width: 320px" class="wp-caption alignright"><a class="lightbox" href="https://krebsonsecurity.com/wp-content/uploads/2015/09/tulumsign.png"><img aria-describedby="caption-attachment-32318" loading="lazy" class=" wp-image-32318" src="https://krebsonsecurity.com/wp-content/uploads/2015/09/tulumsign-580x523.png" alt="A sign across the street from the police department in Tulum." width="310" height="280" srcset="https://krebsonsecurity.com/wp-content/uploads/2015/09/tulumsign-580x523.png 580w, https://krebsonsecurity.com/wp-content/uploads/2015/09/tulumsign.png 779w" sizes="(max-width: 310px) 100vw, 310px" /></a><p id="caption-attachment-32318" class="wp-caption-text">A sign across the street from the police department in Tulum.</p></div>
+<p class="p1"><span class="s1">After several nervous minutes of creeping traffic, I was waved on through the checkpoint and immediately felt silly for having gotten so worked up about it. However, upon my arrival 20 minutes later in Tulum — a popular tourist destination due to its proximity to the Mayan ruins — I would have a much closer encounter with the police. </span></p>
+<p class="p1"><span class="s1">As I pulled into the area where tour buses normally drop off passengers by the hundreds each hour, a number of men stood waving pamphlets and offering “Cheap!” parking that was anything but (or at least I thought at the time). Each was trying to direct me to park the Volkswagen in one of several large, dusty lots. </span></p>
+<p class="p1"><span class="s1">“I&#8217;ll just be about five minutes,” I said, stupidly putting the vehicle in park on the main street right in front of the tourist lot. The attendants just shook their heads and began hailing other newcomers. </span></p>
+<p class="p1"><span class="s1">The Tulum visit yielded another three ATMs within a few hundred meters of each other that were all emanating the Free2Move signal. But unfortunately, that jaunt took more than five minutes: When I returned to the Volkswagen, I found a parking ticket on the windshield and the parking attendants smirking, gleefully shouting in Spanish that I should have listened to them and parked in their lot.</span> <a href="https://krebsonsecurity.com/2015/09/tracking-bluetooth-skimmers-in-mexico-part-ii/#more-32267" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-32260" class="post-32260 post type-post status-publish format-standard hentry category-sunshine category-all-about-skimmers tag-android tag-atm-skimmer tag-bluetooth tag-cancun tag-cardtronics tag-free2move tag-huawei tag-marriott-casamagna tag-mexico tag-telcel">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2015/09/tracking-a-bluetooth-skimmer-gang-in-mexico/" title="Permalink to Tracking a Bluetooth Skimmer Gang in Mexico" rel="bookmark">Tracking a Bluetooth Skimmer Gang in Mexico</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">September 14, 2015</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2015/09/tracking-a-bluetooth-skimmer-gang-in-mexico/#comments">115 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p><strong><em>-Sept. 9, 12:30 p.m. CT, Yucatan Peninsula, Mexico:</em></strong> <em>Halfway down the southbound four-lane highway from Cancun to the ancient ruins in Tulum, traffic inexplicably slowed to a halt. There was some sort of checkpoint ahead by the Mexican Federal Police. I began to wonder whether it was a good idea to have brought along the ATM skimmer instead of leaving it in the hotel safe. If the cops searched my stuff, how could I explain having ultra-sophisticated Bluetooth ATM skimmer components in my backpack?</em></p>
+<p>The above paragraph is an excerpt that I pulled from the body of Part II in this series of articles and video essays stemming from a recent four-day trip to Mexico. During that trip, I found at least 19 different ATMs that all apparently had been hacked from the inside and retrofitted with tiny, sophisticated devices that store and transmit stolen card data and PINs wirelessly.</p>
+<p>In June 2015, I heard from a source at an ATM firm who wanted advice and help in reaching out to the right people about what he described as an ongoing ATM fraud campaign of unprecedented sophistication, organization and breadth. Given my focus on ATM skimming technology and innovations, I was immediately interested.</p>
+<div align="center"><iframe loading="lazy" src="https://www.youtube.com/embed/Pi6y2soOp8Y" width="560" height="315" frameborder="0" allowfullscreen="allowfullscreen"></iframe></div>
+<p>My source asked to have his name and that of his employer omitted from the story because he fears potential reprisals from the alleged organized criminal perpetrators of this scam. According to my source, several of his employer&#8217;s ATM installation and maintenance technicians in the Cancun area reported recently being approached by men with Eastern European accents, asking each tech if he would be interested in making more than 100 times his monthly salary just for providing direct, physical access to the inside of a single ATM that the technician served.</p>
+<p>One of my source’s co-workers was later found to have accepted the bribes, which apparently had only grown larger and more aggressive after technicians in charge of specific, very busy ATMs declined an initial offer.</p>
+<p>My source said his company fired the rogue employee who’d taken the bait, but that the employee&#8217;s actions had still been useful because experts were now able to examine the skimming technology first-hand. The company tested the hardware by installing it into ATMs that were not in service. When they turned the devices on, they discovered each component was beaconing out the same Bluetooth signal: “Free2Move.”</p>
+<p>Turns out, Free2Move is the default name for <a href="http://web.free2move.se/products/modules/bluetooth-modules/" target="_blank">a bluetooth beacon</a> in a component made by a legitimate wireless communications company of the same name. I also located <a href="http://mycardreader.com/" target="_blank">a sales thread in a dubious looking site</a> that specializes in offering this technology in mini form for ATM PIN pads and card readers for $550 per component (although the site claims it won&#8217;t sell the products to scammers).</p>
+<p><a class="lightbox" href="https://krebsonsecurity.com/wp-content/uploads/2015/09/f2m.png"><img loading="lazy" class="alignright  wp-image-32310" src="https://krebsonsecurity.com/wp-content/uploads/2015/09/f2m-580x487.png" alt="f2m" width="357" height="300" srcset="https://krebsonsecurity.com/wp-content/uploads/2015/09/f2m-580x487.png 580w, https://krebsonsecurity.com/wp-content/uploads/2015/09/f2m.png 797w" sizes="(max-width: 357px) 100vw, 357px" /></a>The Bluetooth circuit boards allegedly supplied by the Eastern Europeans who bribed my source’s technician were made to be discretely wired directly onto the electronic ATM circuit boards which independently serve the machine’s debit card reader and PIN pad.</p>
+<p>Each of the bluetooth circuit boards are tiny — wafer thin and about 1 cm wide by 2 cm long. Each also comes with its own data storage device. Stolen card data can be retrieved from the bluetooth components wirelessly: The thief merely needs to be within a few meters of the compromised ATM to pull stolen card data and PINs off the devices, providing he has the secret key needed to access that bluetooth wireless connection.</p>
+<p>Even if you knew the initial PIN code to connect to the Bluetooth wireless component on the ATM —the stolen data that is sent by the bluetooth components is encrypted. Decrypting that data requires a private key that ostensibly only the owners of this crimeware possess.</p>
+<p>These are not your ordinary skimming devices. Most skimmers are detectable because they are designed to be affixed to the outside of the ATMs. But with direct, internal access to carefully targeted cash machines, the devices could sit for months or even years inside of compromised ATMs before being detected (depending in part on how quickly and smartly the thieves used or sold the stolen card numbers and PINs).</p>
+<p>Not long after figuring out the scheme used by this skimmer, my source instructed his contacts in Cancun and the surrounding area to survey various ATMs in the region to see if any of these machines were emitting a Bluetooth signal called “Free2Move.” Sure enough, the area was blanketed with cash machines spitting out Free2Move signals.</p>
+<p>Going to the cops would be useless at best, and potentially dangerous; Mexico’s police force is notoriously corrupt, and for all my source knew the skimmer scammers were paying for their own protection from the police.</p>
+<p>Rather, he said he wanted to figure out a way to spot compromised ATMs where those systems were deployed across Mexico (but mainly in the areas popular with tourists from Europe and The United States).</p>
+<p>When my source said he knew where I could obtain one of these skimmers in Mexico firsthand, I volunteered to scour the tourist areas in and around Cancun to look for ATMs spitting out the Free2Move bluetooth signal.</p>
+<p>I’d worked especially hard the previous two months: So much so that July and August were record traffic months for KrebsOnSecurity, with several big breach stories bringing more than a million new readers to the site. It was time to schedule a quasi-vacation, and this was the perfect excuse. I had a huge pile of frequent flier miles burning a hole in my pocket, and I wasted no time in using those miles to book a hotel and flight to Cancun. <a href="https://krebsonsecurity.com/2015/09/tracking-a-bluetooth-skimmer-gang-in-mexico/#more-32260" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-32248" class="post-32248 post type-post status-publish format-standard hentry category-ashley-madison-breach category-comingstorm tag-ashley-madison-hack tag-ashleymadison-hack tag-avid-life-media tag-raja-bhatia">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2015/09/ex-ashley-madison-cto-threatens-libel-suit/" title="Permalink to Ex-Ashley Madison CTO Threatens Libel Suit" rel="bookmark">Ex-Ashley Madison CTO Threatens Libel Suit</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">September 9, 2015</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2015/09/ex-ashley-madison-cto-threatens-libel-suit/#comments">109 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>Last month, KrebsOnSecurity posted <a href="http://krebsonsecurity.com/2015/08/leaked-ashleymadison-emails-suggest-execs-hacked-competitors/" target="_blank" rel="noopener">an exclusive story</a> about emails leaked from AshleyMadison that suggested the company&#8217;s former chief technology officer <strong>Raja Bhatia</strong> hacked into a rival firm in 2012. Now, an attorney for the former executive is threatening a libel lawsuit against this author unless the story is retracted.</p>
+<p>According to Bhatia&#8217;s attorney, the part of the story they consider defamatory has to do with the headline of the piece, and this bit:</p>
+<blockquote><p>&#8220;A review of those missives shows that on at least one occasion, a former company executive hacked another dating website, exfiltrating their entire user database. On Nov. 30, 2012, <strong>Raja Bhatia</strong>, the founding chief technology officer of AshleyMadison.com, sent a message to Biderman notifying his boss of a security hole discovered in <strong>nerve.com</strong>, an American online magazine dedicated to sexual topics, relationships and culture.</p>
+<p>At the time, nerve.com was experimenting with its own adult dating section, and Bhatia said he’d uncovered a way to download and manipulate the nerve.com user database.</p>
+<p>“They did a very lousy job building their platform. I got their entire user base,” Bhatia told Biderman via email, including in the message a link to a Github archive with a sample of the database. “Also, I can turn any non paying user into a paying user, vice versa, compose messages between users, check unread stats, etc.”</p></blockquote>
+<p>Libel lawsuits in the United States are usually quite difficult and expensive for the plaintiff to win. But in Canada &#8212; where Bhatia&#8217;s attorney and AshleyMadison&#8217;s parent company<strong> Avid Life Media</strong> are headquartered &#8212; the libel laws are more complex for defendants. For example, according my consultation with a prominent Canadian digital media attorney, the onus there is on the accused to prove the disputed libelous claims are in fact true.</p>
+<p>Nevertheless, I have no intention of posting a retraction or correcting any elements of this story. But I&#8217;m <a href="http://krebsonsecurity.com/wp-content/uploads/2015/09/Krebs-2015-09-04.pdf" target="_blank" rel="noopener">publishing a copy of the letter</a> (PDF) from Bhatia&#8217;s lawyer in the likely event that other publications have also received libel and defamation threats from AshleyMadison and/or its current and former employees.</p>
+<p>A <a href="http://www.wired.com/2015/08/ashley-madison-leak-reveals-ex-cto-hacked-competing-site/" target="_blank" rel="noopener">story at Wired.com from Kim Zetter</a> that ran shortly after my piece aired includes quite a few more colorful quotes from leaked emails Bhatia allegedly sent to AshMad CEO <strong>Noel Biderman</strong>.</p>
+<p><strong>Update, 11:49 a.m. ET:</strong> Added reference to Wired piece as the last sentence of this story.</p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-32237" class="post-32237 post type-post status-publish format-standard hentry category-patches tag-adobe-shockwave-patch tag-internet-explorer tag-microsoft-edge tag-microsoft-september-2015-updates tag-shavlik">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2015/09/microsoft-pushes-a-dozen-security-updates/" title="Permalink to Microsoft Pushes a Dozen Security Updates" rel="bookmark">Microsoft Pushes a Dozen Security Updates</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">September 8, 2015</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2015/09/microsoft-pushes-a-dozen-security-updates/#comments">32 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p><strong>Microsoft</strong> today released a dozen security updates for computers running supported versions of its <strong>Windows</strong> operating system. Five of the patches fix flaws that could get PCs compromised with little to no help from users, and f<span class="s1">ive of the bulletins have vulnerabilities that were publicly disclosed before today (including one that reportedly has been detected in exploits in the wild). </span>Separately, <strong>Adobe</strong> is pushing a security update for its <strong>Shockwave Player</strong> &#8211; a browser plugin that I&#8217;ve long urged readers to junk.</p>
+<p><a href="https://krebsonsecurity.com/wp-content/uploads/2014/07/brokenwindows.png"><img loading="lazy" class="alignright size-full wp-image-26837" src="https://krebsonsecurity.com/wp-content/uploads/2014/07/brokenwindows.png" alt="brokenwindows" width="229" height="240" /></a>According to security firm <a href="http://blog.shavlik.com/september-patch-tuesday/" target="_blank">Shavlik</a>, the patches that address flaws which have already been publicly disclosed include a large <strong>Internet Explorer</strong> (IE) update that corrects 17 flaws and a fix for <strong>Microsoft Edge</strong>, Redmond&#8217;s flagship replacement browser for IE; both address <a href="https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2015-1421" target="_blank">this bug</a>, among others.</p>
+<p>A <a href="https://technet.microsoft.com/library/security/ms15-097" target="_blank">critical fix</a> for a Windows graphics component addresses flaws that previously showed up in two public disclosures, one of which Shavlik says is currently being exploited in the wild (<a href="http://www.cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-2546" target="_blank">CVE-2015-2546</a>).  The 100th patch that Microsoft has issued so far this year &#8212; a salve for <strong>Windows Media Player</strong> &#8211; fixes two different vulnerabilities that were publicly disclosed before today (<span class="s1">CVE-2015-2509 and CVE-2015-2504).</span></p>
+<p>In other important patch news today, Adobe has released a security update for its Shockwave Player browser plugin. If you need this program, then <a href="https://get.adobe.com/shockwave/" target="_blank">update it</a>; the latest version is <em>v. 12.2.0.162</em>. But in my experience, most users don&#8217;t need it and are better off without it. For more on what I say that, see <a href="http://krebsonsecurity.com/2014/05/why-you-should-ditch-adobe-shockwave/" target="_blank">Why You Should Ditch Adobe Shockwave</a>.</p>
+<p>Not sure whether your computer has Shockwave installed? If you visit <a title="http://www.adobe.com/shockwave/welcome" href="http://www.adobe.com/shockwave/welcome" target="_blank">this link</a> and see a short animation, it should tell you which version of Shockwave you have installed. If it prompts you to download Shockwave (or in the case of <strong>Google Chrome</strong> for some reason just automatically downloads the installer), then you don’t have Shockwave installed. To remove Shockwave, grab Adobe’s uninstall tool <a title="http://helpx.adobe.com/shockwave/kb/download-shockwave-stand-alone-installer.html" href="http://helpx.adobe.com/shockwave/kb/download-shockwave-stand-alone-installer.html" target="_blank">here</a>. <strong>Mozilla Firefox</strong> users should note that the presence of the “Shockwave Flash” plugin listed in the Firefox Add-ons section denotes an installation of Adobe Flash Player plugin — not Adobe Shockwave Player.</p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+				
+			
+								<div class="themonic-pagination"><div class='pagination'><ul><li><a href='https://krebsonsecurity.com/'>&laquo; First</a></li><li><a href='https://krebsonsecurity.com/page/92/' class='inactive'>&lsaquo; Previous</a></li><li><a href='https://krebsonsecurity.com/page/90/' class='inactive'>90</a></li><li><a href='https://krebsonsecurity.com/page/91/' class='inactive'>91</a></li><li><a href='https://krebsonsecurity.com/page/92/' class='inactive'>92</a></li><li class='current'><span class='currenttext'>93</span></li><li><a href='https://krebsonsecurity.com/page/94/' class='inactive'>94</a></li><li><a href='https://krebsonsecurity.com/page/95/' class='inactive'>95</a></li><li><a href='https://krebsonsecurity.com/page/96/' class='inactive'>96</a></li><li><a href='https://krebsonsecurity.com/page/94/' class='inactive'>Next &rsaquo;</a></li><a class='inactive' href='https://krebsonsecurity.com/page/209/'>Last &raquo;</a></ul></div></div>
+					<div style="display: block; clear: both;"></div>
+			
+		
+
+	
+
+		</div><!-- #content -->
+	</div><!-- #primary -->
+
+
+			<div id="secondary" class="widget-area" role="complementary">
+
+        <div id="sidebar_ad" class="widget themonic-ad5"><div class="a-statement">Advertisement</div><a href="https://www.extrahop.com/resources/papers/zero-trust/?">
+<img src="/b-extrahop/3.jpg" />
+</a></div>
+
+                        <br><div class="widget themonic-ad1"><div class="a-statement">Advertisement</div><a href="https://www.akamai.com/blog/security/attacking-a-macro-security-problem-with-micro-segmentation?utm_source=krebsonsecurity&amp;utm_medium=display&amp;utm_id=GL_SecureWorkforce_Guardicore&amp;utm_campaign=F-MC-52610&amp;utm_content=Guardicore">
+<img src="/b-akamai/138.png">
+</a></div><br>
+
+			<aside id="custom_html-2" class="widget_text widget widget_custom_html"><p class="widget-title">Mailing List</p><div class="textwidget custom-html-widget"><a href="/subscribe/">Subscribe here</a></div></aside><aside id="search-2" class="widget widget_search"><p class="widget-title">Search KrebsOnSecurity</p><form role="search" method="get" id="searchform" class="searchform" action="https://krebsonsecurity.com/">
+				<div>
+					<label class="screen-reader-text" for="s">Search for:</label>
+					<input type="text" value="" name="s" id="s" />
+					<input type="submit" id="searchsubmit" value="Search" />
+				</div>
+			</form></aside>
+		<aside id="recent-posts-3" class="widget widget_recent_entries">
+		<p class="widget-title">Recent Posts</p>
+		<ul>
+											<li>
+					<a href="https://krebsonsecurity.com/2021/12/canada-charges-its-most-prolific-cybercriminal/">Canada Charges Its &#8220;Most Prolific Cybercriminal&#8221;</a>
+									</li>
+											<li>
+					<a href="https://krebsonsecurity.com/2021/12/who-is-the-network-access-broker-babam/">Who Is the Network Access Broker &#8216;Babam&#8217;?</a>
+									</li>
+											<li>
+					<a href="https://krebsonsecurity.com/2021/12/ubiquiti-developer-charged-with-extortion-causing-2020-breach/">Ubiquiti Developer Charged With Extortion, Causing 2020 &#8220;Breach&#8221;</a>
+									</li>
+											<li>
+					<a href="https://krebsonsecurity.com/2021/11/the-internet-is-held-together-with-spit-baling-wire/">The Internet is Held Together With Spit &#038; Baling Wire</a>
+									</li>
+											<li>
+					<a href="https://krebsonsecurity.com/2021/11/arrest-in-ransom-your-employer-email-scheme/">Arrest in &#8216;Ransom Your Employer&#8217; Email Scheme</a>
+									</li>
+					</ul>
+
+		</aside><aside id="text-2" class="widget widget_text">			<div class="textwidget"><a name="subscribe2"></a></div>
+		</aside><aside id="widget_sp_image-15" class="widget widget_sp_image"><p class="widget-title">Spam Nation</p><a href="https://www.amazon.com/Spam-Nation-Organized-Cybercrime-Epidemic-ebook/dp/B00L5QGBL0/ref=dp_kinw_strp_1" target="_blank" class="widget_sp_image-image-link" title="Spam Nation"><img width="266" height="404" alt="Spam Nation" class="attachment-266x404 aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2015/04/spamnation-nyt.png" /></a><div class="widget_sp_image-description" ><p>A New York Times Bestseller! </p>
+</div></aside><aside id="widget_sp_image-25" class="widget widget_sp_image"><p class="widget-title">Thinking of a Cybersecurity Career?</p><a href="https://krebsonsecurity.com/2020/07/thinking-of-a-cybersecurity-career-read-this/" target="_blank" class="widget_sp_image-image-link" title="Thinking of a Cybersecurity Career? Read This."><img width="625" height="424" alt="Thinking of a Cybersecurity Career?" class="attachment-full" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2020/07/codepeople.png 625w, https://krebsonsecurity.com/wp-content/uploads/2020/07/codepeople-580x393.png 580w" sizes="(max-width: 625px) 100vw, 625px" src="https://krebsonsecurity.com/wp-content/uploads/2020/07/codepeople.png" /></a><div class="widget_sp_image-description" ><p>Read this.</p>
+</div></aside><aside id="widget_sp_image-3" class="widget widget_sp_image"><p class="widget-title">All About Skimmers </p><a href="https://krebsonsecurity.com/all-about-skimmers/" target="_blank" class="widget_sp_image-image-link" title="All About Skimmers "><img width="299" height="232" alt="All About Skimmers" class="attachment-299x232 aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2010/08/skimgallery1.jpg" /></a><div class="widget_sp_image-description" ><p>Click image for my skimmer series.</p>
+</div></aside><aside id="categories-2" class="widget widget_categories"><p class="widget-title">Story Categories</p>
+			<ul>
+					<li class="cat-item cat-item-5"><a href="https://krebsonsecurity.com/category/sunshine/" title="Includes investigative blog posts meant to shine a light on the darker corners of the Internet.">A Little Sunshine</a>
+</li>
+	<li class="cat-item cat-item-2240"><a href="https://krebsonsecurity.com/category/all-about-skimmers/">All About Skimmers</a>
+</li>
+	<li class="cat-item cat-item-9085"><a href="https://krebsonsecurity.com/category/ashley-madison-breach/">Ashley Madison breach</a>
+</li>
+	<li class="cat-item cat-item-3191"><a href="https://krebsonsecurity.com/category/breadcrumbs/">Breadcrumbs</a>
+</li>
+	<li class="cat-item cat-item-3771"><a href="https://krebsonsecurity.com/category/data-breaches/" title="Stories about data breaches at retailers, corporations, governments and organizations of all sizes.">Data Breaches</a>
+</li>
+	<li class="cat-item cat-item-4624"><a href="https://krebsonsecurity.com/category/ddos-for-hire/">DDoS-for-Hire</a>
+</li>
+	<li class="cat-item cat-item-9173"><a href="https://krebsonsecurity.com/category/employment-fraud/">Employment Fraud</a>
+</li>
+	<li class="cat-item cat-item-2151"><a href="https://krebsonsecurity.com/category/how-to-break-into-security/" title="If you&#039;ve ever wanted career advice on how to make a shift into the security industry, look no further.">How to Break Into Security</a>
+</li>
+	<li class="cat-item cat-item-87"><a href="https://krebsonsecurity.com/category/latest-warnings/">Latest Warnings</a>
+</li>
+	<li class="cat-item cat-item-4071"><a href="https://krebsonsecurity.com/category/neer-do-well-news/">Ne&#039;er-Do-Well News</a>
+</li>
+	<li class="cat-item cat-item-9"><a href="https://krebsonsecurity.com/category/other/">Other</a>
+</li>
+	<li class="cat-item cat-item-1306"><a href="https://krebsonsecurity.com/category/pharma-wars/">Pharma Wars</a>
+</li>
+	<li class="cat-item cat-item-8240"><a href="https://krebsonsecurity.com/category/ransomware/">Ransomware</a>
+</li>
+	<li class="cat-item cat-item-599"><a href="https://krebsonsecurity.com/category/security-tools/">Security Tools</a>
+</li>
+	<li class="cat-item cat-item-8298"><a href="https://krebsonsecurity.com/category/sim-swapping/">SIM Swapping</a>
+</li>
+	<li class="cat-item cat-item-4079"><a href="https://krebsonsecurity.com/category/spam-nation/">Spam Nation</a>
+</li>
+	<li class="cat-item cat-item-1"><a href="https://krebsonsecurity.com/category/smallbizvictims/" title="Posts in this category will include new stories similar to those told in the Small Business Victims category on The Washington Post&#039;s Security Fix blog, which chronicled the methods organized cyber thieve are using to steal hundreds of thousands of dollars from dozens of small- to mid-sized companies around the country.">Target: Small Businesses</a>
+</li>
+	<li class="cat-item cat-item-5167"><a href="https://krebsonsecurity.com/category/tax-refund-fraud/">Tax Refund Fraud</a>
+</li>
+	<li class="cat-item cat-item-3"><a href="https://krebsonsecurity.com/category/comingstorm/" title="This category includes blog posts about computer and Internet security threats now and on the horizon.">The Coming Storm</a>
+</li>
+	<li class="cat-item cat-item-4"><a href="https://krebsonsecurity.com/category/patches/" title="Short posts on the latest security updates for widely-used software.
+">Time to Patch</a>
+</li>
+	<li class="cat-item cat-item-21"><a href="https://krebsonsecurity.com/category/web-fraud-2-0/">Web Fraud 2.0</a>
+</li>
+			</ul>
+
+			</aside><aside id="widget_sp_image-5" class="widget widget_sp_image"><p class="widget-title">The Value of a Hacked PC</p><a href="https://krebsonsecurity.com/2012/10/the-scrap-value-of-a-hacked-pc-revisited/" target="_blank" class="widget_sp_image-image-link" title="The Value of a Hacked PC"><img width="285" height="180" alt="valuehackedpc " class="attachment-285x180 aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2012/12/valuehackedpc-285x180.png" /></a><div class="widget_sp_image-description" ><p>Badguy uses for your PC</p>
+</div></aside><aside id="widget_sp_image-9" class="widget widget_sp_image"><p class="widget-title">Badguy Uses for Your Email </p><a href="https://krebsonsecurity.com/2013/06/the-value-of-a-hacked-email-account/" target="_self" class="widget_sp_image-image-link" title="Badguy Uses for Your Email "><img width="296" height="170" alt="Badguy Uses for Your Email " class="attachment-full aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2013/06/badguyemail.png 296w, https://krebsonsecurity.com/wp-content/uploads/2013/06/badguyemail-285x163.png 285w" sizes="(max-width: 296px) 100vw, 296px" src="https://krebsonsecurity.com/wp-content/uploads/2013/06/badguyemail.png" /></a><div class="widget_sp_image-description" ><p>Your email account may be worth far more than you imagine.</p>
+</div></aside><aside id="widget_sp_image-24" class="widget widget_sp_image"><a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&#038;hosted_button_id=MCCRKHWRX57HS" id="donate" target="_self" class="widget_sp_image-image-link"><img width="250" height="55" alt="Donate to Krebs On Security" class="attachment-medium aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2016/09/donatepaypal2-1.png" /></a></aside><aside id="most_popular_posts-3" class="widget widget_most_popular_posts">
+<p class="widget-title">Most Popular Posts</p>
+<ul>	<li><a href="https://krebsonsecurity.com/2018/07/sextortion-scam-uses-recipients-hacked-passwords/">Sextortion Scam Uses Recipient's Hacked Passwords</a> (1076)</li>
+	<li><a href="https://krebsonsecurity.com/2015/07/online-cheating-site-ashleymadison-hacked/">Online Cheating Site AshleyMadison Hacked</a> (798)</li>
+	<li><a href="https://krebsonsecurity.com/2013/12/sources-target-investigating-data-breach/">Sources: Target Investigating Data Breach</a> (620)</li>
+	<li><a href="https://krebsonsecurity.com/2020/11/trump-fires-security-chief-christopher-krebs/">Trump Fires Security Chief Christopher Krebs</a> (534)</li>
+	<li><a href="https://krebsonsecurity.com/2013/12/cards-stolen-in-target-breach-flood-underground-markets/">Cards Stolen in Target Breach Flood Underground Markets</a> (445)</li>
+	<li><a href="https://krebsonsecurity.com/2013/05/reports-liberty-reserve-founder-arrested-site-shuttered/">Reports: Liberty Reserve Founder Arrested, Site Shuttered</a> (416)</li>
+	<li><a href="https://krebsonsecurity.com/2015/08/was-the-ashley-madison-database-leaked/">Was the Ashley Madison Database Leaked?</a> (376)</li>
+	<li><a href="https://krebsonsecurity.com/2021/01/ddos-guard-to-forfeit-internet-space-occupied-by-parler/">DDoS-Guard To Forfeit Internet Space Occupied by Parler</a> (374)</li>
+	<li><a href="https://krebsonsecurity.com/2014/05/true-goodbye-using-truecrypt-is-not-secure/">True Goodbye: 'Using TrueCrypt Is Not Secure'</a> (363)</li>
+	<li><a href="https://krebsonsecurity.com/2015/08/who-hacked-ashley-madison/">Who Hacked Ashley Madison?</a> (361)</li>
+</ul>
+</aside>
+<aside id="media_image-2" class="widget widget_media_image"><p class="widget-title">Why So Many Top Hackers Hail from Russia</p><a href="https://krebsonsecurity.com/2017/06/why-so-many-top-hackers-hail-from-russia/"><img width="580" height="389" src="https://krebsonsecurity.com/wp-content/uploads/2017/06/computered-580x389.png" class="image wp-image-39684  attachment-medium size-medium" alt="" loading="lazy" style="max-width: 100%; height: auto;" srcset="https://krebsonsecurity.com/wp-content/uploads/2017/06/computered-580x389.png 580w, https://krebsonsecurity.com/wp-content/uploads/2017/06/computered-768x514.png 768w, https://krebsonsecurity.com/wp-content/uploads/2017/06/computered-940x630.png 940w, https://krebsonsecurity.com/wp-content/uploads/2017/06/computered.png 1551w" sizes="(max-width: 580px) 100vw, 580px" /></a></aside><aside id="widget_sp_image-11" class="widget widget_sp_image"><p class="widget-title">Category: Web Fraud 2.0</p><a href="https://krebsonsecurity.com/category/web-fraud-2-0/" target="_blank" class="widget_sp_image-image-link" title="Category: Web Fraud 2.0"><img width="227" height="400" alt="Criminnovations" class="attachment-medium aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2013/11/cybercrimeinnovations-227x400.png" /></a><div class="widget_sp_image-description" ><p>Innovations from the Underground</p>
+</div></aside><aside id="widget_sp_image-12" class="widget widget_sp_image"><a href="https://krebsonsecurity.com/2014/03/are-credit-monitoring-services-worth-it/" target="_blank" class="widget_sp_image-image-link"><img width="285" height="189" class="attachment-medium aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2014/03/shreddedID-copy-285x189.png 285w, https://krebsonsecurity.com/wp-content/uploads/2014/03/shreddedID-copy-600x399.png 600w, https://krebsonsecurity.com/wp-content/uploads/2014/03/shreddedID-copy.png 849w" sizes="(max-width: 285px) 100vw, 285px" src="https://krebsonsecurity.com/wp-content/uploads/2014/03/shreddedID-copy-285x189.png" /></a><div class="widget_sp_image-description" ><p>ID Protection Services Examined</p>
+</div></aside><aside id="widget_sp_image-13" class="widget widget_sp_image"><p class="widget-title">Is Antivirus Dead?</p><a href="https://krebsonsecurity.com/2014/05/antivirus-is-dead-long-live-antivirus/" target="_blank" class="widget_sp_image-image-link" title="Is Antivirus Dead?"><img width="285" height="161" alt="Is Antivirus Dead?" class="attachment-medium aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2014/05/cryptservices-285x161.png 285w, https://krebsonsecurity.com/wp-content/uploads/2014/05/cryptservices-600x339.png 600w, https://krebsonsecurity.com/wp-content/uploads/2014/05/cryptservices.png 945w" sizes="(max-width: 285px) 100vw, 285px" src="https://krebsonsecurity.com/wp-content/uploads/2014/05/cryptservices-285x161.png" /></a><div class="widget_sp_image-description" ><p>The reasons for its decline</p>
+</div></aside><aside id="widget_sp_image-14" class="widget widget_sp_image"><p class="widget-title">The Growing Tax Fraud Menace</p><a href="https://krebsonsecurity.com/category/tax-refund-fraud/" target="_blank" class="widget_sp_image-image-link" title="The Growing Tax Fraud Menace"><img width="285" height="285" alt="The Growing Tax Fraud Menace" class="attachment-medium aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2014/04/taxfraud-285x285.jpg 285w, https://krebsonsecurity.com/wp-content/uploads/2014/04/taxfraud-150x150.jpg 150w, https://krebsonsecurity.com/wp-content/uploads/2014/04/taxfraud-600x600.jpg 600w, https://krebsonsecurity.com/wp-content/uploads/2014/04/taxfraud.jpg 693w" sizes="(max-width: 285px) 100vw, 285px" src="https://krebsonsecurity.com/wp-content/uploads/2014/04/taxfraud-285x285.jpg" /></a><div class="widget_sp_image-description" ><p>File 'em Before the Bad Guys Can </p>
+</div></aside><aside id="widget_sp_image-17" class="widget widget_sp_image"><p class="widget-title">Inside a Carding Shop</p><a href="https://krebsonsecurity.com/2014/06/peek-inside-a-professional-carding-shop/" target="_blank" class="widget_sp_image-image-link" title="Inside a Carding Shop"><img width="194" height="340" alt="Inside a Carding Shop" class="attachment-medium aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2014/06/mcdumpalsjoined.png" /></a><div class="widget_sp_image-description" ><p>A crash course in carding. </p>
+</div></aside><aside id="widget_sp_image-18" class="widget widget_sp_image"><p class="widget-title">Beware Social Security Fraud</p><a href="https://krebsonsecurity.com/2013/09/crooks-hijack-retirement-funds-via-ssa-portal/" target="_blank" class="widget_sp_image-image-link" title="Beware Social Security Fraud"><img width="285" height="293" alt="Beware Social Security Fraud" class="attachment-full aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2016/09/myssn-285x293.png" /></a><div class="widget_sp_image-description" ><p>Sign up, or Be Signed Up! </p>
+</div></aside><aside id="widget_sp_image-2" class="widget widget_sp_image"><p class="widget-title">How Was Your Card Stolen?</p><a href="https://krebsonsecurity.com/2015/01/how-was-your-credit-card-stolen/" target="_blank" class="widget_sp_image-image-link" title="How Was Your Card Stolen?"><img width="285" height="285" alt="How Was Your Card Stolen?" class="attachment-full aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2016/09/carddominoes-285x285.jpg 285w, https://krebsonsecurity.com/wp-content/uploads/2016/09/carddominoes-285x285-150x150.jpg 150w" sizes="(max-width: 285px) 100vw, 285px" src="https://krebsonsecurity.com/wp-content/uploads/2016/09/carddominoes-285x285.jpg" /></a><div class="widget_sp_image-description" ><p>Finding out is not so easy. </p>
+</div></aside><aside id="widget_sp_image-22" class="widget widget_sp_image"><p class="widget-title">Krebs&#8217;s 3 Rules&#8230;</p><a href="https://krebsonsecurity.com/2011/05/krebss-3-basic-rules-for-online-safety/" target="_blank" class="widget_sp_image-image-link" title="Krebs&#8217;s 3 Rules&#8230;"><img width="300" height="300" alt="Krebs&#8217;s 3 Rules&#8230;" class="attachment-medium aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2011/05/three-300x300.jpg 300w, https://krebsonsecurity.com/wp-content/uploads/2011/05/three-150x150.jpg 150w, https://krebsonsecurity.com/wp-content/uploads/2011/05/three.jpg 347w" sizes="(max-width: 300px) 100vw, 300px" src="https://krebsonsecurity.com/wp-content/uploads/2011/05/three-300x300.jpg" /></a><div class="widget_sp_image-description" ><p>...For Online Safety. </p>
+</div></aside>		</div><!-- #secondary -->
+		</div><!-- #main .wrapper -->
+	
+	<div id="publisho-footer" class="widget-area">
+				<div class="footer-widget">
+                				</div>
+				<div class="footer-widget">
+								</div>
+				<div class="footer-widget">
+								</div>
+	</div>
+
+	<div class="site-wordpress">
+					&copy; Krebs on Security<br>
+	</div>
+	<!-- .site-info --><div class="clear"></div>
+</div><!-- #page -->
+
+<script type='text/javascript' src='https://krebsonsecurity.com/wp-content/themes/kos-mar2021/js/slicknav.js?ver=5.8.2' id='publisho-mobile-navigation-js'></script>
+<script type='text/javascript' src='https://krebsonsecurity.com/wp-includes/js/wp-embed.min.js?ver=5.8.2' id='wp-embed-js'></script>
+</body>
+</html>
+<!--
+Performance optimized by W3 Total Cache. Learn more: https://www.boldgrid.com/w3-total-cache/
+
+Object Caching 192/344 objects using memcached
+Page Caching using memcached 
+Database Caching 7/22 queries in 0.034 seconds using memcached
+
+Served from: krebsonsecurity.com @ 2021-12-10 14:53:46 by W3 Total Cache
+-->

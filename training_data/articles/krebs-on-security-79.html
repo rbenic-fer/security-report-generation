@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<!--[if IE 7]>
+<html class="ie ie7" lang="en-US">
+<![endif]-->
+<!--[if IE 8]>
+<html class="ie ie8" lang="en-US">
+<![endif]-->
+<!--[if !(IE 7) | !(IE 8)  ]><!-->
+<html lang="en-US">
+<!--<![endif]-->
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width" />
+<link rel="profile" href="http://gmpg.org/xfn/11" />
+<!--[if lt IE 9]>
+<script src="https://krebsonsecurity.com/wp-content/themes/kos-mar2021/js/html5.js" type="text/javascript"></script>
+<![endif]-->
+<title>Krebs on Security &#8211; Page 79 &#8211; In-depth security news and investigation</title>
+<meta name='robots' content='max-image-preview:large' />
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="Krebs on Security &raquo; Feed" href="https://krebsonsecurity.com/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Krebs on Security &raquo; Comments Feed" href="https://krebsonsecurity.com/comments/feed/" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.1.0\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.1.0\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/krebsonsecurity.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=5.8.2"}};
+			!function(e,a,t){var n,r,o,i=a.createElement("canvas"),p=i.getContext&&i.getContext("2d");function s(e,t){var a=String.fromCharCode;p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,e),0,0);e=i.toDataURL();return p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,t),0,0),e===i.toDataURL()}function c(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(o=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},r=0;r<o.length;r++)t.supports[o[r]]=function(e){if(!p||!p.fillText)return!1;switch(p.textBaseline="top",p.font="600 32px Arial",e){case"flag":return s([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])?!1:!s([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!s([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]);case"emoji":return!s([10084,65039,8205,55357,56613],[10084,65039,8203,55357,56613])}return!1}(o[r]),t.supports.everything=t.supports.everything&&t.supports[o[r]],"flag"!==o[r]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[o[r]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(n=t.source||{}).concatemoji?c(n.concatemoji):n.wpemoji&&n.twemoji&&(c(n.twemoji),c(n.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+	<link rel='stylesheet' id='colorbox-theme1-css'  href='https://krebsonsecurity.com/wp-content/plugins/jquery-lightbox-for-native-galleries/colorbox/theme1/colorbox.css?ver=1.3.14' type='text/css' media='screen' />
+<link rel='stylesheet' id='wp-block-library-css'  href='https://krebsonsecurity.com/wp-includes/css/dist/block-library/style.min.css?ver=5.8.2' type='text/css' media='all' />
+<link rel='stylesheet' id='contact-form-7-css'  href='https://krebsonsecurity.com/wp-content/plugins/contact-form-7/includes/css/styles.css?ver=5.5.3' type='text/css' media='all' />
+<link rel='stylesheet' id='publisho-style-css'  href='https://krebsonsecurity.com/wp-content/themes/kos-mar2021/style.css?subver=1.2&#038;ver=5.8.2' type='text/css' media='all' />
+<style id='publisho-style-inline-css' type='text/css'>
+
+	.themonic-nav .current-menu-item > a, .themonic-nav .current-menu-ancestor > a, .themonic-nav .current_page_item > a, .themonic-nav .current_page_ancestor > a {
+		background: #cc6600;
+	}
+	.themonic-nav ul.nav-menu, .themonic-nav div.nav-menu > ul {
+		border-bottom: 5px solid #cc6600;
+	}
+	#site-navigation .topheadmenu a {
+    background: rgba(0, 0, 0, 0);
+	}
+	.themonic-nav li a:hover {
+		background: #cc6600;
+	}
+	.themonic-nav li:hover {
+		background: #cc6600;
+	}.wrapper .flexslider {margin: 0 0 30px;}.frontp .btm-wrap {
+    border-top: 1px solid #e9e9e9;
+	}
+	.entry-summary {
+    border-top: none;
+	}.frontp .btm-wrap { margin-bottom: 30px;}.site { font-size:14px;}.site { font-family:'Roboto', arial ;}
+</style>
+<link rel='stylesheet' id='publisho-custom-style-css'  href='https://krebsonsecurity.com/wp-content/themes/kos-mar2021/custom.css?subver=1.2&#038;ver=5.8.2' type='text/css' media='all' />
+<!--[if lt IE 9]>
+<link rel='stylesheet' id='publisho-ie-css'  href='https://krebsonsecurity.com/wp-content/themes/kos-mar2021/css/ie.css?ver=20160606' type='text/css' media='all' />
+<![endif]-->
+<link rel='stylesheet' id='fontawesome-css-css'  href='https://krebsonsecurity.com/wp-content/themes/kos-mar2021/fonts/font-awesome.min.css?ver=5.8.2' type='text/css' media='all' />
+<link rel='stylesheet' id='publisho_custom_fonts-css'  href='//fonts.googleapis.com/css?family=Roboto%3Aregular%2Citalic%2C500%26subset%3Dlatin%2C' type='text/css' media='screen' />
+<script type='text/javascript' src='https://krebsonsecurity.com/wp-includes/js/jquery/jquery.min.js?ver=3.6.0' id='jquery-core-js'></script>
+<script type='text/javascript' src='https://krebsonsecurity.com/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.3.2' id='jquery-migrate-js'></script>
+<script type='text/javascript' src='https://krebsonsecurity.com/wp-content/plugins/jquery-lightbox-for-native-galleries/colorbox/jquery.colorbox-min.js?ver=1.3.14' id='colorbox-js'></script>
+<link rel="https://api.w.org/" href="https://krebsonsecurity.com/wp-json/" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://krebsonsecurity.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://krebsonsecurity.com/wp-includes/wlwmanifest.xml" /> 
+<meta name="generator" content="WordPress 5.8.2" />
+<!-- JavaScript Pull-Quotes plugin v2.2 -->
+	<link rel="stylesheet" href="https://krebsonsecurity.com/wp-content/plugins/jspullquotes/resources/jspullquotes-core.css" type="text/css" />
+	<link rel="stylesheet" href="https://krebsonsecurity.com/wp-content/plugins/jspullquotes/resources/jspullquotes-default.css" type="text/css" />
+	<script type="text/javascript" src="https://krebsonsecurity.com/wp-content/plugins/jspullquotes/resources/jspullquotes.js"></script>
+	<script type="text/javascript">
+		var arrOptions = new Array("1", "1", "right", "1", "1", "blockquote", "pullquote", "pullquote pqRight");
+		pullQuoteOpts(arrOptions);
+	</script>
+<!-- end pull-quote additions -->
+<!-- jQuery Lightbox For Native Galleries v3.1.3 | http://www.viper007bond.com/wordpress-plugins/jquery-lightbox-for-native-galleries/ -->
+<script type="text/javascript">
+// <![CDATA[
+	jQuery(document).ready(function($){
+		$(".gallery").each(function(index, obj){
+			var galleryid = Math.floor(Math.random()*10000);
+			$(obj).find("a").colorbox({rel:galleryid, maxWidth:"95%", maxHeight:"95%"});
+		});
+		$("a.lightbox").colorbox({maxWidth:"95%", maxHeight:"95%"});
+	});
+// ]]>
+</script>
+<style type="text/css" id="custom-background-css">
+body.custom-background { background-color: #ffffff; }
+</style>
+	<link rel="me" href="https://twitter.com/briankrebs" /><meta name="twitter:widgets:link-color" content="#000000" /><meta name="twitter:widgets:border-color" content="#000000" /><meta name="twitter:partner" content="tfwp" />
+<meta name="twitter:card" content="summary" /><meta name="twitter:title" content="Krebs on Security" /><meta name="twitter:site" content="@briankrebs" /><meta name="twitter:description" content="In-depth security news and investigation" />
+</head>
+<body class="home blog paged custom-background paged-79 custom-background-white single-author frontp hfeed">
+<div id="page" class="site">
+	<!-- <div class="publisho-top-mobile-nav clear"></div> -->
+	<div class="themonic-logo themonic-ad3"><div class="a-statement">Advertisement</div><a href="https://go.infrascale.com/lp/get-ransomware-ebook-krebsonsecurity/?utm_source=banner&amp;utm_medium=display&amp;utm_campaign=krebsssecurity_influencer_1240_110">
+<img src="/b-infrascale/5.png">
+</a></div>
+	<div class="themonic-logo themonic-ad6"><div class="a-statement">Advertisement</div><a href="https://www.proofpoint.com/us/resources/awareness-materials/cybersecurity-awareness-month?utm_source=krebs&amp;utm_medium=2021cybersecurityawarenessmonth">
+<img src="/b-proofnam/19.png">
+</a></div>
+	<nav id="site-navigation" class="themonic-nav" role="navigation">
+	</nav><!-- #site-navigation -->
+	<div class="clear"></div>
+	<header id="masthead" class="site-header" role="banner">
+ 					<div class="desktop-social">
+						<div class="socialmedia">
+							<a href="http://twitter.com/briankrebs" target="_blank"><i class="fa fa-twitter"></i></a> 
+															<a class="rss" href="https://krebsonsecurity.com/feed/" target="_blank"><i class="fa fa-rss"></i></a>	
+									<a class="rss" href="https://www.linkedin.com/in/bkrebs/" target="_blank"><i class="fa fa-linkedin"></i></a>	
+								</div>
+				 	</div>
+																						   
+		
+		<div class="themonic-logo responsive-img-container">
+			<a href="https://krebsonsecurity.com/" title="Krebs on Security" rel="home"><img src="https://krebsonsecurity.com/wp-content/uploads/2021/03/kos-27-03-2021.jpg" alt="Krebs on Security"></a>
+		</div>
+
+					<div class="mobile-social">
+						<div class="socialmedia">
+							<a href="http://twitter.com/briankrebs" target="_blank"><i class="fa fa-twitter"></i></a> 
+															<a class="rss" href="https://krebsonsecurity.com/feed/" target="_blank"><i class="fa fa-rss"></i></a>	
+									<a class="rss" href="https://www.linkedin.com/in/bkrebs/" target="_blank"><i class="fa fa-linkedin"></i></a>	
+								</div>
+					</div>
+		
+				<!-- <div class="publisho-mobile-nav clear"></div> -->
+		<nav id="site-navigation" class="themonic-nav" role="navigation">
+			<a class="assistive-text" href="#content" title="Skip to content">Skip to content</a>
+			<div id="menu-top" class="nav-menu"><ul>
+<li ><a href="https://krebsonsecurity.com/">Home</a></li><li class="page_item page-item-2"><a href="https://krebsonsecurity.com/about/">About the Author</a></li>
+<li class="page_item page-item-645"><a href="https://krebsonsecurity.com/cpm/">Advertising/Speaking</a></li>
+</ul></div>
+		</nav><!-- #site-navigation -->
+		<div class="clear"></div>
+	</header><!-- #masthead -->
+	<div id="main" class="wrapper">
+		<div id="primary" class="site-content">
+	
+
+	
+		<div id="content" role="main">
+
+		<article id="post-35555" class="post-35555 post type-post status-publish format-standard hentry category-data-breaches tag-cicis-pizza tag-cicis-pizza-breach tag-datapoint-pos tag-stephen-p-warne">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2016/07/cicis-pizza-card-breach-at-130-locations/" title="Permalink to Cici&#8217;s Pizza: Card Breach at 130+ Locations" rel="bookmark">Cici&#8217;s Pizza: Card Breach at 130+ Locations</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">July 19, 2016</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2016/07/cicis-pizza-card-breach-at-130-locations/#comments">26 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p><strong>Cici&#8217;s Pizza</strong>, a Coppell, Texas-based fast-casual restaurant chain, today acknowledged a credit card breach at more than 135 locations. The disclosure comes more than a month after KrebsOnSecurity first broke the news of the intrusion, offering readers a sneak peak inside the sprawling cybercrime machine that thieves used to siphon card data from Cici&#8217;s customers in real-time.</p>
+<p><img loading="lazy" class="alignright wp-image-35058" src="https://krebsonsecurity.com/wp-content/uploads/2016/06/cicis.png" alt="cicis" width="203" height="203" srcset="https://krebsonsecurity.com/wp-content/uploads/2016/06/cicis.png 441w, https://krebsonsecurity.com/wp-content/uploads/2016/06/cicis-150x150.png 150w" sizes="(max-width: 203px) 100vw, 203px" />In <a href="http://www.cicis.com/news/data-notification-all" target="_blank">a statement</a> released Tuesday evening, Cici&#8217;s said that in early March 2016, the company received reports from several of its restaurant locations that point-of-sale systems were not working properly.</p>
+<p>&#8220;The point-of-sale vendor immediately began an investigation to assess the problem and initiated heightened security measures,&#8221; the company said in a press release. &#8220;After malware was found on some point-of-sale systems, the company began a restaurant-by-restaurant review and remediation, and retained a third-party cybersecurity firm, 403 Labs, to perform a forensic analysis.&#8221;</p>
+<p>According to Cici&#8217;s, &#8220;the vast majority of the intrusions began in March of 2016,&#8221; but the company acknowledges that the breach started as early as 2015 at some locations. Cici&#8217;s said it was confident the malware has been removed from all stores. A list of affected locations is <a href="http://www.cicis.com/media/1325/store-list.pdf" target="_blank">here</a> (PDF).</p>
+<p>On June 3, 2016, KrebsOnSecurity <a href="http://krebsonsecurity.com/2016/06/banks-credit-card-breach-at-cicis-pizza/" target="_blank">reported</a> that sources at multiple financial institutions suspected a card breach at Cici&#8217;s. That story featured a quote from <strong>Stephen P. Warne</strong>, vice president of service and support for <strong>Datapoint POS</strong>, a point-of-sale provider that services a large number of Cici&#8217;s locations. Warne told this author that the fraudsters responsible for the intrusions had tricked employees into installing the card-stealing malicious software. <a href="https://krebsonsecurity.com/2016/07/cicis-pizza-card-breach-at-130-locations/#more-35555" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+	<div id="between_article_ad" class="themonic-ad5"><a href="https://securityscorecard.com/instant-security-scorecard?utm_source=krebs+on+security&amp;utm_medium=display&amp;utm_campaign=instant+scorecard&amp;utm_term=B&amp;utm_content=300x300">
+<img src="/b-securityscorecard/8.jpg">
+</a></div>	<article id="post-35321" class="post-35321 post type-post status-publish format-standard hentry category-sunshine category-breadcrumbs tag-146-185-239-024 tag-artem-tveritinov tag-atveritinovgmail-com tag-carbanak tag-domaintools-com tag-doug-madory tag-falcongaze tag-infocubehost-biz tag-infokube-ru tag-kaspersky-lab tag-petersburg-internet-network tag-ron-guilmette tag-threatconnect tag-vkontakte tag-williamdanielsenyahoo-com">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2016/07/carbanak-gang-tied-to-russian-security-firm/" title="Permalink to Carbanak Gang Tied to Russian Security Firm?" rel="bookmark">Carbanak Gang Tied to Russian Security Firm?</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">July 18, 2016</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2016/07/carbanak-gang-tied-to-russian-security-firm/#comments">36 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>Among the more plunderous cybercrime gangs is a group known as &#8220;<strong>Carbanak,</strong>&#8221; Eastern European hackers blamed for <a href="http://krebsonsecurity.com/2015/02/the-great-bank-heist-or-death-by-1000-cuts/" target="_blank">stealing more than a billion dollars</a> from banks. Today we&#8217;ll examine some compelling clues that point to a connection between the Carbanak gang&#8217;s staging grounds and a Russian security firm that claims to work with some of the world&#8217;s largest brands in cybersecurity.</p>
+<p>The Carbanak gang derives its name from the banking malware used in countless high-dollar cyberheists. The gang is perhaps best known for <a href="http://krebsonsecurity.com/2014/12/gang-hacked-atms-from-inside-banks/" target="_blank">hacking directly into bank networks using poisoned Microsoft Office files</a>, and then using that access to force bank ATMs into dispensing cash. Russian security firm <strong>Kaspersky Lab</strong> <a href="http://www.kaspersky.com/about/news/virus/2015/Carbanak-cybergang-steals-1-bn-USD-from-100-financial-institutions-worldwide" target="_blank">estimates</a> that the Carbanak Gang has likely stolen upwards of USD $1 billion &#8212; but mostly from Russian banks.</p>
+<div id="attachment_29937" style="width: 610px" class="wp-caption aligncenter"><a class="lightbox" href="https://krebsonsecurity.com/wp-content/uploads/2015/02/cvmap.png"><img aria-describedby="caption-attachment-29937" loading="lazy" class="wp-image-29937 size-large" src="https://krebsonsecurity.com/wp-content/uploads/2015/02/cvmap-600x486.png" alt="Image: Kaspersky" width="600" height="486" srcset="https://krebsonsecurity.com/wp-content/uploads/2015/02/cvmap-600x486.png 600w, https://krebsonsecurity.com/wp-content/uploads/2015/02/cvmap-285x231.png 285w, https://krebsonsecurity.com/wp-content/uploads/2015/02/cvmap.png 755w" sizes="(max-width: 600px) 100vw, 600px" /></a><p id="caption-attachment-29937" class="wp-caption-text">Image: Kaspersky</p></div>
+<p>I recently heard from security researcher <strong>Ron Guilmette</strong>, an anti-spam crusader whose sleuthing has been featured on several occasions <a href="http://krebsonsecurity.com/?s=guilmette&amp;x=0&amp;y=0" target="_blank">on this site</a> and in <a href="http://voices.washingtonpost.com/securityfix/2008/04/a_case_of_network_identity_the_1.html" target="_blank">the blog</a> I wrote for <em>The Washington Post</em>. Guilmette said he&#8217;d found some interesting commonalities in the original Web site registration records for a slew of sites that all have been previously responsible for pushing malware known to be used by the Carbanak gang.</p>
+<p>For example, the domains &#8220;<strong>weekend-service[dot]com</strong>&#8221; &#8220;<strong>coral-trevel[dot]com</strong>&#8221; and &#8220;<strong>freemsk-dns[dot]com</strong>&#8221; all were documented <a href="https://www.fox-it.com/en/files/2014/12/Anunak_APT-against-financial-institutions2.pdf" target="_blank">by</a> <a href="https://securelist.com/files/2015/02/Carbanak_APT_eng.pdf" target="_blank">multiple</a> <a href="http://www.welivesecurity.com/2015/09/08/carbanak-gang-is-back-and-packing-new-guns/" target="_blank">security</a> <a href="http://www.group-ib.com/files/Anunak_APT_against_financial_institutions.pdf" target="_blank">firms</a> as distribution hubs for Carbanak crimeware. Historic registration or &#8220;WHOIS&#8221; records maintained by <a href="http://www.domaintools.com" target="_blank">Domaintools.com</a> for all three domains contain the same phone and fax numbers for what appears to be a <strong>Xicheng Co.</strong> in China &#8212; <strong>1066569215</strong> and <strong>1066549216</strong>, each preceded by either a <strong>+86</strong> (China&#8217;s country code) or <strong>+01</strong> (USA). Each domain record also includes the same contact address: &#8220;<strong>williamdanielsen@yahoo.com</strong>&#8220;.</p>
+<p>According to data gathered by <strong>ThreatConnect</strong>, a threat intelligence provider [full disclosure: ThreatConnect is an advertiser on this blog], at least 484 domains were registered to the williamdanielsen@yahoo.com address or to one of 26 other email addresses that listed the same phone numbers and Chinese company.  &#8220;At least 304 of these domains have been associated with a malware plugin [that] has previously been attributed to Carbanak activity,&#8221; ThreatConnect told KrebsOnSecurity.</p>
+<p>Going back to those two phone numbers, 1066569215 and 1066549216; at first glance they appear to be sequential, but closer inspection reveals they differ slightly in the middle. Among the very few domains registered to those Chinese phone numbers that haven&#8217;t been seen launching malware is a Web site called &#8220;<strong>c</strong><strong>ubehost[dot]biz</strong>,&#8221; which according to records was registered in Sept. 2013 to a 28-year-old <a href="http://www.tadviser.ru/index.php/%D0%9F%D0%B5%D1%80%D1%81%D0%BE%D0%BD%D0%B0:%D0%A2%D0%B2%D0%B5%D1%80%D0%B8%D1%82%D0%B8%D0%BD%D0%BE%D0%B2_%D0%90%D1%80%D1%82%D0%B5%D0%BC_%D0%92%D0%BB%D0%B0%D0%B4%D0%B8%D0%BC%D0%B8%D1%80%D0%BE%D0%B2%D0%B8%D1%87" target="_blank">Artem Tveritinov</a> of Perm, Russia.</p>
+<p>Cubehost[dot]biz is a dormant site, but it appears to be the sister property to a Russian security firm called <strong>Infocube </strong>(also spelled &#8220;Infokube&#8221;). The InfoKube web site &#8212; <strong>infokube.ru</strong> &#8212; is also registered to Mr. Tveritinov of Perm, Russia; there are dozens of records in the WHOIS history for infokube.ru, but only the oldest, original record from 2011 contains the email address <strong>atveritinov@gmail.com. </strong></p>
+<p>That same email address was used to register <a href="https://webcache.googleusercontent.com/search?q=cache:CClyUNfQ21kJ:https://vkfaces.com/vk/user/a.tveritinov+&amp;cd=5&amp;hl=en&amp;ct=clnk&amp;gl=us" target="_blank">a four-year-old profile account</a> at the popular Russian social networking site <strong>Vkontakte</strong> for <strong>Artyom &#8220;LioN&#8221; Tveritinov</strong> from Perm, Russia. The &#8220;LioN&#8221; bit is an apparent reference to <a href="https://translate.google.com/translate?hl=en&amp;sl=ru&amp;tl=en&amp;u=http%3A%2F%2Fweb.archive.org%2Fweb%2F20160317232819%2Fhttp%3A%2F%2Finfokube.ru%2Fgk-lion-teper-pod-nadezhnoj-antivirusnoj-zashhitoj!" target="_blank">an Infokube anti-virus product</a> by the same name. <a href="https://krebsonsecurity.com/2016/07/carbanak-gang-tied-to-russian-security-firm/#more-35321" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+	<div class="themonic-ad2"><div class="a-statement">Advertisement</div><a href="https://www.akamai.com/?utm_source=krebsonsecurity&amp;utm_medium=display&amp;utm_id=GL_Platform&amp;utm_campaign=F-MC-52606&amp;utm_content=IDC_InfoBrief">
+<img src="/b-akamai/134.png">
+</a></div>	<article id="post-35465" class="post-35465 post type-post status-publish format-standard hentry category-sunshine category-comingstorm tag-avivah-litan tag-cyber-crime-assessment-2016 tag-dridex tag-dyre tag-eu-general-data-protection-regulation tag-european-union-general-data-protection-regulation tag-gartner-inc tag-u-k-national-crime-agency">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2016/07/cybercrime-overtakes-traditional-crime-in-uk/" title="Permalink to Cybercrime Overtakes Traditional Crime in UK" rel="bookmark">Cybercrime Overtakes Traditional Crime in UK</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">July 15, 2016</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2016/07/cybercrime-overtakes-traditional-crime-in-uk/#comments">28 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>In a notable sign of the times, cybercrime has now surpassed all other forms of crime in the United Kingdom, the nation&#8217;s <strong>National Crime Agency</strong> (NCA) warned in a new report. It remains unclear how closely the rest of the world tracks the U.K.&#8217;s experience, but the report reminds readers that the problem is likely far worse than the numbers suggest, noting that cybercrime is vastly under-reported by victims.</p>
+<p><a class="lightbox" href="https://krebsonsecurity.com/wp-content/uploads/2016/07/ons-stat.png"><img loading="lazy" class="alignright wp-image-35512" src="https://krebsonsecurity.com/wp-content/uploads/2016/07/ons-stat.png" alt="ons-stat" width="271" height="264" /></a>The NCA&#8217;s <a href="http://www.nationalcrimeagency.gov.uk/publications/709-cyber-crime-assessment-2016/file" target="_blank">Cyber Crime Assessment 2016</a>, released July 7, 2016, highlights the need for stronger law enforcement and business partnership to fight cybercrime. According to the NCA, cybercrime emerged as the largest proportion of total crime in the U.K., with &#8220;cyber enabled fraud&#8221; making up 36 percent of all crime reported, and &#8220;computer misuse&#8221; accounting for 17 percent.</p>
+<p>One explanation for the growth of cybercrime reports in the U.K. may be that the Brits are getting better at tracking it. The report notes that the U.K. Office of National Statistics only began including cybercrime for the first time last year in its annual Crime Survey for England and Wales.</p>
+<p>&#8220;The ONS estimated that there were 2.46 million cyber incidents and 2.11 million victims of cyber crime in the U.K. in 2015,&#8221; the report&#8217;s authors wrote. &#8220;These figures highlight the clear shortfall in established reporting, with only 16,349 cyber dependent and approximately 700,000 cyber-enabled incidents reported to Action Fraud over the same period.&#8221;</p>
+<p>The report also focuses on the increasing sophistication of organized cybercrime gangs that develop and deploy targeted, complex malicious software &#8212; such as <a href="http://www.americanbanker.com/news/bank-technology/bank-hacking-gang-dridex-ramps-up-branches-into-ransomware-1079972-1.html" target="_blank">Dridex</a> and <a href="http://www.reuters.com/article/us-cybercrime-russia-dyre-exclusive-idUSKCN0VE2QS" target="_blank">Dyre</a>, which are aimed at emptying consumer and business bank accounts in the U.K. and elsewhere.</p>
+<p><strong>Avivah Litan</strong>, a fraud analyst with <strong>Gartner Inc.</strong>, said cyber fraudsters in the U.K. bring their best game when targeting U.K. banks, which generally require far more stringent customer-facing security measures than U.S. banks &#8212; including smart cards and one-time tokens.</p>
+<p>&#8220;I&#8217;m definitely hearing more about advanced attacks on U.K. banks than in the U.S.,&#8221; Litan said, adding that the anti-fraud measures put in place by U.K. banks have forced cybercriminals to focus more on social engineering U.K. retail and commercial banking customers. <a href="https://krebsonsecurity.com/2016/07/cybercrime-overtakes-traditional-crime-in-uk/#more-35465" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-33474" class="post-33474 post type-post status-publish format-standard hentry category-sunshine tag-hipaa tag-national-institute-of-standards-and-technology tag-nist tag-nist-cybersecurity-framework tag-pci tag-pwc tag-security-maturity tag-the-value-of-a-hacked-company">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2016/07/the-value-of-a-hacked-company/" title="Permalink to The Value of a Hacked Company" rel="bookmark">The Value of a Hacked Company</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">July 14, 2016</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2016/07/the-value-of-a-hacked-company/#comments">30 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>Most organizations only grow in <a href="http://krebsonsecurity.com/2015/04/whats-your-security-maturity-level/" target="_blank">security maturity</a> the hard way &#8212; that is, from the intense learning that takes place in the wake of a costly data breach. That may be because so few company leaders really grasp the centrality of computer and network security to the organization&#8217;s overall goals and productivity, and fewer still have taken an honest inventory of what may be at stake in the event that these assets are compromised.</p>
+<p>If you&#8217;re unsure how much of your organization&#8217;s strategic assets may be intimately tied up with all this technology stuff, ask yourself what would be of special worth to a network intruder. Here&#8217;s a look at some of the key corporate assets that may be of interest and value to modern bad guys.</p>
+<p><a class="lightbox" href="https://krebsonsecurity.com/wp-content/uploads/2016/07/ValueOfHackedCompany.png"><img loading="lazy" class="aligncenter wp-image-35422 size-medium" src="https://krebsonsecurity.com/wp-content/uploads/2016/07/ValueOfHackedCompany-580x501.png" alt="ValueOfHackedCompany" width="580" height="501" srcset="https://krebsonsecurity.com/wp-content/uploads/2016/07/ValueOfHackedCompany-580x501.png 580w, https://krebsonsecurity.com/wp-content/uploads/2016/07/ValueOfHackedCompany.png 589w" sizes="(max-width: 580px) 100vw, 580px" /></a></p>
+<p>This isn&#8217;t meant to be an exhaustive list; I&#8217;m sure we can all think of other examples, and perhaps if I receive enough suggestions from readers I&#8217;ll update this graphic. But the point is that whatever paltry monetary value the cybercrime underground may assign to these stolen assets individually, they&#8217;re each likely worth far more to the victimized company &#8212; if indeed a price can be placed on them at all.</p>
+<p>In years past, most traditional, financially-oriented cybercrime was opportunistic: That is, the bad guys tended to focus on getting in quickly, grabbing all the data that they knew how to easily monetize, and then perhaps leaving behind malware on the hacked systems that abused them for spam distribution.</p>
+<p>These days, an opportunistic, mass-mailed malware infection can quickly and easily morph into a much more serious and sustained problem for the victim organization (<a href="http://krebsonsecurity.com/2014/02/email-attack-on-vendor-set-up-breach-at-target/" target="_blank">just ask Target</a>). This is partly because many of the criminals who run large spam crime machines responsible for pumping out the latest malware threats have grown more adept at mining and harvesting stolen data.</p>
+<p>That data mining process involves harvesting and stealthily testing interesting and potentially useful usernames and passwords stolen from victim systems. Today&#8217;s more clueful cybercrooks understand that if they can identify compromised systems inside organizations that may be sought-after targets of organized cybercrime groups, those groups might be willing to pay handsomely for such ready-made access. <a href="https://krebsonsecurity.com/2016/07/the-value-of-a-hacked-company/#more-33474" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-35468" class="post-35468 post type-post status-publish format-standard hentry category-patches tag-adobe tag-chrome tag-edge tag-firefox tag-flash-version-22-0-0-209 tag-internet-explorer tag-microsoft-patch-tuesday-july-2016 tag-opera tag-windows">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2016/07/adobe-microsoft-patch-critical-security-bugs/" title="Permalink to Adobe, Microsoft Patch Critical Security Bugs" rel="bookmark">Adobe, Microsoft Patch Critical Security Bugs</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">July 13, 2016</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2016/07/adobe-microsoft-patch-critical-security-bugs/#comments">43 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p><strong>Adobe </strong>has pushed out a critical update to plug at least 52 security holes in its widely-used <strong>Flash Player</strong> browser plugin, and another update to patch holes in <strong>Adobe Reader</strong>. Separately, <strong>Microsoft</strong> released 11 security updates to fix vulnerabilities more than 40 flaws in <strong>Windows</strong> and related software.</p>
+<p><img loading="lazy" class="alignright wp-image-18875" src="https://krebsonsecurity.com/wp-content/uploads/2013/02/brokenflash-a.png" alt="brokenflash-a" width="195" height="166" />First off, if you have Adobe Flash Player installed and haven&#8217;t yet hobbled this insecure program so that it runs only when you want it to, you are playing with fire. It&#8217;s bad enough that hackers are constantly finding and exploiting zero-day flaws in Flash Player before Adobe even knows about the bugs.</p>
+<p>The bigger issue is that Flash is an extremely powerful program that runs inside the browser, which means users can compromise their computer just by browsing to a hacked or malicious site that targets unpatched Flash flaws.</p>
+<p>The smartest option is probably to ditch this insecure program once and for all and significantly increase the security of your system in the process. I’ve got more on that approach &#8212; as well as slightly less radical solutions &#8212; in <a href="http://krebsonsecurity.com/2015/06/a-month-without-adobe-flash-player/" target="_blank">A Month Without Adobe Flash Player</a>.</p>
+<p>If you choose to update, please do it today. The most recent versions of Flash should be available from <a href="https://www.adobe.com/products/flashplayer/distribution3.html" target="_blank">this Flash distribution page</a> or the <a href="https://get.adobe.com/flashplayer/" target="_blank">Flash home page</a>. Windows users who browse the Web with anything other than <strong>Internet Explorer</strong> may need to apply this patch twice, once with IE and again using the alternative browser (<strong>Firefox</strong>, <strong>Opera</strong>, e.g.). <strong>Chrome</strong> and IE should auto-install the latest Flash version on browser restart.</p>
+<p>Happily, Adobe has delayed plans to stop <a href="https://www.adobe.com/products/flashplayer/distribution3.html" target="_blank">distributing direct download links to its Flash Player program</a>. The company had said it would decommission the direct download page on June 30, 2016, but the latest, patched Flash <em>version 22.0.0.209</em> for Windows and Mac systems is still available there. The wording on the site has been changed to indicate the download links will be decommissioned &#8220;soon.&#8221; <a href="https://krebsonsecurity.com/2016/07/adobe-microsoft-patch-critical-security-bugs/#more-35468" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-35429" class="post-35429 post type-post status-publish format-standard hentry category-sunshine category-neer-do-well-news tag-carderprofit tag-corbin-weiss tag-cyberstalking tag-doxing tag-exposed-su tag-mark-dycio tag-mir-islam tag-national-rifle-association tag-operation-card-shop tag-robert-sommerfeld tag-ssndob tag-swatting tag-wayne-lapierre">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2016/07/serial-swatter-stalker-and-doxer-mir-islam-gets-just-1-year-in-jail/" title="Permalink to Serial Swatter, Stalker and Doxer Mir Islam Gets Just 1 Year in Jail" rel="bookmark">Serial Swatter, Stalker and Doxer Mir Islam Gets Just 1 Year in Jail</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">July 11, 2016</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2016/07/serial-swatter-stalker-and-doxer-mir-islam-gets-just-1-year-in-jail/#comments">89 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p><strong>Mir Islam</strong>, a 21-year-old Brooklyn man who pleaded guilty to an impressive array of cybercrimes including cyberstalking, &#8220;doxing&#8221; and &#8220;swatting&#8221; celebrities and public officials (as well as this author), was sentenced in federal court today to two years in prison. Unfortunately, thanks to time served in this and other cases, Islam will only see a year of jail time in connection with some fairly heinous assaults that are becoming all too common.</p>
+<p>While Islam&#8217;s sentence fell well short of the government&#8217;s request for punishment, the case raises novel legal issues as to how federal investigators intend to prosecute ongoing cases involving swatting &#8212; an extremely dangerous prank in which police are tricked into responding with deadly force to a phony hostage crisis or bomb scare at a residence or business.</p>
+<div id="attachment_35432" style="width: 590px" class="wp-caption aligncenter"><a class="lightbox" href="https://krebsonsecurity.com/wp-content/uploads/2016/07/islamsentencing.png"><img aria-describedby="caption-attachment-35432" loading="lazy" class="wp-image-35432 size-medium" src="https://krebsonsecurity.com/wp-content/uploads/2016/07/islamsentencing-580x307.png" alt="Mir Islam, at his sentencing hearing today. Sketches copyright by Hennessy / CourtroomArt.com" width="580" height="307" srcset="https://krebsonsecurity.com/wp-content/uploads/2016/07/islamsentencing-580x307.png 580w, https://krebsonsecurity.com/wp-content/uploads/2016/07/islamsentencing-768x407.png 768w, https://krebsonsecurity.com/wp-content/uploads/2016/07/islamsentencing-940x498.png 940w" sizes="(max-width: 580px) 100vw, 580px" /></a><p id="caption-attachment-35432" class="wp-caption-text">Mir Islam, at his sentencing hearing today. Sketches copyright by Hennessy / CourtroomArt.com. Yours Truly is pictured in the blue shirt behind Islam.</p></div>
+<p>On March 14, 2014, Islam and a group of as-yet-unnamed co-conspirators used a text-to-speech (TTY) service for the deaf to <a href="http://krebsonsecurity.com/2013/03/the-world-has-no-room-for-cowards/" target="_blank">relay a message to our local police department</a> stating that there was an active hostage situation going on at our modest town home in Annandale, Va. Nearly a dozen heavily-armed officers responded to the call, forcing me out of my home at gunpoint and putting me in handcuffs before the officer in charge realized it was all a hoax.</p>
+<p>At the time, Islam and his pals were operating a Web site called <strong>Exposed[dot]su</strong>, which sought to &#8220;dox&#8221; public officials and celebrities by listing the name, birthday, address, previous address, phone number and Social Security number of at least 50 public figures and celebrities, including <strong>First Lady Michelle Obama</strong>, then-<strong>FBI director Robert Mueller</strong>, and then <strong>Central Intelligence Agency Director John Brennan</strong>.</p>
+<p>Exposed.su also documented which of these celebrities and public figures had been swatted, including a raft of California celebrities and public figures, such as former California Governor <strong>Arnold Schwartzenegger</strong>, actor <strong>Ashton Kutcher</strong>, and performer <strong>Jay Z</strong>.</p>
+<p><div id="attachment_25473" style="width: 610px" class="wp-caption aligncenter"><a class="lightbox" href="https://krebsonsecurity.com/wp-content/uploads/2014/03/exposed-su.png"><img aria-describedby="caption-attachment-25473" loading="lazy" class="wp-image-25473 size-large" src="https://krebsonsecurity.com/wp-content/uploads/2014/03/exposed-su-600x462.png" alt="Exposed[dot]su was built with the help of identity information obtained and/or stolen from ssndob[dot]ru." width="600" height="462" srcset="https://krebsonsecurity.com/wp-content/uploads/2014/03/exposed-su-600x462.png 600w, https://krebsonsecurity.com/wp-content/uploads/2014/03/exposed-su-285x219.png 285w, https://krebsonsecurity.com/wp-content/uploads/2014/03/exposed-su.png 1263w" sizes="(max-width: 600px) 100vw, 600px" /></a><p id="caption-attachment-25473" class="wp-caption-text"></p>
+<p>Exposed[dot]su was built with the help of identity information obtained and/or stolen from ssndob[dot]ru.</p></div>At the time, most media outlets covering the sheer amount of celebrity exposure at Exposed[dot]su focused on the apparently starling revelation that &#8220;if they can get this sensitive information on these people, they can get it on anyone.&#8221; But for my part, I was more interested in how they were obtaining this data in the first place.</p>
+<p>On March 13, 2013 KrebsOnSecurity featured a story &#8212; <a href="http://krebsonsecurity.com/2013/03/credit-reports-sold-for-cheap-in-the-underweb/" target="_blank">Credit Reports Sold for Cheap in the Underweb</a> &#8211;which sought to explain how the proprietors of Exposed[dot]su had obtained the records for the public officials and celebrities from a Russian online identity theft service called <strong>sssndob[dot]ru</strong>.</p>
+<p>I noted in that story that sources close to the investigation said the assailants were using data gleaned from the ssndob[dot]ru ID theft service to gather enough information so that they could pull credit reports on targets directly from <strong>annualcreditreport.com</strong>, a site mandated by Congress to provide consumers a free copy of their credit report annually from each of the three major credit bureaus.</p>
+<p>Peeved that I&#8217;d outed his methods for doxing public officials, Islam helped orchestrate my swatting the very next day. Within the span of 45 minutes, KrebsOnSecurity.com came under a sustained denial-of-service attack which briefly knocked my site offline.</p>
+<p>At the same time, my hosting provider received a phony letter from the FBI stating my site was hosting illegal content and needed to be taken offline. And, then there was the swatting which occurred minutes after that phony communique was sent.</p>
+<p>All told, the government alleges that Islam swatted at least 19 other people, although only seven of the victims (or their representatives) showed up in court today to tell similarly harrowing stories (I was asked to but did not testify).</p>
+<div id="attachment_35453" style="width: 310px" class="wp-caption alignright"><img aria-describedby="caption-attachment-35453" loading="lazy" class=" wp-image-35453" src="https://krebsonsecurity.com/wp-content/uploads/2016/07/2013swat-580x607.png" alt="Officers responding to my 2013 swatting incident." width="300" height="314" srcset="https://krebsonsecurity.com/wp-content/uploads/2016/07/2013swat-580x607.png 580w, https://krebsonsecurity.com/wp-content/uploads/2016/07/2013swat-768x803.png 768w, https://krebsonsecurity.com/wp-content/uploads/2016/07/2013swat.png 872w" sizes="(max-width: 300px) 100vw, 300px" /><p id="caption-attachment-35453" class="wp-caption-text">Security camera footage of Fairfax County police officers responding to my 2013 swatting incident.</p></div>
+<p>Going into today&#8217;s sentencing hearing, the court advised that under the government&#8217;s sentencing guidelines Islam was facing between 37 and 46 months in prison for the crimes to which he&#8217;d pleaded guilty. But <strong>U.S. District Court Judge Randolph Moss</strong> seemed especially curious about the government&#8217;s rationale for charging Islam with conspiracy to transmit a threat to kidnap or harm using a deadly weapon.</p>
+<p>Judge Moss said the claim raises a somewhat novel legal question: Can the government allege the use of deadly force when the perpetrator of a swatting incident did not actually possess a weapon?</p>
+<p><strong>Corbin Weiss</strong>, an assistant US attorney and a cybercrime coordinator with the <strong>U.S. Department of Justice</strong>, argued that in most of the swatting attacks Islam perpetrated he expressed to emergency responders that any responding officers would be shot or blown up. Thus, the government argued, Islam was using police officers as a proxy for assault with a deadly weapon by ensuring that responding officers would be primed to expect a suspect who was armed and openly hostile to police. <a href="https://krebsonsecurity.com/2016/07/serial-swatter-stalker-and-doxer-mir-islam-gets-just-1-year-in-jail/#more-35429" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-35408" class="post-35408 post type-post status-publish format-standard hentry category-data-breaches tag-cicis-pizza-breach tag-national-association-of-federal-credit-unions tag-point-of-sale-botnet tag-wendys-breach">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2016/07/1025-wendys-locations-hit-in-card-breach/" title="Permalink to 1,025 Wendy&#8217;s Locations Hit in Card Breach" rel="bookmark">1,025 Wendy&#8217;s Locations Hit in Card Breach</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">July 8, 2016</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2016/07/1025-wendys-locations-hit-in-card-breach/#comments">51 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>At least 1,025 <strong>Wendy&#8217;s</strong> locations were hit by a malware-driven credit card breach that began in the fall of 2015, the nationwide fast-food chain said Thursday. The announcement marks a significant expansion in a data breach that is <a href="http://krebsonsecurity.com/2016/03/credit-unions-feeling-pinch-in-wendys-breach/" target="_blank">costing banks and credit unions plenty</a>: Previously, Wendy&#8217;s had said the breach impacted fewer than 300 locations.</p>
+<div id="attachment_35412" style="width: 316px" class="wp-caption alignright"><img aria-describedby="caption-attachment-35412" loading="lazy" class=" wp-image-35412" src="https://krebsonsecurity.com/wp-content/uploads/2016/07/vendys-580x413.png" alt="An ad for Wendy's (in Russian)." width="306" height="218" srcset="https://krebsonsecurity.com/wp-content/uploads/2016/07/vendys-580x413.png 580w, https://krebsonsecurity.com/wp-content/uploads/2016/07/vendys.png 589w" sizes="(max-width: 306px) 100vw, 306px" /><p id="caption-attachment-35412" class="wp-caption-text">An ad for Wendy&#8217;s (in Russian).</p></div>
+<p>On January 27, 2016, this publication was the <a href="http://krebsonsecurity.com/2016/01/wendys-probes-reports-of-credit-card-breach/" target="_blank">first to report</a> that Wendy’s was investigating a card breach. In mid-May, the company <a href="http://krebsonsecurity.com/2016/05/wendys-breach-affected-5-of-restaurants/" target="_blank">announced</a> in its first quarter financial statement that the fraud impacted just five percent of stores. But in a statement last month, Wendy&#8217;s warned that its estimates about the size and scope of the breach <a href="http://krebsonsecurity.com/2016/06/theres-the-beef-wendys-breach-numbers-about-to-get-much-meatier/" target="_blank">were about to get much meatier</a>.</p>
+<p>Wendy&#8217;s has <a href="https://payment.wendys.com/paymentcardcheck.html" target="_blank">published a page</a> that breaks down the breached restaurant locations by state.</p>
+<p>Wendy&#8217;s is placing blame for the breach on an unnamed third-party that serves franchised Wendy&#8217;s locations, saying that a &#8220;service provider&#8221; that had remote access to the compromised cash registers got hacked.</p>
+<p>For better or worse, countless restaurant franchises outsource the management and upkeep of their point-of-sale systems to third party providers, most of whom use remote administration tools to access and manage the systems remotely over the Internet.</p>
+<p>Unsurprisingly, the attackers have focused on hacking the third-party providers and have had much success with this tactic. Very often, the hackers just guess at the usernames and passwords needed to remotely access point-of-sale devices. But as more POS vendors start to tighten up on that front, the criminals are shifting their focus to social engineering attacks &#8212; that is, manipulating employees at the targeted organization into opening the backdoor for the attackers.</p>
+<p>As detailed in <a href="http://krebsonsecurity.com/2016/06/slicing-into-a-point-of-sale-botnet/" target="_blank">Slicing Into a Point-of-Sale Botnet</a>, hackers responsible for stealing millions of customer credit card numbers from pizza chain <a href="http://krebsonsecurity.com/2016/06/banks-credit-card-breach-at-cicis-pizza/" target="_blank">Cici&#8217;s Pizza</a> used social engineering attacks to trick employees at third party point-of-sale providers into installing malicious software. <a href="https://krebsonsecurity.com/2016/07/1025-wendys-locations-hit-in-card-breach/#more-35408" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-35273" class="post-35273 post type-post status-publish format-standard hentry category-sunshine category-web-fraud-2-0 tag-black-seo tag-bryan-seely tag-church-of-scientology tag-fbi tag-google-maps tag-john-harvey tag-l-ron-hubbard tag-narconon tag-scientology tag-secret-service tag-seely-security tag-seo tag-topseek tag-topseek-inc">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2016/06/scientology-seeks-captive-converts-via-google-maps-drug-rehab-centers/" title="Permalink to Scientology Seeks Captive Converts Via Google Maps, Drug Rehab Centers" rel="bookmark">Scientology Seeks Captive Converts Via Google Maps, Drug Rehab Centers</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">June 27, 2016</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2016/06/scientology-seeks-captive-converts-via-google-maps-drug-rehab-centers/#comments">79 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>Fake online reviews generated by unscrupulous marketers blanket the Internet these days. Although online review pollution isn&#8217;t exactly a hot-button consumer issue, there are plenty of cases in which phony reviews may endanger one&#8217;s life or well-being. This is the story about how searching for drug abuse treatment services online could cause concerned loved ones to send their addicted, vulnerable friends or family members straight into the arms of the <strong>Church of Scientology</strong>.</p>
+<p>As explained in last year&#8217;s piece, <a href="http://krebsonsecurity.com/2015/10/dont-be-fooled-by-fake-online-reviews-part-ii/" target="_blank">Don&#8217;t Be Fooled by Fake Online Reviews Part II</a>, there are countless real-world services that are primed for exploitation online by marketers engaged in false and misleading &#8220;search engine optimization&#8221; (SEO) techniques. These shady actors specialize in creating hundreds or thousands of phantom companies online, each with different generic-sounding business names, addresses and phone numbers. The phantom firms often cluster around fake listings created in Google Maps &#8212; complete with numerous five-star reviews, pictures, phone numbers and Web site links.</p>
+<p>The problem is that calls to any of these phony companies are routed back to the same crooked SEO entity that created them. That marketer in turn sells the customer lead to one of several companies that have agreed in advance to buy such business leads. As a result, many consumers think they are dealing with one company when they call, yet end up being serviced by a completely unrelated firm that may not have to worry about maintaining a reputation for quality and fair customer service.</p>
+<p>Experts say fake online reviews are most prevalent in labor-intensive services that do not require the customer to come into the company’s offices but instead come to the consumer. These services include but are not limited to locksmiths, windshield replacement services, garage door repair and replacement technicians, carpet cleaning and other services that consumers very often call for immediate service.</p>
+<p>As it happens, the problem is widespread in the drug rehabilitation industry as well. That became apparent after I spent just a few hours with <strong>Bryan Seely</strong>, the guy who literally <a href="https://www.amazon.com/gp/product/1533156778/ref=as_li_tl?ie=UTF8&amp;tag=seelysecurity-20&amp;camp=1789&amp;creative=9325&amp;linkCode=as2&amp;creativeASIN=1533156778&amp;linkId=bb0aa50317eb9ed82a7919a56a7155b1" target="_blank">wrote the definitive book on fake Internet reviews</a>.</p>
+<p>Perhaps best known for a stunt in which he used fake Google Maps listings to <a href="https://www.youtube.com/watch?v=5c6AADI7Pb4" target="_blank">intercept calls destined for the FBI and U.S. Secret Service</a>, Seely knows a thing or two about this industry: Until 2011, he worked for an SEO firm that helped to develop and spread some of the same fake online reviews that he is now helping to clean up.</p>
+<p>More recently, Seely has been tracking a network of hundreds of phony listings and reviews that lead inquiring customers to fewer than a half dozen drug rehab centers, including <strong><a href="https://en.wikipedia.org/wiki/Narconon" target="_blank">Narconon International</a> </strong>&#8212; an organization that promotes the theories of <a title="Scientology" href="https://en.wikipedia.org/wiki/Scientology" data-ss1467034033="1">Scientology</a> founder <a title="L. Ron Hubbard" href="https://en.wikipedia.org/wiki/L._Ron_Hubbard" data-ss1467034033="1">L. Ron Hubbard</a> regarding substance abuse treatment and addiction.</p>
+<p>As described in <a href="https://en.wikipedia.org/wiki/Narconon" target="_blank">Narconon&#8217;s Wikipedia entry</a>, Narconon facilities are known not only for attempting to win over new converts, but also for treating all drug addictions with a rather bizarre cocktail consisting mainly of vitamins and long hours in extremely hot saunas. The Wiki entry documents multiple cases of accidental deaths at Narconon facilities, where some addicts reportedly died from overdoses of vitamins or neglect:</p>
+<p>&#8220;Narconon has faced considerable controversy over the safety and effectiveness of its rehabilitation methods,&#8221; the Wiki entry reads. &#8220;Narconon teaches that drugs reside in body fat, and remain there indefinitely, and that to recover from drug abuse, addicts can remove the drugs from their fat through saunas and use of vitamins. Medical experts disagree with this basic understanding of physiology, saying that no significant amount of drugs are stored in fat, and that drugs can&#8217;t be &#8216;sweated out&#8217; as Narconon claims.&#8221;</p>
+<div id="attachment_35338" style="width: 590px" class="wp-caption aligncenter"><a class="lightbox" href="https://krebsonsecurity.com/wp-content/uploads/2016/06/whatshappening.png"><img aria-describedby="caption-attachment-35338" loading="lazy" class="wp-image-35338 size-medium" src="https://krebsonsecurity.com/wp-content/uploads/2016/06/whatshappening-580x315.png" alt="whatshappening" width="580" height="315" srcset="https://krebsonsecurity.com/wp-content/uploads/2016/06/whatshappening-580x315.png 580w, https://krebsonsecurity.com/wp-content/uploads/2016/06/whatshappening-768x418.png 768w, https://krebsonsecurity.com/wp-content/uploads/2016/06/whatshappening-940x511.png 940w, https://krebsonsecurity.com/wp-content/uploads/2016/06/whatshappening.png 1177w" sizes="(max-width: 580px) 100vw, 580px" /></a><p id="caption-attachment-35338" class="wp-caption-text">Source: Seely Security.</p></div>
+<h4>FOLLOW THE BOUNCING BALL</h4>
+<p>Seely said he learned that the drug rehab industry was overrun with SEO firms when he began researching rehab centers in Seattle for a family friend who was struggling with substance abuse and addiction issues. A simple search on Google for &#8220;drug rehab Seattle&#8221; turned up multiple local search results that looked promising.</p>
+<p>One of the top three results was for a business calling itself &#8220;Drug Rehab Seattle,&#8221; and while it lists a toll-free phone number, it does not list a physical address (NB: this is not always the case with fake listings, which just as often claim the street address of another legitimate business). A click on the organization&#8217;s listing claims the Web site <strong>rehabs.com </strong>&#8211; a legitimate drug rehab search service. However, the owners of rehabs.com say this listing is unauthorized and unaffiliated with rehabs.com.</p>
+<p>As documented in <a href="https://youtu.be/NcQ7OT0Ythg" target="_blank">this Youtube video</a>, Seely called the toll-free number in the Drug Rehab Seattle listing, and was transferred to a hotline that took down his name, number and insurance information and promised an immediate call back. Within minutes, Seely said, he received a call from a woman who said she represented a Seattle treatment center but was vague about the background of the organization itself. A little digging showed that the treatment center was run by Narconon. <a href="https://krebsonsecurity.com/2016/06/scientology-seeks-captive-converts-via-google-maps-drug-rehab-centers/#more-35273" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-35114" class="post-35114 post type-post status-publish format-standard hentry category-sunshine category-all-about-skimmers tag-apple-pay tag-ingenico-skimmer tag-isc-250 tag-isc250 tag-isc250-skimmer tag-walmart-skimmers">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2016/06/how-to-spot-ingenico-self-checkout-skimmers/" title="Permalink to How to Spot Ingenico Self-Checkout Skimmers" rel="bookmark">How to Spot Ingenico Self-Checkout Skimmers</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">June 24, 2016</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2016/06/how-to-spot-ingenico-self-checkout-skimmers/#comments">75 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>A KrebsOnSecurity <a href="http://krebsonsecurity.com/2016/05/skimmers-found-at-walmart-a-closer-look/" target="_blank">story</a> last month about credit card skimmers found in self-checkout lanes at some <strong>Walmart</strong> locations got picked up by quite a few publications. Since then I&#8217;ve heard from several readers who work at retailers that use hundreds of thousands of these <strong>Ingenico</strong> credit card terminals across their stores, and all wanted to know the same thing: How could they tell if their self-checkout lanes were compromised? This post provides a few pointers.</p>
+<p>Happily, just days before my story point-of-sale vendor Ingenico produced a tutorial on how to spot a skimmer on self checkout lanes powered by Ingenico iSC250 card terminals. Unfortunately, it doesn&#8217;t appear that this report was widely disseminated, because I&#8217;m still getting questions from readers at retailers that use these devices.</p>
+<div id="attachment_35287" style="width: 590px" class="wp-caption aligncenter"><a class="lightbox" href="https://krebsonsecurity.com/wp-content/uploads/2016/06/redcalipers.png"><img aria-describedby="caption-attachment-35287" loading="lazy" class="wp-image-35287 size-medium" src="https://krebsonsecurity.com/wp-content/uploads/2016/06/redcalipers-580x326.png" alt="The red calipers in the image above show the size differences in various noticeable areas of the case overlay on the left compared to the actual ISC250 on the right. Source: Ingenico." width="580" height="326" srcset="https://krebsonsecurity.com/wp-content/uploads/2016/06/redcalipers-580x326.png 580w, https://krebsonsecurity.com/wp-content/uploads/2016/06/redcalipers-768x431.png 768w, https://krebsonsecurity.com/wp-content/uploads/2016/06/redcalipers-940x528.png 940w, https://krebsonsecurity.com/wp-content/uploads/2016/06/redcalipers.png 1318w" sizes="(max-width: 580px) 100vw, 580px" /></a><p id="caption-attachment-35287" class="wp-caption-text">The red calipers in the image above show the size differences in various noticeable areas of the case overlay on the left compared to the actual iSC250 on the right. Source: Ingenico.</p></div>
+<p>&#8220;In order for the overlay to fit atop the POS [point-of-sale] terminal, it must be longer and wider than the target device,&#8221; reads a May 16, 2016 security bulletin obtained by KrebsOnSecurity. &#8220;For this reason, the case overlay will appear noticeably larger than the actual POS terminal. This is the primary identifying characteristic of the skimming device. A skimmer overlay of the iSC250 is over 6 inches wide and 7 inches tall while the iSC250 itself is 5 9/16 inch wide and 6 1⁄2 inches tall.&#8221;</p>
+<p>In addition, the skimming device that thieves can attach in the blink of an eye on top of the Ingenico self-checkout card reader blocks the backlight from coming through the fake PIN pad overlay.</p>
+<div id="attachment_35286" style="width: 590px" class="wp-caption aligncenter"><a class="lightbox" href="https://krebsonsecurity.com/wp-content/uploads/2016/06/ingenicobacklight.png"><img aria-describedby="caption-attachment-35286" loading="lazy" class="wp-image-35286 size-medium" src="https://krebsonsecurity.com/wp-content/uploads/2016/06/ingenicobacklight-580x219.png" alt="The backlight can be best seen while shading the keypad from room lights. The image on the left is a powered-on legitimate ISC250 viewed with the keypad shaded. The backlight can be seen in comparison to a powered-off ISC250 in the right image. Source: Ingenico." width="580" height="219" srcset="https://krebsonsecurity.com/wp-content/uploads/2016/06/ingenicobacklight-580x219.png 580w, https://krebsonsecurity.com/wp-content/uploads/2016/06/ingenicobacklight-768x290.png 768w, https://krebsonsecurity.com/wp-content/uploads/2016/06/ingenicobacklight-940x355.png 940w, https://krebsonsecurity.com/wp-content/uploads/2016/06/ingenicobacklight.png 1314w" sizes="(max-width: 580px) 100vw, 580px" /></a><p id="caption-attachment-35286" class="wp-caption-text">The backlight can be best seen while shading the keypad from room lights. The image on the left is a powered-on legitimate iSC250 viewed with the keypad shaded. The backlight can be seen in comparison to a powered-off iSC250 in the right image. Source: Ingenico.</p></div>
+<p> <a href="https://krebsonsecurity.com/2016/06/how-to-spot-ingenico-self-checkout-skimmers/#more-35114" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-35140" class="post-35140 post type-post status-publish format-standard hentry category-sunshine category-comingstorm tag-avivah-litan tag-darknet tag-darkweb tag-data-breach-investigations-report tag-diskin-advanced-technologies tag-gartner tag-insider-threat tag-noam-jolles tag-verizon">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2016/06/rise-of-darknet-stokes-fear-of-the-insider/" title="Permalink to Rise of Darknet Stokes Fear of The Insider" rel="bookmark">Rise of Darknet Stokes Fear of The Insider</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">June 22, 2016</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2016/06/rise-of-darknet-stokes-fear-of-the-insider/#comments">55 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>With the proliferation of shadowy black markets on the so-called &#8220;darknet&#8221; &#8212; hidden crime bazaars that can only be accessed through special software that obscures one&#8217;s true location online &#8212; it has never been easier for disgruntled employees to harm their current or former employer. At least, this is the fear driving a growing stable of companies seeking technical solutions to detect would-be insiders.</p>
+<p><strong>Avivah Litan</strong>, a fraud analyst with <strong>Gartner Inc.</strong>, says she&#8217;s been inundated recently with calls from organizations asking what they can do to counter the following scenario: A disaffected or disgruntled employee creates a persona on a darknet market and offers to sell his company&#8217;s intellectual property or access to his employer&#8217;s network.</p>
+<div id="attachment_35247" style="width: 590px" class="wp-caption aligncenter"><a class="lightbox" href="https://krebsonsecurity.com/wp-content/uploads/2016/06/guitarcenter.png"><img aria-describedby="caption-attachment-35247" loading="lazy" class="wp-image-35247 size-medium" src="https://krebsonsecurity.com/wp-content/uploads/2016/06/guitarcenter-580x128.png" alt="A darknet forum discussion generated by a claimed insider at music retailer Guitar Center." width="580" height="128" srcset="https://krebsonsecurity.com/wp-content/uploads/2016/06/guitarcenter-580x128.png 580w, https://krebsonsecurity.com/wp-content/uploads/2016/06/guitarcenter-768x169.png 768w, https://krebsonsecurity.com/wp-content/uploads/2016/06/guitarcenter-940x207.png 940w, https://krebsonsecurity.com/wp-content/uploads/2016/06/guitarcenter.png 1233w" sizes="(max-width: 580px) 100vw, 580px" /></a><p id="caption-attachment-35247" class="wp-caption-text">A darknet forum discussion generated by a claimed insider at music retailer Guitar Center.</p></div>
+<p>Litan said a year ago she might have received one such inquiry a month; now Litan says she&#8217;s getting multiple calls a week, often from companies that are in a panic.</p>
+<p>&#8220;I&#8217;m getting calls from lots of big companies, including manufacturers, banks, pharmaceutical firms and retailers,&#8221; she said. &#8220;A year ago, no one wanted to say whether they had or were seriously worried about insiders, but that&#8217;s changing.&#8221;</p>
+<div id="attachment_35250" style="width: 590px" class="wp-caption aligncenter"><a class="lightbox" href="https://krebsonsecurity.com/wp-content/uploads/2016/06/bankinsider.png"><img aria-describedby="caption-attachment-35250" loading="lazy" class="wp-image-35250 size-medium" src="https://krebsonsecurity.com/wp-content/uploads/2016/06/bankinsider-580x208.png" alt="Insiders don't have to be smart or sophisticated to be dangerous." width="580" height="208" srcset="https://krebsonsecurity.com/wp-content/uploads/2016/06/bankinsider-580x208.png 580w, https://krebsonsecurity.com/wp-content/uploads/2016/06/bankinsider-768x276.png 768w, https://krebsonsecurity.com/wp-content/uploads/2016/06/bankinsider-940x337.png 940w, https://krebsonsecurity.com/wp-content/uploads/2016/06/bankinsider.png 1245w" sizes="(max-width: 580px) 100vw, 580px" /></a><p id="caption-attachment-35250" class="wp-caption-text">Insiders don&#8217;t have to be smart or sophisticated to be dangerous, as this darknet forum discussion thread illustrates.</p></div>
+<p>Some companies with tremendous investments in intellectual property &#8212; particularly pharmaceutical and healthcare firms &#8212; are working with law enforcement or paying security firms to monitor and track actors on the darknet that promise access to specific data or organizations, Litan said. <a href="https://krebsonsecurity.com/2016/06/rise-of-darknet-stokes-fear-of-the-insider/#more-35140" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+				
+			
+								<div class="themonic-pagination"><div class='pagination'><ul><li><a href='https://krebsonsecurity.com/'>&laquo; First</a></li><li><a href='https://krebsonsecurity.com/page/78/' class='inactive'>&lsaquo; Previous</a></li><li><a href='https://krebsonsecurity.com/page/76/' class='inactive'>76</a></li><li><a href='https://krebsonsecurity.com/page/77/' class='inactive'>77</a></li><li><a href='https://krebsonsecurity.com/page/78/' class='inactive'>78</a></li><li class='current'><span class='currenttext'>79</span></li><li><a href='https://krebsonsecurity.com/page/80/' class='inactive'>80</a></li><li><a href='https://krebsonsecurity.com/page/81/' class='inactive'>81</a></li><li><a href='https://krebsonsecurity.com/page/82/' class='inactive'>82</a></li><li><a href='https://krebsonsecurity.com/page/80/' class='inactive'>Next &rsaquo;</a></li><a class='inactive' href='https://krebsonsecurity.com/page/209/'>Last &raquo;</a></ul></div></div>
+					<div style="display: block; clear: both;"></div>
+			
+		
+
+	
+
+		</div><!-- #content -->
+	</div><!-- #primary -->
+
+
+			<div id="secondary" class="widget-area" role="complementary">
+
+        <div id="sidebar_ad" class="widget themonic-ad5"><div class="a-statement">Advertisement</div><a href="https://ninjio.com/lp46c-krebs/">
+<img src="/b-ninjio/6.png">
+</a>
+</div>
+
+                        <br><div class="widget themonic-ad1"><div class="a-statement">Advertisement</div><a href="https://www.akamai.com/why-akamai/the-internet-of-possibilities?utm_source=krebsonsecurity&amp;utm_medium=display&amp;utm_campaign=F-MC-54978">
+<img src="/b-akamai/146.png">
+</a></div><br>
+
+			<aside id="custom_html-2" class="widget_text widget widget_custom_html"><p class="widget-title">Mailing List</p><div class="textwidget custom-html-widget"><a href="/subscribe/">Subscribe here</a></div></aside><aside id="search-2" class="widget widget_search"><p class="widget-title">Search KrebsOnSecurity</p><form role="search" method="get" id="searchform" class="searchform" action="https://krebsonsecurity.com/">
+				<div>
+					<label class="screen-reader-text" for="s">Search for:</label>
+					<input type="text" value="" name="s" id="s" />
+					<input type="submit" id="searchsubmit" value="Search" />
+				</div>
+			</form></aside>
+		<aside id="recent-posts-3" class="widget widget_recent_entries">
+		<p class="widget-title">Recent Posts</p>
+		<ul>
+											<li>
+					<a href="https://krebsonsecurity.com/2021/12/canada-charges-its-most-prolific-cybercriminal/">Canada Charges Its &#8220;Most Prolific Cybercriminal&#8221;</a>
+									</li>
+											<li>
+					<a href="https://krebsonsecurity.com/2021/12/who-is-the-network-access-broker-babam/">Who Is the Network Access Broker &#8216;Babam&#8217;?</a>
+									</li>
+											<li>
+					<a href="https://krebsonsecurity.com/2021/12/ubiquiti-developer-charged-with-extortion-causing-2020-breach/">Ubiquiti Developer Charged With Extortion, Causing 2020 &#8220;Breach&#8221;</a>
+									</li>
+											<li>
+					<a href="https://krebsonsecurity.com/2021/11/the-internet-is-held-together-with-spit-baling-wire/">The Internet is Held Together With Spit &#038; Baling Wire</a>
+									</li>
+											<li>
+					<a href="https://krebsonsecurity.com/2021/11/arrest-in-ransom-your-employer-email-scheme/">Arrest in &#8216;Ransom Your Employer&#8217; Email Scheme</a>
+									</li>
+					</ul>
+
+		</aside><aside id="text-2" class="widget widget_text">			<div class="textwidget"><a name="subscribe2"></a></div>
+		</aside><aside id="widget_sp_image-15" class="widget widget_sp_image"><p class="widget-title">Spam Nation</p><a href="https://www.amazon.com/Spam-Nation-Organized-Cybercrime-Epidemic-ebook/dp/B00L5QGBL0/ref=dp_kinw_strp_1" target="_blank" class="widget_sp_image-image-link" title="Spam Nation"><img width="266" height="404" alt="Spam Nation" class="attachment-266x404 aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2015/04/spamnation-nyt.png" /></a><div class="widget_sp_image-description" ><p>A New York Times Bestseller! </p>
+</div></aside><aside id="widget_sp_image-25" class="widget widget_sp_image"><p class="widget-title">Thinking of a Cybersecurity Career?</p><a href="https://krebsonsecurity.com/2020/07/thinking-of-a-cybersecurity-career-read-this/" target="_blank" class="widget_sp_image-image-link" title="Thinking of a Cybersecurity Career? Read This."><img width="625" height="424" alt="Thinking of a Cybersecurity Career?" class="attachment-full" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2020/07/codepeople.png 625w, https://krebsonsecurity.com/wp-content/uploads/2020/07/codepeople-580x393.png 580w" sizes="(max-width: 625px) 100vw, 625px" src="https://krebsonsecurity.com/wp-content/uploads/2020/07/codepeople.png" /></a><div class="widget_sp_image-description" ><p>Read this.</p>
+</div></aside><aside id="widget_sp_image-3" class="widget widget_sp_image"><p class="widget-title">All About Skimmers </p><a href="https://krebsonsecurity.com/all-about-skimmers/" target="_blank" class="widget_sp_image-image-link" title="All About Skimmers "><img width="299" height="232" alt="All About Skimmers" class="attachment-299x232 aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2010/08/skimgallery1.jpg" /></a><div class="widget_sp_image-description" ><p>Click image for my skimmer series.</p>
+</div></aside><aside id="categories-2" class="widget widget_categories"><p class="widget-title">Story Categories</p>
+			<ul>
+					<li class="cat-item cat-item-5"><a href="https://krebsonsecurity.com/category/sunshine/" title="Includes investigative blog posts meant to shine a light on the darker corners of the Internet.">A Little Sunshine</a>
+</li>
+	<li class="cat-item cat-item-2240"><a href="https://krebsonsecurity.com/category/all-about-skimmers/">All About Skimmers</a>
+</li>
+	<li class="cat-item cat-item-9085"><a href="https://krebsonsecurity.com/category/ashley-madison-breach/">Ashley Madison breach</a>
+</li>
+	<li class="cat-item cat-item-3191"><a href="https://krebsonsecurity.com/category/breadcrumbs/">Breadcrumbs</a>
+</li>
+	<li class="cat-item cat-item-3771"><a href="https://krebsonsecurity.com/category/data-breaches/" title="Stories about data breaches at retailers, corporations, governments and organizations of all sizes.">Data Breaches</a>
+</li>
+	<li class="cat-item cat-item-4624"><a href="https://krebsonsecurity.com/category/ddos-for-hire/">DDoS-for-Hire</a>
+</li>
+	<li class="cat-item cat-item-9173"><a href="https://krebsonsecurity.com/category/employment-fraud/">Employment Fraud</a>
+</li>
+	<li class="cat-item cat-item-2151"><a href="https://krebsonsecurity.com/category/how-to-break-into-security/" title="If you&#039;ve ever wanted career advice on how to make a shift into the security industry, look no further.">How to Break Into Security</a>
+</li>
+	<li class="cat-item cat-item-87"><a href="https://krebsonsecurity.com/category/latest-warnings/">Latest Warnings</a>
+</li>
+	<li class="cat-item cat-item-4071"><a href="https://krebsonsecurity.com/category/neer-do-well-news/">Ne&#039;er-Do-Well News</a>
+</li>
+	<li class="cat-item cat-item-9"><a href="https://krebsonsecurity.com/category/other/">Other</a>
+</li>
+	<li class="cat-item cat-item-1306"><a href="https://krebsonsecurity.com/category/pharma-wars/">Pharma Wars</a>
+</li>
+	<li class="cat-item cat-item-8240"><a href="https://krebsonsecurity.com/category/ransomware/">Ransomware</a>
+</li>
+	<li class="cat-item cat-item-599"><a href="https://krebsonsecurity.com/category/security-tools/">Security Tools</a>
+</li>
+	<li class="cat-item cat-item-8298"><a href="https://krebsonsecurity.com/category/sim-swapping/">SIM Swapping</a>
+</li>
+	<li class="cat-item cat-item-4079"><a href="https://krebsonsecurity.com/category/spam-nation/">Spam Nation</a>
+</li>
+	<li class="cat-item cat-item-1"><a href="https://krebsonsecurity.com/category/smallbizvictims/" title="Posts in this category will include new stories similar to those told in the Small Business Victims category on The Washington Post&#039;s Security Fix blog, which chronicled the methods organized cyber thieve are using to steal hundreds of thousands of dollars from dozens of small- to mid-sized companies around the country.">Target: Small Businesses</a>
+</li>
+	<li class="cat-item cat-item-5167"><a href="https://krebsonsecurity.com/category/tax-refund-fraud/">Tax Refund Fraud</a>
+</li>
+	<li class="cat-item cat-item-3"><a href="https://krebsonsecurity.com/category/comingstorm/" title="This category includes blog posts about computer and Internet security threats now and on the horizon.">The Coming Storm</a>
+</li>
+	<li class="cat-item cat-item-4"><a href="https://krebsonsecurity.com/category/patches/" title="Short posts on the latest security updates for widely-used software.
+">Time to Patch</a>
+</li>
+	<li class="cat-item cat-item-21"><a href="https://krebsonsecurity.com/category/web-fraud-2-0/">Web Fraud 2.0</a>
+</li>
+			</ul>
+
+			</aside><aside id="widget_sp_image-5" class="widget widget_sp_image"><p class="widget-title">The Value of a Hacked PC</p><a href="https://krebsonsecurity.com/2012/10/the-scrap-value-of-a-hacked-pc-revisited/" target="_blank" class="widget_sp_image-image-link" title="The Value of a Hacked PC"><img width="285" height="180" alt="valuehackedpc " class="attachment-285x180 aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2012/12/valuehackedpc-285x180.png" /></a><div class="widget_sp_image-description" ><p>Badguy uses for your PC</p>
+</div></aside><aside id="widget_sp_image-9" class="widget widget_sp_image"><p class="widget-title">Badguy Uses for Your Email </p><a href="https://krebsonsecurity.com/2013/06/the-value-of-a-hacked-email-account/" target="_self" class="widget_sp_image-image-link" title="Badguy Uses for Your Email "><img width="296" height="170" alt="Badguy Uses for Your Email " class="attachment-full aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2013/06/badguyemail.png 296w, https://krebsonsecurity.com/wp-content/uploads/2013/06/badguyemail-285x163.png 285w" sizes="(max-width: 296px) 100vw, 296px" src="https://krebsonsecurity.com/wp-content/uploads/2013/06/badguyemail.png" /></a><div class="widget_sp_image-description" ><p>Your email account may be worth far more than you imagine.</p>
+</div></aside><aside id="widget_sp_image-24" class="widget widget_sp_image"><a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&#038;hosted_button_id=MCCRKHWRX57HS" id="donate" target="_self" class="widget_sp_image-image-link"><img width="250" height="55" alt="Donate to Krebs On Security" class="attachment-medium aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2016/09/donatepaypal2-1.png" /></a></aside><aside id="most_popular_posts-3" class="widget widget_most_popular_posts">
+<p class="widget-title">Most Popular Posts</p>
+<ul>	<li><a href="https://krebsonsecurity.com/2018/07/sextortion-scam-uses-recipients-hacked-passwords/">Sextortion Scam Uses Recipient's Hacked Passwords</a> (1076)</li>
+	<li><a href="https://krebsonsecurity.com/2015/07/online-cheating-site-ashleymadison-hacked/">Online Cheating Site AshleyMadison Hacked</a> (798)</li>
+	<li><a href="https://krebsonsecurity.com/2013/12/sources-target-investigating-data-breach/">Sources: Target Investigating Data Breach</a> (620)</li>
+	<li><a href="https://krebsonsecurity.com/2020/11/trump-fires-security-chief-christopher-krebs/">Trump Fires Security Chief Christopher Krebs</a> (534)</li>
+	<li><a href="https://krebsonsecurity.com/2013/12/cards-stolen-in-target-breach-flood-underground-markets/">Cards Stolen in Target Breach Flood Underground Markets</a> (445)</li>
+	<li><a href="https://krebsonsecurity.com/2013/05/reports-liberty-reserve-founder-arrested-site-shuttered/">Reports: Liberty Reserve Founder Arrested, Site Shuttered</a> (416)</li>
+	<li><a href="https://krebsonsecurity.com/2015/08/was-the-ashley-madison-database-leaked/">Was the Ashley Madison Database Leaked?</a> (376)</li>
+	<li><a href="https://krebsonsecurity.com/2021/01/ddos-guard-to-forfeit-internet-space-occupied-by-parler/">DDoS-Guard To Forfeit Internet Space Occupied by Parler</a> (374)</li>
+	<li><a href="https://krebsonsecurity.com/2014/05/true-goodbye-using-truecrypt-is-not-secure/">True Goodbye: 'Using TrueCrypt Is Not Secure'</a> (363)</li>
+	<li><a href="https://krebsonsecurity.com/2015/08/who-hacked-ashley-madison/">Who Hacked Ashley Madison?</a> (361)</li>
+</ul>
+</aside>
+<aside id="media_image-2" class="widget widget_media_image"><p class="widget-title">Why So Many Top Hackers Hail from Russia</p><a href="https://krebsonsecurity.com/2017/06/why-so-many-top-hackers-hail-from-russia/"><img width="580" height="389" src="https://krebsonsecurity.com/wp-content/uploads/2017/06/computered-580x389.png" class="image wp-image-39684  attachment-medium size-medium" alt="" loading="lazy" style="max-width: 100%; height: auto;" srcset="https://krebsonsecurity.com/wp-content/uploads/2017/06/computered-580x389.png 580w, https://krebsonsecurity.com/wp-content/uploads/2017/06/computered-768x514.png 768w, https://krebsonsecurity.com/wp-content/uploads/2017/06/computered-940x630.png 940w, https://krebsonsecurity.com/wp-content/uploads/2017/06/computered.png 1551w" sizes="(max-width: 580px) 100vw, 580px" /></a></aside><aside id="widget_sp_image-11" class="widget widget_sp_image"><p class="widget-title">Category: Web Fraud 2.0</p><a href="https://krebsonsecurity.com/category/web-fraud-2-0/" target="_blank" class="widget_sp_image-image-link" title="Category: Web Fraud 2.0"><img width="227" height="400" alt="Criminnovations" class="attachment-medium aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2013/11/cybercrimeinnovations-227x400.png" /></a><div class="widget_sp_image-description" ><p>Innovations from the Underground</p>
+</div></aside><aside id="widget_sp_image-12" class="widget widget_sp_image"><a href="https://krebsonsecurity.com/2014/03/are-credit-monitoring-services-worth-it/" target="_blank" class="widget_sp_image-image-link"><img width="285" height="189" class="attachment-medium aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2014/03/shreddedID-copy-285x189.png 285w, https://krebsonsecurity.com/wp-content/uploads/2014/03/shreddedID-copy-600x399.png 600w, https://krebsonsecurity.com/wp-content/uploads/2014/03/shreddedID-copy.png 849w" sizes="(max-width: 285px) 100vw, 285px" src="https://krebsonsecurity.com/wp-content/uploads/2014/03/shreddedID-copy-285x189.png" /></a><div class="widget_sp_image-description" ><p>ID Protection Services Examined</p>
+</div></aside><aside id="widget_sp_image-13" class="widget widget_sp_image"><p class="widget-title">Is Antivirus Dead?</p><a href="https://krebsonsecurity.com/2014/05/antivirus-is-dead-long-live-antivirus/" target="_blank" class="widget_sp_image-image-link" title="Is Antivirus Dead?"><img width="285" height="161" alt="Is Antivirus Dead?" class="attachment-medium aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2014/05/cryptservices-285x161.png 285w, https://krebsonsecurity.com/wp-content/uploads/2014/05/cryptservices-600x339.png 600w, https://krebsonsecurity.com/wp-content/uploads/2014/05/cryptservices.png 945w" sizes="(max-width: 285px) 100vw, 285px" src="https://krebsonsecurity.com/wp-content/uploads/2014/05/cryptservices-285x161.png" /></a><div class="widget_sp_image-description" ><p>The reasons for its decline</p>
+</div></aside><aside id="widget_sp_image-14" class="widget widget_sp_image"><p class="widget-title">The Growing Tax Fraud Menace</p><a href="https://krebsonsecurity.com/category/tax-refund-fraud/" target="_blank" class="widget_sp_image-image-link" title="The Growing Tax Fraud Menace"><img width="285" height="285" alt="The Growing Tax Fraud Menace" class="attachment-medium aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2014/04/taxfraud-285x285.jpg 285w, https://krebsonsecurity.com/wp-content/uploads/2014/04/taxfraud-150x150.jpg 150w, https://krebsonsecurity.com/wp-content/uploads/2014/04/taxfraud-600x600.jpg 600w, https://krebsonsecurity.com/wp-content/uploads/2014/04/taxfraud.jpg 693w" sizes="(max-width: 285px) 100vw, 285px" src="https://krebsonsecurity.com/wp-content/uploads/2014/04/taxfraud-285x285.jpg" /></a><div class="widget_sp_image-description" ><p>File 'em Before the Bad Guys Can </p>
+</div></aside><aside id="widget_sp_image-17" class="widget widget_sp_image"><p class="widget-title">Inside a Carding Shop</p><a href="https://krebsonsecurity.com/2014/06/peek-inside-a-professional-carding-shop/" target="_blank" class="widget_sp_image-image-link" title="Inside a Carding Shop"><img width="194" height="340" alt="Inside a Carding Shop" class="attachment-medium aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2014/06/mcdumpalsjoined.png" /></a><div class="widget_sp_image-description" ><p>A crash course in carding. </p>
+</div></aside><aside id="widget_sp_image-18" class="widget widget_sp_image"><p class="widget-title">Beware Social Security Fraud</p><a href="https://krebsonsecurity.com/2013/09/crooks-hijack-retirement-funds-via-ssa-portal/" target="_blank" class="widget_sp_image-image-link" title="Beware Social Security Fraud"><img width="285" height="293" alt="Beware Social Security Fraud" class="attachment-full aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2016/09/myssn-285x293.png" /></a><div class="widget_sp_image-description" ><p>Sign up, or Be Signed Up! </p>
+</div></aside><aside id="widget_sp_image-2" class="widget widget_sp_image"><p class="widget-title">How Was Your Card Stolen?</p><a href="https://krebsonsecurity.com/2015/01/how-was-your-credit-card-stolen/" target="_blank" class="widget_sp_image-image-link" title="How Was Your Card Stolen?"><img width="285" height="285" alt="How Was Your Card Stolen?" class="attachment-full aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2016/09/carddominoes-285x285.jpg 285w, https://krebsonsecurity.com/wp-content/uploads/2016/09/carddominoes-285x285-150x150.jpg 150w" sizes="(max-width: 285px) 100vw, 285px" src="https://krebsonsecurity.com/wp-content/uploads/2016/09/carddominoes-285x285.jpg" /></a><div class="widget_sp_image-description" ><p>Finding out is not so easy. </p>
+</div></aside><aside id="widget_sp_image-22" class="widget widget_sp_image"><p class="widget-title">Krebs&#8217;s 3 Rules&#8230;</p><a href="https://krebsonsecurity.com/2011/05/krebss-3-basic-rules-for-online-safety/" target="_blank" class="widget_sp_image-image-link" title="Krebs&#8217;s 3 Rules&#8230;"><img width="300" height="300" alt="Krebs&#8217;s 3 Rules&#8230;" class="attachment-medium aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2011/05/three-300x300.jpg 300w, https://krebsonsecurity.com/wp-content/uploads/2011/05/three-150x150.jpg 150w, https://krebsonsecurity.com/wp-content/uploads/2011/05/three.jpg 347w" sizes="(max-width: 300px) 100vw, 300px" src="https://krebsonsecurity.com/wp-content/uploads/2011/05/three-300x300.jpg" /></a><div class="widget_sp_image-description" ><p>...For Online Safety. </p>
+</div></aside>		</div><!-- #secondary -->
+		</div><!-- #main .wrapper -->
+	
+	<div id="publisho-footer" class="widget-area">
+				<div class="footer-widget">
+                				</div>
+				<div class="footer-widget">
+								</div>
+				<div class="footer-widget">
+								</div>
+	</div>
+
+	<div class="site-wordpress">
+					&copy; Krebs on Security<br>
+	</div>
+	<!-- .site-info --><div class="clear"></div>
+</div><!-- #page -->
+
+<script type='text/javascript' src='https://krebsonsecurity.com/wp-content/themes/kos-mar2021/js/slicknav.js?ver=5.8.2' id='publisho-mobile-navigation-js'></script>
+<script type='text/javascript' src='https://krebsonsecurity.com/wp-includes/js/wp-embed.min.js?ver=5.8.2' id='wp-embed-js'></script>
+</body>
+</html>
+<!--
+Performance optimized by W3 Total Cache. Learn more: https://www.boldgrid.com/w3-total-cache/
+
+Object Caching 219/445 objects using memcached
+Page Caching using memcached 
+Database Caching 7/32 queries in 0.012 seconds using memcached
+
+Served from: krebsonsecurity.com @ 2021-12-10 14:47:27 by W3 Total Cache
+-->

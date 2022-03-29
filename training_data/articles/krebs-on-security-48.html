@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<!--[if IE 7]>
+<html class="ie ie7" lang="en-US">
+<![endif]-->
+<!--[if IE 8]>
+<html class="ie ie8" lang="en-US">
+<![endif]-->
+<!--[if !(IE 7) | !(IE 8)  ]><!-->
+<html lang="en-US">
+<!--<![endif]-->
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width" />
+<link rel="profile" href="http://gmpg.org/xfn/11" />
+<!--[if lt IE 9]>
+<script src="https://krebsonsecurity.com/wp-content/themes/kos-mar2021/js/html5.js" type="text/javascript"></script>
+<![endif]-->
+<title>Krebs on Security &#8211; Page 48 &#8211; In-depth security news and investigation</title>
+<meta name='robots' content='max-image-preview:large' />
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="Krebs on Security &raquo; Feed" href="https://krebsonsecurity.com/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Krebs on Security &raquo; Comments Feed" href="https://krebsonsecurity.com/comments/feed/" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.1.0\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.1.0\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/krebsonsecurity.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=5.8.2"}};
+			!function(e,a,t){var n,r,o,i=a.createElement("canvas"),p=i.getContext&&i.getContext("2d");function s(e,t){var a=String.fromCharCode;p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,e),0,0);e=i.toDataURL();return p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,t),0,0),e===i.toDataURL()}function c(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(o=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},r=0;r<o.length;r++)t.supports[o[r]]=function(e){if(!p||!p.fillText)return!1;switch(p.textBaseline="top",p.font="600 32px Arial",e){case"flag":return s([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])?!1:!s([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!s([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]);case"emoji":return!s([10084,65039,8205,55357,56613],[10084,65039,8203,55357,56613])}return!1}(o[r]),t.supports.everything=t.supports.everything&&t.supports[o[r]],"flag"!==o[r]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[o[r]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(n=t.source||{}).concatemoji?c(n.concatemoji):n.wpemoji&&n.twemoji&&(c(n.twemoji),c(n.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+	<link rel='stylesheet' id='colorbox-theme1-css'  href='https://krebsonsecurity.com/wp-content/plugins/jquery-lightbox-for-native-galleries/colorbox/theme1/colorbox.css?ver=1.3.14' type='text/css' media='screen' />
+<link rel='stylesheet' id='wp-block-library-css'  href='https://krebsonsecurity.com/wp-includes/css/dist/block-library/style.min.css?ver=5.8.2' type='text/css' media='all' />
+<link rel='stylesheet' id='contact-form-7-css'  href='https://krebsonsecurity.com/wp-content/plugins/contact-form-7/includes/css/styles.css?ver=5.5.3' type='text/css' media='all' />
+<link rel='stylesheet' id='publisho-style-css'  href='https://krebsonsecurity.com/wp-content/themes/kos-mar2021/style.css?subver=1.2&#038;ver=5.8.2' type='text/css' media='all' />
+<style id='publisho-style-inline-css' type='text/css'>
+
+	.themonic-nav .current-menu-item > a, .themonic-nav .current-menu-ancestor > a, .themonic-nav .current_page_item > a, .themonic-nav .current_page_ancestor > a {
+		background: #cc6600;
+	}
+	.themonic-nav ul.nav-menu, .themonic-nav div.nav-menu > ul {
+		border-bottom: 5px solid #cc6600;
+	}
+	#site-navigation .topheadmenu a {
+    background: rgba(0, 0, 0, 0);
+	}
+	.themonic-nav li a:hover {
+		background: #cc6600;
+	}
+	.themonic-nav li:hover {
+		background: #cc6600;
+	}.wrapper .flexslider {margin: 0 0 30px;}.frontp .btm-wrap {
+    border-top: 1px solid #e9e9e9;
+	}
+	.entry-summary {
+    border-top: none;
+	}.frontp .btm-wrap { margin-bottom: 30px;}.site { font-size:14px;}.site { font-family:'Roboto', arial ;}
+</style>
+<link rel='stylesheet' id='publisho-custom-style-css'  href='https://krebsonsecurity.com/wp-content/themes/kos-mar2021/custom.css?subver=1.2&#038;ver=5.8.2' type='text/css' media='all' />
+<!--[if lt IE 9]>
+<link rel='stylesheet' id='publisho-ie-css'  href='https://krebsonsecurity.com/wp-content/themes/kos-mar2021/css/ie.css?ver=20160606' type='text/css' media='all' />
+<![endif]-->
+<link rel='stylesheet' id='fontawesome-css-css'  href='https://krebsonsecurity.com/wp-content/themes/kos-mar2021/fonts/font-awesome.min.css?ver=5.8.2' type='text/css' media='all' />
+<link rel='stylesheet' id='publisho_custom_fonts-css'  href='//fonts.googleapis.com/css?family=Roboto%3Aregular%2Citalic%2C500%26subset%3Dlatin%2C' type='text/css' media='screen' />
+<script type='text/javascript' src='https://krebsonsecurity.com/wp-includes/js/jquery/jquery.min.js?ver=3.6.0' id='jquery-core-js'></script>
+<script type='text/javascript' src='https://krebsonsecurity.com/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.3.2' id='jquery-migrate-js'></script>
+<script type='text/javascript' src='https://krebsonsecurity.com/wp-content/plugins/jquery-lightbox-for-native-galleries/colorbox/jquery.colorbox-min.js?ver=1.3.14' id='colorbox-js'></script>
+<link rel="https://api.w.org/" href="https://krebsonsecurity.com/wp-json/" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://krebsonsecurity.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://krebsonsecurity.com/wp-includes/wlwmanifest.xml" /> 
+<meta name="generator" content="WordPress 5.8.2" />
+<!-- JavaScript Pull-Quotes plugin v2.2 -->
+	<link rel="stylesheet" href="https://krebsonsecurity.com/wp-content/plugins/jspullquotes/resources/jspullquotes-core.css" type="text/css" />
+	<link rel="stylesheet" href="https://krebsonsecurity.com/wp-content/plugins/jspullquotes/resources/jspullquotes-default.css" type="text/css" />
+	<script type="text/javascript" src="https://krebsonsecurity.com/wp-content/plugins/jspullquotes/resources/jspullquotes.js"></script>
+	<script type="text/javascript">
+		var arrOptions = new Array("1", "1", "right", "1", "1", "blockquote", "pullquote", "pullquote pqRight");
+		pullQuoteOpts(arrOptions);
+	</script>
+<!-- end pull-quote additions -->
+<!-- jQuery Lightbox For Native Galleries v3.1.3 | http://www.viper007bond.com/wordpress-plugins/jquery-lightbox-for-native-galleries/ -->
+<script type="text/javascript">
+// <![CDATA[
+	jQuery(document).ready(function($){
+		$(".gallery").each(function(index, obj){
+			var galleryid = Math.floor(Math.random()*10000);
+			$(obj).find("a").colorbox({rel:galleryid, maxWidth:"95%", maxHeight:"95%"});
+		});
+		$("a.lightbox").colorbox({maxWidth:"95%", maxHeight:"95%"});
+	});
+// ]]>
+</script>
+<style type="text/css" id="custom-background-css">
+body.custom-background { background-color: #ffffff; }
+</style>
+	<link rel="me" href="https://twitter.com/briankrebs" /><meta name="twitter:widgets:link-color" content="#000000" /><meta name="twitter:widgets:border-color" content="#000000" /><meta name="twitter:partner" content="tfwp" />
+<meta name="twitter:card" content="summary" /><meta name="twitter:title" content="Krebs on Security" /><meta name="twitter:site" content="@briankrebs" /><meta name="twitter:description" content="In-depth security news and investigation" />
+</head>
+<body class="home blog paged custom-background paged-48 custom-background-white single-author frontp hfeed">
+<div id="page" class="site">
+	<!-- <div class="publisho-top-mobile-nav clear"></div> -->
+	<div class="themonic-logo themonic-ad3"><div class="a-statement">Advertisement</div><a href="https://securityscorecard.com/instant-security-scorecard?utm_source=krebs+on+security&amp;utm_medium=display&amp;utm_campaign=instant+scorecard&amp;utm_term=A&amp;utm_content=1240x110">
+<img src="/b-securityscorecard/1.jpg">
+</a></div>
+	<div class="themonic-logo themonic-ad6"><div class="a-statement">Advertisement</div><a href="https://go.infrascale.com/lp/get-ransomware-ebook-krebsonsecurity/?utm_source=banner&amp;utm_medium=display&amp;utm_campaign=krebssecurity_influencer_1240_160">
+<img src="/b-infrascale/6.png">
+</a></div>
+	<nav id="site-navigation" class="themonic-nav" role="navigation">
+	</nav><!-- #site-navigation -->
+	<div class="clear"></div>
+	<header id="masthead" class="site-header" role="banner">
+ 					<div class="desktop-social">
+						<div class="socialmedia">
+							<a href="http://twitter.com/briankrebs" target="_blank"><i class="fa fa-twitter"></i></a> 
+															<a class="rss" href="https://krebsonsecurity.com/feed/" target="_blank"><i class="fa fa-rss"></i></a>	
+									<a class="rss" href="https://www.linkedin.com/in/bkrebs/" target="_blank"><i class="fa fa-linkedin"></i></a>	
+								</div>
+				 	</div>
+																						   
+		
+		<div class="themonic-logo responsive-img-container">
+			<a href="https://krebsonsecurity.com/" title="Krebs on Security" rel="home"><img src="https://krebsonsecurity.com/wp-content/uploads/2021/03/kos-27-03-2021.jpg" alt="Krebs on Security"></a>
+		</div>
+
+					<div class="mobile-social">
+						<div class="socialmedia">
+							<a href="http://twitter.com/briankrebs" target="_blank"><i class="fa fa-twitter"></i></a> 
+															<a class="rss" href="https://krebsonsecurity.com/feed/" target="_blank"><i class="fa fa-rss"></i></a>	
+									<a class="rss" href="https://www.linkedin.com/in/bkrebs/" target="_blank"><i class="fa fa-linkedin"></i></a>	
+								</div>
+					</div>
+		
+				<!-- <div class="publisho-mobile-nav clear"></div> -->
+		<nav id="site-navigation" class="themonic-nav" role="navigation">
+			<a class="assistive-text" href="#content" title="Skip to content">Skip to content</a>
+			<div id="menu-top" class="nav-menu"><ul>
+<li ><a href="https://krebsonsecurity.com/">Home</a></li><li class="page_item page-item-2"><a href="https://krebsonsecurity.com/about/">About the Author</a></li>
+<li class="page_item page-item-645"><a href="https://krebsonsecurity.com/cpm/">Advertising/Speaking</a></li>
+</ul></div>
+		</nav><!-- #site-navigation -->
+		<div class="clear"></div>
+	</header><!-- #masthead -->
+	<div id="main" class="wrapper">
+		<div id="primary" class="site-content">
+	
+
+	
+		<div id="content" role="main">
+
+		<article id="post-44406" class="post-44406 post type-post status-publish format-standard hentry category-sunshine category-latest-warnings category-comingstorm tag-1dvd7wb72jbtbacftrxsjczzuf4tst8v72 tag-fbi tag-sextortion">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2018/07/sextortion-scam-uses-recipients-hacked-passwords/" title="Permalink to Sextortion Scam Uses Recipient&#8217;s Hacked Passwords" rel="bookmark">Sextortion Scam Uses Recipient&#8217;s Hacked Passwords</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">July 12, 2018</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2018/07/sextortion-scam-uses-recipients-hacked-passwords/#comments">1,076 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>Here&#8217;s a clever new twist on an old email scam that could serve to make the con far more believable. The message purports to have been sent from a hacker who&#8217;s compromised your computer and used your webcam to record a video of you while you were watching porn. The missive threatens to release the video to all your contacts unless you pay a Bitcoin ransom. The new twist? The email now references a real password previously tied to the recipient&#8217;s email address.</p>
+<p><img loading="lazy" class="aligncenter size-full wp-image-44412" src="https://krebsonsecurity.com/wp-content/uploads/2018/07/sextortion.png" alt="" width="487" height="87" /></p>
+<p>The basic elements of this <a href="https://www.fbi.gov/video-repository/newss-what-is-sextortion/view" target="_blank" rel="noopener">sextortion</a> scam email have been around for some time, and usually the only thing that changes with this particular message is the Bitcoin address that frightened targets can use to pay the amount demanded. But this one begins with an unusual opening salvo:</p>
+<p>&#8220;I&#8217;m aware that &lt;substitute password formerly used by recipient here&gt; is your password,&#8221; reads the salutation.</p>
+<p>The rest is formulaic:</p>
+<blockquote><p>You don&#8217;t know me and you&#8217;re thinking why you received this e mail, right?</p>
+<p>Well, I actually placed a malware on the <span class="il">porn</span> website and guess what, you visited this web site to have fun (you know what I mean). While you were watching the video, your web browser acted as a RDP (Remote Desktop) and a keylogger which provided me access to your display screen and webcam. Right after that, my software gathered all your contacts from your Messenger, Facebook account, and email account.</p>
+<p>What exactly did I do?</p>
+<p>I made a split-screen video. First part recorded the video you were viewing (you&#8217;ve got a fine taste haha), and next part recorded your webcam (Yep! It&#8217;s you doing nasty things!).</p>
+<p>What should you do?</p>
+<p>Well, I believe, $1400 is a fair price for our little secret. You&#8217;ll make the payment via Bitcoin to the below address (if you don&#8217;t know this, search &#8220;how to buy bitcoin&#8221; in Google).</p>
+<p>BTC Address: 1Dvd7Wb72JBTbAcfTrxSJCZZuf4tsT<wbr></wbr>8V72<br />
+(It is cAsE sensitive, so copy and paste it)</p>
+<p>Important:</p>
+<p>You have 24 hours in order to make the payment. (I have an unique pixel within this email message, and right now I know that you have read this email). If I don&#8217;t get the payment, I will send your video to all of your contacts including relatives, coworkers, and so forth. Nonetheless, if I do get paid, I will erase the video immidiately. If you want evidence, reply with &#8220;Yes!&#8221; and I will send your video recording to your 5 friends. This is a non-negotiable offer, so don&#8217;t waste my time and yours by replying to this email.</p></blockquote>
+<p> <a href="https://krebsonsecurity.com/2018/07/sextortion-scam-uses-recipients-hacked-passwords/#more-44406" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+	<div id="between_article_ad" class="themonic-ad5"><a href="https://www.extrahop.com/resources/papers/zero-trust/?">
+<img src="/b-extrahop/4.jpg" />
+</a></div>	<article id="post-44384" class="post-44384 post type-post status-publish format-standard hentry category-sunshine tag-bitcanal tag-bitcanal-com tag-doug-madory tag-dyn tag-ip4transfer-net tag-joao-silveira tag-oracle tag-ron-guilmette">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2018/07/notorious-hijack-factory-shunned-from-web/" title="Permalink to Notorious &#8216;Hijack Factory&#8217; Shunned from Web" rel="bookmark">Notorious &#8216;Hijack Factory&#8217; Shunned from Web</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">July 11, 2018</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2018/07/notorious-hijack-factory-shunned-from-web/#comments">30 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>Score one for the good guys: <strong><a href="https://www.bitcanal.com" target="_blank" rel="noopener">Bitcanal</a></strong>, a Portuguese Web hosting firm long accused of helping spammers hijack large swaths of dormant Internet address space over the years, was summarily kicked off the Internet this week after a half-dozen of the company&#8217;s bandwidth providers chose to sever ties with the company.</p>
+<p><img loading="lazy" class="aligncenter wp-image-44395" src="https://krebsonsecurity.com/wp-content/uploads/2018/07/shunned.jpg" alt="" width="585" height="392" /></p>
+<p>Spammers and Internet service providers (ISPs) that facilitate such activity often hijack Internet address ranges that have gone unused for periods of time. Dormant or “unannounced” address ranges are ripe for abuse partly because of the way the global routing system works: Miscreants can “announce” to the rest of the Internet that their hosting facilities are the authorized location for given Internet addresses. If nothing or nobody objects to the change, the Internet address ranges fall into the hands of the hijacker.</p>
+<p>For years, security researchers have tracked the suspected theft of millions of <a href="https://en.wikipedia.org/wiki/IPv4" target="_blank" rel="noopener">IPv4 Internet addresses</a> back to Bitcanal, which was also doing business under the name &#8220;<strong>Ebony Horizon</strong>.&#8221; Experts say shortly after obtaining a chunk of IP addresses, Bitcanal would apparently sell or lease the space to spammers, who would then begin sending junk email from those addresses &#8212; taking full advantage of the good or at least neutral Internet reputation of the previous owner to evade anti-spam blacklists.</p>
+<p>Much of the hijacked address space routed by Bitcanal was once assigned to business entities that no longer exist. But some of the more brazen hijacks attributed to Bitcanal and its customers involved thousands of Internet addresses assigned to active organizations, such as the company&#8217;s <a href="https://dyn.com/blog/latest-isps-to-hijack/" target="_blank" rel="noopener">well-documented acquisition of address space assigned to the Texas State Attorney General&#8217;s office</a>, as well as addresses managed by the <strong>U.S. Department of Defense</strong>.</p>
+<p>Bitcanal&#8217;s reputation finally caught up with the company late last month, when anti-spam activist and researcher <strong>Ron Guilmette</strong> <a href="https://mailman.nanog.org/pipermail/nanog/2018-June/096034.html" target="_blank" rel="noopener">documented yet another new major IP address hijack</a> at the company and challenged Bitcanal&#8217;s upstream Internet providers to stop routing traffic for it (KrebsOnSecurity has published <a href="https://krebsonsecurity.com/?s=ip+address+hijack+guilmette&amp;x=0&amp;y=0" target="_blank" rel="noopener">several stories about previous high-profile IP address hijacks</a> involving spammers who were flagged by Guilmette).</p>
+<p>Guilmette said Bitcanal and its proprietor &#8212; Portuguese businessman <a href="https://twitter.com/bitcanal" target="_blank" rel="noopener"><strong>Joao Silveira</strong></a> &#8212; have a well-documented history of &#8220;behaving badly and coloring outside the lines for literally years.&#8221;</p>
+<p>&#8220;His actions in absconding with other people&#8217;s IP address space, over the years, are those of either a spoiled child or else those of a sociopath, depending on one&#8217;s personal point of view,&#8221; Guilmette said. &#8220;In either case the Internet will, by and large, be glad to see his backside, and will be better off without him.&#8221;</p>
+<p><strong>Doug Madory</strong>, a researcher for Internet performance management firm <strong>Dyn</strong> (now owned by <strong>Oracle</strong>), published <a href="https://dyn.com/blog/shutting-down-the-bgp-hijack-factory/" target="_blank" rel="noopener">a blog post</a> chronicling Bitcanal&#8217;s history as an address &#8220;hijack factory.&#8221; That post also documents the gradual ostracization of Bitcanal over the past week, as one major Internet exchange after another pulled the plug on the company.</p>
+<div id="attachment_44390" style="width: 605px" class="wp-caption aligncenter"><a class="lightbox" href="https://krebsonsecurity.com/wp-content/uploads/2018/07/bitcanalbye.png"><img aria-describedby="caption-attachment-44390" loading="lazy" class="wp-image-44390" src="https://krebsonsecurity.com/wp-content/uploads/2018/07/bitcanalbye.png" alt="" width="595" height="254" /></a><p id="caption-attachment-44390" class="wp-caption-text">Dyn&#8217;s depiction of Bitcanal&#8217;s final remaining upstream Internet provider pulling the plug on the company on July 10, effectively severing it from existence on the Web. Source: Dyn.</p></div>
+<p>Reached for comment just days before Bitcanal was shunned by all of its peering providers, Mr. Silveira expressed shock and surprise over what he called unfair attacks against his company&#8217;s reputation. He blamed the besmirchment on one or two &#8220;bad&#8221; customers who abused his service over the years.</p>
+<p>&#8220;My thought is that one or two customer in my network maybe [imitated] people acting like a client and force the errors or injecting bad network space,&#8221; Silveira said in an emailed response to KrebsOnSecurity. &#8220;I am not the problem and this public trial and conviction will not solve the prefix hijacking matter. If these questions remain without solution, those actors will keep doing it.&#8221; <a href="https://krebsonsecurity.com/2018/07/notorious-hijack-factory-shunned-from-web/#more-44384" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+	<div class="themonic-ad2"><div class="a-statement">Advertisement</div><a href="https://www.akamai.com/why-akamai/the-internet-of-possibilities?utm_source=krebsonsecurity&amp;utm_medium=display&amp;utm_campaign=F-MC-54978">
+<img src="/b-akamai/145.png">
+</a></div>	<article id="post-44375" class="post-44375 post type-post status-publish format-standard hentry category-patches tag-adobe-flash-player tag-adobe-reader tag-cve-2018-8278 tag-cve-2018-8313 tag-cve-2018-8314 tag-flash-version-30-0-0-134 tag-microsoft-patch-tuesday-july-2018">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2018/07/patch-tuesday-july-2018-edition/" title="Permalink to Patch Tuesday, July 2018 Edition" rel="bookmark">Patch Tuesday, July 2018 Edition</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">July 10, 2018</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2018/07/patch-tuesday-july-2018-edition/#comments">30 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p><strong>Microsoft</strong> and <strong>Adobe</strong> each issued security updates for their products today. Microsoft&#8217;s July patch batch includes 14 updates to fix more than 50 security flaws in <strong>Windows</strong> and associated software. Separately, Adobe has pushed out an update for its <strong>Flash Player </strong>browser plugin, as well as a monster patch bundle for <strong>Adobe Reader/Acrobat</strong>.</p>
+<p><img loading="lazy" class="alignright wp-image-26837" src="https://krebsonsecurity.com/wp-content/uploads/2014/07/brokenwindows.png" alt="" width="212" height="222" />According to security firm <a href="https://blog.qualys.com/laws-of-vulnerabilities/2018/07/10/july-patch-tuesday-critical-browser-patches-lazy-fp-exchange-adobe-vulns" target="_blank" rel="noopener">Qualys</a>, all but two of the &#8220;critical&#8221; fixes in this round of updates apply to vulnerabilities in Microsoft&#8217;s browsers &#8212; <strong>Internet Explorer</strong> and <strong>Edge</strong>. Critical patches mend software flaws that can be exploited remotely by malicious software or bad guys with little to no help from the user, save for perhaps visiting a Web site or opening a booby-trapped link.</p>
+<p>Microsoft also patched dangerous vulnerabilities in its <strong>.NET Framework</strong> (a Windows development platform required by many third-party programs and commonly found on most versions of Windows), as well as <strong>Microsoft Office</strong>. With both of these weaknesses, an attacker could trick a victim into opening an email that contained a specially crafted Office document which loads malicious code, says <strong>Allan Liska</strong>, a threat intelligence analyst at <a href="https://www.recordedfuture.com/" target="_blank" rel="noopener">Recorded Future</a>.</p>
+<p>One of the more nettlesome features of Windows 10 is the operating system by default decides on its own when to install updates, very often shutting down open programs and restarting your PC in the middle of the night to do so unless you change the defaults.</p>
+<p>Not infrequently, Redmond ships updates that end up causing stability issues for some users, and it doesn&#8217;t hurt to wait a day or two before seeing if any major problems are reported with new updates before installing them. Microsoft doesn’t make it easy for <strong>Windows 10</strong> users to change this setting, but <a href="https://www.howtogeek.com/224471/how-to-prevent-windows-10-from-automatically-downloading-updates/" target="_blank" rel="noopener">it is possible</a>. For all other Windows OS users, if you’d rather be alerted to new updates when they’re available so you can choose when to install them, there’s a setting for that in <strong>Windows Update</strong>. <a href="https://krebsonsecurity.com/2018/07/patch-tuesday-july-2018-edition/#more-44375" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-44363" class="post-44363 post type-post status-publish format-standard hentry category-sunshine category-comingstorm tag-exxonmobil tag-exxonmobil-rewards tag-exxonmobilerewardsplus-com tag-plenti">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2018/07/exxonmobil-bungles-rewards-card-debut/" title="Permalink to ExxonMobil Bungles Rewards Card Debut" rel="bookmark">ExxonMobil Bungles Rewards Card Debut</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">July 6, 2018</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2018/07/exxonmobil-bungles-rewards-card-debut/#comments">184 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>Energy giant <strong>ExxonMobil</strong> recently sent snail mail letters to its <a href="https://www.exxon.com/en/plenti" target="_blank" rel="noopener">Plenti rewards card</a> members stating that the points program was being replaced with a new one called <strong>Exxon Mobil Rewards+</strong>. Unfortunately, the letter includes a confusing toll free number and directs customers to a parked page that tries to foist Web browser extensions on visitors.</p>
+<p>The mailer (the first page of which is screenshotted below) urges customers to visit exxonmobilrewardsplus[dot]com, to download its mobile app, and to call &#8220;1-888-REWARD+&#8221; with any questions. It may not be immediately obvious, but that &#8220;+&#8221; sign is actually the same thing as a zero on the telephone keypad (although I&#8217;m ashamed to say I had to look that up online to be sure). <a class="lightbox" href="https://krebsonsecurity.com/wp-content/uploads/2018/07/exxonmobmailer.png"><img loading="lazy" class="aligncenter wp-image-44365" src="https://krebsonsecurity.com/wp-content/uploads/2018/07/exxonmobmailer.png" alt="" width="570" height="408" /></a></p>
+<p>Anyone curious enough to guess at other ending numbers other than zero will wind up at a call center advertising &#8220;free&#8221; Caribbean (1) cruises or at a pricey adult chat service dubbed &#8220;America&#8217;s hottest talk line&#8221; (6).</p>
+<p>Worse, visiting the company&#8217;s new rewards Web site in Google Chrome prompted my browser to run a &#8220;security check,&#8221; followed by a series of popups offering to install a Chrome extension called &#8220;Browsing Safely.&#8221;</p>
+<p>That extension changes your default search engine to Yahoo and appears to redirect all searches through a domain called lastlog[dot]in, which seems to be affiliated with <a href="https://intango.com/advertiser/" target="_blank" rel="noopener">an Israeli online advertising network</a>. After adding the Browsing Safely extension to Chrome using a virtual machine, my browser was redirected to Exxon.com.</p>
+<div id="attachment_44366" style="width: 606px" class="wp-caption aligncenter"><img aria-describedby="caption-attachment-44366" loading="lazy" class=" wp-image-44366" src="https://krebsonsecurity.com/wp-content/uploads/2018/07/exxonchromeext.png" alt="" width="596" height="311" /><p id="caption-attachment-44366" class="wp-caption-text">The Google Chrome extension offered when I first visited exxonmobilrewardsplus-dot-com.</p></div>
+<p>Many people on Twitter who expressed confusion about the mailer said they accidentally added an &#8220;e&#8221; to the end of &#8220;exxonmobil&#8221; and ended up getting bounced around to spammy-looking sites with ad redirects and dodgy download offers.</p>
+<p>ExxonMobil corporate has not yet responded to requests for comment. But after about 10 minutes on hold listening to the same Muzak-like song, I was able to reach a customer service person at the confusing ExxonMobil Rewards+ phone number. That person said the Web site for the rewards program wasn&#8217;t going to be active until July 11.</p>
+<p>&#8220;Currently the Web site is not available,&#8221; the representative said. &#8220;Please don&#8217;t try to download anything from it right now. It should be active and available next week.&#8221;</p>
+<p>It always amazes me when major companies with oodles of cash (ExxonMobil made $20 billion last year) roll out new marketing initiatives without consulting professionals who help mitigate security and privacy issues for a living. It seems likely that happened in this case because anyone who knows a thing or two about security would strongly advise against instructing customers to visit a parked domain or one that isn&#8217;t yet fully under the company&#8217;s control.</p>
+<p><strong>Update, July 11, 11:36 a.m. ET:</strong> As several readers have observed in the comments below, it appears that ExxonMobil has registered a different domain for its new rewards program: https://exxonandmobilrewardsplus.com/welcome/home (note the inclusion of the word &#8220;and&#8221; between Exxon and Mobil). This domain is advertised as the official new rewards program domain via ExxonMobil&#8217;s corporate homepage, exxon.com (albeit via a redirect).</p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-43661" class="post-43661 post type-post status-publish format-standard hentry category-latest-warnings category-security-tools tag-carrie-kerskie tag-comcast tag-griffon-force-llc tag-mark-your-territory tag-plant-your-flag">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2018/06/plant-your-flag-mark-your-territory/" title="Permalink to Plant Your Flag, Mark Your Territory" rel="bookmark">Plant Your Flag, Mark Your Territory</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">June 28, 2018</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2018/06/plant-your-flag-mark-your-territory/#comments">76 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>Many people, particularly older folks, proudly declare they avoid using the Web to manage various accounts tied to their personal and financial data &#8212; including everything from utilities and mobile phones to retirement benefits and online banking services. The reasoning behind this strategy is as simple as it is alluring: What&#8217;s not put online can&#8217;t be hacked. But increasingly, adherents to this mantra are finding out the hard way that if you don&#8217;t plant your flag online, fraudsters and identity thieves may do it for you.</p>
+<p>The crux of the problem is that while most types of customer accounts these days can be managed online, the process of tying one&#8217;s account number to a specific email address and/or mobile device typically involves supplying personal data that can easily be found or purchased online &#8212; such as Social Security numbers, birthdays and addresses.</p>
+<p><img loading="lazy" class="aligncenter size-full wp-image-44352" src="https://krebsonsecurity.com/wp-content/uploads/2018/06/plantflag.png" alt="" width="528" height="360" /></p>
+<p>Some examples of how being a modern-day <a href="https://www.merriam-webster.com/dictionary/Luddite" target="_blank" rel="noopener">Luddite</a> can backfire are well-documented, such as when scammers create online accounts in someone&#8217;s name at the <a href="https://krebsonsecurity.com/2015/03/sign-up-at-irs-gov-before-crooks-do-it-for-you/" target="_blank" rel="noopener">Internal Revenue Service</a>, the <a href="https://krebsonsecurity.com/2018/02/usps-finally-starts-notifying-you-by-mail-if-someone-is-scanning-your-snail-mail-online/" target="_blank" rel="noopener">U.S. Postal Service</a> or the <a href="https://krebsonsecurity.com/2013/09/crooks-hijack-retirement-funds-via-ssa-portal/" target="_blank" rel="noopener">Social Security Administration</a>.</p>
+<p>Other examples may be far less obvious. Consider the case of a consumer who receives their home telephone service as part of a bundle through their broadband Internet service provider (ISP). Failing to set up a corresponding online account to manage one&#8217;s telecommunications services can provide a powerful gateway for fraudsters.</p>
+<p><strong>Carrie Kerskie</strong> is president of <a href="https://www.griffonforce.com/" target="_blank" rel="noopener">Griffon Force LLC</a>, a company in Naples, Fla. that helps identity theft victims recover from fraud incidents. Kerskie recalled a recent case in which thieves purchased pricey items from a local jewelry store in the name of an elderly client who&#8217;d previously bought items at that location as gifts for his late wife.</p>
+<p>In that incident, the perpetrator presented a MasterCard Black Card in the victim&#8217;s name along with a fake ID created in the victim&#8217;s name (but with the thief&#8217;s photo). When the jewelry store called the number on file to verify the transactions, the call came through to the impostor&#8217;s cell phone right there in the store.</p>
+<p>Kerskie said a follow-up investigation revealed that the client had never set up an account at his ISP (Comcast) to manage it online. Multiple calls with the ISP&#8217;s customer support people revealed that someone had recently called Comcast pretending to be the 86-year-old client and established an online account.</p>
+<p>&#8220;The victim never set up his account online, and the bad guy called Comcast and gave the victim&#8217;s name, address and Social Security number along with an email address,&#8221; Kerskie said. &#8220;Once that was set up, the bad guy logged in to the account and forwarded the victim&#8217;s calls to another number.&#8221;</p>
+<p>Incredibly, Kerskie said, the fraudster immediately called Comcast to ask about the reason for the sudden account changes.</p>
+<p>&#8220;While I was on the phone with Comcast, the customer rep told me to hold on a minute, that she&#8217;d just received a communication from the victim,&#8221; Kerskie recalled. &#8220;I told the rep that the client was sitting right beside me at the time, and that the call wasn&#8217;t from him. The minute we changed the call forwarding options, the fraudster called customer service to ask why the account had been changed.&#8221;</p>
+<p>Two to three days after Kerskie helped the client clean up fraud with the Comcast account, she got a frantic call from the client&#8217;s daughter, who said she&#8217;d been trying her dad&#8217;s mobile phone but that he hadn&#8217;t answered in days. They soon discovered that dear old dad was just fine, but that he&#8217;d also neglected to set up an online account at his mobile phone provider.</p>
+<p>&#8220;The bad guy had called in to the mobile carrier, provided his personal details, and established an online account,&#8221; Kerskie said. &#8220;Once they did that, they were able transfer his phone service to a new device.&#8221;</p>
+<h4>OFFLINE BANKING</h4>
+<p>Many people naively believe that if they never set up their bank or retirement accounts for online access then cyber thieves can&#8217;t get access either. But Kerskie said she recently had a client who had almost a quarter of a million dollars taken from his bank account precisely because he declined to link his bank account to an online identity.</p>
+<p>&#8220;What we found is that the attacker linked the client&#8217;s bank account to an American Express Gift card, but in order to do that the bad guy had to know the exact amount of the microdeposit that AMEX placed in his account,&#8221; Kerskie said. &#8220;So the bad guy called the 800 number for the victim&#8217;s bank, provided the client&#8217;s name, date of birth, and Social Security number, and then gave them an email address he controlled. In this case, had the client established an online account previously, he would have received a message asking to confirm the fraudulent transaction.&#8221;</p>
+<p>After tying the victim&#8217;s bank account to a prepaid card, the fraudster began slowly withdrawing funds in $5,000 increments. All told, thieves managed to siphon almost $170,000 over a six month period. The victim&#8217;s accounts were being managed by a trusted acquaintance, but the withdrawals didn&#8217;t raise alarms because they were roughly in line with withdrawal amounts the victim had made previously.</p>
+<p>&#8220;But because the victim didn&#8217;t notify the bank within 60 days of the fraudulent transactions as required by law, the bank only had to refund the last 60 days worth of fraudulent transactions,&#8221; Kerskie said. &#8220;We were ultimately able to help him recover most of it, but that was a whole other ordeal.&#8221; <a href="https://krebsonsecurity.com/2018/06/plant-your-flag-mark-your-territory/#more-43661" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-44332" class="post-44332 post type-post status-publish format-standard hentry category-all-about-skimmers tag-apple-pay tag-emv tag-europay tag-fuel-skimmers tag-marcus-booth tag-mastercard tag-pump-skimmers tag-pump-skimming tag-san-antonio-police-department tag-sapd tag-visa">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2018/06/how-to-avoid-card-skimmers-at-the-pump/" title="Permalink to How to Avoid Card Skimmers at the Pump" rel="bookmark">How to Avoid Card Skimmers at the Pump</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">June 26, 2018</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2018/06/how-to-avoid-card-skimmers-at-the-pump/#comments">117 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>Previous stories here on the proliferation of card-skimming devices hidden inside fuel pumps have offered a multitude of security tips for readers looking to minimize their chances of becoming the next victim, such as favoring filling stations that use security cameras and tamper-evident tape on their pumps. But according to police in San Antonio, Texas, there are far more reliable ways to avoid getting skimmed at a fuel station.</p>
+<p>San Antonio, like most major U.S. cities, is grappling with a surge in pump skimming scams. So far in 2018, the <strong>San Antonio Police Department</strong> (SAPD) has found more than 100 skimming devices in area fuel pumps, and that figure already eclipses the total number of skimmers found in the area in 2017. The skimmers are hidden inside of the pumps, and there are often few if any outward signs that a pump has been compromised.</p>
+<p>In virtually all cases investigated by the SAPD, the incidents occurred at filling stations using older-model pumps that have not yet been upgraded with physical and digital security features which make it far more difficult for skimmer thieves to tamper with fuel pumps and siphon customer card data (and PINs from debit card users).</p>
+<p><strong>Lt. Marcus Booth</strong> is the financial crimes unit director for the SAPD. Booth said most filling stations in San Antonio and elsewhere use legacy pumps that have a vertical card reader and a flat, membrane-based keypad. In addition, access to the insides of these older pumps frequently is secured via a master key that opens not only all pumps at a given station, but in many cases all pumps of a given model made by the same manufacturer.</p>
+<div id="attachment_44335" style="width: 608px" class="wp-caption aligncenter"><a class="lightbox" href="https://krebsonsecurity.com/wp-content/uploads/2018/06/olderpump.png"><img aria-describedby="caption-attachment-44335" loading="lazy" class="wp-image-44335" src="https://krebsonsecurity.com/wp-content/uploads/2018/06/olderpump.png" alt="" width="598" height="389" /></a><p id="caption-attachment-44335" class="wp-caption-text">Older model fuel pumps like this one feature a flat, membrane-based keypad and vertical card reader. Image: SAPD.</p></div>
+<p>In contrast, Booth said, newer and more secure pumps typically feature a horizontal card acceptance slot along with a raised metallic keypad &#8212; much like a traditional payphone keypad and referred to in the fuel industry as a &#8220;full travel&#8221; keypad:</p>
+<div id="attachment_44334" style="width: 609px" class="wp-caption aligncenter"><a class="lightbox" href="https://krebsonsecurity.com/wp-content/uploads/2018/06/newerpump.png"><img aria-describedby="caption-attachment-44334" loading="lazy" class="wp-image-44334 size-full" src="https://krebsonsecurity.com/wp-content/uploads/2018/06/newerpump.png" alt="" width="599" height="454" /></a><p id="caption-attachment-44334" class="wp-caption-text">Newer, more tamper-resistant fuel pumps include raised metallic keypads (known in the industry as &#8220;full travel&#8221; keypads), horizontal card readers and custom locks for each pump.</p></div>
+<p>Booth said the SAPD has yet to see a skimming incident involving newer pump models like the one pictured directly above.</p>
+<p>&#8220;Here in San Antonio, many of these stations with these older keypads and card slots were getting hit all the time, sometimes weekly,&#8221; he said. &#8220;But as soon as those went over to newer gear, we&#8217;ve seen zero problems.&#8221;</p>
+<p>According to Booth, the newer pumps include not only custom keys for each pump, but also tamper protections that physically shut down a pump if the machine is improperly accessed. What&#8217;s more, these more advanced pumps do a better job of compartmentalizing individual components, very often enclosing the electronics that serve the card reader and keypad in separately secured metal cages.</p>
+<p>&#8220;Pretty much all these full travel metallic keypads are encrypted, and if you disconnect them they disable themselves and can only be re-enabled by technician,&#8221; Booth told KrebsOnSecurity. &#8220;Also, if the pump is opened improperly, it disables itself. These two specific items: The card reader or the pad, if you pull power to them they&#8217;re dead, and then they can only be re-enabled by an authorized technician.&#8221;</p>
+<p>Newer pumps may also include more modern mobile payment options &#8212; such as <strong>Apple Pay</strong> &#8212; although many stations with pumps that advertise this capability have not yet enabled it, which allows customers to pay for fuel without ever sharing their credit or debit card account details with the fuel station. <a href="https://krebsonsecurity.com/2018/06/how-to-avoid-card-skimmers-at-the-pump/#more-44332" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-44317" class="post-44317 post type-post status-publish format-standard hentry category-sunshine category-comingstorm tag-3cinteractive tag-4th-amendment tag-amy-howe tag-att tag-carpenter-v-united-states tag-electronic-frontier-foundation tag-jennifer-lynch tag-locationsmart tag-scotusblog-com tag-securus-technologies tag-sprint tag-t-mobile tag-the-new-york-times tag-u-s-supreme-court tag-verizon">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2018/06/supreme-court-police-need-warrant-for-mobile-location-data/" title="Permalink to Supreme Court: Police Need Warrant for Mobile Location Data" rel="bookmark">Supreme Court: Police Need Warrant for Mobile Location Data</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">June 22, 2018</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2018/06/supreme-court-police-need-warrant-for-mobile-location-data/#comments">24 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>The <strong>U.S. Supreme Court</strong> today ruled that the government needs to obtain a court-ordered warrant to gather location data on mobile device users. The decision is a major development for privacy rights, but experts say it may have limited bearing on the selling of real-time customer location data by the wireless carriers to third-party companies.</p>
+<div id="attachment_44320" style="width: 603px" class="wp-caption aligncenter"><img aria-describedby="caption-attachment-44320" loading="lazy" class="wp-image-44320 " src="https://krebsonsecurity.com/wp-content/uploads/2018/06/scotus-smaller.png" alt="" width="593" height="415" /><p id="caption-attachment-44320" class="wp-caption-text">Image: Wikipedia.</p></div>
+<p>At issue is <em><a href="https://en.wikipedia.org/wiki/Carpenter_v._United_States" target="_blank" rel="noopener">Carpenter v. United States</a></em>, which challenged a legal theory the Supreme Court outlined more than 40 years ago known as the &#8220;<a href="https://en.wikipedia.org/wiki/Third-party_doctrine" target="_blank" rel="noopener">third-party doctrine</a>.&#8221; The doctrine holds that people who voluntarily give information to third parties &#8212; such as banks, phone companies, email providers or Internet service providers (ISPs) &#8212; have &#8220;no reasonable expectation of privacy.&#8221;</p>
+<p>That framework in recent years has been interpreted to allow police and federal investigators to obtain information &#8212; such as mobile location data &#8212; from third parties without a warrant. But in a 5-4 ruling issued today that flies in the face of the third-party doctrine, the Supreme Court cited &#8220;seismic shifts in digital technology&#8221; allowing wireless carriers to collect &#8220;deeply revealing&#8221; information about mobile users that should be protected by the <a href="https://www.law.cornell.edu/constitution/fourth_amendment" target="_blank" rel="noopener">4th Amendment to the U.S. Constitution</a>, which is intended to shield Americans against unreasonable searches and seizures by the government.</p>
+<p><strong>Amy Howe</strong>, a reporter for <strong>SCOTUSblog.com</strong>, <a href="http://www.scotusblog.com/2018/06/opinion-analysis-court-holds-that-police-will-generally-need-a-warrant-for-cellphone-location-information/" target="_blank" rel="noopener">writes</a> that the decision means police will generally need to get a warrant to obtain cell-site location information, a record of the cell towers (or other sites) with which a cellphone connected.</p>
+<p>The ruling is no doubt a big win for privacy advocates, but many readers have been asking whether this case has any bearing on the sharing or selling of real-time customer location data by the mobile providers to third party companies. Last month, <em>The New York times</em> <a href="https://www.nytimes.com/2018/05/10/technology/cellphone-tracking-law-enforcement.html" target="_blank" rel="noopener">revealed</a> that a company called <strong>Securus Technologies</strong> had been selling this highly sensitive real-time location information to local police forces across the United States, thanks to agreements the company had in place with the major mobile providers.</p>
+<p>It soon emerged that Securus was getting its location data second-hand through a company called <strong>3Cinteractive</strong>, which in turn was reselling data from California-based &#8220;location aggregator&#8221; <strong>LocationSmart</strong>. Roughly two weeks after The Times&#8217; scoop, KrebsOnSecurity <a href="https://krebsonsecurity.com/2018/05/tracking-firm-locationsmart-leaked-location-data-for-customers-of-all-major-u-s-mobile-carriers-in-real-time-via-its-web-site/" target="_blank" rel="noopener">broke the news</a> that anyone could look up the real time location data for virtually any phone number assigned by the major carriers, using a buggy try-before-you-buy demo page that LocationSmart had made available online for years to showcase its technology.</p>
+<p>Since those scandals broke, LocationSmart disabled its promiscuous demo page. More importantly, <strong>AT&amp;T</strong>, <strong>Sprint</strong>, <strong>T-Mobile</strong> and <strong>Verizon</strong> all have said they are now in the process of <a href="https://krebsonsecurity.com/2018/06/verizon-to-stop-sharing-customer-location-data-with-third-parties/" target="_blank" rel="noopener">terminating agreements with third-parties to share this real-time location data</a>.</p>
+<p>Still, there is no law preventing the mobile providers from hashing out new deals to sell this data going forward, and many readers here have expressed concerns that the carriers can and eventually will do exactly that.</p>
+<p>So the question is: Does today&#8217;s Supreme Court ruling have any bearing whatsoever on mobile providers sharing location data with private companies?</p>
+<p>According to SCOTUSblog&#8217;s Howe, the answer is probably &#8220;no.&#8221;</p>
+<p>“[Justice] Roberts emphasized that today’s ruling &#8216;is a narrow one&#8217; that applies only to cell-site location records,&#8221; Howe writes. <em>&#8220;He took pains to point out that the ruling did not &#8216;express a view on matters not before us&#8217; – such as obtaining cell-site location records in real time, or getting information about all of the phones that connected to a particular tower at a particular time</em>. He acknowledged that law-enforcement officials might still be able to obtain cell-site location records without a warrant in emergencies, to deal with &#8216;bomb threats, active shootings, and child abductions.'&#8221; <a href="https://krebsonsecurity.com/2018/06/supreme-court-police-need-warrant-for-mobile-location-data/#more-44317" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-44291" class="post-44291 post type-post status-publish format-standard hentry category-sunshine category-comingstorm tag-att tag-blake-reid tag-carnegie-mellon-university tag-karen-zacharia tag-locaid tag-locationsmart tag-robert-xiao tag-sen-ron-wyden tag-sprint tag-t-mobile tag-timothy-p-mckone tag-university-of-colorado-school-of-law tag-verizon tag-zumigo">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2018/06/verizon-to-stop-sharing-customer-location-data-with-third-parties/" title="Permalink to AT&#038;T, Sprint, Verizon to Stop Sharing Customer Location Data With Third Parties" rel="bookmark">AT&#038;T, Sprint, Verizon to Stop Sharing Customer Location Data With Third Parties</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">June 19, 2018</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2018/06/verizon-to-stop-sharing-customer-location-data-with-third-parties/#comments">38 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>In the wake of a scandal involving third-party companies leaking or selling precise, real-time location data on virtually all Americans who own a mobile phone, <strong>AT&amp;T</strong>, <strong>Sprint</strong> and <strong>Verizon</strong> now say they are terminating location data sharing agreements with third parties.</p>
+<p><img loading="lazy" class="aligncenter wp-image-43845" src="https://krebsonsecurity.com/wp-content/uploads/2018/05/locationtracking.jpg" alt="" width="594" height="385" /></p>
+<p>At issue are companies known in the wireless industry as &#8220;location aggregators,&#8221; entities that manage requests for real-time customer location data for a variety of purposes, such as roadside assistance and emergency response. These aggregators are supposed to obtain customer consent before divulging such information, but several recent incidents show that this third-party trust model is fundamentally broken.</p>
+<p>On May 10, 2018, <em>The New York Times</em> <a href="https://www.nytimes.com/2018/05/10/technology/cellphone-tracking-law-enforcement.html" target="_blank" rel="noopener">broke the story</a> that a little-known data broker named <strong>Securus</strong> was selling local police forces around the country the ability to look up the precise location of any cell phone across all of the major U.S. mobile networks.</p>
+<p>Then it emerged that Securus had been hacked, its database of hundreds of law enforcement officer usernames and passwords plundered. We also learned that Securus’ data was ultimately obtained from a company called <strong>3Cinteractive</strong>, which in turn obtained its data through a California-based location tracking firm called <strong>LocationSmart</strong>.</p>
+<p>On May 17, KrebsOnSecurity <a href="https://krebsonsecurity.com/2018/05/tracking-firm-locationsmart-leaked-location-data-for-customers-of-all-major-u-s-mobile-carriers-in-real-time-via-its-web-site/" target="_blank" rel="noopener">broke the news</a> of research by <strong>Carnegie Mellon University</strong> PhD student <strong>Robert Xiao</strong>, who discovered that a LocationSmart try-before-you-buy opt-in demo of the company’s technology was wide open — allowing real-time lookups from anyone on anyone’s mobile device — without any sort of authentication, consent or authorization.</p>
+<p>LocationSmart disabled its demo page shortly after that story. By that time, <strong>Sen. Ron Wyden</strong> (D-Ore.) had already sent letters to <strong>AT&amp;T</strong>, <strong>Sprint</strong>, <strong>T-Mobile</strong> and Verizon, asking them to detail any agreements to share real-time customer location data with third-party data aggregation firms.</p>
+<p>AT&amp;T, T-Mobile and Verizon all said they had terminated data-sharing agreements with Securus. In <a href="https://www.wyden.senate.gov/imo/media/doc/Sprint%20Letter%20to%20Sen.%20Wyden%206.15.18.pdf" target="_blank" rel="noopener">a written response</a> (PDF) to Sen. Wyden, Sprint declined to share any information about third-parties with which it may share customer location data, and it was the only one of the four carriers that didn&#8217;t say it was terminating any data-sharing agreements.</p>
+<p>T-Mobile and Verizon each said they both share real-time customer data with two companies &#8212; LocationSmart and another firm called <a href="https://www.zumigo.com/" target="_blank" rel="noopener">Zumigo,</a> noting that these companies in turn provide services to a total of approximately 75 other customers.</p>
+<p>Verizon emphasized that Zumigo &#8212; unlike LocationSmart &#8212; has never offered any kind of mobile location information demo service via its site. Nevertheless, Verizon said it had decided to terminate its current location aggregation arrangements with both LocationSmart and Zumigo.</p>
+<p>&#8220;Verizon has notified these location aggregators that it intends to terminate their ability to access and use our customers&#8217; location data as soon as possible,&#8221; <a href="https://www.wyden.senate.gov/imo/media/doc/Verizon%20Response%20to%20Sen%20Wyden%2006_15_18.pdf" target="_blank" rel="noopener">wrote</a> <strong>Karen Zacharia</strong>, Verizon&#8217;s chief privacy officer. &#8220;We recognize that location information can provide many pro-consumer benefits. But our review of our location aggregator program has led to a number of internal questions about how best to protect our customers&#8217; data. We will not enter into new location aggregation arrangements unless and until we are comfortable that we can adequately protect our customers&#8217; location data through technological advancements and/or other practices.&#8221;</p>
+<p>In <a href="https://www.wyden.senate.gov/imo/media/doc/at&amp;t%20letter%20to%20RW%206.15.pdf" target="_blank" rel="noopener">its response</a> (PDF), AT&amp;T made no mention of any other company besides Securus. AT&amp;T indicated it had no intention to stop sharing real-time location data with third-parties, stating that &#8220;without an aggregator, there would be no practical and efficient method to facilitate requests across different carriers.&#8221;</p>
+<p>Sen. Wyden issued a statement today calling on all wireless companies to follow Verizon&#8217;s lead.</p>
+<p>“Verizon deserves credit for taking quick action to protect its customers’ privacy and security,” Wyden said. “After my investigation and follow-up reports revealed that middlemen are selling Americans’ location to the highest bidder without their consent, or making it available on insecure web portals, Verizon did the responsible thing and promptly announced it was cutting these companies off. In contrast, AT&amp;T, T-Mobile, and Sprint seem content to continuing to sell their customers’ private information to these shady middle men, Americans’ privacy be damned.”</p>
+<p><strong>Update, 5:20 p.m. ET:</strong> Shortly after Verizon&#8217;s letter became public, AT&amp;T and Sprint have now said they, too, will start terminating agreements to share customer location data with third parties.</p>
+<p>&#8220;Based on our current internal review, Sprint is beginning the process of terminating its current contracts with data aggregators to whom we provide location data,&#8221; the company said in an emailed statement. &#8220;This will take some time in order to unwind services to consumers, such as roadside assistance and fraud prevention services. Sprint previously suspended all data sharing with LocationSmart on May 25, 2018. We are taking this further step to ensure that any instances of unauthorized location data sharing for purposes not approved by Sprint can be identified and prevented if location data is shared inappropriately by a participating company.&#8221;</p>
+<p>AT&amp;T today also issued a statement: &#8220;Our top priority is to protect our customers’ information, and, to that end, we will be ending our work with aggregators for these services as soon as practical in a way that preserves important, potential lifesaving services like emergency roadside assistance.&#8221;</p>
+<p>KrebsOnSecurity asked T-Mobile if the company planned to follow suit, and was referred to <a href="https://twitter.com/JohnLegere/status/1009168217586061313" target="_blank" rel="noopener">a tweet today</a> from T-Mobile CEO <strong>John Legere</strong>, who wrote: &#8220;I’ve personally evaluated this issue &amp; have pledged that <b>T-Mobile</b> will not sell customer location data to shady middlemen.&#8221; In a follow-up statement shared by T-Mobile, the company said, &#8220;We ended all transmission of customer data to Securus and we are terminating our location aggregator agreements. </p>
+<p> <a href="https://krebsonsecurity.com/2018/06/verizon-to-stop-sharing-customer-location-data-with-third-parties/#more-44291" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-44130" class="post-44130 post type-post status-publish format-standard hentry category-latest-warnings tag-craig-young tag-google tag-google-chromecast tag-google-home tag-internet-of-things tag-intranet-of-things tag-tripwire">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2018/06/google-to-fix-location-data-leak-in-google-home-chromecast/" title="Permalink to Google to Fix Location Data Leak in Google Home, Chromecast" rel="bookmark">Google to Fix Location Data Leak in Google Home, Chromecast</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">June 18, 2018</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2018/06/google-to-fix-location-data-leak-in-google-home-chromecast/#comments">40 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p><strong>Google</strong> in the coming weeks is expected to fix a location privacy leak in two of its most popular consumer products. New research shows that Web sites can run a simple script in the background that collects precise location data on people who have a <strong>Google Home</strong> or <strong>Chromecast</strong> device installed anywhere on their local network.</p>
+<p><img loading="lazy" class="aligncenter wp-image-44277" src="https://krebsonsecurity.com/wp-content/uploads/2018/06/homecast.png" alt="" width="594" height="328" /></p>
+<p><strong>Craig Young</strong>, a researcher with security firm <strong>Tripwire</strong>, said he discovered an authentication weakness that leaks incredibly accurate location information about users of both the smart speaker and home assistant <a href="https://store.google.com/us/product/google_home?hl=en-US" target="_blank" rel="noopener">Google Home</a>, and <a href="https://www.tomsguide.com/us/what-is-google-chromecast,news-17637.html" target="_blank" rel="noopener">Chromecast</a>, a small electronic device that makes it simple to stream TV shows, movies and games to a digital television or monitor.</p>
+<p>Young said the attack works by asking the Google device for a list of nearby wireless networks and then sending that list to Google’s geolocation lookup services.</p>
+<p>&#8220;An attacker can be completely remote as long as they can get the victim to open a link while connected to the same Wi-Fi or wired network as a Google Chromecast or Home device,&#8221; Young told KrebsOnSecurity. &#8220;The only real limitation is that the link needs to remain open for about a minute before the attacker has a location. The attack content could be contained within malicious advertisements or even a tweet.&#8221;</p>
+<p>It is common for Web sites to keep a record of the numeric <a href="https://en.wikipedia.org/wiki/IP_address" target="_blank" rel="noopener">Internet Protocol (IP) address</a> of all visitors, and those addresses can be used in combination with online geolocation tools to glean information about each visitor&#8217;s hometown or region. But this type of location information is often quite imprecise. In many cases, IP geolocation offers only a general idea of where the IP address may be based geographically.</p>
+<p>This is typically not the case with Google&#8217;s geolocation data, which includes <a href="https://www.maketecheasier.com/google-know-where-wifi-router/" target="_blank" rel="noopener">comprehensive maps of wireless network names around the world</a>, linking each individual Wi-Fi network to a corresponding physical location. Armed with this data, Google can very often determine a user&#8217;s location to within a few feet (particularly in densely populated areas), by triangulating the user between several nearby mapped Wi-Fi access points. [Side note: Anyone who&#8217;d like to see this in action need only to turn off location data and remove the SIM card from a smart phone and see how well navigation apps like Google&#8217;s <a href="https://www.waze.com/" target="_blank" rel="noopener">Waze</a> can still figure out where you are].</p>
+<p>&#8220;The difference between this and a basic IP geolocation is the level of precision,&#8221; Young said. &#8220;For example, if I geolocate my IP address right now, I get a location that is roughly 2 miles from my current location at work. For my home Internet connection, the IP geolocation is only accurate to about 3 miles. With my attack demo however, I’ve been consistently getting locations within about 10 meters of the device.&#8221;</p>
+<p>Young said a demo he created (a video of which is below) is accurate enough that he can tell roughly how far apart his device in the kitchen is from another device in the basement.</p>
+<p>&#8220;I’ve only tested this in three environments so far, but in each case the location corresponds to the right street address,&#8221; Young said. &#8220;The Wi-Fi based geolocation works by triangulating a position based on signal strengths to Wi-Fi access points with known locations based on reporting from people’s phones.&#8221;</p>
+<p>Beyond leaking a Chromecast or Google Home user&#8217;s precise geographic location, this bug could help scammers make phishing and extortion attacks appear more realistic. Common scams like fake FBI or IRS warnings or threats to release compromising photos or expose some secret to friends and family could abuse Google&#8217;s location data to lend credibility to the fake warnings, Young notes.</p>
+<p>&#8220;The implications of this are quite broad including the possibility for more effective blackmail or extortion campaigns,&#8221; he said. &#8220;Threats to release compromising photos or expose some secret to friends and family could use this to lend credibility to the warnings and increase their odds of success.&#8221;</p>
+<div style="text-align: center;"><iframe loading="lazy" src="https://www.youtube.com/embed/ESS_D6P26zQ" width="560" height="315" frameborder="0" allowfullscreen="allowfullscreen"></iframe></div>
+<p>When Young first reached out to Google in May about his findings, the company replied by closing his bug report with a &#8220;Status: Won&#8217;t Fix (Intended Behavior)&#8221; message. But after being contacted by KrebsOnSecurity, Google changed its tune, saying it planned to ship an update to address the privacy leak in both devices. Currently, that update is slated to be released in mid-July 2018. <a href="https://krebsonsecurity.com/2018/06/google-to-fix-location-data-leak-in-google-home-chromecast/#more-44130" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-44246" class="post-44246 post type-post status-publish format-standard hentry category-sunshine category-data-breaches category-security-tools category-comingstorm tag-aclu tag-equifax-breach tag-inc-com tag-jessamyn-west tag-legalist-com">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2018/06/librarian-sues-equifax-over-2017-data-breach-wins-600/" title="Permalink to Librarian Sues Equifax Over 2017 Data Breach, Wins $600" rel="bookmark">Librarian Sues Equifax Over 2017 Data Breach, Wins $600</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">June 13, 2018</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2018/06/librarian-sues-equifax-over-2017-data-breach-wins-600/#comments">45 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>In the days following revelations last September that big-three consumer credit bureau <strong>Equifax</strong> had been <a href="https://krebsonsecurity.com/?s=equifax+breach&amp;x=0&amp;y=0" target="_blank" rel="noopener">hacked and relieved of personal data on nearly 150 million people</a>, many Americans no doubt felt resigned and powerless to control their information. But not <strong>Jessamyn West</strong>. The 49-year-old librarian from a tiny town in Vermont took Equifax to court. And now she&#8217;s celebrating a small but symbolic victory after a small claims court awarded her $600 in damages stemming from the 2017 breach.</p>
+<div id="attachment_44252" style="width: 254px" class="wp-caption alignright"><img aria-describedby="caption-attachment-44252" loading="lazy" class="size-full wp-image-44252" src="https://krebsonsecurity.com/wp-content/uploads/2018/06/jwest.png" alt="" width="244" height="216" /><p id="caption-attachment-44252" class="wp-caption-text">Vermont librarian Jessamyn West sued Equifax over its 2017 data breach and won $600 in small claims court. Others are following suit.</p></div>
+<p>Just days after Equifax disclosed the breach, West filed a claim with the local Orange County, Vt. courthouse asking a judge to award her almost $5,000. She told the court that her mother had just died in July, and that it added to the work of sorting out her mom&#8217;s finances while trying to respond to having the entire family&#8217;s credit files potentially exposed to hackers and identity thieves.</p>
+<p>The judge ultimately agreed, but awarded West just $690 ($90 to cover court fees and the rest intended to cover the cost of up to two years of payments to online identity theft protection services).</p>
+<p>In an interview with KrebsOnSecurity, West said she&#8217;s feeling victorious even though the amount awarded is a drop in the bucket for Equifax, which reported more than $3.4 billion in revenue last year.</p>
+<p>&#8220;The small claims case was a lot more about raising awareness,&#8221; said West, a librarian at the <a href="http://orangesouthwest.org/rtcc" target="_blank" rel="noopener">Randolph Technical Career Center</a> who specializes in technology training and frequently conducts <a href="http://www.librarian.net/talks/privacy17/" target="_blank" rel="noopener">talks on privacy and security</a>.</p>
+<p>&#8220;I just wanted to change the conversation I was having with all my neighbors who were like, &#8216;Ugh, computers are hard, what can you do?&#8217; to &#8216;Hey, here are some things you <em>can</em> do&#8217;,&#8221; she said. <span class="pullquote pqleft">&#8220;A lot of people don&#8217;t feel they have agency around privacy and technology in general. This case was about having your own agency when companies don&#8217;t behave how they&#8217;re supposed to with our private information.&#8221;</span></p>
+<p>West said she&#8217;s surprised more people aren&#8217;t following her example. After all, if just a tiny fraction of the 147 million Americans who had their Social Security number, date of birth, address and other personal data stolen in last year&#8217;s breach filed a claim and prevailed as West did, it could easily cost Equifax tens of millions of dollars in damages and legal fees.</p>
+<p>&#8220;The paperwork to file the claim was a little irritating, but it only cost $90,&#8221; she said. &#8220;Then again, I could see how many people probably would see this as a lark, where there&#8217;s a pretty good chance you&#8217;re not going to see that money again, and for a lot of people that probably doesn&#8217;t really make things better.&#8221;</p>
+<p>Equifax is currently the target of several class action lawsuits related to the 2017 breach disclosure, but there have been a few other minor victories in state small claims courts.</p>
+<p>In January, data privacy enthusiast <strong>Christian Haigh</strong> <a href="https://blog.legalist.com/i-won-8-000-from-equifax-in-small-claims-court-heres-how-you-can-too-f0ce6925c079?gi=b828331f5ba" target="_blank" rel="noopener">wrote about winning an $8,000 judgment</a> in small claims court against Equifax for its 2017 breach (the amount was reduced to $5,500 after Equifax appealed).</p>
+<p>Haigh is co-founder of litigation finance startup <a href="https://legalist.com/" target="_blank" rel="noopener">Legalist</a>. According to <a href="https://www.inc.com/bill-murphy-jr/people-are-suing-equifax-in-small-claims-court-its-totally-brilliant-heres-why.html" target="_blank" rel="noopener">Inc.com</a>, Haigh&#8217;s company has started funding other people&#8217;s small claims suits against Equifax, too. (Legalist pays lawyers in plaintiff&#8217;s suits on an hourly basis, and takes a contingency fee if the case is successful.)</p>
+<p><img loading="lazy" class="aligncenter wp-image-44253" src="https://krebsonsecurity.com/wp-content/uploads/2018/06/dvg.jpg" alt="" width="594" height="304" /> <a href="https://krebsonsecurity.com/2018/06/librarian-sues-equifax-over-2017-data-breach-wins-600/#more-44246" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+				
+			
+								<div class="themonic-pagination"><div class='pagination'><ul><li><a href='https://krebsonsecurity.com/'>&laquo; First</a></li><li><a href='https://krebsonsecurity.com/page/47/' class='inactive'>&lsaquo; Previous</a></li><li><a href='https://krebsonsecurity.com/page/45/' class='inactive'>45</a></li><li><a href='https://krebsonsecurity.com/page/46/' class='inactive'>46</a></li><li><a href='https://krebsonsecurity.com/page/47/' class='inactive'>47</a></li><li class='current'><span class='currenttext'>48</span></li><li><a href='https://krebsonsecurity.com/page/49/' class='inactive'>49</a></li><li><a href='https://krebsonsecurity.com/page/50/' class='inactive'>50</a></li><li><a href='https://krebsonsecurity.com/page/51/' class='inactive'>51</a></li><li><a href='https://krebsonsecurity.com/page/49/' class='inactive'>Next &rsaquo;</a></li><a class='inactive' href='https://krebsonsecurity.com/page/209/'>Last &raquo;</a></ul></div></div>
+					<div style="display: block; clear: both;"></div>
+			
+		
+
+	
+
+		</div><!-- #content -->
+	</div><!-- #primary -->
+
+
+			<div id="secondary" class="widget-area" role="complementary">
+
+        <div id="sidebar_ad" class="widget themonic-ad5"><div class="a-statement">Advertisement</div><a href="https://www.area1security.com/2021-email-threat-report/?utm_medium=display&amp;utm_source=krebs&amp;utm_term=na&amp;utm_content=thumb&amp;utm_campaign=2021-Q4-Display-Krebs-2021-Email-Threat-Report">
+<img src="/b-area1/13.png">
+</a></div>
+
+                        <br><div class="widget themonic-ad1"><div class="a-statement">Advertisement</div><a href="https://www.akamai.com/why-akamai/the-internet-of-possibilities?utm_source=krebsonsecurity&amp;utm_medium=display&amp;utm_campaign=F-MC-54978">
+<img src="/b-akamai/146.png">
+</a></div><br>
+
+			<aside id="custom_html-2" class="widget_text widget widget_custom_html"><p class="widget-title">Mailing List</p><div class="textwidget custom-html-widget"><a href="/subscribe/">Subscribe here</a></div></aside><aside id="search-2" class="widget widget_search"><p class="widget-title">Search KrebsOnSecurity</p><form role="search" method="get" id="searchform" class="searchform" action="https://krebsonsecurity.com/">
+				<div>
+					<label class="screen-reader-text" for="s">Search for:</label>
+					<input type="text" value="" name="s" id="s" />
+					<input type="submit" id="searchsubmit" value="Search" />
+				</div>
+			</form></aside>
+		<aside id="recent-posts-3" class="widget widget_recent_entries">
+		<p class="widget-title">Recent Posts</p>
+		<ul>
+											<li>
+					<a href="https://krebsonsecurity.com/2021/12/canada-charges-its-most-prolific-cybercriminal/">Canada Charges Its &#8220;Most Prolific Cybercriminal&#8221;</a>
+									</li>
+											<li>
+					<a href="https://krebsonsecurity.com/2021/12/who-is-the-network-access-broker-babam/">Who Is the Network Access Broker &#8216;Babam&#8217;?</a>
+									</li>
+											<li>
+					<a href="https://krebsonsecurity.com/2021/12/ubiquiti-developer-charged-with-extortion-causing-2020-breach/">Ubiquiti Developer Charged With Extortion, Causing 2020 &#8220;Breach&#8221;</a>
+									</li>
+											<li>
+					<a href="https://krebsonsecurity.com/2021/11/the-internet-is-held-together-with-spit-baling-wire/">The Internet is Held Together With Spit &#038; Baling Wire</a>
+									</li>
+											<li>
+					<a href="https://krebsonsecurity.com/2021/11/arrest-in-ransom-your-employer-email-scheme/">Arrest in &#8216;Ransom Your Employer&#8217; Email Scheme</a>
+									</li>
+					</ul>
+
+		</aside><aside id="text-2" class="widget widget_text">			<div class="textwidget"><a name="subscribe2"></a></div>
+		</aside><aside id="widget_sp_image-15" class="widget widget_sp_image"><p class="widget-title">Spam Nation</p><a href="https://www.amazon.com/Spam-Nation-Organized-Cybercrime-Epidemic-ebook/dp/B00L5QGBL0/ref=dp_kinw_strp_1" target="_blank" class="widget_sp_image-image-link" title="Spam Nation"><img width="266" height="404" alt="Spam Nation" class="attachment-266x404 aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2015/04/spamnation-nyt.png" /></a><div class="widget_sp_image-description" ><p>A New York Times Bestseller! </p>
+</div></aside><aside id="widget_sp_image-25" class="widget widget_sp_image"><p class="widget-title">Thinking of a Cybersecurity Career?</p><a href="https://krebsonsecurity.com/2020/07/thinking-of-a-cybersecurity-career-read-this/" target="_blank" class="widget_sp_image-image-link" title="Thinking of a Cybersecurity Career? Read This."><img width="625" height="424" alt="Thinking of a Cybersecurity Career?" class="attachment-full" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2020/07/codepeople.png 625w, https://krebsonsecurity.com/wp-content/uploads/2020/07/codepeople-580x393.png 580w" sizes="(max-width: 625px) 100vw, 625px" src="https://krebsonsecurity.com/wp-content/uploads/2020/07/codepeople.png" /></a><div class="widget_sp_image-description" ><p>Read this.</p>
+</div></aside><aside id="widget_sp_image-3" class="widget widget_sp_image"><p class="widget-title">All About Skimmers </p><a href="https://krebsonsecurity.com/all-about-skimmers/" target="_blank" class="widget_sp_image-image-link" title="All About Skimmers "><img width="299" height="232" alt="All About Skimmers" class="attachment-299x232 aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2010/08/skimgallery1.jpg" /></a><div class="widget_sp_image-description" ><p>Click image for my skimmer series.</p>
+</div></aside><aside id="categories-2" class="widget widget_categories"><p class="widget-title">Story Categories</p>
+			<ul>
+					<li class="cat-item cat-item-5"><a href="https://krebsonsecurity.com/category/sunshine/" title="Includes investigative blog posts meant to shine a light on the darker corners of the Internet.">A Little Sunshine</a>
+</li>
+	<li class="cat-item cat-item-2240"><a href="https://krebsonsecurity.com/category/all-about-skimmers/">All About Skimmers</a>
+</li>
+	<li class="cat-item cat-item-9085"><a href="https://krebsonsecurity.com/category/ashley-madison-breach/">Ashley Madison breach</a>
+</li>
+	<li class="cat-item cat-item-3191"><a href="https://krebsonsecurity.com/category/breadcrumbs/">Breadcrumbs</a>
+</li>
+	<li class="cat-item cat-item-3771"><a href="https://krebsonsecurity.com/category/data-breaches/" title="Stories about data breaches at retailers, corporations, governments and organizations of all sizes.">Data Breaches</a>
+</li>
+	<li class="cat-item cat-item-4624"><a href="https://krebsonsecurity.com/category/ddos-for-hire/">DDoS-for-Hire</a>
+</li>
+	<li class="cat-item cat-item-9173"><a href="https://krebsonsecurity.com/category/employment-fraud/">Employment Fraud</a>
+</li>
+	<li class="cat-item cat-item-2151"><a href="https://krebsonsecurity.com/category/how-to-break-into-security/" title="If you&#039;ve ever wanted career advice on how to make a shift into the security industry, look no further.">How to Break Into Security</a>
+</li>
+	<li class="cat-item cat-item-87"><a href="https://krebsonsecurity.com/category/latest-warnings/">Latest Warnings</a>
+</li>
+	<li class="cat-item cat-item-4071"><a href="https://krebsonsecurity.com/category/neer-do-well-news/">Ne&#039;er-Do-Well News</a>
+</li>
+	<li class="cat-item cat-item-9"><a href="https://krebsonsecurity.com/category/other/">Other</a>
+</li>
+	<li class="cat-item cat-item-1306"><a href="https://krebsonsecurity.com/category/pharma-wars/">Pharma Wars</a>
+</li>
+	<li class="cat-item cat-item-8240"><a href="https://krebsonsecurity.com/category/ransomware/">Ransomware</a>
+</li>
+	<li class="cat-item cat-item-599"><a href="https://krebsonsecurity.com/category/security-tools/">Security Tools</a>
+</li>
+	<li class="cat-item cat-item-8298"><a href="https://krebsonsecurity.com/category/sim-swapping/">SIM Swapping</a>
+</li>
+	<li class="cat-item cat-item-4079"><a href="https://krebsonsecurity.com/category/spam-nation/">Spam Nation</a>
+</li>
+	<li class="cat-item cat-item-1"><a href="https://krebsonsecurity.com/category/smallbizvictims/" title="Posts in this category will include new stories similar to those told in the Small Business Victims category on The Washington Post&#039;s Security Fix blog, which chronicled the methods organized cyber thieve are using to steal hundreds of thousands of dollars from dozens of small- to mid-sized companies around the country.">Target: Small Businesses</a>
+</li>
+	<li class="cat-item cat-item-5167"><a href="https://krebsonsecurity.com/category/tax-refund-fraud/">Tax Refund Fraud</a>
+</li>
+	<li class="cat-item cat-item-3"><a href="https://krebsonsecurity.com/category/comingstorm/" title="This category includes blog posts about computer and Internet security threats now and on the horizon.">The Coming Storm</a>
+</li>
+	<li class="cat-item cat-item-4"><a href="https://krebsonsecurity.com/category/patches/" title="Short posts on the latest security updates for widely-used software.
+">Time to Patch</a>
+</li>
+	<li class="cat-item cat-item-21"><a href="https://krebsonsecurity.com/category/web-fraud-2-0/">Web Fraud 2.0</a>
+</li>
+			</ul>
+
+			</aside><aside id="widget_sp_image-5" class="widget widget_sp_image"><p class="widget-title">The Value of a Hacked PC</p><a href="https://krebsonsecurity.com/2012/10/the-scrap-value-of-a-hacked-pc-revisited/" target="_blank" class="widget_sp_image-image-link" title="The Value of a Hacked PC"><img width="285" height="180" alt="valuehackedpc " class="attachment-285x180 aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2012/12/valuehackedpc-285x180.png" /></a><div class="widget_sp_image-description" ><p>Badguy uses for your PC</p>
+</div></aside><aside id="widget_sp_image-9" class="widget widget_sp_image"><p class="widget-title">Badguy Uses for Your Email </p><a href="https://krebsonsecurity.com/2013/06/the-value-of-a-hacked-email-account/" target="_self" class="widget_sp_image-image-link" title="Badguy Uses for Your Email "><img width="296" height="170" alt="Badguy Uses for Your Email " class="attachment-full aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2013/06/badguyemail.png 296w, https://krebsonsecurity.com/wp-content/uploads/2013/06/badguyemail-285x163.png 285w" sizes="(max-width: 296px) 100vw, 296px" src="https://krebsonsecurity.com/wp-content/uploads/2013/06/badguyemail.png" /></a><div class="widget_sp_image-description" ><p>Your email account may be worth far more than you imagine.</p>
+</div></aside><aside id="widget_sp_image-24" class="widget widget_sp_image"><a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&#038;hosted_button_id=MCCRKHWRX57HS" id="donate" target="_self" class="widget_sp_image-image-link"><img width="250" height="55" alt="Donate to Krebs On Security" class="attachment-medium aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2016/09/donatepaypal2-1.png" /></a></aside><aside id="most_popular_posts-3" class="widget widget_most_popular_posts">
+<p class="widget-title">Most Popular Posts</p>
+<ul>	<li><a href="https://krebsonsecurity.com/2018/07/sextortion-scam-uses-recipients-hacked-passwords/">Sextortion Scam Uses Recipient's Hacked Passwords</a> (1076)</li>
+	<li><a href="https://krebsonsecurity.com/2015/07/online-cheating-site-ashleymadison-hacked/">Online Cheating Site AshleyMadison Hacked</a> (798)</li>
+	<li><a href="https://krebsonsecurity.com/2013/12/sources-target-investigating-data-breach/">Sources: Target Investigating Data Breach</a> (620)</li>
+	<li><a href="https://krebsonsecurity.com/2020/11/trump-fires-security-chief-christopher-krebs/">Trump Fires Security Chief Christopher Krebs</a> (534)</li>
+	<li><a href="https://krebsonsecurity.com/2013/12/cards-stolen-in-target-breach-flood-underground-markets/">Cards Stolen in Target Breach Flood Underground Markets</a> (445)</li>
+	<li><a href="https://krebsonsecurity.com/2013/05/reports-liberty-reserve-founder-arrested-site-shuttered/">Reports: Liberty Reserve Founder Arrested, Site Shuttered</a> (416)</li>
+	<li><a href="https://krebsonsecurity.com/2015/08/was-the-ashley-madison-database-leaked/">Was the Ashley Madison Database Leaked?</a> (376)</li>
+	<li><a href="https://krebsonsecurity.com/2021/01/ddos-guard-to-forfeit-internet-space-occupied-by-parler/">DDoS-Guard To Forfeit Internet Space Occupied by Parler</a> (374)</li>
+	<li><a href="https://krebsonsecurity.com/2014/05/true-goodbye-using-truecrypt-is-not-secure/">True Goodbye: 'Using TrueCrypt Is Not Secure'</a> (363)</li>
+	<li><a href="https://krebsonsecurity.com/2015/08/who-hacked-ashley-madison/">Who Hacked Ashley Madison?</a> (361)</li>
+</ul>
+</aside>
+<aside id="media_image-2" class="widget widget_media_image"><p class="widget-title">Why So Many Top Hackers Hail from Russia</p><a href="https://krebsonsecurity.com/2017/06/why-so-many-top-hackers-hail-from-russia/"><img width="580" height="389" src="https://krebsonsecurity.com/wp-content/uploads/2017/06/computered-580x389.png" class="image wp-image-39684  attachment-medium size-medium" alt="" loading="lazy" style="max-width: 100%; height: auto;" srcset="https://krebsonsecurity.com/wp-content/uploads/2017/06/computered-580x389.png 580w, https://krebsonsecurity.com/wp-content/uploads/2017/06/computered-768x514.png 768w, https://krebsonsecurity.com/wp-content/uploads/2017/06/computered-940x630.png 940w, https://krebsonsecurity.com/wp-content/uploads/2017/06/computered.png 1551w" sizes="(max-width: 580px) 100vw, 580px" /></a></aside><aside id="widget_sp_image-11" class="widget widget_sp_image"><p class="widget-title">Category: Web Fraud 2.0</p><a href="https://krebsonsecurity.com/category/web-fraud-2-0/" target="_blank" class="widget_sp_image-image-link" title="Category: Web Fraud 2.0"><img width="227" height="400" alt="Criminnovations" class="attachment-medium aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2013/11/cybercrimeinnovations-227x400.png" /></a><div class="widget_sp_image-description" ><p>Innovations from the Underground</p>
+</div></aside><aside id="widget_sp_image-12" class="widget widget_sp_image"><a href="https://krebsonsecurity.com/2014/03/are-credit-monitoring-services-worth-it/" target="_blank" class="widget_sp_image-image-link"><img width="285" height="189" class="attachment-medium aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2014/03/shreddedID-copy-285x189.png 285w, https://krebsonsecurity.com/wp-content/uploads/2014/03/shreddedID-copy-600x399.png 600w, https://krebsonsecurity.com/wp-content/uploads/2014/03/shreddedID-copy.png 849w" sizes="(max-width: 285px) 100vw, 285px" src="https://krebsonsecurity.com/wp-content/uploads/2014/03/shreddedID-copy-285x189.png" /></a><div class="widget_sp_image-description" ><p>ID Protection Services Examined</p>
+</div></aside><aside id="widget_sp_image-13" class="widget widget_sp_image"><p class="widget-title">Is Antivirus Dead?</p><a href="https://krebsonsecurity.com/2014/05/antivirus-is-dead-long-live-antivirus/" target="_blank" class="widget_sp_image-image-link" title="Is Antivirus Dead?"><img width="285" height="161" alt="Is Antivirus Dead?" class="attachment-medium aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2014/05/cryptservices-285x161.png 285w, https://krebsonsecurity.com/wp-content/uploads/2014/05/cryptservices-600x339.png 600w, https://krebsonsecurity.com/wp-content/uploads/2014/05/cryptservices.png 945w" sizes="(max-width: 285px) 100vw, 285px" src="https://krebsonsecurity.com/wp-content/uploads/2014/05/cryptservices-285x161.png" /></a><div class="widget_sp_image-description" ><p>The reasons for its decline</p>
+</div></aside><aside id="widget_sp_image-14" class="widget widget_sp_image"><p class="widget-title">The Growing Tax Fraud Menace</p><a href="https://krebsonsecurity.com/category/tax-refund-fraud/" target="_blank" class="widget_sp_image-image-link" title="The Growing Tax Fraud Menace"><img width="285" height="285" alt="The Growing Tax Fraud Menace" class="attachment-medium aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2014/04/taxfraud-285x285.jpg 285w, https://krebsonsecurity.com/wp-content/uploads/2014/04/taxfraud-150x150.jpg 150w, https://krebsonsecurity.com/wp-content/uploads/2014/04/taxfraud-600x600.jpg 600w, https://krebsonsecurity.com/wp-content/uploads/2014/04/taxfraud.jpg 693w" sizes="(max-width: 285px) 100vw, 285px" src="https://krebsonsecurity.com/wp-content/uploads/2014/04/taxfraud-285x285.jpg" /></a><div class="widget_sp_image-description" ><p>File 'em Before the Bad Guys Can </p>
+</div></aside><aside id="widget_sp_image-17" class="widget widget_sp_image"><p class="widget-title">Inside a Carding Shop</p><a href="https://krebsonsecurity.com/2014/06/peek-inside-a-professional-carding-shop/" target="_blank" class="widget_sp_image-image-link" title="Inside a Carding Shop"><img width="194" height="340" alt="Inside a Carding Shop" class="attachment-medium aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2014/06/mcdumpalsjoined.png" /></a><div class="widget_sp_image-description" ><p>A crash course in carding. </p>
+</div></aside><aside id="widget_sp_image-18" class="widget widget_sp_image"><p class="widget-title">Beware Social Security Fraud</p><a href="https://krebsonsecurity.com/2013/09/crooks-hijack-retirement-funds-via-ssa-portal/" target="_blank" class="widget_sp_image-image-link" title="Beware Social Security Fraud"><img width="285" height="293" alt="Beware Social Security Fraud" class="attachment-full aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2016/09/myssn-285x293.png" /></a><div class="widget_sp_image-description" ><p>Sign up, or Be Signed Up! </p>
+</div></aside><aside id="widget_sp_image-2" class="widget widget_sp_image"><p class="widget-title">How Was Your Card Stolen?</p><a href="https://krebsonsecurity.com/2015/01/how-was-your-credit-card-stolen/" target="_blank" class="widget_sp_image-image-link" title="How Was Your Card Stolen?"><img width="285" height="285" alt="How Was Your Card Stolen?" class="attachment-full aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2016/09/carddominoes-285x285.jpg 285w, https://krebsonsecurity.com/wp-content/uploads/2016/09/carddominoes-285x285-150x150.jpg 150w" sizes="(max-width: 285px) 100vw, 285px" src="https://krebsonsecurity.com/wp-content/uploads/2016/09/carddominoes-285x285.jpg" /></a><div class="widget_sp_image-description" ><p>Finding out is not so easy. </p>
+</div></aside><aside id="widget_sp_image-22" class="widget widget_sp_image"><p class="widget-title">Krebs&#8217;s 3 Rules&#8230;</p><a href="https://krebsonsecurity.com/2011/05/krebss-3-basic-rules-for-online-safety/" target="_blank" class="widget_sp_image-image-link" title="Krebs&#8217;s 3 Rules&#8230;"><img width="300" height="300" alt="Krebs&#8217;s 3 Rules&#8230;" class="attachment-medium aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2011/05/three-300x300.jpg 300w, https://krebsonsecurity.com/wp-content/uploads/2011/05/three-150x150.jpg 150w, https://krebsonsecurity.com/wp-content/uploads/2011/05/three.jpg 347w" sizes="(max-width: 300px) 100vw, 300px" src="https://krebsonsecurity.com/wp-content/uploads/2011/05/three-300x300.jpg" /></a><div class="widget_sp_image-description" ><p>...For Online Safety. </p>
+</div></aside>		</div><!-- #secondary -->
+		</div><!-- #main .wrapper -->
+	
+	<div id="publisho-footer" class="widget-area">
+				<div class="footer-widget">
+                				</div>
+				<div class="footer-widget">
+								</div>
+				<div class="footer-widget">
+								</div>
+	</div>
+
+	<div class="site-wordpress">
+					&copy; Krebs on Security<br>
+	</div>
+	<!-- .site-info --><div class="clear"></div>
+</div><!-- #page -->
+
+<script type='text/javascript' src='https://krebsonsecurity.com/wp-content/themes/kos-mar2021/js/slicknav.js?ver=5.8.2' id='publisho-mobile-navigation-js'></script>
+<script type='text/javascript' src='https://krebsonsecurity.com/wp-includes/js/wp-embed.min.js?ver=5.8.2' id='wp-embed-js'></script>
+</body>
+</html>
+<!--
+Performance optimized by W3 Total Cache. Learn more: https://www.boldgrid.com/w3-total-cache/
+
+Object Caching 199/375 objects using memcached
+Page Caching using memcached 
+Database Caching 7/24 queries in 0.027 seconds using memcached
+
+Served from: krebsonsecurity.com @ 2021-12-10 15:35:03 by W3 Total Cache
+-->

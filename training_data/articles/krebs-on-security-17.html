@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<!--[if IE 7]>
+<html class="ie ie7" lang="en-US">
+<![endif]-->
+<!--[if IE 8]>
+<html class="ie ie8" lang="en-US">
+<![endif]-->
+<!--[if !(IE 7) | !(IE 8)  ]><!-->
+<html lang="en-US">
+<!--<![endif]-->
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width" />
+<link rel="profile" href="http://gmpg.org/xfn/11" />
+<!--[if lt IE 9]>
+<script src="https://krebsonsecurity.com/wp-content/themes/kos-mar2021/js/html5.js" type="text/javascript"></script>
+<![endif]-->
+<title>Krebs on Security &#8211; Page 17 &#8211; In-depth security news and investigation</title>
+<meta name='robots' content='max-image-preview:large' />
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="Krebs on Security &raquo; Feed" href="https://krebsonsecurity.com/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Krebs on Security &raquo; Comments Feed" href="https://krebsonsecurity.com/comments/feed/" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.1.0\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.1.0\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/krebsonsecurity.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=5.8.2"}};
+			!function(e,a,t){var n,r,o,i=a.createElement("canvas"),p=i.getContext&&i.getContext("2d");function s(e,t){var a=String.fromCharCode;p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,e),0,0);e=i.toDataURL();return p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,t),0,0),e===i.toDataURL()}function c(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(o=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},r=0;r<o.length;r++)t.supports[o[r]]=function(e){if(!p||!p.fillText)return!1;switch(p.textBaseline="top",p.font="600 32px Arial",e){case"flag":return s([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])?!1:!s([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!s([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]);case"emoji":return!s([10084,65039,8205,55357,56613],[10084,65039,8203,55357,56613])}return!1}(o[r]),t.supports.everything=t.supports.everything&&t.supports[o[r]],"flag"!==o[r]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[o[r]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(n=t.source||{}).concatemoji?c(n.concatemoji):n.wpemoji&&n.twemoji&&(c(n.twemoji),c(n.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+	<link rel='stylesheet' id='colorbox-theme1-css'  href='https://krebsonsecurity.com/wp-content/plugins/jquery-lightbox-for-native-galleries/colorbox/theme1/colorbox.css?ver=1.3.14' type='text/css' media='screen' />
+<link rel='stylesheet' id='wp-block-library-css'  href='https://krebsonsecurity.com/wp-includes/css/dist/block-library/style.min.css?ver=5.8.2' type='text/css' media='all' />
+<link rel='stylesheet' id='contact-form-7-css'  href='https://krebsonsecurity.com/wp-content/plugins/contact-form-7/includes/css/styles.css?ver=5.5.3' type='text/css' media='all' />
+<link rel='stylesheet' id='publisho-style-css'  href='https://krebsonsecurity.com/wp-content/themes/kos-mar2021/style.css?subver=1.2&#038;ver=5.8.2' type='text/css' media='all' />
+<style id='publisho-style-inline-css' type='text/css'>
+
+	.themonic-nav .current-menu-item > a, .themonic-nav .current-menu-ancestor > a, .themonic-nav .current_page_item > a, .themonic-nav .current_page_ancestor > a {
+		background: #cc6600;
+	}
+	.themonic-nav ul.nav-menu, .themonic-nav div.nav-menu > ul {
+		border-bottom: 5px solid #cc6600;
+	}
+	#site-navigation .topheadmenu a {
+    background: rgba(0, 0, 0, 0);
+	}
+	.themonic-nav li a:hover {
+		background: #cc6600;
+	}
+	.themonic-nav li:hover {
+		background: #cc6600;
+	}.wrapper .flexslider {margin: 0 0 30px;}.frontp .btm-wrap {
+    border-top: 1px solid #e9e9e9;
+	}
+	.entry-summary {
+    border-top: none;
+	}.frontp .btm-wrap { margin-bottom: 30px;}.site { font-size:14px;}.site { font-family:'Roboto', arial ;}
+</style>
+<link rel='stylesheet' id='publisho-custom-style-css'  href='https://krebsonsecurity.com/wp-content/themes/kos-mar2021/custom.css?subver=1.2&#038;ver=5.8.2' type='text/css' media='all' />
+<!--[if lt IE 9]>
+<link rel='stylesheet' id='publisho-ie-css'  href='https://krebsonsecurity.com/wp-content/themes/kos-mar2021/css/ie.css?ver=20160606' type='text/css' media='all' />
+<![endif]-->
+<link rel='stylesheet' id='fontawesome-css-css'  href='https://krebsonsecurity.com/wp-content/themes/kos-mar2021/fonts/font-awesome.min.css?ver=5.8.2' type='text/css' media='all' />
+<link rel='stylesheet' id='publisho_custom_fonts-css'  href='//fonts.googleapis.com/css?family=Roboto%3Aregular%2Citalic%2C500%26subset%3Dlatin%2C' type='text/css' media='screen' />
+<script type='text/javascript' src='https://krebsonsecurity.com/wp-includes/js/jquery/jquery.min.js?ver=3.6.0' id='jquery-core-js'></script>
+<script type='text/javascript' src='https://krebsonsecurity.com/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.3.2' id='jquery-migrate-js'></script>
+<script type='text/javascript' src='https://krebsonsecurity.com/wp-content/plugins/jquery-lightbox-for-native-galleries/colorbox/jquery.colorbox-min.js?ver=1.3.14' id='colorbox-js'></script>
+<link rel="https://api.w.org/" href="https://krebsonsecurity.com/wp-json/" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://krebsonsecurity.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://krebsonsecurity.com/wp-includes/wlwmanifest.xml" /> 
+<meta name="generator" content="WordPress 5.8.2" />
+<!-- JavaScript Pull-Quotes plugin v2.2 -->
+	<link rel="stylesheet" href="https://krebsonsecurity.com/wp-content/plugins/jspullquotes/resources/jspullquotes-core.css" type="text/css" />
+	<link rel="stylesheet" href="https://krebsonsecurity.com/wp-content/plugins/jspullquotes/resources/jspullquotes-default.css" type="text/css" />
+	<script type="text/javascript" src="https://krebsonsecurity.com/wp-content/plugins/jspullquotes/resources/jspullquotes.js"></script>
+	<script type="text/javascript">
+		var arrOptions = new Array("1", "1", "right", "1", "1", "blockquote", "pullquote", "pullquote pqRight");
+		pullQuoteOpts(arrOptions);
+	</script>
+<!-- end pull-quote additions -->
+<!-- jQuery Lightbox For Native Galleries v3.1.3 | http://www.viper007bond.com/wordpress-plugins/jquery-lightbox-for-native-galleries/ -->
+<script type="text/javascript">
+// <![CDATA[
+	jQuery(document).ready(function($){
+		$(".gallery").each(function(index, obj){
+			var galleryid = Math.floor(Math.random()*10000);
+			$(obj).find("a").colorbox({rel:galleryid, maxWidth:"95%", maxHeight:"95%"});
+		});
+		$("a.lightbox").colorbox({maxWidth:"95%", maxHeight:"95%"});
+	});
+// ]]>
+</script>
+<style type="text/css" id="custom-background-css">
+body.custom-background { background-color: #ffffff; }
+</style>
+	<link rel="me" href="https://twitter.com/briankrebs" /><meta name="twitter:widgets:link-color" content="#000000" /><meta name="twitter:widgets:border-color" content="#000000" /><meta name="twitter:partner" content="tfwp" />
+<meta name="twitter:card" content="summary" /><meta name="twitter:title" content="Krebs on Security" /><meta name="twitter:site" content="@briankrebs" /><meta name="twitter:description" content="In-depth security news and investigation" />
+</head>
+<body class="home blog paged custom-background paged-17 custom-background-white single-author frontp hfeed">
+<div id="page" class="site">
+	<!-- <div class="publisho-top-mobile-nav clear"></div> -->
+	<div class="themonic-logo themonic-ad3"><div class="a-statement">Advertisement</div><a href="https://securityscorecard.com/instant-security-scorecard?utm_source=krebs+on+security&amp;utm_medium=display&amp;utm_campaign=instant+scorecard&amp;utm_term=A&amp;utm_content=1240x110">
+<img src="/b-securityscorecard/1.jpg">
+</a></div>
+	<div class="themonic-logo themonic-ad6"><div class="a-statement">Advertisement</div><a href="https://ninjio.com/lp46c-krebs/">
+<img src="/b-ninjio/7.png">
+</a>
+</div>
+	<nav id="site-navigation" class="themonic-nav" role="navigation">
+	</nav><!-- #site-navigation -->
+	<div class="clear"></div>
+	<header id="masthead" class="site-header" role="banner">
+ 					<div class="desktop-social">
+						<div class="socialmedia">
+							<a href="http://twitter.com/briankrebs" target="_blank"><i class="fa fa-twitter"></i></a> 
+															<a class="rss" href="https://krebsonsecurity.com/feed/" target="_blank"><i class="fa fa-rss"></i></a>	
+									<a class="rss" href="https://www.linkedin.com/in/bkrebs/" target="_blank"><i class="fa fa-linkedin"></i></a>	
+								</div>
+				 	</div>
+																						   
+		
+		<div class="themonic-logo responsive-img-container">
+			<a href="https://krebsonsecurity.com/" title="Krebs on Security" rel="home"><img src="https://krebsonsecurity.com/wp-content/uploads/2021/03/kos-27-03-2021.jpg" alt="Krebs on Security"></a>
+		</div>
+
+					<div class="mobile-social">
+						<div class="socialmedia">
+							<a href="http://twitter.com/briankrebs" target="_blank"><i class="fa fa-twitter"></i></a> 
+															<a class="rss" href="https://krebsonsecurity.com/feed/" target="_blank"><i class="fa fa-rss"></i></a>	
+									<a class="rss" href="https://www.linkedin.com/in/bkrebs/" target="_blank"><i class="fa fa-linkedin"></i></a>	
+								</div>
+					</div>
+		
+				<!-- <div class="publisho-mobile-nav clear"></div> -->
+		<nav id="site-navigation" class="themonic-nav" role="navigation">
+			<a class="assistive-text" href="#content" title="Skip to content">Skip to content</a>
+			<div id="menu-top" class="nav-menu"><ul>
+<li ><a href="https://krebsonsecurity.com/">Home</a></li><li class="page_item page-item-2"><a href="https://krebsonsecurity.com/about/">About the Author</a></li>
+<li class="page_item page-item-645"><a href="https://krebsonsecurity.com/cpm/">Advertising/Speaking</a></li>
+</ul></div>
+		</nav><!-- #site-navigation -->
+		<div class="clear"></div>
+	</header><!-- #masthead -->
+	<div id="main" class="wrapper">
+		<div id="primary" class="site-content">
+	
+
+	
+		<div id="content" role="main">
+
+		<article id="post-53008" class="post-53008 post type-post status-publish format-standard has-post-thumbnail hentry category-neer-do-well-news tag-anvisoft tag-apt41 tag-barium tag-chengdu-404 tag-cisco tag-citrix tag-d-link tag-pulse tag-sonarx tag-tan-dailin tag-techcrunch tag-wicked-panda tag-wicked-rose tag-wicked-spider tag-winnti tag-withered-rose tag-zack-whittaker">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2020/09/chinese-antivirus-firm-was-part-of-apt41-supply-chain-attack/" title="Permalink to Chinese Antivirus Firm Was Part of APT41 &#8216;Supply Chain&#8217; Attack" rel="bookmark">Chinese Antivirus Firm Was Part of APT41 &#8216;Supply Chain&#8217; Attack</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">September 17, 2020</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2020/09/chinese-antivirus-firm-was-part-of-apt41-supply-chain-attack/#comments">28 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>The <strong>U.S. Justice Department</strong> this week indicted seven Chinese nationals for a decade-long hacking spree that targeted more than 100 high-tech and online gaming companies. The government alleges the men used malware-laced phishing emails and &#8220;supply chain&#8221; attacks to steal data from companies and their customers. One of the alleged hackers was first profiled here in 2012 as the owner of a Chinese antivirus firm.</p>
+<div id="attachment_53015" style="width: 595px" class="wp-caption aligncenter"><img aria-describedby="caption-attachment-53015" loading="lazy" class="size-full wp-image-53015" src="https://krebsonsecurity.com/wp-content/uploads/2020/09/apt41-group.png" alt="" width="585" height="499" /><p id="caption-attachment-53015" class="wp-caption-text">Image: FBI</p></div>
+<p><a href="https://www.justice.gov/opa/pr/seven-international-cyber-defendants-including-apt41-actors-charged-connection-computer" target="_blank" rel="noopener noreferrer">Charging documents</a> say the seven men are part of a hacking group known variously as &#8220;<strong>APT41</strong>,&#8221; &#8220;<strong>Barium</strong>,&#8221; &#8220;<strong>Winnti</strong>,&#8221; &#8220;<strong>Wicked Panda</strong>,&#8221; and &#8220;<strong>Wicked Spider</strong>.&#8221; Once inside of a target organization, the hackers stole source code, software code signing certificates, customer account data and other information they could use or resell.</p>
+<p>APT41&#8217;s activities span from the mid-2000s to the present day. Earlier this year, for example, the group was tied to a particularly aggressive malware campaign that exploited recent vulnerabilities in widely-used networking products, including flaws in <strong>Cisco</strong> and <strong>D-Link</strong> routers, as well as <strong>Citrix</strong> and <strong>Pulse</strong> VPN appliances. Security firm <a href="https://www.fireeye.com/blog/threat-research/2020/03/apt41-initiates-global-intrusion-campaign-using-multiple-exploits.html" target="_blank" rel="noopener noreferrer">FireEye</a> dubbed that hacking blitz &#8220;one of the broadest campaigns by a Chinese cyber espionage actor we have observed in recent years.&#8221;</p>
+<p>The government alleges the group monetized its illicit access by deploying ransomware and &#8220;<a href="https://www.malwarebytes.com/cryptojacking/" target="_blank" rel="noopener noreferrer">cryptojacking</a>&#8221; tools (using compromised systems to mine cryptocurrencies like Bitcoin). In addition, the gang targeted video game companies and their customers in a bid to steal digital items of value that could be resold, such as points, powers and other items that could be used to enhance the game-playing experience.</p>
+<p>APT41 was known to hide its malware inside fake resumes that were sent to targets. It also deployed more complex supply chain attacks, in which they would hack a software company and modify the code with malware.</p>
+<p>&#8220;The victim software firm &#8212; unaware of the changes to its product, would subsequently distribute the modified software to its third-party customers, who were thereby defrauded into installing malicious software code on their own computers,&#8221; the indictments explain.</p>
+<p>While the various charging documents released in this case do not mention it per se, it is clear that members of this group also favored another form of supply chain attacks &#8212; hiding their malware inside commercial tools they created and advertised as legitimate security software and PC utilities.</p>
+<p>One of the men indicted as part of APT41 &#8212; now 35-year-old <strong>Tan DaiLin</strong> &#8212; was the subject of <a href="https://krebsonsecurity.com/2012/11/infamous-hacker-heading-chinese-antivirus-firm" target="_blank" rel="noopener noreferrer">a 2012 KrebsOnSecurity story</a> that sought to shed light on a Chinese antivirus product marketed as <strong>Anvisoft</strong>. At the time, the product had been &#8220;whitelisted&#8221; or marked as safe by competing, more established antivirus vendors, although the company seemed unresponsive to user complaints and to questions about its leadership and origins.</p>
+<div id="attachment_17528" style="width: 584px" class="wp-caption aligncenter"><img aria-describedby="caption-attachment-17528" loading="lazy" class="size-full wp-image-17528" src="https://krebsonsecurity.com/wp-content/uploads/2012/11/wickedrose.png" alt="" width="574" height="524" srcset="https://krebsonsecurity.com/wp-content/uploads/2012/11/wickedrose.png 574w, https://krebsonsecurity.com/wp-content/uploads/2012/11/wickedrose-285x260.png 285w" sizes="(max-width: 574px) 100vw, 574px" /><p id="caption-attachment-17528" class="wp-caption-text">Tan DaiLin, a.k.a. &#8220;Wicked Rose,&#8221; in his younger years. Image: iDefense</p></div>
+<p>Anvisoft claimed to be based in California and Canada, but a search on the company’s brand name turned up trademark registration records that put Anvisoft in the high-tech zone of <strong>Chengdu</strong> in the Sichuan Province of China.</p>
+<p>A review of Anvisoft&#8217;s website registration records showed the company&#8217;s domain originally was created by Tan DaiLin, an infamous Chinese hacker who went by the aliases &#8220;Wicked Rose&#8221; and &#8220;Withered Rose.&#8221; At the time of story, DaiLin was 28 years old.</p>
+<p>That story cited <a href="http://krebsonsecurity.com/wp-content/uploads/2012/11/WickedRose_andNCPH.pdf" target="_blank" rel="noopener noreferrer">a 2007 report</a> (PDF) from <strong>iDefense</strong>, which detailed DaiLin&#8217;s role as the leader of a state-sponsored, four-man hacking team called NCPH (short for Network Crack Program Hacker). According to iDefense, in 2006 the group was responsible for crafting a rootkit that took advantage of a zero-day vulnerability in Microsoft Word, and was used in attacks on “a large DoD entity” within the USA.</p>
+<p>“Wicked Rose and the NCPH hacking group are implicated in multiple Office based attacks over a two year period,” the iDefense report stated.</p>
+<p>When I first scanned Anvisoft at Virustotal.com back in 2012, none of the antivirus products detected it as suspicious or malicious. But in the days that followed, several antivirus products began flagging it for bundling at least two trojan horse programs designed to steal passwords from various online gaming platforms. <a href="https://krebsonsecurity.com/2020/09/chinese-antivirus-firm-was-part-of-apt41-supply-chain-attack/#more-53008" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+	<div id="between_article_ad" class="themonic-ad5"><a href="https://ww1.bugcrowd.com/ultimate-guide-ransomware-risk-disp/?utm_source=KrebsSecurity&amp;utm_medium=paid_advertising&amp;utm_campaign=banners&amp;utm_content=guides">
+<img src="/b-bugcrowd/4.png">
+</a></div>	<article id="post-52989" class="post-52989 post type-post status-publish format-standard has-post-thumbnail hentry category-neer-do-well-news tag-binance tag-danil-potekhin tag-dmitirii-karasavidi tag-ethereum tag-gemini tag-poloniex tag-u-s-justice-department tag-u-s-treasury-department">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2020/09/two-russians-charged-in-17m-cryptocurrency-phishing-spree/" title="Permalink to Two Russians Charged in $17M Cryptocurrency Phishing Spree" rel="bookmark">Two Russians Charged in $17M Cryptocurrency Phishing Spree</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">September 16, 2020</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2020/09/two-russians-charged-in-17m-cryptocurrency-phishing-spree/#comments">22 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>U.S. authorities today announced criminal charges and financial sanctions against two Russian men accused of stealing nearly $17 million worth of virtual currencies in a series of phishing attacks throughout 2017 and 2018 that spoofed websites for some of the most popular cryptocurrency exchanges.</p>
+<p><img loading="lazy" src="https://krebsonsecurity.com/wp-content/uploads/2020/09/coinphish.png" alt="" width="552" height="426" class="aligncenter size-full wp-image-52998" /><br />
+<strong>The Justice Department</strong> unsealed indictments against Russian nationals <strong>Danil Potekhin</strong> and <strong>Dmitirii Karasavidi</strong>, alleging the duo was responsible for a sophisticated phishing and money laundering campaign that resulted in the theft of $16.8 million in cryptocurrencies and fiat money from victims.</p>
+<p>Separately, the <strong>U.S. Treasury Department </strong> <a href="https://home.treasury.gov/news/press-releases/sm1123" rel="noopener noreferrer" target="_blank">announced economic sanctions against Potekhin and Karasavidi</a>, effectively freezing all property and interests of these persons (subject to U.S. jurisdiction) and making it a crime to transact with them. </p>
+<p>According to the indictments, the two men set up fake websites that spoofed login pages for the currency exchanges <strong>Binance</strong>, <strong>Gemini</strong> and <strong>Poloniex</strong>. Armed with stolen login credentials, the men allegedly stole more than $10 million from 142 Binance victims, $5.24 million from 158 Poloniex users, and $1.17 million from 42 Gemini customers.</p>
+<p>Prosecutors say the men then laundered the stolen funds through an array of intermediary cryptocurrency accounts &#8212; including compromised and fictitiously created accounts &#8212; on the targeted cryptocurrency exchange platforms. In addition, the two are alleged to have artificially inflated the value of their ill-gotten gains by engaging in cryptocurrency price manipulation using some of the stolen funds.</p>
+<p>For example, investigators alleged Potekhin and Karasavidi used compromised Poloniex accounts to place orders to purchase large volumes of &#8220;<a href="https://support.blockchain.com/hc/en-us/articles/360027772571-What-is-gas-" rel="noopener noreferrer" target="_blank">GAS</a>,&#8221; the digital currency token used to pay the cost of executing transactions on the <a href="https://neo.org/" rel="noopener noreferrer" target="_blank">NEO blockchain</a> &#8212; China&#8217;s first open source blockchain platform. </p>
+<p>&#8220;Using digital crurency in one victim Poloniex account, they placed an order to purchase approximately 8,000 GAS, thereby immediately increasing the market price of GAS from approximately $18 to $2,400,&#8221; the indictment explains. </p>
+<p>Potekhin and others then converted the artificially inflated GAS in their own fictitious Poloniex accounts into other cryptocurrencies, including Ethereum (ETH) and Bitcoin (BTC). From the complaint:</p>
+<blockquote><p>&#8220;Before the Eight Fictitious Poloniex Accounts were frozen, POTEKHIN and others transferred approximately 759 ETH to nine digital currency addresses. Through a sophisticated and layered manner, the ETH from these nine digital currency addresses was sent through multiple intermediary accounts, before ultimately being deposited into a Bitfinex account controlled by Karasavidi.&#8221;</p></blockquote>
+<p>The Treasury&#8217;s action today <a href="https://home.treasury.gov/policy-issues/financial-sanctions/recent-actions/20200916" rel="noopener noreferrer" target="_blank">lists several of the cryptocurrency accounts</a> thought to have been used by the defendants. Searching on some of those accounts at various cryptocurrency transaction tracking sites points to a number of phishing victims.</p>
+<p>&#8220;I would like to blow your bitch ass away, if you even had the balls to show yourself,&#8221; exclaimed one victim, posting in a comment <a href="https://etherscan.io/address/0x6aef2850c2ce2ef583ae8a36be3357080608bdc3#comments" rel="noopener noreferrer" target="_blank">on the Etherscan lookup service</a>. <a href="https://krebsonsecurity.com/2020/09/two-russians-charged-in-17m-cryptocurrency-phishing-spree/#more-52989" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+	<div class="themonic-ad2"><div class="a-statement">Advertisement</div><a href="https://www.akamai.com/blog/security/attacking-a-macro-security-problem-with-micro-segmentation?utm_source=krebsonsecurity&amp;utm_medium=display&amp;utm_id=GL_SecureWorkforce_Guardicore&amp;utm_campaign=F-MC-52610&amp;utm_content=Guardicore">
+<img src="/b-akamai/140.png">
+</a></div>	<article id="post-52428" class="post-52428 post type-post status-publish format-standard has-post-thumbnail hentry category-sunshine tag-david-bruno tag-jason-kane tag-jonathan-bibi tag-peiffer-wolf tag-safeswiss-secure-communication-ag tag-secure-swiss-data tag-the-private-office-of-john-bernard">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2020/09/due-diligence-that-money-cant-buy/" title="Permalink to Due Diligence That Money Can&#8217;t Buy" rel="bookmark">Due Diligence That Money Can&#8217;t Buy</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">September 14, 2020</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2020/09/due-diligence-that-money-cant-buy/#comments">42 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>Most of us automatically put our guard up when someone we don&#8217;t know promises something too good to be true. But when the too-good-to-be-true thing starts as our idea, sometimes that instinct fails to kick in. Here&#8217;s the story of how companies searching for investors to believe in their ideas can run into trouble.</p>
+<p><img loading="lazy" class="aligncenter wp-image-52977" src="https://krebsonsecurity.com/wp-content/uploads/2020/09/investmoney.png" alt="" width="571" height="406" /></p>
+<p>Nick is an investment banker who runs a firm that helps raise capital for its clients (Nick is not his real name, and like other investment brokers interviewed in this story spoke with KrebsOnSecurity on condition of anonymity). Nick&#8217;s company works primarily in the mergers and acquisitions space, and his job involves advising clients about which companies and investors might be a good bet.</p>
+<p>In one recent engagement, a client of Nick&#8217;s said they&#8217;d reached out to an investor from Switzerland &#8212; <a href="https://the-private-office.ch/" target="_blank" rel="noopener noreferrer">The Private Office of John Bernard</a> &#8212; whose name was included on a list of angel investors focused on technology startups.</p>
+<p>&#8220;We ran into a group that one of my junior guys found on a list of data providers that compiled information on investors,&#8221; Nick explained. &#8220;I told them what we do and said we were working with a couple of companies that were interested in financing, and asked them to send some materials over. The guy had a British accent, claimed to have made his money in tech and in the dot-com boom, and said he&#8217;d sold a company to Geocities that was then bought by Yahoo.&#8221;</p>
+<p>But Nick wasn&#8217;t convinced Mr. Bernard&#8217;s company was for real. Nick and his colleagues couldn&#8217;t locate the company Mr. Bernard claimed to have sold, and while Bernard said he was based in Switzerland, virtually all of his staff <a href="https://www.linkedin.com/search/results/people/?facetCurrentCompany=%5B%2218987858%22%5D&amp;origin=COMPANY_PAGE_CANNED_SEARCH" target="_blank" rel="noopener noreferrer">were all listed on LinkedIn</a> as residing in Ukraine.</p>
+<p>Nick told his clients about his reservations, but each nevertheless was excited that someone was finally interested enough to invest in their ideas.</p>
+<p>&#8220;The CEO of the client firm said, &#8216;This is great, someone is willing to believe in our company&#8217;,&#8221; Nick said. &#8220;After one phone call, he made an offer to invest tens of millions of dollars. I advised them not to pursue it, and one of the clients agreed. The other was very gung ho.&#8221;</p>
+<p>When companies wish to link up with investors, what follows involves a process known as &#8220;due diligence&#8221; wherein each side takes time to research the other&#8217;s finances, management, and any lurking legal liabilities or risks associated with the transaction. Typically, each party will cover their own due diligence costs, but sometimes the investor or the company that stands to benefit from the transaction will cover the associated fees for both parties.</p>
+<p>Nick said he wasn&#8217;t surprised when Mr. Bernard&#8217;s office insisted that its due diligence fees of tens of thousands of dollars be paid up front by his client. And he noticed the website for the due diligence firm that Mr. Bernard suggested using &#8212; <a href="https://www.insideknowledge.ch/" target="_blank" rel="noopener noreferrer">insideknowledge.ch</a> &#8212; also was filled with generalities and stock photos, just like John Bernard&#8217;s private office website.</p>
+<p>&#8220;He said we used to use big accounting firms for this but found them to be ineffective,&#8221; Nick said. &#8220;The company they wanted us to use looked like a real accounting firm, but we couldn&#8217;t find any evidence that they were real. Also, we asked to see an investment portfolio. He said he&#8217;s invested in over 30 companies, so I would expect to see a document that says, &#8220;here&#8217;s the various companies we&#8217;ve invested in.&#8221; But instead, we got two recommendation letters on letterhead saying how great these investors were.&#8221;</p>
+<p>KrebsOnSecurity located two other investment bankers who had similar experiences with Mr. Bernard&#8217;s office.</p>
+<p>&#8220;A number of us have been comparing notes on this guy, and he never actually delivers,&#8221; said one investment banker who asked not to be named because he did not have permission from his clients. &#8220;In each case, he agreed to invest millions with no push back, the documentation submitted from their end was shabby and unprofessional, and they seem focused on companies that will write a check for due diligence fees. After their fees are paid, the experience has been an ever increasing and inventive number of reasons why the deal can&#8217;t close, including health problems and all sorts of excuses.&#8221;</p>
+<p>Mr. Bernard&#8217;s investment firm did not respond to multiple requests for comment. The one technology company this author could tie to Mr. Bernard was <a href="https://web.archive.org/web/20171015221959/https://secureswissdata.com/" target="_blank" rel="noopener noreferrer">secureswissdata.com</a>, a Swiss concern that provides encrypted email and data services. The domain was registered in 2015 by Inside Knowledge. In February 2020, Secure Swiss Data <a href="https://finance.yahoo.com/news/safeswiss-com-acquires-secure-swiss-110010835.html" target="_blank" rel="noopener noreferrer">was purchased in an &#8220;undisclosed multimillion buyout&#8221;</a> by <strong>SafeSwiss Secure Communication AG</strong>.</p>
+<p>SafeSwiss co-CEO and Secure Swiss Data founder <a href="https://www.linkedin.com/in/david-bruno-62864512/" target="_blank" rel="noopener noreferrer">David Bruno</a> said he couldn&#8217;t imagine that Mr. Bernard would be involved in anything improper.</p>
+<p>&#8220;I can confirm that I know John <span class="il">Bernard</span> and have always found him very honourable and straight forward in my dealings with him as an investor,&#8221; Bruno said. &#8220;To be honest with you, I struggle to believe that he would, or would even need to be, involved in the activity you mentioned, and quite frankly I&#8217;ve never heard about those things.&#8221; <a href="https://krebsonsecurity.com/2020/09/due-diligence-that-money-cant-buy/#more-52428" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-52959" class="post-52959 post type-post status-publish format-standard hentry category-security-tools category-patches tag-alan-liska tag-cve-2020-1210 tag-cve-2020-16875 tag-dustin-childs tag-ivanti tag-microsoft-exchange-server tag-microsoft-patch-tuesday-september-2020 tag-microsoft-sharepoint tag-recorded-future tag-tenable tag-todd-schell tag-zero-day-initiative">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2020/09/microsoft-patch-tuesday-sept-2020-edition/" title="Permalink to Microsoft Patch Tuesday, Sept. 2020 Edition" rel="bookmark">Microsoft Patch Tuesday, Sept. 2020 Edition</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">September 8, 2020</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2020/09/microsoft-patch-tuesday-sept-2020-edition/#comments">56 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p><strong>Microsoft </strong>today released updates to remedy nearly 130 security vulnerabilities in its<strong> Windows</strong> operating system and supported software. None of the flaws are known to be currently under active exploitation, but 23 of them could be exploited by malware or malcontents to seize complete control of Windows computers with little or no help from users.</p>
+<p><img loading="lazy" class="aligncenter size-full wp-image-52647" src="https://krebsonsecurity.com/wp-content/uploads/2020/08/windowsec.png" alt="" width="579" height="425" /></p>
+<p>The majority of the most dangerous or &#8220;critical&#8221; bugs deal with issues in Microsoft&#8217;s various Windows operating systems and its web browsers, <strong>Internet Explorer</strong> and <strong>Edge</strong>. September marks the seventh month in a row Microsoft has shipped fixes for more than 100 flaws in its products, and the fourth month in a row that it fixed more than 120.</p>
+<p>Among the chief concerns for enterprises this month is <a href="https://portal.msrc.microsoft.com/en-US/security-guidance/advisory/CVE-2020-16875" target="_blank" rel="noopener noreferrer">CVE-2020-16875</a>, which involves a critical flaw in the email software <strong>Microsoft Exchange Server 2016 and 2019. </strong>An attacker could leverage the Exchange bug to run code of his choosing just by sending a booby-trapped email to a vulnerable Exchange server.</p>
+<p>&#8220;That doesn’t quite make it wormable, but it’s about the worst-case scenario for Exchange servers,&#8221; said <strong>Dustin Childs</strong>, of <strong>Trend Micro&#8217;s Zero Day Initiative</strong>. &#8220;We have seen the previously patched Exchange bug <a href="https://krebsonsecurity.com/2020/03/microsoft-patch-tuesday-march-2020-edition/" target="_blank" rel="noopener noreferrer">CVE-2020-0688</a> used in the wild, and that requires authentication. We’ll likely see this one in the wild soon. This should be your top priority.&#8221;</p>
+<p>Also not great for companies to have around is <a href="https://portal.msrc.microsoft.com/en-US/security-guidance/advisory/CVE-2020-1210" target="_blank" rel="noopener noreferrer">CVE-2020-1210</a>, which is a remote code execution flaw in supported versions of <strong>Microsoft Sharepoint</strong> document management software that bad guys could attack by uploading a file to a vulnerable Sharepoint site. Security firm <strong>Tenable</strong> notes that this bug is reminiscent of <a href="https://portal.msrc.microsoft.com/en-US/security-guidance/advisory/CVE-2019-0604" target="_blank" rel="noopener noreferrer">CVE-2019-0604</a>, another Sharepoint problem that&#8217;s been exploited for cybercriminal gains since April 2019.</p>
+<p>Microsoft fixed at least five other serious bugs in Sharepoint versions 2010 through 2019 that also could be used to compromise systems running this software. And because ransomware purveyors have a history of seizing upon Sharepoint flaws to wreak havoc inside enterprises, companies should definitely prioritize deployment of these fixes, says <strong>Alan Liska</strong>, senior security architect at <strong>Recorded Future</strong>. <a href="https://krebsonsecurity.com/2020/09/microsoft-patch-tuesday-sept-2020-edition/#more-52959" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-45506" class="post-45506 post type-post status-publish format-standard has-post-thumbnail hentry category-other">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2020/09/the-joys-of-owning-an-og-email-account/" title="Permalink to The Joys of Owning an &#8216;OG&#8217; Email Account" rel="bookmark">The Joys of Owning an &#8216;OG&#8217; Email Account</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">September 2, 2020</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2020/09/the-joys-of-owning-an-og-email-account/#comments">265 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>When you own a short email address at a popular email provider, you are bound to get gobs of spam, and more than a few alerts about random people trying to seize control over the account. If your account name is short and desirable enough, this kind of activity can make the account less reliable for day-to-day communications because it tends to bury emails you do want to receive. But there is also a puzzling side to all this noise: Random people tend to use your account as if it were theirs, and often for some fairly sensitive services online.</p>
+<p><img loading="lazy" class="alignright wp-image-24825 size-medium" src="https://krebsonsecurity.com/wp-content/uploads/2014/02/emaildevil-285x285.jpg" alt="" width="285" height="285" srcset="https://krebsonsecurity.com/wp-content/uploads/2014/02/emaildevil-285x285.jpg 285w, https://krebsonsecurity.com/wp-content/uploads/2014/02/emaildevil-150x150.jpg 150w, https://krebsonsecurity.com/wp-content/uploads/2014/02/emaildevil-600x600.jpg 600w, https://krebsonsecurity.com/wp-content/uploads/2014/02/emaildevil.jpg 693w" sizes="(max-width: 285px) 100vw, 285px" /></p>
+<p>About 16 years ago &#8212; <a href="https://www.quora.com/How-long-was-Gmail-in-private-(invitation-only)-beta" target="_blank" rel="noopener noreferrer">back when you actually had to be invited by an existing Google Mail user in order to open a new Gmail account</a> &#8212; I was able to get hold of a very short email address on the service that hadn&#8217;t yet been reserved. Naming the address here would only invite more spam and account hijack attempts, but let&#8217;s just say the account name has something to do with computer hacking.</p>
+<p>Because it&#8217;s a relatively short username, it is what&#8217;s known as an &#8220;<strong>OG</strong>&#8221; or &#8220;<strong>original gangster</strong>&#8221; account. These account names tend to be highly prized among certain communities, <a href="https://krebsonsecurity.com/?s=original+gangster&amp;x=0&amp;y=0" target="_blank" rel="noopener noreferrer">who busy themselves with trying to hack them for personal use or resale</a>. Hence, the constant account takeover requests.</p>
+<p>What is endlessly fascinating is how many people think it&#8217;s a good idea to sign up for important accounts online using my email address. Naturally, my account has been signed up involuntarily for nearly every dating and porn website there is. That is to be expected, I suppose.</p>
+<p>But what still blows me away is the number of financial and other sensitive accounts I could access if I were of a devious mind. This particular email address has accounts that I never asked for at <strong>H&amp;R Block</strong>, <strong>Turbotax</strong>, <strong>TaxAct</strong>, <strong>iTunes</strong>, <strong>LastPass</strong>, <strong>Dashlane</strong>, <strong>MyPCBackup</strong>, and <strong>Credit Karma</strong>, to name just a few. I&#8217;ve lost count of the number of active bank, ISP and web hosting accounts I can tap into.</p>
+<p>I&#8217;m perpetually amazed by how many other Gmail users and people on similarly-sized webmail providers have opted to pick my account as a backup address if they should ever lose access to their inbox. Almost certainly, these users just lazily picked my account name at random when asked for a backup email &#8212; apparently without fully realizing the potential ramifications of doing so. At last check, my account is listed as the backup for more than three dozen <strong>Yahoo</strong>, <strong>Microsoft</strong> and other Gmail accounts and their associated file-sharing services.</p>
+<p>If for some reason I ever needed to order pet food or medications online, my phantom accounts at <strong>Chewy</strong>, <strong>Coupaw</strong> and <strong>Petco</strong> have me covered. If any of my <strong>Weber</strong> grill parts ever fail, I&#8217;m set for life on that front. The Weber emails I periodically receive remind me of a piece I wrote many years ago for <em>The Washington Post</em>, about companies sending email from [companynamehere]@donotreply.com, without considering that someone might own that domain. Someone did, <a href="http://voices.washingtonpost.com/securityfix/2008/03/they_told_you_not_to_reply.html" target="_blank" rel="noopener noreferrer">and the results were often hilarious</a>.</p>
+<p>It&#8217;s probably a good thing I&#8217;m not massively into computer games, because the online gaming (and gambling) profiles tied to my old Gmail account are innumerable.</p>
+<p>For several years until recently, I was receiving the monthly statements intended for an older gentleman in India who had the bright idea of using my Gmail account to manage his substantial retirement holdings. Thankfully, after reaching out to him he finally removed my address from his profile, although he never responded to questions about how this might have happened.</p>
+<p>On balance, I&#8217;ve learned it&#8217;s better just not to ask. On multiple occasions, I&#8217;d spend a few minutes trying to figure out if the email addresses using my Gmail as a backup were created by real people or just spam bots of some sort. And then I&#8217;d send a polite note to those that fell into the former camp, explaining why this was a bad idea and ask what motivated them to do so.</p>
+<p>Perhaps because my Gmail account name includes a hacking term, the few responses I&#8217;ve received have been less than cheerful. Despite my including detailed instructions on how to undo what she&#8217;d done, one woman in Florida screamed in an ALL CAPS reply that I was trying to phish her and that her husband was a police officer who would soon hunt me down. Alas, I still get notifications anytime she logs into her Yahoo account.</p>
+<p>Probably for the same reason the Florida lady assumed I was a malicious hacker, my account constantly gets requests from random people who wish to hire me to hack into someone else&#8217;s account. I never respond to those either, although I&#8217;ll admit that sometimes when I&#8217;m procrastinating over something the temptation arises.</p>
+<p>Losing access to your inbox can open you up to <a href="https://krebsonsecurity.com/2013/06/the-value-of-a-hacked-email-account/" target="_blank" rel="noopener noreferrer">a cascading nightmare of other problems</a>. Having a backup email address tied to your inbox is a good idea, but obviously only if you also control that backup address. <a href="https://krebsonsecurity.com/2020/09/the-joys-of-owning-an-og-email-account/#more-45506" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-52812" class="post-52812 post type-post status-publish format-standard has-post-thumbnail hentry category-sunshine category-comingstorm tag-cauce tag-invaluement-com tag-kromatix tag-neil-schwartzman tag-rob-mcewen tag-sendgrid tag-steve-pugh tag-twilio">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2020/08/sendgrid-under-siege-from-hacked-accounts/" title="Permalink to Sendgrid Under Siege from Hacked Accounts" rel="bookmark">Sendgrid Under Siege from Hacked Accounts</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">August 28, 2020</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2020/08/sendgrid-under-siege-from-hacked-accounts/#comments">70 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>Email service provider <strong>Sendgrid</strong> is grappling with an unusually large number of customer accounts whose passwords have been cracked, sold to spammers, and abused for sending phishing and email malware attacks. Sendgrid&#8217;s parent company <strong>Twilio</strong> says it is working on a plan to require multi-factor authentication for all of its customers, but that solution may not come fast enough for organizations having trouble dealing with the fallout in the meantime.</p>
+<div id="attachment_52894" style="width: 607px" class="wp-caption aligncenter"><img aria-describedby="caption-attachment-52894" loading="lazy" class=" wp-image-52894" src="https://krebsonsecurity.com/wp-content/uploads/2020/08/sendgrid.png" alt="" width="597" height="391" srcset="https://krebsonsecurity.com/wp-content/uploads/2020/08/sendgrid.png 792w, https://krebsonsecurity.com/wp-content/uploads/2020/08/sendgrid-580x380.png 580w, https://krebsonsecurity.com/wp-content/uploads/2020/08/sendgrid-768x503.png 768w" sizes="(max-width: 597px) 100vw, 597px" /><p id="caption-attachment-52894" class="wp-caption-text">Image: Wikipedia</p></div>
+<p>Many companies use Sendgrid to communicate with their customers via email, or else pay marketing firms to do that on their behalf using Sendgrid&#8217;s systems. Sendgrid takes steps to validate that new customers are legitimate businesses, and that emails sent through its platform carry the proper digital signatures that other companies can use to validate that the messages have been authorized by its customers.</p>
+<p>But this also means when a Sendgrid customer account gets hacked and used to send malware or phishing scams, the threat is particularly acute because a large number of organizations allow email from Sendgrid&#8217;s systems to sail through their spam-filtering systems.</p>
+<p>To make matters worse, links included in emails sent through Sendgrid are obfuscated (mainly for tracking deliverability and other metrics), so it is not immediately clear to recipients where on the Internet they will be taken when they click.</p>
+<p>Dealing with compromised customer accounts is a constant challenge for any organization doing business online today, and certainly Sendgrid is not the only email marketing platform dealing with this problem. But according to multiple emails from readers, recent threads on <a href="https://www.mail-archive.com/search?l=mailop%40mailop.org&amp;q=sendgrid" target="_blank" rel="noopener noreferrer">several anti-spam</a> <a href="https://cwiki.apache.org/confluence/display/SPAMASSASSIN/MailingLists" target="_blank" rel="noopener noreferrer">discussion lists</a>, and interviews with people in the anti-spam community, over the past few months there has been a marked increase in malicious, phishous and outright spammy email being blasted out via Sendgrid&#8217;s servers.</p>
+<p><strong>Rob McEwen</strong> is CEO of <a href="https://www.invaluement.com/" target="_blank" rel="noopener noreferrer">Invaluement.com</a>, an anti-spam firm whose data on junk email trends are used to improve the spam-blocking technologies deployed by several Fortune 100 companies. McEwen said no other email service provider has come close to generating the volume of spam that&#8217;s been emanating from Sendgrid accounts lately.</p>
+<p>&#8220;As far as the nasty criminal phishes and viruses, I think there&#8217;s not even a close second in terms of how bad it&#8217;s been with Sendgrid over the past few months,&#8221; he said.</p>
+<p>Trying to filter out bad emails coming from a major email provider that so many legitimate companies rely upon to reach their customers can be a dicey business. If you filter the emails too aggressively you end up with an unacceptable number of &#8220;false positives,&#8221; i.e., benign or even desirable emails that get flagged as spam and sent to the junk folder or blocked altogether.</p>
+<p>But McEwen said the incidence of malicious spam coming from Sendgrid has gotten so bad that he recently launched a new anti-spam block list specifically to filter out email from Sendgrid accounts that have been known to be blasting large volumes of junk or malicious email.</p>
+<p>&#8220;Before I implemented this in my own filtering system a week ago, I was getting three to four phone calls or stern emails a week from angry customers wondering why these malicious emails were getting through to their inboxes,&#8221; McEwen said. &#8220;And I just am not seeing anything this egregious in terms of viruses and spams from the other email service providers.&#8221; <a href="https://krebsonsecurity.com/2020/08/sendgrid-under-siege-from-hacked-accounts/#more-52812" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-52861" class="post-52861 post type-post status-publish format-standard hentry category-sunshine category-neer-do-well-news tag-hieu-minh-ngo tag-identity-theft tag-lance-ealy tag-matt-oneill tag-tax-refund-fraud tag-u-s-secret-service">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2020/08/confessions-of-an-id-theft-kingpin-part-ii/" title="Permalink to Confessions of an ID Theft Kingpin, Part II" rel="bookmark">Confessions of an ID Theft Kingpin, Part II</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">August 27, 2020</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2020/08/confessions-of-an-id-theft-kingpin-part-ii/#comments">67 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>Yesterday&#8217;s piece told the tale of <strong>Hieu Minh Ngo</strong>, a hacker the <strong>U.S. Secret Service</strong> described as someone who caused more material financial harm to more Americans than any other convicted cybercriminal. Ngo was recently deported back to his home country after serving more than seven years in prison for running multiple identity theft services. He now says he wants to use his experience to convince other cybercriminals to use their skills for good. Here&#8217;s a look at what happened after he got busted.</p>
+<div id="attachment_52874" style="width: 460px" class="wp-caption aligncenter"><img aria-describedby="caption-attachment-52874" loading="lazy" class="size-full wp-image-52874" src="https://krebsonsecurity.com/wp-content/uploads/2020/08/hieuminhngo.png" alt="" width="450" height="421" /><p id="caption-attachment-52874" class="wp-caption-text">Hieu Minh Ngo, 29, in a recent photo.</p></div>
+<p><a href="https://krebsonsecurity.com/2020/08/confessions-of-an-id-theft-kingpin-part-i/" target="_blank" rel="noopener noreferrer">Part I of this series</a> ended with Ngo in handcuffs after disembarking a flight from his native Vietnam to Guam, where he believed he was going to meet another cybercriminal who&#8217;d promised to hook him up with the mother of all consumer data caches.</p>
+<p>Ngo had been making more than $125,000 a month reselling ill-gotten access to some of the biggest data brokers on the planet. But the Secret Service discovered his various accounts at these data brokers and had them shut down one by one. Ngo became obsessed with restarting his business and maintaining his previous income. By this time, his ID theft services had earned roughly USD $3 million.</p>
+<p>As this was going on, Secret Service agents used an intermediary to trick Ngo into thinking he&#8217;d trodden on the turf of another cybercriminal. From Part I:</p>
+<blockquote><p>The Secret Service contacted Ngo through an intermediary in the United Kingdom — a known, convicted cybercriminal who agreed to play along. The U.K.-based collaborator told Ngo he had personally shut down Ngo’s access to Experian because he had been there first and Ngo was interfering with his business.</p>
+<p>“The U.K. guy told Ngo, ‘Hey, you’re treading on my turf, and I decided to lock you out. But as long as you’re paying a vig through me, your access won’t go away’,” the Secret Service&#8217;s <strong>Matt O’Neill</strong> recalled.</p>
+<p>After several months of conversing with his apparent U.K.-based tormentor, Ngo agreed to meet him in Guam to finalize the deal. But immediately after stepping off of the plane in Guam, he was apprehended by Secret Service agents.</p>
+<p>“One of the names of his identity theft services was findget[.]me,” O’Neill said. “We took that seriously, and we did like he asked.”</p></blockquote>
+<p>In an interview with KrebsOnSecurity, Ngo said he spent about two months in a Guam jail awaiting transfer to the United States. A month passed before he was allowed a 10 minute phone call to his family and explain what he&#8217;d gotten himself into.</p>
+<p>&#8220;This was a very tough time,&#8221; Ngo said. &#8220;They were so sad and they were crying a lot.&#8221;</p>
+<p>First stop on his prosecution tour was New Jersey, where he ultimately pleaded guilty to hacking into <strong>MicroBilt</strong>, the first of several data brokers whose consumer databases would power different iterations of his identity theft service over the years.</p>
+<p>Next came New Hampshire, where another guilty plea forced him to testify in three different trials against identity thieves who had used his services for years. Among them was <a href="https://krebsonsecurity.com/?s=lance+ealy&amp;x=0&amp;y=0" target="_blank" rel="noopener noreferrer">Lance Ealy</a>, a serial ID thief from Dayton, Ohio who used Ngo&#8217;s service to purchase more than 350 &#8220;<strong>fullz</strong>&#8221; &#8212; a term used to describe a package of everything one would need to steal someone&#8217;s identity, including their Social Security number, mother&#8217;s maiden name, birth date, address, phone number, email address, bank account information and passwords.</p>
+<p>Ealy used Ngo&#8217;s service primarily to conduct <a href="https://krebsonsecurity.com/?s=tax+refund+fraud&amp;x=0&amp;y=0" target="_blank" rel="noopener noreferrer">tax refund fraud</a> with the <strong>U.S. Internal Revenue Service</strong> (IRS), claiming huge refunds in the names of ID theft victims who first learned of the fraud when they went to file their taxes and found someone else had beat them to it.</p>
+<p>Ngo&#8217;s cooperation with the government ultimately led to 20 arrests, with a dozen of those defendants lured into the open by O&#8217;Neill and other Secret Service agents posing as Ngo.</p>
+<p>The Secret Service had difficulty pinning down the exact amount of financial damage inflicted by Ngo&#8217;s various ID theft services over the years, primarily because those services only kept records of what customers searched for &#8212; not which records they purchased.</p>
+<p>But based on the records they did have, the government estimated that Ngo&#8217;s service enabled approximately $1.1 billion in new account fraud at banks and retailers throughout the United States, and roughly $64 million in tax refund fraud with the states and the IRS.</p>
+<p>&#8220;We interviewed a number of Ngo&#8217;s customers, who were pretty open about why they were using his services,&#8221; O&#8217;Neill said. <span class="pullquote pqright">&#8220;Many of them told us the same thing: Buying identities was so much better for them than stolen payment card data, because card data could be used once or twice before it was no good to them anymore. But identities could be used over and over again for years.&#8221;</span></p>
+<p>O&#8217;Neill said he still marvels at the fact that Ngo&#8217;s name is practically unknown when compared to the world&#8217;s most infamous credit card thieves, some of whom were responsible for stealing hundreds of millions of cards from big box retail merchants.</p>
+<p>&#8220;I don&#8217;t know of anyone who has come close to causing more material harm than Ngo did to the average American,&#8221; O&#8217;Neill said. &#8220;But most people have probably never heard of him.&#8221;</p>
+<p>Ngo said he wasn&#8217;t surprised that his services were responsible for so much financial damage. But he was utterly unprepared to hear about the human toll. Throughout the court proceedings, Ngo sat through story after dreadful story of how his work had ruined the financial lives of people harmed by his services.</p>
+<p>&#8220;When I was running the service, I didn&#8217;t really care because I didn&#8217;t know my customers and I didn&#8217;t know much about what they were doing with it,&#8221; Ngo said. &#8220;But during my case, the federal court received like 13,000 letters from victims who complained they lost their houses, jobs, or could no longer afford to buy a home or maintain their financial life because of me. That made me feel really bad, and I realized I&#8217;d been a terrible person.&#8221;</p>
+<p>Even as he bounced from one federal detention facility to the next, Ngo always seemed to encounter ID theft victims wherever he went, including prison guards, healthcare workers and counselors.</p>
+<p>&#8220;When I was in jail at Beaumont, Texas I talked to one of the correctional officers there who shared with me a story about her friend who lost her identity and then lost everything after that,&#8221; Ngo recalled. &#8220;Her whole life fell apart. I don&#8217;t know if that lady was one of my victims, but that story made me feel sick. I know now that what I was doing was just evil.&#8221;</p>
+<p><div id="attachment_52832" style="width: 605px" class="wp-caption aligncenter"><a class="lightbox" href="https://krebsonsecurity.com/wp-content/uploads/2020/08/ussearch.png"><img aria-describedby="caption-attachment-52832" loading="lazy" class="wp-image-52832" src="https://krebsonsecurity.com/wp-content/uploads/2020/08/ussearch.png" alt="" width="595" height="446" srcset="https://krebsonsecurity.com/wp-content/uploads/2020/08/ussearch.png 889w, https://krebsonsecurity.com/wp-content/uploads/2020/08/ussearch-580x435.png 580w, https://krebsonsecurity.com/wp-content/uploads/2020/08/ussearch-768x575.png 768w" sizes="(max-width: 595px) 100vw, 595px" /></a><p id="caption-attachment-52832" class="wp-caption-text">Ngo&#8217;s former ID theft service usearching[.]info.</p></div> <a href="https://krebsonsecurity.com/2020/08/confessions-of-an-id-theft-kingpin-part-ii/#more-52861" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-52808" class="post-52808 post type-post status-publish format-standard hentry category-sunshine category-neer-do-well-news tag-court-ventures tag-experian tag-findget tag-global-investigative-operations-center tag-hieu-minh-ngo tag-hieupc tag-matt-oneill tag-microbilt tag-superget tag-tlo tag-trans-union tag-u-s-info-search tag-u-s-secret-service">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2020/08/confessions-of-an-id-theft-kingpin-part-i/" title="Permalink to Confessions of an ID Theft Kingpin, Part I" rel="bookmark">Confessions of an ID Theft Kingpin, Part I</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">August 26, 2020</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2020/08/confessions-of-an-id-theft-kingpin-part-i/#comments">43 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>At the height of his cybercriminal career, the hacker known as &#8220;<strong>Hieupc</strong>&#8221; was earning $125,000 a month running a bustling identity theft service that siphoned consumer dossiers from some of the world&#8217;s top data brokers. That is, until his greed and ambition played straight into an elaborate snare set by the <strong>U.S. Secret Service</strong>. Now, after more than seven years in prison Hieupc is back in his home country and hoping to convince other would-be cybercrooks to use their computer skills for good.</p>
+<div id="attachment_52847" style="width: 218px" class="wp-caption alignright"><img aria-describedby="caption-attachment-52847" loading="lazy" class="wp-image-52847 size-full" src="https://krebsonsecurity.com/wp-content/uploads/2020/08/ngo-p.png" alt="" width="208" height="316" /><p id="caption-attachment-52847" class="wp-caption-text">Hieu Minh Ngo, in his teens.</p></div>
+<p>For several years beginning around 2010, a lone teenager in Vietnam named <strong>Hieu Minh Ngo</strong> ran one of the Internet&#8217;s most profitable and popular services for selling &#8220;<strong>fullz</strong>,&#8221; stolen identity records that included a consumer&#8217;s name, date of birth, Social Security number and email and physical address.</p>
+<p>Ngo got his treasure trove of consumer data by hacking and social engineering his way into a string of major data brokers. By the time the Secret Service caught up with him in 2013, he&#8217;d made over $3 million selling fullz data to identity thieves and organized crime rings operating throughout the United States.</p>
+<p><strong>Matt O&#8217;Neill</strong> is the Secret Service agent who in February 2013 successfully executed a scheme to lure Ngo out of Vietnam and into Guam, where the young hacker was arrested and sent to the mainland U.S. to face prosecution. O&#8217;Neill now heads the agency&#8217;s <strong>Global Investigative Operations Center</strong>, which supports investigations into transnational organized criminal groups.</p>
+<p>O&#8217;Neill said he opened the investigation into Ngo&#8217;s identity theft business after reading about it in a 2011 KrebsOnSecurity story, &#8220;<a href="https://krebsonsecurity.com/2011/11/how-much-is-your-identity-worth/" target="_blank" rel="noopener noreferrer">How Much is Your Identity Worth?</a>&#8221; According to O&#8217;Neill, what&#8217;s remarkable about Ngo is that to this day his name is virtually unknown among the pantheon of infamous convicted cybercriminals, the majority of whom were busted for trafficking in huge quantities of stolen credit cards.</p>
+<p>Ngo&#8217;s businesses enabled an entire generation of cybercriminals to commit an estimated $1 billion worth of <em>new account fraud</em>, and to sully the credit histories of countless Americans in the process.</p>
+<p><span class="pullquote pqleft">&#8220;I don&#8217;t know of any other cybercriminal who has caused more material financial harm to more Americans than Ngo,&#8221;</span> O&#8217;Neill told KrebsOnSecurity. &#8220;He was selling the personal information on more than 200 million Americans and allowing anyone to buy it for pennies apiece.&#8221;</p>
+<p>Freshly released from the U.S. prison system and deported back to Vietnam, Ngo is currently finishing up a mandatory three-week COVID-19 quarantine at a government-run facility. He contacted KrebsOnSecurity from inside this facility with the stated aim of telling his little-known story, and to warn others away from following in his footsteps.</p>
+<h4>BEGINNINGS</h4>
+<p>Ten years ago, then 19-year-old hacker Ngo was a regular on the Vietnamese-language computer hacking forums. Ngo says he came from a middle-class family that owned an electronics store, and that his parents bought him a computer when he was around 12 years old. From then on out, he was hooked.</p>
+<p>In his late teens, he traveled to New Zealand to study English at a university there. By that time, he was already an administrator of several dark web hacker forums, and between his studies he discovered a vulnerability in the school&#8217;s network that exposed payment card data.</p>
+<p>&#8220;I did contact the IT technician there to fix it, but nobody cared so I hacked the whole system,&#8221; Ngo recalled. &#8220;Then I used the same vulnerability to hack other websites. I was stealing lots of credit cards.&#8221;</p>
+<p>Ngo said he decided to use the card data to buy concert and event tickets from <strong>Ticketmaster</strong>, and then sell the tickets at a New Zealand auction site called <a href="https://www.trademe.co.nz/" target="_blank" rel="noopener noreferrer">TradeMe</a>. The university later learned of the intrusion and Ngo&#8217;s role in it, and the Auckland police got involved. Ngo&#8217;s travel visa was not renewed after his first semester ended, and in retribution <a href="http://staceyknott.blogspot.com/2009/08/ex-unitec-student-hacks-unitec-website.html" target="_blank" rel="noopener noreferrer">he attacked the university&#8217;s site</a>, shutting it down for at least two days.</p>
+<p>Ngo said he started taking classes again back in Vietnam, but soon found he was spending most of his time on cybercrime forums.</p>
+<p><span class="pullquote pqright">&#8220;I went from hacking for fun to hacking for profits when I saw how easy it was to make money stealing customer databases,&#8221;</span> Ngo said. &#8220;I was hanging out with some of my friends from the underground forums and we talked about planning a new criminal activity.&#8221;</p>
+<p>&#8220;My friends said doing credit cards and bank information is very dangerous, so I started thinking about selling identities,&#8221; Ngo continued. &#8220;At first I thought well, it&#8217;s just information, maybe it&#8217;s not that bad because it&#8217;s not related to bank accounts directly. But I was wrong, and the money I started making very fast just blinded me to a lot of things.&#8221;</p>
+<h4>MICROBILT</h4>
+<p>His first big target was a consumer credit reporting company in New Jersey called <a href="https://en.wikipedia.org/wiki/MicroBilt_Corporation" target="_blank" rel="noopener noreferrer">MicroBilt</a>.</p>
+<p>&#8220;I was hacking into their platform and stealing their customer database so I could use their customer logins to access their [consumer] databases,&#8221; Ngo said. &#8220;I was in their systems for almost a year without them knowing.&#8221;</p>
+<p>Very soon after gaining access to MicroBilt, Ngo says, he stood up <strong>Superget[.]info</strong>, a website that advertised the sale of individual consumer records. Ngo said initially his service was quite manual, requiring customers to request specific states or consumers they wanted information on, and he would conduct the lookups by hand.</p>
+<p><div id="attachment_12183" style="width: 604px" class="wp-caption aligncenter"><a class="lightbox" href="https://krebsonsecurity.com/wp-content/uploads/2011/11/supergethome.png"><img aria-describedby="caption-attachment-12183" loading="lazy" class="wp-image-12183" src="https://krebsonsecurity.com/wp-content/uploads/2011/11/supergethome.png" alt="" width="594" height="347" srcset="https://krebsonsecurity.com/wp-content/uploads/2011/11/supergethome.png 1001w, https://krebsonsecurity.com/wp-content/uploads/2011/11/supergethome-300x175.png 300w" sizes="(max-width: 594px) 100vw, 594px" /></a><p id="caption-attachment-12183" class="wp-caption-text">Ngo&#8217;s former identity theft service, superget[.]info</p></div>&#8220;I was trying to get more records at once, but the speed of our Internet in Vietnam then was very slow,&#8221; Ngo recalled. &#8220;I couldn&#8217;t download it because the database was so huge. So I just manually search for whoever need identities.&#8221;</p>
+<p>But Ngo would soon work out how to use more powerful servers in the United States to automate the collection of larger amounts of consumer data from MicroBilt&#8217;s systems, and from other data brokers. As I wrote of Ngo&#8217;s service back in November 2011:</p>
+<blockquote><p>&#8220;Superget lets users search for specific individuals by name, city, and state. Each “credit” costs USD$1, and a successful hit on a Social Security number or date of birth costs 3 credits each. The more credits you buy, the cheaper the searches are per credit: Six credits cost $4.99; 35 credits cost $20.99, and $100.99 buys you 230 credits. Customers with special needs can avail themselves of the “reseller plan,” which promises 1,500 credits for $500.99, and 3,500 credits for $1000.99.</p>
+<p>&#8220;Our Databases are updated EVERY DAY,&#8221; the site’s owner enthuses. &#8220;About 99% nearly 100% US people could be found, more than any sites on the internet now.&#8221;</p></blockquote>
+<p>Ngo&#8217;s intrusion into MicroBilt eventually was detected, and the company kicked him out of their systems. But he says he got back in using another vulnerability.</p>
+<p>&#8220;I was hacking them and it was back and forth for months,&#8221; Ngo said. &#8220;They would discover [my accounts] and fix it, and I would discover a new vulnerability and hack them again.&#8221;</p>
+<h4>COURT (AD)VENTURES, AND EXPERIAN</h4>
+<p>This game of cat and mouse continued until Ngo found a much more reliable and stable source of consumer data: A U.S. based company called <strong>Court Ventures</strong>, which aggregated public records from court documents. Ngo wasn&#8217;t interested in the data collected by Court Ventures, but rather in its data sharing agreement with a third-party data broker called <strong>U.S. Info Search</strong>, which had access to far more sensitive consumer records.</p>
+<p>Using forged documents and more than a few lies, Ngo was able to convince Court Ventures that he was a private investigator based in the United States.</p>
+<p>&#8220;At first [when] I sign up they asked for some documents to verify,&#8221; Ngo said. &#8220;So I just used some skill about social engineering and went through the security check.&#8221;</p>
+<p>Then, in March 2012, something even more remarkable happened: Court Ventures was purchased by <strong>Experian</strong>, one of the big three major consumer credit bureaus in the United States. And for nine months after the acquisition, Ngo was able to maintain his access.</p>
+<p><img loading="lazy" class="aligncenter wp-image-52840" src="https://krebsonsecurity.com/wp-content/uploads/2020/08/experian-cv.png" alt="" width="596" height="127" srcset="https://krebsonsecurity.com/wp-content/uploads/2020/08/experian-cv.png 1356w, https://krebsonsecurity.com/wp-content/uploads/2020/08/experian-cv-580x124.png 580w, https://krebsonsecurity.com/wp-content/uploads/2020/08/experian-cv-940x200.png 940w, https://krebsonsecurity.com/wp-content/uploads/2020/08/experian-cv-768x164.png 768w" sizes="(max-width: 596px) 100vw, 596px" /></p>
+<p>&#8220;After that, the database was under control by Experian,&#8221; he said. &#8220;I was paying Experian good money, thousands of dollars a month.&#8221;</p>
+<p>Whether anyone at Experian ever performed due diligence on the accounts grandfathered in from Court Ventures is unclear. But it wouldn&#8217;t have taken a rocket surgeon to figure out that this particular customer was up to something fishy.</p>
+<p>For one thing, Ngo paid the monthly invoices for his customers&#8217; data requests using wire transfers from a multitude of banks around the world, but mostly from new accounts at financial institutions in China, Malaysia and Singapore.</p>
+<p>O&#8217;Neill said Ngo&#8217;s identity theft website generated tens of thousands of queries each month. For example, the first invoice Court Ventures sent Ngo in December 2010 was for 60,000 queries. By the time Experian acquired the company, Ngo&#8217;s service had attracted more than 1,400 regular customers, and was averaging 160,000 monthly queries.</p>
+<p>More importantly, Ngo&#8217;s profit margins were enormous.</p>
+<p>&#8220;His service was quite the racket,&#8221; he said. &#8220;Court Ventures charged him 14 cents per lookup, but he charged his customers about $1 for each query.&#8221;</p>
+<p>By this time, O&#8217;Neill and his fellow Secret Service agents had served dozens of subpoenas tied to Ngo&#8217;s identity theft service, including one that granted them access to the email account he used to communicate with customers and administer his site. The agents discovered several emails from Ngo instructing an accomplice to pay Experian using wire transfers from different Asian banks. <a href="https://krebsonsecurity.com/2020/08/confessions-of-an-id-theft-kingpin-part-i/#more-52808" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-52783" class="post-52783 post type-post status-publish format-standard has-post-thumbnail hentry category-latest-warnings category-security-tools category-comingstorm tag-cisa tag-covid-19 tag-fbi tag-vishing">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2020/08/fbi-cisa-echo-warnings-on-vishing-threat/" title="Permalink to FBI, CISA Echo Warnings on &#8216;Vishing&#8217; Threat" rel="bookmark">FBI, CISA Echo Warnings on &#8216;Vishing&#8217; Threat</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">August 21, 2020</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2020/08/fbi-cisa-echo-warnings-on-vishing-threat/#comments">20 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>The <strong>Federal Bureau of Investigation</strong> (FBI) and the <strong>Cybersecurity and Infrastructure Security Agency</strong> (CISA) on Thursday issued a joint alert to warn about the growing threat from voice phishing or &#8220;<strong>vishing</strong>&#8221; attacks targeting companies. The advisory came less than 24 hours after KrebsOnSecurity <a href="https://krebsonsecurity.com/2020/08/voice-phishers-targeting-corporate-vpns/" target="_blank" rel="noopener noreferrer">published an in-depth</a> look at a crime group offering a service that people can hire to steal VPN credentials and other sensitive data from employees working remotely during the Coronavirus pandemic.</p>
+<p><a class="lightbox" href="https://krebsonsecurity.com/wp-content/uploads/2020/08/jsa.png"><img loading="lazy" class="aligncenter wp-image-52786" src="https://krebsonsecurity.com/wp-content/uploads/2020/08/jsa.png" alt="" width="592" height="378" srcset="https://krebsonsecurity.com/wp-content/uploads/2020/08/jsa.png 752w, https://krebsonsecurity.com/wp-content/uploads/2020/08/jsa-580x370.png 580w" sizes="(max-width: 592px) 100vw, 592px" /></a></p>
+<p>&#8220;The COVID-19 pandemic has resulted in a mass shift to working from home, resulting in increased use of corporate virtual private networks (VPNs) and elimination of in-person verification,&#8221; the alert reads. &#8220;In mid-July 2020, cybercriminals started a vishing campaign—gaining access to employee tools at multiple companies with indiscriminate targeting — with the end goal of monetizing the access.&#8221;</p>
+<p><a href="https://krebsonsecurity.com/2020/08/voice-phishers-targeting-corporate-vpns/" target="_blank" rel="noopener noreferrer">As noted in Wednesday&#8217;s story</a>, the agencies said the phishing sites set up by the attackers tend to include hyphens, the target company&#8217;s name, and certain words &#8212; such as &#8220;support,&#8221; &#8220;ticket,&#8221; and &#8220;employee.&#8221; The perpetrators focus on social engineering new hires at the targeted company, and impersonate staff at the target company&#8217;s IT helpdesk.</p>
+<p>The <a href="https://krebsonsecurity.com/wp-content/uploads/2020/08/fbi-cisa-vishing.pdf" target="_blank" rel="noopener noreferrer">joint FBI/CISA alert</a> (PDF) says the vishing gang also compiles dossiers on employees at the specific companies using mass scraping of public profiles on social media platforms, recruiter and marketing tools, publicly available background check services, and open-source research. From the alert:</p>
+<blockquote><p>&#8220;Actors first began using unattributed Voice over Internet Protocol (VoIP) numbers to call targeted employees on their personal cellphones, and later began incorporating spoofed numbers of other offices and employees in the victim company. The actors used social engineering techniques and, in some cases, posed as members of the victim company’s IT help desk, using their knowledge of the employee&#8217;s personally identifiable information—including name, position, duration at company, and home address—to gain the trust of the targeted employee.&#8221;</p>
+<p>&#8220;The actors then convinced the targeted employee that a new VPN link would be sent and required their login, including any 2FA [2-factor authentication] or OTP [one-time passwords]. The actor logged the information provided by the employee and used it in real-time to gain access to corporate tools using the employee’s account.&#8221;</p></blockquote>
+<p>The alert notes that in some cases the unsuspecting employees approved the 2FA or OTP prompt, either accidentally or believing it was the result of the earlier access granted to the help desk impersonator. In other cases, the attackers were able to intercept the one-time codes by targeting the employee with <a href="https://krebsonsecurity.com/?s=sim+swapping&amp;x=0&amp;y=0" target="_blank" rel="noopener noreferrer">SIM swapping</a>, which involves social engineering people at mobile phone companies into giving them control of the target&#8217;s phone number. <a href="https://krebsonsecurity.com/2020/08/fbi-cisa-echo-warnings-on-vishing-threat/#more-52783" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-52718" class="post-52718 post type-post status-publish format-standard has-post-thumbnail hentry category-latest-warnings category-comingstorm tag-allison-nixon tag-domaintools tag-security-keys tag-unit-221b tag-urlscan-io tag-vishing tag-vpn-phishing tag-yubico tag-yubikey tag-zack-allen tag-zerofox">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2020/08/voice-phishers-targeting-corporate-vpns/" title="Permalink to Voice Phishers Targeting Corporate VPNs" rel="bookmark">Voice Phishers Targeting Corporate VPNs</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">August 19, 2020</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2020/08/voice-phishers-targeting-corporate-vpns/#comments">36 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>The COVID-19 epidemic has brought a wave of email phishing attacks that try to trick work-at-home employees into giving away credentials needed to remotely access their employers&#8217; networks. But one increasingly brazen group of crooks is taking your standard phishing attack to the next level, marketing a voice phishing service that uses a combination of one-on-one phone calls and custom phishing sites to steal VPN credentials from employees.</p>
+<p><img loading="lazy" class="aligncenter wp-image-45224" src="https://krebsonsecurity.com/wp-content/uploads/2018/09/phonescam.png" alt="" width="598" height="377" /></p>
+<p>According to interviews with several sources, this hybrid phishing gang has a remarkably high success rate, and operates primarily through paid requests or &#8220;bounties,&#8221; where customers seeking access to specific companies or accounts can hire them to target employees working remotely at home.</p>
+<p>And over the past six months, the criminals responsible have created dozens if not hundreds of phishing pages targeting some of the world&#8217;s biggest corporations. For now at least, they appear to be focusing primarily on companies in the financial, telecommunications and social media industries.</p>
+<p>&#8220;For a number of reasons, this kind of attack is really effective,&#8221; said <strong>Allison Nixon</strong>, chief research officer at New York-based cyber investigations firm <a href="https://www.unit221b.com/" target="_blank" rel="noopener noreferrer">Unit 221B</a>. &#8220;Because of the Coronavirus, we have all these major corporations that previously had entire warehouses full of people who are now working remotely. As a result the attack surface has just exploded.&#8221;</p>
+<h4>TARGET: NEW HIRES</h4>
+<p>A typical engagement begins with a series of phone calls to employees working remotely at a targeted organization. The phishers will explain that they&#8217;re calling from the employer&#8217;s IT department to help troubleshoot issues with the company&#8217;s virtual private networking (VPN) technology.</p>
+<div id="attachment_52747" style="width: 530px" class="wp-caption aligncenter"><img aria-describedby="caption-attachment-52747" loading="lazy" class="size-full wp-image-52747" src="https://krebsonsecurity.com/wp-content/uploads/2020/08/bofaticket.png" alt="" width="520" height="529" /><p id="caption-attachment-52747" class="wp-caption-text">The employee phishing page bofaticket[.]com. Image: urlscan.io</p></div>
+<p>The goal is to convince the target either to divulge their credentials over the phone or to input them manually at a website set up by the attackers that mimics the organization&#8217;s corporate email or VPN portal.</p>
+<p><strong>Zack Allen</strong> is director of threat intelligence for <a href="https://www.zerofox.com/" target="_blank" rel="noopener noreferrer">ZeroFOX</a>, a Baltimore-based company that helps customers detect and respond to risks found on social media and other digital channels. Allen has been working with Nixon and several dozen other researchers from various security firms to monitor the activities of this prolific phishing gang in a bid to disrupt their operations.</p>
+<p>Allen said the attackers tend to focus on phishing new hires at targeted companies, and will often pose as new employees themselves working in the company&#8217;s IT division. To make that claim more believable, the phishers will create LinkedIn profiles and seek to connect those profiles with other employees from that same organization to support the illusion that the phony profile actually belongs to someone inside the targeted firm.</p>
+<p>&#8220;They&#8217;ll say &#8216;Hey, I&#8217;m new to the company, but you can check me out on LinkedIn&#8217; or Microsoft Teams or Slack, or whatever platform the company uses for internal communications,&#8221; Allen said. &#8220;There tends to be a lot of pretext in these conversations around the communications and work-from-home applications that companies are using. But eventually, they tell the employee they have to fix their VPN and can they please log into this website.&#8221;</p>
+<h4>SPEAR VISHING</h4>
+<p>The domains used for these pages often invoke the company&#8217;s name, followed or preceded by hyphenated terms such as &#8220;vpn,&#8221; &#8220;ticket,&#8221; &#8220;employee,&#8221; or &#8220;portal.&#8221; The phishing sites also may include working links to the organization&#8217;s other internal online resources to make the scheme seem more believable if a target starts hovering over links on the page.</p>
+<p>Allen said a typical voice phishing or &#8220;vishing&#8221; attack by this group involves at least two perpetrators: One who is social engineering the target over the phone, and another co-conspirator who takes any credentials entered at the phishing page and quickly uses them to log in to the target company&#8217;s VPN platform in real-time.</p>
+<p>Time is of the essence in these attacks because many companies that rely on VPNs for remote employee access also require employees to supply some type of multi-factor authentication in addition to a username and password &#8212; such as a one-time numeric code generated by a mobile app or text message. And in many cases, those codes are only good for a short duration &#8212; often measured in seconds or minutes.</p>
+<p>But these vishers can easily sidestep that layer of protection, because their phishing pages simply request the one-time code as well. </p>
+<div id="attachment_52743" style="width: 608px" class="wp-caption aligncenter"><a class="lightbox" href="https://krebsonsecurity.com/wp-content/uploads/2020/08/attgl.png"><img aria-describedby="caption-attachment-52743" loading="lazy" class="wp-image-52743" src="https://krebsonsecurity.com/wp-content/uploads/2020/08/attgl.png" alt="" width="598" height="417" srcset="https://krebsonsecurity.com/wp-content/uploads/2020/08/attgl.png 810w, https://krebsonsecurity.com/wp-content/uploads/2020/08/attgl-580x405.png 580w, https://krebsonsecurity.com/wp-content/uploads/2020/08/attgl-768x536.png 768w" sizes="(max-width: 598px) 100vw, 598px" /></a><p id="caption-attachment-52743" class="wp-caption-text">A phishing page (helpdesk-att[.]com) targeting AT&amp;T employees. Image: urlscan.io</p></div>
+<p>Allen said it matters little to the attackers if the first few social engineering attempts fail. Most targeted employees are working from home or can be reached on a mobile device. If at first the attackers don&#8217;t succeed, they simply try again with a different employee.</p>
+<p>And with each passing attempt, the phishers can glean important details from employees about the target&#8217;s operations, such as company-specific lingo used to describe its various online assets, or its corporate hierarchy.</p>
+<p>Thus, each unsuccessful attempt actually teaches the fraudsters how to refine their social engineering approach with the next mark within the targeted organization, Nixon said.</p>
+<p>&#8220;These guys are calling companies over and over, trying to learn how the corporation works from the inside,&#8221; she said. <a href="https://krebsonsecurity.com/2020/08/voice-phishers-targeting-corporate-vpns/#more-52718" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+				
+			
+								<div class="themonic-pagination"><div class='pagination'><ul><li><a href='https://krebsonsecurity.com/'>&laquo; First</a></li><li><a href='https://krebsonsecurity.com/page/16/' class='inactive'>&lsaquo; Previous</a></li><li><a href='https://krebsonsecurity.com/page/14/' class='inactive'>14</a></li><li><a href='https://krebsonsecurity.com/page/15/' class='inactive'>15</a></li><li><a href='https://krebsonsecurity.com/page/16/' class='inactive'>16</a></li><li class='current'><span class='currenttext'>17</span></li><li><a href='https://krebsonsecurity.com/page/18/' class='inactive'>18</a></li><li><a href='https://krebsonsecurity.com/page/19/' class='inactive'>19</a></li><li><a href='https://krebsonsecurity.com/page/20/' class='inactive'>20</a></li><li><a href='https://krebsonsecurity.com/page/18/' class='inactive'>Next &rsaquo;</a></li><a class='inactive' href='https://krebsonsecurity.com/page/209/'>Last &raquo;</a></ul></div></div>
+					<div style="display: block; clear: both;"></div>
+			
+		
+
+	
+
+		</div><!-- #content -->
+	</div><!-- #primary -->
+
+
+			<div id="secondary" class="widget-area" role="complementary">
+
+        <div id="sidebar_ad" class="widget themonic-ad5"><div class="a-statement">Advertisement</div><a href="https://www.cybereason.com/platform/anti-ransomware?utm_source=krebs&amp;utm_medium=display&amp;utm_campaign=q4">
+<img src="/b-cybereason/15.jpg">
+</a></div>
+
+                        <br><div class="widget themonic-ad1"><div class="a-statement">Advertisement</div><a href="https://www.akamai.com/why-akamai/the-internet-of-possibilities?utm_source=krebsonsecurity&amp;utm_medium=display&amp;utm_campaign=F-MC-54978">
+<img src="/b-akamai/146.png">
+</a></div><br>
+
+			<aside id="custom_html-2" class="widget_text widget widget_custom_html"><p class="widget-title">Mailing List</p><div class="textwidget custom-html-widget"><a href="/subscribe/">Subscribe here</a></div></aside><aside id="search-2" class="widget widget_search"><p class="widget-title">Search KrebsOnSecurity</p><form role="search" method="get" id="searchform" class="searchform" action="https://krebsonsecurity.com/">
+				<div>
+					<label class="screen-reader-text" for="s">Search for:</label>
+					<input type="text" value="" name="s" id="s" />
+					<input type="submit" id="searchsubmit" value="Search" />
+				</div>
+			</form></aside>
+		<aside id="recent-posts-3" class="widget widget_recent_entries">
+		<p class="widget-title">Recent Posts</p>
+		<ul>
+											<li>
+					<a href="https://krebsonsecurity.com/2021/12/canada-charges-its-most-prolific-cybercriminal/">Canada Charges Its &#8220;Most Prolific Cybercriminal&#8221;</a>
+									</li>
+											<li>
+					<a href="https://krebsonsecurity.com/2021/12/who-is-the-network-access-broker-babam/">Who Is the Network Access Broker &#8216;Babam&#8217;?</a>
+									</li>
+											<li>
+					<a href="https://krebsonsecurity.com/2021/12/ubiquiti-developer-charged-with-extortion-causing-2020-breach/">Ubiquiti Developer Charged With Extortion, Causing 2020 &#8220;Breach&#8221;</a>
+									</li>
+											<li>
+					<a href="https://krebsonsecurity.com/2021/11/the-internet-is-held-together-with-spit-baling-wire/">The Internet is Held Together With Spit &#038; Baling Wire</a>
+									</li>
+											<li>
+					<a href="https://krebsonsecurity.com/2021/11/arrest-in-ransom-your-employer-email-scheme/">Arrest in &#8216;Ransom Your Employer&#8217; Email Scheme</a>
+									</li>
+					</ul>
+
+		</aside><aside id="text-2" class="widget widget_text">			<div class="textwidget"><a name="subscribe2"></a></div>
+		</aside><aside id="widget_sp_image-15" class="widget widget_sp_image"><p class="widget-title">Spam Nation</p><a href="https://www.amazon.com/Spam-Nation-Organized-Cybercrime-Epidemic-ebook/dp/B00L5QGBL0/ref=dp_kinw_strp_1" target="_blank" class="widget_sp_image-image-link" title="Spam Nation"><img width="266" height="404" alt="Spam Nation" class="attachment-266x404 aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2015/04/spamnation-nyt.png" /></a><div class="widget_sp_image-description" ><p>A New York Times Bestseller! </p>
+</div></aside><aside id="widget_sp_image-25" class="widget widget_sp_image"><p class="widget-title">Thinking of a Cybersecurity Career?</p><a href="https://krebsonsecurity.com/2020/07/thinking-of-a-cybersecurity-career-read-this/" target="_blank" class="widget_sp_image-image-link" title="Thinking of a Cybersecurity Career? Read This."><img width="625" height="424" alt="Thinking of a Cybersecurity Career?" class="attachment-full" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2020/07/codepeople.png 625w, https://krebsonsecurity.com/wp-content/uploads/2020/07/codepeople-580x393.png 580w" sizes="(max-width: 625px) 100vw, 625px" src="https://krebsonsecurity.com/wp-content/uploads/2020/07/codepeople.png" /></a><div class="widget_sp_image-description" ><p>Read this.</p>
+</div></aside><aside id="widget_sp_image-3" class="widget widget_sp_image"><p class="widget-title">All About Skimmers </p><a href="https://krebsonsecurity.com/all-about-skimmers/" target="_blank" class="widget_sp_image-image-link" title="All About Skimmers "><img width="299" height="232" alt="All About Skimmers" class="attachment-299x232 aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2010/08/skimgallery1.jpg" /></a><div class="widget_sp_image-description" ><p>Click image for my skimmer series.</p>
+</div></aside><aside id="categories-2" class="widget widget_categories"><p class="widget-title">Story Categories</p>
+			<ul>
+					<li class="cat-item cat-item-5"><a href="https://krebsonsecurity.com/category/sunshine/" title="Includes investigative blog posts meant to shine a light on the darker corners of the Internet.">A Little Sunshine</a>
+</li>
+	<li class="cat-item cat-item-2240"><a href="https://krebsonsecurity.com/category/all-about-skimmers/">All About Skimmers</a>
+</li>
+	<li class="cat-item cat-item-9085"><a href="https://krebsonsecurity.com/category/ashley-madison-breach/">Ashley Madison breach</a>
+</li>
+	<li class="cat-item cat-item-3191"><a href="https://krebsonsecurity.com/category/breadcrumbs/">Breadcrumbs</a>
+</li>
+	<li class="cat-item cat-item-3771"><a href="https://krebsonsecurity.com/category/data-breaches/" title="Stories about data breaches at retailers, corporations, governments and organizations of all sizes.">Data Breaches</a>
+</li>
+	<li class="cat-item cat-item-4624"><a href="https://krebsonsecurity.com/category/ddos-for-hire/">DDoS-for-Hire</a>
+</li>
+	<li class="cat-item cat-item-9173"><a href="https://krebsonsecurity.com/category/employment-fraud/">Employment Fraud</a>
+</li>
+	<li class="cat-item cat-item-2151"><a href="https://krebsonsecurity.com/category/how-to-break-into-security/" title="If you&#039;ve ever wanted career advice on how to make a shift into the security industry, look no further.">How to Break Into Security</a>
+</li>
+	<li class="cat-item cat-item-87"><a href="https://krebsonsecurity.com/category/latest-warnings/">Latest Warnings</a>
+</li>
+	<li class="cat-item cat-item-4071"><a href="https://krebsonsecurity.com/category/neer-do-well-news/">Ne&#039;er-Do-Well News</a>
+</li>
+	<li class="cat-item cat-item-9"><a href="https://krebsonsecurity.com/category/other/">Other</a>
+</li>
+	<li class="cat-item cat-item-1306"><a href="https://krebsonsecurity.com/category/pharma-wars/">Pharma Wars</a>
+</li>
+	<li class="cat-item cat-item-8240"><a href="https://krebsonsecurity.com/category/ransomware/">Ransomware</a>
+</li>
+	<li class="cat-item cat-item-599"><a href="https://krebsonsecurity.com/category/security-tools/">Security Tools</a>
+</li>
+	<li class="cat-item cat-item-8298"><a href="https://krebsonsecurity.com/category/sim-swapping/">SIM Swapping</a>
+</li>
+	<li class="cat-item cat-item-4079"><a href="https://krebsonsecurity.com/category/spam-nation/">Spam Nation</a>
+</li>
+	<li class="cat-item cat-item-1"><a href="https://krebsonsecurity.com/category/smallbizvictims/" title="Posts in this category will include new stories similar to those told in the Small Business Victims category on The Washington Post&#039;s Security Fix blog, which chronicled the methods organized cyber thieve are using to steal hundreds of thousands of dollars from dozens of small- to mid-sized companies around the country.">Target: Small Businesses</a>
+</li>
+	<li class="cat-item cat-item-5167"><a href="https://krebsonsecurity.com/category/tax-refund-fraud/">Tax Refund Fraud</a>
+</li>
+	<li class="cat-item cat-item-3"><a href="https://krebsonsecurity.com/category/comingstorm/" title="This category includes blog posts about computer and Internet security threats now and on the horizon.">The Coming Storm</a>
+</li>
+	<li class="cat-item cat-item-4"><a href="https://krebsonsecurity.com/category/patches/" title="Short posts on the latest security updates for widely-used software.
+">Time to Patch</a>
+</li>
+	<li class="cat-item cat-item-21"><a href="https://krebsonsecurity.com/category/web-fraud-2-0/">Web Fraud 2.0</a>
+</li>
+			</ul>
+
+			</aside><aside id="widget_sp_image-5" class="widget widget_sp_image"><p class="widget-title">The Value of a Hacked PC</p><a href="https://krebsonsecurity.com/2012/10/the-scrap-value-of-a-hacked-pc-revisited/" target="_blank" class="widget_sp_image-image-link" title="The Value of a Hacked PC"><img width="285" height="180" alt="valuehackedpc " class="attachment-285x180 aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2012/12/valuehackedpc-285x180.png" /></a><div class="widget_sp_image-description" ><p>Badguy uses for your PC</p>
+</div></aside><aside id="widget_sp_image-9" class="widget widget_sp_image"><p class="widget-title">Badguy Uses for Your Email </p><a href="https://krebsonsecurity.com/2013/06/the-value-of-a-hacked-email-account/" target="_self" class="widget_sp_image-image-link" title="Badguy Uses for Your Email "><img width="296" height="170" alt="Badguy Uses for Your Email " class="attachment-full aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2013/06/badguyemail.png 296w, https://krebsonsecurity.com/wp-content/uploads/2013/06/badguyemail-285x163.png 285w" sizes="(max-width: 296px) 100vw, 296px" src="https://krebsonsecurity.com/wp-content/uploads/2013/06/badguyemail.png" /></a><div class="widget_sp_image-description" ><p>Your email account may be worth far more than you imagine.</p>
+</div></aside><aside id="widget_sp_image-24" class="widget widget_sp_image"><a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&#038;hosted_button_id=MCCRKHWRX57HS" id="donate" target="_self" class="widget_sp_image-image-link"><img width="250" height="55" alt="Donate to Krebs On Security" class="attachment-medium aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2016/09/donatepaypal2-1.png" /></a></aside><aside id="most_popular_posts-3" class="widget widget_most_popular_posts">
+<p class="widget-title">Most Popular Posts</p>
+<ul>	<li><a href="https://krebsonsecurity.com/2018/07/sextortion-scam-uses-recipients-hacked-passwords/">Sextortion Scam Uses Recipient's Hacked Passwords</a> (1076)</li>
+	<li><a href="https://krebsonsecurity.com/2015/07/online-cheating-site-ashleymadison-hacked/">Online Cheating Site AshleyMadison Hacked</a> (798)</li>
+	<li><a href="https://krebsonsecurity.com/2013/12/sources-target-investigating-data-breach/">Sources: Target Investigating Data Breach</a> (620)</li>
+	<li><a href="https://krebsonsecurity.com/2020/11/trump-fires-security-chief-christopher-krebs/">Trump Fires Security Chief Christopher Krebs</a> (534)</li>
+	<li><a href="https://krebsonsecurity.com/2013/12/cards-stolen-in-target-breach-flood-underground-markets/">Cards Stolen in Target Breach Flood Underground Markets</a> (445)</li>
+	<li><a href="https://krebsonsecurity.com/2013/05/reports-liberty-reserve-founder-arrested-site-shuttered/">Reports: Liberty Reserve Founder Arrested, Site Shuttered</a> (416)</li>
+	<li><a href="https://krebsonsecurity.com/2015/08/was-the-ashley-madison-database-leaked/">Was the Ashley Madison Database Leaked?</a> (376)</li>
+	<li><a href="https://krebsonsecurity.com/2021/01/ddos-guard-to-forfeit-internet-space-occupied-by-parler/">DDoS-Guard To Forfeit Internet Space Occupied by Parler</a> (374)</li>
+	<li><a href="https://krebsonsecurity.com/2014/05/true-goodbye-using-truecrypt-is-not-secure/">True Goodbye: 'Using TrueCrypt Is Not Secure'</a> (363)</li>
+	<li><a href="https://krebsonsecurity.com/2015/08/who-hacked-ashley-madison/">Who Hacked Ashley Madison?</a> (361)</li>
+</ul>
+</aside>
+<aside id="media_image-2" class="widget widget_media_image"><p class="widget-title">Why So Many Top Hackers Hail from Russia</p><a href="https://krebsonsecurity.com/2017/06/why-so-many-top-hackers-hail-from-russia/"><img width="580" height="389" src="https://krebsonsecurity.com/wp-content/uploads/2017/06/computered-580x389.png" class="image wp-image-39684  attachment-medium size-medium" alt="" loading="lazy" style="max-width: 100%; height: auto;" srcset="https://krebsonsecurity.com/wp-content/uploads/2017/06/computered-580x389.png 580w, https://krebsonsecurity.com/wp-content/uploads/2017/06/computered-768x514.png 768w, https://krebsonsecurity.com/wp-content/uploads/2017/06/computered-940x630.png 940w, https://krebsonsecurity.com/wp-content/uploads/2017/06/computered.png 1551w" sizes="(max-width: 580px) 100vw, 580px" /></a></aside><aside id="widget_sp_image-11" class="widget widget_sp_image"><p class="widget-title">Category: Web Fraud 2.0</p><a href="https://krebsonsecurity.com/category/web-fraud-2-0/" target="_blank" class="widget_sp_image-image-link" title="Category: Web Fraud 2.0"><img width="227" height="400" alt="Criminnovations" class="attachment-medium aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2013/11/cybercrimeinnovations-227x400.png" /></a><div class="widget_sp_image-description" ><p>Innovations from the Underground</p>
+</div></aside><aside id="widget_sp_image-12" class="widget widget_sp_image"><a href="https://krebsonsecurity.com/2014/03/are-credit-monitoring-services-worth-it/" target="_blank" class="widget_sp_image-image-link"><img width="285" height="189" class="attachment-medium aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2014/03/shreddedID-copy-285x189.png 285w, https://krebsonsecurity.com/wp-content/uploads/2014/03/shreddedID-copy-600x399.png 600w, https://krebsonsecurity.com/wp-content/uploads/2014/03/shreddedID-copy.png 849w" sizes="(max-width: 285px) 100vw, 285px" src="https://krebsonsecurity.com/wp-content/uploads/2014/03/shreddedID-copy-285x189.png" /></a><div class="widget_sp_image-description" ><p>ID Protection Services Examined</p>
+</div></aside><aside id="widget_sp_image-13" class="widget widget_sp_image"><p class="widget-title">Is Antivirus Dead?</p><a href="https://krebsonsecurity.com/2014/05/antivirus-is-dead-long-live-antivirus/" target="_blank" class="widget_sp_image-image-link" title="Is Antivirus Dead?"><img width="285" height="161" alt="Is Antivirus Dead?" class="attachment-medium aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2014/05/cryptservices-285x161.png 285w, https://krebsonsecurity.com/wp-content/uploads/2014/05/cryptservices-600x339.png 600w, https://krebsonsecurity.com/wp-content/uploads/2014/05/cryptservices.png 945w" sizes="(max-width: 285px) 100vw, 285px" src="https://krebsonsecurity.com/wp-content/uploads/2014/05/cryptservices-285x161.png" /></a><div class="widget_sp_image-description" ><p>The reasons for its decline</p>
+</div></aside><aside id="widget_sp_image-14" class="widget widget_sp_image"><p class="widget-title">The Growing Tax Fraud Menace</p><a href="https://krebsonsecurity.com/category/tax-refund-fraud/" target="_blank" class="widget_sp_image-image-link" title="The Growing Tax Fraud Menace"><img width="285" height="285" alt="The Growing Tax Fraud Menace" class="attachment-medium aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2014/04/taxfraud-285x285.jpg 285w, https://krebsonsecurity.com/wp-content/uploads/2014/04/taxfraud-150x150.jpg 150w, https://krebsonsecurity.com/wp-content/uploads/2014/04/taxfraud-600x600.jpg 600w, https://krebsonsecurity.com/wp-content/uploads/2014/04/taxfraud.jpg 693w" sizes="(max-width: 285px) 100vw, 285px" src="https://krebsonsecurity.com/wp-content/uploads/2014/04/taxfraud-285x285.jpg" /></a><div class="widget_sp_image-description" ><p>File 'em Before the Bad Guys Can </p>
+</div></aside><aside id="widget_sp_image-17" class="widget widget_sp_image"><p class="widget-title">Inside a Carding Shop</p><a href="https://krebsonsecurity.com/2014/06/peek-inside-a-professional-carding-shop/" target="_blank" class="widget_sp_image-image-link" title="Inside a Carding Shop"><img width="194" height="340" alt="Inside a Carding Shop" class="attachment-medium aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2014/06/mcdumpalsjoined.png" /></a><div class="widget_sp_image-description" ><p>A crash course in carding. </p>
+</div></aside><aside id="widget_sp_image-18" class="widget widget_sp_image"><p class="widget-title">Beware Social Security Fraud</p><a href="https://krebsonsecurity.com/2013/09/crooks-hijack-retirement-funds-via-ssa-portal/" target="_blank" class="widget_sp_image-image-link" title="Beware Social Security Fraud"><img width="285" height="293" alt="Beware Social Security Fraud" class="attachment-full aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2016/09/myssn-285x293.png" /></a><div class="widget_sp_image-description" ><p>Sign up, or Be Signed Up! </p>
+</div></aside><aside id="widget_sp_image-2" class="widget widget_sp_image"><p class="widget-title">How Was Your Card Stolen?</p><a href="https://krebsonsecurity.com/2015/01/how-was-your-credit-card-stolen/" target="_blank" class="widget_sp_image-image-link" title="How Was Your Card Stolen?"><img width="285" height="285" alt="How Was Your Card Stolen?" class="attachment-full aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2016/09/carddominoes-285x285.jpg 285w, https://krebsonsecurity.com/wp-content/uploads/2016/09/carddominoes-285x285-150x150.jpg 150w" sizes="(max-width: 285px) 100vw, 285px" src="https://krebsonsecurity.com/wp-content/uploads/2016/09/carddominoes-285x285.jpg" /></a><div class="widget_sp_image-description" ><p>Finding out is not so easy. </p>
+</div></aside><aside id="widget_sp_image-22" class="widget widget_sp_image"><p class="widget-title">Krebs&#8217;s 3 Rules&#8230;</p><a href="https://krebsonsecurity.com/2011/05/krebss-3-basic-rules-for-online-safety/" target="_blank" class="widget_sp_image-image-link" title="Krebs&#8217;s 3 Rules&#8230;"><img width="300" height="300" alt="Krebs&#8217;s 3 Rules&#8230;" class="attachment-medium aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2011/05/three-300x300.jpg 300w, https://krebsonsecurity.com/wp-content/uploads/2011/05/three-150x150.jpg 150w, https://krebsonsecurity.com/wp-content/uploads/2011/05/three.jpg 347w" sizes="(max-width: 300px) 100vw, 300px" src="https://krebsonsecurity.com/wp-content/uploads/2011/05/three-300x300.jpg" /></a><div class="widget_sp_image-description" ><p>...For Online Safety. </p>
+</div></aside>		</div><!-- #secondary -->
+		</div><!-- #main .wrapper -->
+	
+	<div id="publisho-footer" class="widget-area">
+				<div class="footer-widget">
+                				</div>
+				<div class="footer-widget">
+								</div>
+				<div class="footer-widget">
+								</div>
+	</div>
+
+	<div class="site-wordpress">
+					&copy; Krebs on Security<br>
+	</div>
+	<!-- .site-info --><div class="clear"></div>
+</div><!-- #page -->
+
+<script type='text/javascript' src='https://krebsonsecurity.com/wp-content/themes/kos-mar2021/js/slicknav.js?ver=5.8.2' id='publisho-mobile-navigation-js'></script>
+<script type='text/javascript' src='https://krebsonsecurity.com/wp-includes/js/wp-embed.min.js?ver=5.8.2' id='wp-embed-js'></script>
+</body>
+</html>
+<!--
+Performance optimized by W3 Total Cache. Learn more: https://www.boldgrid.com/w3-total-cache/
+
+Object Caching 316/325 objects using memcached
+Page Caching using memcached 
+Database Caching 7/14 queries in 0.004 seconds using memcached
+
+Served from: krebsonsecurity.com @ 2021-12-10 15:34:53 by W3 Total Cache
+-->

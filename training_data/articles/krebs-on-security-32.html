@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<!--[if IE 7]>
+<html class="ie ie7" lang="en-US">
+<![endif]-->
+<!--[if IE 8]>
+<html class="ie ie8" lang="en-US">
+<![endif]-->
+<!--[if !(IE 7) | !(IE 8)  ]><!-->
+<html lang="en-US">
+<!--<![endif]-->
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width" />
+<link rel="profile" href="http://gmpg.org/xfn/11" />
+<!--[if lt IE 9]>
+<script src="https://krebsonsecurity.com/wp-content/themes/kos-mar2021/js/html5.js" type="text/javascript"></script>
+<![endif]-->
+<title>Krebs on Security &#8211; Page 32 &#8211; In-depth security news and investigation</title>
+<meta name='robots' content='max-image-preview:large' />
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="Krebs on Security &raquo; Feed" href="https://krebsonsecurity.com/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Krebs on Security &raquo; Comments Feed" href="https://krebsonsecurity.com/comments/feed/" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.1.0\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.1.0\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/krebsonsecurity.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=5.8.2"}};
+			!function(e,a,t){var n,r,o,i=a.createElement("canvas"),p=i.getContext&&i.getContext("2d");function s(e,t){var a=String.fromCharCode;p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,e),0,0);e=i.toDataURL();return p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,t),0,0),e===i.toDataURL()}function c(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(o=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},r=0;r<o.length;r++)t.supports[o[r]]=function(e){if(!p||!p.fillText)return!1;switch(p.textBaseline="top",p.font="600 32px Arial",e){case"flag":return s([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])?!1:!s([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!s([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]);case"emoji":return!s([10084,65039,8205,55357,56613],[10084,65039,8203,55357,56613])}return!1}(o[r]),t.supports.everything=t.supports.everything&&t.supports[o[r]],"flag"!==o[r]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[o[r]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(n=t.source||{}).concatemoji?c(n.concatemoji):n.wpemoji&&n.twemoji&&(c(n.twemoji),c(n.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+	<link rel='stylesheet' id='colorbox-theme1-css'  href='https://krebsonsecurity.com/wp-content/plugins/jquery-lightbox-for-native-galleries/colorbox/theme1/colorbox.css?ver=1.3.14' type='text/css' media='screen' />
+<link rel='stylesheet' id='wp-block-library-css'  href='https://krebsonsecurity.com/wp-includes/css/dist/block-library/style.min.css?ver=5.8.2' type='text/css' media='all' />
+<link rel='stylesheet' id='contact-form-7-css'  href='https://krebsonsecurity.com/wp-content/plugins/contact-form-7/includes/css/styles.css?ver=5.5.3' type='text/css' media='all' />
+<link rel='stylesheet' id='publisho-style-css'  href='https://krebsonsecurity.com/wp-content/themes/kos-mar2021/style.css?subver=1.2&#038;ver=5.8.2' type='text/css' media='all' />
+<style id='publisho-style-inline-css' type='text/css'>
+
+	.themonic-nav .current-menu-item > a, .themonic-nav .current-menu-ancestor > a, .themonic-nav .current_page_item > a, .themonic-nav .current_page_ancestor > a {
+		background: #cc6600;
+	}
+	.themonic-nav ul.nav-menu, .themonic-nav div.nav-menu > ul {
+		border-bottom: 5px solid #cc6600;
+	}
+	#site-navigation .topheadmenu a {
+    background: rgba(0, 0, 0, 0);
+	}
+	.themonic-nav li a:hover {
+		background: #cc6600;
+	}
+	.themonic-nav li:hover {
+		background: #cc6600;
+	}.wrapper .flexslider {margin: 0 0 30px;}.frontp .btm-wrap {
+    border-top: 1px solid #e9e9e9;
+	}
+	.entry-summary {
+    border-top: none;
+	}.frontp .btm-wrap { margin-bottom: 30px;}.site { font-size:14px;}.site { font-family:'Roboto', arial ;}
+</style>
+<link rel='stylesheet' id='publisho-custom-style-css'  href='https://krebsonsecurity.com/wp-content/themes/kos-mar2021/custom.css?subver=1.2&#038;ver=5.8.2' type='text/css' media='all' />
+<!--[if lt IE 9]>
+<link rel='stylesheet' id='publisho-ie-css'  href='https://krebsonsecurity.com/wp-content/themes/kos-mar2021/css/ie.css?ver=20160606' type='text/css' media='all' />
+<![endif]-->
+<link rel='stylesheet' id='fontawesome-css-css'  href='https://krebsonsecurity.com/wp-content/themes/kos-mar2021/fonts/font-awesome.min.css?ver=5.8.2' type='text/css' media='all' />
+<link rel='stylesheet' id='publisho_custom_fonts-css'  href='//fonts.googleapis.com/css?family=Roboto%3Aregular%2Citalic%2C500%26subset%3Dlatin%2C' type='text/css' media='screen' />
+<script type='text/javascript' src='https://krebsonsecurity.com/wp-includes/js/jquery/jquery.min.js?ver=3.6.0' id='jquery-core-js'></script>
+<script type='text/javascript' src='https://krebsonsecurity.com/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.3.2' id='jquery-migrate-js'></script>
+<script type='text/javascript' src='https://krebsonsecurity.com/wp-content/plugins/jquery-lightbox-for-native-galleries/colorbox/jquery.colorbox-min.js?ver=1.3.14' id='colorbox-js'></script>
+<link rel="https://api.w.org/" href="https://krebsonsecurity.com/wp-json/" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://krebsonsecurity.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://krebsonsecurity.com/wp-includes/wlwmanifest.xml" /> 
+<meta name="generator" content="WordPress 5.8.2" />
+<!-- JavaScript Pull-Quotes plugin v2.2 -->
+	<link rel="stylesheet" href="https://krebsonsecurity.com/wp-content/plugins/jspullquotes/resources/jspullquotes-core.css" type="text/css" />
+	<link rel="stylesheet" href="https://krebsonsecurity.com/wp-content/plugins/jspullquotes/resources/jspullquotes-default.css" type="text/css" />
+	<script type="text/javascript" src="https://krebsonsecurity.com/wp-content/plugins/jspullquotes/resources/jspullquotes.js"></script>
+	<script type="text/javascript">
+		var arrOptions = new Array("1", "1", "right", "1", "1", "blockquote", "pullquote", "pullquote pqRight");
+		pullQuoteOpts(arrOptions);
+	</script>
+<!-- end pull-quote additions -->
+<!-- jQuery Lightbox For Native Galleries v3.1.3 | http://www.viper007bond.com/wordpress-plugins/jquery-lightbox-for-native-galleries/ -->
+<script type="text/javascript">
+// <![CDATA[
+	jQuery(document).ready(function($){
+		$(".gallery").each(function(index, obj){
+			var galleryid = Math.floor(Math.random()*10000);
+			$(obj).find("a").colorbox({rel:galleryid, maxWidth:"95%", maxHeight:"95%"});
+		});
+		$("a.lightbox").colorbox({maxWidth:"95%", maxHeight:"95%"});
+	});
+// ]]>
+</script>
+<style type="text/css" id="custom-background-css">
+body.custom-background { background-color: #ffffff; }
+</style>
+	<link rel="me" href="https://twitter.com/briankrebs" /><meta name="twitter:widgets:link-color" content="#000000" /><meta name="twitter:widgets:border-color" content="#000000" /><meta name="twitter:partner" content="tfwp" />
+<meta name="twitter:card" content="summary" /><meta name="twitter:title" content="Krebs on Security" /><meta name="twitter:site" content="@briankrebs" /><meta name="twitter:description" content="In-depth security news and investigation" />
+</head>
+<body class="home blog paged custom-background paged-32 custom-background-white single-author frontp hfeed">
+<div id="page" class="site">
+	<!-- <div class="publisho-top-mobile-nav clear"></div> -->
+	<div class="themonic-logo themonic-ad3"><div class="a-statement">Advertisement</div><a href="https://www.area1security.com/2021-email-threat-report/?utm_medium=display&amp;utm_source=krebs&amp;utm_term=na&amp;utm_content=thumb&amp;utm_campaign=2021-Q4-Display-Krebs-2021-Email-Threat-Report">
+<img src="/b-area1/11.png">
+</a></div>
+	<div class="themonic-logo themonic-ad6"><div class="a-statement">Advertisement</div><a href="https://securityscorecard.com/instant-security-scorecard?utm_source=krebs+on+security&amp;utm_medium=display&amp;utm_campaign=instant+scorecard&amp;utm_term=A&amp;utm_content=1240x160">
+<img src="/b-securityscorecard/2.jpg">
+</a></div>
+	<nav id="site-navigation" class="themonic-nav" role="navigation">
+	</nav><!-- #site-navigation -->
+	<div class="clear"></div>
+	<header id="masthead" class="site-header" role="banner">
+ 					<div class="desktop-social">
+						<div class="socialmedia">
+							<a href="http://twitter.com/briankrebs" target="_blank"><i class="fa fa-twitter"></i></a> 
+															<a class="rss" href="https://krebsonsecurity.com/feed/" target="_blank"><i class="fa fa-rss"></i></a>	
+									<a class="rss" href="https://www.linkedin.com/in/bkrebs/" target="_blank"><i class="fa fa-linkedin"></i></a>	
+								</div>
+				 	</div>
+																						   
+		
+		<div class="themonic-logo responsive-img-container">
+			<a href="https://krebsonsecurity.com/" title="Krebs on Security" rel="home"><img src="https://krebsonsecurity.com/wp-content/uploads/2021/03/kos-27-03-2021.jpg" alt="Krebs on Security"></a>
+		</div>
+
+					<div class="mobile-social">
+						<div class="socialmedia">
+							<a href="http://twitter.com/briankrebs" target="_blank"><i class="fa fa-twitter"></i></a> 
+															<a class="rss" href="https://krebsonsecurity.com/feed/" target="_blank"><i class="fa fa-rss"></i></a>	
+									<a class="rss" href="https://www.linkedin.com/in/bkrebs/" target="_blank"><i class="fa fa-linkedin"></i></a>	
+								</div>
+					</div>
+		
+				<!-- <div class="publisho-mobile-nav clear"></div> -->
+		<nav id="site-navigation" class="themonic-nav" role="navigation">
+			<a class="assistive-text" href="#content" title="Skip to content">Skip to content</a>
+			<div id="menu-top" class="nav-menu"><ul>
+<li ><a href="https://krebsonsecurity.com/">Home</a></li><li class="page_item page-item-2"><a href="https://krebsonsecurity.com/about/">About the Author</a></li>
+<li class="page_item page-item-645"><a href="https://krebsonsecurity.com/cpm/">Advertising/Speaking</a></li>
+</ul></div>
+		</nav><!-- #site-navigation -->
+		<div class="clear"></div>
+	</header><!-- #masthead -->
+	<div id="main" class="wrapper">
+		<div id="primary" class="site-content">
+	
+
+	
+		<div id="content" role="main">
+
+		<article id="post-48768" class="post-48768 post type-post status-publish format-standard hentry category-latest-warnings category-comingstorm category-web-fraud-2-0 tag-anti-phishing-working-group tag-ashwin-vamshi tag-cloud-customer-relationship-management tag-crm-phishing tag-netskope tag-pardot tag-salesforce tag-united-rentals">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2019/08/phishers-are-angling-for-your-cloud-providers/" title="Permalink to Phishers are Angling for Your Cloud Providers" rel="bookmark">Phishers are Angling for Your Cloud Providers</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">August 30, 2019</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2019/08/phishers-are-angling-for-your-cloud-providers/#comments">37 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>Many companies are now outsourcing their marketing efforts to cloud-based Customer Relationship Management (CRM) providers. But when accounts at those CRM providers get hacked or phished, the results can be damaging for both the client&#8217;s brand and their customers. Here&#8217;s a look at a recent CRM-based phishing campaign that targeted customers of Fortune 500 construction equipment vendor <strong>United Rentals</strong>.</p>
+<p>Stamford, Ct.-based United Rentals [<a href="https://www.marketwatch.com/investing/stock/uri" target="_blank" rel="noopener">NYSE:URI</a>] is the world&#8217;s largest equipment rental company, with some 18,000 employees and earnings of approximately $4 billion in 2018. On August 21, multiple United Rental customers reported receiving invoice emails with booby-trapped links that led to a malware download for anyone who clicked.</p>
+<p>While phony invoices are a common malware lure, this particular campaign sent users to a page on United Rentals&#8217; own Web site (unitedrentals.com).</p>
+<div id="attachment_48770" style="width: 605px" class="wp-caption aligncenter"><a class="lightbox" href="https://krebsonsecurity.com/wp-content/uploads/2019/08/unitedrentalsphish.png"><img aria-describedby="caption-attachment-48770" loading="lazy" class="wp-image-48770" src="https://krebsonsecurity.com/wp-content/uploads/2019/08/unitedrentalsphish.png" alt="" width="595" height="406" /></a><p id="caption-attachment-48770" class="wp-caption-text">A screen shot of the malicious email that spoofed United Rentals.</p></div>
+<p>In a notice to customers, the company said the unauthorized messages were not sent by United Rentals. One source who had at least two employees fall for the scheme forwarded KrebsOnSecurity a response from UR&#8217;s privacy division, which blamed the incident on a third-party advertising partner.</p>
+<p>&#8220;Based on current knowledge, we believe that an unauthorized party gained access to a vendor platform United Rentals uses in connection with designing and executing email campaigns,&#8221; the response read.</p>
+<p>&#8220;The unauthorized party was able to send a phishing email that appears to be from United Rentals through this platform,&#8221; the reply continued. &#8220;The phishing email contained links to a purported invoice that, if clicked on, could deliver malware to the recipient&#8217;s system. While our investigation is continuing, we currently have no reason to believe that there was unauthorized access to the United Rentals systems used by customers, or to any internal United Rentals systems.&#8221;</p>
+<p>United Rentals told KrebsOnSecurity that its investigation so far reveals no compromise of its internal systems.</p>
+<p>&#8220;At this point, we believe this to be an email phishing incident in which an unauthorized third party used a third-party system to generate an email campaign to deliver what we believe to be a banking trojan,&#8221; said <strong>Dan Higgins</strong>, UR&#8217;s chief information officer.</p>
+<p>United Rentals would not name the third party marketing firm thought to be involved, but <a href="https://krebsonsecurity.com/wp-content/uploads/2019/08/ur-pdns.png" target="_blank" rel="noopener">passive DNS lookups</a> on the UR subdomain referenced in the phishing email (used by UL for marketing since 2014 and visible in the screenshot above as &#8220;wVw.unitedrentals.com&#8221;) points to <a href="https://www.pardot.com" target="_blank" rel="noopener">Pardot</a>, an email marketing division of cloud CRM giant <a href="https://en.wikipedia.org/wiki/Salesforce.com" target="_blank" rel="noopener">Salesforce</a>. <a href="https://krebsonsecurity.com/2019/08/phishers-are-angling-for-your-cloud-providers/#more-48768" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+	<div id="between_article_ad" class="themonic-ad5"><a href="https://securityscorecard.com/instant-security-scorecard?utm_source=krebs+on+security&amp;utm_medium=display&amp;utm_campaign=instant+scorecard&amp;utm_term=B&amp;utm_content=300x300">
+<img src="/b-securityscorecard/8.jpg">
+</a></div>	<article id="post-48773" class="post-48773 post type-post status-publish format-standard hentry category-data-breaches category-ransomware tag-brenna-sadler tag-dds-safe tag-digital-dental-record tag-percsoft tag-propublica tag-wisconsin-dental-association">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2019/08/ransomware-bites-dental-data-backup-firm/" title="Permalink to Ransomware Bites Dental Data Backup Firm" rel="bookmark">Ransomware Bites Dental Data Backup Firm</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">August 29, 2019</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2019/08/ransomware-bites-dental-data-backup-firm/#comments">65 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p><strong>PerCSoft</strong>, a Wisconsin-based company that manages a remote data backup service relied upon by hundreds of dental offices across the country, is struggling to restore access to client systems after falling victim to a ransomware attack.</p>
+<p><img loading="lazy" class="aligncenter wp-image-48776" src="https://krebsonsecurity.com/wp-content/uploads/2019/08/dds-home.png" alt="" width="593" height="271" /></p>
+<p>West Allis, Wis.-based <a href="http://www.percsoft.com/" target="_blank" rel="noopener">PerCSoft</a> is a cloud management provider for <a href="https://www.dentalrecord.com/" target="_blank" rel="noopener">Digital Dental Record</a> (DDR), which operates an online data backup service called <strong>DDS Safe</strong> that archives medical records, charts, insurance documents and other personal information for various dental offices across the United States.</p>
+<p>The ransomware attack hit PerCSoft on the morning of Monday, Aug. 26, and encrypted dental records for some &#8212; but not all &#8212; of the practices that rely on DDS Safe.</p>
+<p>PercSoft did not respond to requests for comment. But <strong>Brenna Sadler</strong>, director of  communications for the <strong>Wisconsin Dental Association</strong>, said the ransomware encrypted files for approximate 400 dental practices, and that somewhere between 80-100 of those clients have now had their files restored.</p>
+<p>Sadler said she did not know whether PerCSoft and/or DDR had paid the ransom demand, what ransomware strain was involved, or how much the attackers had demanded.</p>
+<p>But updates to <a href="https://www.facebook.com/percsoft/" target="_blank" rel="noopener">PerCSoft&#8217;s Facebook page</a> and <a href="https://www.dentalrecord.com/assets/images/UpdateDDSSafe7.pdf" target="_blank" rel="noopener">statements published by both PerCSoft and DDR</a> suggest someone may have paid up: The statements note that both companies worked with a third party software company and were able to obtain a decryptor to help clients regain access to files that were locked by the ransomware.</p>
+<p>Update: Several sources are now reporting that PerCSoft did pay the ransom, although it is not clear how much was paid. One member of a private Facebook group dedicated to IT professionals serving the dental industry shared the following screenshot, which is purportedly from a conversation between PerCSoft and an affected dental office, indicating the cloud provider was planning to pay the ransom:</p>
+<p><img loading="lazy" class="aligncenter wp-image-48781" src="https://krebsonsecurity.com/wp-content/uploads/2019/08/dds-ransom.png" alt="" width="593" height="943" /></p>
+<p>Another image shared by members of that Facebook group indicates the ransomware that attacked PerCSoft is an extremely advanced and fairly recent strain known variously as <a href="https://krebsonsecurity.com/2019/07/is-revil-the-new-gandcrab-ransomware/" target="_blank" rel="noopener">REvil and Sodinokibi</a>.</p>
+<p><img loading="lazy" class="aligncenter wp-image-48783" src="https://krebsonsecurity.com/wp-content/uploads/2019/08/revil-decrypt.png" alt="" width="597" height="237" /></p>
+<p><em>Original story:</em></p>
+<p>However, some affected dental offices have reported that the decryptor did not work to unlock at least some of the files encrypted by the ransomware. Meanwhile, several affected dentistry practices said they feared they might be unable to process payroll payments this week as a result of the attack. <a href="https://krebsonsecurity.com/2019/08/ransomware-bites-dental-data-backup-firm/#more-48773" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+	<div class="themonic-ad2"><div class="a-statement">Advertisement</div><a href="https://www.akamai.com/?utm_source=krebsonsecurity&amp;utm_medium=display&amp;utm_id=GL_Platform&amp;utm_campaign=F-MC-52606&amp;utm_content=IDC_InfoBrief">
+<img src="/b-akamai/134.png">
+</a></div>	<article id="post-48736" class="post-48736 post type-post status-publish format-standard hentry category-data-breaches tag-alissa-knight tag-disruptops tag-heli-erickson tag-imperva tag-incapsula tag-rich-mogull tag-web-application-firewall">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2019/08/cybersecurity-firm-imperva-discloses-breach/" title="Permalink to Cybersecurity Firm Imperva Discloses Breach" rel="bookmark">Cybersecurity Firm Imperva Discloses Breach</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">August 27, 2019</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2019/08/cybersecurity-firm-imperva-discloses-breach/#comments">83 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p><strong>Imperva</strong>, a leading provider of Internet firewall services that help Web sites block malicious cyberattacks, alerted customers on Tuesday that a recent data breach exposed email addresses, scrambled passwords, <a href="https://en.wikipedia.org/wiki/Application_programming_interface" target="_blank" rel="noopener">API keys</a> and <a href="https://en.wikipedia.org/wiki/Transport_Layer_Security" target="_blank" rel="noopener">SSL certificates</a> for a subset of its firewall users.</p>
+<p>Redwood Shores, Calif.-based Imperva sells technology and services designed to detect and block various types of malicious Web traffic, from denial-of-service attacks to digital probes aimed at undermining the security of Web-based software applications.</p>
+<div id="attachment_48740" style="width: 606px" class="wp-caption aligncenter"><img aria-describedby="caption-attachment-48740" loading="lazy" class=" wp-image-48740" src="https://krebsonsecurity.com/wp-content/uploads/2019/08/incapcloud.png" alt="" width="596" height="343" /><p id="caption-attachment-48740" class="wp-caption-text">Image: Imperva</p></div>
+<p>Earlier today, Imperva told customers that it learned on Aug. 20 about a security incident that exposed sensitive information for some users of <strong>Incapsula</strong>, the company&#8217;s cloud-based <strong>Web Application Firewall</strong> (WAF) product.</p>
+<p>&#8220;On August 20, 2019, we learned from a third party of a data exposure that impacts a subset of customers of our Cloud WAF product who had accounts through September 15, 2017,&#8221; wrote <strong>Heli Erickson</strong>, director of analyst relations at Imperva.</p>
+<p>&#8220;We want to be very clear that this data exposure is limited to our Cloud WAF product,&#8221; Erickson&#8217;s message continued. &#8220;While the situation remains under investigation, what we know today is that elements of our Incapsula customer database from 2017, including email addresses and hashed and salted passwords, and, for a subset of the Incapsula customers from 2017, API keys and customer-provided SSL certificates, were exposed.&#8221;</p>
+<p>Companies that use the Incapsula WAF route all of their Web site traffic through the service, which scrubs the communications for any suspicious activity or attacks and then forwards the benign traffic on to its intended destination.</p>
+<p><strong>Rich Mogull</strong>, founder and vice president of product at Kansas City-based cloud security firm <a href="https://disruptops.com/" target="_blank" rel="noopener">DisruptOps</a>, said Imperva is among the top three Web-based firewall providers in business today.</p>
+<p>According to Mogull, an attacker in possession of a customer&#8217;s API keys and SSL certificates could use that access to significantly undermine the security of traffic flowing to and from a customer&#8217;s various Web sites.</p>
+<p>At a minimum, he said, an attacker in possession of these key assets could reduce the security of the WAF settings and exempt or &#8220;whitelist&#8221; from the WAF&#8217;s scrubbing technology any traffic coming from the attacker. A worst-case scenario could allow an attacker to intercept, view or modify traffic destined for an Incapsula client Web site, and even to divert all traffic for that site to or through a site owned by the attacker. <a href="https://krebsonsecurity.com/2019/08/cybersecurity-firm-imperva-discloses-breach/#more-48736" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-48710" class="post-48710 post type-post status-publish format-standard hentry category-data-breaches tag-hy-vee-breach tag-jokers-stash">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2019/08/breach-at-hy-vee-supermarket-chain-tied-to-sale-of-5m-stolen-credit-debit-cards/" title="Permalink to Breach at Hy-Vee Supermarket Chain Tied to Sale of 5M+ Stolen Credit, Debit Cards" rel="bookmark">Breach at Hy-Vee Supermarket Chain Tied to Sale of 5M+ Stolen Credit, Debit Cards</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">August 22, 2019</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2019/08/breach-at-hy-vee-supermarket-chain-tied-to-sale-of-5m-stolen-credit-debit-cards/#comments">82 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>On Tuesday of this week, one of the more popular underground stores peddling credit and debit card data stolen from hacked merchants announced a blockbuster new sale: More than 5.3 million new accounts belonging to cardholders from 35 U.S. states. Multiple sources now tell KrebsOnSecurity that the card data came from compromised gas pumps, coffee shops and restaurants operated by <strong>Hy-Vee</strong>, an Iowa-based company that operates a chain of more than 245 supermarkets throughout the Midwestern United States.</p>
+<p><img loading="lazy" class="aligncenter wp-image-48714" src="https://krebsonsecurity.com/wp-content/uploads/2019/08/hyvee.png" alt="" width="596" height="285" /></p>
+<p>Hy-Vee, based in Des Moines, <a href="https://www.hy-vee.com/corporate/news-events/announcements/notice-of-payment-card-data-incident/" target="_blank" rel="noopener">announced</a> on Aug. 14 it was investigating a data breach involving payment processing systems that handle transactions at some Hy-Vee fuel pumps, drive-thru coffee shops and restaurants.</p>
+<p>The restaurants affected include Hy-Vee <a href="https://marketgrille.hy-vee.com/locations/" target="_blank" rel="noopener">Market Grilles</a>, Market Grille Expresses and <a href="https://wahlburgers.com/all-locations" target="_blank" rel="noopener">Wahlburgers</a> locations that the company owns and operates. Hy-Vee said it was too early to tell when the breach initially began or for how long intruders were inside their payment systems.</p>
+<p>But typically, such breaches occur when cybercriminals manage to remotely install malicious software on a retailer&#8217;s card-processing systems. This type of point-of-sale malware is capable of copying data stored on a credit or debit card&#8217;s magnetic stripe when those cards are swiped at compromised payment terminals. This data can then be used to create counterfeit copies of the cards.</p>
+<p>Hy-Vee said it believes the breach does not affect payment card terminals used at its grocery store checkout lanes, pharmacies or convenience stores, as these systems rely on a security technology designed to defeat card-skimming malware.</p>
+<p>&#8220;These locations have different point-of-sale systems than those located at our grocery stores, drugstores and inside our convenience stores, which utilize point-to-point encryption technology for processing payment card transactions,&#8221; Hy-Vee said. &#8220;This encryption technology protects card data by making it unreadable. Based on our preliminary investigation, we believe payment card transactions that were swiped or inserted on these systems, which are utilized at our front-end checkout lanes, pharmacies, customer service counters, wine &amp; spirits locations, floral departments, clinics and all other food service areas, as well as transactions processed through Aisles Online, are not involved.&#8221;</p>
+<p>According to two sources who asked not to be identified for this story &#8212; including one at a major U.S. financial institution &#8212; the card data stolen from Hy-Vee is now being sold under the code name &#8220;Solar Energy,&#8221; at <a href="https://krebsonsecurity.com/?s=joker%27s+stash&amp;x=0&amp;y=0" target="_blank" rel="noopener">the infamous Joker&#8217;s Stash carding bazaar</a>.</p>
+<div id="attachment_48715" style="width: 604px" class="wp-caption aligncenter"><img aria-describedby="caption-attachment-48715" loading="lazy" class=" wp-image-48715" src="https://krebsonsecurity.com/wp-content/uploads/2019/08/jstash-solar1.png" alt="" width="594" height="401" /><p id="caption-attachment-48715" class="wp-caption-text">An ad at the Joker&#8217;s Stash carding site for &#8220;Solar Energy,&#8221; a batch of more than 5 million credit and debit cards sources say was stolen from customers of supermarket chain Hy-Vee.</p></div>
+<p>Hy-Vee said the company&#8217;s investigation is continuing.</p>
+<p>&#8220;We are aware of reports from payment processors and the card networks of payment data being offered for sale and are working with the payment card networks so that they can identify the cards and work with issuing banks to initiate heightened monitoring on accounts,&#8221; Hy-Vee spokesperson Tina Pothoff said. <a href="https://krebsonsecurity.com/2019/08/breach-at-hy-vee-supermarket-chain-tied-to-sale-of-5m-stolen-credit-debit-cards/#more-48710" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-48673" class="post-48673 post type-post status-publish format-standard hentry category-sunshine tag-alex-weinert tag-anthony-moisant tag-credential-stuffing tag-glassdoor tag-microsoft">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2019/08/forced-password-reset-check-your-assumptions/" title="Permalink to Forced Password Reset? Check Your Assumptions" rel="bookmark">Forced Password Reset? Check Your Assumptions</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">August 21, 2019</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2019/08/forced-password-reset-check-your-assumptions/#comments">110 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>Almost weekly now I hear from an indignant reader who suspects a data breach at a Web site they frequent that has just asked the reader to reset their password. Further investigation almost invariably reveals that the password reset demand was not the result of a breach but rather the site&#8217;s efforts to identify customers who are reusing passwords from other sites that have already been hacked.</p>
+<p>But ironically, many companies taking these proactive steps soon discover that their explanation as to why they&#8217;re doing it can get misinterpreted as more evidence of lax security. This post attempts to unravel what&#8217;s going on here.</p>
+<p>Over the weekend, a follower on Twitter included me in <a href="https://twitter.com/MiamiPaisa/status/1162530551691206659" target="_blank" rel="noopener">a tweet</a> sent to California-based job search site <a href="https://www.glassdoor.com" target="_blank" rel="noopener">Glassdoor</a>, which had just sent him the following notice:</p>
+<p><img loading="lazy" class="aligncenter size-full wp-image-48690" src="https://krebsonsecurity.com/wp-content/uploads/2019/08/glassdoor.png" alt="" width="437" height="725" /></p>
+<p>The Twitter follower expressed concern about this message, because it suggested to him that in order for Glassdoor to have done what it described, the company would have had to be storing its users&#8217; passwords in plain text. I replied that this was in fact not an indication of storing passwords in plain text, and that many companies are now testing their users&#8217; credentials against lists of hacked credentials that have been leaked and made available online.</p>
+<p>The reality is <a href="https://krebsonsecurity.com/2016/06/password-re-user-get-to-get-busy/" target="_blank" rel="noopener">Facebook, Netflix and a number of big-name companies</a> are regularly combing through huge data leak troves for credentials that match those of their customers, and then forcing a password reset for those users. Some are even checking for password re-use on all new account signups.</p>
+<p>The idea here is to stymie a massively pervasive problem facing <em>all</em> companies that do business online today: Namely, &#8220;credential-stuffing attacks,&#8221; in which attackers take millions or even billions of email addresses and corresponding cracked passwords from compromised databases and see how many of them work at other online properties.</p>
+<p>So how does the defense against this daily deluge of credential stuffing work? A company employing this strategy will first extract from these leaked credential lists any email addresses that correspond to their current user base.</p>
+<p>From there, the corresponding cracked (plain text) passwords are fed into the same process that the company relies upon when users log in: That is, the company feeds those plain text passwords through its own password &#8220;hashing&#8221; or scrambling routine.</p>
+<p>Password hashing is designed to be a one-way function which scrambles a plain text password so that it produces a long string of numbers and letters. Not all hashing methods are created equal, and some of the most commonly used methods &#8212; <a href="https://en.wikipedia.org/wiki/MD5" target="_blank" rel="noopener">MD5</a> and <a href="https://en.wikipedia.org/wiki/SHA-1" target="_blank" rel="noopener">SHA-1</a>, for example &#8212; can be far less secure than others, depending on how they&#8217;re implemented (more on that in a moment). Whatever the hashing method used, it&#8217;s the hashed output that gets stored, not the password itself.</p>
+<p>Back to the process: If a user&#8217;s plain text password from a hacked database matches the output of what a company would expect to see after running it through their own internal hashing process, that user is then prompted to change their password to something truly unique. <a href="https://krebsonsecurity.com/2019/08/forced-password-reset-check-your-assumptions/#more-48673" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-47789" class="post-47789 post type-post status-publish format-standard hentry category-sunshine category-breadcrumbs category-comingstorm tag-202-643-8533 tag-868-360-9983 tag-akamai tag-hackforums tag-hexproxy tag-hyas tag-iaps-security-services tag-joshua-powder tag-joshua-powdergmail-com tag-laskh-cybersecurity-and-defense-llc tag-men-danil-valentinovich tag-profitvolt tag-residential-networking-solutions-llc tag-residential-proxies tag-resnet tag-resnetworking tag-serversget tag-shoe-bots tag-sneaker-bots tag-wireless-data-service-provider-corporation">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2019/08/the-rise-of-bulletproof-residential-networks/" title="Permalink to The Rise of &#8220;Bulletproof&#8221; Residential Networks" rel="bookmark">The Rise of &#8220;Bulletproof&#8221; Residential Networks</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">August 19, 2019</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2019/08/the-rise-of-bulletproof-residential-networks/#comments">58 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>Cybercrooks increasingly are anonymizing their malicious traffic by routing it through residential broadband and wireless data connections. Traditionally, those connections have been mainly hacked computers, mobile phones, or home routers. But this story is about so-called &#8220;bulletproof residential VPN services&#8221; that appear to be built by purchasing or otherwise acquiring discrete chunks of Internet addresses from some of the world&#8217;s largest ISPs and mobile data providers.</p>
+<p>In late April 2019, KrebsOnSecurity received a tip from an online retailer who&#8217;d seen an unusual number of suspicious transactions originating from a series of Internet addresses assigned to a relatively new Internet provider based in Maryland called <strong>Residential Networking Solutions LLC</strong>.</p>
+<p>Now, this in itself isn&#8217;t unusual; virtually every provider has the occasional customers who abuse their access for fraudulent purposes. But upon closer inspection, several factors caused me to look more carefully at this company, also known as &#8220;<strong>Resnet</strong>.&#8221;</p>
+<p>An examination of <a href="https://bgp.he.net/AS46723#_prefixes" target="_blank" rel="noopener">the IP address ranges assigned to Resnet</a> shows that it maintains an impressive stable of IP blocks &#8212; <em>totaling almost 70,000 IPv4 addresses</em> &#8212; many of which had until <a href="https://www.google.com/search?q=%222026+Pickens+Way%22&amp;rlz=1C1SQJL_enUS858US858&amp;oq=%222026+Pickens+Way%22&amp;aqs=chrome..69i57j69i60.799j0j4&amp;sourceid=chrome&amp;ie=UTF-8" target="_blank" rel="noopener">quite recently</a> been assigned to someone else.</p>
+<p>Most interestingly, about ten percent of those IPs &#8212; more than 7,000 of them &#8212; had until late 2018 been under the control of <strong>AT&amp;T Mobility</strong>. Additionally, the WHOIS registration records for each of these mobile data blocks suggest Resnet has been somehow reselling data services for major mobile and broadband providers, including <strong>AT&amp;T,</strong> <strong>Verizon,</strong> and <strong>Comcast Cable</strong>.</p>
+<div id="attachment_48499" style="width: 605px" class="wp-caption aligncenter"><img aria-describedby="caption-attachment-48499" loading="lazy" class=" wp-image-48499" src="https://krebsonsecurity.com/wp-content/uploads/2019/08/resnet-he.png" alt="" width="595" height="730" /><p id="caption-attachment-48499" class="wp-caption-text">The WHOIS records for one of several networks associated with Residential Networking Solutions LLC.</p></div>
+<p>Drilling down into the tracts of IPs assigned to <a href="https://bgp.he.net/AS46723#_prefixes" target="_blank" rel="noopener">Resnet&#8217;s core network</a> indicates those 7,000+ mobile IP addresses under Resnet&#8217;s control were given the label  &#8220;<strong>Service Provider Corporation</strong>&#8221; &#8212; <a href="https://krebsonsecurity.com/wp-content/uploads/2019/08/he-spc.png" target="_blank" rel="noopener">mostly those beginning with IPs in the range 198.228.x.x</a>.</p>
+<p>An Internet search reveals this IP range is administered by the <a href="https://wirelessdataspco.org/" target="_blank" rel="noopener">Wireless Data Service Provider Corporation</a> (WDSPC), a non-profit formed in the 1990s to manage IP address ranges that could be handed out to various licensed mobile carriers in the United States.</p>
+<p>Back when the WDSPC was first created, there were quite a few mobile wireless data companies. But today the vast majority of the IP space managed by the WDSPC is leased by <strong>AT&amp;T Mobility</strong> and <strong>Verizon Wireless</strong> &#8212; which have gradually acquired most of their competing providers over the years.</p>
+<p>A call to the WDSPC revealed the nonprofit hadn&#8217;t leased any new wireless data IP space in more than 10 years. That is, until the organization received a communication at the beginning of this year that it believed was from AT&amp;T, which recommended Resnet as a customer who could occupy some of the company&#8217;s mobile data IP address blocks.</p>
+<p>&#8220;I&#8217;m afraid we got duped,&#8221; said the person answering the phone at the WDSPC, while declining to elaborate on the precise nature of the alleged duping or the medium that was used to convey the recommendation.</p>
+<p>AT&amp;T declined to discuss its exact relationship with Resnet  &#8212; or if indeed it ever had one to begin with. It responded to multiple questions about Resnet with a short statement that said, “We have taken steps to terminate this company’s services and have referred the matter to law enforcement.”</p>
+<p>Why exactly AT&amp;T would forward the matter to law enforcement remains unclear. But it&#8217;s not unheard of for hosting providers to forge <a href="https://www.bandwidth.com/glossary/letter-of-authorization-loa/" target="_blank" rel="noopener">certain documents</a> in their quest for additional IP space, and anyone caught doing so via email, phone or fax could be charged with <a href="https://criminal.findlaw.com/criminal-charges/wire-fraud.html" target="_blank" rel="noopener">wire fraud</a>, which is a federal offense that carries punishments of up to $500,000 in fines and as much as 20 years in prison.</p>
+<h4>WHAT IS RESNET?</h4>
+<p>The WHOIS registration records for Resnet&#8217;s main Web site, <strong>resnetworking[.]com</strong>, are hidden behind domain privacy protection. However, a cursory Internet search on that domain turned up plenty of references to it on <strong>Hackforums[.]net</strong>, a sprawling community that hosts a seemingly never-ending supply of up-and-coming hackers seeking affordable and anonymous ways to monetize various online moneymaking schemes.</p>
+<p>One user in particular &#8212; a Hackforums member who goes by the nickname &#8220;<strong>Profitvolt</strong>&#8221; &#8212; has spent several years advertising resnetworking[.]com and a number of related sites and services, including &#8220;unlimited&#8221; AT&amp;T 4G/LTE data services, and the immediate availability of more than 1 million residential IPs that he suggested were &#8220;perfect for botting, shoe buying.&#8221;</p>
+<div id="attachment_48500" style="width: 607px" class="wp-caption aligncenter"><img aria-describedby="caption-attachment-48500" loading="lazy" class=" wp-image-48500" src="https://krebsonsecurity.com/wp-content/uploads/2019/08/1.2milproxypool.png" alt="" width="597" height="392" /><p id="caption-attachment-48500" class="wp-caption-text">The Hackforums user &#8220;Profitvolt&#8221; advertising residential proxies.</p></div>
+<p>Profitvolt advertises his mobile and residential data services as ideal for anyone who wishes to run &#8220;various bots,&#8221; or &#8220;advertising campaigns.&#8221; Those services are meant to provide anonymity when customers are doing things such as automating ad clicks on platforms like <strong>Google Adsense</strong> and <strong>Facebook</strong>; generating new <strong>PayPal</strong> accounts; <a href="https://www.gq.com/story/war-against-sneaker-bots" target="_blank" rel="noopener">sneaker bot activity;</a> <a href="https://en.wikipedia.org/wiki/Credential_stuffing" target="_blank" rel="noopener">credential stuffing attacks</a>; and different types of social media spam.</p>
+<p>For readers unfamiliar with this term, &#8220;shoe botting&#8221; or &#8220;sneaker bots&#8221; refers to the use of automated bot programs and services that aid in the rapid acquisition of limited-release, highly sought-after designer shoes that can then be resold at a profit on secondary markets. All too often, it seems, the people who profit the most in this scheme are using <a href="https://www.akamai.com/us/en/multimedia/documents/state-of-the-internet/soti-security-credential-stuffing-attacks-and-economies-report-2019.pdf" target="_blank" rel="noopener">multiple sets of compromised credentials from consumer accounts</a> at online retailers, and/or stolen payment card data.</p>
+<p>To say shoe botting has become a thorn in the side of online retailers and regular consumers alike would be a major understatement: A <a href="https://www.akamai.com/us/en/multimedia/documents/state-of-the-internet/state-of-the-internet-security-retail-attacks-and-api-traffic-report-2019.pdf" target="_blank" rel="noopener">recent State of The Internet Security Report</a> (PDF) from <strong>Akamai</strong> (an advertiser on this site) noted that such automated bot activity<em> now accounts for almost half of the Internet bandwidth directed at online retailers</em>. The prevalance of shoe botting also might help explain <strong>Footlocker</strong>&#8216;s <a href="https://www.gq.com/story/foot-locker-invests-100-million-goat-thats-a-lot-of-sneakers" target="_blank" rel="noopener">recent $100 million investment in goat.com</a>, the largest secondary shoe resale market on the Web.</p>
+<p>In other discussion threads, Profitvolt advertises he can rent out an &#8220;unlimited number&#8221; of so-called &#8220;residential proxies,&#8221; a term that describes home or mobile Internet connections that can be used to anonymously relay Internet traffic for a variety of dodgy deals.</p>
+<p>From a ne&#8217;er-do-well&#8217;s perspective, the beauty of routing one&#8217;s traffic through residential IPs is that few online businesses will bother to block malicious or suspicious activity emanating from them.</p>
+<p>That&#8217;s because in general the pool of IP addresses assigned to residential or mobile wireless connections cycles intermittently from one user to the next, meaning that blacklisting one residential IP for abuse or malicious activity may only serve to then block legitimate traffic (and e-commerce) from the next user who gets assigned that same IP. <a href="https://krebsonsecurity.com/2019/08/the-rise-of-bulletproof-residential-networks/#more-47789" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-48568" class="post-48568 post type-post status-publish format-standard hentry category-sunshine category-all-about-skimmers tag-aaron-schulman tag-bluetana tag-nishant-bhaskar tag-pump-skimmers tag-u-s-secret-service tag-university-of-california-san-diego tag-university-of-illinois-urbana-champaign tag-usenix">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2019/08/meet-bluetana-the-scourge-of-pump-skimmers/" title="Permalink to Meet Bluetana, the Scourge of Pump Skimmers" rel="bookmark">Meet Bluetana, the Scourge of Pump Skimmers</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">August 14, 2019</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2019/08/meet-bluetana-the-scourge-of-pump-skimmers/#comments">81 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>&#8220;<strong>Bluetana</strong>,&#8221; a new mobile app that looks for Bluetooth-based payment card skimmers hidden inside gas pumps, is helping police and state employees more rapidly and accurately locate compromised fuel stations across the nation, a study released this week suggests. Data collected in the course of the investigation also reveals some fascinating details that may help explain why these pump skimmers are so lucrative and ubiquitous.</p>
+<p>The new app, now being used by agencies in several states, is the brainchild of computer scientists from the <strong>University of California San Diego</strong> and the <strong>University of Illinois Urbana-Champaign</strong>, who say they developed the software in tandem with technical input from the <strong>U.S. Secret Service</strong> (the federal agency most commonly called in to investigate pump skimming rings).</p>
+<div id="attachment_48612" style="width: 607px" class="wp-caption aligncenter"><img aria-describedby="caption-attachment-48612" loading="lazy" class=" wp-image-48612" src="https://krebsonsecurity.com/wp-content/uploads/2019/08/bluetana.png" alt="" width="597" height="321" /><p id="caption-attachment-48612" class="wp-caption-text">The Bluetooth pump skimmer scanner app &#8216;Bluetana&#8217; in action.</p></div>
+<p>Gas pumps are a perennial target of skimmer thieves for several reasons. They are usually unattended, and in too many cases a handful of master keys will open a great many pumps at a variety of filling stations.</p>
+<p>The skimming devices can then be attached to electronics inside the pumps in a matter of seconds, and because they&#8217;re also wired to the pump&#8217;s internal power supply the skimmers can operate indefinitely without the need of short-lived batteries.</p>
+<p>And increasingly, these pump skimmers are fashioned to relay stolen card data and PINs via Bluetooth wireless technology, meaning the thieves who install them can periodically download stolen card data just by pulling up to a compromised pump and remotely connecting to it from a Bluetooth-enabled mobile device or laptop.</p>
+<p>According to the study, some 44 volunteers  &#8212; mostly law enforcement officials and state employees &#8212; were equipped with Bluetana over a year-long experiment to test the effectiveness of the scanning app.</p>
+<p>The researchers said their volunteers collected Bluetooth scans at 1,185 gas stations across six states, and that Bluetana detected a total of 64 skimmers across four of those states. All of the skimmers were later collected by law enforcement, including two that were reportedly missed in manual safety inspections of the pumps six months earlier.</p>
+<p>While several other Android-based apps designed to find pump skimmers are already available, the researchers said Bluetana was developed with an eye toward eliminating false-positives that some of these other apps can fail to distinguish.</p>
+<p>&#8220;Bluetooth technology used in these skimmers are also used for legitimate products commonly seen at and near gas stations such as speed-limit signs, weather sensors and fleet tracking systems,&#8221; said <strong>Nishant Bhaskar</strong>, UC San Diego Ph.D. student and principal author of the study. &#8220;These products can be mistaken for skimmers by existing detection apps.&#8221; <a href="https://krebsonsecurity.com/2019/08/meet-bluetana-the-scourge-of-pump-skimmers/#more-48568" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-48618" class="post-48618 post type-post status-publish format-standard hentry category-latest-warnings category-patches tag-august-2019-edition tag-microsoft-patch-tuesday">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2019/08/patch-tuesday-august-2019-edition/" title="Permalink to Patch Tuesday, August 2019 Edition" rel="bookmark">Patch Tuesday, August 2019 Edition</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">August 13, 2019</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2019/08/patch-tuesday-august-2019-edition/#comments">134 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>Most <strong>Microsoft Windows</strong> (ab)users probably welcome the monthly ritual of applying security updates about as much as they look forward to going to the dentist: It always seems like you were there just yesterday, and you never quite know how it&#8217;s all going to turn out. Fortunately, this month&#8217;s patch batch from Redmond is mercifully light, at least compared to last month.</p>
+<p><img loading="lazy" class="alignright size-full wp-image-26837" src="https://krebsonsecurity.com/wp-content/uploads/2014/07/brokenwindows.png" alt="" width="229" height="240" />Okay, maybe a trip to the dentist&#8217;s office is still preferable. In any case, today is the second Tuesday of the month, which means it&#8217;s once again Patch Tuesday (or &#8212; depending on your setup and when you&#8217;re reading this post &#8212; Reboot Wednesday). Microsoft today released patches to fix some 93 vulnerabilities in Windows and related software, 35 of which affect various <strong>Server</strong> versions of Windows, and another 70 that apply to the <strong>Windows 10</strong> operating system.</p>
+<p>Although there don&#8217;t appear to be any zero-day vulnerabilities fixed this month &#8212; i.e. those that get exploited by cybercriminals before an official patch is available &#8212; there are several issues that merit attention.</p>
+<p>Chief among those are patches to address four moderately terrifying flaws in Microsoft&#8217;s <strong>Remote Desktop Service</strong>, a feature which allows users to remotely access and administer a Windows computer as if they were actually seated in front of the remote computer. Security vendor <strong>Qualys</strong> says two of these weaknesses can be exploited remotely without any authentication or user interaction.</p>
+<p>&#8220;According to Microsoft, at least two of these vulnerabilities (<a href="https://portal.msrc.microsoft.com/en-US/security-guidance/advisory/CVE-2019-1181" target="_blank" rel="noopener">CVE-2019-1181</a> and <a href="https://portal.msrc.microsoft.com/en-US/security-guidance/advisory/CVE-2019-1182">CVE-2019-1182</a>) can be considered &#8216;wormable&#8217; and [can be equated] to BlueKeep,&#8221; referring to <a href="https://krebsonsecurity.com/2019/05/microsoft-patches-wormable-flaw-in-windows-xp-7-and-windows-2003/" target="_blank" rel="noopener">a dangerous bug patched earlier this year</a> that Microsoft warned could be used to spread another <a href="https://en.wikipedia.org/wiki/WannaCry_ransomware_attack" target="_blank" rel="noopener">WannaCry-like ransomware outbreak</a>. &#8220;It is highly likely that at least one of these vulnerabilities will be quickly weaponized, and patching should be prioritized for all Windows systems.&#8221;</p>
+<p>Fortunately, Remote Desktop is disabled by default in Windows 10, and as such these flaws are more likely to be a threat for enterprises that have enabled the application for various purposes. For those keeping score, this is the fourth time in 2019 Microsoft has had to fix critical security issues with its Remote Desktop service.</p>
+<p>For all you Microsoft Edge and Internet <del>Exploiter</del> Explorer users, Microsoft has issued the usual panoply of updates for flaws that could be exploited to install malware after a user merely visits a hacked or booby-trapped Web site. Other equally serious flaws patched in Windows this month could be used to compromise the operating system just by convincing the user to open a malicious file (regardless of which browser the user is running). <a href="https://krebsonsecurity.com/2019/08/patch-tuesday-august-2019-edition/#more-48618" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-48545" class="post-48545 post type-post status-publish format-standard hentry category-data-breaches category-comingstorm tag-ben-shoval tag-first-american-financial-corp tag-u-s-securities-and-exchange-commission">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2019/08/sec-investigating-data-leak-at-first-american-financial-corp/" title="Permalink to SEC Investigating Data Leak at First American Financial Corp." rel="bookmark">SEC Investigating Data Leak at First American Financial Corp.</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">August 12, 2019</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2019/08/sec-investigating-data-leak-at-first-american-financial-corp/#comments">29 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>The <strong>U.S. Securities and Exchange Commissio</strong>n (SEC) is investigating a security failure on the Web site of real estate title insurance giant <strong>First American Financial Corp.</strong> that exposed more than 885 million personal and financial records tied to mortgage deals going back to 2003, KrebsOnSecurity has learned.</p>
+<div id="attachment_47830" style="width: 605px" class="wp-caption aligncenter"><img aria-describedby="caption-attachment-47830" loading="lazy" class=" wp-image-47830" src="https://krebsonsecurity.com/wp-content/uploads/2019/05/firstamericanfinancial.jpg" alt="" width="595" height="354" /><p id="caption-attachment-47830" class="wp-caption-text">First American Financial Corp.</p></div>
+<p>In May, KrebsOnSecurity broke the news that the Web site for Santa Ana, Calif.-based First American [<a href="https://www.marketbeat.com/stocks/NYSE/FAF/" target="_blank" rel="noopener">NYSE:FAF</a>] <a href="https://krebsonsecurity.com/2019/05/first-american-financial-corp-leaked-hundreds-of-millions-of-title-insurance-records/" target="_blank" rel="noopener">exposed some 885 million documents</a> related to real estate closings over the past 16 years, including bank account numbers and statements, mortgage and tax records, Social Security numbers, wire transaction receipts and drivers license images. No authentication was required to view the documents.</p>
+<p>The initial tip on that story came from <strong>Ben Shoval</strong>, a real estate developer based in Seattle. Shoval said he recently received a letter from the SEC&#8217;s enforcement division which stated the agency was investigating the data exposure to determine if First American had violated federal securities laws.</p>
+<p>In its letter, the SEC asked Shoval to preserve and share any documents or evidence he had related to the data exposure.</p>
+<p>&#8220;This investigation is a non-public, fact-finding inquiry,&#8221; the letter explained. &#8220;The investigation does not mean that we have concluded that anyone has violated the law.&#8221;</p>
+<p><img loading="lazy" class="aligncenter wp-image-48565" src="https://krebsonsecurity.com/wp-content/uploads/2019/08/sec-faf-red.png" alt="" width="595" height="462" /></p>
+<p>The SEC declined to comment for this story.</p>
+<p>Word of the SEC investigation comes weeks after <a href="https://krebsonsecurity.com/2019/05/ny-investigates-exposure-of-885-million-mortgage-documents/" target="_blank" rel="noopener">regulators in New York said they were investigating the company</a> in what could turn out to be the first test of the state&#8217;s strict new cybersecurity regulation, which requires financial companies to periodically audit and report on how they protect sensitive data, and provides for fines in cases where violations were reckless or willful. First American also is now <a href="https://www.bloomberg.com/news/articles/2019-05-28/first-american-financial-sued-over-alleged-client-data-breach" target="_blank" rel="noopener">the target of a class action lawsuit</a> that alleges it &#8220;failed to implement even rudimentary security measures.&#8221; <a href="https://krebsonsecurity.com/2019/08/sec-investigating-data-leak-at-first-american-financial-corp/#more-48545" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-48532" class="post-48532 post type-post status-publish format-standard hentry category-sunshine category-data-breaches tag-accenture-idefense tag-alex-holden tag-crowdstrike tag-elliot-luchansky tag-hold-security tag-insynq tag-megacortex-ransomware">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2019/08/insynq-ransom-attack-began-with-phishing-email/" title="Permalink to iNSYNQ Ransom Attack Began With Phishing Email" rel="bookmark">iNSYNQ Ransom Attack Began With Phishing Email</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">August 9, 2019</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2019/08/insynq-ransom-attack-began-with-phishing-email/#comments">39 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>A ransomware outbreak that hit <a href="https://krebsonsecurity.com/2019/07/quickbooks-cloud-hosting-firm-insynq-hit-in-ransomware-attack/" target="_blank" rel="noopener">QuickBooks cloud hosting firm iNSYNQ in mid-July</a> appears to have started with an email phishing attack that snared an employee working in sales for the company, KrebsOnSecurity has learned. It also looks like the intruders spent roughly ten days rooting around iNSYNQ&#8217;s internal network to properly stage things before unleashing the ransomware. iNSYNQ ultimately declined to pay the ransom demand, and it is still working to completely restore customer access to files.</p>
+<p><img loading="lazy" class="aligncenter size-full wp-image-48090" src="https://krebsonsecurity.com/wp-content/uploads/2019/06/cloudrain.jpg" alt="" width="596" height="373" /></p>
+<p>Some of this detail came in a virtual &#8220;town hall&#8221; meeting held August 8, in which iNSYNQ chief executive <strong>Elliot Luchansky</strong> briefed customers on how it all went down, and what the company is doing to prevent such outages in the future.</p>
+<p>A great many iNSYNQ&#8217;s customers are accountants, and when the company took its network offline on July 16 in response to the ransomware outbreak, some of those customers took to social media to complain that iNSYNQ was stonewalling them.</p>
+<p>&#8220;We could definitely have been better prepared, and it&#8217;s totally unacceptable,&#8221; Luchansky told customers. &#8220;I take full responsibility for this. People waiting ridiculous amounts of time for a response is unacceptable.&#8221;</p>
+<p>By way of explaining iNSYNQ&#8217;s initial reluctance to share information about the particulars of the attack early on, Luchansky told customers the company had to assume the intruders were watching and listening to everything iNSYNQ was doing to recover operations and data in the wake of the ransomware outbreak.</p>
+<p>&#8220;That was done strategically for a good reason,&#8221; he said. &#8220;There were human beings involved with [carrying out] this attack in real time, and we had to assume they were monitoring everything we could say. And that posed risks based on what we did say publicly while the ransom negotiations were going on. It could have been used in a way that would have exposed customers even more. That put us in a really tough bind, because transparency is something we take very seriously. But we decided it was in our customers&#8217; best interests to not do that.&#8221;</p>
+<div id="attachment_48541" style="width: 609px" class="wp-caption aligncenter"><img aria-describedby="caption-attachment-48541" loading="lazy" class="size-full wp-image-48541" src="https://krebsonsecurity.com/wp-content/uploads/2019/08/insynq-ad.png" alt="" width="599" height="104" /><p id="caption-attachment-48541" class="wp-caption-text">A paid ad that comes up prominently when one searches for &#8220;insynq&#8221; in Google.</p></div>
+<p>Luchansky did not say how much the intruders were demanding, but he mentioned two key factors that informed the company&#8217;s decision not to pay up.</p>
+<p>&#8220;It was a very substantial amount, but we had the money wired and were ready to pay it in cryptocurrency in the case that it made sense to do so,&#8221; he told customers. &#8220;But we also understood [that paying] would put a target on our heads in the future, and even if we actually received the decryption key, that wasn&#8217;t really the main issue here. Because of the quick reaction we had, we were able to contain the encryption part&#8221; to roughly 50 percent of customer systems, he said.</p>
+<p>Luchansky said the intruders seeded its internal network with <strong>MegaCortex</strong>, a potent new ransomware strain first spotted just a couple of months ago that is being used in targeted attacks on enterprises. He said the attack appears to have been carefully planned out in advance and executed &#8220;with human intervention all the way through.&#8221;</p>
+<p>&#8220;They decided they were coming after us,&#8221; he said. &#8220;It&#8217;s one thing to prepare for these sorts of events but it&#8217;s an entirely different experience to deal with first hand.&#8221;</p>
+<p>According to <a href="https://www.accenture.com/us-en/blogs/blogs-megacortex-business-disruption" target="_blank" rel="noopener">an analysis of MegaCortex published this week by Accenture iDefense</a>, the crooks behind this ransomware strain are targeting businesses &#8212; not home users &#8212; and demanding ransom payments in the range of two to 600 bitcoins, which is roughly $20,000 to $5.8 million.</p>
+<p>&#8220;We are working for profit,&#8221; reads the ransom note left behind by the latest version of MegaCortex. &#8220;The core of this criminal business is to give back your valuable data in the original form (for ransom of course).”</p>
+<div id="attachment_48536" style="width: 603px" class="wp-caption aligncenter"><img aria-describedby="caption-attachment-48536" loading="lazy" class=" wp-image-48536" src="https://krebsonsecurity.com/wp-content/uploads/2019/08/megacortexnote.png" alt="" width="593" height="392" /><p id="caption-attachment-48536" class="wp-caption-text">A portion of the ransom note left behind by the latest version of MegaCortex. Image: Accenture iDefense.</p></div>
+<p> <a href="https://krebsonsecurity.com/2019/08/insynq-ransom-attack-began-with-phishing-email/#more-48532" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+				
+			
+								<div class="themonic-pagination"><div class='pagination'><ul><li><a href='https://krebsonsecurity.com/'>&laquo; First</a></li><li><a href='https://krebsonsecurity.com/page/31/' class='inactive'>&lsaquo; Previous</a></li><li><a href='https://krebsonsecurity.com/page/29/' class='inactive'>29</a></li><li><a href='https://krebsonsecurity.com/page/30/' class='inactive'>30</a></li><li><a href='https://krebsonsecurity.com/page/31/' class='inactive'>31</a></li><li class='current'><span class='currenttext'>32</span></li><li><a href='https://krebsonsecurity.com/page/33/' class='inactive'>33</a></li><li><a href='https://krebsonsecurity.com/page/34/' class='inactive'>34</a></li><li><a href='https://krebsonsecurity.com/page/35/' class='inactive'>35</a></li><li><a href='https://krebsonsecurity.com/page/33/' class='inactive'>Next &rsaquo;</a></li><a class='inactive' href='https://krebsonsecurity.com/page/209/'>Last &raquo;</a></ul></div></div>
+					<div style="display: block; clear: both;"></div>
+			
+		
+
+	
+
+		</div><!-- #content -->
+	</div><!-- #primary -->
+
+
+			<div id="secondary" class="widget-area" role="complementary">
+
+        <div id="sidebar_ad" class="widget themonic-ad5"><div class="a-statement">Advertisement</div><a href="https://go.infrascale.com/lp/get-ransomware-ebook-krebsonsecurity/?utm_source=banner&amp;utm_medium=display&amp;utm_campaign=krebssecurity_influencer_335">
+<img src="/b-infrascale/7.png">
+</a></div>
+
+                        <br><div class="widget themonic-ad1"><div class="a-statement">Advertisement</div><a href="https://www.akamai.com/blog/security/attacking-a-macro-security-problem-with-micro-segmentation?utm_source=krebsonsecurity&amp;utm_medium=display&amp;utm_id=GL_SecureWorkforce_Guardicore&amp;utm_campaign=F-MC-52610&amp;utm_content=Guardicore">
+<img src="/b-akamai/138.png">
+</a></div><br>
+
+			<aside id="custom_html-2" class="widget_text widget widget_custom_html"><p class="widget-title">Mailing List</p><div class="textwidget custom-html-widget"><a href="/subscribe/">Subscribe here</a></div></aside><aside id="search-2" class="widget widget_search"><p class="widget-title">Search KrebsOnSecurity</p><form role="search" method="get" id="searchform" class="searchform" action="https://krebsonsecurity.com/">
+				<div>
+					<label class="screen-reader-text" for="s">Search for:</label>
+					<input type="text" value="" name="s" id="s" />
+					<input type="submit" id="searchsubmit" value="Search" />
+				</div>
+			</form></aside>
+		<aside id="recent-posts-3" class="widget widget_recent_entries">
+		<p class="widget-title">Recent Posts</p>
+		<ul>
+											<li>
+					<a href="https://krebsonsecurity.com/2021/12/canada-charges-its-most-prolific-cybercriminal/">Canada Charges Its &#8220;Most Prolific Cybercriminal&#8221;</a>
+									</li>
+											<li>
+					<a href="https://krebsonsecurity.com/2021/12/who-is-the-network-access-broker-babam/">Who Is the Network Access Broker &#8216;Babam&#8217;?</a>
+									</li>
+											<li>
+					<a href="https://krebsonsecurity.com/2021/12/ubiquiti-developer-charged-with-extortion-causing-2020-breach/">Ubiquiti Developer Charged With Extortion, Causing 2020 &#8220;Breach&#8221;</a>
+									</li>
+											<li>
+					<a href="https://krebsonsecurity.com/2021/11/the-internet-is-held-together-with-spit-baling-wire/">The Internet is Held Together With Spit &#038; Baling Wire</a>
+									</li>
+											<li>
+					<a href="https://krebsonsecurity.com/2021/11/arrest-in-ransom-your-employer-email-scheme/">Arrest in &#8216;Ransom Your Employer&#8217; Email Scheme</a>
+									</li>
+					</ul>
+
+		</aside><aside id="text-2" class="widget widget_text">			<div class="textwidget"><a name="subscribe2"></a></div>
+		</aside><aside id="widget_sp_image-15" class="widget widget_sp_image"><p class="widget-title">Spam Nation</p><a href="https://www.amazon.com/Spam-Nation-Organized-Cybercrime-Epidemic-ebook/dp/B00L5QGBL0/ref=dp_kinw_strp_1" target="_blank" class="widget_sp_image-image-link" title="Spam Nation"><img width="266" height="404" alt="Spam Nation" class="attachment-266x404 aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2015/04/spamnation-nyt.png" /></a><div class="widget_sp_image-description" ><p>A New York Times Bestseller! </p>
+</div></aside><aside id="widget_sp_image-25" class="widget widget_sp_image"><p class="widget-title">Thinking of a Cybersecurity Career?</p><a href="https://krebsonsecurity.com/2020/07/thinking-of-a-cybersecurity-career-read-this/" target="_blank" class="widget_sp_image-image-link" title="Thinking of a Cybersecurity Career? Read This."><img width="625" height="424" alt="Thinking of a Cybersecurity Career?" class="attachment-full" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2020/07/codepeople.png 625w, https://krebsonsecurity.com/wp-content/uploads/2020/07/codepeople-580x393.png 580w" sizes="(max-width: 625px) 100vw, 625px" src="https://krebsonsecurity.com/wp-content/uploads/2020/07/codepeople.png" /></a><div class="widget_sp_image-description" ><p>Read this.</p>
+</div></aside><aside id="widget_sp_image-3" class="widget widget_sp_image"><p class="widget-title">All About Skimmers </p><a href="https://krebsonsecurity.com/all-about-skimmers/" target="_blank" class="widget_sp_image-image-link" title="All About Skimmers "><img width="299" height="232" alt="All About Skimmers" class="attachment-299x232 aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2010/08/skimgallery1.jpg" /></a><div class="widget_sp_image-description" ><p>Click image for my skimmer series.</p>
+</div></aside><aside id="categories-2" class="widget widget_categories"><p class="widget-title">Story Categories</p>
+			<ul>
+					<li class="cat-item cat-item-5"><a href="https://krebsonsecurity.com/category/sunshine/" title="Includes investigative blog posts meant to shine a light on the darker corners of the Internet.">A Little Sunshine</a>
+</li>
+	<li class="cat-item cat-item-2240"><a href="https://krebsonsecurity.com/category/all-about-skimmers/">All About Skimmers</a>
+</li>
+	<li class="cat-item cat-item-9085"><a href="https://krebsonsecurity.com/category/ashley-madison-breach/">Ashley Madison breach</a>
+</li>
+	<li class="cat-item cat-item-3191"><a href="https://krebsonsecurity.com/category/breadcrumbs/">Breadcrumbs</a>
+</li>
+	<li class="cat-item cat-item-3771"><a href="https://krebsonsecurity.com/category/data-breaches/" title="Stories about data breaches at retailers, corporations, governments and organizations of all sizes.">Data Breaches</a>
+</li>
+	<li class="cat-item cat-item-4624"><a href="https://krebsonsecurity.com/category/ddos-for-hire/">DDoS-for-Hire</a>
+</li>
+	<li class="cat-item cat-item-9173"><a href="https://krebsonsecurity.com/category/employment-fraud/">Employment Fraud</a>
+</li>
+	<li class="cat-item cat-item-2151"><a href="https://krebsonsecurity.com/category/how-to-break-into-security/" title="If you&#039;ve ever wanted career advice on how to make a shift into the security industry, look no further.">How to Break Into Security</a>
+</li>
+	<li class="cat-item cat-item-87"><a href="https://krebsonsecurity.com/category/latest-warnings/">Latest Warnings</a>
+</li>
+	<li class="cat-item cat-item-4071"><a href="https://krebsonsecurity.com/category/neer-do-well-news/">Ne&#039;er-Do-Well News</a>
+</li>
+	<li class="cat-item cat-item-9"><a href="https://krebsonsecurity.com/category/other/">Other</a>
+</li>
+	<li class="cat-item cat-item-1306"><a href="https://krebsonsecurity.com/category/pharma-wars/">Pharma Wars</a>
+</li>
+	<li class="cat-item cat-item-8240"><a href="https://krebsonsecurity.com/category/ransomware/">Ransomware</a>
+</li>
+	<li class="cat-item cat-item-599"><a href="https://krebsonsecurity.com/category/security-tools/">Security Tools</a>
+</li>
+	<li class="cat-item cat-item-8298"><a href="https://krebsonsecurity.com/category/sim-swapping/">SIM Swapping</a>
+</li>
+	<li class="cat-item cat-item-4079"><a href="https://krebsonsecurity.com/category/spam-nation/">Spam Nation</a>
+</li>
+	<li class="cat-item cat-item-1"><a href="https://krebsonsecurity.com/category/smallbizvictims/" title="Posts in this category will include new stories similar to those told in the Small Business Victims category on The Washington Post&#039;s Security Fix blog, which chronicled the methods organized cyber thieve are using to steal hundreds of thousands of dollars from dozens of small- to mid-sized companies around the country.">Target: Small Businesses</a>
+</li>
+	<li class="cat-item cat-item-5167"><a href="https://krebsonsecurity.com/category/tax-refund-fraud/">Tax Refund Fraud</a>
+</li>
+	<li class="cat-item cat-item-3"><a href="https://krebsonsecurity.com/category/comingstorm/" title="This category includes blog posts about computer and Internet security threats now and on the horizon.">The Coming Storm</a>
+</li>
+	<li class="cat-item cat-item-4"><a href="https://krebsonsecurity.com/category/patches/" title="Short posts on the latest security updates for widely-used software.
+">Time to Patch</a>
+</li>
+	<li class="cat-item cat-item-21"><a href="https://krebsonsecurity.com/category/web-fraud-2-0/">Web Fraud 2.0</a>
+</li>
+			</ul>
+
+			</aside><aside id="widget_sp_image-5" class="widget widget_sp_image"><p class="widget-title">The Value of a Hacked PC</p><a href="https://krebsonsecurity.com/2012/10/the-scrap-value-of-a-hacked-pc-revisited/" target="_blank" class="widget_sp_image-image-link" title="The Value of a Hacked PC"><img width="285" height="180" alt="valuehackedpc " class="attachment-285x180 aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2012/12/valuehackedpc-285x180.png" /></a><div class="widget_sp_image-description" ><p>Badguy uses for your PC</p>
+</div></aside><aside id="widget_sp_image-9" class="widget widget_sp_image"><p class="widget-title">Badguy Uses for Your Email </p><a href="https://krebsonsecurity.com/2013/06/the-value-of-a-hacked-email-account/" target="_self" class="widget_sp_image-image-link" title="Badguy Uses for Your Email "><img width="296" height="170" alt="Badguy Uses for Your Email " class="attachment-full aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2013/06/badguyemail.png 296w, https://krebsonsecurity.com/wp-content/uploads/2013/06/badguyemail-285x163.png 285w" sizes="(max-width: 296px) 100vw, 296px" src="https://krebsonsecurity.com/wp-content/uploads/2013/06/badguyemail.png" /></a><div class="widget_sp_image-description" ><p>Your email account may be worth far more than you imagine.</p>
+</div></aside><aside id="widget_sp_image-24" class="widget widget_sp_image"><a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&#038;hosted_button_id=MCCRKHWRX57HS" id="donate" target="_self" class="widget_sp_image-image-link"><img width="250" height="55" alt="Donate to Krebs On Security" class="attachment-medium aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2016/09/donatepaypal2-1.png" /></a></aside><aside id="most_popular_posts-3" class="widget widget_most_popular_posts">
+<p class="widget-title">Most Popular Posts</p>
+<ul>	<li><a href="https://krebsonsecurity.com/2018/07/sextortion-scam-uses-recipients-hacked-passwords/">Sextortion Scam Uses Recipient's Hacked Passwords</a> (1076)</li>
+	<li><a href="https://krebsonsecurity.com/2015/07/online-cheating-site-ashleymadison-hacked/">Online Cheating Site AshleyMadison Hacked</a> (798)</li>
+	<li><a href="https://krebsonsecurity.com/2013/12/sources-target-investigating-data-breach/">Sources: Target Investigating Data Breach</a> (620)</li>
+	<li><a href="https://krebsonsecurity.com/2020/11/trump-fires-security-chief-christopher-krebs/">Trump Fires Security Chief Christopher Krebs</a> (534)</li>
+	<li><a href="https://krebsonsecurity.com/2013/12/cards-stolen-in-target-breach-flood-underground-markets/">Cards Stolen in Target Breach Flood Underground Markets</a> (445)</li>
+	<li><a href="https://krebsonsecurity.com/2013/05/reports-liberty-reserve-founder-arrested-site-shuttered/">Reports: Liberty Reserve Founder Arrested, Site Shuttered</a> (416)</li>
+	<li><a href="https://krebsonsecurity.com/2015/08/was-the-ashley-madison-database-leaked/">Was the Ashley Madison Database Leaked?</a> (376)</li>
+	<li><a href="https://krebsonsecurity.com/2021/01/ddos-guard-to-forfeit-internet-space-occupied-by-parler/">DDoS-Guard To Forfeit Internet Space Occupied by Parler</a> (374)</li>
+	<li><a href="https://krebsonsecurity.com/2014/05/true-goodbye-using-truecrypt-is-not-secure/">True Goodbye: 'Using TrueCrypt Is Not Secure'</a> (363)</li>
+	<li><a href="https://krebsonsecurity.com/2015/08/who-hacked-ashley-madison/">Who Hacked Ashley Madison?</a> (361)</li>
+</ul>
+</aside>
+<aside id="media_image-2" class="widget widget_media_image"><p class="widget-title">Why So Many Top Hackers Hail from Russia</p><a href="https://krebsonsecurity.com/2017/06/why-so-many-top-hackers-hail-from-russia/"><img width="580" height="389" src="https://krebsonsecurity.com/wp-content/uploads/2017/06/computered-580x389.png" class="image wp-image-39684  attachment-medium size-medium" alt="" loading="lazy" style="max-width: 100%; height: auto;" srcset="https://krebsonsecurity.com/wp-content/uploads/2017/06/computered-580x389.png 580w, https://krebsonsecurity.com/wp-content/uploads/2017/06/computered-768x514.png 768w, https://krebsonsecurity.com/wp-content/uploads/2017/06/computered-940x630.png 940w, https://krebsonsecurity.com/wp-content/uploads/2017/06/computered.png 1551w" sizes="(max-width: 580px) 100vw, 580px" /></a></aside><aside id="widget_sp_image-11" class="widget widget_sp_image"><p class="widget-title">Category: Web Fraud 2.0</p><a href="https://krebsonsecurity.com/category/web-fraud-2-0/" target="_blank" class="widget_sp_image-image-link" title="Category: Web Fraud 2.0"><img width="227" height="400" alt="Criminnovations" class="attachment-medium aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2013/11/cybercrimeinnovations-227x400.png" /></a><div class="widget_sp_image-description" ><p>Innovations from the Underground</p>
+</div></aside><aside id="widget_sp_image-12" class="widget widget_sp_image"><a href="https://krebsonsecurity.com/2014/03/are-credit-monitoring-services-worth-it/" target="_blank" class="widget_sp_image-image-link"><img width="285" height="189" class="attachment-medium aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2014/03/shreddedID-copy-285x189.png 285w, https://krebsonsecurity.com/wp-content/uploads/2014/03/shreddedID-copy-600x399.png 600w, https://krebsonsecurity.com/wp-content/uploads/2014/03/shreddedID-copy.png 849w" sizes="(max-width: 285px) 100vw, 285px" src="https://krebsonsecurity.com/wp-content/uploads/2014/03/shreddedID-copy-285x189.png" /></a><div class="widget_sp_image-description" ><p>ID Protection Services Examined</p>
+</div></aside><aside id="widget_sp_image-13" class="widget widget_sp_image"><p class="widget-title">Is Antivirus Dead?</p><a href="https://krebsonsecurity.com/2014/05/antivirus-is-dead-long-live-antivirus/" target="_blank" class="widget_sp_image-image-link" title="Is Antivirus Dead?"><img width="285" height="161" alt="Is Antivirus Dead?" class="attachment-medium aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2014/05/cryptservices-285x161.png 285w, https://krebsonsecurity.com/wp-content/uploads/2014/05/cryptservices-600x339.png 600w, https://krebsonsecurity.com/wp-content/uploads/2014/05/cryptservices.png 945w" sizes="(max-width: 285px) 100vw, 285px" src="https://krebsonsecurity.com/wp-content/uploads/2014/05/cryptservices-285x161.png" /></a><div class="widget_sp_image-description" ><p>The reasons for its decline</p>
+</div></aside><aside id="widget_sp_image-14" class="widget widget_sp_image"><p class="widget-title">The Growing Tax Fraud Menace</p><a href="https://krebsonsecurity.com/category/tax-refund-fraud/" target="_blank" class="widget_sp_image-image-link" title="The Growing Tax Fraud Menace"><img width="285" height="285" alt="The Growing Tax Fraud Menace" class="attachment-medium aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2014/04/taxfraud-285x285.jpg 285w, https://krebsonsecurity.com/wp-content/uploads/2014/04/taxfraud-150x150.jpg 150w, https://krebsonsecurity.com/wp-content/uploads/2014/04/taxfraud-600x600.jpg 600w, https://krebsonsecurity.com/wp-content/uploads/2014/04/taxfraud.jpg 693w" sizes="(max-width: 285px) 100vw, 285px" src="https://krebsonsecurity.com/wp-content/uploads/2014/04/taxfraud-285x285.jpg" /></a><div class="widget_sp_image-description" ><p>File 'em Before the Bad Guys Can </p>
+</div></aside><aside id="widget_sp_image-17" class="widget widget_sp_image"><p class="widget-title">Inside a Carding Shop</p><a href="https://krebsonsecurity.com/2014/06/peek-inside-a-professional-carding-shop/" target="_blank" class="widget_sp_image-image-link" title="Inside a Carding Shop"><img width="194" height="340" alt="Inside a Carding Shop" class="attachment-medium aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2014/06/mcdumpalsjoined.png" /></a><div class="widget_sp_image-description" ><p>A crash course in carding. </p>
+</div></aside><aside id="widget_sp_image-18" class="widget widget_sp_image"><p class="widget-title">Beware Social Security Fraud</p><a href="https://krebsonsecurity.com/2013/09/crooks-hijack-retirement-funds-via-ssa-portal/" target="_blank" class="widget_sp_image-image-link" title="Beware Social Security Fraud"><img width="285" height="293" alt="Beware Social Security Fraud" class="attachment-full aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2016/09/myssn-285x293.png" /></a><div class="widget_sp_image-description" ><p>Sign up, or Be Signed Up! </p>
+</div></aside><aside id="widget_sp_image-2" class="widget widget_sp_image"><p class="widget-title">How Was Your Card Stolen?</p><a href="https://krebsonsecurity.com/2015/01/how-was-your-credit-card-stolen/" target="_blank" class="widget_sp_image-image-link" title="How Was Your Card Stolen?"><img width="285" height="285" alt="How Was Your Card Stolen?" class="attachment-full aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2016/09/carddominoes-285x285.jpg 285w, https://krebsonsecurity.com/wp-content/uploads/2016/09/carddominoes-285x285-150x150.jpg 150w" sizes="(max-width: 285px) 100vw, 285px" src="https://krebsonsecurity.com/wp-content/uploads/2016/09/carddominoes-285x285.jpg" /></a><div class="widget_sp_image-description" ><p>Finding out is not so easy. </p>
+</div></aside><aside id="widget_sp_image-22" class="widget widget_sp_image"><p class="widget-title">Krebs&#8217;s 3 Rules&#8230;</p><a href="https://krebsonsecurity.com/2011/05/krebss-3-basic-rules-for-online-safety/" target="_blank" class="widget_sp_image-image-link" title="Krebs&#8217;s 3 Rules&#8230;"><img width="300" height="300" alt="Krebs&#8217;s 3 Rules&#8230;" class="attachment-medium aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2011/05/three-300x300.jpg 300w, https://krebsonsecurity.com/wp-content/uploads/2011/05/three-150x150.jpg 150w, https://krebsonsecurity.com/wp-content/uploads/2011/05/three.jpg 347w" sizes="(max-width: 300px) 100vw, 300px" src="https://krebsonsecurity.com/wp-content/uploads/2011/05/three-300x300.jpg" /></a><div class="widget_sp_image-description" ><p>...For Online Safety. </p>
+</div></aside>		</div><!-- #secondary -->
+		</div><!-- #main .wrapper -->
+	
+	<div id="publisho-footer" class="widget-area">
+				<div class="footer-widget">
+                				</div>
+				<div class="footer-widget">
+								</div>
+				<div class="footer-widget">
+								</div>
+	</div>
+
+	<div class="site-wordpress">
+					&copy; Krebs on Security<br>
+	</div>
+	<!-- .site-info --><div class="clear"></div>
+</div><!-- #page -->
+
+<script type='text/javascript' src='https://krebsonsecurity.com/wp-content/themes/kos-mar2021/js/slicknav.js?ver=5.8.2' id='publisho-mobile-navigation-js'></script>
+<script type='text/javascript' src='https://krebsonsecurity.com/wp-includes/js/wp-embed.min.js?ver=5.8.2' id='wp-embed-js'></script>
+</body>
+</html>
+<!--
+Performance optimized by W3 Total Cache. Learn more: https://www.boldgrid.com/w3-total-cache/
+
+Object Caching 183/387 objects using memcached
+Page Caching using memcached 
+Database Caching 7/27 queries in 0.017 seconds using memcached
+
+Served from: krebsonsecurity.com @ 2021-12-10 15:34:57 by W3 Total Cache
+-->

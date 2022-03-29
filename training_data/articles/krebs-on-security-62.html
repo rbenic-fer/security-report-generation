@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<!--[if IE 7]>
+<html class="ie ie7" lang="en-US">
+<![endif]-->
+<!--[if IE 8]>
+<html class="ie ie8" lang="en-US">
+<![endif]-->
+<!--[if !(IE 7) | !(IE 8)  ]><!-->
+<html lang="en-US">
+<!--<![endif]-->
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width" />
+<link rel="profile" href="http://gmpg.org/xfn/11" />
+<!--[if lt IE 9]>
+<script src="https://krebsonsecurity.com/wp-content/themes/kos-mar2021/js/html5.js" type="text/javascript"></script>
+<![endif]-->
+<title>Krebs on Security &#8211; Page 62 &#8211; In-depth security news and investigation</title>
+<meta name='robots' content='max-image-preview:large' />
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="Krebs on Security &raquo; Feed" href="https://krebsonsecurity.com/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Krebs on Security &raquo; Comments Feed" href="https://krebsonsecurity.com/comments/feed/" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.1.0\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.1.0\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/krebsonsecurity.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=5.8.2"}};
+			!function(e,a,t){var n,r,o,i=a.createElement("canvas"),p=i.getContext&&i.getContext("2d");function s(e,t){var a=String.fromCharCode;p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,e),0,0);e=i.toDataURL();return p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,t),0,0),e===i.toDataURL()}function c(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(o=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},r=0;r<o.length;r++)t.supports[o[r]]=function(e){if(!p||!p.fillText)return!1;switch(p.textBaseline="top",p.font="600 32px Arial",e){case"flag":return s([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])?!1:!s([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!s([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]);case"emoji":return!s([10084,65039,8205,55357,56613],[10084,65039,8203,55357,56613])}return!1}(o[r]),t.supports.everything=t.supports.everything&&t.supports[o[r]],"flag"!==o[r]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[o[r]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(n=t.source||{}).concatemoji?c(n.concatemoji):n.wpemoji&&n.twemoji&&(c(n.twemoji),c(n.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+	<link rel='stylesheet' id='colorbox-theme1-css'  href='https://krebsonsecurity.com/wp-content/plugins/jquery-lightbox-for-native-galleries/colorbox/theme1/colorbox.css?ver=1.3.14' type='text/css' media='screen' />
+<link rel='stylesheet' id='wp-block-library-css'  href='https://krebsonsecurity.com/wp-includes/css/dist/block-library/style.min.css?ver=5.8.2' type='text/css' media='all' />
+<link rel='stylesheet' id='contact-form-7-css'  href='https://krebsonsecurity.com/wp-content/plugins/contact-form-7/includes/css/styles.css?ver=5.5.3' type='text/css' media='all' />
+<link rel='stylesheet' id='publisho-style-css'  href='https://krebsonsecurity.com/wp-content/themes/kos-mar2021/style.css?subver=1.2&#038;ver=5.8.2' type='text/css' media='all' />
+<style id='publisho-style-inline-css' type='text/css'>
+
+	.themonic-nav .current-menu-item > a, .themonic-nav .current-menu-ancestor > a, .themonic-nav .current_page_item > a, .themonic-nav .current_page_ancestor > a {
+		background: #cc6600;
+	}
+	.themonic-nav ul.nav-menu, .themonic-nav div.nav-menu > ul {
+		border-bottom: 5px solid #cc6600;
+	}
+	#site-navigation .topheadmenu a {
+    background: rgba(0, 0, 0, 0);
+	}
+	.themonic-nav li a:hover {
+		background: #cc6600;
+	}
+	.themonic-nav li:hover {
+		background: #cc6600;
+	}.wrapper .flexslider {margin: 0 0 30px;}.frontp .btm-wrap {
+    border-top: 1px solid #e9e9e9;
+	}
+	.entry-summary {
+    border-top: none;
+	}.frontp .btm-wrap { margin-bottom: 30px;}.site { font-size:14px;}.site { font-family:'Roboto', arial ;}
+</style>
+<link rel='stylesheet' id='publisho-custom-style-css'  href='https://krebsonsecurity.com/wp-content/themes/kos-mar2021/custom.css?subver=1.2&#038;ver=5.8.2' type='text/css' media='all' />
+<!--[if lt IE 9]>
+<link rel='stylesheet' id='publisho-ie-css'  href='https://krebsonsecurity.com/wp-content/themes/kos-mar2021/css/ie.css?ver=20160606' type='text/css' media='all' />
+<![endif]-->
+<link rel='stylesheet' id='fontawesome-css-css'  href='https://krebsonsecurity.com/wp-content/themes/kos-mar2021/fonts/font-awesome.min.css?ver=5.8.2' type='text/css' media='all' />
+<link rel='stylesheet' id='publisho_custom_fonts-css'  href='//fonts.googleapis.com/css?family=Roboto%3Aregular%2Citalic%2C500%26subset%3Dlatin%2C' type='text/css' media='screen' />
+<script type='text/javascript' src='https://krebsonsecurity.com/wp-includes/js/jquery/jquery.min.js?ver=3.6.0' id='jquery-core-js'></script>
+<script type='text/javascript' src='https://krebsonsecurity.com/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.3.2' id='jquery-migrate-js'></script>
+<script type='text/javascript' src='https://krebsonsecurity.com/wp-content/plugins/jquery-lightbox-for-native-galleries/colorbox/jquery.colorbox-min.js?ver=1.3.14' id='colorbox-js'></script>
+<link rel="https://api.w.org/" href="https://krebsonsecurity.com/wp-json/" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://krebsonsecurity.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://krebsonsecurity.com/wp-includes/wlwmanifest.xml" /> 
+<meta name="generator" content="WordPress 5.8.2" />
+<!-- JavaScript Pull-Quotes plugin v2.2 -->
+	<link rel="stylesheet" href="https://krebsonsecurity.com/wp-content/plugins/jspullquotes/resources/jspullquotes-core.css" type="text/css" />
+	<link rel="stylesheet" href="https://krebsonsecurity.com/wp-content/plugins/jspullquotes/resources/jspullquotes-default.css" type="text/css" />
+	<script type="text/javascript" src="https://krebsonsecurity.com/wp-content/plugins/jspullquotes/resources/jspullquotes.js"></script>
+	<script type="text/javascript">
+		var arrOptions = new Array("1", "1", "right", "1", "1", "blockquote", "pullquote", "pullquote pqRight");
+		pullQuoteOpts(arrOptions);
+	</script>
+<!-- end pull-quote additions -->
+<!-- jQuery Lightbox For Native Galleries v3.1.3 | http://www.viper007bond.com/wordpress-plugins/jquery-lightbox-for-native-galleries/ -->
+<script type="text/javascript">
+// <![CDATA[
+	jQuery(document).ready(function($){
+		$(".gallery").each(function(index, obj){
+			var galleryid = Math.floor(Math.random()*10000);
+			$(obj).find("a").colorbox({rel:galleryid, maxWidth:"95%", maxHeight:"95%"});
+		});
+		$("a.lightbox").colorbox({maxWidth:"95%", maxHeight:"95%"});
+	});
+// ]]>
+</script>
+<style type="text/css" id="custom-background-css">
+body.custom-background { background-color: #ffffff; }
+</style>
+	<link rel="me" href="https://twitter.com/briankrebs" /><meta name="twitter:widgets:link-color" content="#000000" /><meta name="twitter:widgets:border-color" content="#000000" /><meta name="twitter:partner" content="tfwp" />
+<meta name="twitter:card" content="summary" /><meta name="twitter:title" content="Krebs on Security" /><meta name="twitter:site" content="@briankrebs" /><meta name="twitter:description" content="In-depth security news and investigation" />
+</head>
+<body class="home blog paged custom-background paged-62 custom-background-white single-author frontp hfeed">
+<div id="page" class="site">
+	<!-- <div class="publisho-top-mobile-nav clear"></div> -->
+	<div class="themonic-logo themonic-ad3"><div class="a-statement">Advertisement</div><a href="https://securityscorecard.com/instant-security-scorecard?utm_source=krebs+on+security&amp;utm_medium=display&amp;utm_campaign=instant+scorecard&amp;utm_term=A&amp;utm_content=1240x110">
+<img src="/b-securityscorecard/1.jpg">
+</a></div>
+	<div class="themonic-logo themonic-ad6"><div class="a-statement">Advertisement</div><a href="https://www.akamai.com/why-akamai/the-internet-of-possibilities?utm_source=krebsonsecurity&amp;utm_medium=display&amp;utm_campaign=F-MC-54978">
+<img src="/b-akamai/143.png">
+</a></div>
+	<nav id="site-navigation" class="themonic-nav" role="navigation">
+	</nav><!-- #site-navigation -->
+	<div class="clear"></div>
+	<header id="masthead" class="site-header" role="banner">
+ 					<div class="desktop-social">
+						<div class="socialmedia">
+							<a href="http://twitter.com/briankrebs" target="_blank"><i class="fa fa-twitter"></i></a> 
+															<a class="rss" href="https://krebsonsecurity.com/feed/" target="_blank"><i class="fa fa-rss"></i></a>	
+									<a class="rss" href="https://www.linkedin.com/in/bkrebs/" target="_blank"><i class="fa fa-linkedin"></i></a>	
+								</div>
+				 	</div>
+																						   
+		
+		<div class="themonic-logo responsive-img-container">
+			<a href="https://krebsonsecurity.com/" title="Krebs on Security" rel="home"><img src="https://krebsonsecurity.com/wp-content/uploads/2021/03/kos-27-03-2021.jpg" alt="Krebs on Security"></a>
+		</div>
+
+					<div class="mobile-social">
+						<div class="socialmedia">
+							<a href="http://twitter.com/briankrebs" target="_blank"><i class="fa fa-twitter"></i></a> 
+															<a class="rss" href="https://krebsonsecurity.com/feed/" target="_blank"><i class="fa fa-rss"></i></a>	
+									<a class="rss" href="https://www.linkedin.com/in/bkrebs/" target="_blank"><i class="fa fa-linkedin"></i></a>	
+								</div>
+					</div>
+		
+				<!-- <div class="publisho-mobile-nav clear"></div> -->
+		<nav id="site-navigation" class="themonic-nav" role="navigation">
+			<a class="assistive-text" href="#content" title="Skip to content">Skip to content</a>
+			<div id="menu-top" class="nav-menu"><ul>
+<li ><a href="https://krebsonsecurity.com/">Home</a></li><li class="page_item page-item-2"><a href="https://krebsonsecurity.com/about/">About the Author</a></li>
+<li class="page_item page-item-645"><a href="https://krebsonsecurity.com/cpm/">Advertising/Speaking</a></li>
+</ul></div>
+		</nav><!-- #site-navigation -->
+		<div class="clear"></div>
+	</header><!-- #masthead -->
+	<div id="main" class="wrapper">
+		<div id="primary" class="site-content">
+	
+
+	
+		<div id="content" role="main">
+
+		<article id="post-40346" class="post-40346 post type-post status-publish format-standard hentry category-other tag-charlie-harrow tag-deep-insert-skimmer tag-ncr-corp">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2017/08/dumping-data-from-deep-insert-skimmers/" title="Permalink to Dumping Data from Deep-Insert Skimmers" rel="bookmark">Dumping Data from Deep-Insert Skimmers</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">August 22, 2017</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2017/08/dumping-data-from-deep-insert-skimmers/#comments">56 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>I recently heard from a police detective who was seeking help identifying some strange devices found on two Romanian men caught maxing out stolen credit cards at local retailers. Further inspection revealed the devices to be semi-flexible data transfer wands that thieves can use to extract stolen ATM card data from &#8220;<a href="https://krebsonsecurity.com/2016/05/crooks-go-deep-with-deep-insert-skimmers/" target="_blank">deep-insert skimmers</a>,&#8221; wafer-thin fraud devices made to be hidden inside of the card acceptance slot on a cash machine.</p>
+<p>The investigator agreed to share the photos if I kept his identity out of this story. He told KrebsOnSecurity that the two men were thought to be part of a crime gang active in the northeast United States, and that the almost 4-inch orange plastic wands allow thieves to download data from a deep insert skimmer. Depending on how the deep-insert skimmer is built, thieves may be able to use the wands to retrieve card data without having to remove the skimmer from the throat of the ATM.</p>
+<p>Deep insert skimmers are different from <a href="https://krebsonsecurity.com/2016/06/atm-insert-skimmers-in-action/" target="_blank">typical insert skimmers</a> in that they are placed in various positions within the card reader transport, behind the shutter of a motorized card reader and completely hidden from the consumer at the front of the ATM.</p>
+<p>Here&#8217;s a look at these insert skimmer wands (for want of a better term):</p>
+<div id="attachment_40350" style="width: 590px" class="wp-caption aligncenter"><img aria-describedby="caption-attachment-40350" loading="lazy" class="size-medium wp-image-40350" src="https://krebsonsecurity.com/wp-content/uploads/2017/08/insertskimcord-580x452.png" alt="These plastic wands allow thieves to extract stolen card data stored by insert skimmers. " width="580" height="452" srcset="https://krebsonsecurity.com/wp-content/uploads/2017/08/insertskimcord-580x452.png 580w, https://krebsonsecurity.com/wp-content/uploads/2017/08/insertskimcord-768x599.png 768w, https://krebsonsecurity.com/wp-content/uploads/2017/08/insertskimcord-940x733.png 940w, https://krebsonsecurity.com/wp-content/uploads/2017/08/insertskimcord.png 1261w" sizes="(max-width: 580px) 100vw, 580px" /><p id="caption-attachment-40350" class="wp-caption-text">These plastic wands allow thieves to extract stolen card data stored by insert skimmers.</p></div>
+<p>This is what the wand (left) looks like when inserted into a deep-insert skimmer (right):</p>
+<div id="attachment_40351" style="width: 590px" class="wp-caption aligncenter"><img aria-describedby="caption-attachment-40351" loading="lazy" class="size-medium wp-image-40351" src="https://krebsonsecurity.com/wp-content/uploads/2017/08/insertskimpluggedin-580x238.png" alt="A data transfer wand inserted into a deep-insert skimmer." width="580" height="238" srcset="https://krebsonsecurity.com/wp-content/uploads/2017/08/insertskimpluggedin-580x238.png 580w, https://krebsonsecurity.com/wp-content/uploads/2017/08/insertskimpluggedin-768x316.png 768w, https://krebsonsecurity.com/wp-content/uploads/2017/08/insertskimpluggedin-940x386.png 940w, https://krebsonsecurity.com/wp-content/uploads/2017/08/insertskimpluggedin.png 1521w" sizes="(max-width: 580px) 100vw, 580px" /><p id="caption-attachment-40351" class="wp-caption-text">A data transfer wand inserted into a deep-insert skimmer.</p></div>
+<p> <a href="https://krebsonsecurity.com/2017/08/dumping-data-from-deep-insert-skimmers/#more-40346" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+	<div id="between_article_ad" class="themonic-ad5"><a href="https://www.iansresearch.com/resources/infosec-content-downloads/research-reports/2021-ciso-compensation-benchmark-research-study?utm_source=krebs&amp;utm_medium=display_ad&amp;utm_campaign=2021_ciso_comp_study">
+<img src="/b-ians/6.png">
+</a></div>	<article id="post-40289" class="post-40289 post type-post status-publish format-standard hentry category-other tag-amazon-macie tag-carbon-black tag-directdefense tag-mike-viscuso tag-spotify tag-virustotal">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2017/08/carbon-emissions-oversharing-bug-puts-security-vendor-back-in-spotlight/" title="Permalink to Carbon Emissions: Oversharing Bug Puts Security Vendor Back in Spotlight" rel="bookmark">Carbon Emissions: Oversharing Bug Puts Security Vendor Back in Spotlight</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">August 18, 2017</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2017/08/carbon-emissions-oversharing-bug-puts-security-vendor-back-in-spotlight/#comments">22 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>Last week, security firm <strong>DirectDefense</strong> came under fire for over-hyping claims that <strong>Cb Response</strong>, a cybersecurity product sold by competitor <strong>Carbon Black</strong>, was leaking proprietary data from customers who use it. Carbon Black responded that the bug identified by its competitor was a feature, and that customers were amply cautioned in advance about the potential privacy risks of using the feature. Now Carbon Black is warning that an internal review has revealed a wholly separate bug in Cb Response that could in fact result in some customers unintentionally sharing sensitive files.</p>
+<p><img loading="lazy" src="https://krebsonsecurity.com/wp-content/uploads/2017/08/cblogo.png" alt="cblogo" width="225" height="118" class="alignright size-full wp-image-40322" />As noted in <a href="https://krebsonsecurity.com/2017/08/beware-of-security-by-press-release/" target="_blank">last week&#8217;s story</a>, DirectDefense warned about a problem with Cb Response’s use of Google’s <a href="https://www.virustotal.com/" target="_blank">VirusTotal</a> — a free tool that lets anyone submit a suspicious file and have it scanned against dozens of commercial anti-malware tools. There is also a paid version of VirusTotal that allows customers to examine any file uploaded to the service.</p>
+<p>Specifically, DirectDefense claimed that Cb Response’s sharing of suspicious files with VirusTotal could expose sensitive data because VirusTotal allows paying customers to download any files submitted by other users. DirectDefense labeled the bug “the world’s largest pay-for-play data exfiltration botnet.”</p>
+<p>Numerous industry analysts leapt to Carbon Black&#8217;s defense &#8212; with some even calling &#8220;bullshit&#8221; on the findings &#8212; pointing out that plenty of other vendors submit files through Virustotal and that DirectDefense was merely trying to besmirch a competitor&#8217;s product.</p>
+<p>But earlier this week, Carbon Black began quietly notifying customers that an internal review of the claims revealed a completely different bug that could result in some benign customer files being miscategorized as executable files and inadvertently uploaded to Virustotal for scanning.</p>
+<p>&#8220;On Thursday, we discovered a bug affecting a small percentage of our Cb Response customers,&#8221; said <strong>Mike Viscuso</strong>, co-founder and chief technology officer at Carbon Black. &#8220;Our review is still ongoing, but based on what we learned to date it requires a very specific customer configuration, and we have already taken steps to remediate the bug and protect our customers.&#8221; <a href="https://krebsonsecurity.com/2017/08/carbon-emissions-oversharing-bug-puts-security-vendor-back-in-spotlight/#more-40289" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+	<div class="themonic-ad2"><div class="a-statement">Advertisement</div><a href="https://www.akamai.com/why-akamai/the-internet-of-possibilities?utm_source=krebsonsecurity&amp;utm_medium=display&amp;utm_campaign=F-MC-54978">
+<img src="/b-akamai/145.png">
+</a></div>	<article id="post-40294" class="post-40294 post type-post status-publish format-standard hentry category-other tag-crowdstrike tag-defense-intelligence-agency tag-dnc-hack tag-dragos-inc tag-grizzly-steppe tag-matt-tait tag-norse-corp tag-p-a-s-web-shell tag-profexer tag-robert-m-lee tag-robert-strauss-center-for-international-security-and-law">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2017/08/blowing-the-whistle-on-bad-attribution/" title="Permalink to Blowing the Whistle on Bad Attribution" rel="bookmark">Blowing the Whistle on Bad Attribution</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">August 18, 2017</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2017/08/blowing-the-whistle-on-bad-attribution/#comments">41 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p><em>The New York Times</em> this week published a fascinating story about a young programmer in Ukraine who&#8217;d turned himself in to the local police. The Times says the man did so after one of his software tools was identified by the U.S. government as part of the arsenal used by Russian hackers suspected of hacking into the <strong>Democratic National Committee </strong>(DNC) last year. It&#8217;s a good read, as long as you can ignore that the premise of the piece is completely wrong.</p>
+<p>The story, &#8220;<a href="https://www.nytimes.com/2017/08/16/world/europe/russia-ukraine-malware-hacking-witness.html" target="_blank">In Ukraine, a Malware Expert Who Could Blow the Whistle on Russian Hacking</a>,&#8221; details the plight of a hacker in Kiev better known as &#8220;<strong>Profexer</strong>,&#8221; who has reportedly agreed to be a witness for the FBI. From the story:</p>
+<blockquote><p>&#8220;Profexer&#8217;s posts, already accessible to only a small band of fellow hackers and cybercriminals looking for software tips, blinked out in January &#8212; just days after American intelligence agencies publicly identified a program he had written as one tool used in Russian hacking in the United States. American intelligence agencies have determined Russian hackers were behind the electronic break-in of the Democratic National Committee.&#8221;</p></blockquote>
+<p>The Times&#8217; reasoning for focusing on the travails of Mr. Profexer comes from <a href="https://www.us-cert.gov/security-publications/GRIZZLY-STEPPE-Russian-Malicious-Cyber-Activity" target="_blank">the &#8220;GRIZZLYSTEPPE&#8221; report</a>, a collection of technical indicators or attack &#8220;signatures&#8221; published in December 2016 by the U.S. government that companies can use to determine whether their networks may be compromised by a number of different Russian cybercrime groups.</p>
+<p>The only trouble is nothing in the GRIZZLYSTEPPE report said which of those technical indicators were found in the DNC hack. In fact, Prefexer&#8217;s &#8220;P.A.S. Web shell&#8221; tool &#8212; a program designed to insert a digital backdoor that lets attackers control a hacked Web site remotely &#8212; was specifically <em>not</em> among the hacking tools found in the DNC break-in.</p>
+<p><div id="attachment_40297" style="width: 440px" class="wp-caption aligncenter"><img aria-describedby="caption-attachment-40297" loading="lazy" class="size-full wp-image-40297" src="https://krebsonsecurity.com/wp-content/uploads/2017/08/pas30.png" alt="The P.A.S. Web shell, as previously offered for free on the now-defunct site profexer[dot]name." width="430" height="268" /><p id="caption-attachment-40297" class="wp-caption-text">The P.A.S. Web shell, as previously offered for free on the now-defunct site profexer[dot]name.</p></div>That&#8217;s according to <strong>Crowdstrike</strong>, the company called in to examine the DNC&#8217;s servers following the intrusion. In a statement released to KrebsOnSecurity, Crowdstrike said it <a href="https://www.crowdstrike.com/blog/bears-midst-intrusion-democratic-national-committee/" target="_blank">published the list of malware</a> that it found was used in the DNC hack, and that the Web shell named in the New York Times story was not on that list.</p>
+<p><strong>Robert M. Lee </strong>is<strong> </strong>founder of the industrial cybersecurity firm <strong>Dragos, Inc.</strong> and an expert on the challenges associated with attribution in cybercrime. In a post on his personal blog, Lee challenged The Times on its conclusions.</p>
+<p>&#8220;The GRIZZLYSTEPPE report has nothing to do with the DNC breach though and was a collection of technical indicators the government compiled from multiple agencies all working different Russian related threat groups,&#8221; Lee <a href="http://www.robertmlee.org/russian-election-meddling-grizzleysteppe-and-bananas/" target="_blank">wrote</a>.</p>
+<p>&#8220;The threat group that compromised the DNC was Russian but not all Russian groups broke into the DNC,&#8221; he continued. &#8220;The GRIZZLYSTEPPE report was also highly criticized for its lack of accuracy and lack of a clear message and purpose. I covered it <a href="http://www.robertmlee.org/critiques-of-the-dhsfbis-grizzly-steppe-report/" data-ss1503017050="1">here </a>on my blog but that was also picked up by numerous journalists and <a href="https://krebsonsecurity.com/2017/01/dni-putin-led-cyberattack-propaganda-effort-to-elect-trump-denigrate-clinton/" target="_blank">covered elsewhere</a> [link added]. In other words, there’s no excuse for not knowing how widely criticized the GRIZZLYSTEPPE report was before citing it as good evidence in a NYT piece.&#8221;</p>
+<p>Perhaps in response to Lee&#8217;s blog post, The Times issued a correction to the story, re-writing the above-quoted and indented paragraph to read:</p>
+<blockquote><p>&#8220;It is the first known instance of a living witness emerging from the arid mass of technical detail that has so far shaped the investigation into the election hacking and the heated debate it has stirred. The Ukrainian police declined to divulge the man’s name or other details, other than that he is living in <a class="meta-loc" title="More news and information about Ukraine." href="http://topics.nytimes.com/top/news/international/countriesandterritories/ukraine/index.html?inline=nyt-geo" data-ss1503013572="1">Ukraine</a> and has not been arrested.&#8221;</p></blockquote>
+<p>[Side note: Profexer may well have been doxed by <a href="https://off-guardian.org/2017/01/09/did-a-ukrainian-university-student-create-grizzly-steppe/" target="_blank">this publication</a> just weeks after the GRIZZLYSTEPPE report was released.] <a href="https://krebsonsecurity.com/2017/08/blowing-the-whistle-on-bad-attribution/#more-40294" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-40257" class="post-40257 post type-post status-publish format-standard hentry category-other tag-adrian-sanabria tag-carbon-black tag-cb-response tag-cylance tag-directdefense tag-leslie-carhart">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2017/08/beware-of-security-by-press-release/" title="Permalink to Beware of Security by Press Release" rel="bookmark">Beware of Security by Press Release</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">August 10, 2017</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2017/08/beware-of-security-by-press-release/#comments">45 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>On Wednesday, the security industry once again witnessed an all-too-familiar cycle: I call it &#8220;security by press release.&#8221; It goes a bit like this: A security firm releases a report claiming to have unearthed a major flaw in a competitor&#8217;s product; members of the trade press uncritically <a href="https://gizmodo.com/top-security-firm-may-be-leaking-terabytes-of-confident-1797667775" target="_blank">republish</a> the claims without adding much clarity or waiting for responses from the affected vendor; blindsided vendor responds in a blog post showing how the issue is considerably less dire than originally claimed.</p>
+<p>At issue are claims made by Denver-based security company <strong>DirectDefense</strong>, which published <a href="https://www.directdefense.com/harvesting-cb-response-data-leaks-fun-profit/" target="_blank">a report</a> this week warning that <strong>Cb Response </strong>&#8212; a suite of security tools sold by competitor <strong>Carbon Black</strong> (formerly <a href="https://krebsonsecurity.com/2013/02/security-firm-bit9-hacked-used-to-spread-malware/" target="_blank">Bit9</a>) &#8212; was leaking potentially sensitive and proprietary data from customers who use its product.</p>
+<p><img loading="lazy" class="aligncenter size-medium wp-image-40262" src="https://krebsonsecurity.com/wp-content/uploads/2017/08/snm-580x469.png" alt="snm" width="580" height="469" srcset="https://krebsonsecurity.com/wp-content/uploads/2017/08/snm-580x469.png 580w, https://krebsonsecurity.com/wp-content/uploads/2017/08/snm.png 754w" sizes="(max-width: 580px) 100vw, 580px" /></p>
+<p>DirectDefense warned about a problem with Cb Response&#8217;s use of &#8220;a cloud-based multiscanner&#8221; to scan suspicious files for malware. DirectDefense didn&#8217;t name the scanner in question, but it&#8217;s Google&#8217;s <a href="https://www.virustotal.com" target="_blank">VirusTotal</a> &#8212; a free tool that lets anyone submit a suspicious file and have it scanned against dozens of commercial anti-malware tools. There&#8217;s also a paid version of VirusTotal that allows customers to examine any file uploaded to the service.</p>
+<p>Specifically, DirectDefense claimed that Cb Response&#8217;s sharing of suspicious files with VirusTotal could expose sensitive data because VirusTotal allows paying customers to download any files submitted by other users. This is the full extent of the &#8220;vulnerability&#8221; that DirectDefense labeled &#8220;the world&#8217;s largest pay-for-play data exfiltration botnet.&#8221;</p>
+<p>Carbon Black responded with <a href="https://www.carbonblack.com/2017/08/09/directdefense-incorrectly-asserts-architectural-flaw-in-cb-response/" target="_blank">its own blog post</a> noting that the feature DirectDefense warned about was not turned on by default, and that Carbon Black <a href="https://www.carbonblack.com/wp-content/uploads/2017/08/Blog_Image_2.png" target="_blank">informs customers of the privacy risks</a> that may be associated with sharing files with VirusTotal.</p>
+<h4>ANALYSIS</h4>
+<p><strong>Adrian Sanabria</strong>, a security expert and co-founder of <strong>Savage Security</strong>, published <a href="https://blog.savagesec.com/words-have-meanings-dc925219bb8e?source=user_profile---------0--------------" target="_blank">a blog post</a> that called &#8220;bullshit&#8221; on DirectDefense&#8217;s findings, noting that the company inexplicably singles out a competitor when many other security firms similarly allow customers to submit files to VirusTotal.</p>
+<p>&#8220;Dozens<strong class="markup--strong markup--p-strong"> </strong>of other security vendors either have an option to automatically submit binaries (yes, whole binaries, not just the hash) to VirusTotal or do it without the customers knowledge altogether,&#8221; Sanabria wrote. &#8220;In singling out Carbon Black, DirectDefense opens itself up to criticism and closer scrutiny.&#8221;</p>
+<p>Such as <a href="https://twitter.com/Direct_Defense/status/894651409123033088" target="_blank">shilling for a partner firm</a> (<strong>Cylance</strong>) that stands to gain from taking Carbon Black down a few notches in the public eye, Sanabria observed [link added].</p>
+<p>&#8220;I personally don’t believe DirectDefense is a shill for Cylance, but in singling out one of many vendors that do the same thing, they’ve stepped into a classic PR gaffe that <a class="markup--anchor markup--p-anchor" href="https://twitter.com/threatthreat/status/895306825763041284" target="_blank" rel="noreferrer" data-href="https://twitter.com/threatthreat/status/895306825763041284" data-ss1502373666="1">makes them look like one</a>,&#8221; he wrote. <a href="https://krebsonsecurity.com/2017/08/beware-of-security-by-press-release/#more-40257" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-40244" class="post-40244 post type-post status-publish format-standard hentry category-other tag-applej4ck tag-booter tag-itay-huri tag-new-york-university tag-p1st tag-stresser tag-vdos tag-yarden-bidani">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2017/08/alleged-vdos-operators-arrested-charged/" title="Permalink to Alleged vDOS Operators Arrested, Charged" rel="bookmark">Alleged vDOS Operators Arrested, Charged</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">August 9, 2017</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2017/08/alleged-vdos-operators-arrested-charged/#comments">20 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>Two young Israeli men alleged by this author to have co-founded <strong>vDOS</strong> &#8212; until recently the largest and most profitable cyber attack-for-hire service online &#8212; were arrested and formally indicted this week in Israel on conspiracy and hacking charges.</p>
+<p>On Sept. 8, 2016, KrebsOnSecurity <a href="http://krebsonsecurity.com/2016/09/israeli-online-attack-service-vdos-earned-600000-in-two-years/" target="_blank">published a story</a> about the hacking of vDOS, a service that attracted tens of thousands of paying customers and facilitated more than two million distributed denial-of-service (DDoS) attacks over the four year period it was in business.</p>
+<p>That story named two then 18-year-old Israelis — <strong>Yarden &#8220;applej4ck&#8221; Bidani</strong> and <strong>Itay &#8220;p1st&#8221; Huri</strong> — as the likely owners and operators of vDOS. Within hours of that story&#8217;s publication the two <a href="https://krebsonsecurity.com/2016/09/alleged-vdos-proprietors-arrested-in-israel/" target="_blank">were detained by Israeli police</a>, placed on house arrest for 10 days, and forbidden from using the Internet for a month.</p>
+<div id="attachment_36386" style="width: 590px" class="wp-caption aligncenter"><img aria-describedby="caption-attachment-36386" loading="lazy" class="size-medium wp-image-36386" src="https://krebsonsecurity.com/wp-content/uploads/2016/09/vdosloggedin-580x405.png" alt="vDOS as it existed on Sept. 8, 2016." width="580" height="405" srcset="https://krebsonsecurity.com/wp-content/uploads/2016/09/vdosloggedin-580x405.png 580w, https://krebsonsecurity.com/wp-content/uploads/2016/09/vdosloggedin-768x536.png 768w, https://krebsonsecurity.com/wp-content/uploads/2016/09/vdosloggedin.png 877w" sizes="(max-width: 580px) 100vw, 580px" /><p id="caption-attachment-36386" class="wp-caption-text">vDOS as it existed on Sept. 8, 2016.</p></div>
+<p>On Tuesday, Israeli prosecutors announced they had <a href="http://www.israeldefense.co.il/he/node/30643" target="_blank">formally arrested and charged</a> two 19-year-olds with conspiring to commit a felony, prohibited activities, tampering with or disrupting a computer, and storing or disseminating false information. A <a href="https://pastebin.com/tkcGaYrF" target="_blank">statement</a> from a spokesman for the Israeli state attorney&#8217;s office said prosecutors couldn&#8217;t name the accused because their alleged crimes were committed while they were minors.</p>
+<p>But a number of details match perfectly with previous reporting on Bidani and Huri. As noted in the original Sept. 2016 expose&#8217; on vDOS&#8217;s alleged founders, Israeli prosecutors say the two men made more than $600,000 in two of the four years the service was in operation. vDOS was shuttered for good not longer after Bidani and Huri&#8217;s initial detention in Sept. 2016.</p>
+<p>&#8220;The defendants were constantly improving the attack code and finding different network security weaknesses that would enable them to offer increased attack services that could overcome existing defenses and create real damage to servers and services worldwide,&#8221; Israeli prosecutors alleged of the accused and their enterprise. <a href="https://krebsonsecurity.com/2017/08/alleged-vdos-operators-arrested-charged/#more-40244" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-40144" class="post-40144 post type-post status-publish format-standard hentry category-other tag-bleeping-computer tag-jimmy-graham tag-microsoft-patch-tuesday-august-2017 tag-qualys tag-windows-search-vulnerability">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2017/08/critical-security-fixes-from-adobe-microsoft-2/" title="Permalink to Critical Security Fixes from Adobe, Microsoft" rel="bookmark">Critical Security Fixes from Adobe, Microsoft</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">August 8, 2017</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2017/08/critical-security-fixes-from-adobe-microsoft-2/#comments">19 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p><strong>Adobe</strong> has released updates to fix dozens of vulnerabilities in its <strong>Acrobat</strong>, <strong>Reader</strong> and <strong>Flash Player</strong> software. Separately, <strong>Microsoft</strong> today issued patches to plug 48 security holes in <strong>Windows</strong> and other Microsoft products. If you use Windows or Adobe products, it&#8217;s time once again to get your patches on.</p>
+<p><img loading="lazy" class="alignright size-full wp-image-26837" src="https://krebsonsecurity.com/wp-content/uploads/2014/07/brokenwindows.png" alt="brokenwindows" width="229" height="240" />More than two dozen of the vulnerabilities fixed in today&#8217;s Windows patch bundle address &#8220;critical&#8221; flaws that can be exploited by malware or miscreants to assume complete, remote control over a vulnerable PC with little or no help from the user.</p>
+<p>Security firm <strong>Qualys</strong> recommends that top priority for patching should go to <a href="https://support.microsoft.com/gl-es/help/4034034/windows-search-remote-code-execution-vulnerability" target="_blank">a vulnerability</a> in the <strong>Windows Search</strong> service, noting that this is the third recent Patch <span class="aBn" tabindex="0" data-term="goog_136068006"><span class="aQJ">Tuesday</span></span> to feature a vulnerability in this service.</p>
+<p>Qualys&#8217; <strong>Jimmy Graham</strong> <a href="https://blog.qualys.com/misc/2017/08/08/august-patch-tuesday-25-critical-microsoft-vulnerabilities-43-for-adobe" target="_blank">observes</a> that many of the vulnerabilities in this month’s release involve the Windows Scripting Engine, which can impact both browsers and <strong>Microsoft Office</strong>, and should be considered for prioritizing for workstation-type systems.</p>
+<p>According to Microsoft, none of flaws in August&#8217;s Patch Tuesday are being actively exploited in the wild, although <em>Bleeping Computer</em> <a href="https://www.bleepingcomputer.com/news/microsoft/microsofts-august-patch-tuesday-fixes-48-security-issues/" target="_blank">notes</a> that three of the bugs were publicly detailed before today&#8217;s patch release.</p>
+<p>Case in point: This month&#8217;s patch batch from Microsoft does <em>not</em> address the recently-detailed <a href="https://smbloris.com/" target="_blank">SMBLoris flaw</a>, a vulnerability in all versions of Windows that can be used to remotely freeze up vulnerable systems or cause them to crash. <a href="https://krebsonsecurity.com/2017/08/critical-security-fixes-from-adobe-microsoft-2/#more-40144" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-40140" class="post-40140 post type-post status-publish format-standard hentry category-other tag-adobe tag-apple tag-benjamin-smedberg tag-exploit-kits tag-facebook tag-flash-player tag-google tag-jakub-pudelek tag-microsoft tag-mozilla tag-recorded-future tag-steve-jobs">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2017/08/flash-player-is-dead-long-live-flash-player/" title="Permalink to Flash Player is Dead, Long Live Flash Player!" rel="bookmark">Flash Player is Dead, Long Live Flash Player!</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">August 2, 2017</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2017/08/flash-player-is-dead-long-live-flash-player/#comments">39 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p><strong>Adobe</strong> last week detailed plans to retire its <strong>Flash Player</strong> software, a cross-platform browser plugin so powerful and so packed with security holes that it has become the favorite target of malware developers. To help eradicate this ubiquitous liability, Adobe is enlisting the help of <strong>Apple</strong>, <strong>Facebook</strong>, <strong>Google</strong>, <strong>Microsoft</strong> and <strong>Mozilla</strong>. But don&#8217;t break out the bubbly just yet: Adobe says Flash won&#8217;t be put down officially until 2020.</p>
+<p><img loading="lazy" class="alignright size-full wp-image-18875" src="https://krebsonsecurity.com/wp-content/uploads/2013/02/brokenflash-a.png" alt="brokenflash-a" width="211" height="180" />In <a href="https://blogs.adobe.com/conversations/2017/07/adobe-flash-update.html" target="_blank">a blog post</a> about the move, Adobe said more sites are turning away from proprietary code like Flash toward open standards like <a href="https://en.wikipedia.org/wiki/HTML5" target="_blank">HTML5</a>, <a href="https://en.wikipedia.org/wiki/WebGL" target="_blank">WebGL</a> and <a href="https://en.wikipedia.org/wiki/WebAssembly" target="_blank">WebAssembly</a>, and that these components now provide many of the capabilities and functionalities that plugins pioneered.</p>
+<p>&#8220;Over time, we’ve seen helper apps evolve to become plugins, and more recently, have seen many of these plugin capabilities get incorporated into open web standards,&#8221; Adobe said. &#8220;Today, most browser vendors are integrating capabilities once provided by plugins directly into browsers and deprecating plugins.&#8221;</p>
+<p>It&#8217;s remarkable how quickly Flash has seen a decline in both use and favor, particularly among the top browser makers. Just three years ago, at least 80 percent of desktop <strong>Chrome</strong> users visited a site with Flash each day, according to Google. Today, usage of Flash among Chrome users stands at just <a href="https://www.chromium.org/flash-roadmap/flash-usage-trends" target="_blank">17 percent</a> and continues to decline (see Google graphic below).</p>
+<p>For <strong>Mac</strong> users, the turning away from Flash began in 2010, when Apple co-founder <strong>Steve Jobs</strong> famously penned his &#8220;<a href="https://en.wikipedia.org/wiki/Thoughts_on_Flash" target="_blank">Thoughts on Flash</a>&#8221; memo that outlined the reasons why the technology would not be allowed on the company&#8217;s iOS products. Apple stopped pre-installing the plugin that same year.</p>
+<div id="attachment_40188" style="width: 590px" class="wp-caption aligncenter"><img aria-describedby="caption-attachment-40188" loading="lazy" class="size-medium wp-image-40188" src="https://krebsonsecurity.com/wp-content/uploads/2017/08/flashimpressions-google-580x436.png" alt="The percentage of Chrome users over time that have used Flash on a Web site. Image: Google." width="580" height="436" srcset="https://krebsonsecurity.com/wp-content/uploads/2017/08/flashimpressions-google-580x436.png 580w, https://krebsonsecurity.com/wp-content/uploads/2017/08/flashimpressions-google-768x578.png 768w, https://krebsonsecurity.com/wp-content/uploads/2017/08/flashimpressions-google.png 893w" sizes="(max-width: 580px) 100vw, 580px" /><p id="caption-attachment-40188" class="wp-caption-text">The percentage of Chrome users over time that have used Flash on a Web site. Image: Google.</p></div>
+<p>&#8220;Today, if users install Flash, it remains off by default,&#8221; <a href="https://webkit.org/blog/7839/adobe-announces-flash-distribution-and-updates-to-end/" target="_blank">a post</a> by Apple&#8217;s WebKit Team explains. &#8220;Safari requires <a href="https://webkit.org/blog/6589/next-steps-for-legacy-plug-ins/" target="_blank" data-ss1501680086="1">explicit approval</a> on each website before running the Flash plugin.&#8221;</p>
+<p>Mozilla said that starting this month Firefox users will choose which websites are able to run the Flash plugin.</p>
+<p>&#8220;Flash will be disabled by default for most users in 2019, and only users running the Firefox Extended Support Release will be able to continue using Flash through the final end-of-life at the end of 2020,&#8221; <a href="https://blog.mozilla.org/futurereleases/2017/07/25/firefox-roadmap-flash-end-life/" target="_blank">writes</a> <strong>Benjamin Smedberg</strong> for Mozilla. &#8220;In order to preserve user security, once Flash is no longer supported by Adobe security patches, no version of Firefox will load the plugin.&#8221; <a href="https://krebsonsecurity.com/2017/08/flash-player-is-dead-long-live-flash-player/#more-40140" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-40164" class="post-40164 post type-post status-publish format-standard hentry category-other tag-aaron-swartz tag-berklett-cybersecurity-project tag-berkman-klein-center-for-internet-society tag-cdt tag-center-for-democracy-technology tag-cfaa-abuse tag-computer-fraud-and-abuse-act tag-cory-gardner tag-department-of-homeland-security tag-digital-millennium-copyright-act tag-dmca tag-harvard-university tag-iot-cybersecurity-improvement-act-of-2017 tag-iot-devices tag-mark-warner tag-mozilla tag-ron-wyden tag-steve-daines">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2017/08/new-bill-seeks-basic-iot-security-standards/" title="Permalink to New Bill Seeks Basic IoT Security Standards" rel="bookmark">New Bill Seeks Basic IoT Security Standards</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">August 1, 2017</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2017/08/new-bill-seeks-basic-iot-security-standards/#comments">45 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>Lawmakers in the U.S. Senate today introduced a bill that would set baseline security standards for the government&#8217;s purchase and use of a broad range of Internet-connected devices, including computers, routers and security cameras. The legislation, which also seeks to remedy some widely-perceived shortcomings in existing cybercrime law, was developed <a href="https://krebsonsecurity.com/2016/10/senator-prods-federal-agencies-on-iot-mess/" target="_blank">in direct response</a> to <a href="https://krebsonsecurity.com/?s=ddos+2016+mirai&amp;x=0&amp;y=0" target="_blank">a series of massive cyber attacks in 2016</a> that were fueled for the most part by poorly-secured &#8220;Internet of Things&#8221; (IoT) devices.</p>
+<p><img loading="lazy" class="aligncenter size-full wp-image-40170" src="https://krebsonsecurity.com/wp-content/uploads/2017/08/iotc.png" alt="iotc" width="569" height="395" /></p>
+<p>The <strong>IoT Cybersecurity Improvement Act of 2017</strong> seeks to use the government&#8217;s buying power to signal the basic level of security that IoT devices sold to Uncle Sam will need to have. For example, the bill would require vendors of Internet-connected devices purchased by the federal government make sure the devices can be patched when security updates are available; that the devices do not use hard-coded (unchangeable) passwords; and that vendors ensure the devices are free from known vulnerabilities when sold.</p>
+<p>The bill, introduced by <strong>Sens. Steve Daines</strong> (R-Mont.), <strong>Cory Gardner</strong> (R-Colo.),<strong> Mark Warner</strong> (D-Va.) and <strong>Ron Wyden</strong> (D-Ore.), directs the <strong>White House Office of Management and Budget</strong> (OMB) to develop alternative network-level security requirements for devices with limited data processing and software functionality. In addition, it requires each executive agency to inventory all Internet-connected devices in use by the agency.</p>
+<p>The bill&#8217;s provisions would seem to apply to virtually any device that has an Internet connection and can transmit data. Under the proposal, an IoT device has a fairly broad definition, being described as &#8220;a physical object that is capable of connecting to and is in regular connection with the Internet;&#8221; and one that &#8220;has computer processing capabilities that can collect, send or receive data.&#8221; <a href="https://krebsonsecurity.com/2017/08/new-bill-seeks-basic-iot-security-standards/#more-40164" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-40122" class="post-40122 post type-post status-publish format-standard hentry category-other tag-agence-france-presse tag-bestbuy tag-daniel-kaye tag-govrat tag-liberia tag-mirai">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2017/07/suspended-sentence-for-mirai-botmaster-daniel-kaye/" title="Permalink to Suspended Sentence for Mirai Botmaster Daniel Kaye" rel="bookmark">Suspended Sentence for Mirai Botmaster Daniel Kaye</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">July 28, 2017</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2017/07/suspended-sentence-for-mirai-botmaster-daniel-kaye/#comments">42 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>Last month, KrebsOnSecurity identified U.K. citizen <strong>Daniel Kaye</strong> as the likely real-life identity behind a hacker responsible for clumsily wielding a powerful botnet built on <strong>Mirai</strong>, a malware strain that enslaves poorly secured Internet of Things (IoT) devices for use in large-scale online attacks. Today, a German court issued a suspended sentence for Kaye, who now faces cybercrime charges in the United Kingdom.</p>
+<div id="attachment_40131" style="width: 590px" class="wp-caption aligncenter"><img aria-describedby="caption-attachment-40131" loading="lazy" class="size-medium wp-image-40131" src="https://krebsonsecurity.com/wp-content/uploads/2017/07/dkayflat-1-580x187.png" alt="Daniel Kaye's Facebook profile page." width="580" height="187" srcset="https://krebsonsecurity.com/wp-content/uploads/2017/07/dkayflat-1-580x187.png 580w, https://krebsonsecurity.com/wp-content/uploads/2017/07/dkayflat-1-768x248.png 768w, https://krebsonsecurity.com/wp-content/uploads/2017/07/dkayflat-1-940x303.png 940w, https://krebsonsecurity.com/wp-content/uploads/2017/07/dkayflat-1.png 1674w" sizes="(max-width: 580px) 100vw, 580px" /><p id="caption-attachment-40131" class="wp-caption-text">Daniel Kaye&#8217;s Facebook profile page.</p></div>
+<p>In February 2017, authorities in the United Kingdom arrested a 29-year-old U.K. man on suspicion of knocking more than 900,000 Germans offline in a Mirai attack in November 2016. Shortly after that 2016 attack, a hacker using the nickname &#8220;Bestbuy&#8221; told reporters he was responsible for the outage, apologizing for the incident.</p>
+<p>Prosecutors in Europe had withheld Kaye&#8217;s name from the media throughout the trial. But a court in Germany today confirmed Kaye&#8217;s identity as it handed down a suspended sentence on charges stemming from several failed attacks from his Mirai botnet &#8212; which nevertheless caused extensive internet outages for ISPs in the U.K., Germany and <a href="https://krebsonsecurity.com/2016/11/did-the-mirai-botnet-really-take-liberia-offline/" target="_blank">Liberia</a> last year.</p>
+<p>On July 5, KrebsOnSecurity published <a href="https://krebsonsecurity.com/2017/07/who-is-the-govrat-author-and-mirai-botmaster-bestbuy/" target="_blank">Who is the GovRAT Author and Mirai Botmaster BestBuy</a>. The story followed clues from reports produced by a half-dozen security firms that traced common clues between this BestBuy nickname and an alter-ego, &#8220;Spiderman.&#8221;</p>
+<p>Both identities were connected to the sale of an espionage tool called GovRAT, which is documented to have been used in numerous cyber espionage campaigns against governments, financial institutions, defense contractors and more than 100 corporations.</p>
+<p>That July 5 story traced a trail of digital clues left over 10 years back to Daniel Kaye, a 29-year-old man who had dual U.K. and Israeli citizenship and who was engaged to be married to a U.K. woman.</p>
+<div id="attachment_39807" style="width: 590px" class="wp-caption aligncenter"><a class="lightbox" href="https://krebsonsecurity.com/wp-content/uploads/2017/07/govratmindmap.png"> <img aria-describedby="caption-attachment-39807" loading="lazy" class="wp-image-39807 size-medium" src="https://krebsonsecurity.com/wp-content/uploads/2017/07/govratmindmap-580x283.png" alt=" " width="580" height="300" /></a><p id="caption-attachment-39807" class="wp-caption-text">A &#8220;mind map&#8221; tracing some of the research mentioned in this post.</p></div>
+<p>Last week, a 29-year-old identified by media only as &#8220;Daniel K&#8221; pleaded guilty in a German court for launching the attacks that knocked 900,000 Deutsche Telekom customers offline. Prosecutors said Daniel K sold access to his Mirai botnet as an attack-for-hire service.</p>
+<p>The defendant reportedly told the court that the incident was the biggest mistake of his life, and that he took money in exchange for launching attacks in order to help start a new life with his fiancee. <a href="https://krebsonsecurity.com/2017/07/suspended-sentence-for-mirai-botmaster-daniel-kaye/#more-40122" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-39897" class="post-39897 post type-post status-publish format-standard hentry category-other tag-gsm-pump-skimmers tag-t-mobile">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2017/07/gas-pump-skimmer-sends-card-data-via-text/" title="Permalink to Gas Pump Skimmer Sends Card Data Via Text" rel="bookmark">Gas Pump Skimmer Sends Card Data Via Text</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">July 27, 2017</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2017/07/gas-pump-skimmer-sends-card-data-via-text/#comments">82 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>Skimming devices that crooks install inside fuel station gas pumps frequently rely on an embedded Bluetooth component allowing thieves to collect stolen credit card data from the pumps wirelessly with any mobile device. The downside of this approach is that Bluetooth-based skimmers can be detected by anyone else with a mobile device. Now, investigators in the New York say they are starting to see pump skimmers that use cannibalized cell phone components to send stolen card data via text message.</p>
+<p>Skimmers that transmit stolen card data wirelessly via GSM text messages and other mobile-based communications methods are not new; they have been present &#8212; if not prevalent &#8212; in ATM skimming devices for ages.</p>
+<p>But this is the first instance KrebsOnSecurity is aware of in which such SMS skimmers have been found inside gas pumps, and that matches the experience of several states hardest hit by pump skimming activity.</p>
+<p>The beauty of the GSM-based skimmer is that it can transmit stolen card data wirelessly via text message, meaning thieves can receive real-time transmissions of the card data anywhere in the world &#8212; never needing to return to the scene of the crime. That data can then be turned into counterfeit physical copies of the cards.</p>
+<p>Here&#8217;s a look at a new skimmer pulled from compromised gas pumps at three different filling stations in New York this month. Like other pump skimmers, this device was hooked up to the pump&#8217;s internal power, allowing it to operate indefinitely without relying on batteries.</p>
+<div id="attachment_39893" style="width: 590px" class="wp-caption aligncenter"><img aria-describedby="caption-attachment-39893" loading="lazy" class="size-medium wp-image-39893" src="https://krebsonsecurity.com/wp-content/uploads/2017/07/GSMpumpskim2-580x502.png" alt="A GSM-based card skimmer found embedded in a gas pump in the northeastern United States." width="580" height="502" srcset="https://krebsonsecurity.com/wp-content/uploads/2017/07/GSMpumpskim2-580x502.png 580w, https://krebsonsecurity.com/wp-content/uploads/2017/07/GSMpumpskim2-768x665.png 768w, https://krebsonsecurity.com/wp-content/uploads/2017/07/GSMpumpskim2-940x814.png 940w, https://krebsonsecurity.com/wp-content/uploads/2017/07/GSMpumpskim2.png 983w" sizes="(max-width: 580px) 100vw, 580px" /><p id="caption-attachment-39893" class="wp-caption-text">A GSM-based card skimmer found embedded in a gas pump in the northeastern United States.</p></div>
+<p>It may be difficult to see from the picture above, but the skimmer includes a GSM-based device with a SIM card produced by cellular operator <strong>T-Mobile</strong>. The image below shows the other side of the pump skimmer, with the SIM card visible in the upper right corner of the circuitboard:</p>
+<div id="attachment_39894" style="width: 590px" class="wp-caption aligncenter"><img aria-describedby="caption-attachment-39894" loading="lazy" class="size-medium wp-image-39894" src="https://krebsonsecurity.com/wp-content/uploads/2017/07/GSMpumpskim1-580x607.png" alt="The reverse side of this GSM-based pump skimmer shows a SIM card from T-Mobile." width="580" height="607" srcset="https://krebsonsecurity.com/wp-content/uploads/2017/07/GSMpumpskim1-580x607.png 580w, https://krebsonsecurity.com/wp-content/uploads/2017/07/GSMpumpskim1-768x803.png 768w, https://krebsonsecurity.com/wp-content/uploads/2017/07/GSMpumpskim1.png 917w" sizes="(max-width: 580px) 100vw, 580px" /><p id="caption-attachment-39894" class="wp-caption-text">The reverse side of this GSM-based pump skimmer shows a SIM card from T-Mobile.</p></div>
+<p>It&#8217;s not clear what type of mobile device was used in this skimmer, and the police officer who shared these images with KrebsOnSecurity said the forensic analysis of the device was ongoing. <a href="https://krebsonsecurity.com/2017/07/gas-pump-skimmer-sends-card-data-via-text/#more-39897" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+				
+			
+								<div class="themonic-pagination"><div class='pagination'><ul><li><a href='https://krebsonsecurity.com/'>&laquo; First</a></li><li><a href='https://krebsonsecurity.com/page/61/' class='inactive'>&lsaquo; Previous</a></li><li><a href='https://krebsonsecurity.com/page/59/' class='inactive'>59</a></li><li><a href='https://krebsonsecurity.com/page/60/' class='inactive'>60</a></li><li><a href='https://krebsonsecurity.com/page/61/' class='inactive'>61</a></li><li class='current'><span class='currenttext'>62</span></li><li><a href='https://krebsonsecurity.com/page/63/' class='inactive'>63</a></li><li><a href='https://krebsonsecurity.com/page/64/' class='inactive'>64</a></li><li><a href='https://krebsonsecurity.com/page/65/' class='inactive'>65</a></li><li><a href='https://krebsonsecurity.com/page/63/' class='inactive'>Next &rsaquo;</a></li><a class='inactive' href='https://krebsonsecurity.com/page/209/'>Last &raquo;</a></ul></div></div>
+					<div style="display: block; clear: both;"></div>
+			
+		
+
+	
+
+		</div><!-- #content -->
+	</div><!-- #primary -->
+
+
+			<div id="secondary" class="widget-area" role="complementary">
+
+        <div id="sidebar_ad" class="widget themonic-ad5"><div class="a-statement">Advertisement</div><a href="https://www.area1security.com/2021-email-threat-report/?utm_medium=display&amp;utm_source=krebs&amp;utm_term=na&amp;utm_content=thumb&amp;utm_campaign=2021-Q4-Display-Krebs-2021-Email-Threat-Report">
+<img src="/b-area1/13.png">
+</a></div>
+
+                        <br><div class="widget themonic-ad1"><div class="a-statement">Advertisement</div><a href="https://www.akamai.com/why-akamai/the-internet-of-possibilities?utm_source=krebsonsecurity&amp;utm_medium=display&amp;utm_campaign=F-MC-54978">
+<img src="/b-akamai/146.png">
+</a></div><br>
+
+			<aside id="custom_html-2" class="widget_text widget widget_custom_html"><p class="widget-title">Mailing List</p><div class="textwidget custom-html-widget"><a href="/subscribe/">Subscribe here</a></div></aside><aside id="search-2" class="widget widget_search"><p class="widget-title">Search KrebsOnSecurity</p><form role="search" method="get" id="searchform" class="searchform" action="https://krebsonsecurity.com/">
+				<div>
+					<label class="screen-reader-text" for="s">Search for:</label>
+					<input type="text" value="" name="s" id="s" />
+					<input type="submit" id="searchsubmit" value="Search" />
+				</div>
+			</form></aside>
+		<aside id="recent-posts-3" class="widget widget_recent_entries">
+		<p class="widget-title">Recent Posts</p>
+		<ul>
+											<li>
+					<a href="https://krebsonsecurity.com/2021/12/canada-charges-its-most-prolific-cybercriminal/">Canada Charges Its &#8220;Most Prolific Cybercriminal&#8221;</a>
+									</li>
+											<li>
+					<a href="https://krebsonsecurity.com/2021/12/who-is-the-network-access-broker-babam/">Who Is the Network Access Broker &#8216;Babam&#8217;?</a>
+									</li>
+											<li>
+					<a href="https://krebsonsecurity.com/2021/12/ubiquiti-developer-charged-with-extortion-causing-2020-breach/">Ubiquiti Developer Charged With Extortion, Causing 2020 &#8220;Breach&#8221;</a>
+									</li>
+											<li>
+					<a href="https://krebsonsecurity.com/2021/11/the-internet-is-held-together-with-spit-baling-wire/">The Internet is Held Together With Spit &#038; Baling Wire</a>
+									</li>
+											<li>
+					<a href="https://krebsonsecurity.com/2021/11/arrest-in-ransom-your-employer-email-scheme/">Arrest in &#8216;Ransom Your Employer&#8217; Email Scheme</a>
+									</li>
+					</ul>
+
+		</aside><aside id="text-2" class="widget widget_text">			<div class="textwidget"><a name="subscribe2"></a></div>
+		</aside><aside id="widget_sp_image-15" class="widget widget_sp_image"><p class="widget-title">Spam Nation</p><a href="https://www.amazon.com/Spam-Nation-Organized-Cybercrime-Epidemic-ebook/dp/B00L5QGBL0/ref=dp_kinw_strp_1" target="_blank" class="widget_sp_image-image-link" title="Spam Nation"><img width="266" height="404" alt="Spam Nation" class="attachment-266x404 aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2015/04/spamnation-nyt.png" /></a><div class="widget_sp_image-description" ><p>A New York Times Bestseller! </p>
+</div></aside><aside id="widget_sp_image-25" class="widget widget_sp_image"><p class="widget-title">Thinking of a Cybersecurity Career?</p><a href="https://krebsonsecurity.com/2020/07/thinking-of-a-cybersecurity-career-read-this/" target="_blank" class="widget_sp_image-image-link" title="Thinking of a Cybersecurity Career? Read This."><img width="625" height="424" alt="Thinking of a Cybersecurity Career?" class="attachment-full" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2020/07/codepeople.png 625w, https://krebsonsecurity.com/wp-content/uploads/2020/07/codepeople-580x393.png 580w" sizes="(max-width: 625px) 100vw, 625px" src="https://krebsonsecurity.com/wp-content/uploads/2020/07/codepeople.png" /></a><div class="widget_sp_image-description" ><p>Read this.</p>
+</div></aside><aside id="widget_sp_image-3" class="widget widget_sp_image"><p class="widget-title">All About Skimmers </p><a href="https://krebsonsecurity.com/all-about-skimmers/" target="_blank" class="widget_sp_image-image-link" title="All About Skimmers "><img width="299" height="232" alt="All About Skimmers" class="attachment-299x232 aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2010/08/skimgallery1.jpg" /></a><div class="widget_sp_image-description" ><p>Click image for my skimmer series.</p>
+</div></aside><aside id="categories-2" class="widget widget_categories"><p class="widget-title">Story Categories</p>
+			<ul>
+					<li class="cat-item cat-item-5"><a href="https://krebsonsecurity.com/category/sunshine/" title="Includes investigative blog posts meant to shine a light on the darker corners of the Internet.">A Little Sunshine</a>
+</li>
+	<li class="cat-item cat-item-2240"><a href="https://krebsonsecurity.com/category/all-about-skimmers/">All About Skimmers</a>
+</li>
+	<li class="cat-item cat-item-9085"><a href="https://krebsonsecurity.com/category/ashley-madison-breach/">Ashley Madison breach</a>
+</li>
+	<li class="cat-item cat-item-3191"><a href="https://krebsonsecurity.com/category/breadcrumbs/">Breadcrumbs</a>
+</li>
+	<li class="cat-item cat-item-3771"><a href="https://krebsonsecurity.com/category/data-breaches/" title="Stories about data breaches at retailers, corporations, governments and organizations of all sizes.">Data Breaches</a>
+</li>
+	<li class="cat-item cat-item-4624"><a href="https://krebsonsecurity.com/category/ddos-for-hire/">DDoS-for-Hire</a>
+</li>
+	<li class="cat-item cat-item-9173"><a href="https://krebsonsecurity.com/category/employment-fraud/">Employment Fraud</a>
+</li>
+	<li class="cat-item cat-item-2151"><a href="https://krebsonsecurity.com/category/how-to-break-into-security/" title="If you&#039;ve ever wanted career advice on how to make a shift into the security industry, look no further.">How to Break Into Security</a>
+</li>
+	<li class="cat-item cat-item-87"><a href="https://krebsonsecurity.com/category/latest-warnings/">Latest Warnings</a>
+</li>
+	<li class="cat-item cat-item-4071"><a href="https://krebsonsecurity.com/category/neer-do-well-news/">Ne&#039;er-Do-Well News</a>
+</li>
+	<li class="cat-item cat-item-9"><a href="https://krebsonsecurity.com/category/other/">Other</a>
+</li>
+	<li class="cat-item cat-item-1306"><a href="https://krebsonsecurity.com/category/pharma-wars/">Pharma Wars</a>
+</li>
+	<li class="cat-item cat-item-8240"><a href="https://krebsonsecurity.com/category/ransomware/">Ransomware</a>
+</li>
+	<li class="cat-item cat-item-599"><a href="https://krebsonsecurity.com/category/security-tools/">Security Tools</a>
+</li>
+	<li class="cat-item cat-item-8298"><a href="https://krebsonsecurity.com/category/sim-swapping/">SIM Swapping</a>
+</li>
+	<li class="cat-item cat-item-4079"><a href="https://krebsonsecurity.com/category/spam-nation/">Spam Nation</a>
+</li>
+	<li class="cat-item cat-item-1"><a href="https://krebsonsecurity.com/category/smallbizvictims/" title="Posts in this category will include new stories similar to those told in the Small Business Victims category on The Washington Post&#039;s Security Fix blog, which chronicled the methods organized cyber thieve are using to steal hundreds of thousands of dollars from dozens of small- to mid-sized companies around the country.">Target: Small Businesses</a>
+</li>
+	<li class="cat-item cat-item-5167"><a href="https://krebsonsecurity.com/category/tax-refund-fraud/">Tax Refund Fraud</a>
+</li>
+	<li class="cat-item cat-item-3"><a href="https://krebsonsecurity.com/category/comingstorm/" title="This category includes blog posts about computer and Internet security threats now and on the horizon.">The Coming Storm</a>
+</li>
+	<li class="cat-item cat-item-4"><a href="https://krebsonsecurity.com/category/patches/" title="Short posts on the latest security updates for widely-used software.
+">Time to Patch</a>
+</li>
+	<li class="cat-item cat-item-21"><a href="https://krebsonsecurity.com/category/web-fraud-2-0/">Web Fraud 2.0</a>
+</li>
+			</ul>
+
+			</aside><aside id="widget_sp_image-5" class="widget widget_sp_image"><p class="widget-title">The Value of a Hacked PC</p><a href="https://krebsonsecurity.com/2012/10/the-scrap-value-of-a-hacked-pc-revisited/" target="_blank" class="widget_sp_image-image-link" title="The Value of a Hacked PC"><img width="285" height="180" alt="valuehackedpc " class="attachment-285x180 aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2012/12/valuehackedpc-285x180.png" /></a><div class="widget_sp_image-description" ><p>Badguy uses for your PC</p>
+</div></aside><aside id="widget_sp_image-9" class="widget widget_sp_image"><p class="widget-title">Badguy Uses for Your Email </p><a href="https://krebsonsecurity.com/2013/06/the-value-of-a-hacked-email-account/" target="_self" class="widget_sp_image-image-link" title="Badguy Uses for Your Email "><img width="296" height="170" alt="Badguy Uses for Your Email " class="attachment-full aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2013/06/badguyemail.png 296w, https://krebsonsecurity.com/wp-content/uploads/2013/06/badguyemail-285x163.png 285w" sizes="(max-width: 296px) 100vw, 296px" src="https://krebsonsecurity.com/wp-content/uploads/2013/06/badguyemail.png" /></a><div class="widget_sp_image-description" ><p>Your email account may be worth far more than you imagine.</p>
+</div></aside><aside id="widget_sp_image-24" class="widget widget_sp_image"><a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&#038;hosted_button_id=MCCRKHWRX57HS" id="donate" target="_self" class="widget_sp_image-image-link"><img width="250" height="55" alt="Donate to Krebs On Security" class="attachment-medium aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2016/09/donatepaypal2-1.png" /></a></aside><aside id="most_popular_posts-3" class="widget widget_most_popular_posts">
+<p class="widget-title">Most Popular Posts</p>
+<ul>	<li><a href="https://krebsonsecurity.com/2018/07/sextortion-scam-uses-recipients-hacked-passwords/">Sextortion Scam Uses Recipient's Hacked Passwords</a> (1076)</li>
+	<li><a href="https://krebsonsecurity.com/2015/07/online-cheating-site-ashleymadison-hacked/">Online Cheating Site AshleyMadison Hacked</a> (798)</li>
+	<li><a href="https://krebsonsecurity.com/2013/12/sources-target-investigating-data-breach/">Sources: Target Investigating Data Breach</a> (620)</li>
+	<li><a href="https://krebsonsecurity.com/2020/11/trump-fires-security-chief-christopher-krebs/">Trump Fires Security Chief Christopher Krebs</a> (534)</li>
+	<li><a href="https://krebsonsecurity.com/2013/12/cards-stolen-in-target-breach-flood-underground-markets/">Cards Stolen in Target Breach Flood Underground Markets</a> (445)</li>
+	<li><a href="https://krebsonsecurity.com/2013/05/reports-liberty-reserve-founder-arrested-site-shuttered/">Reports: Liberty Reserve Founder Arrested, Site Shuttered</a> (416)</li>
+	<li><a href="https://krebsonsecurity.com/2015/08/was-the-ashley-madison-database-leaked/">Was the Ashley Madison Database Leaked?</a> (376)</li>
+	<li><a href="https://krebsonsecurity.com/2021/01/ddos-guard-to-forfeit-internet-space-occupied-by-parler/">DDoS-Guard To Forfeit Internet Space Occupied by Parler</a> (374)</li>
+	<li><a href="https://krebsonsecurity.com/2014/05/true-goodbye-using-truecrypt-is-not-secure/">True Goodbye: 'Using TrueCrypt Is Not Secure'</a> (363)</li>
+	<li><a href="https://krebsonsecurity.com/2015/08/who-hacked-ashley-madison/">Who Hacked Ashley Madison?</a> (361)</li>
+</ul>
+</aside>
+<aside id="media_image-2" class="widget widget_media_image"><p class="widget-title">Why So Many Top Hackers Hail from Russia</p><a href="https://krebsonsecurity.com/2017/06/why-so-many-top-hackers-hail-from-russia/"><img width="580" height="389" src="https://krebsonsecurity.com/wp-content/uploads/2017/06/computered-580x389.png" class="image wp-image-39684  attachment-medium size-medium" alt="" loading="lazy" style="max-width: 100%; height: auto;" srcset="https://krebsonsecurity.com/wp-content/uploads/2017/06/computered-580x389.png 580w, https://krebsonsecurity.com/wp-content/uploads/2017/06/computered-768x514.png 768w, https://krebsonsecurity.com/wp-content/uploads/2017/06/computered-940x630.png 940w, https://krebsonsecurity.com/wp-content/uploads/2017/06/computered.png 1551w" sizes="(max-width: 580px) 100vw, 580px" /></a></aside><aside id="widget_sp_image-11" class="widget widget_sp_image"><p class="widget-title">Category: Web Fraud 2.0</p><a href="https://krebsonsecurity.com/category/web-fraud-2-0/" target="_blank" class="widget_sp_image-image-link" title="Category: Web Fraud 2.0"><img width="227" height="400" alt="Criminnovations" class="attachment-medium aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2013/11/cybercrimeinnovations-227x400.png" /></a><div class="widget_sp_image-description" ><p>Innovations from the Underground</p>
+</div></aside><aside id="widget_sp_image-12" class="widget widget_sp_image"><a href="https://krebsonsecurity.com/2014/03/are-credit-monitoring-services-worth-it/" target="_blank" class="widget_sp_image-image-link"><img width="285" height="189" class="attachment-medium aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2014/03/shreddedID-copy-285x189.png 285w, https://krebsonsecurity.com/wp-content/uploads/2014/03/shreddedID-copy-600x399.png 600w, https://krebsonsecurity.com/wp-content/uploads/2014/03/shreddedID-copy.png 849w" sizes="(max-width: 285px) 100vw, 285px" src="https://krebsonsecurity.com/wp-content/uploads/2014/03/shreddedID-copy-285x189.png" /></a><div class="widget_sp_image-description" ><p>ID Protection Services Examined</p>
+</div></aside><aside id="widget_sp_image-13" class="widget widget_sp_image"><p class="widget-title">Is Antivirus Dead?</p><a href="https://krebsonsecurity.com/2014/05/antivirus-is-dead-long-live-antivirus/" target="_blank" class="widget_sp_image-image-link" title="Is Antivirus Dead?"><img width="285" height="161" alt="Is Antivirus Dead?" class="attachment-medium aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2014/05/cryptservices-285x161.png 285w, https://krebsonsecurity.com/wp-content/uploads/2014/05/cryptservices-600x339.png 600w, https://krebsonsecurity.com/wp-content/uploads/2014/05/cryptservices.png 945w" sizes="(max-width: 285px) 100vw, 285px" src="https://krebsonsecurity.com/wp-content/uploads/2014/05/cryptservices-285x161.png" /></a><div class="widget_sp_image-description" ><p>The reasons for its decline</p>
+</div></aside><aside id="widget_sp_image-14" class="widget widget_sp_image"><p class="widget-title">The Growing Tax Fraud Menace</p><a href="https://krebsonsecurity.com/category/tax-refund-fraud/" target="_blank" class="widget_sp_image-image-link" title="The Growing Tax Fraud Menace"><img width="285" height="285" alt="The Growing Tax Fraud Menace" class="attachment-medium aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2014/04/taxfraud-285x285.jpg 285w, https://krebsonsecurity.com/wp-content/uploads/2014/04/taxfraud-150x150.jpg 150w, https://krebsonsecurity.com/wp-content/uploads/2014/04/taxfraud-600x600.jpg 600w, https://krebsonsecurity.com/wp-content/uploads/2014/04/taxfraud.jpg 693w" sizes="(max-width: 285px) 100vw, 285px" src="https://krebsonsecurity.com/wp-content/uploads/2014/04/taxfraud-285x285.jpg" /></a><div class="widget_sp_image-description" ><p>File 'em Before the Bad Guys Can </p>
+</div></aside><aside id="widget_sp_image-17" class="widget widget_sp_image"><p class="widget-title">Inside a Carding Shop</p><a href="https://krebsonsecurity.com/2014/06/peek-inside-a-professional-carding-shop/" target="_blank" class="widget_sp_image-image-link" title="Inside a Carding Shop"><img width="194" height="340" alt="Inside a Carding Shop" class="attachment-medium aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2014/06/mcdumpalsjoined.png" /></a><div class="widget_sp_image-description" ><p>A crash course in carding. </p>
+</div></aside><aside id="widget_sp_image-18" class="widget widget_sp_image"><p class="widget-title">Beware Social Security Fraud</p><a href="https://krebsonsecurity.com/2013/09/crooks-hijack-retirement-funds-via-ssa-portal/" target="_blank" class="widget_sp_image-image-link" title="Beware Social Security Fraud"><img width="285" height="293" alt="Beware Social Security Fraud" class="attachment-full aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2016/09/myssn-285x293.png" /></a><div class="widget_sp_image-description" ><p>Sign up, or Be Signed Up! </p>
+</div></aside><aside id="widget_sp_image-2" class="widget widget_sp_image"><p class="widget-title">How Was Your Card Stolen?</p><a href="https://krebsonsecurity.com/2015/01/how-was-your-credit-card-stolen/" target="_blank" class="widget_sp_image-image-link" title="How Was Your Card Stolen?"><img width="285" height="285" alt="How Was Your Card Stolen?" class="attachment-full aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2016/09/carddominoes-285x285.jpg 285w, https://krebsonsecurity.com/wp-content/uploads/2016/09/carddominoes-285x285-150x150.jpg 150w" sizes="(max-width: 285px) 100vw, 285px" src="https://krebsonsecurity.com/wp-content/uploads/2016/09/carddominoes-285x285.jpg" /></a><div class="widget_sp_image-description" ><p>Finding out is not so easy. </p>
+</div></aside><aside id="widget_sp_image-22" class="widget widget_sp_image"><p class="widget-title">Krebs&#8217;s 3 Rules&#8230;</p><a href="https://krebsonsecurity.com/2011/05/krebss-3-basic-rules-for-online-safety/" target="_blank" class="widget_sp_image-image-link" title="Krebs&#8217;s 3 Rules&#8230;"><img width="300" height="300" alt="Krebs&#8217;s 3 Rules&#8230;" class="attachment-medium aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2011/05/three-300x300.jpg 300w, https://krebsonsecurity.com/wp-content/uploads/2011/05/three-150x150.jpg 150w, https://krebsonsecurity.com/wp-content/uploads/2011/05/three.jpg 347w" sizes="(max-width: 300px) 100vw, 300px" src="https://krebsonsecurity.com/wp-content/uploads/2011/05/three-300x300.jpg" /></a><div class="widget_sp_image-description" ><p>...For Online Safety. </p>
+</div></aside>		</div><!-- #secondary -->
+		</div><!-- #main .wrapper -->
+	
+	<div id="publisho-footer" class="widget-area">
+				<div class="footer-widget">
+                				</div>
+				<div class="footer-widget">
+								</div>
+				<div class="footer-widget">
+								</div>
+	</div>
+
+	<div class="site-wordpress">
+					&copy; Krebs on Security<br>
+	</div>
+	<!-- .site-info --><div class="clear"></div>
+</div><!-- #page -->
+
+<script type='text/javascript' src='https://krebsonsecurity.com/wp-content/themes/kos-mar2021/js/slicknav.js?ver=5.8.2' id='publisho-mobile-navigation-js'></script>
+<script type='text/javascript' src='https://krebsonsecurity.com/wp-includes/js/wp-embed.min.js?ver=5.8.2' id='wp-embed-js'></script>
+</body>
+</html>
+<!--
+Performance optimized by W3 Total Cache. Learn more: https://www.boldgrid.com/w3-total-cache/
+
+Object Caching 306/312 objects using memcached
+Page Caching using memcached 
+Database Caching 7/12 queries in 0.003 seconds using memcached
+
+Served from: krebsonsecurity.com @ 2021-12-10 14:42:02 by W3 Total Cache
+-->

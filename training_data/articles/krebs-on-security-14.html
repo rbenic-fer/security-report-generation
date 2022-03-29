@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<!--[if IE 7]>
+<html class="ie ie7" lang="en-US">
+<![endif]-->
+<!--[if IE 8]>
+<html class="ie ie8" lang="en-US">
+<![endif]-->
+<!--[if !(IE 7) | !(IE 8)  ]><!-->
+<html lang="en-US">
+<!--<![endif]-->
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width" />
+<link rel="profile" href="http://gmpg.org/xfn/11" />
+<!--[if lt IE 9]>
+<script src="https://krebsonsecurity.com/wp-content/themes/kos-mar2021/js/html5.js" type="text/javascript"></script>
+<![endif]-->
+<title>Krebs on Security &#8211; Page 14 &#8211; In-depth security news and investigation</title>
+<meta name='robots' content='max-image-preview:large' />
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="Krebs on Security &raquo; Feed" href="https://krebsonsecurity.com/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Krebs on Security &raquo; Comments Feed" href="https://krebsonsecurity.com/comments/feed/" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.1.0\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.1.0\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/krebsonsecurity.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=5.8.2"}};
+			!function(e,a,t){var n,r,o,i=a.createElement("canvas"),p=i.getContext&&i.getContext("2d");function s(e,t){var a=String.fromCharCode;p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,e),0,0);e=i.toDataURL();return p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,t),0,0),e===i.toDataURL()}function c(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(o=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},r=0;r<o.length;r++)t.supports[o[r]]=function(e){if(!p||!p.fillText)return!1;switch(p.textBaseline="top",p.font="600 32px Arial",e){case"flag":return s([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])?!1:!s([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!s([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]);case"emoji":return!s([10084,65039,8205,55357,56613],[10084,65039,8203,55357,56613])}return!1}(o[r]),t.supports.everything=t.supports.everything&&t.supports[o[r]],"flag"!==o[r]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[o[r]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(n=t.source||{}).concatemoji?c(n.concatemoji):n.wpemoji&&n.twemoji&&(c(n.twemoji),c(n.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+	<link rel='stylesheet' id='colorbox-theme1-css'  href='https://krebsonsecurity.com/wp-content/plugins/jquery-lightbox-for-native-galleries/colorbox/theme1/colorbox.css?ver=1.3.14' type='text/css' media='screen' />
+<link rel='stylesheet' id='wp-block-library-css'  href='https://krebsonsecurity.com/wp-includes/css/dist/block-library/style.min.css?ver=5.8.2' type='text/css' media='all' />
+<link rel='stylesheet' id='contact-form-7-css'  href='https://krebsonsecurity.com/wp-content/plugins/contact-form-7/includes/css/styles.css?ver=5.5.3' type='text/css' media='all' />
+<link rel='stylesheet' id='publisho-style-css'  href='https://krebsonsecurity.com/wp-content/themes/kos-mar2021/style.css?subver=1.2&#038;ver=5.8.2' type='text/css' media='all' />
+<style id='publisho-style-inline-css' type='text/css'>
+
+	.themonic-nav .current-menu-item > a, .themonic-nav .current-menu-ancestor > a, .themonic-nav .current_page_item > a, .themonic-nav .current_page_ancestor > a {
+		background: #cc6600;
+	}
+	.themonic-nav ul.nav-menu, .themonic-nav div.nav-menu > ul {
+		border-bottom: 5px solid #cc6600;
+	}
+	#site-navigation .topheadmenu a {
+    background: rgba(0, 0, 0, 0);
+	}
+	.themonic-nav li a:hover {
+		background: #cc6600;
+	}
+	.themonic-nav li:hover {
+		background: #cc6600;
+	}.wrapper .flexslider {margin: 0 0 30px;}.frontp .btm-wrap {
+    border-top: 1px solid #e9e9e9;
+	}
+	.entry-summary {
+    border-top: none;
+	}.frontp .btm-wrap { margin-bottom: 30px;}.site { font-size:14px;}.site { font-family:'Roboto', arial ;}
+</style>
+<link rel='stylesheet' id='publisho-custom-style-css'  href='https://krebsonsecurity.com/wp-content/themes/kos-mar2021/custom.css?subver=1.2&#038;ver=5.8.2' type='text/css' media='all' />
+<!--[if lt IE 9]>
+<link rel='stylesheet' id='publisho-ie-css'  href='https://krebsonsecurity.com/wp-content/themes/kos-mar2021/css/ie.css?ver=20160606' type='text/css' media='all' />
+<![endif]-->
+<link rel='stylesheet' id='fontawesome-css-css'  href='https://krebsonsecurity.com/wp-content/themes/kos-mar2021/fonts/font-awesome.min.css?ver=5.8.2' type='text/css' media='all' />
+<link rel='stylesheet' id='publisho_custom_fonts-css'  href='//fonts.googleapis.com/css?family=Roboto%3Aregular%2Citalic%2C500%26subset%3Dlatin%2C' type='text/css' media='screen' />
+<script type='text/javascript' src='https://krebsonsecurity.com/wp-includes/js/jquery/jquery.min.js?ver=3.6.0' id='jquery-core-js'></script>
+<script type='text/javascript' src='https://krebsonsecurity.com/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.3.2' id='jquery-migrate-js'></script>
+<script type='text/javascript' src='https://krebsonsecurity.com/wp-content/plugins/jquery-lightbox-for-native-galleries/colorbox/jquery.colorbox-min.js?ver=1.3.14' id='colorbox-js'></script>
+<link rel="https://api.w.org/" href="https://krebsonsecurity.com/wp-json/" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://krebsonsecurity.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://krebsonsecurity.com/wp-includes/wlwmanifest.xml" /> 
+<meta name="generator" content="WordPress 5.8.2" />
+<!-- JavaScript Pull-Quotes plugin v2.2 -->
+	<link rel="stylesheet" href="https://krebsonsecurity.com/wp-content/plugins/jspullquotes/resources/jspullquotes-core.css" type="text/css" />
+	<link rel="stylesheet" href="https://krebsonsecurity.com/wp-content/plugins/jspullquotes/resources/jspullquotes-default.css" type="text/css" />
+	<script type="text/javascript" src="https://krebsonsecurity.com/wp-content/plugins/jspullquotes/resources/jspullquotes.js"></script>
+	<script type="text/javascript">
+		var arrOptions = new Array("1", "1", "right", "1", "1", "blockquote", "pullquote", "pullquote pqRight");
+		pullQuoteOpts(arrOptions);
+	</script>
+<!-- end pull-quote additions -->
+<!-- jQuery Lightbox For Native Galleries v3.1.3 | http://www.viper007bond.com/wordpress-plugins/jquery-lightbox-for-native-galleries/ -->
+<script type="text/javascript">
+// <![CDATA[
+	jQuery(document).ready(function($){
+		$(".gallery").each(function(index, obj){
+			var galleryid = Math.floor(Math.random()*10000);
+			$(obj).find("a").colorbox({rel:galleryid, maxWidth:"95%", maxHeight:"95%"});
+		});
+		$("a.lightbox").colorbox({maxWidth:"95%", maxHeight:"95%"});
+	});
+// ]]>
+</script>
+<style type="text/css" id="custom-background-css">
+body.custom-background { background-color: #ffffff; }
+</style>
+	<link rel="me" href="https://twitter.com/briankrebs" /><meta name="twitter:widgets:link-color" content="#000000" /><meta name="twitter:widgets:border-color" content="#000000" /><meta name="twitter:partner" content="tfwp" />
+<meta name="twitter:card" content="summary" /><meta name="twitter:title" content="Krebs on Security" /><meta name="twitter:site" content="@briankrebs" /><meta name="twitter:description" content="In-depth security news and investigation" />
+</head>
+<body class="home blog paged custom-background paged-14 custom-background-white single-author frontp hfeed">
+<div id="page" class="site">
+	<!-- <div class="publisho-top-mobile-nav clear"></div> -->
+	<div class="themonic-logo themonic-ad3"><div class="a-statement">Advertisement</div><a href="https://ww1.bugcrowd.com/ultimate-guide-ransomware-risk-disp/?utm_source=KrebsSecurity&amp;utm_medium=paid_advertising&amp;utm_campaign=banners&amp;utm_content=guides">
+<img src="/b-bugcrowd/1.png">
+</a></div>
+	<div class="themonic-logo themonic-ad6"><div class="a-statement">Advertisement</div><a href="https://securityscorecard.com/instant-security-scorecard?utm_source=krebs+on+security&amp;utm_medium=display&amp;utm_campaign=instant+scorecard&amp;utm_term=A&amp;utm_content=1240x160">
+<img src="/b-securityscorecard/2.jpg">
+</a></div>
+	<nav id="site-navigation" class="themonic-nav" role="navigation">
+	</nav><!-- #site-navigation -->
+	<div class="clear"></div>
+	<header id="masthead" class="site-header" role="banner">
+ 					<div class="desktop-social">
+						<div class="socialmedia">
+							<a href="http://twitter.com/briankrebs" target="_blank"><i class="fa fa-twitter"></i></a> 
+															<a class="rss" href="https://krebsonsecurity.com/feed/" target="_blank"><i class="fa fa-rss"></i></a>	
+									<a class="rss" href="https://www.linkedin.com/in/bkrebs/" target="_blank"><i class="fa fa-linkedin"></i></a>	
+								</div>
+				 	</div>
+																						   
+		
+		<div class="themonic-logo responsive-img-container">
+			<a href="https://krebsonsecurity.com/" title="Krebs on Security" rel="home"><img src="https://krebsonsecurity.com/wp-content/uploads/2021/03/kos-27-03-2021.jpg" alt="Krebs on Security"></a>
+		</div>
+
+					<div class="mobile-social">
+						<div class="socialmedia">
+							<a href="http://twitter.com/briankrebs" target="_blank"><i class="fa fa-twitter"></i></a> 
+															<a class="rss" href="https://krebsonsecurity.com/feed/" target="_blank"><i class="fa fa-rss"></i></a>	
+									<a class="rss" href="https://www.linkedin.com/in/bkrebs/" target="_blank"><i class="fa fa-linkedin"></i></a>	
+								</div>
+					</div>
+		
+				<!-- <div class="publisho-mobile-nav clear"></div> -->
+		<nav id="site-navigation" class="themonic-nav" role="navigation">
+			<a class="assistive-text" href="#content" title="Skip to content">Skip to content</a>
+			<div id="menu-top" class="nav-menu"><ul>
+<li ><a href="https://krebsonsecurity.com/">Home</a></li><li class="page_item page-item-2"><a href="https://krebsonsecurity.com/about/">About the Author</a></li>
+<li class="page_item page-item-645"><a href="https://krebsonsecurity.com/cpm/">Advertising/Speaking</a></li>
+</ul></div>
+		</nav><!-- #site-navigation -->
+		<div class="clear"></div>
+	</header><!-- #masthead -->
+	<div id="main" class="wrapper">
+		<div id="primary" class="site-content">
+	
+
+	
+		<div id="content" role="main">
+
+		<article id="post-53728" class="post-53728 post type-post status-publish format-standard hentry category-security-tools category-patches tag-adobe tag-allan-liska tag-microsoft-office tag-microsoft-patch-tuesday-december-2020 tag-microsoft-teams tag-oskars-vegeris tag-recorded-future">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2020/12/patch-tuesday-good-riddance-2020-edition/" title="Permalink to Patch Tuesday, Good Riddance 2020 Edition" rel="bookmark">Patch Tuesday, Good Riddance 2020 Edition</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">December 8, 2020</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2020/12/patch-tuesday-good-riddance-2020-edition/#comments">29 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p><strong>Microsoft</strong> today issued its final batch of security updates for <strong>Windows</strong> PCs in 2020, ending the year with a relatively light patch load. Nine of the 58 security vulnerabilities addressed this month earned Microsoft&#8217;s most-dire &#8220;critical&#8221; label, meaning they can be abused by malware or miscreants to seize remote control over PCs without any help from users.</p>
+<p><img loading="lazy" class="aligncenter size-full wp-image-52647" src="https://krebsonsecurity.com/wp-content/uploads/2020/08/windowsec.png" alt="" width="579" height="425" /></p>
+<p>Mercifully, it does not appear that any of the flaws fixed this month are being actively exploited, nor have any them been detailed publicly prior to today.</p>
+<p>The critical bits reside in updates for <strong>Microsoft Exchange Server</strong>, <strong>Sharepoint Server</strong>, and <strong>Windows 10</strong> and <strong>Server 2016</strong> systems. Additionally, Microsoft <a href="https://msrc.microsoft.com/update-guide/vulnerability/ADV200013" target="_blank" rel="noopener noreferrer">released an advisory</a> on how to minimize the risk from a DNS spoofing weakness in Windows Server 2008 through 2019.</p>
+<p>Some of the sub-critical &#8220;important&#8221; flaws addressed this month also probably deserve prompt patching in enterprise environments, including a trio of updates tackling security issues with <strong>Microsoft Office</strong>.</p>
+<p>&#8220;Given the speed with which attackers often weaponize Microsoft Office vulnerabilities, these should be prioritized in patching,&#8221; said <strong>Allan Liska</strong>, senior security architect at <strong>Recorded Future</strong>. &#8220;The vulnerabilities, if exploited, would allow an attacker to execute arbitrary code on a victim’s machine. These vulnerabilities affect Microsoft Excel 2013 through 2019, Microsoft 365 32 and 64 bit versions, Microsoft Office 2019 32 and 64 bit versions, and Microsoft Excel for Mac 2019.&#8221;</p>
+<p>We also learned this week that Redmond quietly addressed a scary <a href="https://thehackernews.com/2020/12/zero-click-wormable-rce-vulnerability.html" target="_blank" rel="noopener noreferrer">&#8220;zero-click&#8221; vulnerability</a> in its <strong>Microsoft Teams</strong> platform that would have let anyone execute code of their choosing just by sending the target a specially-crafted chat message to a Teams users. The bug was cross-platform, meaning it could also have been used to deliver malicious code to people using Teams on non-Windows devices. <a href="https://krebsonsecurity.com/2020/12/patch-tuesday-good-riddance-2020-edition/#more-53728" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+	<div id="between_article_ad" class="themonic-ad5"><a href="https://ninjio.com/lp46d-krebs/">
+<img src="/b-ninjio/11.png">
+</a></div>	<article id="post-53716" class="post-53716 post type-post status-publish format-standard has-post-thumbnail hentry category-security-tools category-tax-refund-fraud tag-identity-protection-personal-identification-number tag-internal-revenue-service tag-ip-pin tag-irs tag-tax-refund-fraud">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2020/12/irs-to-make-id-protection-pin-open-to-all/" title="Permalink to IRS to Make ID Protection PIN Open to All" rel="bookmark">IRS to Make ID Protection PIN Open to All</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">December 4, 2020</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2020/12/irs-to-make-id-protection-pin-open-to-all/#comments">84 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>The <strong>U.S. Internal Revenue Service</strong> (IRS) said this week that beginning in 2021 it will allow all taxpayers to apply for an identity protection personal identification number (IP PIN), a single-use code designed to block identity thieves from falsely claiming a tax refund in your name. Currently, IP PINs are issued only to those who fill out an ID theft affidavit, or to taxpayers who&#8217;ve experienced tax refund fraud in previous years.</p>
+<p><img loading="lazy" class="aligncenter wp-image-42398" src="https://krebsonsecurity.com/wp-content/uploads/2018/01/taxthiefa.png" alt="" width="594" height="218" /></p>
+<p>Tax refund fraud is <a href="https://krebsonsecurity.com/?s=tax+refund+fraud&amp;x=0&amp;y=0">a perennial problem</a> involving the use of identity information and often stolen or misdirected W-2 forms to electronically file an unauthorized tax return for the purposes of claiming a refund in the name of a taxpayer.</p>
+<p>Victims usually first learn of the crime after having their returns rejected because scammers beat them to it. <em>Even those who are not required to file a return can be victims of refund fraud, as can those who are not actually due a refund from the IRS.  </em></p>
+<p>Many of the reasons why refund fraud remains a problem have to do with timing, and some of them are described in more detail <a href="https://taxpayeradvocate.irs.gov/news/nta-blog-irs-fraud-detection-process-is-challenging-for-taxpayers-to-navigate-part-1" target="_blank" rel="noopener noreferrer">here</a>. But the short answer is the IRS is under tremendous pressure to issue refunds quickly and to minimize &#8220;false positives&#8221; (flagging legitimate claims as fraud) &#8212; even when it may not yet have all of the information needed to accurately distinguish phony filings from legitimate ones.  <a href="https://krebsonsecurity.com/2020/12/irs-to-make-id-protection-pin-open-to-all/#more-53716" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+	<div class="themonic-ad2"><div class="a-statement">Advertisement</div><a href="https://www.akamai.com/blog/security/attacking-a-macro-security-problem-with-micro-segmentation?utm_source=krebsonsecurity&amp;utm_medium=display&amp;utm_id=GL_SecureWorkforce_Guardicore&amp;utm_campaign=F-MC-52610&amp;utm_content=Guardicore">
+<img src="/b-akamai/140.png">
+</a></div>	<article id="post-53685" class="post-53685 post type-post status-publish format-standard has-post-thumbnail hentry category-data-breaches category-neer-do-well-news tag-disco-payments tag-discoli tag-ogusers tag-ogusers-breach">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2020/12/account-hijacking-site-ogusers-hacked-again/" title="Permalink to Account Hijacking Site OGUsers Hacked, Again" rel="bookmark">Account Hijacking Site OGUsers Hacked, Again</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">December 2, 2020</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2020/12/account-hijacking-site-ogusers-hacked-again/#comments">36 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>For at least the third time in its existence,<strong> OGUsers</strong> &#8212; a forum overrun with people looking to buy, sell and trade access to compromised social media accounts &#8212; has been hacked.</p>
+<div id="attachment_53695" style="width: 606px" class="wp-caption aligncenter"><a class="lightbox" href="https://krebsonsecurity.com/wp-content/uploads/2020/11/oguoffer.png"><img aria-describedby="caption-attachment-53695" loading="lazy" class="wp-image-53695" src="https://krebsonsecurity.com/wp-content/uploads/2020/11/oguoffer.png" alt="" width="596" height="422" srcset="https://krebsonsecurity.com/wp-content/uploads/2020/11/oguoffer.png 1040w, https://krebsonsecurity.com/wp-content/uploads/2020/11/oguoffer-768x544.png 768w" sizes="(max-width: 596px) 100vw, 596px" /></a><p id="caption-attachment-53695" class="wp-caption-text">An offer by the apparent hackers of OGUsers, offering to remove account information from the eventual database leak in exchange for payment.</p></div>
+<p>Roughly a week ago, the OGUsers homepage was defaced with a message stating the forum&#8217;s user database had been compromised. The hack was acknowledged by the forum&#8217;s current administrator, who assured members that their passwords were protected with a password obfuscation technology that was extremely difficult to crack.</p>
+<p>But unlike in previous breaches at OGUsers, the perpetrators of this latest incident have not yet released the forum database. In the meantime, someone has been taunting forum members, saying they can have their profiles and private messages removed from an impending database leak by paying between $50 and $100.</p>
+<p>OGUsers was hacked at least twice previously, <a href="https://krebsonsecurity.com/2019/05/account-hijacking-forum-ogusers-hacked/" target="_blank" rel="noopener noreferrer">in May 2019</a> and again in March 2020. In the wake of both incidents, the compromised OGUsers databases were made available for public download. <a href="https://krebsonsecurity.com/2020/12/account-hijacking-site-ogusers-hacked-again/#more-53685" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-53698" class="post-53698 post type-post status-publish format-standard has-post-thumbnail hentry category-ddos-for-hire category-neer-do-well-news tag-apophis-squad tag-hdgzero tag-nicola-hanna tag-otis-d-wright-ii tag-protonmail tag-timothy-dalton-vaughn tag-wantedbyfeds tag-xavier-farbel">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2020/12/bomb-threat-ddos-purveyor-gets-eight-years/" title="Permalink to Bomb Threat, DDoS Purveyor Gets Eight Years" rel="bookmark">Bomb Threat, DDoS Purveyor Gets Eight Years</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">December 1, 2020</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2020/12/bomb-threat-ddos-purveyor-gets-eight-years/#comments">26 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>A 22-year-old North Carolina man has been sentenced to nearly eight years in prison for conducting bomb threats against thousands of schools in the U.S. and United Kingdom, running a service that launched distributed denial-of-service (DDoS) attacks, and for possessing sexually explicit images of minors.</p>
+<p><strong>Timothy Dalton Vaughn</strong> from Winston-Salem, N.C. was a key member of the <strong>Apophis Squad</strong>, a gang of young ne’er-do-wells who made bomb threats to more than 2,400 schools and launched DDoS attacks against countless Web sites — including KrebsOnSecurity on multiple occasions.</p>
+<p>The Justice Department says Vaughn and his gang ran a DDoS-for-hire service that they used to shake down victims.</p>
+<p>&#8220;In early 2018, Vaughn demanded 1.5 bitcoin (then worth approximately $20,000) from a Long Beach company, to prevent denial-of-service attacks on its website,&#8221; reads a statement from <strong>Nicola Hanna</strong>, U.S. attorney for the Central District of California. &#8220;When the company refused to pay, he launched a DDoS attack that disabled the company’s website.&#8221;</p>
+<div id="attachment_45027" style="width: 580px" class="wp-caption aligncenter"><img aria-describedby="caption-attachment-45027" loading="lazy" class=" wp-image-45027" src="https://krebsonsecurity.com/wp-content/uploads/2018/09/apophis-tweet.png" alt="" width="570" height="460" /><p id="caption-attachment-45027" class="wp-caption-text">One of many tweets from the attention-starved Apophis Squad, which launched multiple DDoS attacks against KrebsOnSecurity over the past few months.</p></div>
+<p>Dalton, whose online aliases included “WantedbyFeds” and “Hacker_R_US,” pleaded guilty last year to one count of conspiracy to convey threats to injure, convey false information concerning use of explosive device, and intentionally damage a computer; one count of computer hacking; and one count of possession of child pornography.</p>
+<p>Federal judge <strong>Otis D. Wright II</strong> sentenced Vaughn to 95 months for possessing 200 sexually explicit images and videos depicting children, including at least one toddler, the Justice Department said. Vaughn was sentenced to 60 months in federal prison for the remaining charge. The sentences will be served concurrently.  <a href="https://krebsonsecurity.com/2020/12/bomb-threat-ddos-purveyor-gets-eight-years/#more-53698" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-53649" class="post-53649 post type-post status-publish format-standard has-post-thumbnail hentry category-sunshine category-web-fraud-2-0 tag-bibox tag-celcius-network tag-dan-race tag-farsight-security tag-github tag-godaddy tag-namecheap tag-phishing tag-privateemail-com tag-slack tag-vishing tag-wirex-app">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2020/11/godaddy-employees-used-in-attacks-on-multiple-cryptocurrency-services/" title="Permalink to GoDaddy Employees Used in Attacks on Multiple Cryptocurrency Services" rel="bookmark">GoDaddy Employees Used in Attacks on Multiple Cryptocurrency Services</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">November 21, 2020</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2020/11/godaddy-employees-used-in-attacks-on-multiple-cryptocurrency-services/#comments">45 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>Fraudsters redirected email and web traffic destined for several cryptocurrency trading platforms over the past week. The attacks were facilitated by scams targeting employees at <strong>GoDaddy</strong>, the world&#8217;s largest domain name registrar, KrebsOnSecurity has learned.</p>
+<p><img loading="lazy" class="aligncenter wp-image-46446" src="https://krebsonsecurity.com/wp-content/uploads/2019/02/godaddy.jpg" alt="" width="599" height="312" /></p>
+<p>The incident is the latest incursion at GoDaddy that relied on tricking employees into transferring ownership and/or control over targeted domains to fraudsters. In March, a voice phishing scam targeting GoDaddy support employees <a href="https://krebsonsecurity.com/2020/03/phish-of-godaddy-employee-jeopardized-escrow-com-among-others/" target="_blank" rel="noopener noreferrer">allowed attackers to assume control over at least a half-dozen domain names, including transaction brokering site escrow.com</a>.</p>
+<p>And in May of this year, GoDaddy <a href="https://securityboulevard.com/2020/05/godaddy-data-breach-affects-28000-user-accounts/" target="_blank" rel="noopener noreferrer">disclosed that 28,000 of its customers&#8217; web hosting accounts were compromised</a> following a security incident in Oct. 2019 that wasn&#8217;t discovered until April 2020.</p>
+<p>This latest campaign appears to have begun on or around Nov. 13, with an attack on cryptocurrency trading platform <strong>liquid.com</strong>.</p>
+<p>&#8220;A domain hosting provider &#8216;GoDaddy&#8217; that manages one of our core domain names incorrectly transferred control of the account and domain to a malicious actor,&#8221; <strong>Liquid CEO Mike Kayamori</strong> said in <a href="https://blog.liquid.com/security-incident-november-13-2020?=11172020" target="_blank" rel="noopener noreferrer">a blog post</a>. &#8220;This gave the actor the ability to change DNS records and in turn, take control of a number of internal email accounts. In due course, the malicious actor was able to partially compromise our infrastructure, and gain access to document storage.&#8221;</p>
+<p>In the early morning hours of Nov. 18 Central European Time (CET), cyptocurrency mining service <a href="https://www.nicehash.com" target="_blank" rel="noopener noreferrer">NiceHash</a> disccovered that some of the settings for its domain registration records at GoDaddy were changed without authorization, briefly redirecting email and web traffic for the site. NiceHash froze all customer funds for roughly 24 hours until it was able to verify that its domain settings had been changed back to their original settings.</p>
+<p>&#8220;At this moment in time, it looks like no emails, passwords, or any personal data were accessed, but we do suggest resetting your password and activate 2FA security,&#8221; the company wrote <a href="https://www.nicehash.com/blog/post/nicehash-is-back-online-what-happened" target="_blank" rel="noopener noreferrer">in a blog post</a>.</p>
+<p>NiceHash founder <a href="https://krebsonsecurity.com/?s=Matjaz+Skorjanc&amp;x=0&amp;y=0" target="_blank" rel="noopener noreferrer">Matjaz Skorjanc</a> said the unauthorized changes were made from an Internet address at GoDaddy, and that the attackers tried to use their access to its incoming NiceHash emails to perform password resets on various third-party services, including <strong>Slack</strong> and <strong>Github</strong>. But he said GoDaddy was impossible to reach at the time because <a href="https://domainnamewire.com/2020/11/17/godaddy-is-down/" target="_blank" rel="noopener noreferrer">it was undergoing a widespread system outage in which phone and email systems were unresponsive</a>.</p>
+<p>&#8220;We detected this almost immediately [and] started to mitigate [the] attack,&#8221; Skorjanc said in an email to this author. &#8220;Luckily, we fought them off well and they did not gain access to any important service. Nothing was stolen.&#8221;</p>
+<p>Skorjanc said NiceHash&#8217;s email service was redirected to <strong>privateemail.com</strong>, an email platform run by <a href="https://krebsonsecurity.com/?s=namecheap&amp;x=0&amp;y=0" target="_blank" rel="noopener noreferrer">Namecheap Inc.</a>, another large domain name registrar. Using <a href="https://www.farsightsecurity.com" target="_blank" rel="noopener noreferrer">Farsight Security</a>, a service which maps changes to domain name records over time, KrebsOnSecurity instructed the service to show all domains registered at GoDaddy that had alterations to their email records in the past week which pointed them to privateemail.com. Those results were then indexed against the top one million most popular websites according to Alexa.com.</p>
+<p>The result shows that several other cryptocurrency platforms also may have been targeted by the same group, including <a href="https://www.bibox.com" target="_blank" rel="noopener noreferrer">Bibox.com</a>, <a href="https://www.celsius.network" target="_blank" rel="noopener noreferrer">Celsius.network</a>, and <a href="https://www.wirex.app" target="_blank" rel="noopener noreferrer">Wirex.app</a>. None of these companies responded to requests for comment.</p>
+<p>In response to questions from KrebsOnSecurity, GoDaddy acknowledged that &#8220;a small number&#8221; of customer domain names had been modified after a &#8220;limited&#8221; number of GoDaddy employees fell for a social engineering scam. GoDaddy said the outage between 7:00 p.m. and 11:00 p.m. PST on Nov. 17 was not related to a security incident, but rather a technical issue that materialized during planned network maintenance.</p>
+<p>&#8220;Separately, and unrelated to the outage, a routine audit of account activity identified potential unauthorized changes to a small number of customer domains and/or account information,&#8221; GoDaddy spokesperson <strong>Dan Race</strong> said. <span class="pullquote pqleft">&#8220;Our security team investigated and confirmed threat actor activity, including social engineering of a limited number of GoDaddy employees.</span>&#8221;</p>
+<p>&#8220;We immediately locked down the accounts involved in this incident, reverted any changes that took place to accounts, and assisted affected customers with regaining access to their accounts,&#8221; GoDaddy&#8217;s statement continued. &#8220;As threat actors become increasingly sophisticated and aggressive in their attacks, we are constantly educating employees about new tactics that might be used against them and adopting new security measures to prevent future attacks.&#8221;</p>
+<p>Race declined to specify how its employees were tricked into making the unauthorized changes, saying the matter was still under investigation. But <a href="https://krebsonsecurity.com/2020/03/phish-of-godaddy-employee-jeopardized-escrow-com-among-others/" target="_blank" rel="noopener noreferrer">in the attacks earlier this year that affected escrow.com and several other GoDaddy customer domains</a>, the assailants targeted employees over the phone, and were able to read internal notes that GoDaddy employees had left on customer accounts.</p>
+<p>What&#8217;s more, the attack on escrow.com redirected the site to an Internet address in Malaysia that hosted fewer than a dozen other domains, including the phishing website <strong>servicenow-godaddy.com</strong>. This suggests the attackers behind the March incident &#8212; and possibly this latest one &#8212; succeeded by calling GoDaddy employees and convincing them to use their employee credentials at a fraudulent GoDaddy login page. <a href="https://krebsonsecurity.com/2020/11/godaddy-employees-used-in-attacks-on-multiple-cryptocurrency-services/#more-53649" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-53615" class="post-53615 post type-post status-publish format-standard hentry category-neer-do-well-news category-sim-swapping">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2020/11/convicted-sim-swapper-gets-3-years-in-jail/" title="Permalink to Convicted SIM Swapper Gets 3 Years in Jail" rel="bookmark">Convicted SIM Swapper Gets 3 Years in Jail</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">November 20, 2020</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2020/11/convicted-sim-swapper-gets-3-years-in-jail/#comments">27 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>A 21-year-old Irishman who pleaded guilty to charges of helping to steal millions of dollars in cryptocurrencies from victims has been sentenced to just under three years in prison. The defendant is part of an alleged conspiracy involving at least eight others in the United States who stand accused of theft via <strong>SIM swapping</strong>, a crime that involves convincing mobile phone company employees to transfer ownership of the target&#8217;s phone number to a device the attackers control.</p>
+<p><img loading="lazy" class="aligncenter  wp-image-40415" src="https://krebsonsecurity.com/wp-content/uploads/2017/08/phonefraudsmaller.png" alt="" width="598" height="302" srcset="https://krebsonsecurity.com/wp-content/uploads/2017/08/phonefraudsmaller.png 609w, https://krebsonsecurity.com/wp-content/uploads/2017/08/phonefraudsmaller-580x292.png 580w" sizes="(max-width: 598px) 100vw, 598px" /></p>
+<p><strong>Conor Freeman</strong> of Dublin took part in the theft of more than two million dollars worth of cryptocurrency from different victims throughout 2018. Freeman was named as a member of a group of alleged SIM swappers called &#8220;The Community&#8221; <a href="https://krebsonsecurity.com/2019/05/nine-charged-in-alleged-sim-swapping-ring/" target="_blank" rel="noopener noreferrer">charged last year with wire fraud in connection with SIM swapping attacks that netted in excess of $2.4 million</a>.</p>
+<p>Among the eight others accused are three former wireless phone company employees who allegedly helped the gang hijack mobile numbers tied to their targets. Prosecutors say the men would identify people likely to have significant cryptocurrency holdings, then pay their phone company cohorts to transfer the victim&#8217;s mobile service to a new SIM card &#8212; the smart chip in each phone that ties a customer&#8217;s device to their number.</p>
+<p>A fraudulent SIM swap allows the bad guys to intercept a target&#8217;s incoming phone calls and text messages. This is dangerous because a great many sites and services still allow customers to reset their passwords simply by clicking on a link sent via SMS. From there, attackers can gain access to any accounts that allow password resets via SMS or automated calls, from email and social media profiles to virtual currency trading platforms.</p>
+<p>Like other accused members of The Community, Freeman was an active member of <a href="https://krebsonsecurity.com/?s=ogusers&amp;x=0&amp;y=0" target="_blank" rel="noopener noreferrer">OGUsers</a>, a forum that caters to people selling access to hijacked social media and other online accounts. But unlike others in the group, Freeman used his real name (username: Conor), and disclosed his hometown and date of birth to others on the forum. At least twice in the past few years <a href="https://krebsonsecurity.com/2019/05/account-hijacking-forum-ogusers-hacked/" target="_blank" rel="noopener noreferrer">OGUsers was hacked</a>, and its database of profiles and user messages posted online.</p>
+<p>According to a report in <a href="https://www.irishtimes.com/news/crime-and-law/courts/circuit-court/man-jailed-for-role-in-2-million-cryptocurrency-theft-1.4411641?mode=amp" target="_blank" rel="noopener noreferrer">The Irish Times</a>, Freeman spent approximately €130,000, which he had converted into cash from the stolen cryptocurrency. Conor posted on OGUsers that he spent approximately $14,000 on a Rolex watch. The rest was handed over to the police in the form of an electronic wallet that held the equivalent of more than $2 million. <a href="https://krebsonsecurity.com/2020/11/convicted-sim-swapper-gets-3-years-in-jail/#more-53615" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-53618" class="post-53618 post type-post status-publish format-standard has-post-thumbnail hentry category-sunshine tag-christopher-krebs tag-cisa tag-cybersecurity-and-infrastructure-security-agency tag-president-trump tag-rumor-control tag-sen-angus-king tag-sen-richard-burr tag-u-s-department-of-homeland-security tag-y2k">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2020/11/trump-fires-security-chief-christopher-krebs/" title="Permalink to Trump Fires Security Chief Christopher Krebs" rel="bookmark">Trump Fires Security Chief Christopher Krebs</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">November 18, 2020</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2020/11/trump-fires-security-chief-christopher-krebs/#comments">534 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p><strong>President Trump</strong> on Tuesday fired his top election security official <strong>Christopher Krebs</strong> (no relation). The dismissal came via Twitter two weeks to the day after Trump lost an election he baselessly claims was stolen by widespread voting fraud.</p>
+<div id="attachment_53632" style="width: 603px" class="wp-caption aligncenter"><img aria-describedby="caption-attachment-53632" loading="lazy" class=" wp-image-53632" src="https://krebsonsecurity.com/wp-content/uploads/2020/11/krebs-cisa.png" alt="" width="593" height="375" srcset="https://krebsonsecurity.com/wp-content/uploads/2020/11/krebs-cisa.png 967w, https://krebsonsecurity.com/wp-content/uploads/2020/11/krebs-cisa-768x485.png 768w" sizes="(max-width: 593px) 100vw, 593px" /><p id="caption-attachment-53632" class="wp-caption-text">Chris Krebs. Image: CISA.</p></div>
+<p>Krebs, 43, is a former Microsoft executive appointed by Trump to head the <strong>Cybersecurity and Infrastructure Security Agency</strong> (CISA), a division of the <strong>U.S. Department of Homeland Security</strong>. As part of that role, Krebs organized federal and state efforts to improve election security, and to dispel disinformation about the integrity of the voting process.</p>
+<p>Krebs&#8217; dismissal was hardly unexpected. Last week, in the face of repeated statements by Trump that the president was robbed of re-election by buggy voting machines and millions of fraudulently cast ballots, Krebs&#8217; agency rejected the claims as &#8220;unfounded,&#8221; asserting that &#8220;the November 3rd election was the most secure in American history.&#8221;</p>
+<p>In <a href="https://www.cisa.gov/news/2020/11/12/joint-statement-elections-infrastructure-government-coordinating-council-election" target="_blank" rel="noopener noreferrer">a statement on Nov. 12</a>, CISA declared &#8220;there is no evidence that any voting system deleted or lost votes, changed votes, or was in any way compromised.&#8221;</p>
+<p>But in <a href="https://twitter.com/realDonaldTrump/status/1328852354049957888" target="_blank" rel="noopener noreferrer">a tweet Tuesday evening</a>, Trump called that assessment &#8220;highly inaccurate,&#8221; alleging there were &#8220;massive improprieties and fraud &#8212; including dead people voting, Poll watchers not allowed into polling locations, &#8216;glitches&#8217; in the voting machines that changed votes from Trump to Biden, late voting, and many more.&#8221;</p>
+<p><img loading="lazy" class="aligncenter wp-image-53634" src="https://krebsonsecurity.com/wp-content/uploads/2020/11/trump-krebs-tweets.png" alt="" width="593" height="522" /></p>
+<p>Twitter, as it has done with a remarkable number of the president&#8217;s tweets lately, flagged the statements as disputed.</p>
+<p>By most accounts, Krebs was one of the more competent and transparent leaders in the Trump administration. But that same transparency may have cost him his job: Krebs&#8217; agency earlier this year launched &#8220;<a href="https://www.cisa.gov/rumorcontrol" target="_blank" rel="noopener noreferrer">Rumor Control</a>,&#8221; a blog that sought to address many of the conspiracy theories the president has perpetuated in recent days.</p>
+<p><strong>Sen. Richard Burr</strong>, a Republican from North Carolina, <a href="https://www.burr.senate.gov/press/releases/senator-burr-statement-on-cisa-director-christopher-krebs-" target="_blank" rel="noopener noreferrer">said</a> Krebs had done &#8220;a remarkable job during a challenging time,&#8221; and that the &#8220;creative and innovative campaign CISA developed to promote cybersecurity should serve as a model for other government agencies.&#8221;</p>
+<p><strong>Sen. Angus King,</strong> an Independent from Maine and co-chair of a commission to improve the nation&#8217;s cyber defense posture, called Krebs &#8220;an incredibly bright, high-performing, and dedicated public servant who has helped build up new cyber capabilities in the face of swiftly-evolving dangers.&#8221;</p>
+<p>“By firing Mr. Krebs for simply doing his job, President Trump is inflicting severe damage on all Americans – who rely on CISA’s defenses, even if they don’t know it,&#8221; King said in <a href="https://www.king.senate.gov/newsroom/press-releases/solarium-co-chair-king-unjust-firing-of-cisa-director-krebs-makes-americans-less-safe" target="_blank" rel="noopener noreferrer">a written statement</a>. &#8220;If there’s any silver lining in this unjust decision, it’s this: I hope that President-elect Biden will recognize Chris’s contributions, and consult with him as the Biden administration charts the future of this critically important agency.” <a href="https://krebsonsecurity.com/2020/11/trump-fires-security-chief-christopher-krebs/#more-53618" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-53573" class="post-53573 post type-post status-publish format-standard has-post-thumbnail hentry category-sunshine category-latest-warnings category-web-fraud-2-0 tag-frank-angiolelli tag-indelible-llc tag-malwarebytes tag-mcafee tag-norton tag-pieter-arntz tag-pushwelcome">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2020/11/be-very-sparing-in-allowing-site-notifications/" title="Permalink to Be Very Sparing in Allowing Site Notifications" rel="bookmark">Be Very Sparing in Allowing Site Notifications</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">November 17, 2020</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2020/11/be-very-sparing-in-allowing-site-notifications/#comments">62 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>An increasing number of websites are asking visitors to approve &#8220;notifications,&#8221; browser modifications that periodically display messages on the user&#8217;s mobile or desktop device. In many cases these notifications are benign, but several dodgy firms are paying site owners to install their notification scripts and then selling that communications pathway to scammers and online hucksters.</p>
+<div id="attachment_53599" style="width: 600px" class="wp-caption aligncenter"><img aria-describedby="caption-attachment-53599" loading="lazy" class=" wp-image-53599" src="https://krebsonsecurity.com/wp-content/uploads/2020/11/notifications.png" alt="" width="590" height="108" /><p id="caption-attachment-53599" class="wp-caption-text">Notification prompts in Firefox (left) and Google Chrome.</p></div>
+<p>When a website you visit asks permission to send notifications and you approve the request, the resulting messages that pop up appear outside of the browser. For example, on Microsoft Windows systems they typically show up in the bottom right corner of the screen &#8212; just above the system clock. These so-called &#8220;push notifications&#8221; rely on <a href="https://tools.ietf.org/html/rfc8030" target="_blank" rel="noopener noreferrer">an Internet standard</a> designed to work similarly across different operating systems and web browsers.</p>
+<p>But many users may not fully grasp what they are consenting to when they approve notifications, or how to tell the difference between a notification sent by a website and one made to appear like an alert from the operating system or another program that&#8217;s already installed on the device.</p>
+<p>This is evident by the apparent scale of the infrastructure behind a relatively new company based in Montenegro called <strong>PushWelcome</strong>, which advertises the ability for site owners to monetize traffic from their visitors. The company&#8217;s site currently is <a href="https://www.alexa.com/siteinfo/pushwelcome.com" target="_blank" rel="noopener noreferrer">ranked by Alexa.com</a> as among the top 2,000 sites in terms of Internet traffic globally.</p>
+<p>Website publishers who sign up with PushWelcome are asked to include a small script on their page which prompts visitors to approve notifications. In many cases, the notification approval requests themselves are deceptive &#8212; disguised as prompts to click &#8220;OK&#8221; to view video material, or as &#8220;CAPTCHA&#8221; requests designed to distinguish automated bot traffic from real visitors.</p>
+<div id="attachment_53585" style="width: 606px" class="wp-caption aligncenter"><a href="https://krebsonsecurity.com/wp-content/uploads/2020/11/pw-publishers.png"><img aria-describedby="caption-attachment-53585" loading="lazy" class="wp-image-53585" src="https://krebsonsecurity.com/wp-content/uploads/2020/11/pw-publishers.png" alt="" width="596" height="493" srcset="https://krebsonsecurity.com/wp-content/uploads/2020/11/pw-publishers.png 1051w, https://krebsonsecurity.com/wp-content/uploads/2020/11/pw-publishers-768x635.png 768w" sizes="(max-width: 596px) 100vw, 596px" /></a><p id="caption-attachment-53585" class="wp-caption-text">An ad from PushWelcome touting the money that websites can make for embedding their dodgy push notifications scripts.</p></div>
+<p>Approving notifications from a site that uses PushWelcome allows any of the company&#8217;s advertising partners to display whatever messages they choose, whenever they wish to, and in real-time. And almost invariably, those messages include misleading notifications about security risks on the user&#8217;s system, prompts to install other software, ads for dating sites, erectile disfunction medications, and dubious investment opportunities.</p>
+<p>That&#8217;s according to <a href="https://www.indelible.global/post/pushbug-uncovering-widespread-push-notification-rfc-8030-abuse-in-the-wild" target="_blank" rel="noopener noreferrer">a deep analysis</a> of the PushWelcome network compiled by <a href="https://www.indelible.global" target="_blank" rel="noopener noreferrer">Indelible LLC</a>, a cybersecurity firm based in Portland, Ore. <strong>Frank Angiolelli</strong>, vice president of security at Indelible, said rogue notifications can be abused for credential phishing, as well as foisting malware and other unwanted applications on users.</p>
+<p>&#8220;This method is currently being used to deliver something akin to adware or click fraud type activity,&#8221; Angiolelli said. &#8220;The concerning aspect of this is that it is so very undetected by endpoint security programs, and there is a real risk this activity can be used for much more nefarious purposes.&#8221;</p>
+<div id="attachment_53586" style="width: 606px" class="wp-caption aligncenter"><a href="https://krebsonsecurity.com/wp-content/uploads/2020/11/pw-deception.png"><img aria-describedby="caption-attachment-53586" loading="lazy" class="wp-image-53586" src="https://krebsonsecurity.com/wp-content/uploads/2020/11/pw-deception.png" alt="" width="596" height="318" srcset="https://krebsonsecurity.com/wp-content/uploads/2020/11/pw-deception.png 1247w, https://krebsonsecurity.com/wp-content/uploads/2020/11/pw-deception-768x410.png 768w" sizes="(max-width: 596px) 100vw, 596px" /></a><p id="caption-attachment-53586" class="wp-caption-text">Sites affiliated with PushWelcome often use misleading messaging to trick people into approving notifications.</p></div>
+<p> <a href="https://krebsonsecurity.com/2020/11/be-very-sparing-in-allowing-site-notifications/#more-53573" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-53522" class="post-53522 post type-post status-publish format-standard has-post-thumbnail hentry category-security-tools category-patches tag-bob-huber tag-cve-2020-15999 tag-cve-2020-16875 tag-cve-2020-17051 tag-cve-2020-17087 tag-dustin-childs tag-microsoft-exchange-server tag-tenable tag-trend-micro tag-windows-network-file-system tag-zero-day-initiative">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2020/11/patch-tuesday-november-2020-edition/" title="Permalink to Patch Tuesday, November 2020 Edition" rel="bookmark">Patch Tuesday, November 2020 Edition</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">November 10, 2020</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2020/11/patch-tuesday-november-2020-edition/#comments">35 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p><strong>Adobe</strong> and <strong>Microsoft</strong> each issued a bevy of updates today to plug critical security holes in their software. Microsoft&#8217;s release includes fixes for 112 separate flaws, including one zero-day vulnerability that is already being exploited to attack Windows users. Microsoft also is taking flak for changing its security advisories and limiting the amount of information disclosed about each bug.</p>
+<p><img loading="lazy" class="aligncenter wp-image-52647" src="https://krebsonsecurity.com/wp-content/uploads/2020/08/windowsec.png" alt="" width="593" height="435" /></p>
+<p>Some 17 of the 112 issues fixed in today&#8217;s patch batch involve &#8220;critical&#8221; problems in Windows, or those that can be exploited by malware or malcontents to seize complete, remote control over a vulnerable Windows computer without any help from users.</p>
+<p>Most of the rest were assigned the rating &#8220;important,&#8221; which <a href="https://www.microsoft.com/en-us/msrc/security-update-severity-rating-system" target="_blank" rel="noopener noreferrer">in Redmond parlance</a> refers to a vulnerability whose exploitation could &#8220;compromise the confidentiality, integrity, or availability of user data, or of the integrity or availability of processing resources.&#8221;</p>
+<p>A chief concern among all these updates this month is <a href="https://msrc.microsoft.com/update-guide/en-US/vulnerability/CVE-2020-17087" target="_blank" rel="noopener noreferrer">CVE-2020-17087</a>, which is an &#8220;important&#8221; bug in the Windows kernel that is already seeing active exploitation. CVE-2020-17087 is not listed as critical because it&#8217;s what&#8217;s known as a privilege escalation flaw that would allow an attacker who has already compromised a less powerful user account on a system to gain administrative control. In essence, it would have to be chained with another exploit.</p>
+<p>Unfortunately, this is exactly what Google researchers described witnessing recently. On Oct. 20, <strong>Google</strong> released an update for its <strong>Chrome</strong> browser which fixed a bug (<a href="https://nvd.nist.gov/vuln/detail/CVE-2020-15999" target="_blank" rel="noopener noreferrer">CVE-2020-15999</a>) that was seen being used in conjunction with CVE-2020-17087 to compromise Windows users.</p>
+<p>If you take a look at the advisory Microsoft released today for CVE-2020-17087 (or any others from today&#8217;s batch), you might notice they look a bit more sparse. That&#8217;s because Microsoft has opted to restructure those advisories around the <a href="https://nvd.nist.gov/vuln-metrics/cvss" target="_blank" rel="noopener noreferrer">Common Vulnerability Scoring System</a> (CVSS) format to more closely align the format of the advisories with that of other major software vendors.</p>
+<p>But in so doing, Microsoft has also removed some useful information, such as the description explaining in broad terms the scope of the vulnerability, how it can be exploited, and what the result of the exploitation might be. Microsoft explained its reasoning behind this shift in <a href="https://msrc-blog.microsoft.com/2020/11/09/vulnerability-descriptions-in-the-new-version-of-the-security-update-guide/" target="_blank" rel="noopener noreferrer">a blog post</a>.</p>
+<p>Not everyone is happy with the new format. <strong>Bob Huber</strong>, chief security officer at <a href="https://www.tenable.com" target="_blank" rel="noopener noreferrer">Tenable</a>, praised Microsoft for adopting an industry standard, but said the company should consider that folks who review Patch Tuesday releases aren’t security practitioners but rather IT counterparts responsible for actually applying the updates who often aren’t able (and shouldn’t have to) decipher raw CVSS data.</p>
+<p>&#8220;With this new format, end users are completely blind to how a particular CVE impacts them,&#8221; Huber said. &#8220;What’s more, this makes it nearly impossible to determine the urgency of a given patch. It’s difficult to understand the benefits to end-users. However, it’s not too difficult to see how this new format benefits bad actors. They’ll reverse engineer the patches and, by Microsoft not being explicit about vulnerability details, the advantage goes to attackers, not defenders. Without the proper context for these CVEs, it becomes increasingly difficult for defenders to prioritize their remediation efforts.&#8221; <a href="https://krebsonsecurity.com/2020/11/patch-tuesday-november-2020-edition/#more-53522" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-53550" class="post-53550 post type-post status-publish format-standard has-post-thumbnail hentry category-ransomware category-comingstorm tag-chris-hodson tag-emsisoft tag-fabian-wosar tag-ragnar-locker tag-ransomware">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2020/11/ransomware-group-turns-to-facebook-ads/" title="Permalink to Ransomware Group Turns to Facebook Ads" rel="bookmark">Ransomware Group Turns to Facebook Ads</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">November 10, 2020</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2020/11/ransomware-group-turns-to-facebook-ads/#comments">41 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>It&#8217;s bad enough that many ransomware gangs now have blogs where they publish data stolen from companies that refuse to make an extortion payment. Now, one crime group has started using hacked <strong>Facebook</strong> accounts to run ads publicly pressuring their ransomware victims into paying up.</p>
+<p><a class="lightbox" href="https://krebsonsecurity.com/wp-content/uploads/2020/11/campari-fb.png"><img loading="lazy" class="aligncenter wp-image-53552" src="https://krebsonsecurity.com/wp-content/uploads/2020/11/campari-fb.png" alt="" width="598" height="391" srcset="https://krebsonsecurity.com/wp-content/uploads/2020/11/campari-fb.png 1332w, https://krebsonsecurity.com/wp-content/uploads/2020/11/campari-fb-768x502.png 768w" sizes="(max-width: 598px) 100vw, 598px" /></a></p>
+<p>On the evening of Monday, Nov. 9, an ad campaign apparently taken out by the <a href="https://resources.infosecinstitute.com/topic/ragnar-locker-malware-what-it-is-how-it-works-and-how-to-prevent-it-malware-spotlight/" target="_blank" rel="noopener noreferrer">Ragnar Locker Team</a> began appearing on Facebook. The ad was designed to turn the screws to the Italian beverage vendor <strong>Campari Group</strong>, which <a href="https://ftaonline.com/news/campari-group-vittima-di-un-attacco-malware" target="_blank" rel="noopener noreferrer">acknowledged on Nov. 3</a> that its computer systems had been <a href="https://www.zdnet.com/article/italian-beverage-vendor-campari-knocked-offline-after-ransomware-attack/" target="_blank" rel="noopener noreferrer">sidelined by a malware attack</a>.</p>
+<p>On Nov. 6, Campari issued a follow-up statement saying &#8220;at this stage, we cannot completely exclude that some personal and business data has been taken.&#8221;</p>
+<p>&#8220;This is ridiculous and looks like a big fat lie,&#8221; reads the Facebook ad campaign from the Ragnar crime group. &#8220;We can confirm that confidential data was stolen and we talking about huge volume of data.&#8221;</p>
+<p>The ad went on to say Ragnar Locker Team had offloaded two terabytes of information and would give the Italian firm until 6 p.m. EST today (Nov. 10) to negotiate an extortion payment in exchange for a promise not to publish the stolen files.</p>
+<p>The Facebook ad blitz was paid for by <strong>Hodson Event Entertainment</strong>, an account tied to <a href="http://www.djchrishodson.com" target="_blank" rel="noopener noreferrer">Chris Hodson</a>, a deejay based in Chicago. Contacted by KrebsOnSecurity, Hodson said his Facebook account indeed was hacked, and that the attackers had budgeted $500 for the entire campaign.</p>
+<p>&#8220;I thought I had two-step verification turned on for all my accounts, but now it looks like the only one I didn&#8217;t have it set for was Facebook,&#8221; Hodson said.</p>
+<p>Hodson said a review of his account shows the unauthorized campaign reached approximately 7,150 Facebook users, and generated 770 clicks, with a cost-per-result of 21 cents. Of course, it didn&#8217;t cost the ransomware group anything. Hodson said Facebook billed him $35 for the first part of the campaign, but apparently detected the ads as fraudulent sometime this morning before his account could be billed another $159 for the campaign. <a href="https://krebsonsecurity.com/2020/11/ransomware-group-turns-to-facebook-ads/#more-53550" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+				
+			
+								<div class="themonic-pagination"><div class='pagination'><ul><li><a href='https://krebsonsecurity.com/'>&laquo; First</a></li><li><a href='https://krebsonsecurity.com/page/13/' class='inactive'>&lsaquo; Previous</a></li><li><a href='https://krebsonsecurity.com/page/11/' class='inactive'>11</a></li><li><a href='https://krebsonsecurity.com/page/12/' class='inactive'>12</a></li><li><a href='https://krebsonsecurity.com/page/13/' class='inactive'>13</a></li><li class='current'><span class='currenttext'>14</span></li><li><a href='https://krebsonsecurity.com/page/15/' class='inactive'>15</a></li><li><a href='https://krebsonsecurity.com/page/16/' class='inactive'>16</a></li><li><a href='https://krebsonsecurity.com/page/17/' class='inactive'>17</a></li><li><a href='https://krebsonsecurity.com/page/15/' class='inactive'>Next &rsaquo;</a></li><a class='inactive' href='https://krebsonsecurity.com/page/209/'>Last &raquo;</a></ul></div></div>
+					<div style="display: block; clear: both;"></div>
+			
+		
+
+	
+
+		</div><!-- #content -->
+	</div><!-- #primary -->
+
+
+			<div id="secondary" class="widget-area" role="complementary">
+
+        <div id="sidebar_ad" class="widget themonic-ad5"><div class="a-statement">Advertisement</div><a href="https://securityscorecard.com/instant-security-scorecard?utm_source=krebs+on+security&amp;utm_medium=display&amp;utm_campaign=instant+scorecard&amp;utm_term=B&amp;utm_content=335x300">
+<img src="/b-securityscorecard/7.jpg">
+</a></div>
+
+                        <br><div class="widget themonic-ad1"><div class="a-statement">Advertisement</div><a href="https://www.akamai.com/why-akamai/the-internet-of-possibilities?utm_source=krebsonsecurity&amp;utm_medium=display&amp;utm_campaign=F-MC-54978">
+<img src="/b-akamai/146.png">
+</a></div><br>
+
+			<aside id="custom_html-2" class="widget_text widget widget_custom_html"><p class="widget-title">Mailing List</p><div class="textwidget custom-html-widget"><a href="/subscribe/">Subscribe here</a></div></aside><aside id="search-2" class="widget widget_search"><p class="widget-title">Search KrebsOnSecurity</p><form role="search" method="get" id="searchform" class="searchform" action="https://krebsonsecurity.com/">
+				<div>
+					<label class="screen-reader-text" for="s">Search for:</label>
+					<input type="text" value="" name="s" id="s" />
+					<input type="submit" id="searchsubmit" value="Search" />
+				</div>
+			</form></aside>
+		<aside id="recent-posts-3" class="widget widget_recent_entries">
+		<p class="widget-title">Recent Posts</p>
+		<ul>
+											<li>
+					<a href="https://krebsonsecurity.com/2021/12/canada-charges-its-most-prolific-cybercriminal/">Canada Charges Its &#8220;Most Prolific Cybercriminal&#8221;</a>
+									</li>
+											<li>
+					<a href="https://krebsonsecurity.com/2021/12/who-is-the-network-access-broker-babam/">Who Is the Network Access Broker &#8216;Babam&#8217;?</a>
+									</li>
+											<li>
+					<a href="https://krebsonsecurity.com/2021/12/ubiquiti-developer-charged-with-extortion-causing-2020-breach/">Ubiquiti Developer Charged With Extortion, Causing 2020 &#8220;Breach&#8221;</a>
+									</li>
+											<li>
+					<a href="https://krebsonsecurity.com/2021/11/the-internet-is-held-together-with-spit-baling-wire/">The Internet is Held Together With Spit &#038; Baling Wire</a>
+									</li>
+											<li>
+					<a href="https://krebsonsecurity.com/2021/11/arrest-in-ransom-your-employer-email-scheme/">Arrest in &#8216;Ransom Your Employer&#8217; Email Scheme</a>
+									</li>
+					</ul>
+
+		</aside><aside id="text-2" class="widget widget_text">			<div class="textwidget"><a name="subscribe2"></a></div>
+		</aside><aside id="widget_sp_image-15" class="widget widget_sp_image"><p class="widget-title">Spam Nation</p><a href="https://www.amazon.com/Spam-Nation-Organized-Cybercrime-Epidemic-ebook/dp/B00L5QGBL0/ref=dp_kinw_strp_1" target="_blank" class="widget_sp_image-image-link" title="Spam Nation"><img width="266" height="404" alt="Spam Nation" class="attachment-266x404 aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2015/04/spamnation-nyt.png" /></a><div class="widget_sp_image-description" ><p>A New York Times Bestseller! </p>
+</div></aside><aside id="widget_sp_image-25" class="widget widget_sp_image"><p class="widget-title">Thinking of a Cybersecurity Career?</p><a href="https://krebsonsecurity.com/2020/07/thinking-of-a-cybersecurity-career-read-this/" target="_blank" class="widget_sp_image-image-link" title="Thinking of a Cybersecurity Career? Read This."><img width="625" height="424" alt="Thinking of a Cybersecurity Career?" class="attachment-full" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2020/07/codepeople.png 625w, https://krebsonsecurity.com/wp-content/uploads/2020/07/codepeople-580x393.png 580w" sizes="(max-width: 625px) 100vw, 625px" src="https://krebsonsecurity.com/wp-content/uploads/2020/07/codepeople.png" /></a><div class="widget_sp_image-description" ><p>Read this.</p>
+</div></aside><aside id="widget_sp_image-3" class="widget widget_sp_image"><p class="widget-title">All About Skimmers </p><a href="https://krebsonsecurity.com/all-about-skimmers/" target="_blank" class="widget_sp_image-image-link" title="All About Skimmers "><img width="299" height="232" alt="All About Skimmers" class="attachment-299x232 aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2010/08/skimgallery1.jpg" /></a><div class="widget_sp_image-description" ><p>Click image for my skimmer series.</p>
+</div></aside><aside id="categories-2" class="widget widget_categories"><p class="widget-title">Story Categories</p>
+			<ul>
+					<li class="cat-item cat-item-5"><a href="https://krebsonsecurity.com/category/sunshine/" title="Includes investigative blog posts meant to shine a light on the darker corners of the Internet.">A Little Sunshine</a>
+</li>
+	<li class="cat-item cat-item-2240"><a href="https://krebsonsecurity.com/category/all-about-skimmers/">All About Skimmers</a>
+</li>
+	<li class="cat-item cat-item-9085"><a href="https://krebsonsecurity.com/category/ashley-madison-breach/">Ashley Madison breach</a>
+</li>
+	<li class="cat-item cat-item-3191"><a href="https://krebsonsecurity.com/category/breadcrumbs/">Breadcrumbs</a>
+</li>
+	<li class="cat-item cat-item-3771"><a href="https://krebsonsecurity.com/category/data-breaches/" title="Stories about data breaches at retailers, corporations, governments and organizations of all sizes.">Data Breaches</a>
+</li>
+	<li class="cat-item cat-item-4624"><a href="https://krebsonsecurity.com/category/ddos-for-hire/">DDoS-for-Hire</a>
+</li>
+	<li class="cat-item cat-item-9173"><a href="https://krebsonsecurity.com/category/employment-fraud/">Employment Fraud</a>
+</li>
+	<li class="cat-item cat-item-2151"><a href="https://krebsonsecurity.com/category/how-to-break-into-security/" title="If you&#039;ve ever wanted career advice on how to make a shift into the security industry, look no further.">How to Break Into Security</a>
+</li>
+	<li class="cat-item cat-item-87"><a href="https://krebsonsecurity.com/category/latest-warnings/">Latest Warnings</a>
+</li>
+	<li class="cat-item cat-item-4071"><a href="https://krebsonsecurity.com/category/neer-do-well-news/">Ne&#039;er-Do-Well News</a>
+</li>
+	<li class="cat-item cat-item-9"><a href="https://krebsonsecurity.com/category/other/">Other</a>
+</li>
+	<li class="cat-item cat-item-1306"><a href="https://krebsonsecurity.com/category/pharma-wars/">Pharma Wars</a>
+</li>
+	<li class="cat-item cat-item-8240"><a href="https://krebsonsecurity.com/category/ransomware/">Ransomware</a>
+</li>
+	<li class="cat-item cat-item-599"><a href="https://krebsonsecurity.com/category/security-tools/">Security Tools</a>
+</li>
+	<li class="cat-item cat-item-8298"><a href="https://krebsonsecurity.com/category/sim-swapping/">SIM Swapping</a>
+</li>
+	<li class="cat-item cat-item-4079"><a href="https://krebsonsecurity.com/category/spam-nation/">Spam Nation</a>
+</li>
+	<li class="cat-item cat-item-1"><a href="https://krebsonsecurity.com/category/smallbizvictims/" title="Posts in this category will include new stories similar to those told in the Small Business Victims category on The Washington Post&#039;s Security Fix blog, which chronicled the methods organized cyber thieve are using to steal hundreds of thousands of dollars from dozens of small- to mid-sized companies around the country.">Target: Small Businesses</a>
+</li>
+	<li class="cat-item cat-item-5167"><a href="https://krebsonsecurity.com/category/tax-refund-fraud/">Tax Refund Fraud</a>
+</li>
+	<li class="cat-item cat-item-3"><a href="https://krebsonsecurity.com/category/comingstorm/" title="This category includes blog posts about computer and Internet security threats now and on the horizon.">The Coming Storm</a>
+</li>
+	<li class="cat-item cat-item-4"><a href="https://krebsonsecurity.com/category/patches/" title="Short posts on the latest security updates for widely-used software.
+">Time to Patch</a>
+</li>
+	<li class="cat-item cat-item-21"><a href="https://krebsonsecurity.com/category/web-fraud-2-0/">Web Fraud 2.0</a>
+</li>
+			</ul>
+
+			</aside><aside id="widget_sp_image-5" class="widget widget_sp_image"><p class="widget-title">The Value of a Hacked PC</p><a href="https://krebsonsecurity.com/2012/10/the-scrap-value-of-a-hacked-pc-revisited/" target="_blank" class="widget_sp_image-image-link" title="The Value of a Hacked PC"><img width="285" height="180" alt="valuehackedpc " class="attachment-285x180 aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2012/12/valuehackedpc-285x180.png" /></a><div class="widget_sp_image-description" ><p>Badguy uses for your PC</p>
+</div></aside><aside id="widget_sp_image-9" class="widget widget_sp_image"><p class="widget-title">Badguy Uses for Your Email </p><a href="https://krebsonsecurity.com/2013/06/the-value-of-a-hacked-email-account/" target="_self" class="widget_sp_image-image-link" title="Badguy Uses for Your Email "><img width="296" height="170" alt="Badguy Uses for Your Email " class="attachment-full aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2013/06/badguyemail.png 296w, https://krebsonsecurity.com/wp-content/uploads/2013/06/badguyemail-285x163.png 285w" sizes="(max-width: 296px) 100vw, 296px" src="https://krebsonsecurity.com/wp-content/uploads/2013/06/badguyemail.png" /></a><div class="widget_sp_image-description" ><p>Your email account may be worth far more than you imagine.</p>
+</div></aside><aside id="widget_sp_image-24" class="widget widget_sp_image"><a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&#038;hosted_button_id=MCCRKHWRX57HS" id="donate" target="_self" class="widget_sp_image-image-link"><img width="250" height="55" alt="Donate to Krebs On Security" class="attachment-medium aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2016/09/donatepaypal2-1.png" /></a></aside><aside id="most_popular_posts-3" class="widget widget_most_popular_posts">
+<p class="widget-title">Most Popular Posts</p>
+<ul>	<li><a href="https://krebsonsecurity.com/2018/07/sextortion-scam-uses-recipients-hacked-passwords/">Sextortion Scam Uses Recipient's Hacked Passwords</a> (1076)</li>
+	<li><a href="https://krebsonsecurity.com/2015/07/online-cheating-site-ashleymadison-hacked/">Online Cheating Site AshleyMadison Hacked</a> (798)</li>
+	<li><a href="https://krebsonsecurity.com/2013/12/sources-target-investigating-data-breach/">Sources: Target Investigating Data Breach</a> (620)</li>
+	<li><a href="https://krebsonsecurity.com/2020/11/trump-fires-security-chief-christopher-krebs/">Trump Fires Security Chief Christopher Krebs</a> (534)</li>
+	<li><a href="https://krebsonsecurity.com/2013/12/cards-stolen-in-target-breach-flood-underground-markets/">Cards Stolen in Target Breach Flood Underground Markets</a> (445)</li>
+	<li><a href="https://krebsonsecurity.com/2013/05/reports-liberty-reserve-founder-arrested-site-shuttered/">Reports: Liberty Reserve Founder Arrested, Site Shuttered</a> (416)</li>
+	<li><a href="https://krebsonsecurity.com/2015/08/was-the-ashley-madison-database-leaked/">Was the Ashley Madison Database Leaked?</a> (376)</li>
+	<li><a href="https://krebsonsecurity.com/2021/01/ddos-guard-to-forfeit-internet-space-occupied-by-parler/">DDoS-Guard To Forfeit Internet Space Occupied by Parler</a> (374)</li>
+	<li><a href="https://krebsonsecurity.com/2014/05/true-goodbye-using-truecrypt-is-not-secure/">True Goodbye: 'Using TrueCrypt Is Not Secure'</a> (363)</li>
+	<li><a href="https://krebsonsecurity.com/2015/08/who-hacked-ashley-madison/">Who Hacked Ashley Madison?</a> (361)</li>
+</ul>
+</aside>
+<aside id="media_image-2" class="widget widget_media_image"><p class="widget-title">Why So Many Top Hackers Hail from Russia</p><a href="https://krebsonsecurity.com/2017/06/why-so-many-top-hackers-hail-from-russia/"><img width="580" height="389" src="https://krebsonsecurity.com/wp-content/uploads/2017/06/computered-580x389.png" class="image wp-image-39684  attachment-medium size-medium" alt="" loading="lazy" style="max-width: 100%; height: auto;" srcset="https://krebsonsecurity.com/wp-content/uploads/2017/06/computered-580x389.png 580w, https://krebsonsecurity.com/wp-content/uploads/2017/06/computered-768x514.png 768w, https://krebsonsecurity.com/wp-content/uploads/2017/06/computered-940x630.png 940w, https://krebsonsecurity.com/wp-content/uploads/2017/06/computered.png 1551w" sizes="(max-width: 580px) 100vw, 580px" /></a></aside><aside id="widget_sp_image-11" class="widget widget_sp_image"><p class="widget-title">Category: Web Fraud 2.0</p><a href="https://krebsonsecurity.com/category/web-fraud-2-0/" target="_blank" class="widget_sp_image-image-link" title="Category: Web Fraud 2.0"><img width="227" height="400" alt="Criminnovations" class="attachment-medium aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2013/11/cybercrimeinnovations-227x400.png" /></a><div class="widget_sp_image-description" ><p>Innovations from the Underground</p>
+</div></aside><aside id="widget_sp_image-12" class="widget widget_sp_image"><a href="https://krebsonsecurity.com/2014/03/are-credit-monitoring-services-worth-it/" target="_blank" class="widget_sp_image-image-link"><img width="285" height="189" class="attachment-medium aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2014/03/shreddedID-copy-285x189.png 285w, https://krebsonsecurity.com/wp-content/uploads/2014/03/shreddedID-copy-600x399.png 600w, https://krebsonsecurity.com/wp-content/uploads/2014/03/shreddedID-copy.png 849w" sizes="(max-width: 285px) 100vw, 285px" src="https://krebsonsecurity.com/wp-content/uploads/2014/03/shreddedID-copy-285x189.png" /></a><div class="widget_sp_image-description" ><p>ID Protection Services Examined</p>
+</div></aside><aside id="widget_sp_image-13" class="widget widget_sp_image"><p class="widget-title">Is Antivirus Dead?</p><a href="https://krebsonsecurity.com/2014/05/antivirus-is-dead-long-live-antivirus/" target="_blank" class="widget_sp_image-image-link" title="Is Antivirus Dead?"><img width="285" height="161" alt="Is Antivirus Dead?" class="attachment-medium aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2014/05/cryptservices-285x161.png 285w, https://krebsonsecurity.com/wp-content/uploads/2014/05/cryptservices-600x339.png 600w, https://krebsonsecurity.com/wp-content/uploads/2014/05/cryptservices.png 945w" sizes="(max-width: 285px) 100vw, 285px" src="https://krebsonsecurity.com/wp-content/uploads/2014/05/cryptservices-285x161.png" /></a><div class="widget_sp_image-description" ><p>The reasons for its decline</p>
+</div></aside><aside id="widget_sp_image-14" class="widget widget_sp_image"><p class="widget-title">The Growing Tax Fraud Menace</p><a href="https://krebsonsecurity.com/category/tax-refund-fraud/" target="_blank" class="widget_sp_image-image-link" title="The Growing Tax Fraud Menace"><img width="285" height="285" alt="The Growing Tax Fraud Menace" class="attachment-medium aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2014/04/taxfraud-285x285.jpg 285w, https://krebsonsecurity.com/wp-content/uploads/2014/04/taxfraud-150x150.jpg 150w, https://krebsonsecurity.com/wp-content/uploads/2014/04/taxfraud-600x600.jpg 600w, https://krebsonsecurity.com/wp-content/uploads/2014/04/taxfraud.jpg 693w" sizes="(max-width: 285px) 100vw, 285px" src="https://krebsonsecurity.com/wp-content/uploads/2014/04/taxfraud-285x285.jpg" /></a><div class="widget_sp_image-description" ><p>File 'em Before the Bad Guys Can </p>
+</div></aside><aside id="widget_sp_image-17" class="widget widget_sp_image"><p class="widget-title">Inside a Carding Shop</p><a href="https://krebsonsecurity.com/2014/06/peek-inside-a-professional-carding-shop/" target="_blank" class="widget_sp_image-image-link" title="Inside a Carding Shop"><img width="194" height="340" alt="Inside a Carding Shop" class="attachment-medium aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2014/06/mcdumpalsjoined.png" /></a><div class="widget_sp_image-description" ><p>A crash course in carding. </p>
+</div></aside><aside id="widget_sp_image-18" class="widget widget_sp_image"><p class="widget-title">Beware Social Security Fraud</p><a href="https://krebsonsecurity.com/2013/09/crooks-hijack-retirement-funds-via-ssa-portal/" target="_blank" class="widget_sp_image-image-link" title="Beware Social Security Fraud"><img width="285" height="293" alt="Beware Social Security Fraud" class="attachment-full aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2016/09/myssn-285x293.png" /></a><div class="widget_sp_image-description" ><p>Sign up, or Be Signed Up! </p>
+</div></aside><aside id="widget_sp_image-2" class="widget widget_sp_image"><p class="widget-title">How Was Your Card Stolen?</p><a href="https://krebsonsecurity.com/2015/01/how-was-your-credit-card-stolen/" target="_blank" class="widget_sp_image-image-link" title="How Was Your Card Stolen?"><img width="285" height="285" alt="How Was Your Card Stolen?" class="attachment-full aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2016/09/carddominoes-285x285.jpg 285w, https://krebsonsecurity.com/wp-content/uploads/2016/09/carddominoes-285x285-150x150.jpg 150w" sizes="(max-width: 285px) 100vw, 285px" src="https://krebsonsecurity.com/wp-content/uploads/2016/09/carddominoes-285x285.jpg" /></a><div class="widget_sp_image-description" ><p>Finding out is not so easy. </p>
+</div></aside><aside id="widget_sp_image-22" class="widget widget_sp_image"><p class="widget-title">Krebs&#8217;s 3 Rules&#8230;</p><a href="https://krebsonsecurity.com/2011/05/krebss-3-basic-rules-for-online-safety/" target="_blank" class="widget_sp_image-image-link" title="Krebs&#8217;s 3 Rules&#8230;"><img width="300" height="300" alt="Krebs&#8217;s 3 Rules&#8230;" class="attachment-medium aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2011/05/three-300x300.jpg 300w, https://krebsonsecurity.com/wp-content/uploads/2011/05/three-150x150.jpg 150w, https://krebsonsecurity.com/wp-content/uploads/2011/05/three.jpg 347w" sizes="(max-width: 300px) 100vw, 300px" src="https://krebsonsecurity.com/wp-content/uploads/2011/05/three-300x300.jpg" /></a><div class="widget_sp_image-description" ><p>...For Online Safety. </p>
+</div></aside>		</div><!-- #secondary -->
+		</div><!-- #main .wrapper -->
+	
+	<div id="publisho-footer" class="widget-area">
+				<div class="footer-widget">
+                				</div>
+				<div class="footer-widget">
+								</div>
+				<div class="footer-widget">
+								</div>
+	</div>
+
+	<div class="site-wordpress">
+					&copy; Krebs on Security<br>
+	</div>
+	<!-- .site-info --><div class="clear"></div>
+</div><!-- #page -->
+
+<script type='text/javascript' src='https://krebsonsecurity.com/wp-content/themes/kos-mar2021/js/slicknav.js?ver=5.8.2' id='publisho-mobile-navigation-js'></script>
+<script type='text/javascript' src='https://krebsonsecurity.com/wp-includes/js/wp-embed.min.js?ver=5.8.2' id='wp-embed-js'></script>
+</body>
+</html>
+<!--
+Performance optimized by W3 Total Cache. Learn more: https://www.boldgrid.com/w3-total-cache/
+
+Object Caching 248/364 objects using memcached
+Page Caching using memcached 
+Database Caching 5/27 queries in 0.011 seconds using memcached
+
+Served from: krebsonsecurity.com @ 2021-12-10 15:25:06 by W3 Total Cache
+-->

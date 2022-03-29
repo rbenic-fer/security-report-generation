@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<!--[if IE 7]>
+<html class="ie ie7" lang="en-US">
+<![endif]-->
+<!--[if IE 8]>
+<html class="ie ie8" lang="en-US">
+<![endif]-->
+<!--[if !(IE 7) | !(IE 8)  ]><!-->
+<html lang="en-US">
+<!--<![endif]-->
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width" />
+<link rel="profile" href="http://gmpg.org/xfn/11" />
+<!--[if lt IE 9]>
+<script src="https://krebsonsecurity.com/wp-content/themes/kos-mar2021/js/html5.js" type="text/javascript"></script>
+<![endif]-->
+<title>Krebs on Security &#8211; Page 92 &#8211; In-depth security news and investigation</title>
+<meta name='robots' content='max-image-preview:large' />
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="Krebs on Security &raquo; Feed" href="https://krebsonsecurity.com/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Krebs on Security &raquo; Comments Feed" href="https://krebsonsecurity.com/comments/feed/" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.1.0\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.1.0\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/krebsonsecurity.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=5.8.2"}};
+			!function(e,a,t){var n,r,o,i=a.createElement("canvas"),p=i.getContext&&i.getContext("2d");function s(e,t){var a=String.fromCharCode;p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,e),0,0);e=i.toDataURL();return p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,t),0,0),e===i.toDataURL()}function c(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(o=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},r=0;r<o.length;r++)t.supports[o[r]]=function(e){if(!p||!p.fillText)return!1;switch(p.textBaseline="top",p.font="600 32px Arial",e){case"flag":return s([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])?!1:!s([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!s([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]);case"emoji":return!s([10084,65039,8205,55357,56613],[10084,65039,8203,55357,56613])}return!1}(o[r]),t.supports.everything=t.supports.everything&&t.supports[o[r]],"flag"!==o[r]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[o[r]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(n=t.source||{}).concatemoji?c(n.concatemoji):n.wpemoji&&n.twemoji&&(c(n.twemoji),c(n.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+	<link rel='stylesheet' id='colorbox-theme1-css'  href='https://krebsonsecurity.com/wp-content/plugins/jquery-lightbox-for-native-galleries/colorbox/theme1/colorbox.css?ver=1.3.14' type='text/css' media='screen' />
+<link rel='stylesheet' id='wp-block-library-css'  href='https://krebsonsecurity.com/wp-includes/css/dist/block-library/style.min.css?ver=5.8.2' type='text/css' media='all' />
+<link rel='stylesheet' id='contact-form-7-css'  href='https://krebsonsecurity.com/wp-content/plugins/contact-form-7/includes/css/styles.css?ver=5.5.3' type='text/css' media='all' />
+<link rel='stylesheet' id='publisho-style-css'  href='https://krebsonsecurity.com/wp-content/themes/kos-mar2021/style.css?subver=1.2&#038;ver=5.8.2' type='text/css' media='all' />
+<style id='publisho-style-inline-css' type='text/css'>
+
+	.themonic-nav .current-menu-item > a, .themonic-nav .current-menu-ancestor > a, .themonic-nav .current_page_item > a, .themonic-nav .current_page_ancestor > a {
+		background: #cc6600;
+	}
+	.themonic-nav ul.nav-menu, .themonic-nav div.nav-menu > ul {
+		border-bottom: 5px solid #cc6600;
+	}
+	#site-navigation .topheadmenu a {
+    background: rgba(0, 0, 0, 0);
+	}
+	.themonic-nav li a:hover {
+		background: #cc6600;
+	}
+	.themonic-nav li:hover {
+		background: #cc6600;
+	}.wrapper .flexslider {margin: 0 0 30px;}.frontp .btm-wrap {
+    border-top: 1px solid #e9e9e9;
+	}
+	.entry-summary {
+    border-top: none;
+	}.frontp .btm-wrap { margin-bottom: 30px;}.site { font-size:14px;}.site { font-family:'Roboto', arial ;}
+</style>
+<link rel='stylesheet' id='publisho-custom-style-css'  href='https://krebsonsecurity.com/wp-content/themes/kos-mar2021/custom.css?subver=1.2&#038;ver=5.8.2' type='text/css' media='all' />
+<!--[if lt IE 9]>
+<link rel='stylesheet' id='publisho-ie-css'  href='https://krebsonsecurity.com/wp-content/themes/kos-mar2021/css/ie.css?ver=20160606' type='text/css' media='all' />
+<![endif]-->
+<link rel='stylesheet' id='fontawesome-css-css'  href='https://krebsonsecurity.com/wp-content/themes/kos-mar2021/fonts/font-awesome.min.css?ver=5.8.2' type='text/css' media='all' />
+<link rel='stylesheet' id='publisho_custom_fonts-css'  href='//fonts.googleapis.com/css?family=Roboto%3Aregular%2Citalic%2C500%26subset%3Dlatin%2C' type='text/css' media='screen' />
+<script type='text/javascript' src='https://krebsonsecurity.com/wp-includes/js/jquery/jquery.min.js?ver=3.6.0' id='jquery-core-js'></script>
+<script type='text/javascript' src='https://krebsonsecurity.com/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.3.2' id='jquery-migrate-js'></script>
+<script type='text/javascript' src='https://krebsonsecurity.com/wp-content/plugins/jquery-lightbox-for-native-galleries/colorbox/jquery.colorbox-min.js?ver=1.3.14' id='colorbox-js'></script>
+<link rel="https://api.w.org/" href="https://krebsonsecurity.com/wp-json/" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://krebsonsecurity.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://krebsonsecurity.com/wp-includes/wlwmanifest.xml" /> 
+<meta name="generator" content="WordPress 5.8.2" />
+<!-- JavaScript Pull-Quotes plugin v2.2 -->
+	<link rel="stylesheet" href="https://krebsonsecurity.com/wp-content/plugins/jspullquotes/resources/jspullquotes-core.css" type="text/css" />
+	<link rel="stylesheet" href="https://krebsonsecurity.com/wp-content/plugins/jspullquotes/resources/jspullquotes-default.css" type="text/css" />
+	<script type="text/javascript" src="https://krebsonsecurity.com/wp-content/plugins/jspullquotes/resources/jspullquotes.js"></script>
+	<script type="text/javascript">
+		var arrOptions = new Array("1", "1", "right", "1", "1", "blockquote", "pullquote", "pullquote pqRight");
+		pullQuoteOpts(arrOptions);
+	</script>
+<!-- end pull-quote additions -->
+<!-- jQuery Lightbox For Native Galleries v3.1.3 | http://www.viper007bond.com/wordpress-plugins/jquery-lightbox-for-native-galleries/ -->
+<script type="text/javascript">
+// <![CDATA[
+	jQuery(document).ready(function($){
+		$(".gallery").each(function(index, obj){
+			var galleryid = Math.floor(Math.random()*10000);
+			$(obj).find("a").colorbox({rel:galleryid, maxWidth:"95%", maxHeight:"95%"});
+		});
+		$("a.lightbox").colorbox({maxWidth:"95%", maxHeight:"95%"});
+	});
+// ]]>
+</script>
+<style type="text/css" id="custom-background-css">
+body.custom-background { background-color: #ffffff; }
+</style>
+	<link rel="me" href="https://twitter.com/briankrebs" /><meta name="twitter:widgets:link-color" content="#000000" /><meta name="twitter:widgets:border-color" content="#000000" /><meta name="twitter:partner" content="tfwp" />
+<meta name="twitter:card" content="summary" /><meta name="twitter:title" content="Krebs on Security" /><meta name="twitter:site" content="@briankrebs" /><meta name="twitter:description" content="In-depth security news and investigation" />
+</head>
+<body class="home blog paged custom-background paged-92 custom-background-white single-author frontp hfeed">
+<div id="page" class="site">
+	<!-- <div class="publisho-top-mobile-nav clear"></div> -->
+	<div class="themonic-logo themonic-ad3"><div class="a-statement">Advertisement</div><a href="https://go.infrascale.com/lp/get-ransomware-ebook-krebsonsecurity/?utm_source=banner&amp;utm_medium=display&amp;utm_campaign=krebsssecurity_influencer_1240_110">
+<img src="/b-infrascale/5.png">
+</a></div>
+	<div class="themonic-logo themonic-ad6"><div class="a-statement">Advertisement</div><a href="https://www.area1security.com/2021-email-threat-report/?utm_medium=display&amp;utm_source=krebs&amp;utm_term=na&amp;utm_content=graph&amp;utm_campaign=2021-Q4-Display-Krebs-2021-Email-Threat-Report">
+<img src="/b-area1/8.png">
+</a></div>
+	<nav id="site-navigation" class="themonic-nav" role="navigation">
+	</nav><!-- #site-navigation -->
+	<div class="clear"></div>
+	<header id="masthead" class="site-header" role="banner">
+ 					<div class="desktop-social">
+						<div class="socialmedia">
+							<a href="http://twitter.com/briankrebs" target="_blank"><i class="fa fa-twitter"></i></a> 
+															<a class="rss" href="https://krebsonsecurity.com/feed/" target="_blank"><i class="fa fa-rss"></i></a>	
+									<a class="rss" href="https://www.linkedin.com/in/bkrebs/" target="_blank"><i class="fa fa-linkedin"></i></a>	
+								</div>
+				 	</div>
+																						   
+		
+		<div class="themonic-logo responsive-img-container">
+			<a href="https://krebsonsecurity.com/" title="Krebs on Security" rel="home"><img src="https://krebsonsecurity.com/wp-content/uploads/2021/03/kos-27-03-2021.jpg" alt="Krebs on Security"></a>
+		</div>
+
+					<div class="mobile-social">
+						<div class="socialmedia">
+							<a href="http://twitter.com/briankrebs" target="_blank"><i class="fa fa-twitter"></i></a> 
+															<a class="rss" href="https://krebsonsecurity.com/feed/" target="_blank"><i class="fa fa-rss"></i></a>	
+									<a class="rss" href="https://www.linkedin.com/in/bkrebs/" target="_blank"><i class="fa fa-linkedin"></i></a>	
+								</div>
+					</div>
+		
+				<!-- <div class="publisho-mobile-nav clear"></div> -->
+		<nav id="site-navigation" class="themonic-nav" role="navigation">
+			<a class="assistive-text" href="#content" title="Skip to content">Skip to content</a>
+			<div id="menu-top" class="nav-menu"><ul>
+<li ><a href="https://krebsonsecurity.com/">Home</a></li><li class="page_item page-item-2"><a href="https://krebsonsecurity.com/about/">About the Author</a></li>
+<li class="page_item page-item-645"><a href="https://krebsonsecurity.com/cpm/">Advertising/Speaking</a></li>
+</ul></div>
+		</nav><!-- #site-navigation -->
+		<div class="clear"></div>
+	</header><!-- #masthead -->
+	<div id="main" class="wrapper">
+		<div id="primary" class="site-content">
+	
+
+	
+		<div id="content" role="main">
+
+		<article id="post-32591" class="post-32591 post type-post status-publish format-standard hentry category-patches tag-adobe-flash-patch tag-adobe-reader-patch tag-microsoft-patch-tuesday-october-2015 tag-microsoft-update">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2015/10/adobe-microsoft-push-critical-security-fixes-8/" title="Permalink to Adobe, Microsoft Push Critical Security Fixes" rel="bookmark">Adobe, Microsoft Push Critical Security Fixes</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">October 14, 2015</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2015/10/adobe-microsoft-push-critical-security-fixes-8/#comments">42 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p><strong>Adobe</strong> and <strong>Microsoft</strong> on Tuesday each released security updates to remedy critical vulnerabilities in their software. Adobe pushed patches to plug at least 56 security holes present in <strong>Adobe Reader</strong> and <strong>Acrobat</strong>, as well as a fix for <strong>Flash Player</strong> that corrects 13 flaws. Separately, Microsoft issued six update bundles to address at least 33 security problems in various versions of <strong>Windows</strong>, <strong>Microsoft Office</strong> and other software.</p>
+<p>Three of the patches Microsoft issued earned the company&#8217;s most dire &#8220;critical&#8221; rating, meaning they could be exploited by hackers or malware to take complete control over vulnerable systems without any help from users. According to security firm <strong>Shavlik,</strong> four of the flaws involve vulnerabilities that were publicly disclosed by someone other than Microsoft prior to this week. The implication here is that malware writers may have had a head start figuring out ways to exploit several of these flaws, so it&#8217;s probably best not to let too much grass grow under your feet before applying this month&#8217;s updates. <a href="https://krebsonsecurity.com/2015/10/adobe-microsoft-push-critical-security-fixes-8/#more-32591" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+	<div id="between_article_ad" class="themonic-ad5"><a href="https://www.extrahop.com/resources/papers/zero-trust/?">
+<img src="/b-extrahop/4.jpg" />
+</a></div>	<article id="post-32573" class="post-32573 post type-post status-publish format-standard hentry category-sunshine category-breadcrumbs category-neer-do-well-news tag-fly tag-flycracker tag-sergei-vovnenko tag-sergey-vovnenko">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2015/10/hacker-who-sent-me-heroin-faces-charges-in-u-s/" title="Permalink to Hacker Who Sent Me Heroin Faces Charges in U.S." rel="bookmark">Hacker Who Sent Me Heroin Faces Charges in U.S.</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">October 13, 2015</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2015/10/hacker-who-sent-me-heroin-faces-charges-in-u-s/#comments">110 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>A Ukrainian hacker who once hatched a plot to have heroin sent to my Virginia home and then alert police when the drugs arrived had his first appearance in a U.S. court today, after being extradited to the United States to face multiple cybercrime charges.</p>
+<p><strong>Sergey Vovnenko</strong>, a.k.a. &#8220;Fly,&#8221; &#8220;Flycracker&#8221; and &#8220;MUXACC1&#8221; (muxa is transliterated Russian for “муха” which means “fly”), was <a href="http://abcnews.go.com/US/ukrainian-hacker-allegedly-frame-cyber-security-expert-extradited/story?id=34444896" target="_blank">set to appear</a> in a Newark courtroom today on charges of stealing and selling credit card and banking data, emptying bank accounts, and running a botnet of more than 12,000 hacked computers and servers, among other alleged crimes.</p>
+<div id="attachment_26617" style="width: 293px" class="wp-caption alignright"><a href="https://krebsonsecurity.com/wp-content/uploads/2014/06/muxaccpms.png"><img aria-describedby="caption-attachment-26617" loading="lazy" class="size-full wp-image-26617" src="https://krebsonsecurity.com/wp-content/uploads/2014/06/muxaccpms.png" alt="Fly replies to my direct messages telling him I know his real name and where he lives." width="283" height="281" srcset="https://krebsonsecurity.com/wp-content/uploads/2014/06/muxaccpms.png 283w, https://krebsonsecurity.com/wp-content/uploads/2014/06/muxaccpms-150x150.png 150w" sizes="(max-width: 283px) 100vw, 283px" /></a><p id="caption-attachment-26617" class="wp-caption-text">Fly replies to my direct messages telling him I know his real name and where he lives.</p></div>
+<p>I first became acquainted with Fly in 2013, when <a href="https://twitter.com/muxacc1" target="_blank">his Twitter persona</a> (warning: images here may not be safe for work) began sending me taunting tweets laced with epithets and occasional attempts to get me to click dodgy-looking Web links. Fly also took to his Livejournal blog to post copies of my credit report, directions to my home and pictures of my front door.</p>
+<p>After consulting with cybercrime researchers at Russian security firm <strong>Group-IB</strong>, I learned that Fly was the administrator of a closely-guarded but now-defunct cybercrime forum dedicated to financial fraud called <strong>thecc[dot]bz</strong> (&#8220;cc&#8221; is a reference to credit cards).</p>
+<p>Not long after that, I secretly gained access to his forum. And none too soon: In one lengthy discussion thread on the forum, I found that Fly had solicited donations from fellow fraudsters on the forum to donate Bitcoin currency for a slush fund Fly created for the express purpose of purchasing heroin off of the Silk Road &#8212; which was at the time the leading source of illicit drugs on the Dark Web.</p>
+<div id="attachment_22059" style="width: 610px" class="wp-caption aligncenter"><a href="https://krebsonsecurity.com/wp-content/uploads/2013/07/heroin1.png"><img aria-describedby="caption-attachment-22059" loading="lazy" class="size-large wp-image-22059" src="https://krebsonsecurity.com/wp-content/uploads/2013/07/heroin1-600x355.png" alt="Flycracker discussing the purchase of a gram of heroin from Silk Road seller &quot;10toes.&quot;" width="600" height="355" srcset="https://krebsonsecurity.com/wp-content/uploads/2013/07/heroin1-600x355.png 600w, https://krebsonsecurity.com/wp-content/uploads/2013/07/heroin1-285x168.png 285w, https://krebsonsecurity.com/wp-content/uploads/2013/07/heroin1.png 1002w" sizes="(max-width: 600px) 100vw, 600px" /></a><p id="caption-attachment-22059" class="wp-caption-text">Flycracker discussing the purchase of a gram of heroin from Silk Road seller &#8220;10toes.&#8221;</p></div>
+<p>Fly&#8217;s plan was simple: Have the drugs delivered to my home in my name, and then spoof a call from one of my neighbors to the local police informing them that I was a druggie, that I had druggie friends coming in and out of my house all day long, and that I was even having drugs delivered to my home.</p>
+<p>The forum members took care to find the most reputable sellers of heroin on the Silk Road. After purchasing a gram of the stuff from the Silk Road&#8217;s top smack seller &#8212; a drug dealer who used the nickname &#8220;Maestro&#8221; &#8212; Fly posted the USPS tracking link for the package into the discussion thread on his forum.</p>
+<div id="attachment_22896" style="width: 295px" class="wp-caption alignleft"><a href="https://krebsonsecurity.com/wp-content/uploads/2013/10/heroinad.png"><img aria-describedby="caption-attachment-22896" loading="lazy" class="size-medium wp-image-22896" src="https://krebsonsecurity.com/wp-content/uploads/2013/10/heroinad-285x230.png" alt="An ad for heroin on the Silk Road. " width="285" height="230" srcset="https://krebsonsecurity.com/wp-content/uploads/2013/10/heroinad-285x230.png 285w, https://krebsonsecurity.com/wp-content/uploads/2013/10/heroinad-600x486.png 600w, https://krebsonsecurity.com/wp-content/uploads/2013/10/heroinad.png 974w" sizes="(max-width: 285px) 100vw, 285px" /></a><p id="caption-attachment-22896" class="wp-caption-text">An ad for heroin on the Silk Road.</p></div>
+<p>At that point, I called the local police and had a cop come out to take an official police report. The officer asked me to contact him again if the drugs actually arrived. Three days later, our local Postal Service carrier hand delivered a thin USPS Express Mail envelope that was postmarked from Chicago. Inside was another blank envelope containing a May 2013 copy of <strong>Chicago Confidential</strong>, a weekly glossy magazine from the <em>Chicago Tribune</em>.</p>
+<p>On the back of the magazine, taped to a full-page ad for jewelry from <strong>LesterLampert</strong>, were a baker’s dozen individually wrapped packets emblazoned with the same black and gold skull motif that was on <a title="https://krebsonsecurity.com/wp-content/uploads/2013/07/maestro.png" href="https://krebsonsecurity.com/wp-content/uploads/2013/07/maestro.png" target="_blank">Maestro’s Silk Road ad</a>. I immediately contacted the police, who came and dutifully retrieved the drugs, which turned out to be almost pure heroin.</p>
+<div id="attachment_22025" style="width: 610px" class="wp-caption aligncenter"><a href="https://krebsonsecurity.com/wp-content/uploads/2013/07/hcopy.png"><img aria-describedby="caption-attachment-22025" loading="lazy" class="size-large wp-image-22025" src="https://krebsonsecurity.com/wp-content/uploads/2013/07/hcopy-600x800.png" alt="12 packets of what appears to be heroin arrived at my home via the Silk Road on July 29, 2013." width="600" height="800" srcset="https://krebsonsecurity.com/wp-content/uploads/2013/07/hcopy-600x800.png 600w, https://krebsonsecurity.com/wp-content/uploads/2013/07/hcopy-285x380.png 285w, https://krebsonsecurity.com/wp-content/uploads/2013/07/hcopy.png 648w" sizes="(max-width: 600px) 100vw, 600px" /></a><p id="caption-attachment-22025" class="wp-caption-text">12 packets of what appears to be heroin arrived at my home via the Silk Road on July 29, 2013.</p></div>
+<p>I wrote about the experience of foiling Fly&#8217;s plan in a story titled <a href="http://krebsonsecurity.com/2013/07/mail-from-the-velvet-cybercrime-underground/" target="_blank">Mail From the (Velvet) Cybercrime Underground</a>. This did not sit well with Fly, who was made to look bad in front of his forum members who&#8217;d contributed roughly two Bitcoins to the scheme.</p>
+<p>Angry that I’d foiled his plan to have me arrested for drug possession, Fly had a local florist send a gaudy floral arrangement in the shape of <a title="https://krebsonsecurity.com/wp-content/uploads/2014/06/fly-cross.jpg" href="https://krebsonsecurity.com/wp-content/uploads/2014/06/fly-cross.jpg" target="_blank">a giant cross</a> to my home, complete with <a title="https://krebsonsecurity.com/wp-content/uploads/2013/08/velvetycrabs.jpg" href="https://krebsonsecurity.com/wp-content/uploads/2013/08/velvetycrabs.jpg" target="_blank">a menacing message </a>that addressed my wife and was signed, “Velvet Crabs.”</p>
+<div id="attachment_26621" style="width: 295px" class="wp-caption aligncenter"><a href="https://krebsonsecurity.com/wp-content/uploads/2014/06/fly-cross.jpg"><img aria-describedby="caption-attachment-26621" loading="lazy" class="size-medium wp-image-26621" src="https://krebsonsecurity.com/wp-content/uploads/2014/06/fly-cross-285x380.jpg" alt="The floral arrangement that Fly had delivered to my home in Virginia." width="285" height="380" srcset="https://krebsonsecurity.com/wp-content/uploads/2014/06/fly-cross-285x380.jpg 285w, https://krebsonsecurity.com/wp-content/uploads/2014/06/fly-cross-600x800.jpg 600w" sizes="(max-width: 285px) 100vw, 285px" /></a><p id="caption-attachment-26621" class="wp-caption-text">The floral arrangement that Fly had delivered to my home in Virginia.</p></div>
+<p>After this incident, I became intensely curious about the identity of this Fly individual, so I began looking through databases of hacked carding and cybercrime forums. My first real break came when<strong> </strong>Group-IB provided a key piece of the puzzle: Group-IB researchers found that<strong> </strong>on the now-defunct <strong>vulnes[dot]com</strong>, Fly maintained an account under the nickname Flycracker, and signed up with the email address <strong>mazafaka@libero.it</strong>(.it is the country code for Italy).</p>
+<p>According to a trusted source in the security community, that email account was somehow compromised in 2013. The source said the account was full of emailed reports from a keylogging device that was tied to another email address — <strong>777flyck777@gmail.com</strong> (according to Google, mazafaka@libero.it is the recovery email address for 777flyck777@gmail.com).</p>
+<p>Those keylog reports contained some valuable information, and <em>indicated that Fly had planted a keylogger on his then-fiancee Irina’s computer</em>. On several occasions, those emails show Fly’s wife typed in her Gmail address, which included her real first and last name — <strong>Irina Gumenyuk</strong>. <a href="https://krebsonsecurity.com/2015/10/hacker-who-sent-me-heroin-faces-charges-in-u-s/#more-32573" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+	<div class="themonic-ad2"><div class="a-statement">Advertisement</div><a href="https://www.akamai.com/?utm_source=krebsonsecurity&amp;utm_medium=display&amp;utm_id=GL_Platform&amp;utm_campaign=F-MC-52606&amp;utm_content=IDC_InfoBrief">
+<img src="/b-akamai/134.png">
+</a></div>	<article id="post-32550" class="post-32550 post type-post status-publish format-standard hentry category-comingstorm tag-3fn tag-chinese-hackers tag-dmitry-nechvolod tag-gugle tag-mccolo tag-nasa tag-pavel-vrublevsky tag-president-obama tag-president-xi-jinping">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2015/10/arrest-of-chinese-hackers-not-a-first-for-u-s/" title="Permalink to Arrest of Chinese Hackers Not a First for U.S." rel="bookmark">Arrest of Chinese Hackers Not a First for U.S.</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">October 13, 2015</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2015/10/arrest-of-chinese-hackers-not-a-first-for-u-s/#comments">8 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p><em>The Washington Post</em> reported last week that the Chinese government has quietly arrested a handful of hackers at the urging of the U.S. government, a move described as &#8220;an <em>unprecedented</em> step to defuse tensions with Washington at a time when the Obama administration has threatened economic sanctions.&#8221; While this a welcome and encouraging development, it is not the first time Beijing has arrested Chinese hackers in response to pressure from the U.S. government.</p>
+<div id="attachment_32552" style="width: 590px" class="wp-caption aligncenter"><a class="lightbox" href="https://krebsonsecurity.com/wp-content/uploads/2015/10/Screen-Shot-2015-10-12-at-9.58.23-AM.png"><img aria-describedby="caption-attachment-32552" loading="lazy" class="size-medium wp-image-32552" src="https://krebsonsecurity.com/wp-content/uploads/2015/10/Screen-Shot-2015-10-12-at-9.58.23-AM-580x325.png" alt="Image: Democracynow.org." width="580" height="325" srcset="https://krebsonsecurity.com/wp-content/uploads/2015/10/Screen-Shot-2015-10-12-at-9.58.23-AM-580x325.png 580w, https://krebsonsecurity.com/wp-content/uploads/2015/10/Screen-Shot-2015-10-12-at-9.58.23-AM-940x526.png 940w, https://krebsonsecurity.com/wp-content/uploads/2015/10/Screen-Shot-2015-10-12-at-9.58.23-AM.png 1136w" sizes="(max-width: 580px) 100vw, 580px" /></a><p id="caption-attachment-32552" class="wp-caption-text">Image: Democracynow.org.</p></div>
+<p>The action reported by The Post and other media outlets came shortly before Chinese <strong>President Xi Jinping</strong>’s state visit to Washington late last month. The hackers arrested had reportedly been identified by U.S. officials as having stolen commercial secrets from U.S. firms to be sold or passed along to Chinese state-run companies.</p>
+<p>Although The Post has described this action as unprecedented, U.S. government cybercrime investigators have had success convincing Chinese authorities to take such actions in at least one other case previously.</p>
+<p>In <a href="https://oig.nasa.gov/congressional/FINAL_written_statement_for_%20IT_%20hearing_February_26_edit_v2.pdf" target="_blank">a report</a> (PDF) presented to Congress on Feb. 29, 2012, the <strong>Office of Inspector General</strong> for the <strong>National Aeronautics and Space Administration</strong> (NASA) noted that a lengthy investigation into the cyber theft of sensitive technical data from its systems culminated in the arrest of a Chinese national in China.</p>
+<p>&#8220;As a result of an OIG investigation and lengthy international coordination efforts, a<br />
+Chinese national was detained in December 2010 by Chinese authorities for violations of<br />
+Chinese Administrative Law,&#8221; <strong>NASA Inspector General Paul K. Martin</strong> told a House oversight committee. &#8220;This case resulted in the first confirmed detention of a Chinese national for hacking activity targeting U.S. Government agencies. Seven NASA systems, many containing export-restricted technical data, were compromised by the Chinese national.&#8221; <a href="https://krebsonsecurity.com/2015/10/arrest-of-chinese-hackers-not-a-first-for-u-s/#more-32550" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-32559" class="post-32559 post type-post status-publish format-standard hentry category-data-breaches tag-americas-thrift-stores-breach tag-u-s-secret-service">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2015/10/credit-card-breach-at-americas-thrift-stores/" title="Permalink to Credit Card Breach at America&#8217;s Thrift Stores" rel="bookmark">Credit Card Breach at America&#8217;s Thrift Stores</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">October 12, 2015</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2015/10/credit-card-breach-at-americas-thrift-stores/#comments">28 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>Another charity store chain has been hacked: <strong>America’s Thrift Stores</strong>, an organization that operates donations-based thrift stores throughout the southeast United States, said this week that it recently learned it was the victim of a malware-driven security breach that targeted software used by a third-party service provider.</p>
+<p><a href="https://krebsonsecurity.com/wp-content/uploads/2015/10/americasthrift.png"><img loading="lazy" class="alignright wp-image-32562" src="https://krebsonsecurity.com/wp-content/uploads/2015/10/americasthrift-580x204.png" alt="americasthrift" width="287" height="101" srcset="https://krebsonsecurity.com/wp-content/uploads/2015/10/americasthrift-580x204.png 580w, https://krebsonsecurity.com/wp-content/uploads/2015/10/americasthrift.png 740w" sizes="(max-width: 287px) 100vw, 287px" /></a>&#8220;This breach allowed criminals from Eastern Europe unauthorized access to some payment card numbers,&#8221; the company&#8217;s CEO said in a statement. &#8220;This virus/malware, is one of several infecting retailers across North America.&#8221;</p>
+<p>The <a href="http://www.americasthrift.com/news-articles/a-st&lt;div class=">statement</a> continues:</p>
+<p>&#8220;The U.S. Secret Service tells us that only card numbers and expiration dates were stolen. They do not believe any customer names, phone numbers, addresses or email addresses were compromised. This breach may have affected sales transactions between September 1, 2015 and September 27, 2015. If you used your credit or debit card during this time to purchase an item at any America’s Thrift Store location, the payment card number information on your card may have been compromised.&#8221;</p>
+<p>Nevertheless, several banking sources say they have seen a pattern of fraud on cards all used at America&#8217;s Thrift Stores locations indicating that thieves have been able to use the data stolen from the compromised point-of-sale devices to counterfeit new cards.</p>
+<p>Founded in 1984, America’s Thrift Stores is a for-profit thrift store and operates in the southeastern United States. The company is headquartered in Birmingham, Alabama and operates stores in Alabama, Georgia, Tennessee, Mississippi and Louisiana. According to the company&#8217;s site, the organization employs over 1,000 employees and pays over $4 million to its non- profit partners annually, as it turns donated items into revenue for their missions.</p>
+<p>The breach involving America&#8217;s Thrift Stores comes on the heels of <a href="http://krebsonsecurity.com/2014/07/banks-card-breach-at-goodwill-industries/" target="_blank">a similar incident at Goodwill last year</a>. That incident was <a href="http://krebsonsecurity.com/2014/09/breach-at-goodwill-vendor-lasted-18-months/" target="_blank">tied back</a> to security weaknesses at third-party payment vendor <strong>C&amp;K Systems</strong>, although there is no indication yet which third-party service provider may be at fault in the America&#8217;s Thrift Stores breach.</p>
+<dl id="attachment_32567" class="wp-caption aligncenter" style="width: 590px;">
+<dt class="wp-caption-dt"><a href="https://krebsonsecurity.com/wp-content/uploads/2015/10/americasthriftlocations.png"><img loading="lazy" class="size-medium wp-image-32567" src="https://krebsonsecurity.com/wp-content/uploads/2015/10/americasthriftlocations-580x333.png" alt="America's Thrift Store Locations." width="580" height="333" srcset="https://krebsonsecurity.com/wp-content/uploads/2015/10/americasthriftlocations-580x333.png 580w, https://krebsonsecurity.com/wp-content/uploads/2015/10/americasthriftlocations-940x540.png 940w, https://krebsonsecurity.com/wp-content/uploads/2015/10/americasthriftlocations.png 1428w" sizes="(max-width: 580px) 100vw, 580px" /></a></dt>
+<dd class="wp-caption-dd">America&#8217;s Thrift Store Locations.</dd>
+</dl>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-32501" class="post-32501 post type-post status-publish format-standard hentry category-sunshine category-data-breaches tag-court-ventures tag-decisioning-solutions tag-experian-breach tag-experian-ceo-brian-cassin tag-experian-decision-analytics tag-hieu-minh-ngo tag-jasun-tate tag-superget-info tag-t-mobile-breach tag-t-mobile-ceo-john-legere">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2015/10/at-experian-security-attrition-amid-acquisitions/" title="Permalink to At Experian, Security Attrition Amid Acquisitions" rel="bookmark">At Experian, Security Attrition Amid Acquisitions</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">October 8, 2015</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2015/10/at-experian-security-attrition-amid-acquisitions/#comments">62 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p><strong>T-Mobile</strong> disclosed last week that some 15 million customers had their Social Security numbers and other personal data stolen thanks to a breach at <strong>Experian</strong>, the largest of the big American consumer credit bureaus. But this actually wasn&#8217;t the first time that a hacking incident at Experian exposed sensitive T-Mobile customer data, and that previous breach may hold important clues about what went wrong more recently.</p>
+<div id="attachment_32532" style="width: 579px" class="wp-caption aligncenter"><a href="https://krebsonsecurity.com/wp-content/uploads/2015/10/expoffices.png"><img aria-describedby="caption-attachment-32532" loading="lazy" class="size-full wp-image-32532" src="https://krebsonsecurity.com/wp-content/uploads/2015/10/expoffices.png" alt="Experian's offices in Nottingham, UK. Source: Wikipedia." width="569" height="444" /></a><p id="caption-attachment-32532" class="wp-caption-text">Experian&#8217;s offices in Nottingham, UK. Source: Wikipedia.</p></div>
+<p>On Dec. 30, 2013, T-Mobile <a href="http://www.law360.com/articles/499418/t-mobile-discloses-customer-data-breach" target="_blank">said</a> it notified a &#8220;relatively small&#8221; number of customers that unauthorized access to a file stored on servers owned by Experian had exposed Social Security numbers and driver&#8217;s license numbers. The mobile provider identified the breached vendor as <strong>Decisioning Solutions</strong>, an identity-proofing and authentication company that was acquired by Experian in April 2013. We&#8217;ll revisit this acquisition in a few moments.</p>
+<p>Over the past week, KrebsOnSecurity has interviewed a half-dozen security experts who said they recently left Experian to find more rewarding and less frustrating work at other corporations. Nearly all described Experian as a company fixated on acquiring companies in the data broker and analytics technology space, even as it has stymied efforts to improve security and accountability at the Costa Mesa, Calif. based firm.</p>
+<p><strong>Jasun Tate</strong> worked for a year until April 2014 as a chief information security officer delegate and risk consultant at Experian&#8217;s government services and e-marketing business units. Tate said he and several of his colleagues left last year after repeatedly running into problems getting buy-in or follow-up support for major projects to beef up security around Experian&#8217;s growing stable of companies handling sensitive consumer and government data.</p>
+<p>&#8220;What the board of directors at Experian wanted security-wise and the security capabilities on the ground were two completely different things,&#8221; Tate said. &#8220;Senior leadership there said they were pursuing a very aggressive growth-by-acquisition campaign. The acquisition team would have a very strict protocol on how they assess whether a business may be viable to buy, but the subsequent integration of the business into our core security architecture was just a black box of magic in terms of how it was to be implemented. And I&#8217;m not saying successful magic at all.&#8221;</p>
+<p>Another recent former security employee at Experian who agreed to talk on condition of anonymity said it was clear that the company&#8217;s board was not well-informed about the true state of security within the company&#8217;s various business units.</p>
+<p>&#8220;When I was there, the board was very big on security and wanting to invest in it and make sure we were doing what we needed to do in order to avoid situations just like this,&#8221; the source said. &#8220;In my opinion, there’s no way the board was told the whole story, because if they had been then things wouldn’t be where they are are now. We wouldn’t be talking about this. Some things had to have been hidden or spun in a way to look positive somehow.&#8221;</p>
+<p><span style="text-decoration: underline;">BLACK BOX MAGIC</span></p>
+<p>Not long after <a href="https://www.experianplc.com/media/news/2013/03-04-2013/" target="_blank">it acquired the above-mentioned Decisioning Solutions in April 2013</a>, Experian <a href="http://www.decisionanalyticsblog.experian.com/blog/internal-hidden/about-us" target="_blank">folded the company into its <strong>Decision Analytics</strong> platform</a> &#8212; a unit which provides credit and noncredit data, customer analytics and fraud detection to lenders, cable and satellite companies, telecommunications firms, third-party debt collectors, utilities and to state and federal government entities.</p>
+<p>Within hours of the latest T-Mobile breach news hitting the wires, KrebsOnSecurity was contacted by an anonymous source who sent this author a Web link that, when clicked, opened up a support ticket within that Decision Analytics platform in the United Kingdom &#8212; <em>with absolutely no authentication needed</em>. That support ticket I viewed appears to have been filed by someone in an office cube at Experian&#8217;s data center in Costa Rica who was requesting hardware support for a component of the company&#8217;s <strong>Global Technology Services</strong> division.</p>
+<div id="attachment_32547" style="width: 590px" class="wp-caption aligncenter"><a href="https://krebsonsecurity.com/wp-content/uploads/2015/10/csda-sales-exp-ed1.png"><img aria-describedby="caption-attachment-32547" loading="lazy" class="size-medium wp-image-32547" src="https://krebsonsecurity.com/wp-content/uploads/2015/10/csda-sales-exp-ed1-580x578.png" alt="Countless internal support requests for access to Experian's Decision Analytics credit information platform were exposed to the Internet without authentication until earlier this week." width="580" height="578" srcset="https://krebsonsecurity.com/wp-content/uploads/2015/10/csda-sales-exp-ed1-580x578.png 580w, https://krebsonsecurity.com/wp-content/uploads/2015/10/csda-sales-exp-ed1-150x150.png 150w, https://krebsonsecurity.com/wp-content/uploads/2015/10/csda-sales-exp-ed1.png 694w" sizes="(max-width: 580px) 100vw, 580px" /></a><p id="caption-attachment-32547" class="wp-caption-text">Countless internal support requests for access to Experian&#8217;s Decision Analytics credit information platform were exposed to the Internet without authentication until earlier this week.</p></div>
+<p>That particular support ticket was relatively uninteresting, but according to my source anyone could view countless other support tickets filed via the support portal for Experian&#8217;s Decision Analytics platform.</p>
+<p>The same source demonstrated how modifying just one or two numbers at the tail end of that link revealed requests for access to networked file shares from across a range of Experian&#8217;s business units. The requests included specific names of network shares, usernames, userIDs, and LanIDs, as well as email addresses, phone numbers of Experian personnel requesting and approving the changes.</p>
+<div id="attachment_32548" style="width: 590px" class="wp-caption aligncenter"><a href="https://krebsonsecurity.com/wp-content/uploads/2015/10/network-share-exp2.png"><img aria-describedby="caption-attachment-32548" loading="lazy" class="size-medium wp-image-32548" src="https://krebsonsecurity.com/wp-content/uploads/2015/10/network-share-exp2-580x752.png" alt="Countless internal support requests for access to Experian's Decision Analytics credit information platform were exposed to the Internet without authentication until earlier this week." width="580" height="752" srcset="https://krebsonsecurity.com/wp-content/uploads/2015/10/network-share-exp2-580x752.png 580w, https://krebsonsecurity.com/wp-content/uploads/2015/10/network-share-exp2.png 632w" sizes="(max-width: 580px) 100vw, 580px" /></a><p id="caption-attachment-32548" class="wp-caption-text">Countless internal support requests for access to Experian&#8217;s Decision Analytics credit information platform were exposed to the Internet without authentication until earlier this week.</p></div>
+<p>The support site also apparently allowed anyone to file support tickets, potentially making it easy for clever attackers who&#8217;d studied the exposed support tickets to fabricate a request for access to Experian resources or accounts on the system.</p>
+<p>In addition, experts I spoke with who examined the portal said the support site allowed anyone to upload arbitrary file attachments of virtually any file type. Those experts said such file upload capabilities are notoriously easy for attackers to use to inject malicious files into databases and other computing environments, and that having such capability out in the open without at least first requiring users to supply valid username and password credentials is asking for trouble.</p>
+<p>KrebsOnSecurity sought comment from Experian to find out if it knew that its Decision Analytics support portal allowed anyone to view the tickets within. The company said in a statement that it had disabled the portal in response to what appeared to be unauthorized access to it and had notified law enforcement.</p>
+<p>&#8220;We take any unauthorized access to our systems very seriously, and when we detected the unauthorized activities, we shut down the website and notified law enforcement,&#8221; the company said in a statement. &#8220;Our credit database and core infrastructure were not impacted – nor could they be accessed through this website.  This site was a legacy version of a service to enable clients and internal users to create and log tickets for issues they may have and we had already deployed its replacement solution.&#8221; <a href="https://krebsonsecurity.com/2015/10/at-experian-security-attrition-amid-acquisitions/#more-32501" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-31317" class="post-31317 post type-post status-publish format-standard hentry category-sunshine category-latest-warnings tag-airline-boarding-pass-hacking tag-barcode-hacking tag-international-air-transport-association tag-lufthansa tag-star-alliance tag-united-com">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2015/10/whats-in-a-boarding-pass-barcode-a-lot/" title="Permalink to What&#8217;s in a Boarding Pass Barcode? A Lot" rel="bookmark">What&#8217;s in a Boarding Pass Barcode? A Lot</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">October 6, 2015</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2015/10/whats-in-a-boarding-pass-barcode-a-lot/#comments">124 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>The next time you&#8217;re thinking of throwing away a used boarding pass with a barcode on it, consider tossing the boarding pass into a document shredder instead. Two-dimensional barcodes and QR codes can hold a great deal of information, and the codes printed on airline boarding passes may allow someone to discover more about you, your future travel plans, and your frequent flyer account.</p>
+<p>Earlier this year, I heard from a longtime KrebsOnSecurity reader named Cory who said he began to get curious about the data stored inside a boarding pass barcode after a friend put a picture of his boarding pass up on Facebook. Cory took a screen shot of the boarding pass, enlarged it, and quickly found a site online that could read the data.</p>
+<div id="attachment_32517" style="width: 590px" class="wp-caption aligncenter"><a class="lightbox" href="https://krebsonsecurity.com/wp-content/uploads/2015/10/deltabp.png"><img aria-describedby="caption-attachment-32517" loading="lazy" class="size-medium wp-image-32517" src="https://krebsonsecurity.com/wp-content/uploads/2015/10/deltabp-580x250.png" alt="An older Delta boarding pass with a board code. Source: IATA." width="580" height="250" srcset="https://krebsonsecurity.com/wp-content/uploads/2015/10/deltabp-580x250.png 580w, https://krebsonsecurity.com/wp-content/uploads/2015/10/deltabp-940x405.png 940w, https://krebsonsecurity.com/wp-content/uploads/2015/10/deltabp.png 1024w" sizes="(max-width: 580px) 100vw, 580px" /></a><p id="caption-attachment-32517" class="wp-caption-text">An older Delta boarding pass with a bar code that does not include a frequent flyer number. Source: IATA.</p></div>
+<p>&#8220;I found <a href="http://online-barcode-reader.inliteresearch.com/default.aspx" target="_blank">a website</a> that could decode the data and instantly had lots of info about his trip,&#8221; Cory said, showing this author step-by-step exactly how he was able to find this information. &#8216;</p>
+<p>&#8220;Besides his name, frequent flyer number and other [personally identifiable information], I was able to get his record locator (a.k.a. &#8220;record key&#8221; for the Lufthansa flight he was taking that day,&#8221; Cory said. &#8220;I then proceeded to Lufthansa&#8217;s website and using his last name (which was encoded in the barcode) and the record locator was able to get access to his entire account. Not only could I see this one flight, but I could see ANY future flights that were booked to his frequent flyer number from the <a href="https://en.wikipedia.org/wiki/Star_Alliance" target="_blank">Star Alliance</a>.&#8221;</p>
+<p>The access granted by Lufthansa&#8217;s site also included his friend&#8217;s phone number, and the name of the person who booked the flight. More worrisome, Cory now had the ability to view all future flights tied to that frequent flyer account, change seats for the ticketed passengers, and even cancel any future flights.</p>
+<p>The information contained in the boarding pass could make it easier for an attacker to reset the PIN number used to secure his friend&#8217;s Star Alliance frequent flyer account. For example, that information gets you past the early process of resetting a Star Alliance account PIN at United Airline&#8217;s <a href="https://www.united.com/web/enUS/apps/account/settings/pin/pinResolution2.aspx" target="_blank">&#8220;forgot PIN&#8221; Web site</a>. <a href="https://krebsonsecurity.com/2015/10/whats-in-a-boarding-pass-barcode-a-lot/#more-31317" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-32509" class="post-32509 post type-post status-publish format-standard hentry category-data-breaches tag-chip-and-pin tag-chip-and-signature tag-donald-trump tag-hilton-breach tag-trump-hotel-breach">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2015/10/trump-hotel-collection-confirms-card-breach/" title="Permalink to Trump Hotel Collection Confirms Card Breach" rel="bookmark">Trump Hotel Collection Confirms Card Breach</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">October 5, 2015</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2015/10/trump-hotel-collection-confirms-card-breach/#comments">23 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p><strong>The Trump Hotel Collection</strong>, a string of luxury hotel properties tied to business magnate and Republican presidential candidate <strong>Donald Trump</strong>, said last week that a year-long breach of its credit card system may have resulted in the theft of cards used at the hotels. The acknowledgement comes roughly three months after this author <a href="http://krebsonsecurity.com/2015/07/banks-card-breach-at-trump-hotel-properties/" target="_blank">first reported</a> that multiple financial institutions suspected the hotels were compromised.</p>
+<div id="attachment_31406" style="width: 249px" class="wp-caption alignright"><a href="https://krebsonsecurity.com/wp-content/uploads/2015/07/trumpchicago.png"><img aria-describedby="caption-attachment-31406" loading="lazy" class=" wp-image-31406" src="https://krebsonsecurity.com/wp-content/uploads/2015/07/trumpchicago.png" alt="Trump International Hotel and Tower in Chicago." width="239" height="320" /></a><p id="caption-attachment-31406" class="wp-caption-text">Trump International Hotel and Tower in Chicago.</p></div>
+<p>In <a href="https://www.trumphotelcollection.com/cc-security-faq" target="_blank">a Web site</a> created to share details about the hack, The Trump Hotel Collection said the breach affects customers who used their credit or debit cards at the hotels between May 19, 2014, and June 2, 2015.</p>
+<p>&#8220;While the independent forensic investigator did not find evidence that information was taken from the Hotel’s systems, it appears that there may have been unauthorized malware access to payment card information as it was inputted into the payment card systems. Payment card data (including payment card account number, card expiration date, and security code) of individuals who used a payment card at the Hotel between May 19, 2014, and June 2, 2015, may have been affected.</p>
+<p>The Trump compromise is just the latest in a long string of credit card breaches involving hotel brands, restaurants and retail establishments. In March, upscale hotel chain <strong>Mandarin Oriental</strong> <a href="http://krebsonsecurity.com/2015/03/credit-card-breach-at-mandarian-oriental/" target="_blank">disclosed a compromise</a>. The following month, hotel franchising firm <strong>White Lodging</strong> acknowledged that, <a href="http://krebsonsecurity.com/2015/04/white-lodging-confirms-second-breach/" target="_blank">for the second time in 12 months</a>, card processing systems at several of its locations were breached by hackers.</p>
+<p>On Sept. 25, this author <a href="http://krebsonsecurity.com/2015/09/banks-card-breach-at-hilton-hotel-properties/" target="_blank">first reported</a> that the <strong>Hilton Hotel</strong> chain is investigating reports of a pattern of card fraud traced back to some of its properties.<br />
+ <a href="https://krebsonsecurity.com/2015/10/trump-hotel-collection-confirms-card-breach/#more-32509" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-32486" class="post-32486 post type-post status-publish format-standard hentry category-data-breaches tag-scottrade-breach tag-shea-leordeanu">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2015/10/scottrade-breach-hits-4-6-million-customers/" title="Permalink to Scottrade Breach Hits 4.6 Million Customers" rel="bookmark">Scottrade Breach Hits 4.6 Million Customers</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">October 2, 2015</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2015/10/scottrade-breach-hits-4-6-million-customers/#comments">28 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>Welcome to Day 2 of Cybersecurity (Breach) Awareness Month! Today&#8217;s awareness lesson is brought to you by retail brokerage firm <strong>Scottrade Inc.</strong>, which just disclosed a breach involving contact information and possibly Social Security numbers on 4.6 million customers.</p>
+<p><a href="https://krebsonsecurity.com/wp-content/uploads/2015/10/scottrade.png"><img loading="lazy" class="alignright size-full wp-image-32491" src="https://krebsonsecurity.com/wp-content/uploads/2015/10/scottrade.png" alt="scottrade" width="238" height="78" /></a>In an email sent today to customers, St. Louis-based Scottrade said it recently heard from federal law enforcement officials about crimes involving the theft of information from Scottrade and other financial services companies.</p>
+<p>&#8220;Based upon our subsequent internal investigation coupled with information provided by the authorities, we believe a list of client names and street addresses was taken from our system,&#8221; the email notice reads. &#8220;Importantly, we have no reason to believe that Scottrade’s trading platforms or any client funds were compromised. All client passwords remained encrypted at all times and we have not seen any indication of fraudulent activity as a result of this incident.&#8221;</p>
+<p>The notice said that although Social Security numbers, email addresses and other sensitive data were contained in the system accessed, &#8220;it appears that contact information was the focus of the incident.&#8221; The company said the unauthorized access appears to have occurred over a period between late 2013 and early 2014.</p>
+<p>Asked about the context of the notification from federal law enforcement officials, Scottrade spokesperson <strong>Shea Leordeanu</strong> said the company couldn&#8217;t comment on the incident much more than the information included in its <a href="https://about.scottrade.com/updates/cybersecurity.html" target="_blank">Web site notice</a> about the attack. But she did say that Scottrade learned about the data theft from the <strong>FBI</strong>, and that the company is working with agents from FBI field offices in Atlanta and New York. FBI officials could not be immediately reached for comment.</p>
+<p>It may well be that the intruders were after Scottrade user data to facilitate stock scams, and that a spike in spam email for affected Scottrade customers will be the main fallout from this break-in.</p>
+<p>In July 2015, prosecutors in Manhattan <a href="http://www.nytimes.com/2015/08/12/business/dealbook/insider-trading-sec-hacking-case.html" target="_blank">filed charges against five people</a> &#8212; including some suspected of having played a role in the <a href="http://dealbook.nytimes.com/2014/12/22/entry-point-of-jpmorgan-data-breach-is-identified/" target="_blank">2014 breach at JPMorgan Chase</a> that exposed the contact information on more than 80 million consumers. The authorities in that investigation said they suspect that group sought to use email addresses stolen in the JPMorgan hacking to further stock manipulation schemes involving spam emails to pump up the price of otherwise worthless penny stocks.</p>
+<p>Scottrade said despite the fact that it doesn&#8217;t believe Social Security numbers were stolen, the company is offering a year&#8217;s worth of free credit monitoring services to affected customers. Readers who are concerned about protecting their credit files from identity thieves should read <a href="http://krebsonsecurity.com/2015/06/how-i-learned-to-stop-worrying-and-embrace-the-security-freeze/" target="_blank">How I Learned to Stop Worrying and Embrace the Security Freeze</a>.</p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-32477" class="post-32477 post type-post status-publish format-standard hentry category-sunshine category-data-breaches category-latest-warnings tag-equifax tag-experian-breach tag-innovis tag-john-legere tag-susan-henson tag-t-mobile-breach tag-trans-union">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2015/10/experian-breach-affects-15-million-consumers/" title="Permalink to Experian Breach Affects 15 Million Consumers" rel="bookmark">Experian Breach Affects 15 Million Consumers</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">October 2, 2015</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2015/10/experian-breach-affects-15-million-consumers/#comments">74 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>Kicking off <a href="https://www.staysafeonline.org/ncsam/" target="_blank">National Cybersecurity Awareness Month</a> with a bang, credit bureau and consumer data broker <strong>Experian North America</strong> disclosed Thursday that a breach of its computer systems exposed approximately 15 million Social Security numbers and other data on people who applied for financing from wireless provider <strong>T-Mobile USA Inc</strong>.</p>
+<p><a href="https://krebsonsecurity.com/wp-content/uploads/2015/07/experian.png"><img loading="lazy" class="aligncenter size-medium wp-image-31685" src="https://krebsonsecurity.com/wp-content/uploads/2015/07/experian-580x384.png" alt="experian" width="580" height="384" /></a>Experian <a href="http://www.prnewswire.com/news-releases/experian-notifies-consumers-in-the-us-who-may-have-been-affected-by-unauthorized-acquisition-of-a-clients-data-300152926.html" target="_blank">said</a> the compromise of an internal server exposed names, dates of birth, addresses, Social Security numbers and/or drivers&#8217; license numbers, as well as additional information used in T-Mobile&#8217;s own credit assessment. The Costa Mesa, Calif.-based data broker stressed that no payment card or banking details were stolen, and that the intruders never touched its consumer credit database.</p>
+<p>Based on the wording of Experian&#8217;s public statement, many publications have reported that the breach lasted for two years from Sept. 1, 2013 to Sept. 16, 2015. But according to Experian spokesperson <strong>Susan Henson</strong>, the forensic investigation is ongoing, and it remains unclear at this point the exact date that the intruders broke into Experian&#8217;s server.</p>
+<p>Henson told KrebsOnSecurity that Experian detected the breach on Sept. 15, 2015, and confirmed the theft of a single file containing the T-Mobile data on Sept. 22, 2015.</p>
+<p>T-Mobile CEO <strong>John Legere</strong> blasted Experian in <a href="http://www.t-mobile.com/landing/experian-data-breach.html?icid=WOR_NA_CLRSKY_GP21HHC35JV3079" target="_blank">a statement</a> posted to T-Mobile&#8217;s site. &#8220;Obviously I am incredibly angry about this data breach and we will institute a thorough review of our relationship with Experian, but right now my top concern and first focus is assisting any and all consumers affected,&#8221; Legere wrote.</p>
+<p><span style="text-decoration: underline;">WHAT YOU CAN DO</span></p>
+<p>Experian said it will be notifying affected consumers by snail mail, and that it will be offering affected consumers free credit monitoring through its &#8220;Protect MyID&#8221; service. Take them up on this offer if you want , but I would strongly encourage anyone affected by this breach to instead place a security freeze on their credit files at Experian and at the other big three credit bureaus, including <strong>Equifax</strong>, <strong>Trans Union</strong> and <strong>Innovis</strong>.</p>
+<p class="p1"><span class="s1">Experian&#8217;s offer to sign victims up for its credit monitoring service to address a breach of its own making is pretty rich. Moreover, credit monitoring services aren’t really built to prevent ID theft. The most you can hope for from a credit monitoring service is that they give you a heads up when ID theft does happen, and then help you through the often labyrinthine process of getting the credit bureaus and/or creditors to remove the fraudulent activity and to fix your credit score.</span> <a href="https://krebsonsecurity.com/2015/10/experian-breach-affects-15-million-consumers/#more-32477" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-31880" class="post-31880 post type-post status-publish format-standard hentry category-sunshine category-web-fraud-2-0 tag-atm-malware tag-boris-sharov tag-dr-web tag-molotov-cocktail">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2015/09/atm-skimmer-gang-firebombed-antivirus-firm/" title="Permalink to ATM Skimmer Gang Firebombed Antivirus Firm" rel="bookmark">ATM Skimmer Gang Firebombed Antivirus Firm</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">September 29, 2015</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2015/09/atm-skimmer-gang-firebombed-antivirus-firm/#comments">27 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>It&#8217;s notable whenever cybercime spills over into real-world, physical attacks. This is the story of a Russian security firm whose operations were pelted with Molotov cocktail attacks after exposing an organized crime gang that developed and sold malicious software to steal cash from ATMs.</p>
+<p><a href="https://krebsonsecurity.com/wp-content/uploads/2015/09/molotov.png"><img loading="lazy" class="alignright wp-image-32465" src="https://krebsonsecurity.com/wp-content/uploads/2015/09/molotov.png" alt="molotov" width="263" height="233" /></a>The threats began not long after December 18, 2013, when Russian antivirus firm <strong>Dr.Web</strong> posted a writeup about a new Trojan horse program designed to steal card data from infected ATMs. Dr.Web received <a href="https://antifraud.drweb.com/atm_trojs/drweb/?lng=en" target="_blank">an email</a> warning the company to delete all references to the ATM malware from its site.</p>
+<p>The anonymous party, which self-identified as the &#8220;International Carders Syndicate,&#8221; said Dr.Web&#8217;s <a href="http://products.drweb.com/atm_shield" target="_blank">ATM Shield</a> product designed to guard cash machines from known malware &#8220;threatens activity of Syndicate with multi-million dollar profit.&#8221;</p>
+<p>The threat continued:</p>
+<blockquote><p>&#8220;Hundreds of criminal organizations throughout the world can lose their earnings. You have a WEEK to delete all references about ATM Skimmer from your web resource. Otherwise syndicate will stop cash-out transactions and send criminal for your programmers&#8217; heads. The end of Doctor Web will be tragic.&#8221;</p></blockquote>
+<p>In an interview with KrebsOnSecurity, Dr.Web CEO <strong>Boris Sharov</strong> said the company did not comply with the demands. On March 9, 2014, someone threw a Molotov cocktail at the office of a third-party company that was distributing Dr.Web&#8217;s ATM Shield product. Shortly after that, someone attacked the same office again. Each time, the damage was minimal, but it rattled company employees nonetheless.</p>
+<p>Less than two weeks later, Dr.Web received a follow-up warning letter:</p>
+<blockquote><p>&#8220;Dear Dr.Web, the International carder syndicate has warned you about avoidance of interference (unacceptable interference) in the ATM sphere. Taking into account the fact that you’ve ignored syndicate’s demands, we employed sanctions. To emphasis the syndicate’s purpose your office at Blagodatnaya st. was burnt twice.</p>
+<p>If you don’t delete all references about atmskimmer viruses from your products and all products for ATM, the International carder syndicate will destroy Doctor Web’s offices throughout the world, In addition, syndicate will lobby the Prohibition of usage of Russian anti-viruses Law in countries that have representation offices of the syndicate under the pretext of protection against Russian intelligence service.&#8221;</p></blockquote>
+<p>After a third attack on the St. Petersburg office, a suspect who was seen running away from the scene of the attack was arrested but later released because no witnesses came forward to confirm he was the one who threw the bomb.</p>
+<p>Meanwhile, Sharov said Dr.Web detected two physical intrusions into its Moscow office.</p>
+<p>&#8220;This is an office where we have much more security than any other, but also many more visitors,&#8221; he said. &#8220;We had been on high alert after the fire bombings, and we&#8217;ve never had intrusions before and never had them after this. But during that period, we had three attempts to enter the perimeter and to do something bad, but I won&#8217;t go into details about that.&#8221;</p>
+<p>Sharov said Dr.Web analysts believe the group that threatened the attacks were not cyber thieves themselves but instead an organized group of programmers that had sold &#8212; but not yet delivered &#8212; a crimeware product to multiple gangs that specialize in cashing out hacked ATM cards.</p>
+<p>&#8220;We think this group got very nervous by the fact that we had published exactly what they&#8217;d done, and it was very untimely for them, they were really desperate,&#8221; Sharov said. &#8220;We believe our reports came out just after development of the ATM Trojan had finished but before it was released to customers.&#8221; <a href="https://krebsonsecurity.com/2015/09/atm-skimmer-gang-firebombed-antivirus-firm/#more-31880" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+				
+			
+								<div class="themonic-pagination"><div class='pagination'><ul><li><a href='https://krebsonsecurity.com/'>&laquo; First</a></li><li><a href='https://krebsonsecurity.com/page/91/' class='inactive'>&lsaquo; Previous</a></li><li><a href='https://krebsonsecurity.com/page/89/' class='inactive'>89</a></li><li><a href='https://krebsonsecurity.com/page/90/' class='inactive'>90</a></li><li><a href='https://krebsonsecurity.com/page/91/' class='inactive'>91</a></li><li class='current'><span class='currenttext'>92</span></li><li><a href='https://krebsonsecurity.com/page/93/' class='inactive'>93</a></li><li><a href='https://krebsonsecurity.com/page/94/' class='inactive'>94</a></li><li><a href='https://krebsonsecurity.com/page/95/' class='inactive'>95</a></li><li><a href='https://krebsonsecurity.com/page/93/' class='inactive'>Next &rsaquo;</a></li><a class='inactive' href='https://krebsonsecurity.com/page/209/'>Last &raquo;</a></ul></div></div>
+					<div style="display: block; clear: both;"></div>
+			
+		
+
+	
+
+		</div><!-- #content -->
+	</div><!-- #primary -->
+
+
+			<div id="secondary" class="widget-area" role="complementary">
+
+        <div id="sidebar_ad" class="widget themonic-ad5"><div class="a-statement">Advertisement</div><a href="https://securityscorecard.com/instant-security-scorecard?utm_source=krebs+on+security&amp;utm_medium=display&amp;utm_campaign=instant+scorecard&amp;utm_term=A&amp;utm_content=335x300">
+<img src="/b-securityscorecard/3.jpg">
+</a></div>
+
+                        <br><div class="widget themonic-ad1"><div class="a-statement">Advertisement</div><a href="https://www.akamai.com/why-akamai/the-internet-of-possibilities?utm_source=krebsonsecurity&amp;utm_medium=display&amp;utm_campaign=F-MC-54978">
+<img src="/b-akamai/146.png">
+</a></div><br>
+
+			<aside id="custom_html-2" class="widget_text widget widget_custom_html"><p class="widget-title">Mailing List</p><div class="textwidget custom-html-widget"><a href="/subscribe/">Subscribe here</a></div></aside><aside id="search-2" class="widget widget_search"><p class="widget-title">Search KrebsOnSecurity</p><form role="search" method="get" id="searchform" class="searchform" action="https://krebsonsecurity.com/">
+				<div>
+					<label class="screen-reader-text" for="s">Search for:</label>
+					<input type="text" value="" name="s" id="s" />
+					<input type="submit" id="searchsubmit" value="Search" />
+				</div>
+			</form></aside>
+		<aside id="recent-posts-3" class="widget widget_recent_entries">
+		<p class="widget-title">Recent Posts</p>
+		<ul>
+											<li>
+					<a href="https://krebsonsecurity.com/2021/12/canada-charges-its-most-prolific-cybercriminal/">Canada Charges Its &#8220;Most Prolific Cybercriminal&#8221;</a>
+									</li>
+											<li>
+					<a href="https://krebsonsecurity.com/2021/12/who-is-the-network-access-broker-babam/">Who Is the Network Access Broker &#8216;Babam&#8217;?</a>
+									</li>
+											<li>
+					<a href="https://krebsonsecurity.com/2021/12/ubiquiti-developer-charged-with-extortion-causing-2020-breach/">Ubiquiti Developer Charged With Extortion, Causing 2020 &#8220;Breach&#8221;</a>
+									</li>
+											<li>
+					<a href="https://krebsonsecurity.com/2021/11/the-internet-is-held-together-with-spit-baling-wire/">The Internet is Held Together With Spit &#038; Baling Wire</a>
+									</li>
+											<li>
+					<a href="https://krebsonsecurity.com/2021/11/arrest-in-ransom-your-employer-email-scheme/">Arrest in &#8216;Ransom Your Employer&#8217; Email Scheme</a>
+									</li>
+					</ul>
+
+		</aside><aside id="text-2" class="widget widget_text">			<div class="textwidget"><a name="subscribe2"></a></div>
+		</aside><aside id="widget_sp_image-15" class="widget widget_sp_image"><p class="widget-title">Spam Nation</p><a href="https://www.amazon.com/Spam-Nation-Organized-Cybercrime-Epidemic-ebook/dp/B00L5QGBL0/ref=dp_kinw_strp_1" target="_blank" class="widget_sp_image-image-link" title="Spam Nation"><img width="266" height="404" alt="Spam Nation" class="attachment-266x404 aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2015/04/spamnation-nyt.png" /></a><div class="widget_sp_image-description" ><p>A New York Times Bestseller! </p>
+</div></aside><aside id="widget_sp_image-25" class="widget widget_sp_image"><p class="widget-title">Thinking of a Cybersecurity Career?</p><a href="https://krebsonsecurity.com/2020/07/thinking-of-a-cybersecurity-career-read-this/" target="_blank" class="widget_sp_image-image-link" title="Thinking of a Cybersecurity Career? Read This."><img width="625" height="424" alt="Thinking of a Cybersecurity Career?" class="attachment-full" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2020/07/codepeople.png 625w, https://krebsonsecurity.com/wp-content/uploads/2020/07/codepeople-580x393.png 580w" sizes="(max-width: 625px) 100vw, 625px" src="https://krebsonsecurity.com/wp-content/uploads/2020/07/codepeople.png" /></a><div class="widget_sp_image-description" ><p>Read this.</p>
+</div></aside><aside id="widget_sp_image-3" class="widget widget_sp_image"><p class="widget-title">All About Skimmers </p><a href="https://krebsonsecurity.com/all-about-skimmers/" target="_blank" class="widget_sp_image-image-link" title="All About Skimmers "><img width="299" height="232" alt="All About Skimmers" class="attachment-299x232 aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2010/08/skimgallery1.jpg" /></a><div class="widget_sp_image-description" ><p>Click image for my skimmer series.</p>
+</div></aside><aside id="categories-2" class="widget widget_categories"><p class="widget-title">Story Categories</p>
+			<ul>
+					<li class="cat-item cat-item-5"><a href="https://krebsonsecurity.com/category/sunshine/" title="Includes investigative blog posts meant to shine a light on the darker corners of the Internet.">A Little Sunshine</a>
+</li>
+	<li class="cat-item cat-item-2240"><a href="https://krebsonsecurity.com/category/all-about-skimmers/">All About Skimmers</a>
+</li>
+	<li class="cat-item cat-item-9085"><a href="https://krebsonsecurity.com/category/ashley-madison-breach/">Ashley Madison breach</a>
+</li>
+	<li class="cat-item cat-item-3191"><a href="https://krebsonsecurity.com/category/breadcrumbs/">Breadcrumbs</a>
+</li>
+	<li class="cat-item cat-item-3771"><a href="https://krebsonsecurity.com/category/data-breaches/" title="Stories about data breaches at retailers, corporations, governments and organizations of all sizes.">Data Breaches</a>
+</li>
+	<li class="cat-item cat-item-4624"><a href="https://krebsonsecurity.com/category/ddos-for-hire/">DDoS-for-Hire</a>
+</li>
+	<li class="cat-item cat-item-9173"><a href="https://krebsonsecurity.com/category/employment-fraud/">Employment Fraud</a>
+</li>
+	<li class="cat-item cat-item-2151"><a href="https://krebsonsecurity.com/category/how-to-break-into-security/" title="If you&#039;ve ever wanted career advice on how to make a shift into the security industry, look no further.">How to Break Into Security</a>
+</li>
+	<li class="cat-item cat-item-87"><a href="https://krebsonsecurity.com/category/latest-warnings/">Latest Warnings</a>
+</li>
+	<li class="cat-item cat-item-4071"><a href="https://krebsonsecurity.com/category/neer-do-well-news/">Ne&#039;er-Do-Well News</a>
+</li>
+	<li class="cat-item cat-item-9"><a href="https://krebsonsecurity.com/category/other/">Other</a>
+</li>
+	<li class="cat-item cat-item-1306"><a href="https://krebsonsecurity.com/category/pharma-wars/">Pharma Wars</a>
+</li>
+	<li class="cat-item cat-item-8240"><a href="https://krebsonsecurity.com/category/ransomware/">Ransomware</a>
+</li>
+	<li class="cat-item cat-item-599"><a href="https://krebsonsecurity.com/category/security-tools/">Security Tools</a>
+</li>
+	<li class="cat-item cat-item-8298"><a href="https://krebsonsecurity.com/category/sim-swapping/">SIM Swapping</a>
+</li>
+	<li class="cat-item cat-item-4079"><a href="https://krebsonsecurity.com/category/spam-nation/">Spam Nation</a>
+</li>
+	<li class="cat-item cat-item-1"><a href="https://krebsonsecurity.com/category/smallbizvictims/" title="Posts in this category will include new stories similar to those told in the Small Business Victims category on The Washington Post&#039;s Security Fix blog, which chronicled the methods organized cyber thieve are using to steal hundreds of thousands of dollars from dozens of small- to mid-sized companies around the country.">Target: Small Businesses</a>
+</li>
+	<li class="cat-item cat-item-5167"><a href="https://krebsonsecurity.com/category/tax-refund-fraud/">Tax Refund Fraud</a>
+</li>
+	<li class="cat-item cat-item-3"><a href="https://krebsonsecurity.com/category/comingstorm/" title="This category includes blog posts about computer and Internet security threats now and on the horizon.">The Coming Storm</a>
+</li>
+	<li class="cat-item cat-item-4"><a href="https://krebsonsecurity.com/category/patches/" title="Short posts on the latest security updates for widely-used software.
+">Time to Patch</a>
+</li>
+	<li class="cat-item cat-item-21"><a href="https://krebsonsecurity.com/category/web-fraud-2-0/">Web Fraud 2.0</a>
+</li>
+			</ul>
+
+			</aside><aside id="widget_sp_image-5" class="widget widget_sp_image"><p class="widget-title">The Value of a Hacked PC</p><a href="https://krebsonsecurity.com/2012/10/the-scrap-value-of-a-hacked-pc-revisited/" target="_blank" class="widget_sp_image-image-link" title="The Value of a Hacked PC"><img width="285" height="180" alt="valuehackedpc " class="attachment-285x180 aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2012/12/valuehackedpc-285x180.png" /></a><div class="widget_sp_image-description" ><p>Badguy uses for your PC</p>
+</div></aside><aside id="widget_sp_image-9" class="widget widget_sp_image"><p class="widget-title">Badguy Uses for Your Email </p><a href="https://krebsonsecurity.com/2013/06/the-value-of-a-hacked-email-account/" target="_self" class="widget_sp_image-image-link" title="Badguy Uses for Your Email "><img width="296" height="170" alt="Badguy Uses for Your Email " class="attachment-full aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2013/06/badguyemail.png 296w, https://krebsonsecurity.com/wp-content/uploads/2013/06/badguyemail-285x163.png 285w" sizes="(max-width: 296px) 100vw, 296px" src="https://krebsonsecurity.com/wp-content/uploads/2013/06/badguyemail.png" /></a><div class="widget_sp_image-description" ><p>Your email account may be worth far more than you imagine.</p>
+</div></aside><aside id="widget_sp_image-24" class="widget widget_sp_image"><a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&#038;hosted_button_id=MCCRKHWRX57HS" id="donate" target="_self" class="widget_sp_image-image-link"><img width="250" height="55" alt="Donate to Krebs On Security" class="attachment-medium aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2016/09/donatepaypal2-1.png" /></a></aside><aside id="most_popular_posts-3" class="widget widget_most_popular_posts">
+<p class="widget-title">Most Popular Posts</p>
+<ul>	<li><a href="https://krebsonsecurity.com/2018/07/sextortion-scam-uses-recipients-hacked-passwords/">Sextortion Scam Uses Recipient's Hacked Passwords</a> (1076)</li>
+	<li><a href="https://krebsonsecurity.com/2015/07/online-cheating-site-ashleymadison-hacked/">Online Cheating Site AshleyMadison Hacked</a> (798)</li>
+	<li><a href="https://krebsonsecurity.com/2013/12/sources-target-investigating-data-breach/">Sources: Target Investigating Data Breach</a> (620)</li>
+	<li><a href="https://krebsonsecurity.com/2020/11/trump-fires-security-chief-christopher-krebs/">Trump Fires Security Chief Christopher Krebs</a> (534)</li>
+	<li><a href="https://krebsonsecurity.com/2013/12/cards-stolen-in-target-breach-flood-underground-markets/">Cards Stolen in Target Breach Flood Underground Markets</a> (445)</li>
+	<li><a href="https://krebsonsecurity.com/2013/05/reports-liberty-reserve-founder-arrested-site-shuttered/">Reports: Liberty Reserve Founder Arrested, Site Shuttered</a> (416)</li>
+	<li><a href="https://krebsonsecurity.com/2015/08/was-the-ashley-madison-database-leaked/">Was the Ashley Madison Database Leaked?</a> (376)</li>
+	<li><a href="https://krebsonsecurity.com/2021/01/ddos-guard-to-forfeit-internet-space-occupied-by-parler/">DDoS-Guard To Forfeit Internet Space Occupied by Parler</a> (374)</li>
+	<li><a href="https://krebsonsecurity.com/2014/05/true-goodbye-using-truecrypt-is-not-secure/">True Goodbye: 'Using TrueCrypt Is Not Secure'</a> (363)</li>
+	<li><a href="https://krebsonsecurity.com/2015/08/who-hacked-ashley-madison/">Who Hacked Ashley Madison?</a> (361)</li>
+</ul>
+</aside>
+<aside id="media_image-2" class="widget widget_media_image"><p class="widget-title">Why So Many Top Hackers Hail from Russia</p><a href="https://krebsonsecurity.com/2017/06/why-so-many-top-hackers-hail-from-russia/"><img width="580" height="389" src="https://krebsonsecurity.com/wp-content/uploads/2017/06/computered-580x389.png" class="image wp-image-39684  attachment-medium size-medium" alt="" loading="lazy" style="max-width: 100%; height: auto;" srcset="https://krebsonsecurity.com/wp-content/uploads/2017/06/computered-580x389.png 580w, https://krebsonsecurity.com/wp-content/uploads/2017/06/computered-768x514.png 768w, https://krebsonsecurity.com/wp-content/uploads/2017/06/computered-940x630.png 940w, https://krebsonsecurity.com/wp-content/uploads/2017/06/computered.png 1551w" sizes="(max-width: 580px) 100vw, 580px" /></a></aside><aside id="widget_sp_image-11" class="widget widget_sp_image"><p class="widget-title">Category: Web Fraud 2.0</p><a href="https://krebsonsecurity.com/category/web-fraud-2-0/" target="_blank" class="widget_sp_image-image-link" title="Category: Web Fraud 2.0"><img width="227" height="400" alt="Criminnovations" class="attachment-medium aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2013/11/cybercrimeinnovations-227x400.png" /></a><div class="widget_sp_image-description" ><p>Innovations from the Underground</p>
+</div></aside><aside id="widget_sp_image-12" class="widget widget_sp_image"><a href="https://krebsonsecurity.com/2014/03/are-credit-monitoring-services-worth-it/" target="_blank" class="widget_sp_image-image-link"><img width="285" height="189" class="attachment-medium aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2014/03/shreddedID-copy-285x189.png 285w, https://krebsonsecurity.com/wp-content/uploads/2014/03/shreddedID-copy-600x399.png 600w, https://krebsonsecurity.com/wp-content/uploads/2014/03/shreddedID-copy.png 849w" sizes="(max-width: 285px) 100vw, 285px" src="https://krebsonsecurity.com/wp-content/uploads/2014/03/shreddedID-copy-285x189.png" /></a><div class="widget_sp_image-description" ><p>ID Protection Services Examined</p>
+</div></aside><aside id="widget_sp_image-13" class="widget widget_sp_image"><p class="widget-title">Is Antivirus Dead?</p><a href="https://krebsonsecurity.com/2014/05/antivirus-is-dead-long-live-antivirus/" target="_blank" class="widget_sp_image-image-link" title="Is Antivirus Dead?"><img width="285" height="161" alt="Is Antivirus Dead?" class="attachment-medium aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2014/05/cryptservices-285x161.png 285w, https://krebsonsecurity.com/wp-content/uploads/2014/05/cryptservices-600x339.png 600w, https://krebsonsecurity.com/wp-content/uploads/2014/05/cryptservices.png 945w" sizes="(max-width: 285px) 100vw, 285px" src="https://krebsonsecurity.com/wp-content/uploads/2014/05/cryptservices-285x161.png" /></a><div class="widget_sp_image-description" ><p>The reasons for its decline</p>
+</div></aside><aside id="widget_sp_image-14" class="widget widget_sp_image"><p class="widget-title">The Growing Tax Fraud Menace</p><a href="https://krebsonsecurity.com/category/tax-refund-fraud/" target="_blank" class="widget_sp_image-image-link" title="The Growing Tax Fraud Menace"><img width="285" height="285" alt="The Growing Tax Fraud Menace" class="attachment-medium aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2014/04/taxfraud-285x285.jpg 285w, https://krebsonsecurity.com/wp-content/uploads/2014/04/taxfraud-150x150.jpg 150w, https://krebsonsecurity.com/wp-content/uploads/2014/04/taxfraud-600x600.jpg 600w, https://krebsonsecurity.com/wp-content/uploads/2014/04/taxfraud.jpg 693w" sizes="(max-width: 285px) 100vw, 285px" src="https://krebsonsecurity.com/wp-content/uploads/2014/04/taxfraud-285x285.jpg" /></a><div class="widget_sp_image-description" ><p>File 'em Before the Bad Guys Can </p>
+</div></aside><aside id="widget_sp_image-17" class="widget widget_sp_image"><p class="widget-title">Inside a Carding Shop</p><a href="https://krebsonsecurity.com/2014/06/peek-inside-a-professional-carding-shop/" target="_blank" class="widget_sp_image-image-link" title="Inside a Carding Shop"><img width="194" height="340" alt="Inside a Carding Shop" class="attachment-medium aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2014/06/mcdumpalsjoined.png" /></a><div class="widget_sp_image-description" ><p>A crash course in carding. </p>
+</div></aside><aside id="widget_sp_image-18" class="widget widget_sp_image"><p class="widget-title">Beware Social Security Fraud</p><a href="https://krebsonsecurity.com/2013/09/crooks-hijack-retirement-funds-via-ssa-portal/" target="_blank" class="widget_sp_image-image-link" title="Beware Social Security Fraud"><img width="285" height="293" alt="Beware Social Security Fraud" class="attachment-full aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2016/09/myssn-285x293.png" /></a><div class="widget_sp_image-description" ><p>Sign up, or Be Signed Up! </p>
+</div></aside><aside id="widget_sp_image-2" class="widget widget_sp_image"><p class="widget-title">How Was Your Card Stolen?</p><a href="https://krebsonsecurity.com/2015/01/how-was-your-credit-card-stolen/" target="_blank" class="widget_sp_image-image-link" title="How Was Your Card Stolen?"><img width="285" height="285" alt="How Was Your Card Stolen?" class="attachment-full aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2016/09/carddominoes-285x285.jpg 285w, https://krebsonsecurity.com/wp-content/uploads/2016/09/carddominoes-285x285-150x150.jpg 150w" sizes="(max-width: 285px) 100vw, 285px" src="https://krebsonsecurity.com/wp-content/uploads/2016/09/carddominoes-285x285.jpg" /></a><div class="widget_sp_image-description" ><p>Finding out is not so easy. </p>
+</div></aside><aside id="widget_sp_image-22" class="widget widget_sp_image"><p class="widget-title">Krebs&#8217;s 3 Rules&#8230;</p><a href="https://krebsonsecurity.com/2011/05/krebss-3-basic-rules-for-online-safety/" target="_blank" class="widget_sp_image-image-link" title="Krebs&#8217;s 3 Rules&#8230;"><img width="300" height="300" alt="Krebs&#8217;s 3 Rules&#8230;" class="attachment-medium aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2011/05/three-300x300.jpg 300w, https://krebsonsecurity.com/wp-content/uploads/2011/05/three-150x150.jpg 150w, https://krebsonsecurity.com/wp-content/uploads/2011/05/three.jpg 347w" sizes="(max-width: 300px) 100vw, 300px" src="https://krebsonsecurity.com/wp-content/uploads/2011/05/three-300x300.jpg" /></a><div class="widget_sp_image-description" ><p>...For Online Safety. </p>
+</div></aside>		</div><!-- #secondary -->
+		</div><!-- #main .wrapper -->
+	
+	<div id="publisho-footer" class="widget-area">
+				<div class="footer-widget">
+                				</div>
+				<div class="footer-widget">
+								</div>
+				<div class="footer-widget">
+								</div>
+	</div>
+
+	<div class="site-wordpress">
+					&copy; Krebs on Security<br>
+	</div>
+	<!-- .site-info --><div class="clear"></div>
+</div><!-- #page -->
+
+<script type='text/javascript' src='https://krebsonsecurity.com/wp-content/themes/kos-mar2021/js/slicknav.js?ver=5.8.2' id='publisho-mobile-navigation-js'></script>
+<script type='text/javascript' src='https://krebsonsecurity.com/wp-includes/js/wp-embed.min.js?ver=5.8.2' id='wp-embed-js'></script>
+</body>
+</html>
+<!--
+Performance optimized by W3 Total Cache. Learn more: https://www.boldgrid.com/w3-total-cache/
+
+Object Caching 188/367 objects using memcached
+Page Caching using memcached 
+Database Caching 7/24 queries in 0.037 seconds using memcached
+
+Served from: krebsonsecurity.com @ 2021-12-10 14:53:36 by W3 Total Cache
+-->

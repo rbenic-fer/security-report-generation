@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<!--[if IE 7]>
+<html class="ie ie7" lang="en-US">
+<![endif]-->
+<!--[if IE 8]>
+<html class="ie ie8" lang="en-US">
+<![endif]-->
+<!--[if !(IE 7) | !(IE 8)  ]><!-->
+<html lang="en-US">
+<!--<![endif]-->
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width" />
+<link rel="profile" href="http://gmpg.org/xfn/11" />
+<!--[if lt IE 9]>
+<script src="https://krebsonsecurity.com/wp-content/themes/kos-mar2021/js/html5.js" type="text/javascript"></script>
+<![endif]-->
+<title>Krebs on Security &#8211; Page 105 &#8211; In-depth security news and investigation</title>
+<meta name='robots' content='max-image-preview:large' />
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="Krebs on Security &raquo; Feed" href="https://krebsonsecurity.com/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Krebs on Security &raquo; Comments Feed" href="https://krebsonsecurity.com/comments/feed/" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.1.0\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.1.0\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/krebsonsecurity.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=5.8.2"}};
+			!function(e,a,t){var n,r,o,i=a.createElement("canvas"),p=i.getContext&&i.getContext("2d");function s(e,t){var a=String.fromCharCode;p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,e),0,0);e=i.toDataURL();return p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,t),0,0),e===i.toDataURL()}function c(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(o=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},r=0;r<o.length;r++)t.supports[o[r]]=function(e){if(!p||!p.fillText)return!1;switch(p.textBaseline="top",p.font="600 32px Arial",e){case"flag":return s([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])?!1:!s([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!s([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]);case"emoji":return!s([10084,65039,8205,55357,56613],[10084,65039,8203,55357,56613])}return!1}(o[r]),t.supports.everything=t.supports.everything&&t.supports[o[r]],"flag"!==o[r]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[o[r]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(n=t.source||{}).concatemoji?c(n.concatemoji):n.wpemoji&&n.twemoji&&(c(n.twemoji),c(n.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+	<link rel='stylesheet' id='colorbox-theme1-css'  href='https://krebsonsecurity.com/wp-content/plugins/jquery-lightbox-for-native-galleries/colorbox/theme1/colorbox.css?ver=1.3.14' type='text/css' media='screen' />
+<link rel='stylesheet' id='wp-block-library-css'  href='https://krebsonsecurity.com/wp-includes/css/dist/block-library/style.min.css?ver=5.8.2' type='text/css' media='all' />
+<link rel='stylesheet' id='contact-form-7-css'  href='https://krebsonsecurity.com/wp-content/plugins/contact-form-7/includes/css/styles.css?ver=5.5.3' type='text/css' media='all' />
+<link rel='stylesheet' id='publisho-style-css'  href='https://krebsonsecurity.com/wp-content/themes/kos-mar2021/style.css?subver=1.2&#038;ver=5.8.2' type='text/css' media='all' />
+<style id='publisho-style-inline-css' type='text/css'>
+
+	.themonic-nav .current-menu-item > a, .themonic-nav .current-menu-ancestor > a, .themonic-nav .current_page_item > a, .themonic-nav .current_page_ancestor > a {
+		background: #cc6600;
+	}
+	.themonic-nav ul.nav-menu, .themonic-nav div.nav-menu > ul {
+		border-bottom: 5px solid #cc6600;
+	}
+	#site-navigation .topheadmenu a {
+    background: rgba(0, 0, 0, 0);
+	}
+	.themonic-nav li a:hover {
+		background: #cc6600;
+	}
+	.themonic-nav li:hover {
+		background: #cc6600;
+	}.wrapper .flexslider {margin: 0 0 30px;}.frontp .btm-wrap {
+    border-top: 1px solid #e9e9e9;
+	}
+	.entry-summary {
+    border-top: none;
+	}.frontp .btm-wrap { margin-bottom: 30px;}.site { font-size:14px;}.site { font-family:'Roboto', arial ;}
+</style>
+<link rel='stylesheet' id='publisho-custom-style-css'  href='https://krebsonsecurity.com/wp-content/themes/kos-mar2021/custom.css?subver=1.2&#038;ver=5.8.2' type='text/css' media='all' />
+<!--[if lt IE 9]>
+<link rel='stylesheet' id='publisho-ie-css'  href='https://krebsonsecurity.com/wp-content/themes/kos-mar2021/css/ie.css?ver=20160606' type='text/css' media='all' />
+<![endif]-->
+<link rel='stylesheet' id='fontawesome-css-css'  href='https://krebsonsecurity.com/wp-content/themes/kos-mar2021/fonts/font-awesome.min.css?ver=5.8.2' type='text/css' media='all' />
+<link rel='stylesheet' id='publisho_custom_fonts-css'  href='//fonts.googleapis.com/css?family=Roboto%3Aregular%2Citalic%2C500%26subset%3Dlatin%2C' type='text/css' media='screen' />
+<script type='text/javascript' src='https://krebsonsecurity.com/wp-includes/js/jquery/jquery.min.js?ver=3.6.0' id='jquery-core-js'></script>
+<script type='text/javascript' src='https://krebsonsecurity.com/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.3.2' id='jquery-migrate-js'></script>
+<script type='text/javascript' src='https://krebsonsecurity.com/wp-content/plugins/jquery-lightbox-for-native-galleries/colorbox/jquery.colorbox-min.js?ver=1.3.14' id='colorbox-js'></script>
+<link rel="https://api.w.org/" href="https://krebsonsecurity.com/wp-json/" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://krebsonsecurity.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://krebsonsecurity.com/wp-includes/wlwmanifest.xml" /> 
+<meta name="generator" content="WordPress 5.8.2" />
+<!-- JavaScript Pull-Quotes plugin v2.2 -->
+	<link rel="stylesheet" href="https://krebsonsecurity.com/wp-content/plugins/jspullquotes/resources/jspullquotes-core.css" type="text/css" />
+	<link rel="stylesheet" href="https://krebsonsecurity.com/wp-content/plugins/jspullquotes/resources/jspullquotes-default.css" type="text/css" />
+	<script type="text/javascript" src="https://krebsonsecurity.com/wp-content/plugins/jspullquotes/resources/jspullquotes.js"></script>
+	<script type="text/javascript">
+		var arrOptions = new Array("1", "1", "right", "1", "1", "blockquote", "pullquote", "pullquote pqRight");
+		pullQuoteOpts(arrOptions);
+	</script>
+<!-- end pull-quote additions -->
+<!-- jQuery Lightbox For Native Galleries v3.1.3 | http://www.viper007bond.com/wordpress-plugins/jquery-lightbox-for-native-galleries/ -->
+<script type="text/javascript">
+// <![CDATA[
+	jQuery(document).ready(function($){
+		$(".gallery").each(function(index, obj){
+			var galleryid = Math.floor(Math.random()*10000);
+			$(obj).find("a").colorbox({rel:galleryid, maxWidth:"95%", maxHeight:"95%"});
+		});
+		$("a.lightbox").colorbox({maxWidth:"95%", maxHeight:"95%"});
+	});
+// ]]>
+</script>
+<style type="text/css" id="custom-background-css">
+body.custom-background { background-color: #ffffff; }
+</style>
+	<link rel="me" href="https://twitter.com/briankrebs" /><meta name="twitter:widgets:link-color" content="#000000" /><meta name="twitter:widgets:border-color" content="#000000" /><meta name="twitter:partner" content="tfwp" />
+<meta name="twitter:card" content="summary" /><meta name="twitter:title" content="Krebs on Security" /><meta name="twitter:site" content="@briankrebs" /><meta name="twitter:description" content="In-depth security news and investigation" />
+</head>
+<body class="home blog paged custom-background paged-105 custom-background-white single-author frontp hfeed">
+<div id="page" class="site">
+	<!-- <div class="publisho-top-mobile-nav clear"></div> -->
+	<div class="themonic-logo themonic-ad3"><div class="a-statement">Advertisement</div><a href="https://ninjio.com/lp46d-krebs/">
+<img src="/b-ninjio/9.png">
+</a>
+</div>
+	<div class="themonic-logo themonic-ad6"><div class="a-statement">Advertisement</div><a href="https://ninjio.com/lp46d-krebs/">
+<img src="/b-ninjio/10.png">
+</a></div>
+	<nav id="site-navigation" class="themonic-nav" role="navigation">
+	</nav><!-- #site-navigation -->
+	<div class="clear"></div>
+	<header id="masthead" class="site-header" role="banner">
+ 					<div class="desktop-social">
+						<div class="socialmedia">
+							<a href="http://twitter.com/briankrebs" target="_blank"><i class="fa fa-twitter"></i></a> 
+															<a class="rss" href="https://krebsonsecurity.com/feed/" target="_blank"><i class="fa fa-rss"></i></a>	
+									<a class="rss" href="https://www.linkedin.com/in/bkrebs/" target="_blank"><i class="fa fa-linkedin"></i></a>	
+								</div>
+				 	</div>
+																						   
+		
+		<div class="themonic-logo responsive-img-container">
+			<a href="https://krebsonsecurity.com/" title="Krebs on Security" rel="home"><img src="https://krebsonsecurity.com/wp-content/uploads/2021/03/kos-27-03-2021.jpg" alt="Krebs on Security"></a>
+		</div>
+
+					<div class="mobile-social">
+						<div class="socialmedia">
+							<a href="http://twitter.com/briankrebs" target="_blank"><i class="fa fa-twitter"></i></a> 
+															<a class="rss" href="https://krebsonsecurity.com/feed/" target="_blank"><i class="fa fa-rss"></i></a>	
+									<a class="rss" href="https://www.linkedin.com/in/bkrebs/" target="_blank"><i class="fa fa-linkedin"></i></a>	
+								</div>
+					</div>
+		
+				<!-- <div class="publisho-mobile-nav clear"></div> -->
+		<nav id="site-navigation" class="themonic-nav" role="navigation">
+			<a class="assistive-text" href="#content" title="Skip to content">Skip to content</a>
+			<div id="menu-top" class="nav-menu"><ul>
+<li ><a href="https://krebsonsecurity.com/">Home</a></li><li class="page_item page-item-2"><a href="https://krebsonsecurity.com/about/">About the Author</a></li>
+<li class="page_item page-item-645"><a href="https://krebsonsecurity.com/cpm/">Advertising/Speaking</a></li>
+</ul></div>
+		</nav><!-- #site-navigation -->
+		<div class="clear"></div>
+	</header><!-- #masthead -->
+	<div id="main" class="wrapper">
+		<div id="primary" class="site-content">
+	
+
+	
+		<div id="content" role="main">
+
+		<article id="post-30067" class="post-30067 post type-post status-publish format-standard hentry category-other tag-kevin-epstein tag-pharming tag-phishing tag-proofpoint tag-tp-link tag-ut-starcom">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2015/02/spam-uses-default-passwords-to-hack-routers/" title="Permalink to Spam Uses Default Passwords to Hack Routers" rel="bookmark">Spam Uses Default Passwords to Hack Routers</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">February 26, 2015</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2015/02/spam-uses-default-passwords-to-hack-routers/#comments">43 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>In case you needed yet another reason to change the default username and password on your wired or wireless Internet router: Phishers are sending out links that, when clicked, quietly alter the settings on vulnerable routers to harvest online banking credentials and other sensitive data from victims.</p>
+<p><a href="https://krebsonsecurity.com/wp-content/uploads/2015/02/tp-link-WDR4300.png"><img loading="lazy" class="alignright size-full wp-image-30122" src="https://krebsonsecurity.com/wp-content/uploads/2015/02/tp-link-WDR4300.png" alt="tp-link WDR4300" width="243" height="203" /></a>Sunnyvale, Calif. based security firm <strong>Proofpoint</strong> said it recently detected a four-week spam campaign sent to a small number of organizations and targeting primarily Brazilian Internet users. The emails were made to look like they were sent by Brazil&#8217;s largest Internet service provider, alerting recipients about an unpaid bill. In reality, the missives contained a link designed to hack that same ISP&#8217;s router equipment.</p>
+<p>According to Proofpoint, the link in the spam campaign led to a page that mimicked the telecom provider. The landing page included code that silently attempted to execute what&#8217;s known as a <a title="https://www.owasp.org/index.php/Cross-Site_Request_Forgery_%28CSRF%29_Prevention_Cheat_Sheet" href="https://www.owasp.org/index.php/Cross-Site_Request_Forgery_%28CSRF%29_Prevention_Cheat_Sheet" target="_blank">cross-site request forgery attack</a> on <a title="http://packetstormsecurity.com/files/128343/TP-LINK-WDR4300-XSS-Denial-Of-Service.html" href="http://packetstormsecurity.com/files/128343/TP-LINK-WDR4300-XSS-Denial-Of-Service.html" target="_blank">known vulnerabilities</a> in two types of routers, <a title="http://en.wikipedia.org/wiki/UTStarcom" href="http://en.wikipedia.org/wiki/UTStarcom" target="_blank">UT Starcom</a> and <a title="http://en.wikipedia.org/wiki/TP-Link" href="http://en.wikipedia.org/wiki/TP-Link" target="_blank">TP-Link</a>. The malicious page would then invoke <a title="http://blog.unmaskparasites.com/2009/10/28/evolution-of-hidden-iframes/" href="http://blog.unmaskparasites.com/2009/10/28/evolution-of-hidden-iframes/" target="_blank">hidden inline frames</a> (also known as &#8220;iframes&#8221;) that try to log in to the administration page of the victim&#8217;s router using a list of known default credentials built into these devices.</p>
+<p>If successful, the attacker&#8217;s script would modify the domain name system (DNS) settings on the victim&#8217;s router, adding the attacker&#8217;s own DNS server as the primary server while assigning the secondary DNS server to Google&#8217;s public DNS (8.8.8.8). Such a change would allow the attackers to hijack the victim&#8217;s traffic to any Web site, redirecting it away from the legitimate site to a look-alike page designed to siphon the victim&#8217;s credentials. In the event that the attacker&#8217;s DNS server was unresponsive for any reason, the victim&#8217;s router would still function normally.</p>
+<div id="attachment_30120" style="width: 610px" class="wp-caption aligncenter"><a href="https://krebsonsecurity.com/wp-content/uploads/2015/02/dnshijack.png"><img aria-describedby="caption-attachment-30120" loading="lazy" class="size-large wp-image-30120" src="https://krebsonsecurity.com/wp-content/uploads/2015/02/dnshijack-600x162.png" alt="The malicious script used by the spammers in this campaign tries multiple default multiple default credentials in a bid to hijack routers with factory-default settings. Image: Proofpoint." width="600" height="162" srcset="https://krebsonsecurity.com/wp-content/uploads/2015/02/dnshijack-600x162.png 600w, https://krebsonsecurity.com/wp-content/uploads/2015/02/dnshijack-285x77.png 285w, https://krebsonsecurity.com/wp-content/uploads/2015/02/dnshijack.png 831w" sizes="(max-width: 600px) 100vw, 600px" /></a><p id="caption-attachment-30120" class="wp-caption-text">The malicious script used by the spammers in this campaign tries multiple default credentials in a bid to hijack routers with factory-default settings. Image: Proofpoint.</p></div>
+<p>The real danger of attacks like these is that they bypass antivirus and other security tools, and they are likely to go undetected by the victim for long periods of time. <a href="https://krebsonsecurity.com/2015/02/spam-uses-default-passwords-to-hack-routers/#more-30067" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+	<div id="between_article_ad" class="themonic-ad5"><a href="https://www.iansresearch.com/resources/infosec-content-downloads/research-reports/2021-ciso-compensation-benchmark-research-study?utm_source=krebs&amp;utm_medium=display_ad&amp;utm_campaign=2021_ciso_comp_study">
+<img src="/b-ians/6.png">
+</a></div>	<article id="post-30104" class="post-30104 post type-post status-publish format-standard hentry category-other tag-eevon-soh tag-hack-the-planet tag-htp tag-julius-zeekill-kivimaki tag-kms tag-lenovo tag-lizard-squad tag-rory-andrew-godfrey tag-ryan-king tag-starfall tag-superfish tag-web-commerce-communications-ltd tag-webnic-cc">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2015/02/webnic-registrar-blamed-for-hijack-of-lenovo-google-domains/" title="Permalink to Webnic Registrar Blamed for Hijack of Lenovo, Google Domains" rel="bookmark">Webnic Registrar Blamed for Hijack of Lenovo, Google Domains</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">February 26, 2015</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2015/02/webnic-registrar-blamed-for-hijack-of-lenovo-google-domains/#comments">31 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>Two days ago, attackers allegedly associated with the fame-seeking group <strong>Lizard Squad</strong> briefly hijacked Google&#8217;s Vietnam domain (google.com.vn). On Wednesday, <strong>Lenovo.com</strong> was similarly attacked. Sources now tell KrebsOnSecurity that both hijacks were possible because the attackers seized control over <strong>Webnic.cc</strong>, the Malaysian registrar that serves both domains and 600,000 others.</p>
+<p>On Feb. 23, google.com.vn briefly <a title="http://www.ibtimes.co.uk/google-vietnam-domain-name-briefly-hacked-hijacked-by-lizard-squad-1489293" href="http://www.ibtimes.co.uk/google-vietnam-domain-name-briefly-hacked-hijacked-by-lizard-squad-1489293" target="_blank">redirected</a> visitors to a page that read, &#8220;Hacked by <strong>Lizard Squad</strong>, greetz from antichrist, Brian Krebs, sp3c, Komodo, ryan, HTP &amp; Rory Andrew Godfrey (holding it down in Texas).&#8221; The message also included a link to the group&#8217;s Twitter page and its <a title="http://krebsonsecurity.com/2015/01/lizard-stresser-runs-on-hacked-home-routers/" href="http://krebsonsecurity.com/2015/01/lizard-stresser-runs-on-hacked-home-routers/" target="_blank">Lizard Stresser online attacks-for-hire service</a>.</p>
+<p>Today, the group took credit for hacking Lenovo.com, possibly because it was <a title="https://www.google.com/search?q=superfish+lenovo&amp;rlz=1C1CHFX_enUS568US568&amp;oq=superfish+lenovo&amp;aqs=chrome..69i57j0l3j69i61j69i60.3127j0j7&amp;sourceid=chrome&amp;es_sm=93&amp;ie=UTF-8#q=superfish+lenovo&amp;tbm=nws" href="https://www.google.com/search?q=superfish+lenovo&amp;rlz=1C1CHFX_enUS568US568&amp;oq=superfish+lenovo&amp;aqs=chrome..69i57j0l3j69i61j69i60.3127j0j7&amp;sourceid=chrome&amp;es_sm=93&amp;ie=UTF-8#q=superfish+lenovo&amp;tbm=nws" target="_blank">recently revealed</a> that the computer maker was shipping the invasive Superfish adware with <del>all</del> some new Lenovo notebook PCs (the company has <a title="http://support.lenovo.com/us/en/product_security/superfish" href="http://support.lenovo.com/us/en/product_security/superfish" target="_blank">since said</a> Superfish is now disabled on all Lenovo products and that it will no longer pre-load the software).</p>
+<p>According to <a title="http://www.theverge.com/2015/2/25/8110201/lenovo-com-has-been-hacked-apparently-by-lizard-squad" href="http://www.theverge.com/2015/2/25/8110201/lenovo-com-has-been-hacked-apparently-by-lizard-squad" target="_blank">a report</a> in TheVerge.com, the HTML source code for Lenovo.com was changed to read, &#8220;the new and improved rebranded Lenovo website featuring <strong>Ryan King</strong> and <strong>Rory Andrew Godfrey</strong>.&#8221;</p>
+<p>The Verge story notes that both men have been identified as members of the Lizard Squad; to my knowledge this has never been true. In fact, both used to be part of a <a title="http://en.wikipedia.org/wiki/Black_hat_hacker#Black_hat" href="http://en.wikipedia.org/wiki/Black_hat_hacker#Black_hat" target="_blank">black hat</a> and now-defunct hacker collective known as <a title="http://www.exploit-db.com/papers/25306/" href="http://www.exploit-db.com/papers/25306/" target="_blank">Hack The Planet</a> (HTP) along with one of the main current LizardSquad members &#8212; <strong>Julius &#8220;Zeekill&#8221; Kivimaki</strong> (for more on Julius, see <a title="http://krebsonsecurity.com/tag/zeekill/" href="http://krebsonsecurity.com/tag/zeekill/" target="_blank">these stories</a>). However, both King (a.k.a &#8220;Starfall&#8221;) and Godfrey (&#8220;KMS&#8221;) have been quite publicly working to undermine and expose the group for months.</p>
+<p>Reached via instant message, both King and Godfrey said the Lizard Squad used a <a title="http://searchsoftwarequality.techtarget.com/definition/command-injection" href="http://searchsoftwarequality.techtarget.com/definition/command-injection" target="_blank">command injection vulnerability</a> in Webnic.cc to upload a <a title="http://en.wikipedia.org/wiki/Rootkit" href="http://en.wikipedia.org/wiki/Rootkit" target="_blank">rootkit</a> &#8212; a set of hacking tools that hide the intruder&#8217;s presence on a compromised system and give the attacker persistent access to that system. <a href="https://krebsonsecurity.com/2015/02/webnic-registrar-blamed-for-hijack-of-lenovo-google-domains/#more-30104" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+	<div class="themonic-ad2"><div class="a-statement">Advertisement</div><a href="https://www.akamai.com/blog/security/attacking-a-macro-security-problem-with-micro-segmentation?utm_source=krebsonsecurity&amp;utm_medium=display&amp;utm_id=GL_SecureWorkforce_Guardicore&amp;utm_campaign=F-MC-52610&amp;utm_content=Guardicore">
+<img src="/b-akamai/140.png">
+</a></div>	<article id="post-30070" class="post-30070 post type-post status-publish format-standard hentry category-other tag-alexey-kusanagi-tikonov tag-alexey-dmitrievich-bron tag-alexsander-panin tag-aqua tag-dimka tag-evgeniy-mikhailovich-bogachev tag-gameover-zeus tag-haymixer tag-incomeet tag-ivan-petrovich-klepikov tag-jabberzeus tag-lucky12345 tag-slavik tag-spyeye tag-tank tag-vyacheslav-tank-penchukov tag-yevhen-jonni-kulibaba tag-yuriy-jtk-konovalenko tag-zeus">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2015/02/fbi-3m-bounty-for-zeus-trojan-author/" title="Permalink to FBI: $3M Bounty for ZeuS Trojan Author" rel="bookmark">FBI: $3M Bounty for ZeuS Trojan Author</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">February 25, 2015</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2015/02/fbi-3m-bounty-for-zeus-trojan-author/#comments">40 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>The FBI this week <a title="http://www.fbi.gov/wanted/cyber" href="http://www.fbi.gov/wanted/cyber" target="_blank">announced</a> it is offering a USD $3 million bounty for information leading to the arrest and/or conviction of one <strong>Evgeniy Mikhailovich Bogachev</strong>, a Russian man the government believes is responsible for building and distributing the <strong>ZeuS banking Trojan</strong>.</p>
+<p>Bogachev is thought to be a core architect of ZeuS, a malware strain that has been used to steal hundreds of millions of dollars from bank accounts &#8212; mainly from small- to mid-sized businesses based in the United States and Europe. Bogachev also is accused of being part of a crime gang that infected tens of millions of computers, harvested huge volumes of sensitive financial data, and rented the compromised systems to other hackers, spammers and online extortionists.</p>
+<p>So much of the intelligence gathered about Bogachev and his alleged accomplices has been scattered across various court documents and published reports over the years, but probably just as much on this criminal mastermind and his associates has never seen the light of day. What follows is a compendium of knowledge &#8212; a bit of a dossier, if you will &#8212; on Bogachev and his trusted associates.</p>
+<p>I first became aware of Bogachev by his nickname at the time &#8211;&#8220;Slavik&#8221; &#8212; in June 2009, after writing about <a title="http://voices.washingtonpost.com/securityfix/2009/07/an_odyssey_of_fraud_part_ii.html" href="http://voices.washingtonpost.com/securityfix/2009/07/an_odyssey_of_fraud_part_ii.html" target="_blank">a $415,000 cyberheist against Bullitt County, Kentucky</a>. I was still working for <em>The Washington Post</em> then, but that story would open the door to sources who were tracking the activities of an organized cybercrime gang that spanned from Ukraine and Russia to the United Kingdom.</p>
+<div id="attachment_26282" style="width: 610px" class="wp-caption aligncenter"><a class="lightbox" href="https://krebsonsecurity.com/wp-content/uploads/2014/06/evgeniy-fbi.png"><img aria-describedby="caption-attachment-26282" loading="lazy" class="size-large wp-image-26282" src="https://krebsonsecurity.com/wp-content/uploads/2014/06/evgeniy-fbi-600x679.png" alt="Yevgeniy Bogachev, Evgeniy Mikhaylovich Bogachev, a.k.a. &quot;lucky12345&quot;, &quot;slavik&quot;, &quot;Pollingsoon&quot;. Source: FBI.gov &quot;most wanted, cyber. " width="600" height="679" srcset="https://krebsonsecurity.com/wp-content/uploads/2014/06/evgeniy-fbi-600x679.png 600w, https://krebsonsecurity.com/wp-content/uploads/2014/06/evgeniy-fbi-285x322.png 285w, https://krebsonsecurity.com/wp-content/uploads/2014/06/evgeniy-fbi.png 751w" sizes="(max-width: 600px) 100vw, 600px" /></a><p id="caption-attachment-26282" class="wp-caption-text">Yevgeniy Bogachev, Evgeniy Mikhaylovich Bogachev, a.k.a. &#8220;lucky12345&#8221;, &#8220;slavik&#8221;, &#8220;Pollingsoon&#8221;. Source: FBI.gov &#8220;most wanted, cyber.</p></div>
+<p>Not long after that Bullitt County cyberheist story ran, I heard from a source who&#8217;d hacked the Jabber instant message server that these crooks were using to plan and coordinate their cyberheists. The members of this crew quickly became regular readers of my <strong>Security Fix</strong> blog at The Post after seeing their exploits detailed on the blog.</p>
+<p><a href="https://krebsonsecurity.com/wp-content/uploads/2015/02/bullittcar-thumb-250x110.jpg"><img loading="lazy" class="alignright size-full wp-image-30077" src="https://krebsonsecurity.com/wp-content/uploads/2015/02/bullittcar-thumb-250x110.jpg" alt="bullittcar-thumb-250x110" width="250" height="110" /></a>They also acknowledged in their chats that they&#8217;d been in direct contact with the Zeus author himself &#8212; and that the gang had hired the malware author to code a custom version of the Trojan that would latter become known as &#8220;Jabberzeus.&#8221; The &#8220;jabber&#8221; part of the name is a reference to a key feature of the malware that would send an Jabber instant message to members of the gang anytime a new victim logged into a bank account that had a high balance.</p>
+<p>Here&#8217;s a snippet from that chat, translated from Russian. &#8220;Aqua&#8221; was responsible for recruiting and managing a network of &#8220;money mules&#8221; to help cash out the payroll accounts that these crooks were hijacking with the help of their custom Jabberzeus malware. &#8220;Dimka&#8221; is Aqua&#8217;s friend, and Aqua explains to him that they hired the ZeuS author to create the custom malware and help them troubleshoot it. But Aqua is unhappy because the ZeuS author declined to help them keep it undetectable by commercial antivirus tools.</p>
+<blockquote><p><strong>dimka:</strong> I read about the king of seas, was that your handiwork?</p>
+<p><strong>aqua:</strong> what are you talking about?</p>
+<p><strong>dimka:</strong> <span class="il">zeus</span></p>
+<p><strong>aqua:</strong> yes, we are using it right now. its developer sits with us on the system</p>
+<p><strong>dimka:</strong> it seems to be very popular right now</p>
+<p><strong>aqua:</strong> but that fucker annoyed the hell out of everyone. he refuses to write bypass of [anti-malware] scans, and trojan penetration is only 35-40%. we need better</p>
+<p><strong>aqua:</strong> <a href="http://voices.washingtonpost.com/securityfix" target="_blank" rel="noreferrer">http://voices.washingtonpost.com/securityfix</a> read this. here you find almost everything about us</p>
+<p><strong>aqua:</strong> we&#8217;re using this [custom] system. we are the Big Dog. the rest using Zeus are doing piddly crap.</p></blockquote>
+<p>Days later, other members of the Jabberzeus crew  were all jabbering about the Bullitt County cyberheist story. The individual who uses the nickname &#8220;tank&#8221; in the conversation below managed money mules for the gang and helped coordinate the exchange of stolen banking credentials. Tank begins the conversation by <a title="http://voices.washingtonpost.com/securityfix/2009/07/an_odyssey_of_fraud_part_ii.html" href="http://voices.washingtonpost.com/securityfix/2009/07/an_odyssey_of_fraud_part_ii.html" target="_blank">pasting a link</a> to my Washington Post story about the Bullitt County hack.</p>
+<blockquote><p><strong>tank@incomeet.com:</strong> That is about us. Only the <span style="line-height: 1.5;">figures are fairytales. </span></p>
+<p><strong>haymixer@jabber.ru/dimarikk:</strong> This was from your botnet account. Apparently, this is why our hosters in service rejected the old ones. They caused a <span style="line-height: 1.5;">damn commotion.</span></p>
+<p><strong>tank@incomeet.com:</strong> I have already become paranoid over this. Such bullshit as this in the Washington Post.</p>
+<p><strong>haymixer@jabber.ru/dimarikk:</strong> I almost dreamed of this bullshit at night. He writes about everything that I touch in any manner&#8230;Klik Partners, ESTHost, MCCOLO&#8230;</p>
+<p><strong>tank@incomeet.com:</strong> Now you are not alone.  Just 2 weeks before this I contacted him as an expert to find out anything new. It turns out that he wrote this within 3 days. Now we also will dream about him.</p></blockquote>
+<p>In a separate conversation between Tank and the Zeus author (using the nickname &#8220;lucky12345&#8221; here), the two complain about news coverage of Zeus:</p>
+<blockquote><p><strong>tank:</strong> Are you there?</p>
+<p><strong>tank:</strong> This is what they damn wrote about me.</p>
+<p><strong>tank:</strong> [pasting a link to the Washington Post story]</p>
+<p><strong>tank:</strong> I&#8217;ll take a quick look at history</p>
+<p><strong>tank:</strong> Originator: BULLITT COUNTY FISCAL Company: Bullitt County Fiscal Court</p>
+<p><strong>tank:</strong> Well, you got it from that cash-in.</p>
+<p><strong>lucky12345:</strong> From 200k?</p>
+<p><strong>tank:</strong> Well, they are not the right amounts and the cash out from that account was shitty.</p>
+<p><strong>tank:</strong> Levak was written there.</p>
+<p><strong>tank:</strong> Because now the entire USA knows about Zeus.</p>
+<p><strong>tank:</strong> 🙁</p>
+<p><strong>lucky12345:</strong> It&#8217;s fucked.</p></blockquote>
+<p>After the Bullitt County story, my source and I tracked this gang as they hit one small business after another. In the ensuing six months before my departure from The Post, I wrote about this gang&#8217;s <a title="http://www.krebsonsecurity.com/2009/12/story-driven-resume-my-best-work-2005-2009-3/" href="http://www.krebsonsecurity.com/2009/12/story-driven-resume-my-best-work-2005-2009-3/" target="_blank">attacks against more than a dozen companies in the United States</a>.</p>
+<p>By this time, Slavik was openly selling the barebones ZeuS Trojan code that Jabberzeus was built on to anyone who could pay several thousand dollars for the crimeware kit. There is evidence he also was using his own botnet kit or at least taking a fee to set up instances of it on behalf of buyers. In late 2009, security researchers had tracked dozens of Zeus control servers that phoned home to domains which bore his nickname, such as <strong>slaviki-res1.com</strong>, <strong>slavik1[dot]com</strong>, <strong>slavik2[dot]com</strong>, <strong>slavik3[dot]com</strong>, and so on. <a href="https://krebsonsecurity.com/2015/02/fbi-3m-bounty-for-zeus-trojan-author/#more-30070" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-29995" class="post-29995 post type-post status-publish format-standard hentry category-other category-tax-refund-fraud tag-david-williams tag-hr-block tag-indu-kodukula tag-intuit tag-michael-lyons tag-refund-transfer tag-robert-lanesey tag-robert-lee tag-shane-macdougall tag-tax-refund-fraud tag-tax-return-fraud tag-taxact tag-turbotax">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2015/02/turbotaxs-anti-fraud-efforts-under-scrutiny/" title="Permalink to TurboTax&#8217;s Anti-Fraud Efforts Under Scrutiny" rel="bookmark">TurboTax&#8217;s Anti-Fraud Efforts Under Scrutiny</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">February 22, 2015</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2015/02/turbotaxs-anti-fraud-efforts-under-scrutiny/#comments">175 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>Two former security employees at <strong>Intuit</strong> &#8212; the makers of the popular tax preparation software and service <strong>TurboTax &#8212;</strong> allege that the company has made millions of dollars knowingly processing state and federal tax refunds filed by cybercriminals. Intuit says it leads the industry in voluntarily reporting suspicious returns, and that ultimately it is up to the <strong>Internal Revenue Service</strong> to develop industry-wide requirements for tax preparation firms to follow in their fight against the multi-billion dollar problem of tax refund fraud.</p>
+<p>Last week, KrebsOnSecurity <a title="http://krebsonsecurity.com/2015/02/the-rise-in-state-tax-refund-fraud/" href="http://krebsonsecurity.com/2015/02/the-rise-in-state-tax-refund-fraud/" target="_blank">published an exclusive interview</a> with <strong>Indu Kodukula</strong>, Intuit&#8217;s chief information security officer. Kodukula explained that customer password re-use was a major cause of a spike this tax season in fraudulent state tax refund requests. The increase in phony state refund requests prompted several state revenue departments to complain to their state attorneys general. In response, TurboTax <a title="http://krebsonsecurity.com/2015/02/citing-tax-fraud-spike-turbotax-suspends-state-e-filings/" href="http://krebsonsecurity.com/2015/02/citing-tax-fraud-spike-turbotax-suspends-state-e-filings/" target="_blank">temporarily halted all state filings</a> while it investigated claims of a possible breach. The company resumed state filing shortly after that pause, saying it could find no evidence that customers&#8217; TurboTax credentials had been stolen from its network.</p>
+<p>Kodukula noted that although the incidence of hijacked, existing TurboTax accounts was rapidly growing, the majority of refund scams the company has to deal with stem from “stolen identity refund fraud” or SIRF. In SIRF, the thieves gather pieces of data about taxpayers from outside means — through phishing attacks or <a title="http://krebsonsecurity.com/?s=identity+theft+service&amp;x=0&amp;y=0" href="http://krebsonsecurity.com/?s=identity+theft+service&amp;x=0&amp;y=0" target="_blank">identity theft services in the underground</a>, for example — then create accounts at TurboTax in the victims’ names and file fraudulent tax refund claims with the IRS.</p>
+<p>Kodukula cast Intuit as an industry leader in helping the IRS identify and ultimately deny suspicious tax returns. But that portrayal only tells part of the story, according to two former Intuit employees who until recently each held crucial security positions helping the company identify and fight tax fraud. Both individuals described a company that has intentionally dialed back efforts to crack down on SIRF so as not to lose market share when fraudsters began shifting their business to Intuit&#8217;s competitors.</p>
+<p><strong>Robert Lee</strong>, a security business partner at Intuit&#8217;s consumer tax group until his departure from the company in July 2014, said he and his team at Intuit developed sophisticated fraud models to help Intuit quickly identify and close accounts that were being used by crooks to commit massive amounts of SIRF fraud.</p>
+<p>But Lee said he was mystified when Intuit repeatedly refused to adopt some basic policies that would make it more costly and complicated for fraudsters to abuse the company&#8217;s service for tax refund fraud, such as blocking the re-use of the same Social Security number across a certain number of TurboTax accounts, or preventing the same account from filing more than a small number of tax returns.</p>
+<p>&#8220;If I sign up for an account and file tax refund requests on 100 people who are not me, it&#8217;s obviously fraud,&#8221; Lee said in an interview with KrebsOnSecurity. &#8220;<span class="pullquote pqright">We found literally millions of accounts that were 100 percent used only for fraud. But management explicitly forbade us from either flagging the accounts as fraudulent, or turning off those accounts.</span>&#8221;</p>
+<p>The allegations surface just days after Senate Finance Committee Chairman <strong>Orrin Hatch</strong> (R., Utah) said his panel will be holding hearings on reports about a spike in fraudulent filings through TurboTax and elsewhere. The House Ways and Means Committee is <a title="http://www.nasdaq.com/article/congress-starts-its-own-turbotax-probes-20150216-00334" href="http://www.nasdaq.com/article/congress-starts-its-own-turbotax-probes-20150216-00334" target="_blank">reportedly</a> looking into the matter and has held bipartisan staff-level discussions with the IRS and Intuit.</p>
+<p><strong>The Federal Trade Commission</strong> (FTC) said it received 332,646 identity theft complaints in the calendar year 2014, and that almost one-third of them &#8212; the largest portion &#8212; were tax-related identity theft complaints. Tax identity theft has been the largest ID theft category for the last five years.</p>
+<p>According to a <a title="http://www.gao.gov/assets/670/667965.pdf" href="http://www.gao.gov/assets/670/667965.pdf" target="_blank">recent report</a> (PDF) from the <strong>U.S. Government Accountability Office</strong> (GAO), the IRS estimated it prevented $24.2 billion in fraudulent identity theft refunds in 2013.  Unfortunately, the IRS also paid $5.8 billion that year for refund requests later determined to be fraud. The GAO noted that because of the difficulties in knowing the amount of undetected fraud, the actual amount could far exceed those estimates.</p>
+<p><span style="text-decoration: underline;">SQUEEZING THE BALLOON</span></p>
+<p>Lee said the scammers who hijack existing TurboTax accounts most often will use stolen credit cards to pay the $25-$50 TurboTax fee for processing and sending the refund request to the IRS.</p>
+<p>But he said the crooks perpetrating SIRF typically force the IRS &#8212; and, by extension, U.S. taxpayers &#8212; to cover the fee for their bogus filings. That&#8217;s because most SIRF filings take advantage of what&#8217;s known in the online tax preparation business as a &#8216;refund transfer&#8217;, which deducts TurboTax&#8217;s filing fee from the total amount of the fraudulent refund request. If the IRS then approves the fraudulent return, TurboTax gets paid.</p>
+<p>&#8220;The reason fraudsters love this system is because they don&#8217;t even have to use stolen credit cards to do it,&#8221; Lee said. &#8220;What&#8217;s really going on here is that the fraud business is actually profitable for Intuit.&#8221;</p>
+<p>Lee confirmed Kodukula&#8217;s narrative that Intuit is an industry leader in sending the IRS regular reports about tax returns that appear suspicious. But he said the company eventually scaled back those reports after noticing that the overall fraud the IRS was reporting wasn&#8217;t decreasing as a result of Intuit&#8217;s reporting: Fraudsters were simply taking their business to Intuit&#8217;s competitors.</p>
+<p>&#8220;We noticed the IRS started taking action, and because of this, <span class="pullquote pqleft">we started to see not only our fraud numbers but also our revenue go down before the peak of tax season a couple of years ago,&#8221; Lee recalled. &#8220;When we stopped or delayed sending those fraud numbers, we saw the fraud and our revenue go back up.</span>&#8221;</p>
+<p>Lee said that early on, the reports on returns that Intuit&#8217;s fraud teams flagged as bogus were sent immediately to the IRS.</p>
+<p>&#8220;Then, there was a time period where we didn&#8217;t deliver that information at all,&#8221; he said. &#8220;And then at one point there was a two-week delay added between the time the information was ready and the time it was submitted to the IRS. There was no technical reason for that delay, but I can only speculate what the real justification for that was.&#8221;</p>
+<p>KrebsOnSecurity obtained a copy of a recording made of an internal Intuit conference call on Oct. 14, 2014, in which <strong>Michael Lyons</strong>, TurboTax&#8217;s deputy general counsel, describes the risks of the company being overly aggressive &#8212; relative to its competitors &#8212; in flagging suspicious tax returns for the IRS.</p>
+<p>&#8220;As you can imagine, the bad guys being smart and savvy, they saw this and noticed it, they just went somewhere else,&#8221; Lyons said in the recording. &#8220;The amount of fraudulent activity didn&#8217;t change. The landscape didn&#8217;t change. It was like squeezing a balloon. They recognized that TurboTax returns were getting stopped at the door. So they said, &#8216;We’ll just go over to <strong>H&amp;R Block</strong>, to <strong>TaxSlayer</strong> or <strong>TaxAct</strong>, or whatever.&#8217; And all of a sudden we saw what we call &#8216;multi-filer activity&#8217; had completely dropped off a cliff but the amount that the IRS reported coming through digital channels and through their self reported fraud network was not changing at all. The bad guys had just gone from us to others.&#8221;</p>
+<p>That recording was shared by <strong>Shane MacDougall</strong>, formerly a principal security engineer at Intuit. MacDougall resigned from the company last week and filed an official whistleblower complaint with the <strong>U.S. Securities and Exchange Commission</strong>, alleging that the company routinely placed profits ahead of ethics. MacDougall submitted the recording in his filing with the SEC.</p>
+<p>&#8220;Complainant repeatedly raised issues with managers, directors, and even [a senior vice president] of the company to try to rectify ongoing fraud, but was repeatedly rebuffed and told Intuit couldn&#8217;t do anything that would &#8216;hurt the numbers&#8217;,&#8221; MacDougall wrote in his SEC filing. &#8220;Complainant repeatedly offered solutions to help stop the fraud, but was ignored.&#8221;</p>
+<p><span style="text-decoration: underline;">NO RULES OF THE ROAD</span></p>
+<p>For its part, Intuit maintains that it is well out in front of its competitors in voluntarily reporting to the IRS refund requests that the company has flagged as suspicious. The company also stresses that it has done so even though the IRS still has not promulgated rules that require TurboTax and its competitors to report suspicious returns  &#8212; or even how to report such activity. Intuit executives say they went to the IRS three years ago to request specific authority to share that information. The IRS did not respond to requests for comment.</p>
+<p>Intuit officials declined to address Lyons&#8217; recorded comments specifically, although they did confirm that a company attorney led an employee WebEx meeting on the date the recording was made. But <strong>David Williams</strong>, Intuit&#8217;s chief tax officer, said what’s missing from the recorded conversation excerpted above is that Intuit has been at the forefront of asking the IRS to propose industry standards that every industry player can follow &#8212; requests that have so far gone unheeded.</p>
+<p>&#8220;We have led the industry in making suspicious activity reports, and I’d venture to say that virtually all of the returns that Mr. Lee is quoted as referring to appear in our suspicious activity reports and are stopped by the IRS,&#8221; Williams said. &#8220;Whatever else Mr. Lee may have seen, I’m not buying the premise that somehow there was a profit motive in it for us.&#8221;</p>
+<p><strong>Robert Lanesey</strong>, Inuit&#8217;s chief communications officer, said Intuit doesn&#8217;t make a penny on tax filings that are ultimately rejected by the IRS.</p>
+<p><span class="pullquote pqright">&#8220;Revenue that comes from reports included in our suspicious activity reports to the IRS has dropped precipitously as we have changed and improved our reporting mechanisms,&#8221; Lanesey said. &#8220;When it comes to market share, it doesn&#8217;t count toward our market share unless it&#8217;s a successful return. We’ve gotten better and we&#8217;ve gotten more accurate, but it’s not about money.&#8221;</span></p>
+<p>Williams added that it is not up to Intuit to block returns from being filed, and that it is the IRS&#8217;s sole determination whether to process a given refund request.</p>
+<p>&#8220;We will flag them as suspicious, but we do not get to determine if a return is fraud,&#8221; Williams said. &#8220;It’s the IRS’s responsibility and ultimately they make that decision. What I will tell you is that of the ones we report as suspicious, the IRS rejects a very high percentage, somewhere in the 80-90 percent range.&#8221;</p>
+<p>Earlier this month, Intuit CEO <strong>Brad Smith</strong> <a title="http://blogs.wsj.com/totalreturn/2015/02/11/intuit-ceo-sends-letter-to-irs-commissioner-on-fraud/" href="http://blogs.wsj.com/totalreturn/2015/02/11/intuit-ceo-sends-letter-to-irs-commissioner-on-fraud/" target="_blank">sent a letter</a> to the commissioner of the IRS,  noting that while Intuit sends reports to the IRS when it sees patterns of suspicious behavior, the government has been limited in the types of information it can share with parties, including tax-preparation firms.</p>
+<p>“The IRS could be the convener to bring the States together to help drive common standards adoption,” Smith wrote, offering the assistance of Intuit staff members “to work directly with the IRS and the States in whatever ways may be of assistance…as the fight against fraud goes forward.”</p>
+<p style="line-height: 18.0pt;"><span style="text-decoration: underline;">ZERO FALSE POSITIVES</span></p>
+<p>Lee and MacDougall both said Intuit&#8217;s official approach to fighting fraud is guided by a policy of zero tolerance for so-called &#8220;false positives&#8221; &#8212; the problem of incorrectly flagging a legitimate customer refund request as suspicious, and possibly incurring the double whammy of a delay in the customer&#8217;s refund and an inquiry by the IRS. This is supported by audio recordings of conference calls between Intuit&#8217;s senior executives that were shared with KrebsOnSecurity.</p>
+<p>&#8220;We protect the sanctity of the customer experience and hold it as inviolate,&#8221; Intuit&#8217;s General<br />
+Counsel Michael Lyons can be heard saying on a recorded October 2014 internal conference call. &#8220;We do everything we can to organize the best screening program we can, but we avoid false positives at all costs. Because getting a legitimate taxpayer ensnared in the &#8216;you’re a bad guy&#8217; area with the IRS is hell. Once your return gets flagged as suspicious, rejected and the IRS starts investigating, you’re not in a good place. More than 50 percent of people out there are living paycheck to paycheck, and when this is the biggest paycheck of the year for them, they can’t afford to get erroneously flagged as fraud and have to prove to the IRS who they are so that they can get that legitimate refund that they were expecting months ago.&#8221;</p>
+<p>On the same conference call, MacDougall can be heard asking Lyons why the company wouldn&#8217;t want to use security as a way to set the company apart from its competitors in the online tax preparation industry.</p>
+<p> <a href="https://krebsonsecurity.com/2015/02/turbotaxs-anti-fraud-efforts-under-scrutiny/#more-29995" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-29919" class="post-29919 post type-post status-publish format-standard hentry category-other category-tax-refund-fraud tag-account-takeover-fraud tag-experian tag-indu-kodukula tag-intuit tag-mulitfactor-authentication tag-sirf tag-stolen-identity-refund-fraud tag-tax-return-fraud tag-tigta tag-treasury-inspector-general-for-tax-administration tag-turbotax">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2015/02/the-rise-in-state-tax-refund-fraud/" title="Permalink to The Rise in State Tax Refund Fraud" rel="bookmark">The Rise in State Tax Refund Fraud</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">February 17, 2015</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2015/02/the-rise-in-state-tax-refund-fraud/#comments">72 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<h4>Intuit: Anti-fraud Improvements by IRS Fuel Up To 3700 Percent Rise in Phony State Filings</h4>
+<p>Scam artists stole billions of dollars last year from the U.S. Treasury by filing phony federal tax refund requests on millions of Americans. But as Uncle Sam has made this type of fraud harder for thieves to profit from, the crooks have massively shifted their focus to conducting refund fraud at the state level. Or at least according to <strong>Intuit Inc.</strong>, the makers of <strong>TurboTax</strong>: The company says it believes that shift is responsible for <em>a whopping 3700 percent increase in fraudulent state tax refund filings this year in some states.</em></p>
+<div id="attachment_25751" style="width: 257px" class="wp-caption alignright"><a href="https://krebsonsecurity.com/wp-content/uploads/2014/04/taxfraud.jpg"><img aria-describedby="caption-attachment-25751" loading="lazy" class=" wp-image-25751" src="https://krebsonsecurity.com/wp-content/uploads/2014/04/taxfraud-285x285.jpg" alt="File 'em Before the Bad Guys Can" width="247" height="247" srcset="https://krebsonsecurity.com/wp-content/uploads/2014/04/taxfraud-285x285.jpg 285w, https://krebsonsecurity.com/wp-content/uploads/2014/04/taxfraud-150x150.jpg 150w, https://krebsonsecurity.com/wp-content/uploads/2014/04/taxfraud-600x600.jpg 600w, https://krebsonsecurity.com/wp-content/uploads/2014/04/taxfraud.jpg 693w" sizes="(max-width: 247px) 100vw, 247px" /></a><p id="caption-attachment-25751" class="wp-caption-text">File &#8217;em Before the Bad Guys Can</p></div>
+<p>Earlier this month, TurboTax was <a title="http://krebsonsecurity.com/2015/02/citing-tax-fraud-spike-turbotax-suspends-state-e-filings/" href="http://krebsonsecurity.com/2015/02/citing-tax-fraud-spike-turbotax-suspends-state-e-filings/http://krebsonsecurity.com/2015/02/citing-tax-fraud-spike-turbotax-suspends-state-e-filings/" target="_blank">forced to briefly suspend state tax refund filings</a> while it investigated the source of the unprecedented fraud spike. To learn more about the run-up to this extraordinary step and other tax fraud trends this year, I talked with <strong>Indu Kodukula</strong>, chief information security officer at Intuit.</p>
+<p>Kodukula explained that in years past the dominant form of tax return scams the company has dealt with stemmed from phony federal tax refund requests. But this tax season, things changed dramatically.</p>
+<p>&#8220;The IRS has gotten much better than a few years ago from the perspective of fighting fraud,&#8221; Kodukula said. &#8220;We think what&#8217;s happening is that as a result the fraudsters are starting to target the states.&#8221;</p>
+<p>The data released by the <strong>Treasury Inspector General for Tax Administration</strong> (TIGTA), which oversees the work of the IRS, suggests the IRS does indeed appear to have improved at flagging and ultimately denying fraudulent federal tax returns. In <a title="http://www.treasury.gov/tigta/auditreports/2014reports/201440029_oa_highlights.html" href="http://www.treasury.gov/tigta/auditreports/2014reports/201440029_oa_highlights.html" target="_blank">an interim report</a> on the 2014 tax filing season, TIGTA said the IRS identified and confirmed 28,076 fraudulent tax returns involving identity theft. That was down significantly from <a title="http://www.treasury.gov/tigta/auditreports/2013reports/201340035fr.pdf" href="http://www.treasury.gov/tigta/auditreports/2013reports/201340035fr.pdf" target="_blank">a year earlier</a> (PDF), when the IRS identified and confirmed 85,385 fraudulent tax returns involving identity theft.</p>
+<p><span style="text-decoration: underline;">THE ROLE OF UNLINKED RETURNS</span></p>
+<p>Kodukula said tax fraudsters have evolved in response to increased information sharing by the IRS with state revenue departments about phony tax returns received at the federal level. He described a process that began about three years ago, when Intuit and TurboTax received express permission from the IRS to share information about suspected bogus tax refund requests.</p>
+<p><a href="https://krebsonsecurity.com/wp-content/uploads/2015/02/dyot-copy2.png"><img loading="lazy" class="alignleft  wp-image-29811" src="https://krebsonsecurity.com/wp-content/uploads/2015/02/dyot-copy2.png" alt="dyot copy2" width="231" height="296" /></a>&#8220;It has been our understanding that this information is in turn being shared with [state treasury departments], Kodukula said. &#8220;But there are 46 states in the Union where taxpayers can file what&#8217;s called an &#8216;<strong>unlinked return</strong>,&#8217; meaning they can file a state return without having a file a federal return at the same time. So when the [tax fraudsters] file an unlinked return, it leaves the state at its own disposal to fight this fraud, and we think that&#8217;s what has taken the states by surprise this year.&#8221;</p>
+<p>States allow unlinked returns because most taxpayers owe taxes at the federal level but are due refunds from their state. Thus, unlinked returns allow taxpayers who owe money to the IRS to pay some or all of that off with state refund money.</p>
+<p>Unlinked returns typically have made up a very small chunk of Intuit&#8217;s overall returns, Kodukula said. However, so far in this year&#8217;s tax filing season, Intuit has seen between three and 37-fold increases in unlinked, state-only returns. Convinced that most of those requests are fraudulent, the company now blocks users from filing unlinked returns via TurboTax.</p>
+<p>&#8220;It&#8217;s very hard to imagine a fundamental demographic shift that could cause that kind of pattern,&#8221; Kodukula said. &#8220;Our thought is that the vast majority of this is clearly not legitimate activity.&#8221;</p>
+<p><span style="text-decoration: underline;">ACCOUNT TAKEOVERS FUELED BY PASSWORD RE-USE</span></p>
+<p>Not only have the fraudsters shifted from attacking the IRS to robbing state coffers, but the methods they use to steal taxpayer data also are evolving. Kodukula explained that traditionally most of the bogus refund requests were the result of what the company calls &#8220;stolen identity refund fraud&#8221; or SIRF. In SIRF scams, the thieves gather pieces of data about taxpayers from outside means &#8212; through phishing attacks or <a title="http://krebsonsecurity.com/?s=identity+theft+service&amp;x=0&amp;y=0" href="http://krebsonsecurity.com/?s=identity+theft+service&amp;x=0&amp;y=0" target="_blank">identity theft services in the underground</a>, for example &#8212; then create accounts at TurboTax in the victims&#8217; names and file fraudulent tax refund claims with the IRS.</p>
+<p>But Kodukula said that over the past 18 months, Intuit has watched fraudsters shift from SIRF to account takeovers, wherein scammers compromise TurboTax credentials by exploiting human nature: The tendency for people to re-use passwords across multiple sites.  This technique works because a fair percentage of users re-use passwords at multiple sites. When a breach at one site exposes the email addresses and passwords of its users, fraudsters will invariably try the stolen account credentials at other sites, knowing that a small percentage of them will work. <a href="https://krebsonsecurity.com/2015/02/the-rise-in-state-tax-refund-fraud/#more-29919" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-29960" class="post-29960 post type-post status-publish format-standard hentry category-other tag-association-of-american-publishers tag-prose-awards tag-spam-nation">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2015/02/spam-nation-wins-prose-award/" title="Permalink to &#8216;Spam Nation&#8217; Wins PROSE Award" rel="bookmark">&#8216;Spam Nation&#8217; Wins PROSE Award</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">February 17, 2015</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2015/02/spam-nation-wins-prose-award/#comments">27 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>I am pleased to announce that my new book, <a title="http://www.amazon.com/Spam-Nation-Organized-Cybercrime---Epidemic/dp/1402295618/ref=sr_1_1?ie=UTF8&amp;qid=1400765293&amp;sr=8-1&amp;keywords=spam+nation" href="http://www.amazon.com/Spam-Nation-Organized-Cybercrime---Epidemic/dp/1402295618/ref=sr_1_1?ie=UTF8&amp;qid=1400765293&amp;sr=8-1&amp;keywords=spam+nation" target="_blank"><em>Spam Nation: The Inside Story of Organized Cybercrime, from Global Epidemic to Your Front Door</em></a>, has been honored with a <strong>2015 PROSE Award</strong> in the Media &amp; Cultural Studies category.</p>
+<p><a href="https://krebsonsecurity.com/wp-content/uploads/2015/02/proseawards.png"><img loading="lazy" class="alignright size-medium wp-image-29961" src="https://krebsonsecurity.com/wp-content/uploads/2015/02/proseawards-285x149.png" alt="proseawards" width="285" height="149" srcset="https://krebsonsecurity.com/wp-content/uploads/2015/02/proseawards-285x149.png 285w, https://krebsonsecurity.com/wp-content/uploads/2015/02/proseawards.png 306w" sizes="(max-width: 285px) 100vw, 285px" /></a>The PROSE Awards are given by the Professional and Scholarly Publishing Division of the <strong>Association of American Publishers. </strong></p>
+<p>From the AAP&#8217;s site: &#8220;The awards annually recognize the very best in professional and scholarly publishing by bringing attention to distinguished books, journals, and electronic content in over 40 categories. Judged by peer publishers, librarians, and medical professionals since 1976, the PROSE Awards are extraordinary for their breadth and depth.&#8221;</p>
+<p>I am grateful to the AAP for this honor. According to the AAP, the 2015 PROSE Awards received a record-breaking 540 entries this year &#8211; more than ever before in their 39-year history &#8211; from more than 70 publishers around the world. &#8221; Other 2015 PROSE Awards winners are listed at <a title="http://proseawards.com/current-winners.html" href="http://proseawards.com/current-winners.html" target="_blank">this page</a>.</p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-29921" class="post-29921 post type-post status-publish format-standard hentry category-other tag-andy-chandler tag-anunak tag-bebe-breach tag-carbanak tag-dridex tag-dyre tag-fox-it tag-group-ib tag-kaspersky-lab tag-new-york-times tag-sheplers-breach tag-staples-breach">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2015/02/the-great-bank-heist-or-death-by-1000-cuts/" title="Permalink to The Great Bank Heist, or Death by 1,000 Cuts?" rel="bookmark">The Great Bank Heist, or Death by 1,000 Cuts?</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">February 16, 2015</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2015/02/the-great-bank-heist-or-death-by-1000-cuts/#comments">88 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>I received a number of media requests and emails from readers over the weekend to comment on a front-page <em>New York Times</em> <a title="http://www.nytimes.com/2015/02/15/world/bank-hackers-steal-millions-via-malware.html?partner=socialflow&amp;smid=tw-nytimes&amp;_r=1" href="http://www.nytimes.com/2015/02/15/world/bank-hackers-steal-millions-via-malware.html?partner=socialflow&amp;smid=tw-nytimes&amp;_r=1" target="_blank">story</a> about an organized gang of cybercriminals pulling off &#8220;one of the largest bank heists ever.&#8221; Turns out, I reported on this gang&#8217;s activities in December 2014, although my story ran minus many of the superlatives in the Times piece.</p>
+<p>The Times&#8217; story, &#8220;Bank Hackers Steal Millions Via Malware,&#8221; looks at the activities of an Eastern European cybercrime group that Russian security firm <strong>Kaspersky Lab</strong> calls the &#8220;Carbanak&#8221; gang. According to Kaspersky, this group deployed malware via phishing scams to get inside of computers at more than 100 banks and steal upwards of USD $300 million &#8212; possibly as high as USD $1 billion.</p>
+<div id="attachment_29937" style="width: 610px" class="wp-caption aligncenter"><a href="https://krebsonsecurity.com/wp-content/uploads/2015/02/cvmap.png"><img aria-describedby="caption-attachment-29937" loading="lazy" class="size-large wp-image-29937" src="https://krebsonsecurity.com/wp-content/uploads/2015/02/cvmap-600x486.png" alt="Image: Kaspersky" width="600" height="486" srcset="https://krebsonsecurity.com/wp-content/uploads/2015/02/cvmap-600x486.png 600w, https://krebsonsecurity.com/wp-content/uploads/2015/02/cvmap-285x231.png 285w, https://krebsonsecurity.com/wp-content/uploads/2015/02/cvmap.png 755w" sizes="(max-width: 600px) 100vw, 600px" /></a><p id="caption-attachment-29937" class="wp-caption-text">Image: Kaspersky</p></div>
+<p>Such jaw-dropping numbers were missing from a story I wrote in December 2014 about this same outfit, <a title="http://krebsonsecurity.com/2014/12/gang-hacked-atms-from-inside-banks/" href="http://krebsonsecurity.com/2014/12/gang-hacked-atms-from-inside-banks/" target="_blank">Gang Hacked ATMs From Inside Banks</a>. That piece was based on similar research <a title="http://www.group-ib.com/files/Anunak_APT_against_financial_institutions.pdf" href="http://www.group-ib.com/files/Anunak_APT_against_financial_institutions.pdf" target="_blank">published</a> (PDF) jointly by Dutch security firm <strong>Fox-IT</strong> and by <strong>Group-IB</strong>, a Russian computer forensics company. Fox-IT and Group-IB called the crime group &#8220;Anunak,&#8221; and described how the crooks sent malware laced <strong>Microsoft Office</strong> attachments in spear phishing attacks to compromise specific users inside targeted banks.</p>
+<p>&#8220;Most cybercrime targets consumers and businesses, stealing account information such as passwords and other data that lets thieves cash out hijacked bank accounts, as well as credit and debit cards,&#8221; my December 2014 story observed. &#8220;But this gang specializes in hacking into banks directly, and then working out ingenious ways to funnel cash directly from the financial institution itself.&#8221;</p>
+<p>I also noted that a source told me this group of hackers is thought to be the same criminal gang responsible for several credit and debit card breaches at major retailers across the United States, including women’s clothier <a title="http://krebsonsecurity.com/2014/12/banks-credit-card-breach-at-bebe-stores/" href="http://krebsonsecurity.com/2014/12/banks-credit-card-breach-at-bebe-stores/" target="_blank">Bebe Stores Inc.</a>, western wear store <a title="http://www.kansascity.com/news/business/article2169946.html" href="http://www.kansascity.com/news/business/article2169946.html" target="_blank" rel="noreferrer">Sheplers</a>, and office supply store <a title="http://krebsonsecurity.com/?s=staples&amp;x=0&amp;y=0" href="http://krebsonsecurity.com/?s=staples&amp;x=0&amp;y=0" target="_blank">Staples Inc</a>.</p>
+<p><strong>Andy Chandler</strong>, Fox-IT&#8217;s general manager and senior vice president, said the group profiled in its December report and in the Kaspersky study are the same.</p>
+<p>“Anunak or Carbanak are the same,&#8221; Chandler said. &#8220;We continue to track this organization but there are no major revelations since December. So far in 2015, the financial industry have been kept busy by other more creative criminal groups,&#8221; such as those responsible for spreading the <a title="http://www.secureworks.com/cyber-threat-intelligence/threats/dyre-banking-trojan/" href="http://www.secureworks.com/cyber-threat-intelligence/threats/dyre-banking-trojan/" target="_blank">Dyre</a> and <a title="http://researchcenter.paloaltonetworks.com/2014/10/dridex-banking-trojan-distributed-word-documents/" href="http://researchcenter.paloaltonetworks.com/2014/10/dridex-banking-trojan-distributed-word-documents/" target="_blank">Dridex</a> banking malware, he said. <a href="https://krebsonsecurity.com/2015/02/the-great-bank-heist-or-death-by-1000-cuts/#more-29921" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-29621" class="post-29621 post type-post status-publish format-standard hentry category-other tag-gas-pump-security-tape tag-gas-pump-skimmers">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2015/02/fuel-station-skimmers-primed-at-the-pump/" title="Permalink to Fuel Station Skimmers: Primed at the Pump" rel="bookmark">Fuel Station Skimmers: Primed at the Pump</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">February 13, 2015</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2015/02/fuel-station-skimmers-primed-at-the-pump/#comments">68 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>I recall the first time I encountered an armed security guard at a local store. I remember feeling a bit concerned about the safety of the place because I made a snap (and correct) assumption that it must have been robbed recently. I get a similar feeling each time I fuel up my car at a filling station and notice the pump and credit card reader festooned with security tape that conjures up images of police tape around a crime scene.</p>
+<div id="attachment_29895" style="width: 490px" class="wp-caption aligncenter"><a class="lightbox" href="https://krebsonsecurity.com/wp-content/uploads/2015/02/kangaroo2.jpg"><img aria-describedby="caption-attachment-29895" loading="lazy" class="size-full wp-image-29895" src="https://krebsonsecurity.com/wp-content/uploads/2015/02/kangaroo2.jpg" alt="The security tape wrapped around this card reader at a Kangaroo station is intended to communicate that the credit card reader hasn't been altered." width="480" height="640" srcset="https://krebsonsecurity.com/wp-content/uploads/2015/02/kangaroo2.jpg 480w, https://krebsonsecurity.com/wp-content/uploads/2015/02/kangaroo2-285x380.jpg 285w" sizes="(max-width: 480px) 100vw, 480px" /></a><p id="caption-attachment-29895" class="wp-caption-text">The security tape wrapped around this card reader at a Kangaroo station is intended to communicate that the credit card reader hasn&#8217;t been altered.</p></div>
+<p>It&#8217;s nice to know I&#8217;m not the only one who feels this way. A reader named Tyler recently shared the above image, along with his experience.</p>
+<p>&#8220;I had my first encounter with tape across a gas station&#8217;s card reader the other day,&#8221; Tyler said. &#8220;I must say it led me to believe there was some sort of skimming device installed, as I have never seen this before. Further inspection showed it was actually a real attempt by the gas station to let consumers know if the device has been tampered with.&#8221;</p>
+<div id="attachment_29912" style="width: 610px" class="wp-caption aligncenter"><a href="https://krebsonsecurity.com/wp-content/uploads/2015/02/fingertape.jpg"><img aria-describedby="caption-attachment-29912" loading="lazy" class="size-large wp-image-29912" src="https://krebsonsecurity.com/wp-content/uploads/2015/02/fingertape-600x450.jpg" alt="Of course, if you merely need to re-affix the tape to something else, that's not a high technical hurdle." width="600" height="450" srcset="https://krebsonsecurity.com/wp-content/uploads/2015/02/fingertape-600x450.jpg 600w, https://krebsonsecurity.com/wp-content/uploads/2015/02/fingertape-285x214.jpg 285w, https://krebsonsecurity.com/wp-content/uploads/2015/02/fingertape.jpg 640w" sizes="(max-width: 600px) 100vw, 600px" /></a><p id="caption-attachment-29912" class="wp-caption-text">Of course, if you merely need to re-affix the tape to something else, that&#8217;s not a high technical hurdle.</p></div>
+<p>Tyler wanted to know what would prevent a scammer from simply removing the tape from one reader and placing it back on top of a compromised reader? Or, since most people probably wouldn&#8217;t know to look for the presence of tape around the card reader, how about just placing the skimming device right on top? I wondered that as well.</p>
+<p>The tape carries the bold yet misguided assurance, &#8220;securing your identity.&#8221; However, I&#8217;m guessing this security device is primarily meant to serve as a signal to gas station attendants when and if someone has monkeyed with a pump card reader.</p>
+<p>The tape on the reader is intended to protect against pump reader skimmers, like the one pictured below, which sells in underground forums for upwards of USD $2,000 and is designed to be fit directly over top of the readers they have at many <a title="https://krebsonsecurity.com/wp-content/uploads/2015/02/esso-Gas-Station.jpg" href="https://krebsonsecurity.com/wp-content/uploads/2015/02/esso-Gas-Station.jpg" target="_blank">ESSO/Exxon fuel pumps</a>.</p>
+<div id="attachment_29897" style="width: 610px" class="wp-caption aligncenter"><a class="lightbox" href="https://krebsonsecurity.com/wp-content/uploads/2015/02/gasraf1.png"><img aria-describedby="caption-attachment-29897" loading="lazy" class="size-large wp-image-29897" src="https://krebsonsecurity.com/wp-content/uploads/2015/02/gasraf1-600x338.png" alt="A gas pump card skimmer marketed and sold in underground forums for more than $2,000." width="600" height="338" srcset="https://krebsonsecurity.com/wp-content/uploads/2015/02/gasraf1-600x338.png 600w, https://krebsonsecurity.com/wp-content/uploads/2015/02/gasraf1-285x160.png 285w, https://krebsonsecurity.com/wp-content/uploads/2015/02/gasraf1.png 856w" sizes="(max-width: 600px) 100vw, 600px" /></a><p id="caption-attachment-29897" class="wp-caption-text">The seller of a gas pump card skimmer shows off his wares, which he sells for more than $2,000.</p></div>
+<p> <a href="https://krebsonsecurity.com/2015/02/fuel-station-skimmers-primed-at-the-pump/#more-29621" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-29823" class="post-29823 post type-post status-publish format-standard hentry category-other tag-david-wray tag-dcma-hack tag-dod">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2015/02/defense-contract-management-agency-probes-hack/" title="Permalink to Defense Contract Management Agency Probes Hack" rel="bookmark">Defense Contract Management Agency Probes Hack</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">February 10, 2015</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2015/02/defense-contract-management-agency-probes-hack/#comments">40 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>The <strong>Defense Contract Management Agency</strong>, the U.S. federal government entity responsible for performing <a title="http://en.wikipedia.org/wiki/Defense_Contract_Management_Agency" href="http://en.wikipedia.org/wiki/Defense_Contract_Management_Agency" target="_blank">contract administration services</a> for the<strong> Department of Defense</strong>, is responding to a suspected cybersecurity breach and has pulled a number of its servers offline while the investigation continues, KrebsOnSecurity has learned.</p>
+<div id="attachment_29873" style="width: 610px" class="wp-caption aligncenter"><a href="https://krebsonsecurity.com/wp-content/uploads/2015/02/dcma-outage.png"><img aria-describedby="caption-attachment-29873" loading="lazy" class="size-large wp-image-29873" src="https://krebsonsecurity.com/wp-content/uploads/2015/02/dcma-outage-600x379.png" alt="The public Web site for the DCMA has been offline for nearly two weeks. " width="600" height="379" srcset="https://krebsonsecurity.com/wp-content/uploads/2015/02/dcma-outage-600x379.png 600w, https://krebsonsecurity.com/wp-content/uploads/2015/02/dcma-outage-285x180.png 285w, https://krebsonsecurity.com/wp-content/uploads/2015/02/dcma-outage.png 1006w" sizes="(max-width: 600px) 100vw, 600px" /></a><p id="caption-attachment-29873" class="wp-caption-text">The public Web site for the DCMA has been offline for nearly two weeks.</p></div>
+<p>A notice posted to the DCMA&#8217;s home page communicates little about the investigation, other than to note that &#8220;corrective action is in progress,&#8221; and that &#8220;work is being done to restore service as quickly as possible.&#8221;</p>
+<p>Contacted about the outage, DCMA spokesman <strong>David Wray</strong> said suspicious activity was detected on a DCMA public-facing server January 28, resulting in an ongoing investigation.</p>
+<p>&#8220;So far, no DCMA, DoD or Defense Industrial Base data nor any Personal Identification Information has been breached. A cyber protection team from Joint Forces Headquarters, Department of Defense Information Network, is working with DCMA to enhance network security. DCMA&#8217;s website has been intentionally taken offline while the team investigates the activity. All other network operations have proceeded as normal.&#8221; <a href="https://krebsonsecurity.com/2015/02/defense-contract-management-agency-probes-hack/#more-29823" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-29874" class="post-29874 post type-post status-publish format-standard hentry category-other tag-february-2015-patch-tuesday tag-internet-explorer tag-microsoft-active-directory tag-microsoft-windows">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2015/02/microsoft-pushes-patches-for-dozens-of-flaws/" title="Permalink to Microsoft Pushes Patches for Dozens of Flaws" rel="bookmark">Microsoft Pushes Patches for Dozens of Flaws</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">February 10, 2015</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2015/02/microsoft-pushes-patches-for-dozens-of-flaws/#comments">60 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p><strong>Microsoft</strong> today released nine update bundles to plug at least 55 distinct security vulnerabilities in its <strong>Windows</strong> operating system and other software. Three of the patches fix bugs in Windows that Microsoft considers &#8220;critical,&#8221; meaning they can be exploited remotely to compromise vulnerable systems with little or no help from users, save for perhaps clicking a link or visiting a hostile Web site.</p>
+<p><a href="https://krebsonsecurity.com/wp-content/uploads/2014/07/brokenwindows.png"><img loading="lazy" class="alignright size-full wp-image-26837" src="https://krebsonsecurity.com/wp-content/uploads/2014/07/brokenwindows.png" alt="brokenwindows" width="229" height="240" /></a>The bulk of the flaws (41) addressed in this update apply to <strong>Internet Explorer</strong>, the default browser on Windows. This patch should obviously be a priority for any organizations that rely on IE. Other patches fix bugs in the Windows OS itself and in various versions of Microsoft Office. A full breakdown of the patches is available <a title="https://technet.microsoft.com/library/security/ms15-feb" href="https://technet.microsoft.com/library/security/ms15-feb" target="_blank">here</a>.</p>
+<p>Among the more interesting critical patches is a fix for <a title="https://technet.microsoft.com/library/security/MS15-011" href="https://technet.microsoft.com/library/security/MS15-011" target="_blank">a vulnerability</a> in <strong>Microsoft Group Policy</strong> that could present unique threats for enterprises that rely on <a title="http://en.wikipedia.org/wiki/Active_Directory" href="http://en.wikipedia.org/wiki/Active_Directory" target="_blank">Active Directory</a>, the default authentication mechanism on corporate Windows networks.  The vulnerability is remotely exploitable and can be used to grant attackers administrator-level privileges on the targeted machine or device –  that means 10s of millions of PCS, kiosks and other devices, if left untreated.</p>
+<p>Several readers who&#8217;ve already applied these updates report that doing so may require multiple restarts of Windows. Patches are available via Windows Update, the patching mechanism built into all recent and supported versions of Windows. For more granular information about these patches, check out <a title="https://community.qualys.com/blogs/laws-of-vulnerabilities/2015/02/10/patch-tuesday-february-2015" href="https://community.qualys.com/blogs/laws-of-vulnerabilities/2015/02/10/patch-tuesday-february-2015" target="_blank">this blog post</a> by <strong>Qualys </strong>as well as the always-useful <a title="https://isc.sans.edu/forums/diary/Microsoft+Update+Advisory+for+February+2015/19315/" href="https://isc.sans.edu/forums/diary/Microsoft+Update+Advisory+for+February+2015/19315/" target="_blank">roundup</a> at the <strong>SANS Internet Storm Center</strong>.</p>
+<p>As always, if you experience any issues applying these patches or after applying them, please leave a note in the comments section below describing your experience.</p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+				
+			
+								<div class="themonic-pagination"><div class='pagination'><ul><li><a href='https://krebsonsecurity.com/'>&laquo; First</a></li><li><a href='https://krebsonsecurity.com/page/104/' class='inactive'>&lsaquo; Previous</a></li><li><a href='https://krebsonsecurity.com/page/102/' class='inactive'>102</a></li><li><a href='https://krebsonsecurity.com/page/103/' class='inactive'>103</a></li><li><a href='https://krebsonsecurity.com/page/104/' class='inactive'>104</a></li><li class='current'><span class='currenttext'>105</span></li><li><a href='https://krebsonsecurity.com/page/106/' class='inactive'>106</a></li><li><a href='https://krebsonsecurity.com/page/107/' class='inactive'>107</a></li><li><a href='https://krebsonsecurity.com/page/108/' class='inactive'>108</a></li><li><a href='https://krebsonsecurity.com/page/106/' class='inactive'>Next &rsaquo;</a></li><a class='inactive' href='https://krebsonsecurity.com/page/209/'>Last &raquo;</a></ul></div></div>
+					<div style="display: block; clear: both;"></div>
+			
+		
+
+	
+
+		</div><!-- #content -->
+	</div><!-- #primary -->
+
+
+			<div id="secondary" class="widget-area" role="complementary">
+
+        <div id="sidebar_ad" class="widget themonic-ad5"><div class="a-statement">Advertisement</div><a href="https://securityscorecard.com/instant-security-scorecard?utm_source=krebs+on+security&amp;utm_medium=display&amp;utm_campaign=instant+scorecard&amp;utm_term=A&amp;utm_content=335x300">
+<img src="/b-securityscorecard/3.jpg">
+</a></div>
+
+                        <br><div class="widget themonic-ad1"><div class="a-statement">Advertisement</div><a href="https://www.akamai.com/why-akamai/the-internet-of-possibilities?utm_source=krebsonsecurity&amp;utm_medium=display&amp;utm_campaign=F-MC-54978">
+<img src="/b-akamai/146.png">
+</a></div><br>
+
+			<aside id="custom_html-2" class="widget_text widget widget_custom_html"><p class="widget-title">Mailing List</p><div class="textwidget custom-html-widget"><a href="/subscribe/">Subscribe here</a></div></aside><aside id="search-2" class="widget widget_search"><p class="widget-title">Search KrebsOnSecurity</p><form role="search" method="get" id="searchform" class="searchform" action="https://krebsonsecurity.com/">
+				<div>
+					<label class="screen-reader-text" for="s">Search for:</label>
+					<input type="text" value="" name="s" id="s" />
+					<input type="submit" id="searchsubmit" value="Search" />
+				</div>
+			</form></aside>
+		<aside id="recent-posts-3" class="widget widget_recent_entries">
+		<p class="widget-title">Recent Posts</p>
+		<ul>
+											<li>
+					<a href="https://krebsonsecurity.com/2021/12/canada-charges-its-most-prolific-cybercriminal/">Canada Charges Its &#8220;Most Prolific Cybercriminal&#8221;</a>
+									</li>
+											<li>
+					<a href="https://krebsonsecurity.com/2021/12/who-is-the-network-access-broker-babam/">Who Is the Network Access Broker &#8216;Babam&#8217;?</a>
+									</li>
+											<li>
+					<a href="https://krebsonsecurity.com/2021/12/ubiquiti-developer-charged-with-extortion-causing-2020-breach/">Ubiquiti Developer Charged With Extortion, Causing 2020 &#8220;Breach&#8221;</a>
+									</li>
+											<li>
+					<a href="https://krebsonsecurity.com/2021/11/the-internet-is-held-together-with-spit-baling-wire/">The Internet is Held Together With Spit &#038; Baling Wire</a>
+									</li>
+											<li>
+					<a href="https://krebsonsecurity.com/2021/11/arrest-in-ransom-your-employer-email-scheme/">Arrest in &#8216;Ransom Your Employer&#8217; Email Scheme</a>
+									</li>
+					</ul>
+
+		</aside><aside id="text-2" class="widget widget_text">			<div class="textwidget"><a name="subscribe2"></a></div>
+		</aside><aside id="widget_sp_image-15" class="widget widget_sp_image"><p class="widget-title">Spam Nation</p><a href="https://www.amazon.com/Spam-Nation-Organized-Cybercrime-Epidemic-ebook/dp/B00L5QGBL0/ref=dp_kinw_strp_1" target="_blank" class="widget_sp_image-image-link" title="Spam Nation"><img width="266" height="404" alt="Spam Nation" class="attachment-266x404 aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2015/04/spamnation-nyt.png" /></a><div class="widget_sp_image-description" ><p>A New York Times Bestseller! </p>
+</div></aside><aside id="widget_sp_image-25" class="widget widget_sp_image"><p class="widget-title">Thinking of a Cybersecurity Career?</p><a href="https://krebsonsecurity.com/2020/07/thinking-of-a-cybersecurity-career-read-this/" target="_blank" class="widget_sp_image-image-link" title="Thinking of a Cybersecurity Career? Read This."><img width="625" height="424" alt="Thinking of a Cybersecurity Career?" class="attachment-full" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2020/07/codepeople.png 625w, https://krebsonsecurity.com/wp-content/uploads/2020/07/codepeople-580x393.png 580w" sizes="(max-width: 625px) 100vw, 625px" src="https://krebsonsecurity.com/wp-content/uploads/2020/07/codepeople.png" /></a><div class="widget_sp_image-description" ><p>Read this.</p>
+</div></aside><aside id="widget_sp_image-3" class="widget widget_sp_image"><p class="widget-title">All About Skimmers </p><a href="https://krebsonsecurity.com/all-about-skimmers/" target="_blank" class="widget_sp_image-image-link" title="All About Skimmers "><img width="299" height="232" alt="All About Skimmers" class="attachment-299x232 aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2010/08/skimgallery1.jpg" /></a><div class="widget_sp_image-description" ><p>Click image for my skimmer series.</p>
+</div></aside><aside id="categories-2" class="widget widget_categories"><p class="widget-title">Story Categories</p>
+			<ul>
+					<li class="cat-item cat-item-5"><a href="https://krebsonsecurity.com/category/sunshine/" title="Includes investigative blog posts meant to shine a light on the darker corners of the Internet.">A Little Sunshine</a>
+</li>
+	<li class="cat-item cat-item-2240"><a href="https://krebsonsecurity.com/category/all-about-skimmers/">All About Skimmers</a>
+</li>
+	<li class="cat-item cat-item-9085"><a href="https://krebsonsecurity.com/category/ashley-madison-breach/">Ashley Madison breach</a>
+</li>
+	<li class="cat-item cat-item-3191"><a href="https://krebsonsecurity.com/category/breadcrumbs/">Breadcrumbs</a>
+</li>
+	<li class="cat-item cat-item-3771"><a href="https://krebsonsecurity.com/category/data-breaches/" title="Stories about data breaches at retailers, corporations, governments and organizations of all sizes.">Data Breaches</a>
+</li>
+	<li class="cat-item cat-item-4624"><a href="https://krebsonsecurity.com/category/ddos-for-hire/">DDoS-for-Hire</a>
+</li>
+	<li class="cat-item cat-item-9173"><a href="https://krebsonsecurity.com/category/employment-fraud/">Employment Fraud</a>
+</li>
+	<li class="cat-item cat-item-2151"><a href="https://krebsonsecurity.com/category/how-to-break-into-security/" title="If you&#039;ve ever wanted career advice on how to make a shift into the security industry, look no further.">How to Break Into Security</a>
+</li>
+	<li class="cat-item cat-item-87"><a href="https://krebsonsecurity.com/category/latest-warnings/">Latest Warnings</a>
+</li>
+	<li class="cat-item cat-item-4071"><a href="https://krebsonsecurity.com/category/neer-do-well-news/">Ne&#039;er-Do-Well News</a>
+</li>
+	<li class="cat-item cat-item-9"><a href="https://krebsonsecurity.com/category/other/">Other</a>
+</li>
+	<li class="cat-item cat-item-1306"><a href="https://krebsonsecurity.com/category/pharma-wars/">Pharma Wars</a>
+</li>
+	<li class="cat-item cat-item-8240"><a href="https://krebsonsecurity.com/category/ransomware/">Ransomware</a>
+</li>
+	<li class="cat-item cat-item-599"><a href="https://krebsonsecurity.com/category/security-tools/">Security Tools</a>
+</li>
+	<li class="cat-item cat-item-8298"><a href="https://krebsonsecurity.com/category/sim-swapping/">SIM Swapping</a>
+</li>
+	<li class="cat-item cat-item-4079"><a href="https://krebsonsecurity.com/category/spam-nation/">Spam Nation</a>
+</li>
+	<li class="cat-item cat-item-1"><a href="https://krebsonsecurity.com/category/smallbizvictims/" title="Posts in this category will include new stories similar to those told in the Small Business Victims category on The Washington Post&#039;s Security Fix blog, which chronicled the methods organized cyber thieve are using to steal hundreds of thousands of dollars from dozens of small- to mid-sized companies around the country.">Target: Small Businesses</a>
+</li>
+	<li class="cat-item cat-item-5167"><a href="https://krebsonsecurity.com/category/tax-refund-fraud/">Tax Refund Fraud</a>
+</li>
+	<li class="cat-item cat-item-3"><a href="https://krebsonsecurity.com/category/comingstorm/" title="This category includes blog posts about computer and Internet security threats now and on the horizon.">The Coming Storm</a>
+</li>
+	<li class="cat-item cat-item-4"><a href="https://krebsonsecurity.com/category/patches/" title="Short posts on the latest security updates for widely-used software.
+">Time to Patch</a>
+</li>
+	<li class="cat-item cat-item-21"><a href="https://krebsonsecurity.com/category/web-fraud-2-0/">Web Fraud 2.0</a>
+</li>
+			</ul>
+
+			</aside><aside id="widget_sp_image-5" class="widget widget_sp_image"><p class="widget-title">The Value of a Hacked PC</p><a href="https://krebsonsecurity.com/2012/10/the-scrap-value-of-a-hacked-pc-revisited/" target="_blank" class="widget_sp_image-image-link" title="The Value of a Hacked PC"><img width="285" height="180" alt="valuehackedpc " class="attachment-285x180 aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2012/12/valuehackedpc-285x180.png" /></a><div class="widget_sp_image-description" ><p>Badguy uses for your PC</p>
+</div></aside><aside id="widget_sp_image-9" class="widget widget_sp_image"><p class="widget-title">Badguy Uses for Your Email </p><a href="https://krebsonsecurity.com/2013/06/the-value-of-a-hacked-email-account/" target="_self" class="widget_sp_image-image-link" title="Badguy Uses for Your Email "><img width="296" height="170" alt="Badguy Uses for Your Email " class="attachment-full aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2013/06/badguyemail.png 296w, https://krebsonsecurity.com/wp-content/uploads/2013/06/badguyemail-285x163.png 285w" sizes="(max-width: 296px) 100vw, 296px" src="https://krebsonsecurity.com/wp-content/uploads/2013/06/badguyemail.png" /></a><div class="widget_sp_image-description" ><p>Your email account may be worth far more than you imagine.</p>
+</div></aside><aside id="widget_sp_image-24" class="widget widget_sp_image"><a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&#038;hosted_button_id=MCCRKHWRX57HS" id="donate" target="_self" class="widget_sp_image-image-link"><img width="250" height="55" alt="Donate to Krebs On Security" class="attachment-medium aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2016/09/donatepaypal2-1.png" /></a></aside><aside id="most_popular_posts-3" class="widget widget_most_popular_posts">
+<p class="widget-title">Most Popular Posts</p>
+<ul>	<li><a href="https://krebsonsecurity.com/2018/07/sextortion-scam-uses-recipients-hacked-passwords/">Sextortion Scam Uses Recipient's Hacked Passwords</a> (1076)</li>
+	<li><a href="https://krebsonsecurity.com/2015/07/online-cheating-site-ashleymadison-hacked/">Online Cheating Site AshleyMadison Hacked</a> (798)</li>
+	<li><a href="https://krebsonsecurity.com/2013/12/sources-target-investigating-data-breach/">Sources: Target Investigating Data Breach</a> (620)</li>
+	<li><a href="https://krebsonsecurity.com/2020/11/trump-fires-security-chief-christopher-krebs/">Trump Fires Security Chief Christopher Krebs</a> (534)</li>
+	<li><a href="https://krebsonsecurity.com/2013/12/cards-stolen-in-target-breach-flood-underground-markets/">Cards Stolen in Target Breach Flood Underground Markets</a> (445)</li>
+	<li><a href="https://krebsonsecurity.com/2013/05/reports-liberty-reserve-founder-arrested-site-shuttered/">Reports: Liberty Reserve Founder Arrested, Site Shuttered</a> (416)</li>
+	<li><a href="https://krebsonsecurity.com/2015/08/was-the-ashley-madison-database-leaked/">Was the Ashley Madison Database Leaked?</a> (376)</li>
+	<li><a href="https://krebsonsecurity.com/2021/01/ddos-guard-to-forfeit-internet-space-occupied-by-parler/">DDoS-Guard To Forfeit Internet Space Occupied by Parler</a> (374)</li>
+	<li><a href="https://krebsonsecurity.com/2014/05/true-goodbye-using-truecrypt-is-not-secure/">True Goodbye: 'Using TrueCrypt Is Not Secure'</a> (363)</li>
+	<li><a href="https://krebsonsecurity.com/2015/08/who-hacked-ashley-madison/">Who Hacked Ashley Madison?</a> (361)</li>
+</ul>
+</aside>
+<aside id="media_image-2" class="widget widget_media_image"><p class="widget-title">Why So Many Top Hackers Hail from Russia</p><a href="https://krebsonsecurity.com/2017/06/why-so-many-top-hackers-hail-from-russia/"><img width="580" height="389" src="https://krebsonsecurity.com/wp-content/uploads/2017/06/computered-580x389.png" class="image wp-image-39684  attachment-medium size-medium" alt="" loading="lazy" style="max-width: 100%; height: auto;" srcset="https://krebsonsecurity.com/wp-content/uploads/2017/06/computered-580x389.png 580w, https://krebsonsecurity.com/wp-content/uploads/2017/06/computered-768x514.png 768w, https://krebsonsecurity.com/wp-content/uploads/2017/06/computered-940x630.png 940w, https://krebsonsecurity.com/wp-content/uploads/2017/06/computered.png 1551w" sizes="(max-width: 580px) 100vw, 580px" /></a></aside><aside id="widget_sp_image-11" class="widget widget_sp_image"><p class="widget-title">Category: Web Fraud 2.0</p><a href="https://krebsonsecurity.com/category/web-fraud-2-0/" target="_blank" class="widget_sp_image-image-link" title="Category: Web Fraud 2.0"><img width="227" height="400" alt="Criminnovations" class="attachment-medium aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2013/11/cybercrimeinnovations-227x400.png" /></a><div class="widget_sp_image-description" ><p>Innovations from the Underground</p>
+</div></aside><aside id="widget_sp_image-12" class="widget widget_sp_image"><a href="https://krebsonsecurity.com/2014/03/are-credit-monitoring-services-worth-it/" target="_blank" class="widget_sp_image-image-link"><img width="285" height="189" class="attachment-medium aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2014/03/shreddedID-copy-285x189.png 285w, https://krebsonsecurity.com/wp-content/uploads/2014/03/shreddedID-copy-600x399.png 600w, https://krebsonsecurity.com/wp-content/uploads/2014/03/shreddedID-copy.png 849w" sizes="(max-width: 285px) 100vw, 285px" src="https://krebsonsecurity.com/wp-content/uploads/2014/03/shreddedID-copy-285x189.png" /></a><div class="widget_sp_image-description" ><p>ID Protection Services Examined</p>
+</div></aside><aside id="widget_sp_image-13" class="widget widget_sp_image"><p class="widget-title">Is Antivirus Dead?</p><a href="https://krebsonsecurity.com/2014/05/antivirus-is-dead-long-live-antivirus/" target="_blank" class="widget_sp_image-image-link" title="Is Antivirus Dead?"><img width="285" height="161" alt="Is Antivirus Dead?" class="attachment-medium aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2014/05/cryptservices-285x161.png 285w, https://krebsonsecurity.com/wp-content/uploads/2014/05/cryptservices-600x339.png 600w, https://krebsonsecurity.com/wp-content/uploads/2014/05/cryptservices.png 945w" sizes="(max-width: 285px) 100vw, 285px" src="https://krebsonsecurity.com/wp-content/uploads/2014/05/cryptservices-285x161.png" /></a><div class="widget_sp_image-description" ><p>The reasons for its decline</p>
+</div></aside><aside id="widget_sp_image-14" class="widget widget_sp_image"><p class="widget-title">The Growing Tax Fraud Menace</p><a href="https://krebsonsecurity.com/category/tax-refund-fraud/" target="_blank" class="widget_sp_image-image-link" title="The Growing Tax Fraud Menace"><img width="285" height="285" alt="The Growing Tax Fraud Menace" class="attachment-medium aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2014/04/taxfraud-285x285.jpg 285w, https://krebsonsecurity.com/wp-content/uploads/2014/04/taxfraud-150x150.jpg 150w, https://krebsonsecurity.com/wp-content/uploads/2014/04/taxfraud-600x600.jpg 600w, https://krebsonsecurity.com/wp-content/uploads/2014/04/taxfraud.jpg 693w" sizes="(max-width: 285px) 100vw, 285px" src="https://krebsonsecurity.com/wp-content/uploads/2014/04/taxfraud-285x285.jpg" /></a><div class="widget_sp_image-description" ><p>File 'em Before the Bad Guys Can </p>
+</div></aside><aside id="widget_sp_image-17" class="widget widget_sp_image"><p class="widget-title">Inside a Carding Shop</p><a href="https://krebsonsecurity.com/2014/06/peek-inside-a-professional-carding-shop/" target="_blank" class="widget_sp_image-image-link" title="Inside a Carding Shop"><img width="194" height="340" alt="Inside a Carding Shop" class="attachment-medium aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2014/06/mcdumpalsjoined.png" /></a><div class="widget_sp_image-description" ><p>A crash course in carding. </p>
+</div></aside><aside id="widget_sp_image-18" class="widget widget_sp_image"><p class="widget-title">Beware Social Security Fraud</p><a href="https://krebsonsecurity.com/2013/09/crooks-hijack-retirement-funds-via-ssa-portal/" target="_blank" class="widget_sp_image-image-link" title="Beware Social Security Fraud"><img width="285" height="293" alt="Beware Social Security Fraud" class="attachment-full aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2016/09/myssn-285x293.png" /></a><div class="widget_sp_image-description" ><p>Sign up, or Be Signed Up! </p>
+</div></aside><aside id="widget_sp_image-2" class="widget widget_sp_image"><p class="widget-title">How Was Your Card Stolen?</p><a href="https://krebsonsecurity.com/2015/01/how-was-your-credit-card-stolen/" target="_blank" class="widget_sp_image-image-link" title="How Was Your Card Stolen?"><img width="285" height="285" alt="How Was Your Card Stolen?" class="attachment-full aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2016/09/carddominoes-285x285.jpg 285w, https://krebsonsecurity.com/wp-content/uploads/2016/09/carddominoes-285x285-150x150.jpg 150w" sizes="(max-width: 285px) 100vw, 285px" src="https://krebsonsecurity.com/wp-content/uploads/2016/09/carddominoes-285x285.jpg" /></a><div class="widget_sp_image-description" ><p>Finding out is not so easy. </p>
+</div></aside><aside id="widget_sp_image-22" class="widget widget_sp_image"><p class="widget-title">Krebs&#8217;s 3 Rules&#8230;</p><a href="https://krebsonsecurity.com/2011/05/krebss-3-basic-rules-for-online-safety/" target="_blank" class="widget_sp_image-image-link" title="Krebs&#8217;s 3 Rules&#8230;"><img width="300" height="300" alt="Krebs&#8217;s 3 Rules&#8230;" class="attachment-medium aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2011/05/three-300x300.jpg 300w, https://krebsonsecurity.com/wp-content/uploads/2011/05/three-150x150.jpg 150w, https://krebsonsecurity.com/wp-content/uploads/2011/05/three.jpg 347w" sizes="(max-width: 300px) 100vw, 300px" src="https://krebsonsecurity.com/wp-content/uploads/2011/05/three-300x300.jpg" /></a><div class="widget_sp_image-description" ><p>...For Online Safety. </p>
+</div></aside>		</div><!-- #secondary -->
+		</div><!-- #main .wrapper -->
+	
+	<div id="publisho-footer" class="widget-area">
+				<div class="footer-widget">
+                				</div>
+				<div class="footer-widget">
+								</div>
+				<div class="footer-widget">
+								</div>
+	</div>
+
+	<div class="site-wordpress">
+					&copy; Krebs on Security<br>
+	</div>
+	<!-- .site-info --><div class="clear"></div>
+</div><!-- #page -->
+
+<script type='text/javascript' src='https://krebsonsecurity.com/wp-content/themes/kos-mar2021/js/slicknav.js?ver=5.8.2' id='publisho-mobile-navigation-js'></script>
+<script type='text/javascript' src='https://krebsonsecurity.com/wp-includes/js/wp-embed.min.js?ver=5.8.2' id='wp-embed-js'></script>
+</body>
+</html>
+<!--
+Performance optimized by W3 Total Cache. Learn more: https://www.boldgrid.com/w3-total-cache/
+
+Object Caching 197/383 objects using memcached
+Page Caching using memcached 
+Database Caching 7/25 queries in 0.019 seconds using memcached
+
+Served from: krebsonsecurity.com @ 2021-12-10 14:59:39 by W3 Total Cache
+-->

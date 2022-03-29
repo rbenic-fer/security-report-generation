@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<!--[if IE 7]>
+<html class="ie ie7" lang="en-US">
+<![endif]-->
+<!--[if IE 8]>
+<html class="ie ie8" lang="en-US">
+<![endif]-->
+<!--[if !(IE 7) | !(IE 8)  ]><!-->
+<html lang="en-US">
+<!--<![endif]-->
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width" />
+<link rel="profile" href="http://gmpg.org/xfn/11" />
+<!--[if lt IE 9]>
+<script src="https://krebsonsecurity.com/wp-content/themes/kos-mar2021/js/html5.js" type="text/javascript"></script>
+<![endif]-->
+<title>Krebs on Security &#8211; Page 40 &#8211; In-depth security news and investigation</title>
+<meta name='robots' content='max-image-preview:large' />
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="Krebs on Security &raquo; Feed" href="https://krebsonsecurity.com/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Krebs on Security &raquo; Comments Feed" href="https://krebsonsecurity.com/comments/feed/" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.1.0\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.1.0\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/krebsonsecurity.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=5.8.2"}};
+			!function(e,a,t){var n,r,o,i=a.createElement("canvas"),p=i.getContext&&i.getContext("2d");function s(e,t){var a=String.fromCharCode;p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,e),0,0);e=i.toDataURL();return p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,t),0,0),e===i.toDataURL()}function c(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(o=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},r=0;r<o.length;r++)t.supports[o[r]]=function(e){if(!p||!p.fillText)return!1;switch(p.textBaseline="top",p.font="600 32px Arial",e){case"flag":return s([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])?!1:!s([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!s([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]);case"emoji":return!s([10084,65039,8205,55357,56613],[10084,65039,8203,55357,56613])}return!1}(o[r]),t.supports.everything=t.supports.everything&&t.supports[o[r]],"flag"!==o[r]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[o[r]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(n=t.source||{}).concatemoji?c(n.concatemoji):n.wpemoji&&n.twemoji&&(c(n.twemoji),c(n.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+	<link rel='stylesheet' id='colorbox-theme1-css'  href='https://krebsonsecurity.com/wp-content/plugins/jquery-lightbox-for-native-galleries/colorbox/theme1/colorbox.css?ver=1.3.14' type='text/css' media='screen' />
+<link rel='stylesheet' id='wp-block-library-css'  href='https://krebsonsecurity.com/wp-includes/css/dist/block-library/style.min.css?ver=5.8.2' type='text/css' media='all' />
+<link rel='stylesheet' id='contact-form-7-css'  href='https://krebsonsecurity.com/wp-content/plugins/contact-form-7/includes/css/styles.css?ver=5.5.3' type='text/css' media='all' />
+<link rel='stylesheet' id='publisho-style-css'  href='https://krebsonsecurity.com/wp-content/themes/kos-mar2021/style.css?subver=1.2&#038;ver=5.8.2' type='text/css' media='all' />
+<style id='publisho-style-inline-css' type='text/css'>
+
+	.themonic-nav .current-menu-item > a, .themonic-nav .current-menu-ancestor > a, .themonic-nav .current_page_item > a, .themonic-nav .current_page_ancestor > a {
+		background: #cc6600;
+	}
+	.themonic-nav ul.nav-menu, .themonic-nav div.nav-menu > ul {
+		border-bottom: 5px solid #cc6600;
+	}
+	#site-navigation .topheadmenu a {
+    background: rgba(0, 0, 0, 0);
+	}
+	.themonic-nav li a:hover {
+		background: #cc6600;
+	}
+	.themonic-nav li:hover {
+		background: #cc6600;
+	}.wrapper .flexslider {margin: 0 0 30px;}.frontp .btm-wrap {
+    border-top: 1px solid #e9e9e9;
+	}
+	.entry-summary {
+    border-top: none;
+	}.frontp .btm-wrap { margin-bottom: 30px;}.site { font-size:14px;}.site { font-family:'Roboto', arial ;}
+</style>
+<link rel='stylesheet' id='publisho-custom-style-css'  href='https://krebsonsecurity.com/wp-content/themes/kos-mar2021/custom.css?subver=1.2&#038;ver=5.8.2' type='text/css' media='all' />
+<!--[if lt IE 9]>
+<link rel='stylesheet' id='publisho-ie-css'  href='https://krebsonsecurity.com/wp-content/themes/kos-mar2021/css/ie.css?ver=20160606' type='text/css' media='all' />
+<![endif]-->
+<link rel='stylesheet' id='fontawesome-css-css'  href='https://krebsonsecurity.com/wp-content/themes/kos-mar2021/fonts/font-awesome.min.css?ver=5.8.2' type='text/css' media='all' />
+<link rel='stylesheet' id='publisho_custom_fonts-css'  href='//fonts.googleapis.com/css?family=Roboto%3Aregular%2Citalic%2C500%26subset%3Dlatin%2C' type='text/css' media='screen' />
+<script type='text/javascript' src='https://krebsonsecurity.com/wp-includes/js/jquery/jquery.min.js?ver=3.6.0' id='jquery-core-js'></script>
+<script type='text/javascript' src='https://krebsonsecurity.com/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.3.2' id='jquery-migrate-js'></script>
+<script type='text/javascript' src='https://krebsonsecurity.com/wp-content/plugins/jquery-lightbox-for-native-galleries/colorbox/jquery.colorbox-min.js?ver=1.3.14' id='colorbox-js'></script>
+<link rel="https://api.w.org/" href="https://krebsonsecurity.com/wp-json/" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://krebsonsecurity.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://krebsonsecurity.com/wp-includes/wlwmanifest.xml" /> 
+<meta name="generator" content="WordPress 5.8.2" />
+<!-- JavaScript Pull-Quotes plugin v2.2 -->
+	<link rel="stylesheet" href="https://krebsonsecurity.com/wp-content/plugins/jspullquotes/resources/jspullquotes-core.css" type="text/css" />
+	<link rel="stylesheet" href="https://krebsonsecurity.com/wp-content/plugins/jspullquotes/resources/jspullquotes-default.css" type="text/css" />
+	<script type="text/javascript" src="https://krebsonsecurity.com/wp-content/plugins/jspullquotes/resources/jspullquotes.js"></script>
+	<script type="text/javascript">
+		var arrOptions = new Array("1", "1", "right", "1", "1", "blockquote", "pullquote", "pullquote pqRight");
+		pullQuoteOpts(arrOptions);
+	</script>
+<!-- end pull-quote additions -->
+<!-- jQuery Lightbox For Native Galleries v3.1.3 | http://www.viper007bond.com/wordpress-plugins/jquery-lightbox-for-native-galleries/ -->
+<script type="text/javascript">
+// <![CDATA[
+	jQuery(document).ready(function($){
+		$(".gallery").each(function(index, obj){
+			var galleryid = Math.floor(Math.random()*10000);
+			$(obj).find("a").colorbox({rel:galleryid, maxWidth:"95%", maxHeight:"95%"});
+		});
+		$("a.lightbox").colorbox({maxWidth:"95%", maxHeight:"95%"});
+	});
+// ]]>
+</script>
+<style type="text/css" id="custom-background-css">
+body.custom-background { background-color: #ffffff; }
+</style>
+	<link rel="me" href="https://twitter.com/briankrebs" /><meta name="twitter:widgets:link-color" content="#000000" /><meta name="twitter:widgets:border-color" content="#000000" /><meta name="twitter:partner" content="tfwp" />
+<meta name="twitter:card" content="summary" /><meta name="twitter:title" content="Krebs on Security" /><meta name="twitter:site" content="@briankrebs" /><meta name="twitter:description" content="In-depth security news and investigation" />
+</head>
+<body class="home blog paged custom-background paged-40 custom-background-white single-author frontp hfeed">
+<div id="page" class="site">
+	<!-- <div class="publisho-top-mobile-nav clear"></div> -->
+	<div class="themonic-logo themonic-ad3"><div class="a-statement">Advertisement</div><a href="https://securityscorecard.com/instant-security-scorecard?utm_source=krebs+on+security&amp;utm_medium=display&amp;utm_campaign=instant+scorecard&amp;utm_term=B&amp;utm_content=1240x110">
+<img src="/b-securityscorecard/5.jpg">
+</a></div>
+	<div class="themonic-logo themonic-ad6"><div class="a-statement">Advertisement</div><a href="https://info.knowbe4.com/phishing-forensics-krebs?utm_source=Krebs&amp;utm_medium=display&amp;utm_campaign=website&amp;utm_content=PhishingForensics">
+<img src="/b-knowbe4/14.jpg" />
+</a></div>
+	<nav id="site-navigation" class="themonic-nav" role="navigation">
+	</nav><!-- #site-navigation -->
+	<div class="clear"></div>
+	<header id="masthead" class="site-header" role="banner">
+ 					<div class="desktop-social">
+						<div class="socialmedia">
+							<a href="http://twitter.com/briankrebs" target="_blank"><i class="fa fa-twitter"></i></a> 
+															<a class="rss" href="https://krebsonsecurity.com/feed/" target="_blank"><i class="fa fa-rss"></i></a>	
+									<a class="rss" href="https://www.linkedin.com/in/bkrebs/" target="_blank"><i class="fa fa-linkedin"></i></a>	
+								</div>
+				 	</div>
+																						   
+		
+		<div class="themonic-logo responsive-img-container">
+			<a href="https://krebsonsecurity.com/" title="Krebs on Security" rel="home"><img src="https://krebsonsecurity.com/wp-content/uploads/2021/03/kos-27-03-2021.jpg" alt="Krebs on Security"></a>
+		</div>
+
+					<div class="mobile-social">
+						<div class="socialmedia">
+							<a href="http://twitter.com/briankrebs" target="_blank"><i class="fa fa-twitter"></i></a> 
+															<a class="rss" href="https://krebsonsecurity.com/feed/" target="_blank"><i class="fa fa-rss"></i></a>	
+									<a class="rss" href="https://www.linkedin.com/in/bkrebs/" target="_blank"><i class="fa fa-linkedin"></i></a>	
+								</div>
+					</div>
+		
+				<!-- <div class="publisho-mobile-nav clear"></div> -->
+		<nav id="site-navigation" class="themonic-nav" role="navigation">
+			<a class="assistive-text" href="#content" title="Skip to content">Skip to content</a>
+			<div id="menu-top" class="nav-menu"><ul>
+<li ><a href="https://krebsonsecurity.com/">Home</a></li><li class="page_item page-item-2"><a href="https://krebsonsecurity.com/about/">About the Author</a></li>
+<li class="page_item page-item-645"><a href="https://krebsonsecurity.com/cpm/">Advertising/Speaking</a></li>
+</ul></div>
+		</nav><!-- #site-navigation -->
+		<div class="clear"></div>
+	</header><!-- #masthead -->
+	<div id="main" class="wrapper">
+		<div id="primary" class="site-content">
+	
+
+	
+		<div id="content" role="main">
+
+		<article id="post-46440" class="post-46440 post type-post status-publish format-standard hentry category-sunshine category-latest-warnings category-comingstorm tag-a-s-mechanical tag-charlene-price tag-dan-race tag-dns tag-gand-crab-ransomware tag-godaddy tag-martijn-grooten tag-myonlinesecurity tag-nomoreransom-org tag-ron-guilmette tag-sextortion tag-spammy-bear tag-virus-bulletin">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2019/02/crooks-continue-to-exploit-godaddy-hole/" title="Permalink to Crooks Continue to Exploit GoDaddy Hole" rel="bookmark">Crooks Continue to Exploit GoDaddy Hole</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">February 4, 2019</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2019/02/crooks-continue-to-exploit-godaddy-hole/#comments">31 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p><strong>Godaddy.com</strong>, the world&#8217;s largest domain name registrar, recently addressed an authentication weakness that cybercriminals were using to blast out spam through legitimate, dormant domains. But several more recent malware spam campaigns suggest GoDaddy&#8217;s fix hasn&#8217;t gone far enough, and that scammers likely still have a sizable arsenal of hijacked GoDaddy domains at their disposal.</p>
+<p><img loading="lazy" class="aligncenter wp-image-46446" src="https://krebsonsecurity.com/wp-content/uploads/2019/02/godaddy.jpg" alt="" width="594" height="309" /></p>
+<p>On January 22, KrebsOnSecurity <a href="https://krebsonsecurity.com/2019/01/bomb-threat-sextortion-spammers-abused-weakness-at-godaddy-com/" target="_blank" rel="noopener">published research</a> showing that crooks behind a series of massive <a href="https://krebsonsecurity.com/2018/07/sextortion-scam-uses-recipients-hacked-passwords/" target="_blank" rel="noopener">sextortion</a> and <a href="https://krebsonsecurity.com/2018/12/spammed-bomb-threat-hoax-demands-bitcoin/" target="_blank" rel="noopener">bomb threat</a> spam campaigns throughout 2018 &#8212; an adversary that&#8217;s been dubbed &#8220;<strong>Spammy Bear</strong>&#8221; &#8212;  achieved an unusual amount of inbox delivery by exploiting a weakness at GoDaddy which allowed anyone to add a domain to their GoDaddy account without validating that they actually owned the domain.</p>
+<p>Spammy Bear targeted dormant but otherwise legitimate domains that had one thing in common: They all at one time used GoDaddy&#8217;s hosted <a href="https://en.wikipedia.org/wiki/Domain_Name_System" target="_blank" rel="noopener">Domain Name System</a> (DNS) service. Researcher <strong>Ron Guilmette</strong> discovered that Spammy Bear was able to hijack thousands of these dormant domains for spam simply by registering free accounts at GoDaddy and telling the company&#8217;s automated DNS service to allow the sending of email with those domains from an Internet address controlled by the spammers.</p>
+<p>Very soon after that story ran, GoDaddy said it had put in place a fix for the problem, and had scrubbed more than 4,000 domain names used in the spam campaigns that were identified in my Jan. 22 story. But on or around February 1, a new spam campaign that leveraged similarly hijacked domains at GoDaddy began distributing <a href="https://labs.bitdefender.com/2018/10/gandcrab-the-most-popular-multi-million-dollar-ransomware-of-the-year/" target="_blank" rel="noopener">Gand Crab</a>, a potent strain of ransomware.</p>
+<p>As noted in a post last week at the blog <a href="https://myonlinesecurity.co.uk/godaddy-dns-system-still-compromised-to-deliver-yet-another-gandgrab-ransomware-campaign/" target="_blank" rel="noopener">MyOnlineSecurity</a>, the Gand Crab campaign used a variety of lures, including fake DHL shipping notices and phony AT&amp;T e-fax alerts. The domains documented by MyOnlineSecurity all had their DNS records altered between Jan. 31 and Feb. 1 to allow the sending of email from Internet addresses tied to <a href="https://ipinfo.io/AS44493" target="_blank" rel="noopener">two</a> <a href="https://ipinfo.io/AS40824" target="_blank" rel="noopener">ISPs</a> identified in my original Jan. 22 report on the GoDaddy weakness.</p>
+<p>&#8220;What makes these malware laden emails much more likely to be delivered is the fact that the sending domains all have a good reputation,&#8221; MyOnlineSecurity observed. &#8220;There are dozens, if not hundreds of domains involved in this particular campaign. Almost all the domains have been registered for many years, some for more than 10 years.&#8221;</p>
+<div id="attachment_46457" style="width: 436px" class="wp-caption aligncenter"><img aria-describedby="caption-attachment-46457" loading="lazy" class="size-full wp-image-46457" src="https://krebsonsecurity.com/wp-content/uploads/2019/02/ambrosetech.jpg" alt="" width="426" height="133" /><p id="caption-attachment-46457" class="wp-caption-text">A &#8220;passive DNS&#8221; lookup shows the DNS changes made by the spammers on Jan. 31 for one of the domains used in the Gand Crab spam campaign documented by MyOnlineSecurity. Image: Farsight Security.</p></div>
+<p>In a statement provided to KrebsOnSecurity, GoDaddy said the company was confident the steps it took to address the problem were working as intended, and that GoDaddy had simply overlooked the domains abused in the recent GandCrab spam campaign.</p>
+<p>&#8220;The domains used in the Gand Crab campaign were modified before then, but we missed them in our initial sweep,&#8221; GoDaddy spokesperson <strong>Dan Race</strong> said. &#8220;While we are otherwise confident of the mitigation steps we took to prevent the dangling DNS issue, we are working to identify any other domains that need to be fixed.&#8221;</p>
+<p>&#8220;We do not believe it is possible for a person to hijack the DNS of one or more domains using the same tactics as used in the Spammy Bear and Gand Crab campaigns,&#8221; Race continued. &#8220;However, we are assessing if there are other methods that may be used to achieve the same results, and we continue our normal monitoring for account takeover. We have also set up a reporting alias at <strong>dns-spam-concerns@godaddy.com</strong> to make it easier to report any suspicious activity or any details that might help our efforts to stop this kind of abuse.&#8221;</p>
+<p>That email address is likely to receive quite a few tips in the short run. <em>Virus Bulletin</em> editor <strong>Martijn Grooten</strong> this week <a href="https://www.virusbulletin.com/blog/2019/02/amazon-ups-emotet-formbook-and-lokibot-look-those-phishing-and-malware-emails-bypassed-email-security-products/" target="_blank" rel="noopener">published his analysis</a> on a January 29 malware email campaign that came disguised as a shipping notice from <strong>UPS</strong>. Grooten said the spam intercepted from that campaign included links to an Internet address that was previously used to distribute GandCrab, and that virtually <a href="https://docs.google.com/spreadsheets/d/1ywRXAvkI5okrKqdrVpcLzNxnVNr80RBEnc4ykV2t7bs/edit#gid=1976826119" target="_blank" rel="noopener">all of the domains seen sending the fake UPS notices</a> used one of two pairs of DNS servers managed by GoDaddy.</p>
+<p>&#8220;The majority of domains, which we think had probably had their DNS compromised, still point to the same IP address though,&#8221; Grooten wrote. That IP address is currently home to <a href="https://krebsonsecurity.com/wp-content/uploads/2019/02/ccshop.jpg" target="_blank" rel="noopener">a Web site that sells stolen credit card data</a>.</p>
+<div id="attachment_46444" style="width: 607px" class="wp-caption aligncenter"><img aria-describedby="caption-attachment-46444" loading="lazy" class=" wp-image-46444" src="https://krebsonsecurity.com/wp-content/uploads/2019/02/upslure.jpg" alt="" width="597" height="558" /><p id="caption-attachment-46444" class="wp-caption-text">The fake UPS message used in a Jan. 29 Gand Crab malware spam campaign. Source: Virus Bulletin.</p></div>
+<p>Grooten told KrebsOnSecurity he suspects criminals may have succeeded at actually compromising several of GoDaddy&#8217;s hosted DNS servers. For one thing, he said, the same pair (sometimes two pairs) of name servers keep appearing in the same campaign.</p>
+<p>&#8220;In quite a few campaigns we saw domains used that were alphabetically close, [and] there are other domains used that had moved away from GoDaddy before these campaigns, yet were still used,&#8221; Grooten said. &#8220;It&#8217;s also interesting to note that hundreds &#8212; and perhaps thousands &#8212; of domains had their DNS changed within a short period of time. Such a thing is hard to do if you have to log into individual accounts.&#8221;</p>
+<p>GoDaddy said there has been no such breach.</p>
+<p>“Our DNS servers have not been compromised,&#8221; Race said. &#8220;The examples provided were dangled domains that had zone files created by the threat actor prior to when we implemented our mitigation on January 23. These domain names were parked until the threat actors activated them. They had the ability to do that because they owned the zone files already. We’re continuing to review customer accounts for other potential zone entries.”<br />
+ <a href="https://krebsonsecurity.com/2019/02/crooks-continue-to-exploit-godaddy-hole/#more-46440" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+	<div id="between_article_ad" class="themonic-ad5"><a href="https://ninjio.com/lp46d-krebs/">
+<img src="/b-ninjio/11.png">
+</a></div>	<article id="post-46415" class="post-46415 post type-post status-publish format-standard hentry category-ddos-for-hire category-neer-do-well-news tag-booter tag-ddos-for-hire tag-europol tag-hack-right tag-operation-power-off tag-stresser tag-titanium-stresser tag-webstresser">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2019/02/250-webstresser-users-to-face-legal-action/" title="Permalink to 250 Webstresser Users to Face Legal Action" rel="bookmark">250 Webstresser Users to Face Legal Action</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">February 1, 2019</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2019/02/250-webstresser-users-to-face-legal-action/#comments">37 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>More than 250 customers of a popular and powerful online attack-for-hire service that was dismantled by authorities in 2018 are expected to face legal action for the damage they caused, according to <strong>Europol</strong>, the European Union&#8217;s law enforcement agency.</p>
+<p>In April 2018, investigators in the U.S., U.K. and the Netherlands <a href="https://krebsonsecurity.com/2018/04/ddos-for-hire-service-webstresser-dismantled/" target="_blank" rel="noopener">took down attack-for-hire service <strong>WebStresser[.]org</strong></a> and arrested its alleged administrators. Prior to the takedown, the service had more than 151,000 registered users and was responsible for launching some four million attacks over three years. Now, those same authorities are targeting people who paid the service to conduct attacks.</p>
+<div id="attachment_43527" style="width: 600px" class="wp-caption aligncenter"><a class="lightbox" href="https://krebsonsecurity.com/wp-content/uploads/2018/04/webstresser.png"><img aria-describedby="caption-attachment-43527" loading="lazy" class="wp-image-43527" src="https://krebsonsecurity.com/wp-content/uploads/2018/04/webstresser.png" alt="" width="590" height="309" /></a><p id="caption-attachment-43527" class="wp-caption-text">Webstresser.org (formerly Webstresser.co), as it appeared in 2017.</p></div>
+<p>In the United Kingdom, police have seized more than 60 personal electronic devices from a number of Webstresser users, and some 250 customers of the service will soon face legal action, Europol said in a statement released this week.</p>
+<p>&#8220;Size does not matter – all levels of users are under the radar of law enforcement, be it a gamer booting out the competition out of a game, or a high-level hacker carrying out DDoS attacks against commercial targets for financial gain,&#8221; Europol officials warned.</p>
+<p>The focus on Webstresser&#8217;s customers is the latest phase of “Operation Power Off,” which targeted one of the most active services for launching point-and-click distributed denial-of-service (DDoS) attacks. WebStresser was one of many so-called “booter” or “stresser” services — virtual hired muscle that even completely unskilled users can rent to knock nearly any website or Internet user offline.</p>
+<p>Operation Power Off is part of a broader law enforcement effort to disrupt the burgeoning booter service industry and to <a href="https://krebsonsecurity.com/2018/01/expert-iot-botnets-the-work-of-a-vast-minority/" target="_blank" rel="noopener">weaken demand for such services</a>. In December, authorities in the United States <a href="https://krebsonsecurity.com/2018/12/feds-charge-three-in-mass-seizure-of-attack-for-hire-services/" target="_blank" rel="noopener">filed criminal charges against three men</a> accused of running booter services, and orchestrated a coordinated takedown of 15 different booter sites.</p>
+<div id="attachment_46100" style="width: 602px" class="wp-caption aligncenter"><a class="lightbox" href="https://krebsonsecurity.com/wp-content/uploads/2018/12/domainseize.jpg"><img aria-describedby="caption-attachment-46100" loading="lazy" class="wp-image-46100" src="https://krebsonsecurity.com/wp-content/uploads/2018/12/domainseize.jpg" alt="" width="592" height="462" /></a><p id="caption-attachment-46100" class="wp-caption-text">This seizure notice appeared on the homepage of more than a dozen popular &#8220;booter&#8221; or &#8220;stresser&#8221; DDoS-for-hire Web sites in December 2018.</p></div>
+<p> <a href="https://krebsonsecurity.com/2019/02/250-webstresser-users-to-face-legal-action/#more-46415" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+	<div class="themonic-ad2"><div class="a-statement">Advertisement</div><a href="https://www.akamai.com/?utm_source=krebsonsecurity&amp;utm_medium=display&amp;utm_id=GL_Platform&amp;utm_campaign=F-MC-52606&amp;utm_content=IDC_InfoBrief">
+<img src="/b-akamai/134.png">
+</a></div>	<article id="post-46392" class="post-46392 post type-post status-publish format-standard hentry category-neer-do-well-news tag-casey-viner tag-logan-patten tag-neal-patel tag-shane-gaskill tag-swatting tag-tyler-barriss tag-tyler-stewart">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2019/01/three-charged-for-working-with-serial-swatter/" title="Permalink to Three Charged for Working With Serial Swatter" rel="bookmark">Three Charged for Working With Serial Swatter</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">January 25, 2019</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2019/01/three-charged-for-working-with-serial-swatter/#comments">37 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>The <strong>U.S. Justice Department</strong> has filed criminal charges against three U.S. men accused of swatting, or making hoax reports of bomb threats or murders in a bid to trigger a heavily armed police response to a target&#8217;s address. Investigators say the men, aged 19 to 23, all carried out the attacks with the help of <strong>Tyler Barriss</strong>, a convicted serial swatter whose last stunt in late 2018 cost a Kansas man his life.</p>
+<div id="attachment_46397" style="width: 605px" class="wp-caption aligncenter"><img aria-describedby="caption-attachment-46397" loading="lazy" class=" wp-image-46397" src="https://krebsonsecurity.com/wp-content/uploads/2019/01/swatting.jpg" alt="" width="595" height="287" /><p id="caption-attachment-46397" class="wp-caption-text">Image: FBI.gov</p></div>
+<p>FBI agents on Wednesday arrested <strong>Neal Patel</strong>, 23, of Des Plaines, Ill. and <strong>Tyler Stewart</strong>, 19 of Gulf Breeze, Fla. The third defendant, <strong>Logan Patten</strong>, 19, of Greenwood, Mo., agreed to turn himself in. The men are charged in three separate indictments with conspiracy and conveying false information about the use of explosive devices.</p>
+<p>Investigators say Patten, who used the Twitter handle &#8220;@spared,&#8221; hired Barriss in December 2017 to swat individuals and a high school in Lee&#8217;s Summit, Mo.</p>
+<p>Around the same time, Stewart, a.k.a. &#8220;@tragic&#8221; on Twitter, allegedly worked with Barriss to make two phony bomb threats to evacuate a high school in Gurnee, Ill. In that incident, Barriss admitted telling police in Gurnee he had left explosives in a classroom and was high on methamphetamine and was thinking about shooting teachers and students.</p>
+<p>Also in December 2017, Patel allegedly worked with Barriss to plan a bomb threat targeting a video game convention in Dallas, Texas. Patel is also accused of using stolen credit cards to buy items of clothing for Barriss.</p>
+<p>The Justice Department&#8217;s <a href="https://www.justice.gov/usao-cdca/pr/three-men-charged-swatting-schemes-which-admitted-hoax-maker-targeted-individuals" target="_blank" rel="noopener">media release</a> on the indictments doesn&#8217;t specify which convention Barriss and Patel allegedly swatted, but a <em>Wired</em> <a href="https://www.wired.com/story/swatting-deadly-online-gaming-prank/" target="_blank" rel="noopener">story</a> from last year tied Barriss to a similarly timed bomb threat that caused the evacuation of a major <strong>Call of Duty</strong> tournament at the Dallas Convention Center.</p>
+<p>&#8220;When the social media star SoaR Ashtronova tweeted about the confusion she felt as she fled the event beneath the whir of police helicopters, Barriss taunted her from one of his Twitter accounts: &#8216;It got ran, baby girl. Thats what happens,&#8221; Wired reported.</p>
+<p>Interestingly, it was a dispute over a $1.50 grudge match in a Call of Duty game that would ultimately lead to Barriss&#8217;s final &#8212; and fatal &#8212; swatting. On Dec. 28, 2017, Barriss phoned police in Wichita, Kan. from his location in California, telling them he was a local man who&#8217;d just shot his father and was holding other family members hostage. <a href="https://krebsonsecurity.com/2019/01/three-charged-for-working-with-serial-swatter/#more-46392" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-46316" class="post-46316 post type-post status-publish format-standard hentry category-comingstorm tag-alex-stamos tag-brian-fung tag-christopher-burgess tag-fbi-agents-association tag-fbiaa tag-patrick-gray tag-risky-business-podcast tag-us-government-shutdown">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2019/01/how-the-u-s-govt-shutdown-harms-security/" title="Permalink to How the U.S. Govt. Shutdown Harms Security" rel="bookmark">How the U.S. Govt. Shutdown Harms Security</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">January 23, 2019</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2019/01/how-the-u-s-govt-shutdown-harms-security/#comments">99 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>The ongoing partial U.S. federal government shutdown is having a tangible, negative impact on cybercrime investigations, according to interviews with federal law enforcement investigators and a report issued this week by a group representing the interests of FBI agents. Even if lawmakers move forward on new proposals to reopen the government, sources say the standoff is likely to have serious repercussions for federal law enforcement agencies for years to come.</p>
+<p><img loading="lazy" class="aligncenter wp-image-46381" src="https://krebsonsecurity.com/wp-content/uploads/2019/01/congress.png" alt="" width="588" height="315" /></p>
+<p>One federal agent with more than 20 years on the job told KrebsOnSecurity the shutdown &#8220;is crushing our ability to take the fight to cyber criminals.&#8221;</p>
+<p>&#8220;The talent drain after this is finally resolved will cost us five years,&#8221; said the source, who asked to remain anonymous because he was not authorized to speak to the news media. &#8220;Literally everyone I know who is able to retire or can find work in the private sector is actively looking, and the smart private companies are aware and actively recruiting. As a nation, we are much less safe from a cyber security posture than we were a month ago.&#8221;</p>
+<p>The source said his agency can’t even get agents and analysts the higher clearances needed for sensitive cases because everyone who does the clearance processing is furloughed.</p>
+<p>&#8220;Investigators who are eligible to retire or who simply wish to walk away from their job aren’t retiring or quitting now because they can’t even be processed out due to furlough of the organization&#8217;s human resources people,&#8221; the source said. &#8220;These are criminal investigations involving national security. It’s also a giant distraction and people aren’t as focused.&#8221;</p>
+<p>The source&#8217;s comments echoed some of the points made in <a href="https://www.fbiaa.org/sites/default/files/downloadable/FBIAA%20Voices%20from%20the%20Field.pdf" target="_blank" rel="noopener">a 72-page report</a> (PDF) released this week by the <strong>FBI Agents Association</strong>, a group that advocates on behalf of active and retired FBI special agents.</p>
+<p>&#8220;Today we have no funds for making Confidential Human Source payments,&#8221; reads a quote from the FBIAA report, attributed to an agent in the FBI&#8217;s northeast region. &#8220;In my situation, I have two sources that support our national security cyber mission that no longer have funding. They are critical sources providing tripwires and intelligence that protect the United States against our foreign adversaries. The loss in productivity and pertinent intelligence is immeasurable.&#8221;</p>
+<p>My federal law enforcement source mentioned his agency also was unable to pay confidential informants for their help with ongoing investigations.</p>
+<p>&#8220;We are having the same problems like not being able to pay informants, no travel, critical case coordination meetings postponed, and no procurements to further the mission,&#8221; the source said.</p>
+<p>The extended shutdown directly affects more than 800,000 workers, many of them furloughed or required to work without pay. Some federal employees, now missing at least two back-to-back paychecks, are having trouble keeping food on the table. <strong>CNN</strong> <a href="https://www.cnn.com/2019/01/17/politics/fbi-shutdown-food-bank/index.html" target="_blank" rel="noopener">reports</a> that FBI field offices across the country are opening food banks to help support special agents and staff struggling without pay.</p>
+<p>An extended lack of pay is forcing many agents to seek side hustles and jobs, despite rules that seek to restrict such activity, according to media reports. Missing multiple paychecks also can force investigators to take on additional debt. This is potentially troublesome because excess debt down the road <a href="https://www.clearpoint.org/blog/personal-finances-credit-score-affect-security-clearance/" target="_blank" rel="noopener">can lead to problems keeping one&#8217;s security clearances</a>.</p>
+<p>Excessive debt is a threat to clearances because it can make people more susceptible to being drawn into illegal activities or taking bribes for money, which in turn may leave them vulnerable to extortion. Indeed, <a href="https://news.clearancejobs.com/2018/12/29/government-shutdown-creates-foreign-intelligence-opportunity/" target="_blank" rel="noopener">this story from Clearancejobs.com</a> observes that the shutdown may be inadvertently creating new recruiting opportunities for foreign intelligence operatives.</p>
+<p>&#8220;If you are a hostile intelligence service human intelligence (HUMINT) targeting officer you are hoping this situation lasts a long time and has a multitude of unintended consequences affecting the cleared government employee population,&#8221; writes <strong>Christopher Burgess</strong>. <a href="https://krebsonsecurity.com/2019/01/how-the-u-s-govt-shutdown-harms-security/#more-46316" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-46319" class="post-46319 post type-post status-publish format-standard hentry category-sunshine category-comingstorm category-web-fraud-2-0 tag-amazon-web-services tag-cisco-talos tag-digital-ocean tag-dns tag-godaddy tag-google-cloud tag-matthew-bryant tag-mozilla-firefox tag-mozilla-foundation tag-ron-guilmette tag-sextortion tag-spammy-bear tag-webzilla tag-wz-communications">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2019/01/bomb-threat-sextortion-spammers-abused-weakness-at-godaddy-com/" title="Permalink to Bomb Threat, Sextortion Spammers Abused Weakness at GoDaddy.com" rel="bookmark">Bomb Threat, Sextortion Spammers Abused Weakness at GoDaddy.com</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">January 22, 2019</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2019/01/bomb-threat-sextortion-spammers-abused-weakness-at-godaddy-com/#comments">38 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>Two of the most disruptive and widely-received spam email campaigns over the past few months &#8212; including an <a href="https://krebsonsecurity.com/2018/07/sextortion-scam-uses-recipients-hacked-passwords/" target="_blank" rel="noopener">ongoing sextortion email scam</a> and <a href="https://krebsonsecurity.com/2018/12/spammed-bomb-threat-hoax-demands-bitcoin/" target="_blank" rel="noopener">a bomb threat hoax</a> that shut down dozens of schools, businesses and government buildings late last year &#8212; were made possible thanks to an authentication weakness at <strong>GoDaddy.com</strong>, the world&#8217;s largest domain name registrar, KrebsOnSecurity has learned.</p>
+<p>Perhaps more worryingly, experts warn this same weakness that let spammers hijack domains tied to GoDaddy also affects a great many other major Internet service providers, and is actively being abused to launch phishing and malware attacks which leverage dormant Web site names currently owned and controlled by some of the world&#8217;s most trusted corporate names and brands.</p>
+<p><img loading="lazy" class="aligncenter wp-image-46333" src="https://krebsonsecurity.com/wp-content/uploads/2019/01/spamwall.jpg" alt="" width="592" height="555" /></p>
+<p>In July 2018, email users around the world <a href="https://krebsonsecurity.com/2018/07/sextortion-scam-uses-recipients-hacked-passwords/" target="_blank" rel="noopener">began complaining</a> of receiving spam which began with a password the recipient used at some point in the past and threatened to release embarrassing videos of the recipient unless a bitcoin ransom was paid. On December 13, 2018, a similarly large spam campaign was blasted out, threatening that someone <a href="https://krebsonsecurity.com/2018/12/spammed-bomb-threat-hoax-demands-bitcoin/" target="_blank" rel="noopener">had planted bombs within the recipient’s building</a> that would be detonated unless a hefty bitcoin ransom was paid by the end of the business day.</p>
+<p>Experts at <a href="https://blog.talosintelligence.com/2018/12/bitcoin-bomb-scare-associated-with.html" target="_blank" rel="noopener">Cisco Talos</a> and other security firms quickly drew parallels between the two mass spam campaigns, pointing to a significant overlap in Russia-based Internet addresses used to send the junk emails. Yet one aspect of these seemingly related campaigns that has been largely overlooked is the degree to which each achieved an unusually high rate of delivery to recipients.</p>
+<p>Large-scale spam campaigns often are conducted using newly-registered or hacked email addresses, and/or throwaway domains. The trouble is, spam sent from these assets is trivial to block because anti-spam and security systems tend to discard or mark as spam any messages that appear to come from addresses which have no known history or reputation attached to them.</p>
+<p>However, in both the sextortion and bomb threat spam campaigns, the vast majority of the email was being sent through Web site names that had already existed for some time, and indeed even had a trusted reputation. Not only that, <em>new research shows</em> <em>many of these domains were registered long ago and are still owned by dozens of Fortune 500 and Fortune 1000 companies. </em></p>
+<p>That&#8217;s according to <strong>Ron Guilmette</strong>, a <a href="https://krebsonsecurity.com/?s=ron+guilmette&amp;x=0&amp;y=0" target="_blank" rel="noopener">dogged anti-spam researcher</a>. Researching the history and reputation of thousands of <a href="https://docs.google.com/spreadsheets/d/1p_Eq_LW2zjNopntTGipzn9mOLMeyBqYLA4J0WEM8yVc/edit?usp=sharing" target="_blank" rel="noopener">Web site names</a> used in each of the extortionist spam campaigns, Guilmette made a startling discovery: Virtually all of them had at one time received service from GoDaddy.com, a Scottsdale, Ariz. based domain name registrar and hosting provider.</p>
+<p>Guilmette told KrebsOnSecurity he initially considered the possibility that GoDaddy had been hacked, or that thousands of the registrar&#8217;s customers perhaps had their GoDaddy usernames and passwords stolen.</p>
+<p>But as he began digging deeper, Guilmette came to the conclusion that the spammers were exploiting an obscure &#8212; albeit widespread &#8212; weakness among hosting companies, cloud providers and domain registrars that was first publicly detailed in 2016.</p>
+<h4>EARLY WARNING SIGNS</h4>
+<p>In August 2016, security researcher <strong>Matthew Bryant</strong> wrote about a weakness that could be used to hijack email service for<a href="https://thehackerblog.com/floating-domains-taking-over-20k-digitalocean-domains-via-a-lax-domain-import-system/index.html" target="_blank" rel="noopener"> 20,000 established domain names</a> at a U.S. based hosting provider. A few months later, Bryant warned that the same technique could be leveraged <a href="https://thehackerblog.com/the-orphaned-internet-taking-over-120k-domains-via-a-dns-vulnerability-in-aws-google-cloud-rackspace-and-digital-ocean/index-2.html" target="_blank" rel="noopener">to send spam from more than 120,000 trusted domains</a> across multiple providers. And Guilmette says he now believes the attack method detailed by Bryant also explains what&#8217;s going on in the more recent sextortion and bomb threat spams.</p>
+<p>Grasping the true breadth of Bryant&#8217;s prescient discovery requires a brief and simplified primer on how Web sites work. Your Web browser knows how to find a Web site name like example.com thanks to the global <a href="https://en.wikipedia.org/wiki/Domain_Name_System" target="_blank" rel="noopener">Domain Name System</a> (DNS), which serves as a kind of phone book for the Internet by translating human-friendly Web site names (example.com) into numeric Internet address that are easier for computers to manage.</p>
+<p>When someone wants to register a domain at a registrar like GoDaddy, the registrar will typically provide two sets of DNS records that the customer then needs to assign to his domain. Those records are crucial because they allow Web browsers to figure out the Internet address of the hosting provider that&#8217;s serving that Web site domain. Like many other registrars, GoDaddy lets new customers use their managed DNS services for free for a period of time (in GoDaddy&#8217;s case it&#8217;s 30 days), after which time customers must pay for the service.</p>
+<p>The crux of Bryant&#8217;s discovery was that the spammers in those 2016 campaigns learned that countless hosting firms and registrars would allow anyone to add a domain to their account without ever validating that the person requesting the change actually owned the domain. Here&#8217;s what Bryant wrote about the threat back in 2016:</p>
+<blockquote><p>&#8220;In addition to the hijacked domains often having past history and a long age, they also have WHOIS information which points to real people unrelated to the person carrying out the attack. Now if an attacker launches a malware campaign using these domains, it will be harder to pinpoint who/what is carrying out the attack since the domains would all appear to be just regular domains with no observable pattern other than the fact that they all use cloud DNS. It&#8217;s an attacker&#8217;s dream, troublesome attribution and an endless number of names to use for malicious campaigns.&#8221;</p></blockquote>
+<h4>SAY WHAT?</h4>
+<p>For a more concrete example of what&#8217;s going on here, we&#8217;ll look at just one of the 4,000+ domains that Guilmette found were used in the Dec. 13, 2018 bomb threat hoax. <strong>Virtualfirefox.com</strong> is a domain registered via GoDaddy in 2013 and currently owned by <strong>The Mozilla Corporation</strong>, a wholly owned subsidiary of the <strong>Mozilla Foundation </strong>&#8212; the makers of the popular Firefox Web browser.</p>
+<p>The domain&#8217;s registration has been renewed each year since its inception, but the domain itself has sat dormant for some time. When it was initially set up, it took advantage of two managed DNS servers assigned to it by GoDaddy &#8212; ns17.domaincontrol.com, and ns18.domaincontrol.com.</p>
+<p>GoDaddy is a massive hosting provider, and it has more than 100 such DNS servers to serve the needs of its clients. To hijack this domain, the attackers in the December 2018 spam campaign needed only to have created a free account at GoDaddy that was assigned the exact same DNS servers handed out to Virtualfirefox.com (ns17.domaincontrol.com and ns18.domaincontrol.com). After that, the attackers simply claim ownership over the domain, and tell GoDaddy to allow the sending of email with that domain from an Internet address they control.</p>
+<p>Mozilla spokesperson <strong>Ellen Canale</strong> said Mozilla took ownership of virtualfirefox.com in September 2017 after a trademark dispute, but that the DNS nameserver for the record was not reset until January of 2019.</p>
+<p>&#8220;This oversight created a state where the DNS pointed to a server controlled by a third party, leaving it vulnerable to misuse,&#8221; Canale said. &#8220;We’ve reviewed the configuration of both our registrar and nameservers and have found no indication of misuse. In addition to addressing the immediate problem, we have reviewed the entire catalog of properties we own to ensure they are properly configured.&#8221;</p>
+<p>According to both Guilmette and Bryant, this type of hijack is possible because GoDaddy &#8212; like many other managed DNS providers &#8212; <em>does little to check whether someone with an existing account (free or otherwise) who is claiming ownership over a given domain actually controls that domain name.</em></p>
+<p>Contacted by KrebsOnSecurity, GoDaddy acknowledged the authentication weakness documented by Guilmette.</p>
+<p><span class="pullquote pqleft">&#8220;After investigating the matter, our team confirmed that a threat actor(s) abused our DNS setup process,&#8221; the company said in an emailed statement.</span></p>
+<p>&#8220;We’ve identified a fix and are taking corrective action immediately,&#8221; the statement continued. &#8220;While those responsible were able to create DNS entries on dormant domains, at no time did account ownership change nor was customer information exposed.” <a href="https://krebsonsecurity.com/2019/01/bomb-threat-sextortion-spammers-abused-weakness-at-godaddy-com/#more-46319" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-46290" class="post-46290 post type-post status-publish format-standard hentry category-sunshine category-breadcrumbs category-neer-do-well-news tag-alex-holden tag-haveibeenpwned-com tag-hold-security tag-mega-nz tag-sanixer tag-troy-hunt">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2019/01/773m-password-megabreach-is-years-old/" title="Permalink to 773M Password &#8216;Megabreach&#8217; is Years Old" rel="bookmark">773M Password &#8216;Megabreach&#8217; is Years Old</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">January 17, 2019</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2019/01/773m-password-megabreach-is-years-old/#comments">67 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>My inbox and Twitter messages positively lit up today with people forwarding stories from <a href="https://www.wired.com/story/collection-one-breach-email-accounts-passwords/?mbid=social_twitter&amp;utm_brand=wired&amp;utm_campaign=wired&amp;utm_medium=social&amp;utm_social-type=owned&amp;utm_source=twitter" target="_blank" rel="noopener"><em>Wired</em></a> and other publications about a supposedly new trove of nearly 773 million unique email addresses and 21 million unique passwords that were posted to a hacking forum. A story in <a href="https://www.theguardian.com/technology/2019/jan/17/breached-data-largest-collection-ever-seen-email-password-hacking?CMP=fb_a-technology_b-gdntech" target="_blank" rel="noopener"><em>The Guardian</em></a> breathlessly dubbed it &#8220;the largest collection ever of breached data found.&#8221; But in an interview with the apparent seller, KrebsOnSecurity learned that it is not even close to the largest gathering of stolen data, and that it is at least two to three years old.</p>
+<p>The dump, labeled &#8220;<strong>Collection #1</strong>&#8221; and approximately 87GB in size, was <a href="https://www.troyhunt.com/the-773-million-record-collection-1-data-reach/" target="_blank" rel="noopener">first detailed</a> earlier today by <strong>Troy Hunt</strong>, who operates the <strong>HaveIBeenPwned</strong> breach notification service. Hunt said the data cache was likely &#8220;made up of many different individual data breaches from literally thousands of different sources.&#8221;</p>
+<p>KrebsOnSecurity sought perspective on this discovery from <strong>Alex Holden</strong>, CTO of <a href="https://www.holdsecurity.com" target="_blank" rel="noopener">Hold Security</a>, a company that specializes in trawling underground spaces for intelligence about malicious actors and their stolen data dumps. Holden said the data appears to have first been posted to underground forums in October 2018, and that it is just a subset of a much larger tranche of passwords being peddled by a shadowy seller online.</p>
+<p>Here&#8217;s a screenshot of a subset of that seller&#8217;s current offerings, which total almost <em>1 Terabyte</em> of stolen and hacked passwords:</p>
+<div id="attachment_46291" style="width: 603px" class="wp-caption aligncenter"><a class="lightbox" href="https://krebsonsecurity.com/wp-content/uploads/2019/01/collection1.jpg"><img aria-describedby="caption-attachment-46291" loading="lazy" class="wp-image-46291" src="https://krebsonsecurity.com/wp-content/uploads/2019/01/collection1.jpg" alt="" width="593" height="618" /></a><p id="caption-attachment-46291" class="wp-caption-text">The 87GB &#8220;Collection1&#8221; archive is one of but many similar tranches of stolen passwords being sold by a particularly prolific ne&#8217;er-do-well in the underground.</p></div>
+<p>As we can see above, Collection #1 offered by this seller is indeed 87GB in size. He also advertises a <strong>Telegram</strong> username where he can be reached &#8212; &#8220;<strong>Sanixer</strong>.&#8221; So, naturally, KrebsOnSecurity contacted Sanixer via Telegram to find out more about the origins of Collection #1, which he is presently selling for the bargain price of just $45.</p>
+<p>Sanixer said Collection#1 consists of data pulled from a huge number of hacked sites, and was not exactly his &#8220;freshest&#8221; offering. Rather, he sort of steered me away from that archive, suggesting that &#8212; unlike most of his other wares &#8212; Collection #1 was at least 2-3 years old. His other password packages, which he said are not all pictured in the above screen shot and total more than 4 terabytes in size, are less than a year old, Sanixer explained.</p>
+<p>By way of explaining the provenance of Collection #1, Sanixer said it was a mix of &#8220;dumps and leaked bases,&#8221; and then he offered an interesting screen shot of his additional collections. Click on the image below and notice the open Web browser tab behind his purloined password trove (which is apparently stored at Mega.nz): Troy Hunt&#8217;s published research on this 773 million Collection #1.</p>
+<div id="attachment_46292" style="width: 609px" class="wp-caption aligncenter"><a class="lightbox" href="https://krebsonsecurity.com/wp-content/uploads/2019/01/sanixer.jpg"><img aria-describedby="caption-attachment-46292" loading="lazy" class="wp-image-46292" src="https://krebsonsecurity.com/wp-content/uploads/2019/01/sanixer.jpg" alt="" width="599" height="339" /></a><p id="caption-attachment-46292" class="wp-caption-text">Sanixer says Collection #1 was from a mix of sources. A description of those sources can be seen in the directory tree on the left side of this screenshot.</p></div>
+<p>Holden said the habit of collecting large amounts of credentials and posting it online is not new at all, and that the data is far more useful for things like phishing, blackmail and other indirect attacks &#8212; as opposed to plundering inboxes. Holden added that his company had already derived 99 percent of the data in Collection #1 from other sources.</p>
+<p>&#8220;It was popularized several years ago by Russian hackers on various Dark Web forums,&#8221; he said. &#8220;Because the data is gathered from a number of breaches, typically older data, it does not present a direct danger to the general user community. Its sheer volume is impressive, yet, by account of many hackers the data is not greatly useful.&#8221;</p>
+<p>A core reason so many accounts get compromised is that far too many people have the nasty habit(s) of choosing poor passwords, re-using passwords and email addresses across multiple sites, and not taking advantage of multi-factor authentication options when they are available.</p>
+<p>If this Collection #1 has you spooked, changing your password(s) certainly can&#8217;t hurt &#8212; unless of course you&#8217;re in the habit of re-using passwords. Please don&#8217;t do that. As we can see from the offering above, your password is probably worth way more to you than it is to cybercriminals (in the case of Collection #1, just .000002 cents per password). <a href="https://krebsonsecurity.com/2019/01/773m-password-megabreach-is-years-old/#more-46290" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-46262" class="post-46262 post type-post status-publish format-standard hentry category-neer-do-well-news category-sim-swapping tag-att tag-caleb-tuttle tag-chris-david tag-michael-terpin tag-nicholas-st-denis-truglia tag-nicholas-truglia tag-react-task-force tag-regional-enforcement-allied-computer-team tag-sim-swap">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2019/01/stole-24-million-but-still-cant-keep-a-friend/" title="Permalink to &#8220;Stole $24 Million But Still Can&#8217;t Keep a Friend&#8221;" rel="bookmark">&#8220;Stole $24 Million But Still Can&#8217;t Keep a Friend&#8221;</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">January 15, 2019</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2019/01/stole-24-million-but-still-cant-keep-a-friend/#comments">46 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>Unsettling new claims have emerged about <strong>Nicholas Truglia</strong>, a 21-year-old Manhattan resident accused of hijacking cell phone accounts to steal tens of millions of dollars in cryptocurrencies from victims. The lurid details, made public in a civil lawsuit filed this week by one of his alleged victims, paints a chilling picture of a man addicted to thievery and all its trappings. The documents suggest that Truglia stole from his father and even a dead man &#8212; all the while lamenting that his fabulous new wealth brought him nothing but misery.</p>
+<p><img loading="lazy" class="aligncenter size-full wp-image-44711" src="https://krebsonsecurity.com/wp-content/uploads/2018/08/newsnip.png" alt="" width="419" height="586" /></p>
+<p>The unflattering profile was laid out in a series of documents tied to a lawsuit lodged by <strong>Michael Terpin</strong>, a cryptocurrency investor who co-founded the first angel investor group for bitcoin enthusiasts in 2013. Terpin alleges that crooks stole almost $24 million worth of cryptocurrency after fraudulently executing a “<a href="https://krebsonsecurity.com/?s=sim+swap&amp;x=0&amp;y=0" target="_blank" rel="noopener">SIM swap</a>” on his mobile phone account at AT&amp;T in early 2018. Terpin also <a href="https://krebsonsecurity.com/2018/08/hanging-up-on-mobile-in-the-name-of-security/" target="_blank" rel="noopener">is pursuing a $200 million civil lawsuit against AT&amp;T</a> in connection with the theft.</p>
+<p>Authorities <a href="https://nypost.com/2018/11/20/man-hacked-into-silicon-valley-execs-phones-to-steal-cryptocurrency-cops/" target="_blank" rel="noopener">arrested Truglia</a> on November 14, 2018 on suspicion of using SIM swaps to steal approximately $1 million worth of cryptocurrencies from a different Silicon Valley executive. But Terpin&#8217;s <a href="https://www.greenbergglusker.com/content/uploads/2019/01/Conformed-Declaration-of-Michael-Terpin-ISO-Plaintiffs-Ex-Parte-Motions-3118143-1.pdf" target="_blank" rel="noopener">civil lawsuit</a> (PDF) maintains that evidence was revealed at Truglia’s bail hearing that he had texted his father and multiple friends to brag about the $24 million hack on the day of Terpin’s theft, allegedly offering to take friends to the Super Bowl with “porn star escorts.&#8221;</p>
+<p>Terpin&#8217;s lawsuit includes a large number of supporting documents, including an affidavit filed by <strong>Chris David</strong>, a 25-year-old New York City resident who claims to have been an acquaintance of Truglia&#8217;s until he began to unravel the source of his new friend&#8217;s overnight riches.</p>
+<p>In <a href="https://www.greenbergglusker.com/content/uploads/2019/01/Chris-David-Declaration-Redacted-3119196-1.pdf" target="_blank" rel="noopener">his affidavit</a> (PDF), David describes himself as a self-employed private jet broker who met Truglia in a fitness center attached to Truglia&#8217;s luxury apartment building. Truglia allegedly struck up a conversation about booking private jets with his cryptocurrency. When the two met again a few days later, David says Truglia showed him accounts on his mobile phone and computer indicating he had over $7 million in cash in a JP Morgan account and more than $12 million in various cryptocurrencies.</p>
+<p>&#8220;At the same time, Nick showed me two thumb drives (<a href="https://trezor.io/" target="_blank" rel="noopener">Trezors</a>),&#8221; David recounted. &#8220;One had over $40 million in cash value of various cryptos, and the other one had over $20 million cash value of various cryptos.&#8221;</p>
+<p>David said Truglia initially explained his wealth by saying he&#8217;d made the money by <a href="https://www.webopedia.com/TERM/C/cryptocurrency-mining.html" target="_blank" rel="noopener">mining cryptocurrencies</a>, but that Truglia later would admit he stole the funds.</p>
+<p>&#8220;Over the next few months, Nick and I socialized at nightclubs, local bars, the gym, and in his apartment playing video games,&#8221; David recounted. &#8220;Gradually, I got to know Nick. He does not have a job or visible means of support. His typical day is to get up late, go to the gym, eat at the deli across the street, play video games late into the night and he had no friends. Nick was an egotistical braggart about his life and wealth. For example, once at a crowded lounge, he said: &#8216;Chris, I have more money than all of the people here tonight.'&#8221;</p>
+<p>David started documenting Truglia&#8217;s activities after he and several of his friends were arrested for allegedly stealing Truglia&#8217;s laptop, mobile phone and Trezor drive. That incident, recounted in <a href="https://nypost.com/2018/11/06/friends-accused-of-torturing-pal-to-steal-his-cryptocurrency/" target="_blank" rel="noopener">this New York Post story</a>  and in David&#8217;s own testimony, indicates that Truglia later recanted the accusation and chalked it up to confusion resulting from a heavy night of drinking.</p>
+<p>According to David, when Truglia wasn&#8217;t bragging about his wealth he was displaying it openly: He lived in a $6,000 per month apartment, wore a Rolex watch which he claimed cost $100,000, and boasted he was going to purchase a $250,000 McLaren sports car. David also said he recorded conversations with Truglia in which the latter admitted to stealing $24 million from Terpin.</p>
+<p>David said he even witnessed Truglia attempting a SIM swap at a Times Square AT&amp;T store in August 2018. Here&#8217;s David&#8217;s account of that hijack effort, which allegedly failed when Truglia declined to pay the target&#8217;s overdue phone bill:</p>
+<p><a class="lightbox" href="https://krebsonsecurity.com/wp-content/uploads/2019/01/att-truglio.jpg"><img loading="lazy" class="aligncenter wp-image-46269" src="https://krebsonsecurity.com/wp-content/uploads/2019/01/att-truglio.jpg" alt="" width="596" height="329" /></a></p>
+<p>The affidavit states that later in the month David took screen shots of a now-defunct Twitter account that Truglia allegedly used (@erupts), which included six different messages about what the theft of $24 million had wrought.</p>
+<div id="attachment_46265" style="width: 604px" class="wp-caption aligncenter"><img aria-describedby="caption-attachment-46265" loading="lazy" class=" wp-image-46265" src="https://krebsonsecurity.com/wp-content/uploads/2019/01/24m1.jpg" alt="" width="594" height="383" /><p id="caption-attachment-46265" class="wp-caption-text">Tweets from the account @erupts, allegedly penned by Nicholas Truglia.</p></div>
+<p>&#8220;Stole 24 million but still can&#8217;t keep a friend,&#8221; reads another tweet allegedly tied to Truglia&#8217;s account:</p>
+<p><img loading="lazy" class="aligncenter wp-image-46266" src="https://krebsonsecurity.com/wp-content/uploads/2019/01/24m2.jpg" alt="" width="594" height="326" /></p>
+<p>David says Truglia even acknowledged stealing $15,000 after hacking into his own father&#8217;s accounts. According to David, Truglia&#8217;s dad asked to be repaid, and that his son agreed to return the money &#8212; but in bitcoin. In the image below &#8212; which David claims was a screenshot he took of a mobile phone chat conversation between Truglia and his father &#8212; the elder expresses mystification and frustration about how to complete the transaction.</p>
+<div id="attachment_46267" style="width: 453px" class="wp-caption aligncenter"><img aria-describedby="caption-attachment-46267" loading="lazy" class="size-full wp-image-46267" src="https://krebsonsecurity.com/wp-content/uploads/2019/01/truglia-chat.jpg" alt="" width="443" height="639" /><p id="caption-attachment-46267" class="wp-caption-text">A screen shot David says he took of an alleged chat conversation between Truglia and his father regarding repayment of $15,000.</p></div>
+<p> <a href="https://krebsonsecurity.com/2019/01/stole-24-million-but-still-cant-keep-a-friend/#more-46262" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-46248" class="post-46248 post type-post status-publish format-standard hentry category-ddos-for-hire category-neer-do-well-news tag-bbc tag-cellcom tag-daniel-kaye tag-ddos tag-govrat tag-haaretz tag-lonestar tag-martin-gottesfeld tag-mirai tag-national-crime-agency">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2019/01/courts-hand-down-hard-jail-time-for-ddos/" title="Permalink to Courts Hand Down Hard Jail Time for DDoS" rel="bookmark">Courts Hand Down Hard Jail Time for DDoS</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">January 14, 2019</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2019/01/courts-hand-down-hard-jail-time-for-ddos/#comments">57 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>Seldom do people responsible for launching crippling cyberattacks face justice, but increasingly courts around the world are making examples of the few who do get busted for such crimes. On Friday, a 34-year-old Connecticut man received a whopping 10-year prison sentence for carrying out distributed denial-of-service (DDoS) attacks against a number of hospitals in 2014. Also last week, a 30-year-old in the United Kingdom was sentenced to 32 months in jail for using an army of hacked devices to crash large portions of Liberia&#8217;s Internet access in 2016.</p>
+<div id="attachment_46254" style="width: 265px" class="wp-caption alignright"><img aria-describedby="caption-attachment-46254" loading="lazy" class="wp-image-46254 " src="https://krebsonsecurity.com/wp-content/uploads/2019/01/kaye.jpg" alt="" width="255" height="307" /><p id="caption-attachment-46254" class="wp-caption-text">Daniel Kaye. Photo: National Crime Agency</p></div>
+<p><strong>Daniel Kaye</strong>, an Israel-U.K. dual citizen, admitted attacking an African phone company in 2016, and to inadvertently knocking out Internet access for much of the country in the process. Kaye launched the attack using a botnet powered by <a href="https://krebsonsecurity.com/?s=mirai&amp;x=0&amp;y=0" target="_blank" rel="noopener">Mirai</a>, a malware strain that enslaves hacked Internet of Things (IoT) devices like poorly-secured Internet routers and Web-based cameras for use in large-scale cyberattacks.</p>
+<p>According to court testimony, Kaye was hired in 2015 to attack <strong>Lonestar</strong>, Liberia&#8217;s top mobile phone and Internet provider. Kaye pocketed $10,000 for the attack, which was alleged to have been paid for by an individual working for <strong>Cellcom</strong>, Lonestar&#8217;s competitor in the region. As reported by Israeli news outlet <a href="https://www.haaretz.com/israel-news/.premium-the-israeli-businessmen-who-got-rich-off-angola-s-war-and-their-ties-to-cyberattack-1.6792027" target="_blank" rel="noopener">Haaretz</a>, Kaye testified that the attack was ordered by the CEO of Cellcom Liberia.</p>
+<p>In February 2017, authorities in the United Kingdom arrested Kaye and extradited him to Germany to face charges of knocking more than 900,000 Germans offline in a Mirai attack in November 2016. Prosecutors withheld Kaye&#8217;s full name throughout the trial in Germany, but in July 2017 KrebsOnSecurity <a href="https://krebsonsecurity.com/2017/07/who-is-the-govrat-author-and-mirai-botmaster-bestbuy/" target="_blank" rel="noopener">published findings that named Kaye as the likely culprit</a>. Kaye ultimately <a href="https://krebsonsecurity.com/2017/07/suspended-sentence-for-mirai-botmaster-daniel-kaye/" target="_blank" rel="noopener">received a suspended sentence</a> for the attack in Germany, and was sent back to the U.K. to face charges there.</p>
+<p>The July 2017 KrebsOnSecurity investigation also linked Kaye to the development and sale of a sophisticated piece of spyware named <strong>GovRAT</strong>, which is documented to have been used in numerous cyber espionage campaigns against governments, financial institutions, defense contractors and more than 100 corporations.</p>
+<p>The U.K.&#8217;s <strong>National Crime Agency</strong> called Kaye perhaps the most significant cyber criminal yet caught in Britain. A <a href="https://www.bbc.co.uk/news/uk-46840461" target="_blank" rel="noopener">report on the trial from the BBC</a> says Kaye wept as he was taken away to jail. <a href="https://krebsonsecurity.com/2019/01/courts-hand-down-hard-jail-time-for-ddos/#more-46248" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-45913" class="post-45913 post type-post status-publish format-standard hentry category-sunshine category-latest-warnings tag-fuze-card tag-fuze-card-fraud tag-u-s-secret-service">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2019/01/secret-service-theft-rings-turn-to-fuze-cards/" title="Permalink to Secret Service: Theft Rings Turn to Fuze Cards" rel="bookmark">Secret Service: Theft Rings Turn to Fuze Cards</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">January 10, 2019</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2019/01/secret-service-theft-rings-turn-to-fuze-cards/#comments">94 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>Street thieves who specialize in cashing out stolen credit and debit cards increasingly are hedging their chances of getting caught carrying multiple counterfeit cards by relying on <a href="https://www.fuzecard.com/" target="_blank" rel="noopener">Fuze Cards</a>, a smartcard technology that allows users to store dozens of cards on a single device, the <strong>U.S. Secret Service</strong> warns.</p>
+<div id="attachment_46238" style="width: 540px" class="wp-caption aligncenter"><img aria-describedby="caption-attachment-46238" loading="lazy" class="size-full wp-image-46238" src="https://krebsonsecurity.com/wp-content/uploads/2019/01/fuzeimage.jpg" alt="" width="530" height="278" /><p id="caption-attachment-46238" class="wp-caption-text">A Fuze card can store up to 30 credit/debit cards. Image: Fuzecard.com</p></div>
+<p>Launched in May 2017, the Fuze Card is a data storage device that looks like a regular credit card but can hold account data for up to 30 credit cards. The Fuze Card displays no credit card number on either side, instead relying on a small display screen on the front that cardholders can use to change which stored card is to be used to complete a transaction.</p>
+<p>After the user chooses the card data to be used, the card data is made available in the dynamic magnetic stripe on the back of the card or via the embedded smart chip. Fuze cards also can be used at ATMs to withdraw funds.</p>
+<p>An internal memo the U.S. Secret Service shared with financial industry partners states that Secret Service field offices in New York and St. Louis are currently working criminal investigations where Fuze Cards have been used by fraud rings.</p>
+<p>The memo, a copy of which was obtained by KrebsOnSecurity, states that card theft rings are using Fuze Cards to avoid raising suspicions that may arise when shuffling through multiple counterfeit cards at the register.</p>
+<p><span class="pullquote pqright">&#8220;The transaction may also appear as a declined transaction but the fraudster, with the push of a button, is changing the card numbers being used,&#8221; the memo notes.</span></p>
+<p>Fraud rings often will <a href="https://krebsonsecurity.com/2014/06/peek-inside-a-professional-carding-shop/" target="_blank" rel="noopener">purchase data on thousands of credit and debit cards</a> stolen from hacked point-of-sale devices or obtained via physical card skimmers. The data can be encoded onto any card with a magnetic stripe, and then used to buy high-priced items at retail outlets &#8212; or to withdrawn funds from ATMs (if the fraudsters also have the cardholder&#8217;s PIN).</p>
+<p>But getting caught holding dozens of counterfeit or stolen cards is tough to explain to authorities. Hence, the allure of the Fuze Card, which may appear to the casual observer to be just another credit card in one&#8217;s wallet. <a href="https://krebsonsecurity.com/2019/01/secret-service-theft-rings-turn-to-fuze-cards/#more-45913" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-46230" class="post-46230 post type-post status-publish format-standard hentry category-patches tag-allan-liska tag-cve-2018-8653 tag-cve-2019-0547 tag-cve-2019-0579 tag-ghacks-net tag-martin-brinkmann tag-patch-tuesday-january-2019 tag-recorded-future tag-satnam-narang tag-tenable tag-woody-leonhard">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2019/01/patch-tuesday-january-2019-edition/" title="Permalink to Patch Tuesday, January 2019 Edition" rel="bookmark">Patch Tuesday, January 2019 Edition</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">January 9, 2019</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2019/01/patch-tuesday-january-2019-edition/#comments">43 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p><strong>Microsoft</strong> on Tuesday released updates to fix roughly four dozen security issues with its <strong>Windows</strong> operating systems and related software. All things considered, this first Patch Tuesday of 2019 is fairly mild, bereft as it is of any new <strong>Adobe Flash</strong> updates or zero-day exploits. But there are a few spicy bits to keep in mind. Read on for the gory details. <a href="https://krebsonsecurity.com/2019/01/patch-tuesday-january-2019-edition/#more-46230" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+				
+			
+								<div class="themonic-pagination"><div class='pagination'><ul><li><a href='https://krebsonsecurity.com/'>&laquo; First</a></li><li><a href='https://krebsonsecurity.com/page/39/' class='inactive'>&lsaquo; Previous</a></li><li><a href='https://krebsonsecurity.com/page/37/' class='inactive'>37</a></li><li><a href='https://krebsonsecurity.com/page/38/' class='inactive'>38</a></li><li><a href='https://krebsonsecurity.com/page/39/' class='inactive'>39</a></li><li class='current'><span class='currenttext'>40</span></li><li><a href='https://krebsonsecurity.com/page/41/' class='inactive'>41</a></li><li><a href='https://krebsonsecurity.com/page/42/' class='inactive'>42</a></li><li><a href='https://krebsonsecurity.com/page/43/' class='inactive'>43</a></li><li><a href='https://krebsonsecurity.com/page/41/' class='inactive'>Next &rsaquo;</a></li><a class='inactive' href='https://krebsonsecurity.com/page/209/'>Last &raquo;</a></ul></div></div>
+					<div style="display: block; clear: both;"></div>
+			
+		
+
+	
+
+		</div><!-- #content -->
+	</div><!-- #primary -->
+
+
+			<div id="secondary" class="widget-area" role="complementary">
+
+        <div id="sidebar_ad" class="widget themonic-ad5"><div class="a-statement">Advertisement</div><a href="https://securityscorecard.com/instant-security-scorecard?utm_source=krebs+on+security&amp;utm_medium=display&amp;utm_campaign=instant+scorecard&amp;utm_term=A&amp;utm_content=335x300">
+<img src="/b-securityscorecard/3.jpg">
+</a></div>
+
+                        <br><div class="widget themonic-ad1"><div class="a-statement">Advertisement</div><a href="https://www.akamai.com/blog/security/attacking-a-macro-security-problem-with-micro-segmentation?utm_source=krebsonsecurity&amp;utm_medium=display&amp;utm_id=GL_SecureWorkforce_Guardicore&amp;utm_campaign=F-MC-52610&amp;utm_content=Guardicore">
+<img src="/b-akamai/138.png">
+</a></div><br>
+
+			<aside id="custom_html-2" class="widget_text widget widget_custom_html"><p class="widget-title">Mailing List</p><div class="textwidget custom-html-widget"><a href="/subscribe/">Subscribe here</a></div></aside><aside id="search-2" class="widget widget_search"><p class="widget-title">Search KrebsOnSecurity</p><form role="search" method="get" id="searchform" class="searchform" action="https://krebsonsecurity.com/">
+				<div>
+					<label class="screen-reader-text" for="s">Search for:</label>
+					<input type="text" value="" name="s" id="s" />
+					<input type="submit" id="searchsubmit" value="Search" />
+				</div>
+			</form></aside>
+		<aside id="recent-posts-3" class="widget widget_recent_entries">
+		<p class="widget-title">Recent Posts</p>
+		<ul>
+											<li>
+					<a href="https://krebsonsecurity.com/2021/12/canada-charges-its-most-prolific-cybercriminal/">Canada Charges Its &#8220;Most Prolific Cybercriminal&#8221;</a>
+									</li>
+											<li>
+					<a href="https://krebsonsecurity.com/2021/12/who-is-the-network-access-broker-babam/">Who Is the Network Access Broker &#8216;Babam&#8217;?</a>
+									</li>
+											<li>
+					<a href="https://krebsonsecurity.com/2021/12/ubiquiti-developer-charged-with-extortion-causing-2020-breach/">Ubiquiti Developer Charged With Extortion, Causing 2020 &#8220;Breach&#8221;</a>
+									</li>
+											<li>
+					<a href="https://krebsonsecurity.com/2021/11/the-internet-is-held-together-with-spit-baling-wire/">The Internet is Held Together With Spit &#038; Baling Wire</a>
+									</li>
+											<li>
+					<a href="https://krebsonsecurity.com/2021/11/arrest-in-ransom-your-employer-email-scheme/">Arrest in &#8216;Ransom Your Employer&#8217; Email Scheme</a>
+									</li>
+					</ul>
+
+		</aside><aside id="text-2" class="widget widget_text">			<div class="textwidget"><a name="subscribe2"></a></div>
+		</aside><aside id="widget_sp_image-15" class="widget widget_sp_image"><p class="widget-title">Spam Nation</p><a href="https://www.amazon.com/Spam-Nation-Organized-Cybercrime-Epidemic-ebook/dp/B00L5QGBL0/ref=dp_kinw_strp_1" target="_blank" class="widget_sp_image-image-link" title="Spam Nation"><img width="266" height="404" alt="Spam Nation" class="attachment-266x404 aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2015/04/spamnation-nyt.png" /></a><div class="widget_sp_image-description" ><p>A New York Times Bestseller! </p>
+</div></aside><aside id="widget_sp_image-25" class="widget widget_sp_image"><p class="widget-title">Thinking of a Cybersecurity Career?</p><a href="https://krebsonsecurity.com/2020/07/thinking-of-a-cybersecurity-career-read-this/" target="_blank" class="widget_sp_image-image-link" title="Thinking of a Cybersecurity Career? Read This."><img width="625" height="424" alt="Thinking of a Cybersecurity Career?" class="attachment-full" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2020/07/codepeople.png 625w, https://krebsonsecurity.com/wp-content/uploads/2020/07/codepeople-580x393.png 580w" sizes="(max-width: 625px) 100vw, 625px" src="https://krebsonsecurity.com/wp-content/uploads/2020/07/codepeople.png" /></a><div class="widget_sp_image-description" ><p>Read this.</p>
+</div></aside><aside id="widget_sp_image-3" class="widget widget_sp_image"><p class="widget-title">All About Skimmers </p><a href="https://krebsonsecurity.com/all-about-skimmers/" target="_blank" class="widget_sp_image-image-link" title="All About Skimmers "><img width="299" height="232" alt="All About Skimmers" class="attachment-299x232 aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2010/08/skimgallery1.jpg" /></a><div class="widget_sp_image-description" ><p>Click image for my skimmer series.</p>
+</div></aside><aside id="categories-2" class="widget widget_categories"><p class="widget-title">Story Categories</p>
+			<ul>
+					<li class="cat-item cat-item-5"><a href="https://krebsonsecurity.com/category/sunshine/" title="Includes investigative blog posts meant to shine a light on the darker corners of the Internet.">A Little Sunshine</a>
+</li>
+	<li class="cat-item cat-item-2240"><a href="https://krebsonsecurity.com/category/all-about-skimmers/">All About Skimmers</a>
+</li>
+	<li class="cat-item cat-item-9085"><a href="https://krebsonsecurity.com/category/ashley-madison-breach/">Ashley Madison breach</a>
+</li>
+	<li class="cat-item cat-item-3191"><a href="https://krebsonsecurity.com/category/breadcrumbs/">Breadcrumbs</a>
+</li>
+	<li class="cat-item cat-item-3771"><a href="https://krebsonsecurity.com/category/data-breaches/" title="Stories about data breaches at retailers, corporations, governments and organizations of all sizes.">Data Breaches</a>
+</li>
+	<li class="cat-item cat-item-4624"><a href="https://krebsonsecurity.com/category/ddos-for-hire/">DDoS-for-Hire</a>
+</li>
+	<li class="cat-item cat-item-9173"><a href="https://krebsonsecurity.com/category/employment-fraud/">Employment Fraud</a>
+</li>
+	<li class="cat-item cat-item-2151"><a href="https://krebsonsecurity.com/category/how-to-break-into-security/" title="If you&#039;ve ever wanted career advice on how to make a shift into the security industry, look no further.">How to Break Into Security</a>
+</li>
+	<li class="cat-item cat-item-87"><a href="https://krebsonsecurity.com/category/latest-warnings/">Latest Warnings</a>
+</li>
+	<li class="cat-item cat-item-4071"><a href="https://krebsonsecurity.com/category/neer-do-well-news/">Ne&#039;er-Do-Well News</a>
+</li>
+	<li class="cat-item cat-item-9"><a href="https://krebsonsecurity.com/category/other/">Other</a>
+</li>
+	<li class="cat-item cat-item-1306"><a href="https://krebsonsecurity.com/category/pharma-wars/">Pharma Wars</a>
+</li>
+	<li class="cat-item cat-item-8240"><a href="https://krebsonsecurity.com/category/ransomware/">Ransomware</a>
+</li>
+	<li class="cat-item cat-item-599"><a href="https://krebsonsecurity.com/category/security-tools/">Security Tools</a>
+</li>
+	<li class="cat-item cat-item-8298"><a href="https://krebsonsecurity.com/category/sim-swapping/">SIM Swapping</a>
+</li>
+	<li class="cat-item cat-item-4079"><a href="https://krebsonsecurity.com/category/spam-nation/">Spam Nation</a>
+</li>
+	<li class="cat-item cat-item-1"><a href="https://krebsonsecurity.com/category/smallbizvictims/" title="Posts in this category will include new stories similar to those told in the Small Business Victims category on The Washington Post&#039;s Security Fix blog, which chronicled the methods organized cyber thieve are using to steal hundreds of thousands of dollars from dozens of small- to mid-sized companies around the country.">Target: Small Businesses</a>
+</li>
+	<li class="cat-item cat-item-5167"><a href="https://krebsonsecurity.com/category/tax-refund-fraud/">Tax Refund Fraud</a>
+</li>
+	<li class="cat-item cat-item-3"><a href="https://krebsonsecurity.com/category/comingstorm/" title="This category includes blog posts about computer and Internet security threats now and on the horizon.">The Coming Storm</a>
+</li>
+	<li class="cat-item cat-item-4"><a href="https://krebsonsecurity.com/category/patches/" title="Short posts on the latest security updates for widely-used software.
+">Time to Patch</a>
+</li>
+	<li class="cat-item cat-item-21"><a href="https://krebsonsecurity.com/category/web-fraud-2-0/">Web Fraud 2.0</a>
+</li>
+			</ul>
+
+			</aside><aside id="widget_sp_image-5" class="widget widget_sp_image"><p class="widget-title">The Value of a Hacked PC</p><a href="https://krebsonsecurity.com/2012/10/the-scrap-value-of-a-hacked-pc-revisited/" target="_blank" class="widget_sp_image-image-link" title="The Value of a Hacked PC"><img width="285" height="180" alt="valuehackedpc " class="attachment-285x180 aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2012/12/valuehackedpc-285x180.png" /></a><div class="widget_sp_image-description" ><p>Badguy uses for your PC</p>
+</div></aside><aside id="widget_sp_image-9" class="widget widget_sp_image"><p class="widget-title">Badguy Uses for Your Email </p><a href="https://krebsonsecurity.com/2013/06/the-value-of-a-hacked-email-account/" target="_self" class="widget_sp_image-image-link" title="Badguy Uses for Your Email "><img width="296" height="170" alt="Badguy Uses for Your Email " class="attachment-full aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2013/06/badguyemail.png 296w, https://krebsonsecurity.com/wp-content/uploads/2013/06/badguyemail-285x163.png 285w" sizes="(max-width: 296px) 100vw, 296px" src="https://krebsonsecurity.com/wp-content/uploads/2013/06/badguyemail.png" /></a><div class="widget_sp_image-description" ><p>Your email account may be worth far more than you imagine.</p>
+</div></aside><aside id="widget_sp_image-24" class="widget widget_sp_image"><a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&#038;hosted_button_id=MCCRKHWRX57HS" id="donate" target="_self" class="widget_sp_image-image-link"><img width="250" height="55" alt="Donate to Krebs On Security" class="attachment-medium aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2016/09/donatepaypal2-1.png" /></a></aside><aside id="most_popular_posts-3" class="widget widget_most_popular_posts">
+<p class="widget-title">Most Popular Posts</p>
+<ul>	<li><a href="https://krebsonsecurity.com/2018/07/sextortion-scam-uses-recipients-hacked-passwords/">Sextortion Scam Uses Recipient's Hacked Passwords</a> (1076)</li>
+	<li><a href="https://krebsonsecurity.com/2015/07/online-cheating-site-ashleymadison-hacked/">Online Cheating Site AshleyMadison Hacked</a> (798)</li>
+	<li><a href="https://krebsonsecurity.com/2013/12/sources-target-investigating-data-breach/">Sources: Target Investigating Data Breach</a> (620)</li>
+	<li><a href="https://krebsonsecurity.com/2020/11/trump-fires-security-chief-christopher-krebs/">Trump Fires Security Chief Christopher Krebs</a> (534)</li>
+	<li><a href="https://krebsonsecurity.com/2013/12/cards-stolen-in-target-breach-flood-underground-markets/">Cards Stolen in Target Breach Flood Underground Markets</a> (445)</li>
+	<li><a href="https://krebsonsecurity.com/2013/05/reports-liberty-reserve-founder-arrested-site-shuttered/">Reports: Liberty Reserve Founder Arrested, Site Shuttered</a> (416)</li>
+	<li><a href="https://krebsonsecurity.com/2015/08/was-the-ashley-madison-database-leaked/">Was the Ashley Madison Database Leaked?</a> (376)</li>
+	<li><a href="https://krebsonsecurity.com/2021/01/ddos-guard-to-forfeit-internet-space-occupied-by-parler/">DDoS-Guard To Forfeit Internet Space Occupied by Parler</a> (374)</li>
+	<li><a href="https://krebsonsecurity.com/2014/05/true-goodbye-using-truecrypt-is-not-secure/">True Goodbye: 'Using TrueCrypt Is Not Secure'</a> (363)</li>
+	<li><a href="https://krebsonsecurity.com/2015/08/who-hacked-ashley-madison/">Who Hacked Ashley Madison?</a> (361)</li>
+</ul>
+</aside>
+<aside id="media_image-2" class="widget widget_media_image"><p class="widget-title">Why So Many Top Hackers Hail from Russia</p><a href="https://krebsonsecurity.com/2017/06/why-so-many-top-hackers-hail-from-russia/"><img width="580" height="389" src="https://krebsonsecurity.com/wp-content/uploads/2017/06/computered-580x389.png" class="image wp-image-39684  attachment-medium size-medium" alt="" loading="lazy" style="max-width: 100%; height: auto;" srcset="https://krebsonsecurity.com/wp-content/uploads/2017/06/computered-580x389.png 580w, https://krebsonsecurity.com/wp-content/uploads/2017/06/computered-768x514.png 768w, https://krebsonsecurity.com/wp-content/uploads/2017/06/computered-940x630.png 940w, https://krebsonsecurity.com/wp-content/uploads/2017/06/computered.png 1551w" sizes="(max-width: 580px) 100vw, 580px" /></a></aside><aside id="widget_sp_image-11" class="widget widget_sp_image"><p class="widget-title">Category: Web Fraud 2.0</p><a href="https://krebsonsecurity.com/category/web-fraud-2-0/" target="_blank" class="widget_sp_image-image-link" title="Category: Web Fraud 2.0"><img width="227" height="400" alt="Criminnovations" class="attachment-medium aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2013/11/cybercrimeinnovations-227x400.png" /></a><div class="widget_sp_image-description" ><p>Innovations from the Underground</p>
+</div></aside><aside id="widget_sp_image-12" class="widget widget_sp_image"><a href="https://krebsonsecurity.com/2014/03/are-credit-monitoring-services-worth-it/" target="_blank" class="widget_sp_image-image-link"><img width="285" height="189" class="attachment-medium aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2014/03/shreddedID-copy-285x189.png 285w, https://krebsonsecurity.com/wp-content/uploads/2014/03/shreddedID-copy-600x399.png 600w, https://krebsonsecurity.com/wp-content/uploads/2014/03/shreddedID-copy.png 849w" sizes="(max-width: 285px) 100vw, 285px" src="https://krebsonsecurity.com/wp-content/uploads/2014/03/shreddedID-copy-285x189.png" /></a><div class="widget_sp_image-description" ><p>ID Protection Services Examined</p>
+</div></aside><aside id="widget_sp_image-13" class="widget widget_sp_image"><p class="widget-title">Is Antivirus Dead?</p><a href="https://krebsonsecurity.com/2014/05/antivirus-is-dead-long-live-antivirus/" target="_blank" class="widget_sp_image-image-link" title="Is Antivirus Dead?"><img width="285" height="161" alt="Is Antivirus Dead?" class="attachment-medium aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2014/05/cryptservices-285x161.png 285w, https://krebsonsecurity.com/wp-content/uploads/2014/05/cryptservices-600x339.png 600w, https://krebsonsecurity.com/wp-content/uploads/2014/05/cryptservices.png 945w" sizes="(max-width: 285px) 100vw, 285px" src="https://krebsonsecurity.com/wp-content/uploads/2014/05/cryptservices-285x161.png" /></a><div class="widget_sp_image-description" ><p>The reasons for its decline</p>
+</div></aside><aside id="widget_sp_image-14" class="widget widget_sp_image"><p class="widget-title">The Growing Tax Fraud Menace</p><a href="https://krebsonsecurity.com/category/tax-refund-fraud/" target="_blank" class="widget_sp_image-image-link" title="The Growing Tax Fraud Menace"><img width="285" height="285" alt="The Growing Tax Fraud Menace" class="attachment-medium aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2014/04/taxfraud-285x285.jpg 285w, https://krebsonsecurity.com/wp-content/uploads/2014/04/taxfraud-150x150.jpg 150w, https://krebsonsecurity.com/wp-content/uploads/2014/04/taxfraud-600x600.jpg 600w, https://krebsonsecurity.com/wp-content/uploads/2014/04/taxfraud.jpg 693w" sizes="(max-width: 285px) 100vw, 285px" src="https://krebsonsecurity.com/wp-content/uploads/2014/04/taxfraud-285x285.jpg" /></a><div class="widget_sp_image-description" ><p>File 'em Before the Bad Guys Can </p>
+</div></aside><aside id="widget_sp_image-17" class="widget widget_sp_image"><p class="widget-title">Inside a Carding Shop</p><a href="https://krebsonsecurity.com/2014/06/peek-inside-a-professional-carding-shop/" target="_blank" class="widget_sp_image-image-link" title="Inside a Carding Shop"><img width="194" height="340" alt="Inside a Carding Shop" class="attachment-medium aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2014/06/mcdumpalsjoined.png" /></a><div class="widget_sp_image-description" ><p>A crash course in carding. </p>
+</div></aside><aside id="widget_sp_image-18" class="widget widget_sp_image"><p class="widget-title">Beware Social Security Fraud</p><a href="https://krebsonsecurity.com/2013/09/crooks-hijack-retirement-funds-via-ssa-portal/" target="_blank" class="widget_sp_image-image-link" title="Beware Social Security Fraud"><img width="285" height="293" alt="Beware Social Security Fraud" class="attachment-full aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2016/09/myssn-285x293.png" /></a><div class="widget_sp_image-description" ><p>Sign up, or Be Signed Up! </p>
+</div></aside><aside id="widget_sp_image-2" class="widget widget_sp_image"><p class="widget-title">How Was Your Card Stolen?</p><a href="https://krebsonsecurity.com/2015/01/how-was-your-credit-card-stolen/" target="_blank" class="widget_sp_image-image-link" title="How Was Your Card Stolen?"><img width="285" height="285" alt="How Was Your Card Stolen?" class="attachment-full aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2016/09/carddominoes-285x285.jpg 285w, https://krebsonsecurity.com/wp-content/uploads/2016/09/carddominoes-285x285-150x150.jpg 150w" sizes="(max-width: 285px) 100vw, 285px" src="https://krebsonsecurity.com/wp-content/uploads/2016/09/carddominoes-285x285.jpg" /></a><div class="widget_sp_image-description" ><p>Finding out is not so easy. </p>
+</div></aside><aside id="widget_sp_image-22" class="widget widget_sp_image"><p class="widget-title">Krebs&#8217;s 3 Rules&#8230;</p><a href="https://krebsonsecurity.com/2011/05/krebss-3-basic-rules-for-online-safety/" target="_blank" class="widget_sp_image-image-link" title="Krebs&#8217;s 3 Rules&#8230;"><img width="300" height="300" alt="Krebs&#8217;s 3 Rules&#8230;" class="attachment-medium aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2011/05/three-300x300.jpg 300w, https://krebsonsecurity.com/wp-content/uploads/2011/05/three-150x150.jpg 150w, https://krebsonsecurity.com/wp-content/uploads/2011/05/three.jpg 347w" sizes="(max-width: 300px) 100vw, 300px" src="https://krebsonsecurity.com/wp-content/uploads/2011/05/three-300x300.jpg" /></a><div class="widget_sp_image-description" ><p>...For Online Safety. </p>
+</div></aside>		</div><!-- #secondary -->
+		</div><!-- #main .wrapper -->
+	
+	<div id="publisho-footer" class="widget-area">
+				<div class="footer-widget">
+                				</div>
+				<div class="footer-widget">
+								</div>
+				<div class="footer-widget">
+								</div>
+	</div>
+
+	<div class="site-wordpress">
+					&copy; Krebs on Security<br>
+	</div>
+	<!-- .site-info --><div class="clear"></div>
+</div><!-- #page -->
+
+<script type='text/javascript' src='https://krebsonsecurity.com/wp-content/themes/kos-mar2021/js/slicknav.js?ver=5.8.2' id='publisho-mobile-navigation-js'></script>
+<script type='text/javascript' src='https://krebsonsecurity.com/wp-includes/js/wp-embed.min.js?ver=5.8.2' id='wp-embed-js'></script>
+</body>
+</html>
+<!--
+Performance optimized by W3 Total Cache. Learn more: https://www.boldgrid.com/w3-total-cache/
+
+Object Caching 274/402 objects using memcached
+Page Caching using memcached 
+Database Caching 7/28 queries in 0.017 seconds using memcached
+
+Served from: krebsonsecurity.com @ 2021-12-10 15:35:00 by W3 Total Cache
+-->

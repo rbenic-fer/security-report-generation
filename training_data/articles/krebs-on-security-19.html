@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<!--[if IE 7]>
+<html class="ie ie7" lang="en-US">
+<![endif]-->
+<!--[if IE 8]>
+<html class="ie ie8" lang="en-US">
+<![endif]-->
+<!--[if !(IE 7) | !(IE 8)  ]><!-->
+<html lang="en-US">
+<!--<![endif]-->
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width" />
+<link rel="profile" href="http://gmpg.org/xfn/11" />
+<!--[if lt IE 9]>
+<script src="https://krebsonsecurity.com/wp-content/themes/kos-mar2021/js/html5.js" type="text/javascript"></script>
+<![endif]-->
+<title>Krebs on Security &#8211; Page 19 &#8211; In-depth security news and investigation</title>
+<meta name='robots' content='max-image-preview:large' />
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="Krebs on Security &raquo; Feed" href="https://krebsonsecurity.com/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Krebs on Security &raquo; Comments Feed" href="https://krebsonsecurity.com/comments/feed/" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.1.0\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.1.0\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/krebsonsecurity.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=5.8.2"}};
+			!function(e,a,t){var n,r,o,i=a.createElement("canvas"),p=i.getContext&&i.getContext("2d");function s(e,t){var a=String.fromCharCode;p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,e),0,0);e=i.toDataURL();return p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,t),0,0),e===i.toDataURL()}function c(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(o=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},r=0;r<o.length;r++)t.supports[o[r]]=function(e){if(!p||!p.fillText)return!1;switch(p.textBaseline="top",p.font="600 32px Arial",e){case"flag":return s([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])?!1:!s([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!s([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]);case"emoji":return!s([10084,65039,8205,55357,56613],[10084,65039,8203,55357,56613])}return!1}(o[r]),t.supports.everything=t.supports.everything&&t.supports[o[r]],"flag"!==o[r]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[o[r]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(n=t.source||{}).concatemoji?c(n.concatemoji):n.wpemoji&&n.twemoji&&(c(n.twemoji),c(n.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+	<link rel='stylesheet' id='colorbox-theme1-css'  href='https://krebsonsecurity.com/wp-content/plugins/jquery-lightbox-for-native-galleries/colorbox/theme1/colorbox.css?ver=1.3.14' type='text/css' media='screen' />
+<link rel='stylesheet' id='wp-block-library-css'  href='https://krebsonsecurity.com/wp-includes/css/dist/block-library/style.min.css?ver=5.8.2' type='text/css' media='all' />
+<link rel='stylesheet' id='contact-form-7-css'  href='https://krebsonsecurity.com/wp-content/plugins/contact-form-7/includes/css/styles.css?ver=5.5.3' type='text/css' media='all' />
+<link rel='stylesheet' id='publisho-style-css'  href='https://krebsonsecurity.com/wp-content/themes/kos-mar2021/style.css?subver=1.2&#038;ver=5.8.2' type='text/css' media='all' />
+<style id='publisho-style-inline-css' type='text/css'>
+
+	.themonic-nav .current-menu-item > a, .themonic-nav .current-menu-ancestor > a, .themonic-nav .current_page_item > a, .themonic-nav .current_page_ancestor > a {
+		background: #cc6600;
+	}
+	.themonic-nav ul.nav-menu, .themonic-nav div.nav-menu > ul {
+		border-bottom: 5px solid #cc6600;
+	}
+	#site-navigation .topheadmenu a {
+    background: rgba(0, 0, 0, 0);
+	}
+	.themonic-nav li a:hover {
+		background: #cc6600;
+	}
+	.themonic-nav li:hover {
+		background: #cc6600;
+	}.wrapper .flexslider {margin: 0 0 30px;}.frontp .btm-wrap {
+    border-top: 1px solid #e9e9e9;
+	}
+	.entry-summary {
+    border-top: none;
+	}.frontp .btm-wrap { margin-bottom: 30px;}.site { font-size:14px;}.site { font-family:'Roboto', arial ;}
+</style>
+<link rel='stylesheet' id='publisho-custom-style-css'  href='https://krebsonsecurity.com/wp-content/themes/kos-mar2021/custom.css?subver=1.2&#038;ver=5.8.2' type='text/css' media='all' />
+<!--[if lt IE 9]>
+<link rel='stylesheet' id='publisho-ie-css'  href='https://krebsonsecurity.com/wp-content/themes/kos-mar2021/css/ie.css?ver=20160606' type='text/css' media='all' />
+<![endif]-->
+<link rel='stylesheet' id='fontawesome-css-css'  href='https://krebsonsecurity.com/wp-content/themes/kos-mar2021/fonts/font-awesome.min.css?ver=5.8.2' type='text/css' media='all' />
+<link rel='stylesheet' id='publisho_custom_fonts-css'  href='//fonts.googleapis.com/css?family=Roboto%3Aregular%2Citalic%2C500%26subset%3Dlatin%2C' type='text/css' media='screen' />
+<script type='text/javascript' src='https://krebsonsecurity.com/wp-includes/js/jquery/jquery.min.js?ver=3.6.0' id='jquery-core-js'></script>
+<script type='text/javascript' src='https://krebsonsecurity.com/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.3.2' id='jquery-migrate-js'></script>
+<script type='text/javascript' src='https://krebsonsecurity.com/wp-content/plugins/jquery-lightbox-for-native-galleries/colorbox/jquery.colorbox-min.js?ver=1.3.14' id='colorbox-js'></script>
+<link rel="https://api.w.org/" href="https://krebsonsecurity.com/wp-json/" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://krebsonsecurity.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://krebsonsecurity.com/wp-includes/wlwmanifest.xml" /> 
+<meta name="generator" content="WordPress 5.8.2" />
+<!-- JavaScript Pull-Quotes plugin v2.2 -->
+	<link rel="stylesheet" href="https://krebsonsecurity.com/wp-content/plugins/jspullquotes/resources/jspullquotes-core.css" type="text/css" />
+	<link rel="stylesheet" href="https://krebsonsecurity.com/wp-content/plugins/jspullquotes/resources/jspullquotes-default.css" type="text/css" />
+	<script type="text/javascript" src="https://krebsonsecurity.com/wp-content/plugins/jspullquotes/resources/jspullquotes.js"></script>
+	<script type="text/javascript">
+		var arrOptions = new Array("1", "1", "right", "1", "1", "blockquote", "pullquote", "pullquote pqRight");
+		pullQuoteOpts(arrOptions);
+	</script>
+<!-- end pull-quote additions -->
+<!-- jQuery Lightbox For Native Galleries v3.1.3 | http://www.viper007bond.com/wordpress-plugins/jquery-lightbox-for-native-galleries/ -->
+<script type="text/javascript">
+// <![CDATA[
+	jQuery(document).ready(function($){
+		$(".gallery").each(function(index, obj){
+			var galleryid = Math.floor(Math.random()*10000);
+			$(obj).find("a").colorbox({rel:galleryid, maxWidth:"95%", maxHeight:"95%"});
+		});
+		$("a.lightbox").colorbox({maxWidth:"95%", maxHeight:"95%"});
+	});
+// ]]>
+</script>
+<style type="text/css" id="custom-background-css">
+body.custom-background { background-color: #ffffff; }
+</style>
+	<link rel="me" href="https://twitter.com/briankrebs" /><meta name="twitter:widgets:link-color" content="#000000" /><meta name="twitter:widgets:border-color" content="#000000" /><meta name="twitter:partner" content="tfwp" />
+<meta name="twitter:card" content="summary" /><meta name="twitter:title" content="Krebs on Security" /><meta name="twitter:site" content="@briankrebs" /><meta name="twitter:description" content="In-depth security news and investigation" />
+</head>
+<body class="home blog paged custom-background paged-19 custom-background-white single-author frontp hfeed">
+<div id="page" class="site">
+	<!-- <div class="publisho-top-mobile-nav clear"></div> -->
+	<div class="themonic-logo themonic-ad3"><div class="a-statement">Advertisement</div><a href="https://securityscorecard.com/instant-security-scorecard?utm_source=krebs+on+security&amp;utm_medium=display&amp;utm_campaign=instant+scorecard&amp;utm_term=B&amp;utm_content=1240x110">
+<img src="/b-securityscorecard/5.jpg">
+</a></div>
+	<div class="themonic-logo themonic-ad6"><div class="a-statement">Advertisement</div><a href="https://ninjio.com/lp46d-krebs/">
+<img src="/b-ninjio/10.png">
+</a></div>
+	<nav id="site-navigation" class="themonic-nav" role="navigation">
+	</nav><!-- #site-navigation -->
+	<div class="clear"></div>
+	<header id="masthead" class="site-header" role="banner">
+ 					<div class="desktop-social">
+						<div class="socialmedia">
+							<a href="http://twitter.com/briankrebs" target="_blank"><i class="fa fa-twitter"></i></a> 
+															<a class="rss" href="https://krebsonsecurity.com/feed/" target="_blank"><i class="fa fa-rss"></i></a>	
+									<a class="rss" href="https://www.linkedin.com/in/bkrebs/" target="_blank"><i class="fa fa-linkedin"></i></a>	
+								</div>
+				 	</div>
+																						   
+		
+		<div class="themonic-logo responsive-img-container">
+			<a href="https://krebsonsecurity.com/" title="Krebs on Security" rel="home"><img src="https://krebsonsecurity.com/wp-content/uploads/2021/03/kos-27-03-2021.jpg" alt="Krebs on Security"></a>
+		</div>
+
+					<div class="mobile-social">
+						<div class="socialmedia">
+							<a href="http://twitter.com/briankrebs" target="_blank"><i class="fa fa-twitter"></i></a> 
+															<a class="rss" href="https://krebsonsecurity.com/feed/" target="_blank"><i class="fa fa-rss"></i></a>	
+									<a class="rss" href="https://www.linkedin.com/in/bkrebs/" target="_blank"><i class="fa fa-linkedin"></i></a>	
+								</div>
+					</div>
+		
+				<!-- <div class="publisho-mobile-nav clear"></div> -->
+		<nav id="site-navigation" class="themonic-nav" role="navigation">
+			<a class="assistive-text" href="#content" title="Skip to content">Skip to content</a>
+			<div id="menu-top" class="nav-menu"><ul>
+<li ><a href="https://krebsonsecurity.com/">Home</a></li><li class="page_item page-item-2"><a href="https://krebsonsecurity.com/about/">About the Author</a></li>
+<li class="page_item page-item-645"><a href="https://krebsonsecurity.com/cpm/">Advertising/Speaking</a></li>
+</ul></div>
+		</nav><!-- #site-navigation -->
+		<div class="clear"></div>
+	</header><!-- #masthead -->
+	<div id="main" class="wrapper">
+		<div id="primary" class="site-content">
+	
+
+	
+		<div id="content" role="main">
+
+		<article id="post-51865" class="post-51865 post type-post status-publish format-standard hentry category-employment-fraud category-smallbizvictims category-comingstorm tag-alex-holden tag-business-identity-theft tag-covid-19 tag-dun-bradstreet tag-eva-velasquez tag-fan-experiences tag-hold-security tag-identity-theft-resource-center tag-mary-mcmahan tag-scott-russell">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2020/07/business-id-theft-soars-amid-covid-closures/" title="Permalink to Business ID Theft Soars Amid COVID Closures" rel="bookmark">Business ID Theft Soars Amid COVID Closures</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">July 27, 2020</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2020/07/business-id-theft-soars-amid-covid-closures/#comments">21 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>Identity thieves who specialize in running up unauthorized lines of credit in the names of small businesses are having a field day with all of the closures and economic uncertainty wrought by the COVID-19 pandemic, KrebsOnSecurity has learned. This story is about the victims of a particularly aggressive business ID theft ring that&#8217;s spent years targeting small businesses across the country and is now pivoting toward using that access for pandemic assistance loans and unemployment benefits.</p>
+<p><img loading="lazy" class="aligncenter wp-image-51644" src="https://krebsonsecurity.com/wp-content/uploads/2020/05/100mask.jpg" alt="" width="590" height="359" /></p>
+<p>Most consumers are likely aware of the threat from identity theft, which occurs when crooks apply for new lines of credit in your name. But the same crime can be far more costly and damaging when thieves target small businesses. Unfortunately, far too many entrepreneurs are simply unaware of the threat or don&#8217;t know how to be watchful for it.</p>
+<p>What&#8217;s more, with so many small enterprises going out of business or sitting dormant during the COVID-19 pandemic, organized fraud rings have an unusually rich pool of targets to choose from.</p>
+<p>Short Hills, N.J.-based <a href="https://www.dnb.com" target="_blank" rel="noopener noreferrer">Dun &amp; Bradstreet</a> [<a href="https://finance.yahoo.com/quote/DNB/" target="_blank" rel="noopener noreferrer">NYSE:DNB</a>] is a data analytics company that acts as a kind of de facto credit bureau for companies: When a business owner wants to open a new line of credit, creditors typically check with Dun &amp; Bradstreet to gauge the business&#8217;s history and trustworthiness.</p>
+<p>In 2019, Dun &amp; Bradstreet saw more than a 100 percent increase in business identity theft. For 2020, the company estimates <em>an overall 258 percent spike in the crime.</em> Dun &amp; Bradstreet said that so far this year it has received over 4,700 tips and leads where business identity theft or malfeasance are suspected.</p>
+<p>&#8220;The ferocity of cyber criminals to take advantage of COVID-19 uncertainties by preying on small businesses is disturbing,&#8221; said <strong>Andrew LaMarca</strong>, who leads the global high-risk and fraud team at Dun &amp; Bradstreet.</p>
+<p>For the past several months, Milwaukee, Wisc. based cyber intelligence firm <a href="https://www.holdsecurity.com" target="_blank" rel="noopener noreferrer">Hold Security</a> has been monitoring the communications between and among a businesses ID theft gang apparently operating in Georgia and Florida but targeting businesses throughout the United States. That surveillance has helped to paint a detailed picture of how business ID thieves operate, as well as the tricks they use to gain credit in a company&#8217;s name.</p>
+<p>Hold Security founder <strong>Alex Holden</strong> said the group appears to target both active and dormant or inactive small businesses. The gang typically will start by looking up the business ownership records at the Secretary of State website that corresponds to the company&#8217;s state of incorporation. From there, they identify the officers and owners of the company, acquire their Social Security and Tax ID numbers from the dark web and other sources online.</p>
+<p>To prove ownership over the hijacked firms, they hire low-wage image editors online to help fabricate and/or modify a number of official documents tied to the business &#8212; including tax records and utility bills.</p>
+<p>The scammers frequently then file phony documents with the Secretary of State&#8217;s office in the name(s) of the business owners, but include a mailing address that they control. They also create email addresses and domain names that mimic the names of the owners and the company to make future credit applications appear more legitimate, and submit the listings to business search websites, such as yellowpages.com.</p>
+<p>For both dormant and existing businesses, the fraudsters attempt to create or modify the target company&#8217;s accounts at Dun &amp; Bradstreet. In some cases, the scammers create dashboard accounts in the business&#8217;s names at Dun &amp; Bradstreet&#8217;s credit builder portal; in others, the bad guys have actually hacked existing business accounts at DNB, requesting a new DUNS numbers for the business (a DUNS number is a unique, nine-digit identifier for businesses).</p>
+<p><img loading="lazy" class="aligncenter wp-image-52445" src="https://krebsonsecurity.com/wp-content/uploads/2020/07/dnb.png" alt="" width="591" height="179" srcset="https://krebsonsecurity.com/wp-content/uploads/2020/07/dnb.png 1304w, https://krebsonsecurity.com/wp-content/uploads/2020/07/dnb-580x175.png 580w, https://krebsonsecurity.com/wp-content/uploads/2020/07/dnb-940x284.png 940w, https://krebsonsecurity.com/wp-content/uploads/2020/07/dnb-768x232.png 768w" sizes="(max-width: 591px) 100vw, 591px" /></p>
+<p>Finally, after the bogus profiles are approved by Dun &amp; Bradstreet, the gang waits a few weeks or months and then starts applying for new lines of credit in the target business&#8217;s name at stores like Home Depot, Office Depot and Staples. Then they go on a buying spree with the cards issued by those stores.</p>
+<p>Usually, the first indication a victim has that they&#8217;ve been targeted is when the debt collection companies start calling.</p>
+<p>&#8220;They are using mostly small companies that are still active businesses but currently not operating because of COVID-19,&#8221; Holden said. &#8220;With this gang, we see four or five people working together. The team leader manages the work between people. One person seems to be in charge of getting stolen cards from the dark web to pay for the reactivation of businesses through the secretary of state sites. Another team member works on revising the business documents and registering them on various sites. The others are busy looking for specific businesses they want to revive.&#8221;</p>
+<p>Holden said the gang appears to find success in getting new lines of credit with about 20 percent of the businesses they target.</p>
+<p>&#8220;One&#8217;s personal credit is nothing compared to the ability of corporations to borrow money,&#8221; he said. &#8220;That&#8217;s bad because while the credit system may be flawed for individuals, it&#8217;s an even worse situation on average when we&#8217;re talking about businesses.&#8221;</p>
+<p>Holden said over the past few months his firm has seen communications between the gang&#8217;s members indicating they have temporarily shifted more of their energy and resources to defrauding states and the federal government by filing unemployment insurance claims and apply for pandemic assistance loans with the Small Business Administration.</p>
+<p>&#8220;It makes sense, because they&#8217;ve already got control over all these dormant businesses,&#8221; he said. &#8220;So they&#8217;re now busy trying to get unemployment payments and SBA loans in the names of these companies and their employees.&#8221;</p>
+<h4>PHANTOM OFFICES</h4>
+<p>Hold Security shared data intercepted from the gang that listed the personal and financial details of dozens of companies targeted for ID theft, including Dun &amp; Bradstreet logins the crooks had created for the hijacked businesses. Dun &amp; Bradstreet declined to comment on the matter, other than to say it was working with federal and state authorities to alert affected businesses and state regulators.</p>
+<p><img loading="lazy" class="aligncenter wp-image-52446" src="https://krebsonsecurity.com/wp-content/uploads/2020/07/officeboxes.jpg" alt="" width="596" height="397" srcset="https://krebsonsecurity.com/wp-content/uploads/2020/07/officeboxes.jpg 1000w, https://krebsonsecurity.com/wp-content/uploads/2020/07/officeboxes-580x386.jpg 580w, https://krebsonsecurity.com/wp-content/uploads/2020/07/officeboxes-940x626.jpg 940w, https://krebsonsecurity.com/wp-content/uploads/2020/07/officeboxes-768x511.jpg 768w" sizes="(max-width: 596px) 100vw, 596px" /></p>
+<p>Among those targeted was <a href="https://www.escflorida.com/" target="_blank" rel="noopener noreferrer">Environmental Safety Consultants Inc.</a> (ESC), a 37-year-old environmental engineering firm based in Bradenton, Fla. ESC owner <strong>Scott Russell</strong> estimates his company was initially targeted nearly two years ago, and that he first became aware something wasn&#8217;t right when he recently began getting calls from Home Depot&#8217;s corporate offices inquiring about the company&#8217;s delinquent account.</p>
+<p>But Russell said he didn&#8217;t quite grasp the enormity of the situation until last year, when he was contacted by the manager of a virtual office space across town who told him about a suspiciously large number of deliveries at an office space that was rented out in his name.</p>
+<p>Russell had never rented that particular office. Rather, the thieves had done it for him, using his name and the name of his business. The office manager said the deliveries came virtually non-stop, even though there was apparently no business operating within the rented premises. And in each case, shortly after the shipments arrived someone would show up and cart them away.</p>
+<p>&#8220;She said we don&#8217;t think it&#8217;s you,&#8221; he recalled. &#8220;Turns out, they had paid for a lease in my name with someone else&#8217;s credit card. She shared with me a copy of the lease, which included a fraudulent ID and even a vehicle insurance card for a Land Cruiser we got rid of like 15 years ago. The application listed our home address with me and some woman who was not my wife&#8217;s name.&#8221;</p>
+<p>The crates and boxes being delivered to his erstwhile office space were mostly computers and other high-priced items ordered from 10 different Office Depot credit cards that also were not in his name.</p>
+<p>&#8220;The total value of the electronic equipment that was bought and delivered there was something like $75,000,&#8221; Russell said, noting that it took countless hours and phone calls with Office Depot to make it clear they would no longer accept shipments addressed to him or his company. &#8220;It was quite spine-tingling to see someone penned a lease in the name of my business and personal identity.&#8221;</p>
+<p>Even though the virtual office manager had the presence of mind to take photocopies of the driver&#8217;s licenses presented by the people arriving to pick up the fraudulent shipments, the local police seemed largely uninterested in pursuing the case, Russell said.</p>
+<p>&#8220;I went to the local county sheriff&#8217;s office and showed them all the documentation I had and the guy just yawned and said he&#8217;d get right on it,&#8221; he recalled. &#8220;The place where the office space was rented was in another county, and the detective I spoke to there about it was interested, but he could never get anyone from my county to follow up.&#8221; <a href="https://krebsonsecurity.com/2020/07/business-id-theft-soars-amid-covid-closures/#more-51865" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+	<div id="between_article_ad" class="themonic-ad5"><a href="https://www.iansresearch.com/resources/infosec-content-downloads/research-reports/2021-ciso-compensation-benchmark-research-study?utm_source=krebs&amp;utm_medium=display_ad&amp;utm_campaign=2021_ciso_comp_study">
+<img src="/b-ians/8.png">
+</a></div>	<article id="post-52199" class="post-52199 post type-post status-publish format-standard hentry category-how-to-break-into-security tag-alan-paller tag-defcon-groups tag-how-to-break-into-security tag-kali-linux tag-metasploit tag-nessus tag-nikto tag-nmap tag-openvas tag-owasp tag-sans-institute tag-security-bsides tag-tcp-ip tag-tcpdump tag-virtualbox tag-webgoat tag-wireshark tag-womens-society-of-cyberjutsu">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2020/07/thinking-of-a-cybersecurity-career-read-this/" title="Permalink to Thinking of a Cybersecurity Career? Read This" rel="bookmark">Thinking of a Cybersecurity Career? Read This</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">July 24, 2020</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2020/07/thinking-of-a-cybersecurity-career-read-this/#comments">172 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>Thousands of people graduate from colleges and universities each year with cybersecurity or computer science degrees only to find employers are less than thrilled about their hands-on, foundational skills. Here&#8217;s a look at a recent survey that identified some of the bigger skills gaps, and some thoughts about how those seeking a career in these fields can better stand out from the crowd.</p>
+<p><img loading="lazy" class="aligncenter wp-image-52423" src="https://krebsonsecurity.com/wp-content/uploads/2020/07/codepeople.png" alt="" width="760" height="517" /></p>
+<p>Virtually every week KrebsOnSecurity receives at least one email from someone seeking advice on <a href="https://krebsonsecurity.com/category/how-to-break-into-security/" target="_blank" rel="noopener noreferrer">how to break into cybersecurity</a> as a career. In most cases, the aspirants ask which certifications they should seek, or what specialization in computer security might hold the brightest future.</p>
+<p>Rarely am I asked which practical skills they should seek to make themselves more appealing candidates for a future job. And while I always preface any response with the caveat that I don&#8217;t hold any computer-related certifications or degrees myself, I do speak with C-level executives in cybersecurity and recruiters on a regular basis and frequently ask them for their impressions of today&#8217;s cybersecurity job candidates.</p>
+<p>A common theme in these C-level executive responses is that a great many candidates simply lack hands-on experience with the more practical concerns of operating, maintaining and defending the information systems which drive their businesses.</p>
+<p>Granted, most people who have just graduated with a degree lack practical experience. But happily, a somewhat unique aspect of cybersecurity is that one can gain a fair degree of mastery of hands-on skills and foundational knowledge through self-directed study and old fashioned trial-and-error.</p>
+<p>One key piece of advice I nearly always include in my response to readers involves learning the core components of how computers and other devices communicate with one another. I say this because a mastery of networking is a fundamental skill that so many other areas of learning build upon. Trying to get a job in security without a deep understanding of how data packets work is a bit like trying to become a chemical engineer without first mastering the periodic table of elements.</p>
+<p>But please don&#8217;t take my word for it. <a href="https://www.sans.org" target="_blank" rel="noopener noreferrer">The SANS Institute</a>, a Bethesda, Md. based security research and training firm, recently conducted a survey of more than 500 cybersecurity practitioners at 284 different companies in an effort to suss out which skills they find most useful in job candidates, and which are most frequently lacking.</p>
+<p>The survey asked respondents to rank various skills from &#8220;critical&#8221; to &#8220;not needed.&#8221; Fully 85 percent ranked networking as a critical or &#8220;very important&#8221; skill, followed by a mastery of the Linux operating system (77 percent), Windows (73 percent), common exploitation techniques (73 percent), computer architectures and virtualization (67 percent) and data and cryptography (58 percent). Perhaps surprisingly, only 39 percent ranked programming as a critical or very important skill (I&#8217;ll come back to this in a moment).</p>
+<p>How did the cybersecurity practitioners surveyed grade their pool of potential job candidates on these critical and very important skills? The results may be eye-opening:</p>
+<p><a class="lightbox" href="https://krebsonsecurity.com/wp-content/uploads/2020/07/skillscyber.png"><img loading="lazy" class="aligncenter wp-image-52405" src="https://krebsonsecurity.com/wp-content/uploads/2020/07/skillscyber.png" alt="" width="764" height="238" srcset="https://krebsonsecurity.com/wp-content/uploads/2020/07/skillscyber.png 802w, https://krebsonsecurity.com/wp-content/uploads/2020/07/skillscyber-580x181.png 580w, https://krebsonsecurity.com/wp-content/uploads/2020/07/skillscyber-768x239.png 768w" sizes="(max-width: 764px) 100vw, 764px" /></a></p>
+<p>&#8220;Employers report that student cybersecurity preparation is largely inadequate and are frustrated that they have to spend months searching before they find qualified entry-level employees if any can be found,&#8221; said <strong>Alan Paller</strong>, director of research at the SANS Institute. &#8220;We hypothesized that the beginning of a pathway toward resolving those challenges and helping close the cybersecurity skills gap would be to isolate the capabilities that employers expected but did not find in cybersecurity graduates.&#8221;</p>
+<p style="font-weight: 400;">The truth is, some of the smartest, most insightful and talented computer security professionals I know today don&#8217;t have any computer-related certifications under their belts. In fact, many of them never even went to college or completed a university-level degree program.</p>
+<p>Rather, they got into security because they were passionately and intensely curious about the subject, and that curiosity led them to learn as much as they could &#8212; mainly by reading, doing, and making mistakes (lots of them).</p>
+<p>I mention this not to dissuade readers from pursuing degrees or certifications in the field (which may be a basic requirement for many corporate HR departments) but to emphasize that these should not be viewed as some kind of golden ticket to a rewarding, stable and relatively high-paying career.</p>
+<p>More to the point, without a mastery of one or more of the above-mentioned skills, you simply will not be a terribly appealing or outstanding job candidate when the time comes. <a href="https://krebsonsecurity.com/2020/07/thinking-of-a-cybersecurity-career-read-this/#more-52199" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+	<div class="themonic-ad2"><div class="a-statement">Advertisement</div><a href="https://www.akamai.com/why-akamai/the-internet-of-possibilities?utm_source=krebsonsecurity&amp;utm_medium=display&amp;utm_campaign=F-MC-54978">
+<img src="/b-akamai/145.png">
+</a></div>	<article id="post-52384" class="post-52384 post type-post status-publish format-standard hentry category-data-breaches category-comingstorm tag-first-american-financial-corp tag-new-york-state-department-of-financial-services tag-reuters">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2020/07/ny-charges-first-american-financial-for-massive-data-leak/" title="Permalink to NY Charges First American Financial for Massive Data Leak" rel="bookmark">NY Charges First American Financial for Massive Data Leak</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">July 23, 2020</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2020/07/ny-charges-first-american-financial-for-massive-data-leak/#comments">34 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>In May 2019, KrebsOnSecurity broke the news that the website of mortgage title insurance giant <strong>First American Financial Corp.</strong> had exposed approximately 885 million records related to mortgage deals going back to 2003. On Wednesday, regulators in New York announced that First American was the target of their first ever cybersecurity enforcement action in connection with the incident, charges that could bring steep financial penalties.</p>
+<div id="attachment_47830" style="width: 608px" class="wp-caption aligncenter"><img aria-describedby="caption-attachment-47830" loading="lazy" class=" wp-image-47830" src="https://krebsonsecurity.com/wp-content/uploads/2019/05/firstamericanfinancial.jpg" alt="" width="598" height="356" /><p id="caption-attachment-47830" class="wp-caption-text">First American Financial Corp.</p></div>
+<p>Santa Ana, Calif.-based <a href="https://en.wikipedia.org/wiki/First_American_Corporation" target="_blank" rel="noopener noreferrer">First American</a> [<a href="https://www.marketbeat.com/stocks/NYSE/FAF/" target="_blank" rel="noopener noreferrer">NYSE:FAF</a>] is a leading provider of title insurance and settlement services to the real estate and mortgage industries. It employs some 18,000 people and brought in <a href="http://investors.firstam.com/investors/overview/default.aspx" target="_blank" rel="noopener noreferrer">$6.2 billion in 2019</a>.</p>
+<p>As <a href="https://krebsonsecurity.com/2019/05/first-american-financial-corp-leaked-hundreds-of-millions-of-title-insurance-records/" target="_blank" rel="noopener noreferrer">first reported here last year</a>, First American&#8217;s website exposed 16 years worth of digitized mortgage title insurance records — including bank account numbers and statements, mortgage and tax records, Social Security numbers, wire transaction receipts, and drivers license images.</p>
+<p>The documents were available without authentication to anyone with a Web browser.</p>
+<p>According to <a href="https://www.dfs.ny.gov/system/files/documents/2020/07/ea20200721_first_american_notice_charges.pdf" target="_blank" rel="noopener noreferrer">a filing</a> (PDF) by the <strong>New York State Department of Financial Services</strong> (DFS), the weakness that exposed the documents was first introduced during an application software update in May 2014 and went undetected for years.</p>
+<p>Worse still, the DFS found, the vulnerability was discovered in a penetration test First American conducted on its own in December 2018.</p>
+<p>&#8220;Remarkably, Respondent instead allowed unfettered access to the personal and financial data of millions of its customers for six more months until the breach and its serious ramifications were widely publicized by a nationally recognized cybersecurity industry journalist,&#8221; the DFS explained in <a href="https://www.dfs.ny.gov/reports_and_publications/press_releases/pr202007221" target="_blank" rel="noopener noreferrer">a statement</a> on the charges.</p>
+<div id="attachment_47843" style="width: 608px" class="wp-caption aligncenter"><img aria-describedby="caption-attachment-47843" loading="lazy" class=" wp-image-47843" src="https://krebsonsecurity.com/wp-content/uploads/2019/05/sample-fa.jpg" alt="" width="598" height="489" /><p id="caption-attachment-47843" class="wp-caption-text">A redacted screenshot of one of many millions of sensitive records exposed by First American&#8217;s Web site.</p></div>
+<p>Reuters <a href="https://kfgo.com/2020/07/22/new-york-charges-big-title-insurer-first-american-over-security-gap/" target="_blank" rel="noopener noreferrer">reports</a> that the penalties could be significant for First American: The DFS considers each instance of exposed personal information a separate violation, and the company faces penalties of up to $1,000 per violation. <a href="https://krebsonsecurity.com/2020/07/ny-charges-first-american-financial-for-massive-data-leak/#more-52384" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-52323" class="post-52323 post type-post status-publish format-standard hentry category-sunshine category-neer-do-well-news tag-allison-nixon tag-aqua tag-beyond-insane tag-chaewon tag-crim tag-ever-so-anxious tag-joseph-oconnor tag-josh-perry tag-lol tag-mark-rasch tag-mason tag-ogusers tag-plugwalkjoe tag-promo tag-samy-tarazi tag-sim-swapping tag-tankska tag-unit-221b tag-voku">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2020/07/twitter-hacking-for-profit-and-the-lols/" title="Permalink to Twitter Hacking for Profit and the LoLs" rel="bookmark">Twitter Hacking for Profit and the LoLs</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">July 22, 2020</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2020/07/twitter-hacking-for-profit-and-the-lols/#comments">23 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p><em>The New York Times</em> last week ran an interview with several young men who claimed to have had direct contact with those involved in last week&#8217;s epic hack against Twitter. These individuals said they were only customers of the person who had access to Twitter&#8217;s internal employee tools, and were not responsible for the actual intrusion or bitcoin scams that took place that day. But new information suggests that at least two of them operated a service that resold access to Twitter employees for the purposes of modifying or seizing control of prized Twitter profiles.</p>
+<p>As first <a href="https://krebsonsecurity.com/2020/07/whos-behind-wednesdays-epic-twitter-hack/" target="_blank" rel="noopener noreferrer">reported here on July 16,</a> prior to bitcoin scam messages being blasted out from such high-profile Twitter accounts @barackobama, @joebiden, @elonmusk and @billgates, several highly desirable short-character Twitter account names changed hands, including @L, @6 and @W.</p>
+<div id="attachment_52340" style="width: 520px" class="wp-caption aligncenter"><img aria-describedby="caption-attachment-52340" loading="lazy" class=" wp-image-52340" src="https://krebsonsecurity.com/wp-content/uploads/2020/07/resetl.png" alt="" width="510" height="597" /><p id="caption-attachment-52340" class="wp-caption-text">A screenshot of a Discord discussion between the key Twitter hacker &#8220;Kirk&#8221; and several people seeking to hijack high-value Twitter accounts.</p></div>
+<p>Known as “original gangster” or &#8220;OG&#8221; accounts, short-character profile names confer a measure of status and wealth in certain online communities, and such accounts can often fetch thousands of dollars when resold in the underground.</p>
+<p>The people involved in obtaining those OG accounts on July 15 said they got them from a person identified only as &#8220;Kirk,&#8221; who claimed to be a Twitter employee. According to <a href="https://www.nytimes.com/2020/07/17/technology/twitter-hackers-interview.html?action=click&amp;module=Top%20Stories&amp;pgtype=Homepage" target="_blank" rel="noopener noreferrer">The Times</a>, Kirk first reached out to the group through a hacker who used the screen name &#8220;<strong>lol</strong>&#8221; on <strong>OGusers</strong>, a forum dedicated to helping users hijack and resell OG accounts from Twitter and other social media platforms. From The Times&#8217;s story:</p>
+<blockquote><p>&#8220;The hacker &#8216;lol&#8217; and another one he worked with, who went by the screen name &#8216;ever so anxious,&#8217; told The Times that they wanted to talk about their work with Kirk in order to prove that they had only facilitated the purchases and takeovers of lesser-known Twitter addresses early in the day. They said they had not continued to work with Kirk once he began more high-profile attacks around 3:30 p.m. Eastern time on Wednesday.</p>
+<p>&#8216;lol&#8217; did not confirm his real-world identity, but said he lived on the West Coast and was in his 20s. “ever so anxious” said he was 19 and lived in the south of England with his mother.</p>
+<p>Kirk connected with “lol” late Tuesday and then “ever so anxious” on Discord early on Wednesday, and asked if they wanted to be his middlemen, selling Twitter accounts to the online underworld where they were known. They would take a cut from each transaction.&#8221;</p></blockquote>
+<p>Twice in the past year, the <a href="https://krebsonsecurity.com/?s=ogusers&amp;x=0&amp;y=0" target="_blank" rel="noopener noreferrer">OGUsers forum was hacked</a>, and both times its database of usernames, email addresses and private messages was leaked online. A review of the private messages for &#8220;lol&#8221; on OGUsers provides a glimpse into the vibrant market for the resale of prized OG accounts.</p>
+<p>On OGUsers, lol was known to other members as someone who had a direct connection to one or more people working at Twitter who could be used to help fellow members gain access to Twitter profiles, including those that had been suspended for one reason or another. In fact, this was how lol introduced himself to the OGUsers community when he first joined.</p>
+<p>&#8220;I have a twitter contact who I can get users from (to an extent) and I believe I can get verification from,&#8221; lol explained.</p>
+<p>In a direct message exchange on OGUsers from November 2019, lol is asked for help from another OGUser member whose Twitter account had been suspended for abuse.</p>
+<p>&#8220;hello saw u talking about a twitter rep could you please ask if she would be able to help unsus [unsuspend] my main and my friends business account will pay 800-1k for each,&#8221; the OGUusers profile inquires of lol.</p>
+<p>Lol says he can&#8217;t promise anything but will look into it. &#8220;I sent her that, not sure if I will get a reply today bc its the weekend but ill let u know,&#8221; Lol says.</p>
+<p>In another exchange, an OGUser denizen quizzes lol about his Twitter hookup.</p>
+<p>&#8220;Does she charge for escalations? And how do you know her/what is her department/job. How do you connect with them if I may ask?&#8221;</p>
+<p>&#8220;They are in the Client success team,&#8221; lol replies. &#8220;No they don&#8217;t charge, and I know them through a connection.&#8221;</p>
+<p>As for how he got access to the Twitter employee, lol declines to elaborate, saying it&#8217;s a private method. &#8220;It&#8217;s a lil method, sorry I cant say.&#8221;</p>
+<p>In another direct message, lol asks a fellow OGUser member to edit a comment in a forum discussion which included the Twitter account &#8220;<strong>@tankska</strong>,&#8221; saying it was his IRL (in real life) Twitter account and that he didn&#8217;t want to risk it getting found out or suspended (Twitter says this account doesn&#8217;t exist, but <a href="https://twitter.com/search?q=tankska&amp;src=typed_query" target="_blank" rel="noopener noreferrer">a simple text search on Twitter</a> shows the profile was active until late 2019).</p>
+<p>&#8220;can u edit that comment out, @tankska is a gaming twitter of mine and i dont want it to be on ogu :D&#8217;,&#8221; lol wrote. &#8220;just dont want my irl getting sus[pended].&#8221;</p>
+<p>Still another OGUser member would post lol&#8217;s identifying information into a forum thread, calling lol by his first name &#8212; &#8220;Josh&#8221; &#8212; in a post asking lol what he might offer in an auction for a specific OG name.</p>
+<p>&#8220;Put me down for 100, but don&#8217;t note my name in the thread please,&#8221; lol wrote.</p>
+<h4>WHO IS LOL?</h4>
+<p>The information in lol&#8217;s OGUsers registration profile indicates he was probably being truthful with The Times about his location. The hacked forum database shows a user &#8220;tankska&#8221; registered on OGUsers back in July 2018, but only made one post asking about the price of an older Twitter account for sale.</p>
+<p>The person who registered the tankska account on OGUsers did so with the email address <strong>jperry94526@gmail.com</strong>, and from an Internet address tied to the <strong>San Ramon Unified School District</strong> in Danville, Calif.</p>
+<p>According to <a href="https://www.4iq.com" target="_blank" rel="noopener noreferrer">4iq.com</a>, a service that indexes account details like usernames and passwords exposed in Web site data breaches, the jperry94526 email address was used to register accounts at several other sites over the years, including one at the apparel store Stockx.com under the profile name <strong>Josh Perry</strong>.</p>
+<p>Tankska was active only briefly on OGUsers, but the hacked OGUsers database shows that &#8220;lol&#8221; changed his username three times over the years. Initially, it was &#8220;freej0sh,&#8221; followed by just &#8220;j0sh.&#8221;</p>
+<p>lol did not respond to requests for comment sent to email addresses tied to his various OGU profiles and Instagram accounts.</p>
+<h4>ALWAYS IN DISCORD</h4>
+<p>Last week&#8217;s story on the Twitter compromise noted that just before the bitcoin scam tweets went out, several OG usernames changed hands. The story traced screenshots of Twitter tools posted online back to a moniker that is well-known in the OGUsers circle: <a href="https://krebsonsecurity.com/wp-content/uploads/2020/07/pwj-mason.png" target="_blank" rel="noopener noreferrer">PlugWalkJoe</a>, a 21-year-old from the United Kingdom.</p>
+<p>Speaking with <em>The Times</em>, PlugWalkJoe &#8212; whose real name is <strong>Joseph O&#8217;Connor</strong> &#8212; said while he acquired a single OG Twitter account (<a href="https://medium.com/@lucky225/the-twitter-hack-what-exactly-happened-d8740d33c1c" target="_blank" rel="noopener noreferrer">@6</a>) through one of the hackers in direct communication with Kirk, he was otherwise not involved in the conversation.</p>
+<p>&#8220;I don&#8217;t care,&#8221; O&#8217;Connor told The Times. &#8220;They can come arrest me. I would laugh at them. I haven&#8217;t done anything.&#8221;</p>
+<p>In an interview with KrebsOnSecurity, O&#8217;Connor likewise asserted his innocence, suggesting at least a half dozen other hacker handles that may have been Kirk or someone who worked with Kirk on July 15, including &#8220;Voku,&#8221; &#8220;Crim/Criminal,&#8221; &#8220;Promo,&#8221; and &#8220;Aqua.&#8221;</p>
+<p>&#8220;That twit screenshot was the first time in a while I joke[d], and evidently I shouldn&#8217;t have,&#8221; he said. &#8220;Joking is what got me into this mess.&#8221;</p>
+<p>O&#8217;Connor shared a number of screenshots from a <a href="https://en.wikipedia.org/wiki/Discord_(software)" target="_blank" rel="noopener noreferrer">Discord</a> chat conversation on the day of the Twitter hack between Kirk and two others: &#8220;<strong>Alive</strong>,&#8221; which is another handle used by lol, and &#8220;<strong>Ever So Anxious.</strong>&#8221; Both were described by The Times as middlemen who sought to resell OG Twitter names obtained from Kirk. O&#8217;Connor is referenced in these screenshots as both &#8220;PWJ&#8221; and by his Discord handle, &#8220;<strong>Beyond Insane</strong>.&#8221;</p>
+<div id="attachment_52337" style="width: 412px" class="wp-caption aligncenter"><a class="lightbox" href="https://krebsonsecurity.com/wp-content/uploads/2020/07/beyondkirk.png"><img aria-describedby="caption-attachment-52337" loading="lazy" class="wp-image-52337 size-full" src="https://krebsonsecurity.com/wp-content/uploads/2020/07/beyondkirk.png" alt="" width="402" height="540" /></a><p id="caption-attachment-52337" class="wp-caption-text">The negotiations over highly-prized OG Twitter usernames took place just prior to the hijacked celebrity accounts tweeting out bitcoin scams.</p></div>
+<p>Ever So Anxious told Kirk his OGU nickname was &#8220;<strong>Chaewon</strong>,&#8221; which corresponds to a user in the United Kingdom. Just prior to the Twitter compromise, Chaewon <a href="https://krebsonsecurity.com/wp-content/uploads/2020/07/chaewon.png" target="_blank" rel="noopener noreferrer">advertised a service on the forum</a> that could change the email address tied to any Twitter account for around $250 worth of bitcoin. O&#8217;Connor said Chaewon also operates under the hacker alias &#8220;<strong>Mason</strong>.&#8221;</p>
+<div id="attachment_52338" style="width: 367px" class="wp-caption aligncenter"><img aria-describedby="caption-attachment-52338" loading="lazy" class="size-full wp-image-52338" src="https://krebsonsecurity.com/wp-content/uploads/2020/07/chaewon-kirk.png" alt="" width="357" height="627" /><p id="caption-attachment-52338" class="wp-caption-text">&#8220;Ever So Anxious&#8221; tells Kirk his OGUsers handle is &#8220;Chaewon,&#8221; and asks Kirk to modify the display names of different OG Twitter handles to read &#8220;lol&#8221; and &#8220;PWJ&#8221;.</p></div>
+<p>At one point in the conversation, Kirk tells Alive and Ever So Anxious to send funds for any OG usernames they want to <a href="https://www.blockchain.com/btc/address/1Ai52Uw6usjhpcDrwSmkUvjuqLpcznUuyF" target="_blank" rel="noopener noreferrer">this bitcoin address</a>. The payment history of that address shows that it indeed also received approximately $180,000 worth of bitcoin from the wallet address tied to <a href="https://krebsonsecurity.com/wp-content/uploads/2020/07/bezos-hack.png" target="_blank" rel="noopener noreferrer">the scam messages tweeted out on July 15 by the compromised celebrity accounts</a>.</p>
+<div id="attachment_52335" style="width: 563px" class="wp-caption aligncenter"><img aria-describedby="caption-attachment-52335" loading="lazy" class="wp-image-52335 size-full" src="https://krebsonsecurity.com/wp-content/uploads/2020/07/kirk3-e.png" alt="" width="553" height="484" /><p id="caption-attachment-52335" class="wp-caption-text">The Twitter hacker &#8220;Kirk&#8221; telling lol/Alive and Chaewon/Mason/Ever So Anxious where to send the funds for the OG Twitter accounts they wanted.</p></div>
+<p> <a href="https://krebsonsecurity.com/2020/07/twitter-hacking-for-profit-and-the-lols/#more-52323" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-52278" class="post-52278 post type-post status-publish format-standard hentry category-sunshine category-neer-do-well-news tag-8676 tag-b tag-chaewon tag-chuckling-squad tag-joseph-james-oconnor tag-og tag-plugwalkjoe tag-shinji tag-unit-221b">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2020/07/whos-behind-wednesdays-epic-twitter-hack/" title="Permalink to Who&#8217;s Behind Wednesday&#8217;s Epic Twitter Hack?" rel="bookmark">Who&#8217;s Behind Wednesday&#8217;s Epic Twitter Hack?</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">July 16, 2020</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2020/07/whos-behind-wednesdays-epic-twitter-hack/#comments">111 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p><strong>Twitter</strong> was thrown into chaos on Wednesday after accounts for some of the world&#8217;s most recognizable public figures, executives and celebrities starting tweeting out links to bitcoin scams. Twitter says the attack happened because someone tricked or coerced an employee into providing access to internal Twitter administrative tools. This post is an attempt to lay out some of the timeline of the attack, and point to clues about who may have been behind it.</p>
+<p>The first public signs of the intrusion came around 3 PM EDT, when the Twitter account for the cryptocurrency exchange Binance <a href="https://www.binance.com/en/blog/421499824684900753/Statement-on-Twitter-Breach" target="_blank" rel="noopener noreferrer">tweeted a message</a> saying it had partnered with &#8220;CryptoForHealth&#8221; to give back 5000 bitcoin to the community, with a link where people could donate or send money.</p>
+<p>Minutes after that, similar tweets went out from the accounts of other cryptocurrency exchanges, and from the Twitter accounts for democratic presidential candidate <strong>Joe Biden</strong>, <strong>Amazon CEO Jeff Bezos</strong>, <strong>President Barack Obama</strong>, <strong>Tesla CEO Elon Musk</strong>, former New York Mayor <strong>Michael Bloomberg</strong> and investment mogul <strong>Warren Buffett</strong>.</p>
+<p><img loading="lazy" class="aligncenter wp-image-52296" src="https://krebsonsecurity.com/wp-content/uploads/2020/07/bezos-hack.png" alt="" width="553" height="682" /></p>
+<p>While it may sound ridiculous that anyone would be fooled into sending bitcoin in response to these tweets, an analysis of <a href="https://www.blockchain.com/btc/address/bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh?page=31" target="_blank" rel="noopener noreferrer">the BTC wallet</a> promoted by many of the hacked Twitter profiles shows that over the past 24 hours the account has processed 383 transactions and received almost 13 bitcoin &#8212; or approximately USD $117,000.</p>
+<p>Twitter issued <a href="https://twitter.com/TwitterSupport/status/1283591846464233474" target="_blank" rel="noopener noreferrer">a statement</a> saying it detected &#8220;a coordinated social engineering attack by people who successfully targeted some of our employees with access to internal systems and tools. We know they used this access to take control of many highly-visible (including verified) accounts and Tweet on their behalf. We’re looking into what other malicious activity they may have conducted or information they may have accessed and will share more here as we have it.&#8221;</p>
+<p>There are strong indications that this attack was perpetrated by individuals who&#8217;ve traditionally specialized in hijacking social media accounts via &#8220;<a href="https://krebsonsecurity.com/?s=sim+swapping&amp;x=0&amp;y=0" target="_blank" rel="noopener noreferrer">SIM swapping</a>,&#8221; an increasingly rampant form of crime that involves bribing, hacking or coercing employees at mobile phone and social media companies into providing access to a target&#8217;s account.</p>
+<p>People within the SIM swapping community are obsessed with hijacking so-called &#8220;OG&#8221; social media accounts. Short for &#8220;original gangster,&#8221; OG accounts typically are those with short profile names (such as @B or @joe). Possession of these OG accounts confers a measure of status and perceived influence and wealth in SIM swapping circles, as such accounts can often fetch thousands of dollars when resold in the underground.</p>
+<p>In the days leading up to Wednesday&#8217;s attack on Twitter, there were signs that some actors in the SIM swapping community were selling the ability to change an email address tied to any Twitter account. In a post on OGusers &#8212; <a href="https://krebsonsecurity.com/?s=ogusers&amp;x=0&amp;y=0" target="_blank" rel="noopener noreferrer">a forum dedicated to account hijacking </a>&#8212; a user named &#8220;<strong>Chaewon</strong>&#8221; advertised they could change email address tied to <em>any</em> Twitter account for $250, and provide direct access to accounts for between $2,000 and $3,000 apiece.</p>
+<div id="attachment_52281" style="width: 600px" class="wp-caption aligncenter"><a class="lightbox" href="https://krebsonsecurity.com/wp-content/uploads/2020/07/chaewon.png"><img aria-describedby="caption-attachment-52281" loading="lazy" class="wp-image-52281" src="https://krebsonsecurity.com/wp-content/uploads/2020/07/chaewon.png" alt="" width="590" height="321" srcset="https://krebsonsecurity.com/wp-content/uploads/2020/07/chaewon.png 1518w, https://krebsonsecurity.com/wp-content/uploads/2020/07/chaewon-580x316.png 580w, https://krebsonsecurity.com/wp-content/uploads/2020/07/chaewon-940x511.png 940w, https://krebsonsecurity.com/wp-content/uploads/2020/07/chaewon-768x418.png 768w" sizes="(max-width: 590px) 100vw, 590px" /></a><p id="caption-attachment-52281" class="wp-caption-text">The OGUsers forum user &#8220;Chaewon&#8221; taking requests to modify the email address tied to any twitter account.</p></div>
+<p>&#8220;This is NOT a method, you will be given a full refund if for any reason you aren&#8217;t given the email/@, however if it is revered/suspended I will not be held accountable,&#8221; Chaewon wrote in their sales thread, which was titled &#8220;Pulling email for any Twitter/Taking Requests.&#8221;</p>
+<p>Hours before any of the Twitter accounts for cryptocurrency platforms or public figures began blasting out bitcoin scams on Wednesday, the attackers appear to have focused their attention on hijacking a handful of OG accounts, including &#8220;<strong>@6.</strong>&#8221;</p>
+<p>That Twitter account was formerly owned by <a href="https://krebsonsecurity.com/2018/03/adrian-lamo-homeless-hacker-who-turned-in-chelsea-manning-dead-at-37/" target="_blank" rel="noopener noreferrer">Adrian Lamo</a> &#8212; the now-deceased &#8220;homeless hacker&#8221; perhaps best known for breaking into the New York Times&#8217;s network and for reporting <a href="https://en.wikipedia.org/wiki/Chelsea_Manning" target="_blank" rel="noopener noreferrer">Chelsea Manning</a>&#8216;s theft of classified documents. @6 is now controlled by Lamo&#8217;s longtime friend, a security researcher and <a href="https://en.wikipedia.org/wiki/Phreaking" target="_blank" rel="noopener noreferrer">phone phreaker</a> who asked to be identified in this story only by his Twitter nickname, &#8220;<a href="https://twitter.com/lucky225/status/1283525414896320512?s=19" target="_blank" rel="noopener noreferrer"><strong>Lucky225</strong></a>.&#8221;</p>
+<p>Lucky225 said that just before 2 p.m. EDT on Wednesday, he received a password reset confirmation code via Google Voice for the @6 Twitter account. Lucky said he&#8217;d previously disabled SMS notifications as a means of receiving multi-factor codes from Twitter, opting instead to have one-time codes generated by a mobile authentication app.</p>
+<p>But because the attackers were able to change the email address tied to the @6 account and disable multi-factor authentication, the one-time authentication code was sent to both his Google Voice account <em>and</em> to the new email address added by the attackers.</p>
+<p>&#8220;The way the attack worked was that within Twitter&#8217;s admin tools, apparently you can update the email address of any Twitter user, and it does this without sending any kind of notification to the user,&#8221; Lucky told KrebsOnSecurity. &#8220;So [the attackers] could avoid detection by updating the email address on the account first, and then turning off 2FA.&#8221;</p>
+<p>Lucky said he hasn&#8217;t been able to review whether any tweets were sent from his account during the time it was hijacked because he still doesn&#8217;t have access to it (he has put together a breakdown of the entire episode <a href="https://medium.com/@lucky225/the-twitter-hack-what-exactly-happened-d8740d33c1c" target="_blank" rel="noopener noreferrer">at this Medium post</a>).</p>
+<p>But around the same time @6 was hijacked, another OG account &#8211; <strong>@B</strong> &#8212; was swiped. Someone then began tweeting out pictures of Twitter&#8217;s internal tools panel showing the @B account.</p>
+<div id="attachment_52282" style="width: 464px" class="wp-caption aligncenter"><img aria-describedby="caption-attachment-52282" loading="lazy" class="size-full wp-image-52282" src="https://krebsonsecurity.com/wp-content/uploads/2020/07/atb.png" alt="" width="454" height="603" /><p id="caption-attachment-52282" class="wp-caption-text">A screenshot of the hijacked OG Twitter account &#8220;@B,&#8221; shows the hijackers logged in to Twitter&#8217;s internal account tools interface.</p></div>
+<p>Twitter responded by removing any tweets across its platform that included screenshots of its internal tools, and in some cases temporarily suspended the ability of those accounts to tweet further.</p>
+<p>Another Twitter account &#8212; <strong>@shinji</strong> &#8212; also was tweeting out screenshots of Twitter&#8217;s internal tools. Minutes before Twitter terminated the @shinji account, it was seen publishing a tweet saying &#8220;follow @6,&#8221; referring to the account hijacked from Lucky225.</p>
+<div id="attachment_52283" style="width: 604px" class="wp-caption aligncenter"><a class="lightbox" href="https://krebsonsecurity.com/wp-content/uploads/2020/07/shinji-r.png"><img aria-describedby="caption-attachment-52283" loading="lazy" class="wp-image-52283" src="https://krebsonsecurity.com/wp-content/uploads/2020/07/shinji-r.png" alt="" width="594" height="382" srcset="https://krebsonsecurity.com/wp-content/uploads/2020/07/shinji-r.png 651w, https://krebsonsecurity.com/wp-content/uploads/2020/07/shinji-r-580x373.png 580w" sizes="(max-width: 594px) 100vw, 594px" /></a><p id="caption-attachment-52283" class="wp-caption-text">The account &#8220;@shinji&#8221; tweeting a screenshot of Twitter&#8217;s internal tools interface.</p></div>
+<p>Cached copies of @Shinji&#8217;s tweets prior to Wednesday&#8217;s attack on Twitter are available <a href="https://archive.vn/Abr3l" target="_blank" rel="noopener noreferrer">here</a> and <a href="https://archive.vn/YGS0T" target="_blank" rel="noopener noreferrer">here</a>. Those caches show Shinji claims ownership of two OG accounts on Instagram &#8212; &#8220;<a href="https://www.instagram.com/j0e/" target="_blank" rel="noopener noreferrer">j0e</a>&#8221; and &#8220;<a href="https://www.instagram.com/dead/" target="_blank" rel="noopener noreferrer">dead</a>.&#8221;</p>
+<p>KrebsOnSecurity heard from a source who works in security at one of the largest U.S.-based mobile carriers, who said the &#8220;j0e&#8221; and &#8220;dead&#8221; Instagram accounts are tied to a notorious SIM swapper who goes by the nickname &#8220;<strong>PlugWalkJoe</strong>.&#8221; Investigators have been tracking PlugWalkJoe because he is thought to have been involved in multiple SIM swapping attacks over the years that preceded high-dollar bitcoin heists.</p>
+<div id="attachment_52288" style="width: 601px" class="wp-caption aligncenter"><img aria-describedby="caption-attachment-52288" loading="lazy" class="size-full wp-image-52288" src="https://krebsonsecurity.com/wp-content/uploads/2020/07/shinji-archive1.png" alt="" width="591" height="386" srcset="https://krebsonsecurity.com/wp-content/uploads/2020/07/shinji-archive1.png 591w, https://krebsonsecurity.com/wp-content/uploads/2020/07/shinji-archive1-580x379.png 580w" sizes="(max-width: 591px) 100vw, 591px" /><p id="caption-attachment-52288" class="wp-caption-text">Archived copies of the @Shinji account on twitter shows one of Joe&#8217;s OG Instagram accounts, &#8220;Dead.&#8221;</p></div>
+<p>Now look at the profile image in the other Archive.org index of the @shinji Twitter account (pictured below). It is the same image as the one included in the @Shinji screenshot above from Wednesday in which Joseph/@Shinji was tweeting out pictures of Twitter&#8217;s internal tools.</p>
+<div id="attachment_52292" style="width: 608px" class="wp-caption aligncenter"><img aria-describedby="caption-attachment-52292" loading="lazy" class=" wp-image-52292" src="https://krebsonsecurity.com/wp-content/uploads/2020/07/shinjo.png" alt="" width="598" height="291" srcset="https://krebsonsecurity.com/wp-content/uploads/2020/07/shinjo.png 693w, https://krebsonsecurity.com/wp-content/uploads/2020/07/shinjo-580x282.png 580w" sizes="(max-width: 598px) 100vw, 598px" /><p id="caption-attachment-52292" class="wp-caption-text">Image: Archive.org</p></div>
+<p>This individual, the source said, was a key participant in a group of SIM swappers that adopted the nickname &#8220;<strong>ChucklingSquad</strong>,&#8221; and was thought to be behind the hijacking of <strong>Twitter CEO Jack Dorsey</strong>&#8216;s Twitter account last year. As <a href="https://www.wired.com/story/jack-dorsey-twitter-hacked/" target="_blank" rel="noopener noreferrer">Wired.com recounted</a>, @jack was hijacked after the attackers conducted a SIM swap attack against <strong>AT&amp;T</strong>, the mobile provider for the phone number tied to Dorsey&#8217;s Twitter account.</p>
+<div id="attachment_52286" style="width: 563px" class="wp-caption aligncenter"><img aria-describedby="caption-attachment-52286" loading="lazy" class=" wp-image-52286" src="https://krebsonsecurity.com/wp-content/uploads/2020/07/jack-tweet.png" alt="" width="553" height="571" /><p id="caption-attachment-52286" class="wp-caption-text">A tweet sent out from Twitter CEO Jack Dorsey&#8217;s account while it was hijacked shouted out to PlugWalkJoe and other Chuckling Squad members.</p></div>
+<p> <a href="https://krebsonsecurity.com/2020/07/whos-behind-wednesdays-epic-twitter-hack/#more-52278" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-52264" class="post-52264 post type-post status-publish format-standard hentry category-patches tag-net-framework tag-cve-2020-1350 tag-cve-2020-1410 tag-cve-2020-1421 tag-cve-2020-1435 tag-cve-2020-1436 tag-cve-2020-1463 tag-internet-exploder tag-microsoft-patch-tuesday-july-2020 tag-office tag-recorded-future tag-sharepoint tag-visual-studio">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2020/07/wormable-flaw-leads-july-microsoft-patches/" title="Permalink to &#8216;Wormable&#8217; Flaw Leads July Microsoft Patches" rel="bookmark">&#8216;Wormable&#8217; Flaw Leads July Microsoft Patches</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">July 14, 2020</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2020/07/wormable-flaw-leads-july-microsoft-patches/#comments">42 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p><strong>Microsoft</strong> today released updates to plug a whopping 123 security holes in <strong>Windows</strong> and related software, including fixes for a critical, &#8220;wormable&#8221; flaw in <strong>Windows Server</strong> versions that Microsoft says is likely to be exploited soon. While this particular weakness mainly affects enterprises, July&#8217;s care package from Redmond has a little something for everyone. So if you&#8217;re a Windows (ab)user, it&#8217;s time once again to back up and patch up (preferably in that order).</p>
+<p><img loading="lazy" class="aligncenter wp-image-52272" src="https://krebsonsecurity.com/wp-content/uploads/2020/07/cworm.png" alt="" width="595" height="412" srcset="https://krebsonsecurity.com/wp-content/uploads/2020/07/cworm.png 925w, https://krebsonsecurity.com/wp-content/uploads/2020/07/cworm-580x401.png 580w, https://krebsonsecurity.com/wp-content/uploads/2020/07/cworm-768x531.png 768w" sizes="(max-width: 595px) 100vw, 595px" />Top of the heap this month in terms of outright scariness is <a href="https://portal.msrc.microsoft.com/en-US/security-guidance/advisory/CVE-2020-1350" target="_blank" rel="noopener noreferrer">CVE-2020-1350</a>, which concerns a remotely exploitable bug in more or less all versions of Windows Server that attackers could use to install malicious software simply by sending a specially crafted DNS request.</p>
+<p>Microsoft said it is not aware of reports that anyone is exploiting the weakness (yet), but the flaw has been assigned a <a href="https://www.first.org/cvss/user-guide" target="_blank" rel="noopener noreferrer">CVSS score</a> of 10, which translates to &#8220;easy to attack&#8221; and &#8220;likely to be exploited.&#8221;</p>
+<p>&#8220;We consider this to be a wormable vulnerability, meaning that it has the potential to spread via malware between vulnerable computers without user interaction,&#8221; Microsoft wrote in its documentation of CVE-2020-1350. &#8220;DNS is a foundational networking component and commonly installed on Domain Controllers, so a compromise could lead to significant service interruptions and the compromise of high level domain accounts.&#8221;</p>
+<p>CVE-2020-1350 is just the latest worry for enterprise system administrators in charge of patching dangerous bugs in widely-used software. Over the past couple of weeks, fixes for flaws with high severity ratings have been released for a broad array of software products typically used by businesses, <a href="https://www.zdnet.com/article/recon-bug-lets-hackers-create-admin-accounts-on-sap-servers/" target="_blank" rel="noopener noreferrer">including Citrix, F5, Juniper, Oracle and SAP</a>. This at a time when many organizations are already short-staffed and dealing with employees working remotely thanks to the COVID-19 pandemic.</p>
+<p>The Windows Server vulnerability isn&#8217;t the only nasty one addressed this month that malware or malcontents can use to break into systems without any help from users. A full 17 other critical flaws fixed in this release tackle security weaknesses that Microsoft assigned its most dire &#8220;critical&#8221; rating, such as in <strong>Office</strong>, <strong>Internet Exploder</strong>, <strong>SharePoint</strong>, <strong>Visual Studio</strong>, and Microsoft&#8217;s <strong>.NET Framework</strong>. <a href="https://krebsonsecurity.com/2020/07/wormable-flaw-leads-july-microsoft-patches/#more-52264" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-52201" class="post-52201 post type-post status-publish format-standard hentry category-sunshine category-neer-do-well-news category-comingstorm tag-apollo-breach tag-data-viper-breach tag-empire-market tag-exabyte tag-five tag-raidforums tag-soundcard tag-verifications-io-breach tag-vinny-troia">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2020/07/breached-data-indexer-data-viper-hacked/" title="Permalink to Breached Data Indexer &#8216;Data Viper&#8217; Hacked" rel="bookmark">Breached Data Indexer &#8216;Data Viper&#8217; Hacked</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">July 13, 2020</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2020/07/breached-data-indexer-data-viper-hacked/#comments">34 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p><strong>Data Viper</strong>, a security startup that provides access to some 15 billion usernames, passwords and other information exposed in more than 8,000 website breaches, has itself been hacked and its user database posted online. The hackers also claim they are selling on the dark web roughly 2 billion records Data Viper collated from numerous breaches and data leaks, including data from several companies that likely either do not know they have been hacked or have not yet publicly disclosed an intrusion.</p>
+<p>The apparent breach at St. Louis, Mo. based Data Viper offers a cautionary and twisted tale of what can happen when security researchers seeking to gather intelligence about illegal activity online get too close to their prey or lose sight of their purported mission. The incident also highlights the often murky area between what&#8217;s legal and ethical in combating cybercrime.</p>
+<p><img loading="lazy" class="aligncenter wp-image-52251" src="https://krebsonsecurity.com/wp-content/uploads/2020/07/dataviper.png" alt="" width="561" height="268" /></p>
+<p>Data Viper is the brainchild of <strong>Vinny Troia</strong>, a security researcher who runs a cyber threat intelligence company called <strong>Night Lion Security</strong>. Since its inception in 2018, Data Viper has billed itself as a &#8220;threat intelligence platform designed to provide organizations, investigators and law enforcement with access to the largest collection of private hacker channels, pastes, forums and breached databases on the market.&#8221;</p>
+<p>Many private companies sell access to such information to vetted clients &#8212; mainly law enforcement officials and anti-fraud experts working in security roles at major companies that can foot the bill for these often pricey services.</p>
+<p>Data Viper has <a href="https://web.archive.org/web/20200427105221/https://www.dataviper.io/" target="_blank" rel="noopener noreferrer">sought to differentiate itself</a> by advertising &#8220;access to private and undisclosed breach data.&#8221; As KrebsOnSecurity noted in <a href="https://krebsonsecurity.com/2018/10/when-security-researchers-pose-as-cybercrooks-who-can-tell-the-difference/" target="_blank" rel="noopener noreferrer">a 2018 story</a>, Troia has acknowledged posing as a buyer or seller on various dark web forums as a way to acquire old and newly-hacked databases from other forum members.</p>
+<p>But this approach may have backfired over the weekend, when someone posted to <a href="https://en.wikipedia.org/wiki/Deep_web" target="_blank" rel="noopener noreferrer">the deep web</a> a link to an &#8220;e-zine&#8221; (electronic magazine) describing the Data Viper hack and linking to the Data Viper user base. The anonymous poster alleged he&#8217;d been inside Data Viper for months and had exfiltrated hundreds of gigabytes of breached data from the service without notice.</p>
+<p>The intruder also linked to several dozen new sales threads on the dark web site <strong>Empire Market</strong>, where they advertise the sale of hundreds of millions of account details from dozens of leaked or hacked website databases that Data Viper allegedly acquired via trading with others on cybercrime forums.</p>
+<div id="attachment_52243" style="width: 608px" class="wp-caption aligncenter"><img aria-describedby="caption-attachment-52243" loading="lazy" class=" wp-image-52243" src="https://krebsonsecurity.com/wp-content/uploads/2020/07/sh-dw.png" alt="" width="598" height="524" srcset="https://krebsonsecurity.com/wp-content/uploads/2020/07/sh-dw.png 635w, https://krebsonsecurity.com/wp-content/uploads/2020/07/sh-dw-580x508.png 580w" sizes="(max-width: 598px) 100vw, 598px" /><p id="caption-attachment-52243" class="wp-caption-text">An online post by the attackers who broke into Data Viper.</p></div>
+<p>Some of the databases for sale tie back to known, publicly reported breaches. But others correspond to companies that do not appear to have disclosed a security incident. As such, KrebsOnSecurity is not naming most of those companies and is currently attempting to ascertain the validity of the claims.</p>
+<p>KrebsOnSecurity did speak with <strong>Victor Ho</strong>, the CEO of <strong>Fivestars.com</strong>, a company that helps smaller firms run customer loyalty programs. The hackers claimed they are selling 44 million records taken from Fivestars last year. Ho said he was unaware of any data security incident and that no such event had been reported to his company, but that Fivestars is now investigating the claims. Ho allowed that the number of records mentioned in the dark web sales thread roughly matches the number of users his company had last year.</p>
+<p>But on Aug. 3, 2019, Data Viper&#8217;s Twitter account <a href="https://twitter.com/DataViperIO/status/1157797279132205057" target="_blank" rel="noopener noreferrer">casually noted</a>, &#8220;FiveStars &#8212; 44m breached records added &#8211; incl Name, Email, DOB.&#8221; The post, buried among a flurry of similar statements about huge caches of breached personal information added to Data Viper, received hardly any attention and garnered just one retweet.</p>
+<h4>GNOSTIC PLAYERS, SHINY HUNTERS</h4>
+<p>Reached <a href="https://twitter.com/vinnytroia" target="_blank" rel="noopener noreferrer">via Twitter</a>, Troia acknowledged that his site had been hacked, but said the attackers only got access to the development server for Data Viper, and not the more critical production systems that power the service and which house his index of compromised credentials.</p>
+<p>Troia said the people responsible for compromising his site are the same people who hacked the databases they are now selling on the dark web and claiming to have obtained exclusively from his service.</p>
+<p>What&#8217;s more, Troia believes the attack was a preemptive strike in response to a keynote he&#8217;s giving in Boston this week: On June 29, Troia <a href="https://twitter.com/vinnytroia/status/1277674993799872512" target="_blank" rel="noopener noreferrer">tweeted</a> that he plans to use the speech to publicly expose the identities of the hackers, who he suspects are behind a large number of website break-ins over the years.</p>
+<p>Hacked or leaked credentials are prized by cybercriminals engaged in &#8220;credential stuffing,&#8221; a rampant form of cybercrime that succeeds when people use the same passwords across multiple websites. Armed with a list of email addresses and passwords from a breached site, attackers will then automate login attempts using those same credentials at hundreds of other sites.</p>
+<p>Password re-use becomes orders of magnitude more dangerous when website developers engage in this unsafe practice. Indeed, <a href="https://www.dataviper.io/blog/2019/gnosticplayers-part-1-nclay-ddb-nsfw/" target="_blank" rel="noopener noreferrer">a January 2020 post on the Data Viper blog</a> suggests credential stuffing is exactly how the group he plans to discuss in his upcoming talk perpetrated their website compromises.</p>
+<p>In that post, Troia wrote that the hacker group, known variously as &#8220;<strong>Gnostic Players</strong>&#8221; and &#8220;<strong>Shiny Hunters</strong>,&#8221; plundered countless website databases using roughly the same method: Targeting developers using credential stuffing attacks to log into their <strong>GitHub</strong> accounts.</p>
+<p>&#8220;While there, they would pillage the code repositories, looking for AWS keys and similar credentials that were checked into code repositories,&#8221; Troia wrote.</p>
+<p>Troia said the intrusion into his service wasn&#8217;t the result of the credential re-use, but instead because his developer accidentally left his credentials exposed in documents explaining how customers can use Data Viper&#8217;s application programming interface.</p>
+<p>&#8220;I will say the irony of how they got in is absolutely amazing,&#8221; Troia said. &#8220;But all of this stuff they claim to be selling is [databases] they were already selling. All of this is from Gnostic players. None of it came from me. It’s all for show to try and discredit my report and my talk.&#8221;</p>
+<p>Troia said he didn&#8217;t know how many of the databases Gnostic Players claimed to have obtained from his site were legitimate hacks or even public yet.</p>
+<p>&#8220;As for public reporting on the databases, a lot of that will be in my report Wednesday,&#8221; he said. &#8220;All of my &#8216;reporting&#8217; goes to the FBI.&#8221;</p>
+<h4>SMOKE AND MIRRORS</h4>
+<p>The e-zine produced by the Data Viper hackers claimed that Troia used many nicknames on various cybercrime forums, including the moniker &#8220;Exabyte&#8221; on <strong>OGUsers</strong>, a forum that&#8217;s been <a href="https://krebsonsecurity.com/?s=ogusers&amp;x=0&amp;y=0" target="_blank" rel="noopener noreferrer">closely associated with account takeovers</a>.</p>
+<p>In a conversation with KrebsOnSecurity, Troia acknowledged that this Exabyte attribution was correct, noting that he was happy about the exposure because it further solidified his suspicions about who was responsible for hacking his site.</p>
+<p>This is interesting because some of the hacked databases the intruders claimed to have acquired after compromising Data Viper correspond to discoveries credited to Troia in which companies inadvertently exposed tens of millions of user details by leaving them publicly accessible online at cloud services like Amazon&#8217;s EC2.</p>
+<p>For example, in March 2019, Troia said he&#8217;d <a href="https://www.wired.com/story/email-marketing-company-809-million-records-exposed-online/" target="_blank" rel="noopener noreferrer">co-discovered a publicly accessible database containing 150 gigabytes of plaintext marketing data</a> &#8212; including 763 million unique email addresses. The data had been exposed online by <strong>Verifications.io</strong>, an email validation firm.</p>
+<p>On Oct 12, 2019, a new user named Exabyte registered on <strong>RaidForums</strong> &#8212; a site dedicated to sharing hacked databases and tools to perpetrate credential stuffing attacks. That Exabyte account was registered less than two weeks after Troia created his Exabyte identity on OGUsers. The Exabyte on RaidForums posted on Dec. 26, 2019 that he was providing the community with something of a belated Christmas present: 200 million accounts leaked from Verifications.io.</p>
+<p>&#8220;Verifications.io is finally here!&#8221; Exabyte enthused. &#8220;This release contains 69 of 70 of the original verifications.io databases, totaling 200+ million accounts.&#8221;</p>
+<div id="attachment_52215" style="width: 606px" class="wp-caption aligncenter"><a class="lightbox" href="https://krebsonsecurity.com/wp-content/uploads/2020/07/exabyte.png"><img aria-describedby="caption-attachment-52215" loading="lazy" class="wp-image-52215" src="https://krebsonsecurity.com/wp-content/uploads/2020/07/exabyte.png" alt="" width="596" height="333" srcset="https://krebsonsecurity.com/wp-content/uploads/2020/07/exabyte.png 1025w, https://krebsonsecurity.com/wp-content/uploads/2020/07/exabyte-580x324.png 580w, https://krebsonsecurity.com/wp-content/uploads/2020/07/exabyte-940x525.png 940w, https://krebsonsecurity.com/wp-content/uploads/2020/07/exabyte-768x429.png 768w" sizes="(max-width: 596px) 100vw, 596px" /></a><p id="caption-attachment-52215" class="wp-caption-text">Exabyte&#8217;s offer of the Verifications.io database on RaidForums.</p></div>
+<p>In May 2018, Troia <a href="https://www.wired.com/story/apollo-breach-linkedin-salesforce-data/" target="_blank" rel="noopener noreferrer">was featured in <em>Wired.com</em></a> and many other publications after discovering that sales intelligence firm <strong>Apollo</strong> left 125 million email addresses and nine billion data points publicly exposed in a cloud service. As <a href="https://krebsonsecurity.com/2018/10/when-security-researchers-pose-as-cybercrooks-who-can-tell-the-difference/" target="_blank" rel="noopener noreferrer">I reported in 2018</a>, prior to that disclosure Troia had sought my help in identifying the source of the exposed data, which he&#8217;d initially and incorrectly concluded was exposed by <strong>LinkedIn.com</strong>. Rather, Apollo had scraped and collated the data from many different sites, including LinkedIn.</p>
+<p>Then in August 2018, someone using the nickname &#8220;Soundcard&#8221; posted a sales thread to the now-defunct <strong>Kickass</strong> dark web forum offering the personal information of 212 million LinkedIn users in exchange for two bitcoin (then the equivalent of ~$12,000 USD). Incredibly, Troia had previously told me that he was the person behind that Soundcard identity on the Kickass forum.</p>
+<div id="attachment_45259" style="width: 608px" class="wp-caption aligncenter"><a class="lightbox" href="https://krebsonsecurity.com/wp-content/uploads/2018/10/soundcard-li.png"><img aria-describedby="caption-attachment-45259" loading="lazy" class="wp-image-45259" src="https://krebsonsecurity.com/wp-content/uploads/2018/10/soundcard-li.png" alt="" width="598" height="357" /></a><p id="caption-attachment-45259" class="wp-caption-text">Soundcard, a.k.a. Troia, offering to sell what he claimed was all of LinkedIn&#8217;s user data, on the Dark Web forum Kickass.</p></div>
+<p>Asked about the Exabyte posts on RaidForums, Troia said he wasn&#8217;t the only one who had access to the Verifications.io data, and that the full scope of what&#8217;s been going on would become clearer soon.</p>
+<p>&#8220;More than one person can have the same name &#8216;Exabyte,&#8221; Troia said. &#8220;So much from both sides you are seeing is smoke and mirrors.&#8221;</p>
+<p>Smoke and mirrors, indeed. It&#8217;s entirely possible this incident is an elaborate and cynical PR stunt by Troia to somehow spring a trap on the bad guys. Troia recently published a book on threat hunting, and on <a href="https://krebsonsecurity.com/wp-content/uploads/2020/07/page360.pdf" target="_blank" rel="noopener noreferrer">page 360</a> (PDF) he describes how he previously staged a hack against his own site and then bragged about the fake intrusion on cybercrime forums in a bid to gather information about specific cybercriminals who took the bait &#8212; the same people, by the way, he claims are behind the attack on his site.</p>
+<p> <a href="https://krebsonsecurity.com/2020/07/breached-data-indexer-data-viper-hacked/#more-52201" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-52173" class="post-52173 post type-post status-publish format-standard hentry category-sunshine category-employment-fraud category-security-tools tag-mye-verify tag-mye-verify-gov tag-unemployment-ins">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2020/07/e-verifys-ssn-lock-is-nothing-of-the-sort/" title="Permalink to E-Verify&#8217;s &#8220;SSN Lock&#8221; is Nothing of the Sort" rel="bookmark">E-Verify&#8217;s &#8220;SSN Lock&#8221; is Nothing of the Sort</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">July 4, 2020</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2020/07/e-verifys-ssn-lock-is-nothing-of-the-sort/#comments">79 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>One of the most-read advice columns on this site is a 2018 piece called &#8220;<a href="https://krebsonsecurity.com/2018/06/plant-your-flag-mark-your-territory/" target="_blank" rel="noopener noreferrer">Plant Your Flag, Mark Your Territory</a>,&#8221; which tried to impress upon readers the importance of creating accounts at websites like those at the <a href="https://krebsonsecurity.com/2013/09/crooks-hijack-retirement-funds-via-ssa-portal/" target="_blank" rel="noopener noreferrer">Social Security Administration</a>, the <a href="https://krebsonsecurity.com/2015/03/sign-up-at-irs-gov-before-crooks-do-it-for-you/" target="_blank" rel="noopener noreferrer">IRS</a> and others before crooks do it for you. A key concept here is that these services only allow one account per Social Security number &#8212; which for better or worse is the de facto national identifier in the United States. But KrebsOnSecurity recently discovered that this is not the case with all federal government sites built to help you manage your identity online.</p>
+<p>A reader who was recently the victim of <a href="https://krebsonsecurity.com/?s=unemployment+insurance+fraud&amp;x=0&amp;y=0" target="_blank" rel="noopener noreferrer">unemployment insurance fraud</a> said he was told he should create an account at the <strong>Department of Homeland Security</strong>&#8216;s <a href="https://myeverify.uscis.gov/" target="_blank" rel="noopener noreferrer">myE-Verify website</a>, and place a lock on his Social Security number (SSN) to minimize the chances that ID thieves might abuse his identity for employment fraud in the future.</p>
+<div id="attachment_52185" style="width: 607px" class="wp-caption aligncenter"><a class="lightbox" href="https://krebsonsecurity.com/wp-content/uploads/2020/07/myeverify.png"><img aria-describedby="caption-attachment-52185" loading="lazy" class="wp-image-52185" src="https://krebsonsecurity.com/wp-content/uploads/2020/07/myeverify.png" alt="" width="597" height="414" srcset="https://krebsonsecurity.com/wp-content/uploads/2020/07/myeverify.png 1161w, https://krebsonsecurity.com/wp-content/uploads/2020/07/myeverify-580x402.png 580w, https://krebsonsecurity.com/wp-content/uploads/2020/07/myeverify-940x652.png 940w, https://krebsonsecurity.com/wp-content/uploads/2020/07/myeverify-768x533.png 768w" sizes="(max-width: 597px) 100vw, 597px" /></a><p id="caption-attachment-52185" class="wp-caption-text">DHS&#8217;s myE-Verify homepage.</p></div>
+<p>According to the website, roughly 600,000 employers at over 1.9 million hiring sites use E-Verify to confirm the employment eligibility of new employees. E-Verify&#8217;s consumer-facing portal myE-Verify lets users track and manage employment inquiries made through the E-Verify system. It also features a &#8220;Self Lock&#8221; designed to prevent the misuse of one&#8217;s SSN in E-Verify.</p>
+<p>Enabling this lock is supposed to mean that for the next year thereafter, if an unauthorized individual attempts to fraudulently use a SSN for employment authorization, he or she cannot use the SSN in E-Verify, even if the SSN is that of an employment authorized individual. But in practice, this service may actually do little to deter ID thieves from impersonating you to a potential employer.</p>
+<p>At the request of the reader who reached out (and in the interest of following my own advice to plant one&#8217;s flag), KrebsOnSecurity decided to sign up for a myE-Verify account. After verifying my email address, I was asked to pick a strong password and select a form of multi-factor authentication (MFA). The most secure MFA option offered (a one-time code generated by an app like Google Authenticator or Authy) was already pre-selected, so I chose that.</p>
+<p>The site requested my name, address, SSN, date of birth and phone number. I was then asked to <a href="https://krebsonsecurity.com/wp-content/uploads/2020/07/myeverifypasswordquestions.png" target="_blank" rel="noopener noreferrer">select five questions and answers</a> that might be asked if I were to try to reset my password, such as &#8220;In what city/town did you meet your spouse,&#8221; and &#8220;What is the name of the company of your first paid job.&#8221; I chose long, gibberish answers that had nothing to do with the questions (yes, these password questions are next to useless for security and frequently are the cause of account takeovers, but we&#8217;ll get to that in a minute).</p>
+<p>Password reset questions selected, the site proceeded to ask four, multiple-guess &#8220;knowledge-based authentication&#8221; questions to verify my identity. The <strong>U.S. Federal Trade Commission</strong>&#8216;s <a href="https://www.consumer.ftc.gov/blog/2015/11/your-information-being-used-job-related-id-theft" target="_blank" rel="noopener noreferrer">primer page on preventing job-related ID theft</a> says people who have <a href="https://krebsonsecurity.com/2018/09/credit-freezes-are-free-let-the-ice-age-begin/" target="_blank" rel="noopener noreferrer">placed a security freeze on their credit files with the major credit bureaus</a> will need to lift or thaw the freeze before being able to answer these questions successfully at myE-Verify. However, I did not find that to be the case, even though my credit file has been frozen with the major bureaus for years.</p>
+<p>After successfully answering the KBA questions (the answer to each was &#8220;none of the above,&#8221; by the way), the site declared I&#8217;d successfully created my account! I could then see that I had the option to place a &#8220;Self Lock&#8221; on my SSN within the E-Verify system.</p>
+<p><a class="lightbox" href="https://krebsonsecurity.com/wp-content/uploads/2020/07/everifywelcome.png"><img loading="lazy" class="aligncenter wp-image-52183" src="https://krebsonsecurity.com/wp-content/uploads/2020/07/everifywelcome.png" alt="" width="597" height="438" srcset="https://krebsonsecurity.com/wp-content/uploads/2020/07/everifywelcome.png 1154w, https://krebsonsecurity.com/wp-content/uploads/2020/07/everifywelcome-580x425.png 580w, https://krebsonsecurity.com/wp-content/uploads/2020/07/everifywelcome-940x689.png 940w, https://krebsonsecurity.com/wp-content/uploads/2020/07/everifywelcome-768x563.png 768w" sizes="(max-width: 597px) 100vw, 597px" /></a></p>
+<p>Doing so required me to pick three more challenge questions and answers. The site didn&#8217;t explain why it was asking me to do this, but I assumed it would prompt me for the answers in the event that I later chose to unlock my SSN within E-Verify.</p>
+<p>After selecting and answering those questions and clicking the &#8220;Lock my SSN&#8221; button, the site generated an error message saying something went wrong and it couldn&#8217;t proceed.</p>
+<p><img loading="lazy" class="aligncenter wp-image-52179" src="https://krebsonsecurity.com/wp-content/uploads/2020/07/myeverifysystemerror-e.png" alt="" width="598" height="433" srcset="https://krebsonsecurity.com/wp-content/uploads/2020/07/myeverifysystemerror-e.png 1161w, https://krebsonsecurity.com/wp-content/uploads/2020/07/myeverifysystemerror-e-580x420.png 580w, https://krebsonsecurity.com/wp-content/uploads/2020/07/myeverifysystemerror-e-940x681.png 940w, https://krebsonsecurity.com/wp-content/uploads/2020/07/myeverifysystemerror-e-768x556.png 768w" sizes="(max-width: 598px) 100vw, 598px" /></p>
+<p>Alas, logging out and logging back in again showed that the site did in fact proceed and that my SSN was locked. Joy.</p>
+<p>But I still had to know one thing: Could someone else come along pretending to be me and create another account using my SSN, date of birth and address but under a different email address? Using a different browser and Internet address, I proceeded to find out.</p>
+<p>Imagine my surprise when I was able to create a separate account as me with just a different email address (once again, the correct answers to all of the KBA questions was &#8220;none of the above&#8221;). Upon logging in, I noticed my SSN was indeed locked within E-Verify. So I chose to unlock it.</p>
+<p>Did the system ask any of the challenge questions it had me create previously? Nope. It just reported that my SSN was now unlocked. Logging out and logging back in to the original account I created (again under a different IP and browser) confirmed that my SSN was unlocked. <a href="https://krebsonsecurity.com/2020/07/e-verifys-ssn-lock-is-nothing-of-the-sort/#more-52173" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-52157" class="post-52157 post type-post status-publish format-standard hentry category-ransomware tag-ransomware">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2020/07/ransomware-gangs-dont-need-pr-help/" title="Permalink to Ransomware Gangs Don&#8217;t Need PR Help" rel="bookmark">Ransomware Gangs Don&#8217;t Need PR Help</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">July 1, 2020</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2020/07/ransomware-gangs-dont-need-pr-help/#comments">51 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>We&#8217;ve seen an ugly trend recently of <a href="https://www.bleepingcomputer.com/news/security/business-giant-xerox-allegedly-suffers-maze-ransomware-attack/" target="_blank" rel="noopener noreferrer">tech news stories</a> and <a href="https://cybleinc.com/blog-2/" target="_blank" rel="noopener noreferrer">cybersecurity firms</a> trumpeting claims of ransomware attacks on companies large and small, apparently based on little more than the say-so of the ransomware gangs themselves. Such coverage is potentially quite harmful and plays deftly into the hands of organized crime.</p>
+<p>Often the rationale behind couching these events as newsworthy is that the attacks involve publicly traded companies or recognizable brands, and that investors and the public have a right to know. But absent any additional information from the victim company or their partners who may be affected by the attack, these kinds of stories and blog posts look a great deal like ambulance chasing and sensationalism.</p>
+<p><img loading="lazy" class="aligncenter wp-image-32771" src="https://krebsonsecurity.com/wp-content/uploads/2015/11/ransomware-kav.png" alt="" width="596" height="449" srcset="https://krebsonsecurity.com/wp-content/uploads/2015/11/ransomware-kav.png 631w, https://krebsonsecurity.com/wp-content/uploads/2015/11/ransomware-kav-580x438.png 580w" sizes="(max-width: 596px) 100vw, 596px" /></p>
+<p>Currently, more than a dozen ransomware crime gangs have erected their own blogs to publish sensitive data from victims. A few of these blogs routinely issue self-serving press releases, some of which gallingly refer to victims as &#8220;clients&#8221; and cast themselves in a beneficent light. Usually, the blog posts that appear on ransom sites are little more than a teaser &#8212; screenshots of claimed access to computers, or a handful of documents that expose proprietary or financial information.</p>
+<p>The goal behind the publication of these teasers is clear, and the ransomware gangs make no bones about it: To publicly pressure the victim company into paying up. Those that refuse to be extorted are told to expect that huge amounts of sensitive company data will be published online or sold on the dark web (or both).</p>
+<p>Emboldened by their successes, several ransomware gangs recently <em>have started demanding two ransoms</em>: One payment to secure a digital key that can unlock files, folders and directories encrypted by their malware, and a second to avoid having any stolen information published or shared with others.</p>
+<p>KrebsOnSecurity has sought to <a href="https://krebsonsecurity.com/?s=ransomware&amp;x=0&amp;y=0" target="_blank" rel="noopener noreferrer">highlight ransomware incidents</a> at companies whose core business involves providing technical services to others &#8212; particularly managed service providers that have done an exceptionally poor job communicating about the attack with their customers.</p>
+<p>Overall, I&#8217;ve tried to use each story to call attention to key failures that frequently give rise to ransomware infections, and to offer information about how other companies can avoid a similar fate.</p>
+<p>But simply parroting what professional extortionists have posted on their blog about victims of cybercrime smacks of providing aid and comfort to an enemy that needs and deserves neither.</p>
+<p>Maybe you disagree, dear readers? Feel free to sound off in the comments below.</p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-52123" class="post-52123 post type-post status-publish format-standard hentry category-data-breaches category-comingstorm tag-andrew-barratt tag-chicken-express-breach tag-coalfire tag-covid-19 tag-gemini-advisory tag-ricky-stuart tag-stas-alforov">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2020/06/covid-19-breach-bubble-waiting-to-pop/" title="Permalink to COVID-19 &#8216;Breach Bubble&#8217; Waiting to Pop?" rel="bookmark">COVID-19 &#8216;Breach Bubble&#8217; Waiting to Pop?</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">June 30, 2020</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2020/06/covid-19-breach-bubble-waiting-to-pop/#comments">25 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>The COVID-19 pandemic has made it harder for banks to trace the source of payment card data stolen from smaller, hacked online merchants. On the plus side, months of quarantine have massively decreased demand for account information that thieves buy and use to create physical counterfeit credit cards. But fraud experts say recent developments suggest both trends are about to change &#8212; and likely for the worse.</p>
+<p>The economic laws of supply and demand hold just as true in the business world as they do in the cybercrime space. Global lockdowns from COVID-19 have resulted in far fewer fraudsters willing or able to visit retail stores to use their counterfeit cards, and the decreased demand has severely depressed prices in the underground for purloined card data.</p>
+<div id="attachment_52132" style="width: 608px" class="wp-caption aligncenter"><a class="lightbox" href="https://krebsonsecurity.com/wp-content/uploads/2020/06/realandrare.png"><img aria-describedby="caption-attachment-52132" loading="lazy" class="wp-image-52132" src="https://krebsonsecurity.com/wp-content/uploads/2020/06/realandrare.png" alt="" width="598" height="148" /></a><p id="caption-attachment-52132" class="wp-caption-text">An ad for a site selling stolen payment card data, circa March 2020.</p></div>
+<p>That&#8217;s according to <a href="https://www.geminiadvisory.io" target="_blank" rel="noopener noreferrer">Gemini Advisory</a>, a New York-based cyber intelligence firm that closely tracks the inventories of dark web stores trafficking in stolen payment card data.</p>
+<p><strong>Stas Alforov</strong>, Gemini&#8217;s director of research and development, said that since the beginning of 2020 the company has seen a steep drop in demand for compromised &#8220;card present&#8221; data &#8212; digits stolen from hacked brick-and-mortar merchants with the help of malicious software surreptitiously installed on point-of-sale (POS) devices.</p>
+<p>Alforov said the median price for card-present data has dropped precipitously over the past few months.</p>
+<p>&#8220;Gemini Advisory has seen over 50 percent decrease in demand for compromised card present data since the mandated COVID-19 quarantines in the United States as well as the majority of the world,&#8221; he told KrebsOnSecurity.</p>
+<p>Meanwhile, the supply of card-present data has remained relatively steady. Gemini&#8217;s <a href="https://geminiadvisory.io/cybercrime-during-covid-19-chicken-express-breach/" rel="noopener noreferrer" target="_blank">latest find</a> &#8212; a 10-month-long card breach at dozens of <a href="https://www.chickene.com" target="_blank" rel="noopener noreferrer">Chicken Express</a> locations throughout Texas and other southern states that the fast-food chain first publicly acknowledged today after being contacted by this author &#8212; saw an estimated 165,000 cards stolen from eatery locations recently go on sale at one of the dark web&#8217;s largest cybercrime bazaars.</p>
+<p>&#8220;Card present data supply hasn&#8217;t wavered much during the COVID-19 period,&#8221; Alforov said. &#8220;This is likely due to the fact that most of the sold data is still coming from breaches that occurred in 2019 and early 2020.&#8221;</p>
+<div id="attachment_52131" style="width: 607px" class="wp-caption aligncenter"><a class="lightbox" href="https://krebsonsecurity.com/wp-content/uploads/2020/06/medianpricecnp.png"><img aria-describedby="caption-attachment-52131" loading="lazy" class="wp-image-52131" src="https://krebsonsecurity.com/wp-content/uploads/2020/06/medianpricecnp.png" alt="" width="597" height="301" /></a><p id="caption-attachment-52131" class="wp-caption-text">A lack of demand for and steady supply of stolen card-present data in the underground has severely depressed prices since the beginning of the COVID-19 pandemic. Image: Gemini Advisory</p></div>
+<p>Naturally, crooks who ply their trade in credit card thievery also have been working from home more throughout the COVID-19 pandemic. That means demand for stolen &#8220;card-not-present&#8221; data &#8212; customer payment information extracted from hacked online merchants and typically used to defraud other e-commerce vendors &#8212; remains high. And so have prices for card-not-present data: Gemini found prices for this commodity actually increased slightly over the past few months.</p>
+<p><strong>Andrew Barratt</strong> is an investigator with <a href="https://www.coalfire.com" target="_blank" rel="noopener noreferrer">Coalfire</a>, the cyber forensics firm hired by Chicken Express to remediate the breach and help the company improve security going forward. Barratt said there&#8217;s another curious COVID-19 dynamic going on with e-commerce fraud recently that is making it more difficult for banks and card issuers to trace patterns in stolen card-not-present data back to hacked web merchants &#8212; particularly smaller e-commerce shops.</p>
+<p>&#8220;One of the concerns that has been expressed to me is that we’re getting [fewer] overlapping hotspots,&#8221; Barratt said. &#8220;For a lot of the smaller, more frequently compromised merchants there has been a large drop off in transactions. Whilst big e-commerce has generally done okay during the COVID-19 pandemic, a number of more modest sized or specialty online retailers have not had the same access to their supply chain and so have had to close or drastically reduce the lines they’re selling.&#8221;</p>
+<p>Banks routinely take groups of customer cards that have experienced fraudulent activity and try to see if some or all of them were used at the same merchant during a similar timeframe, a basic anti-fraud process known as &#8220;common point of purchase&#8221; or CPP analysis. But ironically, this analysis can become more challenging when there are fewer overall transactions going through a compromised merchant&#8217;s site, Barratt said.</p>
+<p>&#8220;With a smaller transactional footprint means less Common Point of Purchase alerts and less data to work on to trigger a forensic investigation or fraud alert,&#8221; Barratt said. &#8220;It does also mean less fraud right now – which is a positive. <span class="pullquote pqright">But one of the big concerns that has been raised to us as investigators &#8212; literally asking if we have capacity for what’s coming &#8212; has been that merchants are getting compromised by ‘lie in wait’ type intruders.&#8221;</span></p>
+<p>Barratt says there&#8217;s a suspicion that hackers may have established beachheads [breachheads?] in a number of these smaller online merchants and are simply biding their time. If and when transaction volumes for these merchants do pick up, the concern is then hackers may be in a better position to mix the sale of cards stolen from many hacked merchants and further confound CPP analysis efforts. <a href="https://krebsonsecurity.com/2020/06/covid-19-breach-bubble-waiting-to-pop/#more-52123" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+				
+			
+								<div class="themonic-pagination"><div class='pagination'><ul><li><a href='https://krebsonsecurity.com/'>&laquo; First</a></li><li><a href='https://krebsonsecurity.com/page/18/' class='inactive'>&lsaquo; Previous</a></li><li><a href='https://krebsonsecurity.com/page/16/' class='inactive'>16</a></li><li><a href='https://krebsonsecurity.com/page/17/' class='inactive'>17</a></li><li><a href='https://krebsonsecurity.com/page/18/' class='inactive'>18</a></li><li class='current'><span class='currenttext'>19</span></li><li><a href='https://krebsonsecurity.com/page/20/' class='inactive'>20</a></li><li><a href='https://krebsonsecurity.com/page/21/' class='inactive'>21</a></li><li><a href='https://krebsonsecurity.com/page/22/' class='inactive'>22</a></li><li><a href='https://krebsonsecurity.com/page/20/' class='inactive'>Next &rsaquo;</a></li><a class='inactive' href='https://krebsonsecurity.com/page/209/'>Last &raquo;</a></ul></div></div>
+					<div style="display: block; clear: both;"></div>
+			
+		
+
+	
+
+		</div><!-- #content -->
+	</div><!-- #primary -->
+
+
+			<div id="secondary" class="widget-area" role="complementary">
+
+        <div id="sidebar_ad" class="widget themonic-ad5"><div class="a-statement">Advertisement</div><a href="https://www.newnettechnologies.com/nnt-and-cis-controls.html">
+<img src="/b-newnet/18.jpg">
+</a></div>
+
+                        <br><div class="widget themonic-ad1"><div class="a-statement">Advertisement</div><a href="https://www.akamai.com/blog/security/attacking-a-macro-security-problem-with-micro-segmentation?utm_source=krebsonsecurity&amp;utm_medium=display&amp;utm_id=GL_SecureWorkforce_Guardicore&amp;utm_campaign=F-MC-52610&amp;utm_content=Guardicore">
+<img src="/b-akamai/138.png">
+</a></div><br>
+
+			<aside id="custom_html-2" class="widget_text widget widget_custom_html"><p class="widget-title">Mailing List</p><div class="textwidget custom-html-widget"><a href="/subscribe/">Subscribe here</a></div></aside><aside id="search-2" class="widget widget_search"><p class="widget-title">Search KrebsOnSecurity</p><form role="search" method="get" id="searchform" class="searchform" action="https://krebsonsecurity.com/">
+				<div>
+					<label class="screen-reader-text" for="s">Search for:</label>
+					<input type="text" value="" name="s" id="s" />
+					<input type="submit" id="searchsubmit" value="Search" />
+				</div>
+			</form></aside>
+		<aside id="recent-posts-3" class="widget widget_recent_entries">
+		<p class="widget-title">Recent Posts</p>
+		<ul>
+											<li>
+					<a href="https://krebsonsecurity.com/2021/12/canada-charges-its-most-prolific-cybercriminal/">Canada Charges Its &#8220;Most Prolific Cybercriminal&#8221;</a>
+									</li>
+											<li>
+					<a href="https://krebsonsecurity.com/2021/12/who-is-the-network-access-broker-babam/">Who Is the Network Access Broker &#8216;Babam&#8217;?</a>
+									</li>
+											<li>
+					<a href="https://krebsonsecurity.com/2021/12/ubiquiti-developer-charged-with-extortion-causing-2020-breach/">Ubiquiti Developer Charged With Extortion, Causing 2020 &#8220;Breach&#8221;</a>
+									</li>
+											<li>
+					<a href="https://krebsonsecurity.com/2021/11/the-internet-is-held-together-with-spit-baling-wire/">The Internet is Held Together With Spit &#038; Baling Wire</a>
+									</li>
+											<li>
+					<a href="https://krebsonsecurity.com/2021/11/arrest-in-ransom-your-employer-email-scheme/">Arrest in &#8216;Ransom Your Employer&#8217; Email Scheme</a>
+									</li>
+					</ul>
+
+		</aside><aside id="text-2" class="widget widget_text">			<div class="textwidget"><a name="subscribe2"></a></div>
+		</aside><aside id="widget_sp_image-15" class="widget widget_sp_image"><p class="widget-title">Spam Nation</p><a href="https://www.amazon.com/Spam-Nation-Organized-Cybercrime-Epidemic-ebook/dp/B00L5QGBL0/ref=dp_kinw_strp_1" target="_blank" class="widget_sp_image-image-link" title="Spam Nation"><img width="266" height="404" alt="Spam Nation" class="attachment-266x404 aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2015/04/spamnation-nyt.png" /></a><div class="widget_sp_image-description" ><p>A New York Times Bestseller! </p>
+</div></aside><aside id="widget_sp_image-25" class="widget widget_sp_image"><p class="widget-title">Thinking of a Cybersecurity Career?</p><a href="https://krebsonsecurity.com/2020/07/thinking-of-a-cybersecurity-career-read-this/" target="_blank" class="widget_sp_image-image-link" title="Thinking of a Cybersecurity Career? Read This."><img width="625" height="424" alt="Thinking of a Cybersecurity Career?" class="attachment-full" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2020/07/codepeople.png 625w, https://krebsonsecurity.com/wp-content/uploads/2020/07/codepeople-580x393.png 580w" sizes="(max-width: 625px) 100vw, 625px" src="https://krebsonsecurity.com/wp-content/uploads/2020/07/codepeople.png" /></a><div class="widget_sp_image-description" ><p>Read this.</p>
+</div></aside><aside id="widget_sp_image-3" class="widget widget_sp_image"><p class="widget-title">All About Skimmers </p><a href="https://krebsonsecurity.com/all-about-skimmers/" target="_blank" class="widget_sp_image-image-link" title="All About Skimmers "><img width="299" height="232" alt="All About Skimmers" class="attachment-299x232 aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2010/08/skimgallery1.jpg" /></a><div class="widget_sp_image-description" ><p>Click image for my skimmer series.</p>
+</div></aside><aside id="categories-2" class="widget widget_categories"><p class="widget-title">Story Categories</p>
+			<ul>
+					<li class="cat-item cat-item-5"><a href="https://krebsonsecurity.com/category/sunshine/" title="Includes investigative blog posts meant to shine a light on the darker corners of the Internet.">A Little Sunshine</a>
+</li>
+	<li class="cat-item cat-item-2240"><a href="https://krebsonsecurity.com/category/all-about-skimmers/">All About Skimmers</a>
+</li>
+	<li class="cat-item cat-item-9085"><a href="https://krebsonsecurity.com/category/ashley-madison-breach/">Ashley Madison breach</a>
+</li>
+	<li class="cat-item cat-item-3191"><a href="https://krebsonsecurity.com/category/breadcrumbs/">Breadcrumbs</a>
+</li>
+	<li class="cat-item cat-item-3771"><a href="https://krebsonsecurity.com/category/data-breaches/" title="Stories about data breaches at retailers, corporations, governments and organizations of all sizes.">Data Breaches</a>
+</li>
+	<li class="cat-item cat-item-4624"><a href="https://krebsonsecurity.com/category/ddos-for-hire/">DDoS-for-Hire</a>
+</li>
+	<li class="cat-item cat-item-9173"><a href="https://krebsonsecurity.com/category/employment-fraud/">Employment Fraud</a>
+</li>
+	<li class="cat-item cat-item-2151"><a href="https://krebsonsecurity.com/category/how-to-break-into-security/" title="If you&#039;ve ever wanted career advice on how to make a shift into the security industry, look no further.">How to Break Into Security</a>
+</li>
+	<li class="cat-item cat-item-87"><a href="https://krebsonsecurity.com/category/latest-warnings/">Latest Warnings</a>
+</li>
+	<li class="cat-item cat-item-4071"><a href="https://krebsonsecurity.com/category/neer-do-well-news/">Ne&#039;er-Do-Well News</a>
+</li>
+	<li class="cat-item cat-item-9"><a href="https://krebsonsecurity.com/category/other/">Other</a>
+</li>
+	<li class="cat-item cat-item-1306"><a href="https://krebsonsecurity.com/category/pharma-wars/">Pharma Wars</a>
+</li>
+	<li class="cat-item cat-item-8240"><a href="https://krebsonsecurity.com/category/ransomware/">Ransomware</a>
+</li>
+	<li class="cat-item cat-item-599"><a href="https://krebsonsecurity.com/category/security-tools/">Security Tools</a>
+</li>
+	<li class="cat-item cat-item-8298"><a href="https://krebsonsecurity.com/category/sim-swapping/">SIM Swapping</a>
+</li>
+	<li class="cat-item cat-item-4079"><a href="https://krebsonsecurity.com/category/spam-nation/">Spam Nation</a>
+</li>
+	<li class="cat-item cat-item-1"><a href="https://krebsonsecurity.com/category/smallbizvictims/" title="Posts in this category will include new stories similar to those told in the Small Business Victims category on The Washington Post&#039;s Security Fix blog, which chronicled the methods organized cyber thieve are using to steal hundreds of thousands of dollars from dozens of small- to mid-sized companies around the country.">Target: Small Businesses</a>
+</li>
+	<li class="cat-item cat-item-5167"><a href="https://krebsonsecurity.com/category/tax-refund-fraud/">Tax Refund Fraud</a>
+</li>
+	<li class="cat-item cat-item-3"><a href="https://krebsonsecurity.com/category/comingstorm/" title="This category includes blog posts about computer and Internet security threats now and on the horizon.">The Coming Storm</a>
+</li>
+	<li class="cat-item cat-item-4"><a href="https://krebsonsecurity.com/category/patches/" title="Short posts on the latest security updates for widely-used software.
+">Time to Patch</a>
+</li>
+	<li class="cat-item cat-item-21"><a href="https://krebsonsecurity.com/category/web-fraud-2-0/">Web Fraud 2.0</a>
+</li>
+			</ul>
+
+			</aside><aside id="widget_sp_image-5" class="widget widget_sp_image"><p class="widget-title">The Value of a Hacked PC</p><a href="https://krebsonsecurity.com/2012/10/the-scrap-value-of-a-hacked-pc-revisited/" target="_blank" class="widget_sp_image-image-link" title="The Value of a Hacked PC"><img width="285" height="180" alt="valuehackedpc " class="attachment-285x180 aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2012/12/valuehackedpc-285x180.png" /></a><div class="widget_sp_image-description" ><p>Badguy uses for your PC</p>
+</div></aside><aside id="widget_sp_image-9" class="widget widget_sp_image"><p class="widget-title">Badguy Uses for Your Email </p><a href="https://krebsonsecurity.com/2013/06/the-value-of-a-hacked-email-account/" target="_self" class="widget_sp_image-image-link" title="Badguy Uses for Your Email "><img width="296" height="170" alt="Badguy Uses for Your Email " class="attachment-full aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2013/06/badguyemail.png 296w, https://krebsonsecurity.com/wp-content/uploads/2013/06/badguyemail-285x163.png 285w" sizes="(max-width: 296px) 100vw, 296px" src="https://krebsonsecurity.com/wp-content/uploads/2013/06/badguyemail.png" /></a><div class="widget_sp_image-description" ><p>Your email account may be worth far more than you imagine.</p>
+</div></aside><aside id="widget_sp_image-24" class="widget widget_sp_image"><a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&#038;hosted_button_id=MCCRKHWRX57HS" id="donate" target="_self" class="widget_sp_image-image-link"><img width="250" height="55" alt="Donate to Krebs On Security" class="attachment-medium aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2016/09/donatepaypal2-1.png" /></a></aside><aside id="most_popular_posts-3" class="widget widget_most_popular_posts">
+<p class="widget-title">Most Popular Posts</p>
+<ul>	<li><a href="https://krebsonsecurity.com/2018/07/sextortion-scam-uses-recipients-hacked-passwords/">Sextortion Scam Uses Recipient's Hacked Passwords</a> (1076)</li>
+	<li><a href="https://krebsonsecurity.com/2015/07/online-cheating-site-ashleymadison-hacked/">Online Cheating Site AshleyMadison Hacked</a> (798)</li>
+	<li><a href="https://krebsonsecurity.com/2013/12/sources-target-investigating-data-breach/">Sources: Target Investigating Data Breach</a> (620)</li>
+	<li><a href="https://krebsonsecurity.com/2020/11/trump-fires-security-chief-christopher-krebs/">Trump Fires Security Chief Christopher Krebs</a> (534)</li>
+	<li><a href="https://krebsonsecurity.com/2013/12/cards-stolen-in-target-breach-flood-underground-markets/">Cards Stolen in Target Breach Flood Underground Markets</a> (445)</li>
+	<li><a href="https://krebsonsecurity.com/2013/05/reports-liberty-reserve-founder-arrested-site-shuttered/">Reports: Liberty Reserve Founder Arrested, Site Shuttered</a> (416)</li>
+	<li><a href="https://krebsonsecurity.com/2015/08/was-the-ashley-madison-database-leaked/">Was the Ashley Madison Database Leaked?</a> (376)</li>
+	<li><a href="https://krebsonsecurity.com/2021/01/ddos-guard-to-forfeit-internet-space-occupied-by-parler/">DDoS-Guard To Forfeit Internet Space Occupied by Parler</a> (374)</li>
+	<li><a href="https://krebsonsecurity.com/2014/05/true-goodbye-using-truecrypt-is-not-secure/">True Goodbye: 'Using TrueCrypt Is Not Secure'</a> (363)</li>
+	<li><a href="https://krebsonsecurity.com/2015/08/who-hacked-ashley-madison/">Who Hacked Ashley Madison?</a> (361)</li>
+</ul>
+</aside>
+<aside id="media_image-2" class="widget widget_media_image"><p class="widget-title">Why So Many Top Hackers Hail from Russia</p><a href="https://krebsonsecurity.com/2017/06/why-so-many-top-hackers-hail-from-russia/"><img width="580" height="389" src="https://krebsonsecurity.com/wp-content/uploads/2017/06/computered-580x389.png" class="image wp-image-39684  attachment-medium size-medium" alt="" loading="lazy" style="max-width: 100%; height: auto;" srcset="https://krebsonsecurity.com/wp-content/uploads/2017/06/computered-580x389.png 580w, https://krebsonsecurity.com/wp-content/uploads/2017/06/computered-768x514.png 768w, https://krebsonsecurity.com/wp-content/uploads/2017/06/computered-940x630.png 940w, https://krebsonsecurity.com/wp-content/uploads/2017/06/computered.png 1551w" sizes="(max-width: 580px) 100vw, 580px" /></a></aside><aside id="widget_sp_image-11" class="widget widget_sp_image"><p class="widget-title">Category: Web Fraud 2.0</p><a href="https://krebsonsecurity.com/category/web-fraud-2-0/" target="_blank" class="widget_sp_image-image-link" title="Category: Web Fraud 2.0"><img width="227" height="400" alt="Criminnovations" class="attachment-medium aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2013/11/cybercrimeinnovations-227x400.png" /></a><div class="widget_sp_image-description" ><p>Innovations from the Underground</p>
+</div></aside><aside id="widget_sp_image-12" class="widget widget_sp_image"><a href="https://krebsonsecurity.com/2014/03/are-credit-monitoring-services-worth-it/" target="_blank" class="widget_sp_image-image-link"><img width="285" height="189" class="attachment-medium aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2014/03/shreddedID-copy-285x189.png 285w, https://krebsonsecurity.com/wp-content/uploads/2014/03/shreddedID-copy-600x399.png 600w, https://krebsonsecurity.com/wp-content/uploads/2014/03/shreddedID-copy.png 849w" sizes="(max-width: 285px) 100vw, 285px" src="https://krebsonsecurity.com/wp-content/uploads/2014/03/shreddedID-copy-285x189.png" /></a><div class="widget_sp_image-description" ><p>ID Protection Services Examined</p>
+</div></aside><aside id="widget_sp_image-13" class="widget widget_sp_image"><p class="widget-title">Is Antivirus Dead?</p><a href="https://krebsonsecurity.com/2014/05/antivirus-is-dead-long-live-antivirus/" target="_blank" class="widget_sp_image-image-link" title="Is Antivirus Dead?"><img width="285" height="161" alt="Is Antivirus Dead?" class="attachment-medium aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2014/05/cryptservices-285x161.png 285w, https://krebsonsecurity.com/wp-content/uploads/2014/05/cryptservices-600x339.png 600w, https://krebsonsecurity.com/wp-content/uploads/2014/05/cryptservices.png 945w" sizes="(max-width: 285px) 100vw, 285px" src="https://krebsonsecurity.com/wp-content/uploads/2014/05/cryptservices-285x161.png" /></a><div class="widget_sp_image-description" ><p>The reasons for its decline</p>
+</div></aside><aside id="widget_sp_image-14" class="widget widget_sp_image"><p class="widget-title">The Growing Tax Fraud Menace</p><a href="https://krebsonsecurity.com/category/tax-refund-fraud/" target="_blank" class="widget_sp_image-image-link" title="The Growing Tax Fraud Menace"><img width="285" height="285" alt="The Growing Tax Fraud Menace" class="attachment-medium aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2014/04/taxfraud-285x285.jpg 285w, https://krebsonsecurity.com/wp-content/uploads/2014/04/taxfraud-150x150.jpg 150w, https://krebsonsecurity.com/wp-content/uploads/2014/04/taxfraud-600x600.jpg 600w, https://krebsonsecurity.com/wp-content/uploads/2014/04/taxfraud.jpg 693w" sizes="(max-width: 285px) 100vw, 285px" src="https://krebsonsecurity.com/wp-content/uploads/2014/04/taxfraud-285x285.jpg" /></a><div class="widget_sp_image-description" ><p>File 'em Before the Bad Guys Can </p>
+</div></aside><aside id="widget_sp_image-17" class="widget widget_sp_image"><p class="widget-title">Inside a Carding Shop</p><a href="https://krebsonsecurity.com/2014/06/peek-inside-a-professional-carding-shop/" target="_blank" class="widget_sp_image-image-link" title="Inside a Carding Shop"><img width="194" height="340" alt="Inside a Carding Shop" class="attachment-medium aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2014/06/mcdumpalsjoined.png" /></a><div class="widget_sp_image-description" ><p>A crash course in carding. </p>
+</div></aside><aside id="widget_sp_image-18" class="widget widget_sp_image"><p class="widget-title">Beware Social Security Fraud</p><a href="https://krebsonsecurity.com/2013/09/crooks-hijack-retirement-funds-via-ssa-portal/" target="_blank" class="widget_sp_image-image-link" title="Beware Social Security Fraud"><img width="285" height="293" alt="Beware Social Security Fraud" class="attachment-full aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2016/09/myssn-285x293.png" /></a><div class="widget_sp_image-description" ><p>Sign up, or Be Signed Up! </p>
+</div></aside><aside id="widget_sp_image-2" class="widget widget_sp_image"><p class="widget-title">How Was Your Card Stolen?</p><a href="https://krebsonsecurity.com/2015/01/how-was-your-credit-card-stolen/" target="_blank" class="widget_sp_image-image-link" title="How Was Your Card Stolen?"><img width="285" height="285" alt="How Was Your Card Stolen?" class="attachment-full aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2016/09/carddominoes-285x285.jpg 285w, https://krebsonsecurity.com/wp-content/uploads/2016/09/carddominoes-285x285-150x150.jpg 150w" sizes="(max-width: 285px) 100vw, 285px" src="https://krebsonsecurity.com/wp-content/uploads/2016/09/carddominoes-285x285.jpg" /></a><div class="widget_sp_image-description" ><p>Finding out is not so easy. </p>
+</div></aside><aside id="widget_sp_image-22" class="widget widget_sp_image"><p class="widget-title">Krebs&#8217;s 3 Rules&#8230;</p><a href="https://krebsonsecurity.com/2011/05/krebss-3-basic-rules-for-online-safety/" target="_blank" class="widget_sp_image-image-link" title="Krebs&#8217;s 3 Rules&#8230;"><img width="300" height="300" alt="Krebs&#8217;s 3 Rules&#8230;" class="attachment-medium aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2011/05/three-300x300.jpg 300w, https://krebsonsecurity.com/wp-content/uploads/2011/05/three-150x150.jpg 150w, https://krebsonsecurity.com/wp-content/uploads/2011/05/three.jpg 347w" sizes="(max-width: 300px) 100vw, 300px" src="https://krebsonsecurity.com/wp-content/uploads/2011/05/three-300x300.jpg" /></a><div class="widget_sp_image-description" ><p>...For Online Safety. </p>
+</div></aside>		</div><!-- #secondary -->
+		</div><!-- #main .wrapper -->
+	
+	<div id="publisho-footer" class="widget-area">
+				<div class="footer-widget">
+                				</div>
+				<div class="footer-widget">
+								</div>
+				<div class="footer-widget">
+								</div>
+	</div>
+
+	<div class="site-wordpress">
+					&copy; Krebs on Security<br>
+	</div>
+	<!-- .site-info --><div class="clear"></div>
+</div><!-- #page -->
+
+<script type='text/javascript' src='https://krebsonsecurity.com/wp-content/themes/kos-mar2021/js/slicknav.js?ver=5.8.2' id='publisho-mobile-navigation-js'></script>
+<script type='text/javascript' src='https://krebsonsecurity.com/wp-includes/js/wp-embed.min.js?ver=5.8.2' id='wp-embed-js'></script>
+</body>
+</html>
+<!--
+Performance optimized by W3 Total Cache. Learn more: https://www.boldgrid.com/w3-total-cache/
+
+Object Caching 233/478 objects using memcached
+Page Caching using memcached 
+Database Caching 7/37 queries in 0.026 seconds using memcached
+
+Served from: krebsonsecurity.com @ 2021-12-10 15:34:54 by W3 Total Cache
+-->

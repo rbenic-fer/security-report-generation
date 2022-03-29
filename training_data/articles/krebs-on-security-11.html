@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<!--[if IE 7]>
+<html class="ie ie7" lang="en-US">
+<![endif]-->
+<!--[if IE 8]>
+<html class="ie ie8" lang="en-US">
+<![endif]-->
+<!--[if !(IE 7) | !(IE 8)  ]><!-->
+<html lang="en-US">
+<!--<![endif]-->
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width" />
+<link rel="profile" href="http://gmpg.org/xfn/11" />
+<!--[if lt IE 9]>
+<script src="https://krebsonsecurity.com/wp-content/themes/kos-mar2021/js/html5.js" type="text/javascript"></script>
+<![endif]-->
+<title>Krebs on Security &#8211; Page 11 &#8211; In-depth security news and investigation</title>
+<meta name='robots' content='max-image-preview:large' />
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="Krebs on Security &raquo; Feed" href="https://krebsonsecurity.com/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Krebs on Security &raquo; Comments Feed" href="https://krebsonsecurity.com/comments/feed/" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.1.0\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.1.0\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/krebsonsecurity.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=5.8.2"}};
+			!function(e,a,t){var n,r,o,i=a.createElement("canvas"),p=i.getContext&&i.getContext("2d");function s(e,t){var a=String.fromCharCode;p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,e),0,0);e=i.toDataURL();return p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,t),0,0),e===i.toDataURL()}function c(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(o=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},r=0;r<o.length;r++)t.supports[o[r]]=function(e){if(!p||!p.fillText)return!1;switch(p.textBaseline="top",p.font="600 32px Arial",e){case"flag":return s([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])?!1:!s([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!s([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]);case"emoji":return!s([10084,65039,8205,55357,56613],[10084,65039,8203,55357,56613])}return!1}(o[r]),t.supports.everything=t.supports.everything&&t.supports[o[r]],"flag"!==o[r]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[o[r]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(n=t.source||{}).concatemoji?c(n.concatemoji):n.wpemoji&&n.twemoji&&(c(n.twemoji),c(n.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+	<link rel='stylesheet' id='colorbox-theme1-css'  href='https://krebsonsecurity.com/wp-content/plugins/jquery-lightbox-for-native-galleries/colorbox/theme1/colorbox.css?ver=1.3.14' type='text/css' media='screen' />
+<link rel='stylesheet' id='wp-block-library-css'  href='https://krebsonsecurity.com/wp-includes/css/dist/block-library/style.min.css?ver=5.8.2' type='text/css' media='all' />
+<link rel='stylesheet' id='contact-form-7-css'  href='https://krebsonsecurity.com/wp-content/plugins/contact-form-7/includes/css/styles.css?ver=5.5.3' type='text/css' media='all' />
+<link rel='stylesheet' id='publisho-style-css'  href='https://krebsonsecurity.com/wp-content/themes/kos-mar2021/style.css?subver=1.2&#038;ver=5.8.2' type='text/css' media='all' />
+<style id='publisho-style-inline-css' type='text/css'>
+
+	.themonic-nav .current-menu-item > a, .themonic-nav .current-menu-ancestor > a, .themonic-nav .current_page_item > a, .themonic-nav .current_page_ancestor > a {
+		background: #cc6600;
+	}
+	.themonic-nav ul.nav-menu, .themonic-nav div.nav-menu > ul {
+		border-bottom: 5px solid #cc6600;
+	}
+	#site-navigation .topheadmenu a {
+    background: rgba(0, 0, 0, 0);
+	}
+	.themonic-nav li a:hover {
+		background: #cc6600;
+	}
+	.themonic-nav li:hover {
+		background: #cc6600;
+	}.wrapper .flexslider {margin: 0 0 30px;}.frontp .btm-wrap {
+    border-top: 1px solid #e9e9e9;
+	}
+	.entry-summary {
+    border-top: none;
+	}.frontp .btm-wrap { margin-bottom: 30px;}.site { font-size:14px;}.site { font-family:'Roboto', arial ;}
+</style>
+<link rel='stylesheet' id='publisho-custom-style-css'  href='https://krebsonsecurity.com/wp-content/themes/kos-mar2021/custom.css?subver=1.2&#038;ver=5.8.2' type='text/css' media='all' />
+<!--[if lt IE 9]>
+<link rel='stylesheet' id='publisho-ie-css'  href='https://krebsonsecurity.com/wp-content/themes/kos-mar2021/css/ie.css?ver=20160606' type='text/css' media='all' />
+<![endif]-->
+<link rel='stylesheet' id='fontawesome-css-css'  href='https://krebsonsecurity.com/wp-content/themes/kos-mar2021/fonts/font-awesome.min.css?ver=5.8.2' type='text/css' media='all' />
+<link rel='stylesheet' id='publisho_custom_fonts-css'  href='//fonts.googleapis.com/css?family=Roboto%3Aregular%2Citalic%2C500%26subset%3Dlatin%2C' type='text/css' media='screen' />
+<script type='text/javascript' src='https://krebsonsecurity.com/wp-includes/js/jquery/jquery.min.js?ver=3.6.0' id='jquery-core-js'></script>
+<script type='text/javascript' src='https://krebsonsecurity.com/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.3.2' id='jquery-migrate-js'></script>
+<script type='text/javascript' src='https://krebsonsecurity.com/wp-content/plugins/jquery-lightbox-for-native-galleries/colorbox/jquery.colorbox-min.js?ver=1.3.14' id='colorbox-js'></script>
+<link rel="https://api.w.org/" href="https://krebsonsecurity.com/wp-json/" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://krebsonsecurity.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://krebsonsecurity.com/wp-includes/wlwmanifest.xml" /> 
+<meta name="generator" content="WordPress 5.8.2" />
+<!-- JavaScript Pull-Quotes plugin v2.2 -->
+	<link rel="stylesheet" href="https://krebsonsecurity.com/wp-content/plugins/jspullquotes/resources/jspullquotes-core.css" type="text/css" />
+	<link rel="stylesheet" href="https://krebsonsecurity.com/wp-content/plugins/jspullquotes/resources/jspullquotes-default.css" type="text/css" />
+	<script type="text/javascript" src="https://krebsonsecurity.com/wp-content/plugins/jspullquotes/resources/jspullquotes.js"></script>
+	<script type="text/javascript">
+		var arrOptions = new Array("1", "1", "right", "1", "1", "blockquote", "pullquote", "pullquote pqRight");
+		pullQuoteOpts(arrOptions);
+	</script>
+<!-- end pull-quote additions -->
+<!-- jQuery Lightbox For Native Galleries v3.1.3 | http://www.viper007bond.com/wordpress-plugins/jquery-lightbox-for-native-galleries/ -->
+<script type="text/javascript">
+// <![CDATA[
+	jQuery(document).ready(function($){
+		$(".gallery").each(function(index, obj){
+			var galleryid = Math.floor(Math.random()*10000);
+			$(obj).find("a").colorbox({rel:galleryid, maxWidth:"95%", maxHeight:"95%"});
+		});
+		$("a.lightbox").colorbox({maxWidth:"95%", maxHeight:"95%"});
+	});
+// ]]>
+</script>
+<style type="text/css" id="custom-background-css">
+body.custom-background { background-color: #ffffff; }
+</style>
+	<link rel="me" href="https://twitter.com/briankrebs" /><meta name="twitter:widgets:link-color" content="#000000" /><meta name="twitter:widgets:border-color" content="#000000" /><meta name="twitter:partner" content="tfwp" />
+<meta name="twitter:card" content="summary" /><meta name="twitter:title" content="Krebs on Security" /><meta name="twitter:site" content="@briankrebs" /><meta name="twitter:description" content="In-depth security news and investigation" />
+</head>
+<body class="home blog paged custom-background paged-11 custom-background-white single-author frontp hfeed">
+<div id="page" class="site">
+	<!-- <div class="publisho-top-mobile-nav clear"></div> -->
+	<div class="themonic-logo themonic-ad3"><div class="a-statement">Advertisement</div><a href="https://www.iansresearch.com/resources/infosec-content-downloads/research-reports/2021-ciso-compensation-benchmark-research-study?utm_source=krebs&amp;utm_medium=display_ad&amp;utm_campaign=2021_ciso_comp_study">
+<img src="/b-ians/5.png">
+</a></div>
+	<div class="themonic-logo themonic-ad6"><div class="a-statement">Advertisement</div><a href="https://securityscorecard.com/instant-security-scorecard?utm_source=krebs+on+security&amp;utm_medium=display&amp;utm_campaign=instant+scorecard&amp;utm_term=B&amp;utm_content=1240x160">
+<img src="/b-securityscorecard/6.jpg">
+</a></div>
+	<nav id="site-navigation" class="themonic-nav" role="navigation">
+	</nav><!-- #site-navigation -->
+	<div class="clear"></div>
+	<header id="masthead" class="site-header" role="banner">
+ 					<div class="desktop-social">
+						<div class="socialmedia">
+							<a href="http://twitter.com/briankrebs" target="_blank"><i class="fa fa-twitter"></i></a> 
+															<a class="rss" href="https://krebsonsecurity.com/feed/" target="_blank"><i class="fa fa-rss"></i></a>	
+									<a class="rss" href="https://www.linkedin.com/in/bkrebs/" target="_blank"><i class="fa fa-linkedin"></i></a>	
+								</div>
+				 	</div>
+																						   
+		
+		<div class="themonic-logo responsive-img-container">
+			<a href="https://krebsonsecurity.com/" title="Krebs on Security" rel="home"><img src="https://krebsonsecurity.com/wp-content/uploads/2021/03/kos-27-03-2021.jpg" alt="Krebs on Security"></a>
+		</div>
+
+					<div class="mobile-social">
+						<div class="socialmedia">
+							<a href="http://twitter.com/briankrebs" target="_blank"><i class="fa fa-twitter"></i></a> 
+															<a class="rss" href="https://krebsonsecurity.com/feed/" target="_blank"><i class="fa fa-rss"></i></a>	
+									<a class="rss" href="https://www.linkedin.com/in/bkrebs/" target="_blank"><i class="fa fa-linkedin"></i></a>	
+								</div>
+					</div>
+		
+				<!-- <div class="publisho-mobile-nav clear"></div> -->
+		<nav id="site-navigation" class="themonic-nav" role="navigation">
+			<a class="assistive-text" href="#content" title="Skip to content">Skip to content</a>
+			<div id="menu-top" class="nav-menu"><ul>
+<li ><a href="https://krebsonsecurity.com/">Home</a></li><li class="page_item page-item-2"><a href="https://krebsonsecurity.com/about/">About the Author</a></li>
+<li class="page_item page-item-645"><a href="https://krebsonsecurity.com/cpm/">Advertising/Speaking</a></li>
+</ul></div>
+		</nav><!-- #site-navigation -->
+		<div class="clear"></div>
+	</header><!-- #masthead -->
+	<div id="main" class="wrapper">
+		<div id="primary" class="site-content">
+	
+
+	
+		<div id="content" role="main">
+
+		<article id="post-54475" class="post-54475 post type-post status-publish format-standard has-post-thumbnail hentry category-sunshine category-comingstorm tag-chrome-extensions tag-chrome-stats-com tag-cisco-systems tag-crxcavator-io tag-extendbalanc tag-hao-nguyen tag-holavpn tag-infatica tag-ininja-vpn tag-luminati tag-modheader tag-vladimir-m-fomenko">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2021/03/is-your-browser-extension-a-botnet-backdoor/" title="Permalink to Is Your Browser Extension a Botnet Backdoor?" rel="bookmark">Is Your Browser Extension a Botnet Backdoor?</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">March 1, 2021</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2021/03/is-your-browser-extension-a-botnet-backdoor/#comments">44 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>A company that rents out access to more than 10 million Web browsers so that clients can hide their true Internet addresses has built its network by paying browser extension makers to quietly include its code in their creations. This story examines the lopsided economics of extension development, and why installing an extension can be such a risky proposition.</p>
+<p><img loading="lazy" class="aligncenter wp-image-45005" src="https://krebsonsecurity.com/wp-content/uploads/2018/09/browsers.png" alt="" width="594" height="109" /></p>
+<p>Singapore-based <strong>Infatica[.]io</strong> is part of a growing industry of shadowy firms trying to woo developers who maintain popular browser extensions &#8212; desktop and mobile device software add-ons available for download from <strong>Apple</strong>, <strong>Google</strong>, <strong>Microsoft</strong> and <strong>Mozilla</strong> designed to add functionality or customization to one&#8217;s browsing experience.</p>
+<p>Some of these extensions have garnered hundreds of thousands or even millions of users. But here&#8217;s the rub: As an extension&#8217;s user base grows, maintaining them with software updates and responding to user support requests tends to take up an inordinate amount of the author&#8217;s time. Yet extension authors have few options for earning financial compensation for their work.</p>
+<p>So when a company comes along and offers to buy the extension &#8212; or pay the author to silently include some extra code &#8212; that proposal is frequently too good to pass up.</p>
+<p>For its part, Infatica seeks out authors with extensions that have at least 50,000 users. An extension maker who agrees to incorporate Infatica&#8217;s computer code can earn anywhere from $15 to $45 each month for every 1,000 active users.</p>
+<div id="attachment_54494" style="width: 603px" class="wp-caption aligncenter"><img aria-describedby="caption-attachment-54494" loading="lazy" class="wp-image-54494" src="https://krebsonsecurity.com/wp-content/uploads/2021/02/infatica-revshare.png" alt="" width="593" height="434" srcset="https://krebsonsecurity.com/wp-content/uploads/2021/02/infatica-revshare.png 1030w, https://krebsonsecurity.com/wp-content/uploads/2021/02/infatica-revshare-768x562.png 768w" sizes="(max-width: 593px) 100vw, 593px" /><p id="caption-attachment-54494" class="wp-caption-text">An Infatica graphic explaining the potential benefits for extension owners.</p></div>
+<p>Infatica&#8217;s code then uses the browser of anyone who has that extension installed to route Web traffic for the company&#8217;s customers, including marketers or anyone able to afford its hefty monthly subscription charges.</p>
+<p>The end result is when Infatica customers browse to a web site, that site thinks the traffic is coming from the Internet address tied to the extension user, not the customer&#8217;s.</p>
+<p>Infatica prices its service based on the volume of web traffic a customer is seeking to anonymize, from $360 a month for 40 gigabytes all the way to $20,000 a month for 10,000 gigabytes of data traffic pushed through millions of residential computers.</p>
+<h4>THE ECONOMICS OF EXTENSIONS</h4>
+<p><strong>Hao Nguyen</strong> is the developer behind <a href="https://chrome.google.com/webstore/detail/modheader/idgpnmonknjnojddfkpgkljpfnnfcklj?hl=en" target="_blank" rel="noopener">ModHeader</a>, an extension used by more than 400,000 people to test the functionality of websites by making it easier for users to modify the data shared with those sites. When Nguyen found himself spending increasing amounts of his time and money supporting the extension, he tried including ads in the program to help offset costs.</p>
+<p>ModHeader users protested loudly against the change, and Nguyen removed the ads &#8212; which he said weren&#8217;t making him much money anyway.</p>
+<p><span class="pullquote pqright">&#8220;I had spent at least 10 years building this thing and had no luck monetizing it,&#8221; </span> he told KrebsOnSecurity.</p>
+<p>Nguyen said he ignored multiple requests from different companies offering to pay him to insert their code, mainly because the code gave those firms the ability to inject whatever they wanted into his program (and onto his users&#8217; devices) at any time.</p>
+<p>Then came Infatica, whose code was fairly straightforward by comparison, he said. It restricted the company to routing web requests through his users&#8217; browsers, and did not try to access more sensitive components of the user&#8217;s browser experience, such as stored passwords and cookies, or viewing the user&#8217;s screen.</p>
+<p>More importantly, the deal would net him at least $1,500 a month, and possibly quite a bit more.</p>
+<p>&#8220;I gave Infatica a try but within a few days I got <a href="https://github.com/bewisse/modheader/issues/64" target="_blank" rel="noopener">a lot of negative user reviews</a>,&#8221; he said. &#8220;They didn&#8217;t like that the extension might be using their browser as a proxy for going to not so good places like porn sites.&#8221;</p>
+<p>Again he relented, and removed the Infatica code. <a href="https://krebsonsecurity.com/2021/03/is-your-browser-extension-a-botnet-backdoor/#more-54475" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+	<div id="between_article_ad" class="themonic-ad5"><a href="https://www.extrahop.com/resources/papers/zero-trust/?">
+<img src="/b-extrahop/4.jpg" />
+</a></div>	<article id="post-54184" class="post-54184 post type-post status-publish format-standard has-post-thumbnail hentry category-sunshine category-employment-fraud tag-blake-hall tag-id-me tag-jim-patterson tag-labor-department">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2021/02/how-100m-in-jobless-claims-went-to-inmates/" title="Permalink to How $100M in Jobless Claims Went to Inmates" rel="bookmark">How $100M in Jobless Claims Went to Inmates</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">February 25, 2021</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2021/02/how-100m-in-jobless-claims-went-to-inmates/#comments">48 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>The U.S. Labor Department&#8217;s inspector general said this week that roughly $100 million in fraudulent unemployment insurance claims were paid in 2020 to criminals who are already in jail. That&#8217;s a tiny share of the estimated tens of billions of dollars in jobless benefits states have given to identity thieves in the past year. To help reverse that trend, many states are now turning to a little-known private company called <strong>ID.me</strong>. This post examines some of what that company is seeing in its efforts to stymie unemployment fraud.</p>
+<div id="attachment_54441" style="width: 603px" class="wp-caption aligncenter"><a href="https://krebsonsecurity.com/wp-content/uploads/2021/02/idme-prisoncards.png"><img aria-describedby="caption-attachment-54441" loading="lazy" class="wp-image-54441" src="https://krebsonsecurity.com/wp-content/uploads/2021/02/idme-prisoncards.png" alt="" width="593" height="200" /></a><p id="caption-attachment-54441" class="wp-caption-text">These prisoners tried to apply for jobless benefits. Personal information from the inmate IDs has been redacted. Image: ID.me</p></div>
+<p>A new <a href="https://www.oig.dol.gov/public/reports/oa/2021/19-21-002-03-315.pdf" target="_blank" rel="noopener">report</a> (PDF) from the Labor Department&#8217;s Office of Inspector General (OIG) found that from March through October of 2020, some $3.5 billion in fraudulent jobless benefits &#8212; nearly two-thirds of the phony claims it reviewed &#8212; was paid out to individuals with Social Security numbers filed in multiple states. Almost $100 million went to more than 13,000 ineligible people who are currently in prison.</p>
+<p>The OIG acknowledges that the total losses from all states is likely to be tens of billions of dollars. Indeed, just one state &#8212; California &#8212; disclosed last month that hackers, identity thieves and overseas criminal rings stole more than $11 billion in jobless benefits from the state last year. That&#8217;s roughly 10 percent of all claims.</p>
+<p><em>Bloomberg Law</em> <a href="https://news.bloomberglaw.com/daily-labor-report/jobless-aid-fraud-warrants-greater-federal-action-watchdog-says" target="_blank" rel="noopener">reports</a> that in response to a flood of jobless claims that exploit the lack of information sharing among states, the Labor Dept. urged the states to use a federally funded hub designed to share applicant data and detect fraudulent claims filed in more than one state. But as the OIG report notes, participation in the hub is voluntary, and so far only 32 of 54 state or territory workforce agencies in the U.S. are using it.</p>
+<p>Much of this fraud exploits weak authentication methods used by states that have long sought to verify applicants using static, widely available information such as Social Security numbers and birthdays. Many states also lacked the ability to tell when multiple payments were going to the same bank accounts.</p>
+<p>To make matters worse, as the Coronavirus pandemic took hold a number of states dramatically pared back the amount of information required to successfully request a jobless benefits claim.</p>
+<h4>77,000 NEW (AB)USERS EACH DAY</h4>
+<p>In response, 15 states have now allied with McLean, Va.-based ID.me to shore up their authentication efforts, with six more states under contract to use the service in the coming months. That&#8217;s a minor coup for a company launched in 2010 with the goal of helping e-commerce sites validate the identities of customers for the purposes of <a href="https://shop.id.me/" target="_blank" rel="noopener">granting discounts</a> for veterans, teachers, students, nurses and first responders.</p>
+<p>ID.me says it now has more than 36 million people signed up for accounts, with roughly 77,000 new users signing up each day. Naturally, a big part of that growth has come from unemployed people seeking jobless benefits.</p>
+<p>To screen out fraudsters, ID.me requires applicants to supply a great deal more information than previously requested by the states, such as images of their driver&#8217;s license or other government-issued ID, copies of utility or insurance bills, and details about their mobile phone service.</p>
+<p>When an applicant doesn&#8217;t have one or more of the above &#8212; or if something about their application triggers potential fraud flags &#8212; ID.me may require a recorded, live video chat with the person applying for benefits.</p>
+<p>This has led to some fairly amusing attempts to circumvent their verification processes, said ID.me founder and CEO <strong>Blake Hall</strong>. For example, it&#8217;s not uncommon for applicants appearing in the company&#8217;s video chat to don disguises. The Halloween mask worn by the applicant pictured below is just one example.</p>
+<div id="attachment_54442" style="width: 255px" class="wp-caption alignright"><img aria-describedby="caption-attachment-54442" loading="lazy" class=" wp-image-54442" src="https://krebsonsecurity.com/wp-content/uploads/2021/02/joblessmask.png" alt="" width="245" height="299" /><p id="caption-attachment-54442" class="wp-caption-text">Image: ID.me</p></div>
+<p>Hall said the company&#8217;s service is blocking a significant amount of &#8220;first party&#8221; fraud &#8212; someone using their own identity to file in multiple states where they aren&#8217;t eligible &#8212; as well as &#8220;third-party&#8221; fraud, where people are tricked into giving away identity data that thieves then use to apply for benefits.</p>
+<p>&#8220;There&#8217;s literally every form of attack, from nation states and organized crime to prisoners,&#8221; Hall said. &#8220;It&#8217;s like the D-Day of fraud, this is Omaha Beach we&#8217;re on right now. The amount of fraud we are fighting is truly staggering.&#8221;</p>
+<p>According to ID.me, a major driver of phony jobless claims comes from social engineering, where people have given away personal data in response to romance or sweepstakes scams, or after applying for what they thought was a legitimate work-from-home job.</p>
+<p>&#8220;A lot of this is targeting the elderly,&#8221; Hall said. &#8220;We&#8217;ve seen [videos] of people in nursing homes, where folks off camera are speaking for them and holding up documents.&#8221;</p>
+<p>&#8220;We had one video where the person applying said, &#8216;I&#8217;m here for the prize money,'&#8221; Hall continued. &#8220;Another elderly victim started weeping when they realized they weren&#8217;t getting a job and were the victim of a job scam. In general though, the job scam stuff hits younger people harder and the romance and prize money stuff hits elderly people harder.&#8221;</p>
+<p>Many other phony claims are filed by people who&#8217;ve been approached by fraudsters promising them a cut of any unemployment claims granted in their names.</p>
+<p>&#8220;That person is told to just claim that they had their identity stolen when and if law enforcement ever shows up,&#8221; Hall said.<br />
+ <a href="https://krebsonsecurity.com/2021/02/how-100m-in-jobless-claims-went-to-inmates/#more-54184" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+	<div class="themonic-ad2"><div class="a-statement">Advertisement</div><a href="https://www.akamai.com/blog/security/attacking-a-macro-security-problem-with-micro-segmentation?utm_source=krebsonsecurity&amp;utm_medium=display&amp;utm_id=GL_SecureWorkforce_Guardicore&amp;utm_campaign=F-MC-52610&amp;utm_content=Guardicore">
+<img src="/b-akamai/140.png">
+</a></div>	<article id="post-54400" class="post-54400 post type-post status-publish format-standard has-post-thumbnail hentry category-all-about-skimmers tag-shimmer tag-smart-card-skimmer">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2021/02/checkout-skimmers-powered-by-chip-cards/" title="Permalink to Checkout Skimmers Powered by Chip Cards" rel="bookmark">Checkout Skimmers Powered by Chip Cards</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">February 23, 2021</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2021/02/checkout-skimmers-powered-by-chip-cards/#comments">58 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>Easily the most sophisticated skimming devices made for hacking terminals at retail self-checkout lanes are a new breed of PIN pad overlay combined with a flexible, paper-thin device that fits inside the terminal&#8217;s chip reader slot. What enables these skimmers to be so slim? They draw their power from the low-voltage current that gets triggered when a chip-based card is inserted. As a result, they do not require external batteries, and can remain in operation indefinitely.</p>
+<div id="attachment_54411" style="width: 603px" class="wp-caption aligncenter"><img aria-describedby="caption-attachment-54411" loading="lazy" class=" wp-image-54411" src="https://krebsonsecurity.com/wp-content/uploads/2021/02/overlay-shim.png" alt="" width="593" height="705" /><p id="caption-attachment-54411" class="wp-caption-text">A point-of-sale skimming device that consists of a PIN pad overlay (top) and a smart card skimmer (a.k.a. &#8220;shimmer&#8221;). The entire device folds onto itself, with the bottom end of the flexible card shimmer fed into the mouth of the chip card acceptance slot.</p></div>
+<p>The overlay skimming device pictured above consists of two main components. The one on top is a regular PIN pad overlay designed to record keypresses when a customer enters their debit card PIN. The overlay includes a microcontroller and a small data storage unit (bottom left).</p>
+<p>The second component, which is wired to the overlay skimmer, is a flexible card skimmer (often called a &#8220;shimmer&#8221;) that gets fed into the mouth of the chip card acceptance slot. You&#8217;ll notice neither device contains a battery, because there simply isn&#8217;t enough space to accommodate one.</p>
+<p>Virtually all payment card terminals at self-checkout lanes now accept (if not also require) cards with a chip to be inserted into the machine. When a chip card is inserted, the terminal reads the data stored on the smart card by sending an electric current through the chip.</p>
+<p>Incredibly, this skimming apparatus is able to siphon a small amount of that power (a few milliamps) to record any data transmitted by the payment terminal transaction and PIN pad presses. When the terminal is no longer in use, the skimming device remains dormant.</p>
+<p>The skimmer pictured above does not stick out of the payment terminal at all when it&#8217;s been seated properly inside the machine. Here&#8217;s what the fake PIN pad overlay and card skimmer looks like when fully inserted into the card acceptance slot and viewed head-on:</p>
+<div id="attachment_54404" style="width: 605px" class="wp-caption aligncenter"><img aria-describedby="caption-attachment-54404" loading="lazy" class=" wp-image-54404" src="https://krebsonsecurity.com/wp-content/uploads/2021/02/pt-inserted.png" alt="" width="595" height="344" /><p id="caption-attachment-54404" class="wp-caption-text">The insert skimmer fully ensconced inside the compromised payment terminal. Image: KrebsOnSecurity.com</p></div>
+<p> <a href="https://krebsonsecurity.com/2021/02/checkout-skimmers-powered-by-chip-cards/#more-54400" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-54390" class="post-54390 post type-post status-publish format-standard has-post-thumbnail hentry category-all-about-skimmers category-neer-do-well-news tag-atm-skimmers tag-constantin-sorinel-marcu tag-florian-tudor tag-intacash tag-jose-alberto-gomez-alvarez tag-jose-de-la-pena-ruiz-de-chavez tag-jose-luis-jonathan-yong tag-jose-luis-yong-cruz tag-mexico tag-nain-diaz-medina tag-occrp tag-organized-crime-and-corruption-reporting-project tag-riviera-maya-gang tag-the-shark">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2021/02/mexican-politician-removed-over-alleged-ties-to-romanian-atm-skimmer-gang/" title="Permalink to Mexican Politician Removed Over Alleged Ties to Romanian ATM Skimmer Gang" rel="bookmark">Mexican Politician Removed Over Alleged Ties to Romanian ATM Skimmer Gang</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">February 19, 2021</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2021/02/mexican-politician-removed-over-alleged-ties-to-romanian-atm-skimmer-gang/#comments">37 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>The leader of Mexico&#8217;s Green Party has been removed from office following allegations that he received money from a Romanian ATM skimmer gang that stole hundreds of millions of dollars from tourists visiting Mexico&#8217;s top tourist destinations over the past five years. The scandal is the latest fallout stemming from a three-part investigation into the organized crime group by KrebsOnSecurity in 2015.</p>
+<div id="attachment_32341" style="width: 601px" class="wp-caption aligncenter"><img aria-describedby="caption-attachment-32341" loading="lazy" class=" wp-image-32341" src="https://krebsonsecurity.com/wp-content/uploads/2015/09/BTpadskimF2M.png" alt="" width="591" height="584" srcset="https://krebsonsecurity.com/wp-content/uploads/2015/09/BTpadskimF2M.png 616w, https://krebsonsecurity.com/wp-content/uploads/2015/09/BTpadskimF2M-580x573.png 580w" sizes="(max-width: 591px) 100vw, 591px" /><p id="caption-attachment-32341" class="wp-caption-text">One of the Bluetooth-enabled PIN pads pulled from a compromised ATM in Mexico. The two components on the left are legitimate parts of the machine. The fake PIN pad made to be slipped under the legit PIN pad on the machine, is the orange component, top right. The Bluetooth and data storage chips are in the middle.</p></div>
+<p><strong>Jose de la Peña Ruiz de Chávez</strong>, who leads the Green Ecologist Party of Mexico (PVEM), was <a href="https://www.occrp.org/en/daily/13878-mexican-politician-denies-links-to-riviera-maya-gang" target="_blank" rel="noopener">dismissed this month</a> after it was revealed that his were among 79 bank accounts seized as part of an ongoing law enforcement investigation into a Romanian organized crime group that owned and operated an ATM network throughout the country.</p>
+<p>In 2015, KrebsOnSecurity traveled to Mexico&#8217;s Yucatan Peninsula to follow up on reports about <a href="https://krebsonsecurity.com/2015/07/spike-in-atm-skimming-in-mexico/" target="_blank" rel="noopener">a massive spike in ATM skimming activity</a> that appeared centered around some of the nation&#8217;s primary tourist areas.</p>
+<p>That <a href="https://krebsonsecurity.com/2015/09/tracking-a-bluetooth-skimmer-gang-in-mexico/" target="_blank" rel="noopener">three-part</a> <a href="https://krebsonsecurity.com/2015/09/tracking-bluetooth-skimmers-in-mexico-part-ii/" target="_blank" rel="noopener">series</a> <a href="https://krebsonsecurity.com/2015/09/whos-behind-bluetooth-skimming-in-mexico/" target="_blank" rel="noopener">concluded</a> that <strong>Intacash</strong>, an ATM provider owned and operated by a group of Romanian citizens, had been paying technicians working for other ATM companies to install sophisticated Bluetooth-based skimming devices inside cash machines throughout the Quintana Roo region of Mexico, which includes Cancun, Cozumel, Playa del Carmen and Tulum.</p>
+<p> <a href="https://krebsonsecurity.com/2021/02/mexican-politician-removed-over-alleged-ties-to-romanian-atm-skimmer-gang/#more-54390" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-54375" class="post-54375 post type-post status-publish format-standard hentry category-neer-do-well-news tag-applejeus tag-apt-38 tag-cybersecurity-and-infrastructure-agency tag-department-of-homeland-security tag-fbi tag-ghaleb-alaumary tag-hidden-cobra tag-jon-chang-hyok tag-kim-il tag-lazarus-group tag-marine-chain-token tag-park-jin-hyok tag-sony-pictures tag-wannacry">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2021/02/u-s-indicts-north-korean-hackers-in-theft-of-200-million/" title="Permalink to U.S. Indicts North Korean Hackers in Theft of $200 Million" rel="bookmark">U.S. Indicts North Korean Hackers in Theft of $200 Million</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">February 17, 2021</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2021/02/u-s-indicts-north-korean-hackers-in-theft-of-200-million/#comments">77 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>The <strong>U.S. Justice Department</strong> today unsealed indictments against three men accused of working with the North Korean regime to carry out some of the most damaging cybercrime attacks over the past decade, including the <a href="https://krebsonsecurity.com/?s=sony+pictures&amp;x=0&amp;y=0" target="_blank" rel="noopener">2014 hack of Sony Pictures</a>, the global <a href="https://en.wikipedia.org/wiki/WannaCry_ransomware_attack" target="_blank" rel="noopener">WannaCry ransomware contagion of 2017</a>, and the theft of roughly $200 million and attempted theft of more than $1.2 billion from banks and other victims worldwide.</p>
+<p><img loading="lazy" class="aligncenter wp-image-54381" src="https://krebsonsecurity.com/wp-content/uploads/2021/02/nk.jpg" alt="" width="598" height="396" /></p>
+<p>Investigators with the DOJ, <strong>U.S. Secret Service</strong> and <strong>Department of Homeland Security</strong> told reporters on Wednesday the trio&#8217;s activities involved extortion, phishing, direct attacks on financial institutions and ATM networks, as well as malicious applications that masqueraded as software tools to help people manage their cryptocurrency holdings.</p>
+<p>Prosecutors say the hackers were part of an effort to circumvent ongoing international financial sanctions against the North Korean regime. The group is thought to be responsible for the attempted theft of approximately $1.2 billion, although it&#8217;s unclear how much of that was actually stolen.</p>
+<p>Confirmed thefts attributed to the group include the 2016 hacking of the SWIFT payment system for Bangladesh Bank, which netted thieves $81 million; $6.1 million in a 2018 <a href="https://krebsonsecurity.com/?s=atm+cash+out&amp;x=0&amp;y=0" target="_blank" rel="noopener">ATM cash out scheme</a> targeting a Pakistani bank; and a total of $112 million in virtual currencies stolen between 2017 and 2020 from cryptocurrency companies in Slovenia, Indonesia and New York.</p>
+<p>&#8220;The scope of the criminal conduct by the North Korean hackers was extensive and longrunning, and the range of crimes they have committed is staggering,&#8221; said <strong>Acting U.S. Attorney Tracy L. Wilkison</strong> for the Central District of California. &#8220;The conduct detailed in the indictment are the acts of a criminal nation-state that has stopped at nothing to extract revenge and obtain money to prop up its regime.&#8221;</p>
+<p><a href="https://krebsonsecurity.com/wp-content/uploads/2021/02/kim-il.png"><img loading="lazy" class="alignright wp-image-54382" src="https://krebsonsecurity.com/wp-content/uploads/2021/02/kim-il.png" alt="" width="247" height="211" srcset="https://krebsonsecurity.com/wp-content/uploads/2021/02/kim-il.png 789w, https://krebsonsecurity.com/wp-content/uploads/2021/02/kim-il-768x658.png 768w" sizes="(max-width: 247px) 100vw, 247px" /></a>The indictments name <a href="https://www.justice.gov/opa/press-release/file/1367706/download" target="_blank" rel="noopener"><strong>Jon Chang Hyok</strong></a> (a.k.a &#8220;Alex/Quan Jiang&#8221;), <a href="https://www.justice.gov/opa/press-release/file/1367711/download" target="_blank" rel="noopener"><strong>Kim Il</strong></a> (a.k.a. &#8220;Julien Kim&#8221;/&#8221;Tony Walker&#8221;), and <a href="https://www.justice.gov/opa/press-release/file/1367716/download" target="_blank" rel="noopener"><strong>Park Jin</strong> <strong>Hyok</strong></a> (a.k.a. Pak Jin Hek/Pak Kwang Jin). U.S. prosecutors say the men were members of the <a href="https://en.wikipedia.org/wiki/Reconnaissance_General_Bureau" target="_blank" rel="noopener">Reconnaissance General Bureau</a> (RGB), an intelligence division of the Democratic People&#8217;s Republic of Korea (DPRK) that manages the state&#8217;s clandestine operations.</p>
+<p>The Justice Department says those indicted were members of a DPRK-sponsored cybercrime group variously identified by the security community as the <strong>Lazarus Group</strong> and <strong>Advanced Persistent Threat 38</strong> (APT 38). The government alleges the men reside in North Korea but were frequently stationed by the DPRK in other countries, including China and Russia.</p>
+<p>Park was <a href="https://www.justice.gov/opa/pr/north-korean-regime-backed-programmer-charged-conspiracy-conduct-multiple-cyber-attacks-and" target="_blank" rel="noopener">previously charged in 2018</a> in connection with the WannaCry and Sony Pictures attacks. But today&#8217;s indictments expanded the range of crimes attributed to Park and his alleged co-conspirators, including cryptocurrency thefts, phony cryptocurrency investment schemes and apps, and efforts to launder the proceeds of their crimes.</p>
+<p>Prosecutors in California also today unsealed an indictment against <strong>Ghaleb Alaumary</strong>, a 37-year-old from Mississauga, Ontario who pleaded guilty in November 2020 to charges of laundering tens of millions of dollars stolen by the DPRK hackers.</p>
+<p>The accused allegedly developed and marketed a series of cryptocurrency applications that were advertised as tools to help people manage their crypto holdings. In reality, prosecutors say, the programs were malware or downloaded malware after the applications were installed.</p>
+<p>A <a href="https://us-cert.cisa.gov/ncas/alerts/aa21-048a" target="_blank" rel="noopener">joint cyber advisory</a> from the FBI, the Treasury and DHS&#8217;s Cybersecurity and Infrastructure Agency (CISA) delves deeper into these backdoored cryptocurrency apps, a family of malware activity referred to as &#8220;<strong>AppleJeus</strong>. &#8220;<strong>Hidden Cobra</strong>&#8221; is the collective handle assigned to the hackers behind the AppleJeus malware.</p>
+<p>&#8220;In most instances, the malicious application—seen on both Windows and Mac operating systems—appears to be from a legitimate cryptocurrency trading company, thus fooling individuals into downloading it as a third-party application from a website that seems legitimate,&#8221; the advisory reads. &#8220;In addition to infecting victims through legitimate-looking websites, HIDDEN COBRA actors also use phishing, social networking, and social engineering techniques to lure users into downloading the malware.&#8221; <a href="https://krebsonsecurity.com/2021/02/u-s-indicts-north-korean-hackers-in-theft-of-200-million/#more-54375" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-54083" class="post-54083 post type-post status-publish format-standard has-post-thumbnail hentry category-all-about-skimmers tag-bluetooth-skimmer tag-overlay-skimmer">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2021/02/bluetooth-overlay-skimmer-that-blocks-chip/" title="Permalink to Bluetooth Overlay Skimmer That Blocks Chip" rel="bookmark">Bluetooth Overlay Skimmer That Blocks Chip</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">February 15, 2021</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2021/02/bluetooth-overlay-skimmer-that-blocks-chip/#comments">80 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>As a total sucker for anything skimming-related, I was interested to hear from a reader working security for a retail chain in the United States who recently found Bluetooth-enabled skimming devices placed over top of payment card terminals at several stores. Interestingly, these skimmers interfered with the terminal&#8217;s ability to read chip-based cards, forcing customers to swipe the stripe instead.</p>
+<div id="attachment_54200" style="width: 610px" class="wp-caption aligncenter"><a href="https://krebsonsecurity.com/wp-content/uploads/2021/01/btoverlay.png"><img aria-describedby="caption-attachment-54200" loading="lazy" class="wp-image-54200" src="https://krebsonsecurity.com/wp-content/uploads/2021/01/btoverlay.png" alt="" width="600" height="546" srcset="https://krebsonsecurity.com/wp-content/uploads/2021/01/btoverlay.png 823w, https://krebsonsecurity.com/wp-content/uploads/2021/01/btoverlay-768x699.png 768w" sizes="(max-width: 600px) 100vw, 600px" /></a><p id="caption-attachment-54200" class="wp-caption-text">The payment card skimmer overlay transmitted stolen data via Bluetooth, physically blocked chip-based transactions, and included a PIN pad overlay.</p></div>
+<p>Here&#8217;s a closer look at the electronic gear jammed into these overlay skimmers. It includes a hidden PIN pad overlay that captures, stores and transmits via Bluetooth data from cards swiped through the machine, as well as PINs entered on the device:</p>
+<div id="attachment_54201" style="width: 609px" class="wp-caption aligncenter"><a href="https://krebsonsecurity.com/wp-content/uploads/2021/01/reverse-bt-skim.png"><img aria-describedby="caption-attachment-54201" loading="lazy" class="wp-image-54201" src="https://krebsonsecurity.com/wp-content/uploads/2021/01/reverse-bt-skim.png" alt="" width="599" height="646" /></a><p id="caption-attachment-54201" class="wp-caption-text">The hidden magnetic stripe reader is in the bottom left, just below the Bluetooth circuit board. A PIN pad overlay (center) intercepts any PINs entered by customers; the cell phone battery (right) powers all of the components.</p></div>
+<p>My reader source shared these images on condition that the retailer in question not be named. But it&#8217;s worth pointing out these devices <a href="https://krebsonsecurity.com/2018/02/would-you-have-spotted-this-skimmer/" target="_blank" rel="noopener">can be installed on virtually any customer-facing payment terminal in the blink of eye</a>. <a href="https://krebsonsecurity.com/2021/02/bluetooth-overlay-skimmer-that-blocks-chip/#more-54083" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-54326" class="post-54326 post type-post status-publish format-standard has-post-thumbnail hentry category-sunshine tag-andrew-hildick-smith tag-applied-control-solutions tag-bob-gualtieri tag-cert-polska tag-environmental-protection-agency tag-florida-water-hack tag-joe-weiss tag-marcin-dudek tag-teamviewer tag-water-isac">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2021/02/whats-most-interesting-about-the-florida-water-system-hack-that-we-heard-about-it-at-all/" title="Permalink to What&#8217;s most interesting about the Florida water system hack? That we heard about it at all." rel="bookmark">What&#8217;s most interesting about the Florida water system hack? That we heard about it at all.</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">February 10, 2021</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2021/02/whats-most-interesting-about-the-florida-water-system-hack-that-we-heard-about-it-at-all/#comments">61 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>Stories about computer security tend to go viral when they bridge the vast divide between geeks and luddites, and this week&#8217;s news about a hacker who tried to poison a Florida town&#8217;s water supply was understandably front-page material. But for security nerds who&#8217;ve been warning about this sort of thing for ages, the most surprising aspect of the incident seems to be that we learned about it at all.</p>
+<p><img loading="lazy" class="aligncenter wp-image-54338" src="https://krebsonsecurity.com/wp-content/uploads/2021/02/drinkwatersupply.jpg" alt="" width="588" height="441" /></p>
+<p>Spend a few minutes searching Twitter, Reddit or any number of other social media sites and you&#8217;ll find countless examples of researchers posting proof of being able to access so-called &#8220;human-machine interfaces&#8221; &#8212; basically web pages designed to interact remotely with various complex systems, such as those that monitor and/or control things like power, water, sewage and manufacturing plants.</p>
+<p>And yet, there have been precious few known incidents of malicious hackers abusing this access to disrupt these complex systems. That is, until this past Monday, when Florida county sheriff <strong>Bob Gualtieri</strong> held a remarkably clear-headed and fact-filled news conference about an attempt to poison the water supply of Oldsmar, a town of around 15,000 not far from Tampa.</p>
+<p>Gualtieri told the media that someone (they don&#8217;t know who yet) remotely accessed a computer for the city&#8217;s water treatment system (using Teamviewer) and briefly increased the amount of sodium hydroxide (a.k.a. lye used to control acidity in the water)<em> to 100 times the normal level</em>.</p>
+<p>&#8220;The city’s water supply was not affected,&#8221; <em>The Tampa Bay Times</em> <a href="https://www.tampabay.com/news/pinellas/2021/02/08/someone-tried-to-poison-oldsmars-water-supply-during-hack-sheriff-says/" target="_blank" rel="noopener">reported</a>. &#8220;A supervisor working remotely saw the concentration being changed on his computer screen and immediately reverted it, Gualtieri said. City officials on Monday emphasized that several other safeguards are in place to prevent contaminated water from entering the water supply and said they’ve disabled the remote-access system used in the attack.&#8221;</p>
+<p>In short, a likely inexperienced intruder somehow learned the credentials needed to remotely access Oldsmar&#8217;s water system, did little to hide his activity, and then tried to change settings by such a wide margin that the alterations would be hard to overlook.</p>
+<p>&#8220;The system wasn&#8217;t capable of doing what the attacker wanted,&#8221; said <strong>Joe Weiss</strong>, managing partner at <strong>Applied Control Solutions</strong>, a consultancy for the control systems industry. &#8220;The system isn&#8217;t capable of going up by a factor of 100 because there are certain physics problems involved there. Also, the changes he tried to make wouldn&#8217;t happen instantaneously. The operators would have had plenty of time to do something about it.&#8221;</p>
+<p>Weiss was just one of a half-dozen experts steeped in the cybersecurity aspects of industrial control systems that KrebsOnSecurity spoke with this week. While all of those interviewed echoed Weiss&#8217;s conclusion, most also said they were concerned about the prospects of a more advanced adversary.</p>
+<p>Here are some of the sobering takeaways from those interviews:</p>
+<ul>
+<li>There are approximately 54,000 distinct drinking water systems in the United States.</li>
+<li>The vast majority of those systems serve fewer than 50,000 residents, with many serving just a few hundred or thousand.</li>
+<li>Virtually all of them rely on some type of remote access to monitor and/or administer these facilities.</li>
+<li>Many of these facilities are unattended, underfunded, and do not have someone watching the IT operations 24/7.</li>
+<li>Many facilities have not separated operational technology (the bits that control the switches and levers) from safety systems that might detect and alert on intrusions or potentially dangerous changes.</li>
+</ul>
+<p>So, given how easy it is to search the web for and find ways to remotely interact with these HMI systems, why aren&#8217;t there more incidents like the one in Oldsmar making the news? One reason may be that these facilities don&#8217;t have to disclose such events when they do happen. <a href="https://krebsonsecurity.com/2021/02/whats-most-interesting-about-the-florida-water-system-hack-that-we-heard-about-it-at-all/#more-54326" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-54321" class="post-54321 post type-post status-publish format-standard has-post-thumbnail hentry category-security-tools category-patches tag-cve-2020-1472 tag-cve-2021-1732 tag-cve-2021-21148 tag-cve-2021-24078 tag-immersive-labs tag-kevin-breen tag-microsoft-patch-tuesday-february-2021 tag-netlogon tag-recorded-future tag-zerologon">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2021/02/microsoft-patch-tuesday-february-2021-edition/" title="Permalink to Microsoft Patch Tuesday, February 2021 Edition" rel="bookmark">Microsoft Patch Tuesday, February 2021 Edition</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">February 9, 2021</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2021/02/microsoft-patch-tuesday-february-2021-edition/#comments">44 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p><strong>Microsoft</strong> today rolled out updates to plug at least 56 security holes in its <strong>Windows</strong> operating systems and other software. One of the bugs is already being actively exploited, and six of them were publicized prior to today, potentially giving attackers a head start in figuring out how to exploit the flaws.</p>
+<p><img loading="lazy" class="aligncenter wp-image-52647" src="https://krebsonsecurity.com/wp-content/uploads/2020/08/windowsec.png" alt="" width="596" height="438" /></p>
+<p>Nine of the 56 vulnerabilities earned Microsoft&#8217;s most urgent &#8220;critical&#8221; rating, meaning malware or miscreants could use them to seize remote control over unpatched systems with little or no help from users.</p>
+<p>The flaw being exploited in the wild already &#8212; <a href="https://msrc.microsoft.com/update-guide/en-US/vulnerability/CVE-2021-1732" target="_blank" rel="noopener">CVE-2021-1732</a> &#8212; affects Windows 10, Server 2016 and later editions. It received a slightly less dire &#8220;important&#8221; rating and mainly because it is a vulnerability that lets an attacker increase their authority and control on a device, which means the attacker needs to already have access to the target system.</p>
+<p>Two of the other bugs that were disclosed prior to this week are critical and reside in <strong>Microsoft&#8217;s .NET Framework</strong>, a component required by many third-party applications (most Windows users will have some version of .NET installed). <a href="https://krebsonsecurity.com/2021/02/microsoft-patch-tuesday-february-2021-edition/#more-54321" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-54297" class="post-54297 post type-post status-publish format-standard has-post-thumbnail hentry category-neer-do-well-news category-web-fraud-2-0 tag-australian-federal-police tag-brad-marden tag-check-point-research tag-fr3d-hk tag-intel-471 tag-kaktys tag-qakbot tag-remco-verhoef tag-sans-internet-storm-center tag-u-admin">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2021/02/arrest-raids-tied-to-u-admin-phishing-kit/" title="Permalink to Arrest, Raids Tied to &#8216;U-Admin&#8217; Phishing Kit" rel="bookmark">Arrest, Raids Tied to &#8216;U-Admin&#8217; Phishing Kit</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">February 8, 2021</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2021/02/arrest-raids-tied-to-u-admin-phishing-kit/#comments">17 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>Cyber cops in Ukraine carried out an arrest and several raids last week in connection with the author of a <strong>U-Admin</strong>, a software package used to administer what&#8217;s being called &#8220;one of the world&#8217;s largest phishing services.&#8221; The operation was carried out in coordination with the FBI and authorities in Australia, which was particularly hard hit by phishing scams perpetrated by U-Admin customers.</p>
+<div id="attachment_54305" style="width: 606px" class="wp-caption aligncenter"><a href="https://krebsonsecurity.com/wp-content/uploads/2021/02/unknownadmin.png"><img aria-describedby="caption-attachment-54305" loading="lazy" class="wp-image-54305" src="https://krebsonsecurity.com/wp-content/uploads/2021/02/unknownadmin.png" alt="" width="596" height="295" srcset="https://krebsonsecurity.com/wp-content/uploads/2021/02/unknownadmin.png 1026w, https://krebsonsecurity.com/wp-content/uploads/2021/02/unknownadmin-768x380.png 768w" sizes="(max-width: 596px) 100vw, 596px" /></a><p id="caption-attachment-54305" class="wp-caption-text">The U-Admin phishing panel interface. Image: fr3d.hk/blog</p></div>
+<p>The Ukrainian attorney general&#8217;s office <a href="https://www.gp.gov.ua/ua/news?_m=publications&amp;_t=rec&amp;id=288438&amp;fp=10" target="_blank" rel="noopener">said</a> it worked with <a href="https://cyberpolice.gov.ua/news/kiberpolicziya-prypynyla-diyalnist-odnogo-z-najbilshyx-u-sviti-fishyngovyx-servisiv-dlya-atak-na-finansovi-ustanovy-riznyx-krayin-506/" target="_blank" rel="noopener">the nation&#8217;s police force</a> to identify a 39-year-old man from the Ternopil region who developed a phishing package and special administrative panel for the product.</p>
+<p>&#8220;According to the analysis of foreign law enforcement agencies, more than 50% of all phishing attacks in 2019 in Australia were carried out thanks to the development of the Ternopil hacker,&#8221; the attorney general&#8217;s office said, noting that investigators had identified hundreds of U-Admin customers.</p>
+<p><strong>Brad Marden</strong>, superintendent of cybercrime operations for the <strong>Australian Federal Police</strong> (AFP), said their investigation into who was behind U-Admin began in late 2018, after Australian citizens began getting deluged with phishing attacks via mobile text messages that leveraged the software.</p>
+<p>&#8220;It was rampant,&#8221; Marden said, noting that the AFP identified the suspect and referred the case to the Ukrainians for prosecution. &#8220;At one stage in 2019 we had a couple of hundred SMS phishing campaigns tied to just this particular actor. Pretty much every Australian received a half dozen of these phishing attempts.&#8221;</p>
+<p>U-Admin, a.k.a. &#8220;Universal Admin,&#8221; is crimeware platform that first surfaced in 2016. U-Admin was sold by an individual who used the hacker handle &#8220;<strong>Kaktys</strong>&#8221; on multiple cybercrime forums.</p>
+<p>According to <a href="https://fr3d.hk/blog/u-admin-show-tell" target="_blank" rel="noopener">this comprehensive breakdown of the phishing toolkit</a>, the U-Admin control panel isn&#8217;t sold on its own, but rather it is included when customers contact the developer and purchase a set of phishing pages designed to mimic a specific brand &#8212; such as a bank website or social media platform.</p>
+<p>Cybersecurity threat intelligence firm <a href="https://www.intel471.com" target="_blank" rel="noopener">Intel 471</a> describes U-Admin as an information stealing framework that uses several plug-ins in one location to help users pilfer victim credentials more efficiently. Those plug-ins include a phishing page generator, a victim tracker, and even a component to help manage money mules (for automatic transfers from victim accounts to people who were hired in advance to receive and launder stolen funds).</p>
+<p>Perhaps the biggest selling point for U-Admin is a module that helps phishers intercept multi-factor authentication codes. This core functionality is what&#8217;s known as a &#8220;web inject,&#8221; because it allows phishers to inject content into the phishing page that prompts the victim to enter additional information. The video below, produced by the U-Admin developer, shows a few examples (click to enlarge). <a href="https://krebsonsecurity.com/2021/02/arrest-raids-tied-to-u-admin-phishing-kit/#more-54297" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-54249" class="post-54249 post type-post status-publish format-standard has-post-thumbnail hentry category-neer-do-well-news category-comingstorm category-web-fraud-2-0 tag-h4ck tag-trusted tag-beam tag-extortion tag-facebook tag-instagram tag-noah-hawkins tag-ogusers tag-ryan-zanelli tag-sextortion tag-sim-swapping tag-swatting tag-tiktok tag-twitter">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2021/02/facebook-instagram-tiktok-and-twitter-target-resellers-of-hacked-accounts/" title="Permalink to Facebook, Instagram, TikTok and Twitter Target Resellers of Hacked Accounts" rel="bookmark">Facebook, Instagram, TikTok and Twitter Target Resellers of Hacked Accounts</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">February 4, 2021</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2021/02/facebook-instagram-tiktok-and-twitter-target-resellers-of-hacked-accounts/#comments">17 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p><strong>Facebook, Instagram</strong>, <strong>TikTok</strong>, and <strong>Twitter</strong> this week all took steps to crack down on users involved in trafficking hijacked user accounts across their platforms. The coordinated action seized hundreds of accounts the companies say have played a major role in facilitating the trade and often lucrative resale of compromised, highly sought-after usernames.</p>
+<p><img loading="lazy" class="alignright size-full wp-image-37128" src="https://krebsonsecurity.com/wp-content/uploads/2016/12/athook.png" alt="" width="194" height="375" />At the center of the account ban wave are some of the most active members of <strong>OGUsers</strong>, a forum that caters to thousands of people <a href="https://krebsonsecurity.com/?s=ogusers&amp;x=0&amp;y=0" target="_blank" rel="noopener">selling access to hijacked social media and other online accounts</a>.</p>
+<p>Particularly prized by this community are short usernames, which can often be resold for thousands of dollars to those looking to claim a choice vanity name.</p>
+<p>Facebook told KrebsOnSecurity it seized hundreds of accounts &#8212; mainly on Instagram &#8212; that have been stolen from legitimate users through a variety of intimidation and harassment tactics, including hacking, coercion, extortion, <a href="https://krebsonsecurity.com/?s=sextortion&amp;x=0&amp;y=0" target="_blank" rel="noopener">sextortion</a>, <a href="https://krebsonsecurity.com/?s=sim+swapping&amp;x=0&amp;y=0" target="_blank" rel="noopener">SIM swapping</a>, and <a href="https://krebsonsecurity.com/?s=swatting&amp;x=0&amp;y=0" target="_blank" rel="noopener">swatting</a>.</p>
+<h4>THE MIDDLEMEN</h4>
+<p>Facebook said it targeted a number of accounts tied to key sellers on OGUsers, as well as those who advertise the ability to broker stolen account sales.</p>
+<p>Like most cybercrime forums, OGUsers is overrun with shady characters who are there mainly to rip off other members. As a result, some of the most popular denizens of the community are those who&#8217;ve earned a reputation as trusted &#8220;middlemen.&#8221;</p>
+<p>These core members offer escrow services that &#8211; in exchange for a cut of the total transaction cost (usually five percent) &#8212; will hold the buyer&#8217;s funds until he is satisfied that the seller has delivered the credentials and any email account access needed to control the hijacked social media account.</p>
+<p>For example, one of the most active accounts targeted in this week&#8217;s social network crackdown is <a href="https://krebsonsecurity.com/wp-content/uploads/2021/02/ig-trusted.png" target="_blank" rel="noopener">the Instagram profile</a> &#8220;<strong>Trusted</strong>,&#8221; self-described as &#8220;top-tier professional middleman/escrow since 2014.&#8221;</p>
+<p>Trusted&#8217;s profile included several screenshots of his OGUsers persona, &#8220;Beam,&#8221; who <a href="https://krebsonsecurity.com/wp-content/uploads/2021/02/beam-normies.png" target="_blank" rel="noopener">warns members</a> about an uptick in the number of new OGUsers profiles impersonating him and other middlemen on the forum. Beam currently has more reputation points or &#8220;vouches&#8221; than almost anyone on the forum, save for perhaps the current and former site administrators.</p>
+<div id="attachment_54260" style="width: 608px" class="wp-caption aligncenter"><img aria-describedby="caption-attachment-54260" loading="lazy" class=" wp-image-54260" src="https://krebsonsecurity.com/wp-content/uploads/2021/02/ig-trusted.png" alt="" width="598" height="492" srcset="https://krebsonsecurity.com/wp-content/uploads/2021/02/ig-trusted.png 1002w, https://krebsonsecurity.com/wp-content/uploads/2021/02/ig-trusted-768x632.png 768w" sizes="(max-width: 598px) 100vw, 598px" /><p id="caption-attachment-54260" class="wp-caption-text">The now-banned Instagram account for the middleman @trusted/beam.</p></div>
+<p>Helpfully, OGUsers <a href="https://krebsonsecurity.com/2020/12/account-hijacking-site-ogusers-hacked-again/" target="_blank" rel="noopener">has been hacked multiple times over the years</a>, and its database of user details and private messages posted on competing crime forums. Those databases show Beam was just the 12th user account created on OGUsers back in 2014.</p>
+<p>In his posts, Beam says he has brokered well north of 10,000 transactions. Indeed, the leaked OGUsers databases &#8212; which include private messages on the forum prior to June 2020 &#8212; offer a small window into the overall value of the hijacked social media account industry.</p>
+<p>In each of Beam&#8217;s direct messages to other members who hired him as a middleman he would include the address of the bitcoin wallet to which the buyer was to send the funds. <a href="https://www.blockchain.com/btc/address/1DravToLrBUyEdb8XyPtZJr83S6DHedRM6" target="_blank" rel="noopener">Just two</a> <a href="https://www.blockchain.com/btc/address/1BeHkKCzUz1jrVFpy5REAxRsyXSMDsoe35" target="_blank" rel="noopener">of the bitcoin wallets</a> Beam used for middlemanning over the past of couple of years recorded in excess of 6,700 transactions totaling more than 243 bitcoins &#8212; or <em>roughly $8.5 million by today&#8217;s valuation</em> (~$35,000 per coin)<em>. </em>Beam would have earned roughly $425,000 in commissions on those sales.</p>
+<p>Beam, a Canadian whose real name is <strong>Noah Hawkins</strong>, declined to be interviewed when contacted earlier this week. But his &#8220;Trusted&#8221; account on Instagram was taken down by Facebook today, as were &#8220;<a href="https://krebsonsecurity.com/wp-content/uploads/2021/02/ig-rl.png" target="_blank" rel="noopener">@Killer</a>,&#8221; &#8212; a personal Instagram account he used under the nickname &#8220;noah/beam.&#8221; Beam&#8217;s Twitter account &#8212; <a href="https://web.archive.org/web/20190116060539if_/http://twitter.com/nh" target="_blank" rel="noopener">@NH</a> &#8212; has been deactivated by Twitter; it was <a href="https://web.archive.org/web/20140328002545/twitter.com/nh" target="_blank" rel="noopener">hacked and stolen from its original owner back in 2014</a>.</p>
+<p>Reached for comment, Twitter confirmed that it worked in tandem with Facebook to seize accounts tied to top members of OGUsers, citing its <a href="https://help.twitter.com/en/rules-and-policies/platform-manipulation" target="_blank" rel="noopener">platform manipulation and spam policy</a>. Twitter said its investigation into the people behind these accounts is ongoing.</p>
+<p>TikTok confirmed it also took action to target accounts tied to top OGUusers members, although it declined to say how many accounts were reclaimed.</p>
+<p>&#8220;As part of our ongoing work to find and stop inauthentic behavior, we recently reclaimed a number of TikTok usernames that were being used for account squatting,&#8221; TikTok said in a written statement. &#8220;We will continue to focus on staying ahead of the ever-evolving tactics of bad actors, including cooperating with third parties and others in the industry.&#8221; <a href="https://krebsonsecurity.com/2021/02/facebook-instagram-tiktok-and-twitter-target-resellers-of-hacked-accounts/#more-54249" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+				
+			
+								<div class="themonic-pagination"><div class='pagination'><ul><li><a href='https://krebsonsecurity.com/'>&laquo; First</a></li><li><a href='https://krebsonsecurity.com/page/10/' class='inactive'>&lsaquo; Previous</a></li><li><a href='https://krebsonsecurity.com/page/8/' class='inactive'>8</a></li><li><a href='https://krebsonsecurity.com/page/9/' class='inactive'>9</a></li><li><a href='https://krebsonsecurity.com/page/10/' class='inactive'>10</a></li><li class='current'><span class='currenttext'>11</span></li><li><a href='https://krebsonsecurity.com/page/12/' class='inactive'>12</a></li><li><a href='https://krebsonsecurity.com/page/13/' class='inactive'>13</a></li><li><a href='https://krebsonsecurity.com/page/14/' class='inactive'>14</a></li><li><a href='https://krebsonsecurity.com/page/12/' class='inactive'>Next &rsaquo;</a></li><a class='inactive' href='https://krebsonsecurity.com/page/209/'>Last &raquo;</a></ul></div></div>
+					<div style="display: block; clear: both;"></div>
+			
+		
+
+	
+
+		</div><!-- #content -->
+	</div><!-- #primary -->
+
+
+			<div id="secondary" class="widget-area" role="complementary">
+
+        <div id="sidebar_ad" class="widget themonic-ad5"><div class="a-statement">Advertisement</div><a href="https://info.knowbe4.com/phishing-forensics-krebs?utm_source=Krebs&amp;utm_medium=display&amp;utm_campaign=website&amp;utm_content=PhishingForensics">
+<img src="/b-knowbe4/16.jpg" />
+</a></div>
+
+                        <br><div class="widget themonic-ad1"><div class="a-statement">Advertisement</div><a href="https://www.akamai.com/why-akamai/the-internet-of-possibilities?utm_source=krebsonsecurity&amp;utm_medium=display&amp;utm_campaign=F-MC-54978">
+<img src="/b-akamai/146.png">
+</a></div><br>
+
+			<aside id="custom_html-2" class="widget_text widget widget_custom_html"><p class="widget-title">Mailing List</p><div class="textwidget custom-html-widget"><a href="/subscribe/">Subscribe here</a></div></aside><aside id="search-2" class="widget widget_search"><p class="widget-title">Search KrebsOnSecurity</p><form role="search" method="get" id="searchform" class="searchform" action="https://krebsonsecurity.com/">
+				<div>
+					<label class="screen-reader-text" for="s">Search for:</label>
+					<input type="text" value="" name="s" id="s" />
+					<input type="submit" id="searchsubmit" value="Search" />
+				</div>
+			</form></aside>
+		<aside id="recent-posts-3" class="widget widget_recent_entries">
+		<p class="widget-title">Recent Posts</p>
+		<ul>
+											<li>
+					<a href="https://krebsonsecurity.com/2021/12/canada-charges-its-most-prolific-cybercriminal/">Canada Charges Its &#8220;Most Prolific Cybercriminal&#8221;</a>
+									</li>
+											<li>
+					<a href="https://krebsonsecurity.com/2021/12/who-is-the-network-access-broker-babam/">Who Is the Network Access Broker &#8216;Babam&#8217;?</a>
+									</li>
+											<li>
+					<a href="https://krebsonsecurity.com/2021/12/ubiquiti-developer-charged-with-extortion-causing-2020-breach/">Ubiquiti Developer Charged With Extortion, Causing 2020 &#8220;Breach&#8221;</a>
+									</li>
+											<li>
+					<a href="https://krebsonsecurity.com/2021/11/the-internet-is-held-together-with-spit-baling-wire/">The Internet is Held Together With Spit &#038; Baling Wire</a>
+									</li>
+											<li>
+					<a href="https://krebsonsecurity.com/2021/11/arrest-in-ransom-your-employer-email-scheme/">Arrest in &#8216;Ransom Your Employer&#8217; Email Scheme</a>
+									</li>
+					</ul>
+
+		</aside><aside id="text-2" class="widget widget_text">			<div class="textwidget"><a name="subscribe2"></a></div>
+		</aside><aside id="widget_sp_image-15" class="widget widget_sp_image"><p class="widget-title">Spam Nation</p><a href="https://www.amazon.com/Spam-Nation-Organized-Cybercrime-Epidemic-ebook/dp/B00L5QGBL0/ref=dp_kinw_strp_1" target="_blank" class="widget_sp_image-image-link" title="Spam Nation"><img width="266" height="404" alt="Spam Nation" class="attachment-266x404 aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2015/04/spamnation-nyt.png" /></a><div class="widget_sp_image-description" ><p>A New York Times Bestseller! </p>
+</div></aside><aside id="widget_sp_image-25" class="widget widget_sp_image"><p class="widget-title">Thinking of a Cybersecurity Career?</p><a href="https://krebsonsecurity.com/2020/07/thinking-of-a-cybersecurity-career-read-this/" target="_blank" class="widget_sp_image-image-link" title="Thinking of a Cybersecurity Career? Read This."><img width="625" height="424" alt="Thinking of a Cybersecurity Career?" class="attachment-full" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2020/07/codepeople.png 625w, https://krebsonsecurity.com/wp-content/uploads/2020/07/codepeople-580x393.png 580w" sizes="(max-width: 625px) 100vw, 625px" src="https://krebsonsecurity.com/wp-content/uploads/2020/07/codepeople.png" /></a><div class="widget_sp_image-description" ><p>Read this.</p>
+</div></aside><aside id="widget_sp_image-3" class="widget widget_sp_image"><p class="widget-title">All About Skimmers </p><a href="https://krebsonsecurity.com/all-about-skimmers/" target="_blank" class="widget_sp_image-image-link" title="All About Skimmers "><img width="299" height="232" alt="All About Skimmers" class="attachment-299x232 aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2010/08/skimgallery1.jpg" /></a><div class="widget_sp_image-description" ><p>Click image for my skimmer series.</p>
+</div></aside><aside id="categories-2" class="widget widget_categories"><p class="widget-title">Story Categories</p>
+			<ul>
+					<li class="cat-item cat-item-5"><a href="https://krebsonsecurity.com/category/sunshine/" title="Includes investigative blog posts meant to shine a light on the darker corners of the Internet.">A Little Sunshine</a>
+</li>
+	<li class="cat-item cat-item-2240"><a href="https://krebsonsecurity.com/category/all-about-skimmers/">All About Skimmers</a>
+</li>
+	<li class="cat-item cat-item-9085"><a href="https://krebsonsecurity.com/category/ashley-madison-breach/">Ashley Madison breach</a>
+</li>
+	<li class="cat-item cat-item-3191"><a href="https://krebsonsecurity.com/category/breadcrumbs/">Breadcrumbs</a>
+</li>
+	<li class="cat-item cat-item-3771"><a href="https://krebsonsecurity.com/category/data-breaches/" title="Stories about data breaches at retailers, corporations, governments and organizations of all sizes.">Data Breaches</a>
+</li>
+	<li class="cat-item cat-item-4624"><a href="https://krebsonsecurity.com/category/ddos-for-hire/">DDoS-for-Hire</a>
+</li>
+	<li class="cat-item cat-item-9173"><a href="https://krebsonsecurity.com/category/employment-fraud/">Employment Fraud</a>
+</li>
+	<li class="cat-item cat-item-2151"><a href="https://krebsonsecurity.com/category/how-to-break-into-security/" title="If you&#039;ve ever wanted career advice on how to make a shift into the security industry, look no further.">How to Break Into Security</a>
+</li>
+	<li class="cat-item cat-item-87"><a href="https://krebsonsecurity.com/category/latest-warnings/">Latest Warnings</a>
+</li>
+	<li class="cat-item cat-item-4071"><a href="https://krebsonsecurity.com/category/neer-do-well-news/">Ne&#039;er-Do-Well News</a>
+</li>
+	<li class="cat-item cat-item-9"><a href="https://krebsonsecurity.com/category/other/">Other</a>
+</li>
+	<li class="cat-item cat-item-1306"><a href="https://krebsonsecurity.com/category/pharma-wars/">Pharma Wars</a>
+</li>
+	<li class="cat-item cat-item-8240"><a href="https://krebsonsecurity.com/category/ransomware/">Ransomware</a>
+</li>
+	<li class="cat-item cat-item-599"><a href="https://krebsonsecurity.com/category/security-tools/">Security Tools</a>
+</li>
+	<li class="cat-item cat-item-8298"><a href="https://krebsonsecurity.com/category/sim-swapping/">SIM Swapping</a>
+</li>
+	<li class="cat-item cat-item-4079"><a href="https://krebsonsecurity.com/category/spam-nation/">Spam Nation</a>
+</li>
+	<li class="cat-item cat-item-1"><a href="https://krebsonsecurity.com/category/smallbizvictims/" title="Posts in this category will include new stories similar to those told in the Small Business Victims category on The Washington Post&#039;s Security Fix blog, which chronicled the methods organized cyber thieve are using to steal hundreds of thousands of dollars from dozens of small- to mid-sized companies around the country.">Target: Small Businesses</a>
+</li>
+	<li class="cat-item cat-item-5167"><a href="https://krebsonsecurity.com/category/tax-refund-fraud/">Tax Refund Fraud</a>
+</li>
+	<li class="cat-item cat-item-3"><a href="https://krebsonsecurity.com/category/comingstorm/" title="This category includes blog posts about computer and Internet security threats now and on the horizon.">The Coming Storm</a>
+</li>
+	<li class="cat-item cat-item-4"><a href="https://krebsonsecurity.com/category/patches/" title="Short posts on the latest security updates for widely-used software.
+">Time to Patch</a>
+</li>
+	<li class="cat-item cat-item-21"><a href="https://krebsonsecurity.com/category/web-fraud-2-0/">Web Fraud 2.0</a>
+</li>
+			</ul>
+
+			</aside><aside id="widget_sp_image-5" class="widget widget_sp_image"><p class="widget-title">The Value of a Hacked PC</p><a href="https://krebsonsecurity.com/2012/10/the-scrap-value-of-a-hacked-pc-revisited/" target="_blank" class="widget_sp_image-image-link" title="The Value of a Hacked PC"><img width="285" height="180" alt="valuehackedpc " class="attachment-285x180 aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2012/12/valuehackedpc-285x180.png" /></a><div class="widget_sp_image-description" ><p>Badguy uses for your PC</p>
+</div></aside><aside id="widget_sp_image-9" class="widget widget_sp_image"><p class="widget-title">Badguy Uses for Your Email </p><a href="https://krebsonsecurity.com/2013/06/the-value-of-a-hacked-email-account/" target="_self" class="widget_sp_image-image-link" title="Badguy Uses for Your Email "><img width="296" height="170" alt="Badguy Uses for Your Email " class="attachment-full aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2013/06/badguyemail.png 296w, https://krebsonsecurity.com/wp-content/uploads/2013/06/badguyemail-285x163.png 285w" sizes="(max-width: 296px) 100vw, 296px" src="https://krebsonsecurity.com/wp-content/uploads/2013/06/badguyemail.png" /></a><div class="widget_sp_image-description" ><p>Your email account may be worth far more than you imagine.</p>
+</div></aside><aside id="widget_sp_image-24" class="widget widget_sp_image"><a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&#038;hosted_button_id=MCCRKHWRX57HS" id="donate" target="_self" class="widget_sp_image-image-link"><img width="250" height="55" alt="Donate to Krebs On Security" class="attachment-medium aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2016/09/donatepaypal2-1.png" /></a></aside><aside id="most_popular_posts-3" class="widget widget_most_popular_posts">
+<p class="widget-title">Most Popular Posts</p>
+<ul>	<li><a href="https://krebsonsecurity.com/2018/07/sextortion-scam-uses-recipients-hacked-passwords/">Sextortion Scam Uses Recipient's Hacked Passwords</a> (1076)</li>
+	<li><a href="https://krebsonsecurity.com/2015/07/online-cheating-site-ashleymadison-hacked/">Online Cheating Site AshleyMadison Hacked</a> (798)</li>
+	<li><a href="https://krebsonsecurity.com/2013/12/sources-target-investigating-data-breach/">Sources: Target Investigating Data Breach</a> (620)</li>
+	<li><a href="https://krebsonsecurity.com/2020/11/trump-fires-security-chief-christopher-krebs/">Trump Fires Security Chief Christopher Krebs</a> (534)</li>
+	<li><a href="https://krebsonsecurity.com/2013/12/cards-stolen-in-target-breach-flood-underground-markets/">Cards Stolen in Target Breach Flood Underground Markets</a> (445)</li>
+	<li><a href="https://krebsonsecurity.com/2013/05/reports-liberty-reserve-founder-arrested-site-shuttered/">Reports: Liberty Reserve Founder Arrested, Site Shuttered</a> (416)</li>
+	<li><a href="https://krebsonsecurity.com/2015/08/was-the-ashley-madison-database-leaked/">Was the Ashley Madison Database Leaked?</a> (376)</li>
+	<li><a href="https://krebsonsecurity.com/2021/01/ddos-guard-to-forfeit-internet-space-occupied-by-parler/">DDoS-Guard To Forfeit Internet Space Occupied by Parler</a> (374)</li>
+	<li><a href="https://krebsonsecurity.com/2014/05/true-goodbye-using-truecrypt-is-not-secure/">True Goodbye: 'Using TrueCrypt Is Not Secure'</a> (363)</li>
+	<li><a href="https://krebsonsecurity.com/2015/08/who-hacked-ashley-madison/">Who Hacked Ashley Madison?</a> (361)</li>
+</ul>
+</aside>
+<aside id="media_image-2" class="widget widget_media_image"><p class="widget-title">Why So Many Top Hackers Hail from Russia</p><a href="https://krebsonsecurity.com/2017/06/why-so-many-top-hackers-hail-from-russia/"><img width="580" height="389" src="https://krebsonsecurity.com/wp-content/uploads/2017/06/computered-580x389.png" class="image wp-image-39684  attachment-medium size-medium" alt="" loading="lazy" style="max-width: 100%; height: auto;" srcset="https://krebsonsecurity.com/wp-content/uploads/2017/06/computered-580x389.png 580w, https://krebsonsecurity.com/wp-content/uploads/2017/06/computered-768x514.png 768w, https://krebsonsecurity.com/wp-content/uploads/2017/06/computered-940x630.png 940w, https://krebsonsecurity.com/wp-content/uploads/2017/06/computered.png 1551w" sizes="(max-width: 580px) 100vw, 580px" /></a></aside><aside id="widget_sp_image-11" class="widget widget_sp_image"><p class="widget-title">Category: Web Fraud 2.0</p><a href="https://krebsonsecurity.com/category/web-fraud-2-0/" target="_blank" class="widget_sp_image-image-link" title="Category: Web Fraud 2.0"><img width="227" height="400" alt="Criminnovations" class="attachment-medium aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2013/11/cybercrimeinnovations-227x400.png" /></a><div class="widget_sp_image-description" ><p>Innovations from the Underground</p>
+</div></aside><aside id="widget_sp_image-12" class="widget widget_sp_image"><a href="https://krebsonsecurity.com/2014/03/are-credit-monitoring-services-worth-it/" target="_blank" class="widget_sp_image-image-link"><img width="285" height="189" class="attachment-medium aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2014/03/shreddedID-copy-285x189.png 285w, https://krebsonsecurity.com/wp-content/uploads/2014/03/shreddedID-copy-600x399.png 600w, https://krebsonsecurity.com/wp-content/uploads/2014/03/shreddedID-copy.png 849w" sizes="(max-width: 285px) 100vw, 285px" src="https://krebsonsecurity.com/wp-content/uploads/2014/03/shreddedID-copy-285x189.png" /></a><div class="widget_sp_image-description" ><p>ID Protection Services Examined</p>
+</div></aside><aside id="widget_sp_image-13" class="widget widget_sp_image"><p class="widget-title">Is Antivirus Dead?</p><a href="https://krebsonsecurity.com/2014/05/antivirus-is-dead-long-live-antivirus/" target="_blank" class="widget_sp_image-image-link" title="Is Antivirus Dead?"><img width="285" height="161" alt="Is Antivirus Dead?" class="attachment-medium aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2014/05/cryptservices-285x161.png 285w, https://krebsonsecurity.com/wp-content/uploads/2014/05/cryptservices-600x339.png 600w, https://krebsonsecurity.com/wp-content/uploads/2014/05/cryptservices.png 945w" sizes="(max-width: 285px) 100vw, 285px" src="https://krebsonsecurity.com/wp-content/uploads/2014/05/cryptservices-285x161.png" /></a><div class="widget_sp_image-description" ><p>The reasons for its decline</p>
+</div></aside><aside id="widget_sp_image-14" class="widget widget_sp_image"><p class="widget-title">The Growing Tax Fraud Menace</p><a href="https://krebsonsecurity.com/category/tax-refund-fraud/" target="_blank" class="widget_sp_image-image-link" title="The Growing Tax Fraud Menace"><img width="285" height="285" alt="The Growing Tax Fraud Menace" class="attachment-medium aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2014/04/taxfraud-285x285.jpg 285w, https://krebsonsecurity.com/wp-content/uploads/2014/04/taxfraud-150x150.jpg 150w, https://krebsonsecurity.com/wp-content/uploads/2014/04/taxfraud-600x600.jpg 600w, https://krebsonsecurity.com/wp-content/uploads/2014/04/taxfraud.jpg 693w" sizes="(max-width: 285px) 100vw, 285px" src="https://krebsonsecurity.com/wp-content/uploads/2014/04/taxfraud-285x285.jpg" /></a><div class="widget_sp_image-description" ><p>File 'em Before the Bad Guys Can </p>
+</div></aside><aside id="widget_sp_image-17" class="widget widget_sp_image"><p class="widget-title">Inside a Carding Shop</p><a href="https://krebsonsecurity.com/2014/06/peek-inside-a-professional-carding-shop/" target="_blank" class="widget_sp_image-image-link" title="Inside a Carding Shop"><img width="194" height="340" alt="Inside a Carding Shop" class="attachment-medium aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2014/06/mcdumpalsjoined.png" /></a><div class="widget_sp_image-description" ><p>A crash course in carding. </p>
+</div></aside><aside id="widget_sp_image-18" class="widget widget_sp_image"><p class="widget-title">Beware Social Security Fraud</p><a href="https://krebsonsecurity.com/2013/09/crooks-hijack-retirement-funds-via-ssa-portal/" target="_blank" class="widget_sp_image-image-link" title="Beware Social Security Fraud"><img width="285" height="293" alt="Beware Social Security Fraud" class="attachment-full aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2016/09/myssn-285x293.png" /></a><div class="widget_sp_image-description" ><p>Sign up, or Be Signed Up! </p>
+</div></aside><aside id="widget_sp_image-2" class="widget widget_sp_image"><p class="widget-title">How Was Your Card Stolen?</p><a href="https://krebsonsecurity.com/2015/01/how-was-your-credit-card-stolen/" target="_blank" class="widget_sp_image-image-link" title="How Was Your Card Stolen?"><img width="285" height="285" alt="How Was Your Card Stolen?" class="attachment-full aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2016/09/carddominoes-285x285.jpg 285w, https://krebsonsecurity.com/wp-content/uploads/2016/09/carddominoes-285x285-150x150.jpg 150w" sizes="(max-width: 285px) 100vw, 285px" src="https://krebsonsecurity.com/wp-content/uploads/2016/09/carddominoes-285x285.jpg" /></a><div class="widget_sp_image-description" ><p>Finding out is not so easy. </p>
+</div></aside><aside id="widget_sp_image-22" class="widget widget_sp_image"><p class="widget-title">Krebs&#8217;s 3 Rules&#8230;</p><a href="https://krebsonsecurity.com/2011/05/krebss-3-basic-rules-for-online-safety/" target="_blank" class="widget_sp_image-image-link" title="Krebs&#8217;s 3 Rules&#8230;"><img width="300" height="300" alt="Krebs&#8217;s 3 Rules&#8230;" class="attachment-medium aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2011/05/three-300x300.jpg 300w, https://krebsonsecurity.com/wp-content/uploads/2011/05/three-150x150.jpg 150w, https://krebsonsecurity.com/wp-content/uploads/2011/05/three.jpg 347w" sizes="(max-width: 300px) 100vw, 300px" src="https://krebsonsecurity.com/wp-content/uploads/2011/05/three-300x300.jpg" /></a><div class="widget_sp_image-description" ><p>...For Online Safety. </p>
+</div></aside>		</div><!-- #secondary -->
+		</div><!-- #main .wrapper -->
+	
+	<div id="publisho-footer" class="widget-area">
+				<div class="footer-widget">
+                				</div>
+				<div class="footer-widget">
+								</div>
+				<div class="footer-widget">
+								</div>
+	</div>
+
+	<div class="site-wordpress">
+					&copy; Krebs on Security<br>
+	</div>
+	<!-- .site-info --><div class="clear"></div>
+</div><!-- #page -->
+
+<script type='text/javascript' src='https://krebsonsecurity.com/wp-content/themes/kos-mar2021/js/slicknav.js?ver=5.8.2' id='publisho-mobile-navigation-js'></script>
+<script type='text/javascript' src='https://krebsonsecurity.com/wp-includes/js/wp-embed.min.js?ver=5.8.2' id='wp-embed-js'></script>
+</body>
+</html>
+<!--
+Performance optimized by W3 Total Cache. Learn more: https://www.boldgrid.com/w3-total-cache/
+
+Object Caching 231/401 objects using memcached
+Page Caching using memcached 
+Database Caching 7/28 queries in 0.010 seconds using memcached
+
+Served from: krebsonsecurity.com @ 2021-12-10 15:24:39 by W3 Total Cache
+-->

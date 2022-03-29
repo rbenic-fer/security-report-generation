@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<!--[if IE 7]>
+<html class="ie ie7" lang="en-US">
+<![endif]-->
+<!--[if IE 8]>
+<html class="ie ie8" lang="en-US">
+<![endif]-->
+<!--[if !(IE 7) | !(IE 8)  ]><!-->
+<html lang="en-US">
+<!--<![endif]-->
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width" />
+<link rel="profile" href="http://gmpg.org/xfn/11" />
+<!--[if lt IE 9]>
+<script src="https://krebsonsecurity.com/wp-content/themes/kos-mar2021/js/html5.js" type="text/javascript"></script>
+<![endif]-->
+<title>Krebs on Security &#8211; Page 26 &#8211; In-depth security news and investigation</title>
+<meta name='robots' content='max-image-preview:large' />
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="Krebs on Security &raquo; Feed" href="https://krebsonsecurity.com/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Krebs on Security &raquo; Comments Feed" href="https://krebsonsecurity.com/comments/feed/" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.1.0\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.1.0\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/krebsonsecurity.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=5.8.2"}};
+			!function(e,a,t){var n,r,o,i=a.createElement("canvas"),p=i.getContext&&i.getContext("2d");function s(e,t){var a=String.fromCharCode;p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,e),0,0);e=i.toDataURL();return p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,t),0,0),e===i.toDataURL()}function c(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(o=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},r=0;r<o.length;r++)t.supports[o[r]]=function(e){if(!p||!p.fillText)return!1;switch(p.textBaseline="top",p.font="600 32px Arial",e){case"flag":return s([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])?!1:!s([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!s([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]);case"emoji":return!s([10084,65039,8205,55357,56613],[10084,65039,8203,55357,56613])}return!1}(o[r]),t.supports.everything=t.supports.everything&&t.supports[o[r]],"flag"!==o[r]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[o[r]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(n=t.source||{}).concatemoji?c(n.concatemoji):n.wpemoji&&n.twemoji&&(c(n.twemoji),c(n.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+	<link rel='stylesheet' id='colorbox-theme1-css'  href='https://krebsonsecurity.com/wp-content/plugins/jquery-lightbox-for-native-galleries/colorbox/theme1/colorbox.css?ver=1.3.14' type='text/css' media='screen' />
+<link rel='stylesheet' id='wp-block-library-css'  href='https://krebsonsecurity.com/wp-includes/css/dist/block-library/style.min.css?ver=5.8.2' type='text/css' media='all' />
+<link rel='stylesheet' id='contact-form-7-css'  href='https://krebsonsecurity.com/wp-content/plugins/contact-form-7/includes/css/styles.css?ver=5.5.3' type='text/css' media='all' />
+<link rel='stylesheet' id='publisho-style-css'  href='https://krebsonsecurity.com/wp-content/themes/kos-mar2021/style.css?subver=1.2&#038;ver=5.8.2' type='text/css' media='all' />
+<style id='publisho-style-inline-css' type='text/css'>
+
+	.themonic-nav .current-menu-item > a, .themonic-nav .current-menu-ancestor > a, .themonic-nav .current_page_item > a, .themonic-nav .current_page_ancestor > a {
+		background: #cc6600;
+	}
+	.themonic-nav ul.nav-menu, .themonic-nav div.nav-menu > ul {
+		border-bottom: 5px solid #cc6600;
+	}
+	#site-navigation .topheadmenu a {
+    background: rgba(0, 0, 0, 0);
+	}
+	.themonic-nav li a:hover {
+		background: #cc6600;
+	}
+	.themonic-nav li:hover {
+		background: #cc6600;
+	}.wrapper .flexslider {margin: 0 0 30px;}.frontp .btm-wrap {
+    border-top: 1px solid #e9e9e9;
+	}
+	.entry-summary {
+    border-top: none;
+	}.frontp .btm-wrap { margin-bottom: 30px;}.site { font-size:14px;}.site { font-family:'Roboto', arial ;}
+</style>
+<link rel='stylesheet' id='publisho-custom-style-css'  href='https://krebsonsecurity.com/wp-content/themes/kos-mar2021/custom.css?subver=1.2&#038;ver=5.8.2' type='text/css' media='all' />
+<!--[if lt IE 9]>
+<link rel='stylesheet' id='publisho-ie-css'  href='https://krebsonsecurity.com/wp-content/themes/kos-mar2021/css/ie.css?ver=20160606' type='text/css' media='all' />
+<![endif]-->
+<link rel='stylesheet' id='fontawesome-css-css'  href='https://krebsonsecurity.com/wp-content/themes/kos-mar2021/fonts/font-awesome.min.css?ver=5.8.2' type='text/css' media='all' />
+<link rel='stylesheet' id='publisho_custom_fonts-css'  href='//fonts.googleapis.com/css?family=Roboto%3Aregular%2Citalic%2C500%26subset%3Dlatin%2C' type='text/css' media='screen' />
+<script type='text/javascript' src='https://krebsonsecurity.com/wp-includes/js/jquery/jquery.min.js?ver=3.6.0' id='jquery-core-js'></script>
+<script type='text/javascript' src='https://krebsonsecurity.com/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.3.2' id='jquery-migrate-js'></script>
+<script type='text/javascript' src='https://krebsonsecurity.com/wp-content/plugins/jquery-lightbox-for-native-galleries/colorbox/jquery.colorbox-min.js?ver=1.3.14' id='colorbox-js'></script>
+<link rel="https://api.w.org/" href="https://krebsonsecurity.com/wp-json/" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://krebsonsecurity.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://krebsonsecurity.com/wp-includes/wlwmanifest.xml" /> 
+<meta name="generator" content="WordPress 5.8.2" />
+<!-- JavaScript Pull-Quotes plugin v2.2 -->
+	<link rel="stylesheet" href="https://krebsonsecurity.com/wp-content/plugins/jspullquotes/resources/jspullquotes-core.css" type="text/css" />
+	<link rel="stylesheet" href="https://krebsonsecurity.com/wp-content/plugins/jspullquotes/resources/jspullquotes-default.css" type="text/css" />
+	<script type="text/javascript" src="https://krebsonsecurity.com/wp-content/plugins/jspullquotes/resources/jspullquotes.js"></script>
+	<script type="text/javascript">
+		var arrOptions = new Array("1", "1", "right", "1", "1", "blockquote", "pullquote", "pullquote pqRight");
+		pullQuoteOpts(arrOptions);
+	</script>
+<!-- end pull-quote additions -->
+<!-- jQuery Lightbox For Native Galleries v3.1.3 | http://www.viper007bond.com/wordpress-plugins/jquery-lightbox-for-native-galleries/ -->
+<script type="text/javascript">
+// <![CDATA[
+	jQuery(document).ready(function($){
+		$(".gallery").each(function(index, obj){
+			var galleryid = Math.floor(Math.random()*10000);
+			$(obj).find("a").colorbox({rel:galleryid, maxWidth:"95%", maxHeight:"95%"});
+		});
+		$("a.lightbox").colorbox({maxWidth:"95%", maxHeight:"95%"});
+	});
+// ]]>
+</script>
+<style type="text/css" id="custom-background-css">
+body.custom-background { background-color: #ffffff; }
+</style>
+	<link rel="me" href="https://twitter.com/briankrebs" /><meta name="twitter:widgets:link-color" content="#000000" /><meta name="twitter:widgets:border-color" content="#000000" /><meta name="twitter:partner" content="tfwp" />
+<meta name="twitter:card" content="summary" /><meta name="twitter:title" content="Krebs on Security" /><meta name="twitter:site" content="@briankrebs" /><meta name="twitter:description" content="In-depth security news and investigation" />
+</head>
+<body class="home blog paged custom-background paged-26 custom-background-white single-author frontp hfeed">
+<div id="page" class="site">
+	<!-- <div class="publisho-top-mobile-nav clear"></div> -->
+	<div class="themonic-logo themonic-ad3"><div class="a-statement">Advertisement</div><a href="https://securityscorecard.com/instant-security-scorecard?utm_source=krebs+on+security&amp;utm_medium=display&amp;utm_campaign=instant+scorecard&amp;utm_term=A&amp;utm_content=1240x110">
+<img src="/b-securityscorecard/1.jpg">
+</a></div>
+	<div class="themonic-logo themonic-ad6"><div class="a-statement">Advertisement</div><a href="https://info.knowbe4.com/phishing-forensics-krebs?utm_source=Krebs&amp;utm_medium=display&amp;utm_campaign=website&amp;utm_content=PhishingForensics">
+<img src="/b-knowbe4/14.jpg" />
+</a></div>
+	<nav id="site-navigation" class="themonic-nav" role="navigation">
+	</nav><!-- #site-navigation -->
+	<div class="clear"></div>
+	<header id="masthead" class="site-header" role="banner">
+ 					<div class="desktop-social">
+						<div class="socialmedia">
+							<a href="http://twitter.com/briankrebs" target="_blank"><i class="fa fa-twitter"></i></a> 
+															<a class="rss" href="https://krebsonsecurity.com/feed/" target="_blank"><i class="fa fa-rss"></i></a>	
+									<a class="rss" href="https://www.linkedin.com/in/bkrebs/" target="_blank"><i class="fa fa-linkedin"></i></a>	
+								</div>
+				 	</div>
+																						   
+		
+		<div class="themonic-logo responsive-img-container">
+			<a href="https://krebsonsecurity.com/" title="Krebs on Security" rel="home"><img src="https://krebsonsecurity.com/wp-content/uploads/2021/03/kos-27-03-2021.jpg" alt="Krebs on Security"></a>
+		</div>
+
+					<div class="mobile-social">
+						<div class="socialmedia">
+							<a href="http://twitter.com/briankrebs" target="_blank"><i class="fa fa-twitter"></i></a> 
+															<a class="rss" href="https://krebsonsecurity.com/feed/" target="_blank"><i class="fa fa-rss"></i></a>	
+									<a class="rss" href="https://www.linkedin.com/in/bkrebs/" target="_blank"><i class="fa fa-linkedin"></i></a>	
+								</div>
+					</div>
+		
+				<!-- <div class="publisho-mobile-nav clear"></div> -->
+		<nav id="site-navigation" class="themonic-nav" role="navigation">
+			<a class="assistive-text" href="#content" title="Skip to content">Skip to content</a>
+			<div id="menu-top" class="nav-menu"><ul>
+<li ><a href="https://krebsonsecurity.com/">Home</a></li><li class="page_item page-item-2"><a href="https://krebsonsecurity.com/about/">About the Author</a></li>
+<li class="page_item page-item-645"><a href="https://krebsonsecurity.com/cpm/">Advertising/Speaking</a></li>
+</ul></div>
+		</nav><!-- #site-navigation -->
+		<div class="clear"></div>
+	</header><!-- #masthead -->
+	<div id="main" class="wrapper">
+		<div id="primary" class="site-content">
+	
+
+	
+		<div id="content" role="main">
+
+		<article id="post-50407" class="post-50407 post type-post status-publish format-standard hentry category-latest-warnings category-comingstorm tag-active-directory tag-corp-com tag-dns-name-devolution tag-jas-global-advisors tag-jeff-schmidt tag-microsoft-corp tag-microsoft-windows tag-mike-oconnor tag-namespace-collision tag-u-s-department-of-homeland-security">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2020/02/dangerous-domain-corp-com-goes-up-for-sale/" title="Permalink to Dangerous Domain Corp.com Goes Up for Sale" rel="bookmark">Dangerous Domain Corp.com Goes Up for Sale</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">February 8, 2020</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2020/02/dangerous-domain-corp-com-goes-up-for-sale/#comments">78 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>As an early domain name investor, <strong>Mike O&#8217;Connor</strong> had by 1994 snatched up several choice online destinations, including bar.com, cafes.com, grill.com, place.com, pub.com and television.com. Some he sold over the years, but for the past 26 years O&#8217;Connor refused to auction perhaps the most sensitive domain in his stable &#8212; <strong>corp.com</strong>. It is sensitive because years of testing shows whoever wields it would have access to an unending stream of passwords, email and other proprietary data belonging to hundreds of thousands of systems at major companies around the globe.</p>
+<p><img loading="lazy" class="aligncenter wp-image-50460" src="https://krebsonsecurity.com/wp-content/uploads/2020/02/corpcomtoxic.png" alt="" width="591" height="158" /></p>
+<p>Now, facing 70 and seeking to simplify his estate, O&#8217;Connor is finally selling corp.com. The asking price &#8212; $1.7 million &#8212; is hardly outlandish for a 4-letter domain with such strong commercial appeal. O&#8217;Connor said he hopes <strong>Microsoft Corp.</strong> will buy it, but fears they won&#8217;t and instead it will get snatched up by someone working with organized cybercriminals or state-funded hacking groups bent on undermining the interests of Western corporations.</p>
+<p>One reason O&#8217;Connor hopes Microsoft will buy it is that by virtue of the unique way <strong>Windows</strong> handles resolving domain names on a local network, virtually all of the computers trying to share sensitive data with corp.com are somewhat confused Windows PCs. More importantly, early versions of Windows actually encouraged the adoption of insecure settings that made it more likely Windows computers might try to share sensitive data with corp.com.</p>
+<p>At issue is a problem known as &#8220;<a href="https://www.computerworld.com/article/3480799/icann-seeks-to-tackle-dns-namespace-collision-risks.html" target="_blank" rel="noopener">namespace collision</a>,&#8221; a situation where domain names intended to be used exclusively on an internal company network end up overlapping with domains that can resolve normally on the open Internet.</p>
+<p>Windows computers on an internal corporate network validate other things on that network using a Microsoft innovation called <a href="https://en.wikipedia.org/wiki/Active_Directory" target="_blank" rel="noopener">Active Directory</a>, which is the umbrella term for a broad range of identity-related services in Windows environments. A core part of the way these things find each other involves a Windows feature called &#8220;<a href="https://www.itprotoday.com/security/whats-dns-name-devolution" target="_blank" rel="noopener">DNS name devolution</a>,&#8221; which is a kind of network shorthand that makes it easier to find other computers or servers without having to specify a full, legitimate domain name for those resources.</p>
+<p>For instance, if a company runs an internal network with the name internalnetwork.example.com, and an employee on that network wishes to access a shared drive called &#8220;drive1,&#8221; there&#8217;s no need to type &#8220;drive1.internalnetwork.example.com&#8221; into Windows Explorer; typing &#8220;\\drive1\&#8221; alone will suffice, and Windows takes care of the rest.</p>
+<p>But things can get far trickier with an internal Windows domain that does not map back to a second-level domain the organization actually owns and controls. And unfortunately, in early versions of Windows that supported Active Directory &#8212; Windows 2000 Server, for example &#8212; the default or example Active Directory path was given as &#8220;corp,&#8221; and many companies apparently adopted this setting without modifying it to include a domain they controlled.</p>
+<p>Compounding things further, some companies then went on to build (and/or assimilate) vast networks of networks on top of this erroneous setting.</p>
+<p>Now, none of this was much of a security concern back in the day when it was impractical for employees to lug their bulky desktop computers and monitors outside of the corporate network. But what happens when an employee working at a company with an Active Directory network path called &#8220;corp&#8221; takes a company laptop to the local Starbucks?</p>
+<p>Chances are good that at least some resources on the employee&#8217;s laptop will still try to access that internal &#8220;corp&#8221; domain. And because of the way DNS name devolution works on Windows, that company laptop online via the Starbucks wireless connection is likely to then seek those same resources at &#8220;corp.com.&#8221;</p>
+<p>In practical terms, this means that whoever controls corp.com can passively intercept private communications from hundreds of thousands of computers that end up being taken outside of a corporate environment which uses this &#8220;corp&#8221; designation for its Active Directory domain.</p>
+<h4>INSTANT CORPORATE BOTNET, ANYONE?</h4>
+<p>That&#8217;s according to <strong>Jeff Schmidt</strong>, a security expert who <a href="https://www.icann.org/en/system/files/files/name-collision-mitigation-study-06jun14-en.pdf" target="_blank" rel="noopener">conducted a lengthy study on DNS namespace collisions</a> funded in part by grants from the <strong>U.S. Department of Homeland Security</strong>. As part of that analysis, Schmidt convinced O&#8217;Connor to hold off selling corp.com so he and others could better understand and document the volume and types of traffic flowing to it each day.</p>
+<p>During an eight month analysis of wayward internal corporate traffic destined for corp.com in 2019, Schmidt found more than 375,000 Windows PCs were trying to send this domain information it had no business receiving &#8212; including attempts to log in to internal corporate networks and access specific file shares on those networks.</p>
+<p>For a brief period during that testing, Schmidt&#8217;s company <strong>JAS Global Advisors</strong> accepted connections at corp.com that mimicked the way local Windows networks handle logins and file-sharing attempts.</p>
+<p>&#8220;It was terrifying,&#8221; Schmidt said. &#8220;We discontinued the experiment after 15 minutes and destroyed the data. A well-known offensive tester that consulted with JAS on this remarked that during the experiment it was &#8216;raining credentials&#8217; and that he&#8217;d never seen anything like it.&#8221;</p>
+<p>Likewise, JAS temporarily configured corp.com to accept incoming email.</p>
+<p>&#8220;After about an hour we received in excess of 12 million emails and discontinued the experiment,&#8221; Schmidt said. &#8220;While the vast majority of the emails were of an automated nature, we found some of the emails to be sensitive and thus destroyed the entire corpus without further analysis.&#8221;</p>
+<p>Schmidt said he and others concluded that whoever ends up controlling corp.com could have an instant botnet of well-connected enterprise machines.</p>
+<p>&#8220;Hundreds of thousands of machines directly exploitable and countless more exploitable via lateral movement once in the enterprise,&#8221; he said. &#8220;Want an instant foothold into about 30 of the world’s largest companies according to the Forbes Global 2000? Control corp.com.&#8221; <a href="https://krebsonsecurity.com/2020/02/dangerous-domain-corp-com-goes-up-for-sale/#more-50407" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+	<div id="between_article_ad" class="themonic-ad5"><a href="https://ninjio.com/lp46c-krebs/">
+<img src="/b-ninjio/8.png">
+</a>
+</div>	<article id="post-50373" class="post-50373 post type-post status-publish format-standard hentry category-sunshine tag-focus-ev tag-ford tag-mathew-marulla tag-myfordmobile-com tag-u-s-federal-trade-commission">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2020/02/when-your-used-car-is-a-little-too-mobile/" title="Permalink to When Your Used Car is a Little Too &#8216;Mobile&#8217;" rel="bookmark">When Your Used Car is a Little Too &#8216;Mobile&#8217;</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">February 5, 2020</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2020/02/when-your-used-car-is-a-little-too-mobile/#comments">56 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>Many modern vehicles let owners use the Internet or a mobile device to control the car&#8217;s locks, track location and performance data, and start the engine. But who exactly owns that control is not always clear when these smart cars are sold or leased anew. Here&#8217;s the story of one former electric vehicle owner who discovered he could still gain remote, online access to his old automobile years after his lease ended.</p>
+<p><strong>Mathew Marulla</strong> began leasing a <strong>Ford Focus</strong> electric vehicle in 2013, but turned the car back in to Ford at the end of his lease in 2016. So Marulla was surprised when he recently received an email from Ford.com stating that the clock in his car was set incorrectly.</p>
+<p><a class="lightbox" href="https://krebsonsecurity.com/wp-content/uploads/2020/02/fordmobile.png"><img loading="lazy" class="aligncenter wp-image-50420" src="https://krebsonsecurity.com/wp-content/uploads/2020/02/fordmobile.png" alt="" width="597" height="100" /></a></p>
+<p>Out of curiosity, Marulla decided to check if his old MyFordMobile.com credentials from 2016 still worked. They did, and Marulla was presented with an online dashboard showing the current location of his old ride and its mileage statistics.</p>
+<p>The dashboard also allowed him to remotely start the vehicle, as well as lock and unlock its doors.</p>
+<div id="attachment_50416" style="width: 608px" class="wp-caption aligncenter"><img aria-describedby="caption-attachment-50416" loading="lazy" class=" wp-image-50416" src="https://krebsonsecurity.com/wp-content/uploads/2020/02/fordss.png" alt="" width="598" height="529" /><p id="caption-attachment-50416" class="wp-caption-text">Mathew Marulla turned in his leased Ford EV to Ford 4 years ago, so he is no longer the legal owner of the car. But he can still remotely track its location and usage, lock and unlock it, and start the engine.</p></div>
+<p>&#8220;It was a three-year lease from Ford and I turned it in to Ford four years ago, so Ford definitely knows I am no longer the owner,&#8221; Marulla said, noting that the dashboard also included historic records showing where the Focus had been driven in days prior.</p>
+<p>&#8220;I can track its movements, see where it plugs in,&#8221; he said. &#8220;Now I know where the current owner likely lives, and if I watch it tomorrow I can probably figure out where he works. I have not been the owner of this vehicle for four years, <span class="il">Ford</span> knows this, yet they took no action whatsoever to remove me as the owner in this application.&#8221;</p>
+<p>Asked to comment on Marulla&#8217;s experience, a spokesperson for Ford said all Ford dealerships are supposed to perform a &#8220;master reset&#8221; as part of their used car checklist prior to the resale of a vehicle. A master reset (carried out via the vehicle&#8217;s SYNC infotainment screen by a customer or dealer) disassociates the vehicle from all current accounts. <a href="https://krebsonsecurity.com/2020/02/when-your-used-car-is-a-little-too-mobile/#more-50373" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+	<div class="themonic-ad2"><div class="a-statement">Advertisement</div><a href="https://www.akamai.com/?utm_source=krebsonsecurity&amp;utm_medium=display&amp;utm_id=GL_Platform&amp;utm_campaign=F-MC-52606&amp;utm_content=IDC_InfoBrief">
+<img src="/b-akamai/134.png">
+</a></div>	<article id="post-50383" class="post-50383 post type-post status-publish format-standard hentry category-ddos-for-hire category-neer-do-well-news tag-assistant-u-s-attorney-adam-alexander tag-booter tag-booter-service tag-david-bukoski tag-network-stresser tag-quantum-stresser tag-stresser">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2020/02/booter-boss-busted-by-bacon-pizza-buy/" title="Permalink to Booter Boss Busted By Bacon Pizza Buy" rel="bookmark">Booter Boss Busted By Bacon Pizza Buy</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">February 4, 2020</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2020/02/booter-boss-busted-by-bacon-pizza-buy/#comments">42 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>A Pennsylvania man who operated one of the Internet&#8217;s longest-running online attack-for-hire or &#8220;booter&#8221; services was sentenced to five years probation today. While the young man&#8217;s punishment was heavily tempered by his current poor health, the defendant&#8217;s dietary choices may have contributed to both his capture and the lenient sentencing: Investigators say the onetime booter boss&#8217;s identity became clear after he ordered a bacon and chicken pizza delivered to his home using the same email address he originally used to register his criminal attack service.</p>
+<p><strong>David Bukoski</strong>, 24, of Hanover Township, Pa., pleaded guilty to running <strong>Quantum Stresser</strong>, an attack-for-hire business &#8212; also known as a &#8220;booter&#8221; or &#8220;stresser&#8221; service &#8212; that helped paying customers launch tens of thousands of digital sieges capable of knocking Web sites and entire network providers offline.</p>
+<div id="attachment_50388" style="width: 604px" class="wp-caption aligncenter"><img aria-describedby="caption-attachment-50388" loading="lazy" class=" wp-image-50388" src="https://krebsonsecurity.com/wp-content/uploads/2020/02/quantumstresser.png" alt="" width="594" height="233" /><p id="caption-attachment-50388" class="wp-caption-text">The landing page for the Quantum Stresser attack-for-hire service.</p></div>
+<p>Investigators say Bukoski’s booter service was among the longest running services targeted by the FBI, operating since at least 2012. The government says Quantum Stresser had more than 80,000 customer subscriptions, and that during 2018 the service was used to conduct approximately 50,000 actual or attempted attacks targeting people and networks worldwide.</p>
+<p>The Quantum Stresser Web site &#8212; <strong>quantumstress[.]net</strong> &#8212; was among 15 booter services that were seized by U.S. and international authorities in December 2018 <a href="https://krebsonsecurity.com/2018/12/feds-charge-three-in-mass-seizure-of-attack-for-hire-services/" target="_blank" rel="noopener noreferrer">as part of a coordinated takedown targeting attack-for-hire services</a>.</p>
+<p>Federal prosecutors in Alaska said search warrants served on the email accounts Bukoski used in conjunction with Quantum Stresser revealed that he was banned from several companies he used to advertise and accept payments for the booter service.</p>
+<p>The government&#8217;s sentencing memorandum says Bukoski&#8217;s replies demanding to know the reasons for the suspensions were instrumental in discovering his real name.  FBI agents were able to zero in on Bukoski&#8217;s real-life location after a review of his email account showed a receipt from May 2018 in which he&#8217;d gone online and ordered a handmade pan pizza to be delivered to his home address.</p>
+<div id="attachment_50390" style="width: 603px" class="wp-caption aligncenter"><img aria-describedby="caption-attachment-50390" loading="lazy" class=" wp-image-50390" src="https://krebsonsecurity.com/wp-content/uploads/2020/02/pizzados.png" alt="" width="593" height="417" /><p id="caption-attachment-50390" class="wp-caption-text">When an online pizza delivery order brings FBI agents to raid your home.</p></div>
+<p>While getting busted on account of ordering a pizza online might sound like a bone-headed or rookie mistake for a cybercriminal, it is hardly unprecedented. In 2012 KrebsOnSecurity <a href="https://krebsonsecurity.com/2012/05/microsoft-to-botmasters-abandon-your-inboxes/" target="_blank" rel="noopener noreferrer">wrote about the plight of Yuriy &#8220;Jtk&#8221; Konovalenko</a>, a then 30-year-old Ukrainian man who was rounded up as part of an international crackdown on an organized crime gang that used the ZeuS malware to steal tens of millions of dollars from companies and consumers. In that case, Konovalenko ultimately unmasked himself because he used his Internet connection to order the delivery of a &#8220;Veggie Roma&#8221; pizza to his apartment in the United Kingdom. <a href="https://krebsonsecurity.com/2020/02/booter-boss-busted-by-bacon-pizza-buy/#more-50383" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-50334" class="post-50334 post type-post status-publish format-standard hentry category-sunshine tag-ars-technica tag-chad-leonard tag-chris-nickerson tag-coalfire tag-dallas-county tag-dallas-county-attorney-charles-sinnard tag-dan-goodin tag-gary-demercurio tag-justin-wynn tag-matthew-linholm tag-sen-zach-whiting tag-state-sen-amy-sinclair tag-tom-mcandrew">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2020/01/iowa-prosecutors-drop-charges-against-men-hired-to-test-their-security/" title="Permalink to Iowa Prosecutors Drop Charges Against Men Hired to Test Their Security" rel="bookmark">Iowa Prosecutors Drop Charges Against Men Hired to Test Their Security</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">January 31, 2020</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2020/01/iowa-prosecutors-drop-charges-against-men-hired-to-test-their-security/#comments">75 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>On Sept. 11, 2019, two security experts at a company that had been hired by the state of Iowa to test the physical and network security of its judicial system were arrested while probing the security of an Iowa county courthouse, jailed in orange jumpsuits, charged with burglary, and held on $100,000 bail. On Thursday Jan. 30, prosecutors in Iowa announced they had dropped the criminal charges. The news came while KrebsOnSecurity was conducting a video interview with the two accused (featured below).</p>
+<div id="attachment_50353" style="width: 601px" class="wp-caption aligncenter"><img aria-describedby="caption-attachment-50353" loading="lazy" class=" wp-image-50353" src="https://krebsonsecurity.com/wp-content/uploads/2020/01/dallascountycourthouse.png" alt="" width="591" height="353" /><p id="caption-attachment-50353" class="wp-caption-text">The courthouse in Dallas County, Iowa. Image: Wikipedia.</p></div>
+<p><strong>Gary DeMercurio</strong>, 43 of Seattle, and <strong>Justin Wynn</strong>, 29 of Naples, Fla., are both professional <a href="https://en.wikipedia.org/wiki/Penetration_test" target="_blank" rel="noopener">penetration testers</a> employed by <a href="https://www.coalfire.com" target="_blank" rel="noopener">Coalfire Labs</a>, a security firm based in Westminster, Colo. Iowa&#8217;s State Court Administration had hired the company to test the security of its judicial buildings.</p>
+<p>Under <a href="https://cms.arstechnica.com/wp-content/uploads/2019/11/rules-of-engagement.pdf" target="_blank" rel="noopener">the terms of their contract</a> (PDF), DeMercurio and Wynn were permitted to impersonate staff and contractors, provide false pretenses to gain physical access to facilities, &#8220;tailgate&#8221; employees into buildings, and access restricted areas of those facilities. The contract said the men could not attempt to subvert alarm systems, force-open doors, or access areas that require protective equipment.</p>
+<p>When the duo&#8217;s early-morning Sept. 11 test of the security at the courthouse in Dallas County, Iowa set off an audible security alarm, they followed procedure and waited on-site for the police. DeMercurio and Wynn said when the county&#8217;s sheriff deputies arrived on the scene just a few minutes later, they told the officers who they were and why they were there, and that they&#8217;d obtained entry to the premises via an unlocked door.</p>
+<p>&#8220;They said they found a courthouse door unlocked, so they closed it from the outside and let it lock,&#8221; <strong>Dan Goodin</strong> of Ars Technica <a href="https://arstechnica.com/information-technology/2019/11/how-a-turf-war-and-a-botched-contract-landed-2-pentesters-in-iowa-jail/" target="_blank" rel="noopener">wrote</a> of the ordeal in November. &#8220;Then they slipped a plastic cutting board through a crack in the door and manipulated its locking mechanism. (Pentesters frequently use makeshift or self-created tools in their craft to flip latches, trigger motion-detected mechanisms, and test other security systems.) The deputies seemed impressed.&#8221;</p>
+<p>To assuage concerns they might be burglars, DeMercurio and Wynn produced an authorization letter detailing the job they&#8217;d been hired to do and listing the names and mobile phone numbers of Iowa state employees who could verify their story.</p>
+<p>After contacting some of the court officials listed in the letter, the deputies seemed satisfied that the men weren&#8217;t thieves. That is, until <strong>Dallas County Sheriff Chad Leonard</strong> showed up.</p>
+<p>&#8220;The pentesters had already said they used a tool to open the front door,&#8221; Goodin recounted. &#8220;Leonard took that to mean the men had violated the restriction against forcing doors open. Leonard also said the men attempted to turn off the alarm—something Coalfire officials vehemently deny. In Leonard’s mind that was a second violation. Another reason for doubt: one of the people listed as a contact on the get-out-of-jail-free letter didn’t answer the deputies’ calls, while another said he didn’t believe the men had permission to conduct physical intrusions.&#8221;</p>
+<p>DeMercurio and Wynn were arrested, jailed, and held for nearly 24 hours before being released on a $100,000 bail. Initially they were charged with felony third-degree burglary and possessing burglary tools, although those charges were later downgraded to misdemeanor trespass.</p>
+<p>What initially seemed to Coalfire as a momentary lapse of judgment by Iowa authorities quickly morphed into the surreal when state lawmakers held hearings questioning why and how someone in the state&#8217;s employ could have so recklessly endangered the safety and security of its citizens.</p>
+<div id="attachment_50365" style="width: 601px" class="wp-caption aligncenter"><img aria-describedby="caption-attachment-50365" loading="lazy" class=" wp-image-50365" src="https://krebsonsecurity.com/wp-content/uploads/2020/01/demercurio-wynn.png" alt="" width="591" height="300" /><p id="caption-attachment-50365" class="wp-caption-text">DeMercurio and Wynn, minus the orange jumpsuits.</p></div>
+<p>Judicial Branch officials in Dallas County said in response to this grilling that they didn&#8217;t expect Coalfire&#8217;s physical penetration testing to be conducted outside of business hours. <a href="https://www.legis.iowa.gov/legislators/legislator?ga=88&amp;personID=10729" target="_blank" rel="noopener">State Sen. Amy Sinclair</a> was quoted as telling her colleagues that &#8220;the hiring of an outside company to break into the courthouses in September created &#8216;significant danger, not only to the contractors, but to local law enforcement, and members of the public.'&#8221;</p>
+<p>&#8220;Essentially a branch of government has contracted with a company to commit crimes, and that’s very troubling,&#8221; lamented Iowa state <a href="https://www.legis.iowa.gov/legislators/legislator?ga=88&amp;personID=26997" target="_blank" rel="noopener">Sen. Zach Whiting</a>. &#8220;I want to find out who needs to be held accountable for this and how we can do that.&#8221;</p>
+<p>Those strong words clashed with a joint statement released Thursday by Coalfire and <strong>Dallas County Attorney Charles Sinnard</strong>:</p>
+<p>&#8220;Ultimately, the long-term interests of justice and protection of the public are not best served by continued prosecution of the trespass charges,&#8221; the statement reads. &#8220;Those interests are best served by all the parties working together to ensure that there is clear communication on the actions to be taken to secure the sensitive information maintained by the judicial branch, without endangering the life or property of the citizens of Iowa, law enforcement or the persons carrying out the testing.</p>
+<p><strong>Matthew Linholm</strong>, an attorney representing DeMercurio and Wynn in the case, said the justice system ceases to serve its crucial function and loses credibility when criminal accusations are used to advance personal or political agendas.</p>
+<p>&#8220;Such a practice endangers the effective administration of justice and our confidence in the criminal justice system,&#8221; Linholm told <em>The Des Moines Register</em>, which <a href="https://www.desmoinesregister.com/story/news/crime-and-courts/2020/01/30/courthouse-break-ins-charges-dropped-against-coalfire-employees/4611574002/" target="_blank" rel="noopener">broke the news</a> of the dropped charges. <a href="https://krebsonsecurity.com/2020/01/iowa-prosecutors-drop-charges-against-men-hired-to-test-their-security/#more-50334" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-50215" class="post-50215 post type-post status-publish format-standard hentry category-data-breaches category-latest-warnings tag-lisa-belot tag-microsoft tag-sprint tag-vice-com">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2020/01/sprint-exposed-customer-support-site-to-web/" title="Permalink to Sprint Exposed Customer Support Site to Web" rel="bookmark">Sprint Exposed Customer Support Site to Web</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">January 29, 2020</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2020/01/sprint-exposed-customer-support-site-to-web/#comments">21 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>Fresh on the heels of a disclosure that <strong>Microsoft Corp. </strong>leaked internal customer support data to the Internet, mobile provider <strong>Sprint</strong> has addressed a mix-up in which posts to a private customer support community were exposed to the Web.</p>
+<p>KrebsOnSecurity recently contacted Sprint to let the company know that an internal customer support forum called &#8220;Social Care&#8221; was being indexed by search engines, and that several months worth of postings about customer complaints and other issues were viewable without authentication to anyone with a Web browser.</p>
+<div id="attachment_50320" style="width: 594px" class="wp-caption aligncenter"><img aria-describedby="caption-attachment-50320" loading="lazy" class=" wp-image-50320" src="https://krebsonsecurity.com/wp-content/uploads/2020/01/sprint-apple.png" alt="" width="584" height="683" /><p id="caption-attachment-50320" class="wp-caption-text">A redacted screen shot of one Sprint customer support thread exposed to the Web.</p></div>
+<p>A Sprint spokesperson responded that the forum was indeed intended to be a private section of its support community, but that an error caused the section to become public.</p>
+<p>&#8220;These conversations include minimal customer information and are used for frontline reps to escalate issues to managers,&#8221; said <strong>Lisa Belot</strong>, Sprint&#8217;s communications manager.</p>
+<p>A review of the exposed support forum by this author suggests that while none of the posts exposed customer information such as payment card data, a number of them did include customer account information, such customer names, device identifiers and in some cases location information.</p>
+<p>Perhaps more importantly for Sprint and its customers, the forum also included numerous links and references to internal tools and procedures. This sort of information would no doubt be of interest to scammers seeking to conduct social engineering attacks against Sprint employees as way to perpetrate other types of fraud, including <a href="https://krebsonsecurity.com/category/sim-swapping/" target="_blank" rel="noopener">unauthorized SIM swaps</a> or in gleaning more account information from targeted customers. <a href="https://krebsonsecurity.com/2020/01/sprint-exposed-customer-support-site-to-web/#more-50215" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-50274" class="post-50274 post type-post status-publish format-standard hentry category-data-breaches category-comingstorm tag-bebe-stores-breach tag-buca-di-beppo-breach tag-gemini-advisory tag-hilton-hotels-breach tag-jokers-stash tag-krystal-breach tag-mastercard tag-mcalisters-deli-breach tag-moes-breach tag-scholtzskys-breach tag-sonic-breach tag-visa tag-wawa-breach">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2020/01/wawa-breach-may-have-compromised-more-than-30-million-payment-cards/" title="Permalink to Wawa Breach May Have Compromised More Than 30 Million Payment Cards" rel="bookmark">Wawa Breach May Have Compromised More Than 30 Million Payment Cards</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">January 28, 2020</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2020/01/wawa-breach-may-have-compromised-more-than-30-million-payment-cards/#comments">52 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>In late December 2019, fuel and convenience store chain <strong>Wawa Inc.</strong> said a nine-month-long breach of its payment card processing systems may have led to the theft of card data from customers who visited any of its 850 locations nationwide. Now, fraud experts say the first batch of card data stolen from Wawa customers is being sold at one of the underground&#8217;s most popular crime shops, which claims to have 30 million records to peddle from a new nationwide breach.</p>
+<p>On the evening of Monday, Jan. 27, a popular fraud bazaar known as <a href="https://krebsonsecurity.com/2016/03/carders-park-piles-of-cash-at-jokers-stash/" target="_blank" rel="noopener">Joker&#8217;s Stash</a> began selling card data from &#8220;a new huge nationwide breach&#8221; that purportedly includes more than 30 million card accounts issued by thousands of financial institutions across 40+ U.S. states.</p>
+<div id="attachment_50292" style="width: 609px" class="wp-caption aligncenter"><img aria-describedby="caption-attachment-50292" loading="lazy" class=" wp-image-50292" src="https://krebsonsecurity.com/wp-content/uploads/2020/01/badaboom.png" alt="" width="599" height="494" /><p id="caption-attachment-50292" class="wp-caption-text">The fraud bazaar Joker&#8217;s Stash on Monday began selling some 30 million stolen payment card accounts that experts say have been tied back to a breach at Wawa in 2019.</p></div>
+<p>Two sources that work closely with financial institutions nationwide tell KrebsOnSecurity the new batch of cards that went on sale Monday evening &#8212; dubbed &#8220;BIGBADABOOM-III&#8221; by Joker&#8217;s Stash &#8212; map squarely back to cardholder purchases at Wawa.</p>
+<p>On Dec. 19, 2019, Wawa <a href="https://www.wawa.com/alerts/data-security" target="_blank" rel="noopener">sent a notice to customers</a> saying the company had discovered card-stealing malware installed on in-store payment processing systems and fuel dispensers at potentially all Wawa locations.</p>
+<p>Pennsylvania-based Wawa says it discovered the intrusion on Dec. 10 and contained the breach by Dec. 12, but that the malware was thought to have been installed more than nine months earlier, around March 4. The exposed information includes debit and credit card numbers, expiration dates, and cardholder names. Wawa said the breach did not expose personal identification numbers (PINs) or CVV records (the three-digit security code printed on the back of a payment card).</p>
+<p>A spokesperson for Wawa confirmed that the company today became aware of reports of criminal attempts to sell some customer payment card information potentially involved in the data security incident announced by Wawa on December 19, 2019.</p>
+<p>&#8220;We have alerted our payment card processor, payment card brands, and card issuers to heighten fraud monitoring activities to help further protect any customer information,&#8221; Wawa said in a statement released to KrebsOnSecurity. &#8220;We continue to work closely with federal law enforcement in connection with their ongoing investigation to determine the scope of the disclosure of Wawa-specific customer payment card data.&#8221;</p>
+<p>&#8220;We continue to encourage our customers to remain vigilant in reviewing charges on their payment card statements and to promptly report any unauthorized use to the bank or financial institution that issued their payment card by calling the number on the back of the card,&#8221; the statement continues. &#8220;Under federal law and card company rules, customers who notify their payment card issuer in a timely manner of fraudulent charges will not be responsible for those charges. In the unlikely event any individual customer who has promptly notified their card issuer of fraudulent charges related to this incident is not reimbursed, Wawa will work with them to reimburse them for those charges.&#8221;</p>
+<p><strong>Gemini Advisory</strong>, a New York-based fraud intelligence company, said the biggest concentrations of stolen cards for sale in the BIGBADABOOM-III batch map back to Wawa customer card use in Florida and Pennsylvania, the two most populous states where Wawa operates. Wawa also has locations in Delaware, Maryland, New Jersey, Virginia and the District of Columbia.</p>
+<p>According to Gemini, Joker&#8217;s Stash has so far released only a small portion of the claimed 30 million. However, this is not an uncommon practice: Releasing too many stolen cards for sale at once tends to have the effect of depressing the overall price of stolen cards across the underground market.</p>
+<p>&#8220;Based on Gemini’s analysis, the initial set of bases linked to “BIGBADABOOM-III” consisted of nearly 100,000 records,&#8221; Gemini <a href="https://geminiadvisory.io/breached-wawa-payment-card-records-reach-dark-web/" target="_blank" rel="noopener">observed</a>. &#8220;While the majority of those records were from US banks and were linked to US-based cardholders, some records also linked to cardholders from Latin America, Europe, and several Asian countries. Non-US-based cardholders likely fell victim to this breach when traveling to the United States and utilizing Wawa gas stations during the period of exposure.&#8221;</p>
+<p>Gemini&#8217;s director of research <strong>Stas Alforov</strong> stressed that some of the 30 million cards advertised for sale as part of this BIGBADABOOM batch may in fact be sourced from breaches at other retailers, something Joker&#8217;s Stash has been known to do in previous large batches.</p>
+<p>Gemini monitors multiple carding sites like Joker&#8217;s Stash. The company found the median price of U.S.-issued records in the new Joker&#8217;s Stash batch is currently $17, with some of the international records priced as high as $210 per card.</p>
+<p>&#8220;Apart from banks with a nationwide presence, only financial institutions along the East Coast had significant exposure,&#8221; Gemini concluded.</p>
+<p>Representatives from <strong>MasterCard</strong> did not respond to requests for comment. <strong>Visa</strong> declined to comment for this story, but pointed to a series of alerts it issued in <a href="https://usa.visa.com/dam/VCOM/global/support-legal/documents/visa-security-alert-attacks-targeting-fuel-dispenser-merchant-pos.pdf" target="_blank" rel="noopener">November</a> and <a href="https://usa.visa.com/dam/VCOM/global/support-legal/documents/cybercrime-groups-targeting-fuel-dispenser-merchants.pdf" target="_blank" rel="noopener">December</a> 2019 about cybercrime groups increasingly targeting fuel dispenser merchants. <a href="https://krebsonsecurity.com/2020/01/wawa-breach-may-have-compromised-more-than-30-million-payment-cards/#more-50274" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-50271" class="post-50271 post type-post status-publish format-standard hentry category-neer-do-well-news tag-aleksei-burkov tag-aqua tag-cardplanet tag-directconnection tag-evil-corp tag-haaretz tag-k0pa tag-maksim-viktorovich-yakubets tag-naama-issachar tag-the-times-of-israel tag-vladimir-putin">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2020/01/russian-cybercrime-boss-burkov-pleads-guilty/" title="Permalink to Russian Cybercrime Boss Burkov Pleads Guilty" rel="bookmark">Russian Cybercrime Boss Burkov Pleads Guilty</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">January 27, 2020</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2020/01/russian-cybercrime-boss-burkov-pleads-guilty/#comments">27 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p><strong>Aleksei Burkov</strong>, an ultra-connected Russian hacker once described as &#8220;an asset of supreme importance&#8221; to Moscow, has pleaded guilty in a U.S. court to running a site that sold stolen payment card data and to administering a highly secretive crime forum that counted among its members some of the most elite Russian cybercrooks.</p>
+<div id="attachment_49530" style="width: 605px" class="wp-caption aligncenter"><img aria-describedby="caption-attachment-49530" loading="lazy" class=" wp-image-49530" src="https://krebsonsecurity.com/wp-content/uploads/2019/11/burkov-jerusalem-getty.png" alt="" width="595" height="375" /><p id="caption-attachment-49530" class="wp-caption-text">Aleksei Burkov, seated second from right, attends a hearing in Jerusalem in 2015. Andrei Shirokov / Tass via Getty Images.</p></div>
+<p>Burkov, 29, admitted to running <strong>CardPlanet</strong>, a site that sold more than 150,000 stolen credit card accounts, and to being the founder and administrator of <strong>DirectConnection</strong> &#8212; a closely guarded underground community that attracted some of the world&#8217;s most-wanted Russian hackers. He <a href="https://www.justice.gov/usao-edva/pr/russian-national-pleads-guilty-running-online-criminal-marketplace" target="_blank" rel="noopener">pleaded guilty last week</a> in a Virginia court to access device fraud and conspiracy to commit computer intrusion, identity theft, wire fraud and money laundering.</p>
+<p>As KrebsOnSecurity noted in <a href="https://krebsonsecurity.com/2019/11/why-were-the-russians-so-set-against-this-hacker-being-extradited/" target="_blank" rel="noopener">a November 2019 profile of Burkov&#8217;s hacker nickname &#8216;k0pa,&#8217;</a> &#8220;a deep dive into the various pseudonyms allegedly used by Burkov suggests this individual may be one of the most connected and skilled malicious hackers ever apprehended by U.S. authorities, and that the Russian government is probably concerned that he simply knows too much.&#8221;</p>
+<p>Membership in the DirectConnection fraud forum was heavily restricted. New members had to be native Russian speakers, provide a $5,000 deposit, and be vouched for by three existing crime forum members. Also, members needed to have a special encryption certificate installed in their Web browser before the forum&#8217;s login page would even load.</p>
+<p>DirectConnection was something of a Who&#8217;s Who of major cybercriminals, and many of its most well-known members have likewise been extradited to and prosecuted by the United States. Those include <strong>Sergey &#8220;Fly&#8221; Vovnenko</strong>, who was sentenced to 41 months in prison for operating a botnet and stealing login and payment card data. Vovnenko also served as administrator of his own cybercrime forum, which <a href="https://krebsonsecurity.com/2019/09/interview-with-the-guy-who-tried-to-frame-me-for-heroin-possession/" target="_blank" rel="noopener">he used in 2013 to carry out a plan to have Yours Truly framed for heroin possession</a>.</p>
+<p>As noted in last year&#8217;s profile of Burkov, an early and important member of DirectConnection was a hacker who went by the moniker &#8220;<strong>aqua</strong>&#8221; and ran the banking sub-forum on Burkov&#8217;s site. In December 2019, the <strong>FBI</strong> <a href="https://www.fbi.gov/wanted/cyber/maksim-viktorovich-yakubets" target="_blank" rel="noopener">offered a $5 million bounty</a> leading to the arrest and conviction of aqua, who&#8217;s been identified as <strong>Maksim Viktorovich Yakubets</strong>. The Justice Department says Yakubets/aqua <a href="https://krebsonsecurity.com/2019/12/inside-evil-corp-a-100m-cybercrime-menace/" target="_blank" rel="noopener">ran a transnational cybercrime organization called &#8220;Evil Corp.&#8221;</a> that stole roughly $100 million from victims.</p>
+<div id="attachment_49556" style="width: 606px" class="wp-caption aligncenter"><img aria-describedby="caption-attachment-49556" loading="lazy" class=" wp-image-49556" src="https://krebsonsecurity.com/wp-content/uploads/2019/11/jz-dc.png" alt="" width="596" height="215" /><p id="caption-attachment-49556" class="wp-caption-text">In this 2011 screenshot of DirectConnection, we can see the nickname of &#8220;aqua,&#8221; who ran the &#8220;banking&#8221; sub-forum on DirectConecttion. Aqua, a.k.a. Maksim V. Yakubets of Russia, now has a $5 million bounty on his head from the FBI.</p></div>
+<p> <a href="https://krebsonsecurity.com/2020/01/russian-cybercrime-boss-burkov-pleads-guilty/#more-50271" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-50236" class="post-50236 post type-post status-publish format-standard hentry category-latest-warnings category-comingstorm category-web-fraud-2-0 tag-arno-vis tag-csc tag-dnspionage tag-dnssec tag-e-hawk tag-e-hawk-net tag-openprovider tag-pdr tag-peter-cholnoky tag-public-domain-registry tag-raymond-dijkxhoorn tag-registrar-lock tag-registry-lock tag-whatsapp">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2020/01/does-your-domain-have-a-registry-lock/" title="Permalink to Does Your Domain Have a Registry Lock?" rel="bookmark">Does Your Domain Have a Registry Lock?</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">January 24, 2020</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2020/01/does-your-domain-have-a-registry-lock/#comments">41 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>If you&#8217;re running a business online, few things can be as disruptive or destructive to your brand as someone stealing your company&#8217;s domain name and doing whatever they wish with it. Even so, most major Web site owners aren&#8217;t taking full advantage of the security tools available to protect their domains from being hijacked. Here&#8217;s the story of one recent victim who was doing <em>almost</em> everything possible to avoid such a situation and still had a key domain stolen by scammers.</p>
+<p>On December 23, 2019, unknown attackers began contacting customer support people at <a href="https://openprovider.com/" target="_blank" rel="noopener">OpenProvider</a>, a popular domain name registrar based in The Netherlands. The scammers told the customer representatives they had just purchased from the original owner the domain <strong>e-hawk.net</strong> &#8212; which is part of a service that helps Web sites detect and block fraud &#8212; and that they were having trouble transferring the domain from OpenProvider to a different registrar.</p>
+<p>The real owner of e-hawk.net is <strong>Raymond Dijkxhoorn</strong>, a security expert and entrepreneur who has spent much of his career making life harder for cybercrooks and spammers. Dijkxhoorn and E-HAWK&#8217;s <strong>CEO Peter Cholnoky</strong> had already protected their domain with a &#8220;<strong>registrar lock</strong>,&#8221; a service that requires the registrar to confirm any requested changes with the domain owner via whatever communications method is specified by the registrant.</p>
+<p>In the case of e-hawk.net, however, the scammers managed to trick an OpenProvider customer service rep into transferring the domain to another registrar with a fairly lame social engineering ruse &#8212; and without triggering any verification to the real owners of the domain.</p>
+<p>Specifically, the thieves contacted OpenProvider via <strong>WhatsApp</strong>, said they were now the rightful owners of the domain, and shared a short screen grab video showing the registrar&#8217;s automated system blocking the domain transfer (see video below).</p>
+<div style="text-align: center;"><iframe loading="lazy" src="https://www.youtube.com/embed/Wmc57l1FRuo" width="560" height="315" frameborder="0" allowfullscreen="allowfullscreen"></iframe></div>
+<p>&#8220;The support agent helpfully tried to verify if what the [scammers] were saying was true, and said, &#8216;Let&#8217;s see if we can move e-hawk.net from here to check if that works&#8217;,&#8221; Dijkxhoorn said. &#8220;But a registrar should not act on instructions coming from a random email address or other account that is not even connected to the domain in question.&#8221;</p>
+<p>Dijkxhoorn shared records obtained from OpenProvider showing that on Dec. 23, 2019, the e-hawk.net domain was transferred to a reseller account within OpenProvider. Just three days later, that reseller account moved e-hawk.net to another registrar &#8212; <a href="https://publicdomainregistry.com/" target="_blank" rel="noopener">Public Domain Registry</a> (PDR).</p>
+<p>&#8220;Due to the previously silent move to another reseller account within OpenProvider, we were not notified by the registrar about any changes,&#8221; Dijkxhoorn said. &#8220;This fraudulent move was possible due to successful social engineering towards the OpenProvider support team. We have now learned that after the move to the other OpenProvider account, the fraudsters could silently remove the registrar lock and move the domain to PDR.&#8221;</p>
+<h4>REGISTRY LOCK</h4>
+<p>Dijkxhoorn said one security precaution his company had not taken with their domain prior to the fraudulent transfer was a &#8220;<strong>registry lock</strong>,&#8221; a more stringent, manual (and sometimes offline) process that effectively neutralizes any attempts by fraudsters to social engineer your domain registrar.</p>
+<p>With a registry lock in place, your registrar cannot move your domain to another registrar on its own. Doing so requires manual contact verification by the appropriate domain registry, such as <a href="https://www.verisign.com" target="_blank" rel="noopener">Verisign</a> &#8212; which is the authoritative registry for all domains ending in .com, .net, .name, .cc, .tv, .edu, .gov and .jobs. Other registries handle locks for specific top-level or country-code domains, including <a href="https://www.nominet.uk/" target="_blank" rel="noopener">Nominet</a> (for .co.uk or .uk domains), <a href="http://www.eurid.eu/fr/bureaux-denregistrement/devenez-un-bureau-denregistrement-eu/registry-lock" target="_blank" rel="noopener">EURID</a> (for .eu domains), CNNIC for (for .cn) domains, and so on.</p>
+<p>According to data provided by digital brand protection firm <a href="https://www.cscglobal.com/service/csc/about/" target="_blank" rel="noopener">CSC</a>, while domains created in the top three most registered top-level domains (.com, .jp and .cn) are eligible for registry locks,<em> just 22 percent of domain names tracked in Forbes&#8217; list of the World&#8217;s Largest Public Companies have secured registry locks.</em></p>
+<p>Unfortunately, not all registrars support registry locks (a list of top-level domains that do allow registry locks is <a href="https://docs.google.com/spreadsheets/d/1XjuE0VZdIS3gUJ8t4bpPjhP4SV6WAg0AyALPN_Uxe94/edit?usp=sharing" target="_blank" rel="noopener">here</a>, courtesy of CSC). But as we&#8217;ll see in a moment, there are other security precautions that can and do help if your domain somehow ends up getting hijacked.</p>
+<p>Dijkxhoorn said his company first learned of the domain theft on Jan. 13, 2020, which was the date the fraudsters got around to changing the domain name system (DNS) settings for e-hawk.net. That alert was triggered by systems E-HAWK had previously built in-house that continually monitor their stable of domains for any DNS changes.</p>
+<p>By the way, this continuous monitoring of one&#8217;s DNS settings is a powerful approach to help blunt attacks on your domains and DNS infrastructure. Anyone curious about why this might be a good approach should have a look at <a href="https://krebsonsecurity.com/2019/02/a-deep-dive-on-the-recent-widespread-dns-hijacking-attacks/" target="_blank" rel="noopener">this deep-dive from 2019 on &#8220;DNSpionage,&#8221;</a> the name given to the exploits of an Iranian group that has successfully stolen countless passwords and VPN credentials from major companies via DNS-based attacks. <a href="https://krebsonsecurity.com/2020/01/does-your-domain-have-a-registry-lock/#more-50236" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-50223" class="post-50223 post type-post status-publish format-standard hentry category-sunshine category-patches tag-apple tag-brandon-butch tag-iphone-11 tag-ultra-wideband">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2020/01/apple-addresses-iphone-11-location-privacy-concern/" title="Permalink to Apple Addresses iPhone 11 Location Privacy Concern" rel="bookmark">Apple Addresses iPhone 11 Location Privacy Concern</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">January 22, 2020</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2020/01/apple-addresses-iphone-11-location-privacy-concern/#comments">25 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p><strong>Apple</strong> is rolling out a new update to its iOS operating system that addresses the location privacy issue on iPhone 11 devices that was first detailed here last month.</p>
+<p><img loading="lazy" class="aligncenter wp-image-49815" src="https://krebsonsecurity.com/wp-content/uploads/2019/12/iphone11pro.png" alt="" width="594" height="316" /></p>
+<p>Beta versions of <strong>iOS 13.3.1</strong> include a new setting that lets users disable the &#8220;Ultra Wideband&#8221; feature, a short-range technology that lets iPhone 11 users share files locally with other nearby phones that support this feature.</p>
+<p>In December, KrebsOnSecurity <a href="https://krebsonsecurity.com/2019/12/the-iphone-11-pros-location-data-puzzler/" target="_blank" rel="noopener">pointed out</a> the new iPhone 11 line queries the user&#8217;s location even when all applications and system services are individually set never to request this data.</p>
+<p>Apple initially said the company did not see any privacy concerns and that the location tracking icon (a small, upward-facing arrow to the left of the battery icon) appears for system services that do not have a switch in the iPhone&#8217;s settings menu.</p>
+<p>Apple <a href="https://krebsonsecurity.com/2019/12/apple-explains-mysterious-iphone-11-location-requests/" target="_blank" rel="noopener">later acknowledged</a> the mysterious location requests were related to the inclusion of an Ultra Wideband chip in iPhone 11, Pro and Pro Max devices.</p>
+<p>The company further explained that the location information indicator appears because the device periodically checks to see whether it is being used in a handful of countries for which Apple hasn’t yet received approval to deploy Ultra Wideband.</p>
+<p>Apple also stressed it doesn&#8217;t use the UWB feature to collect user location data, and that this location checking resided &#8220;entirely on the device.&#8221; Still, it&#8217;s nice that iPhone 11 users will now have a setting to disable the feature if they want.</p>
+<p>Spotted by journalist <strong>Brandon Butch</strong> and published <a href="https://twitter.com/BrandonButch/status/1218272838181949441?s=20" rel="noreferrer" data-ss1579715333="1">on Twitter</a> last week, the new toggle switch to turn off UWB now exists in the &#8220;Networking &amp; Wireless&#8221; settings in beta versions of iOS 13.3.1, under <strong>Locations Services &gt; System Services. </strong>Beta versions are released early to developers to help iron out kinks in the software, and it&#8217;s not clear yet when 13.3.1 will be released to the general public.</p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-50227" class="post-50227 post type-post status-publish format-standard hentry category-ddos-for-hire category-neer-do-well-news tag-backconnect-security-llc tag-free-software-foundation tag-mirai tag-richard-stallman tag-tucker-preston tag-u-s-justice-department tag-vdos">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2020/01/ddos-mitigation-firm-founder-admits-to-ddos/" title="Permalink to DDoS Mitigation Firm Founder Admits to DDoS" rel="bookmark">DDoS Mitigation Firm Founder Admits to DDoS</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">January 20, 2020</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2020/01/ddos-mitigation-firm-founder-admits-to-ddos/#comments">48 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>A Georgia man who co-founded a service designed to protect companies from crippling distributed denial-of-service (DDoS) attacks has pleaded to paying a DDoS-for-hire service to launch attacks against others.</p>
+<p><img loading="lazy" class="aligncenter  wp-image-36825" src="https://krebsonsecurity.com/wp-content/uploads/2016/10/ddosbomb.png" alt="" width="593" height="365" srcset="https://krebsonsecurity.com/wp-content/uploads/2016/10/ddosbomb.png 699w, https://krebsonsecurity.com/wp-content/uploads/2016/10/ddosbomb-580x357.png 580w" sizes="(max-width: 593px) 100vw, 593px" /></p>
+<p><strong>Tucker Preston</strong>, 22, of Macon, Ga., pleaded guilty last week in a New Jersey court to one count of damaging protected computers by transmission of a program, code or command. DDoS attacks involve flooding a target Web site with so much junk Internet traffic that it can no longer accommodate legitimate visitors.</p>
+<p>Preston was featured in the 2016 KrebsOnSecurity story <a href="https://krebsonsecurity.com/2016/09/ddos-mitigation-firm-has-history-of-hijacks/" target="_blank" rel="noopener">DDoS Mitigation Firm Has History of Hijacks</a>, which detailed how the company he co-founded &#8212; <strong>BackConnect Security LLC</strong> &#8212; had developed the unusual habit of hijacking Internet address space it didn&#8217;t own in a bid to protect clients from attacks.</p>
+<p>Preston&#8217;s guilty <a href="https://krebsonsecurity.com/wp-content/uploads/2020/01/preston.information.pdf" target="_blank" rel="noopener">plea agreement</a> (PDF) doesn&#8217;t specify who he admitted attacking, and refers to the target only as &#8220;Victim 1.&#8221; Preston declined to comment for this story.</p>
+<p>But that 2016 story came on the heels of <a href="https://krebsonsecurity.com/2016/09/israeli-online-attack-service-vdos-earned-600000-in-two-years/" target="_blank" rel="noopener">an exclusive about the hacking of <strong>vDOS</strong></a> &#8212; at the time the world&#8217;s most popular and powerful DDoS-for-hire service.</p>
+<p>KrebsOnSecurity <a href="https://krebsonsecurity.com/2017/08/alleged-vdos-operators-arrested-charged/" target="_blank" rel="noopener">exposed the co-administrators of vDOS</a> and obtained a copy of the entire vDOS database, including its registered users and a record of the attacks those users had paid vDOS to launch on their behalf.</p>
+<p>Those records showed that several email addresses tied to a domain registered by then 19-year-old Preston had been used to create a vDOS account that was active in attacking a large number of targets, including multiple assaults on networks belonging to the <a href="http://www.fsf.org/" target="_blank" rel="noopener">Free Software Foundation</a> (FSF).</p>
+<p>The 2016 story on BackConnect featured an interview with a former system administrator at FSF who said the nonprofit briefly considered working with BackConnect, and that the attacks started almost immediately after FSF told the company&#8217;s owners they would need to look elsewhere for DDoS protection.</p>
+<p>Perhaps having fun at the expense of the FSF was something of a meme that the accused and his associates seized upon, but it&#8217;s interesting to note that the name of the FSF&#8217;s founder &#8212; <strong>Richard Stallman</strong> &#8212; <a href="https://krebsonsecurity.com/2017/01/who-is-anna-senpai-the-mirai-worm-author/" target="_blank" rel="noopener">was used as a nickname by the co-author of <strong>Mirai</strong></a>, a potent malware strain that was created for the purposes of enslaving Internet of Things (IoT) devices for large-scale DDoS attacks.</p>
+<p>Ultimately, it was the Mirai co-author&#8217;s use of this nickname that contributed to him getting caught, arrested, and <a href="https://krebsonsecurity.com/2018/10/mirai-co-author-gets-6-months-confinement-8-6m-in-fines-for-rutgers-attacks/" target="_blank" rel="noopener">prosecuted</a> for <a href="https://krebsonsecurity.com/2016/10/source-code-for-iot-botnet-mirai-released/" target="_blank" rel="noopener">releasing Mirai and its source code</a> (as well as for <a href="https://krebsonsecurity.com/2016/09/the-democratization-of-censorship/" target="_blank" rel="noopener">facilitating a record-setting DDoS against this Web site in 2016</a>).</p>
+<p>According to a statement from the <strong>U.S. Justice Department</strong>, the count to which he pleaded guilty is punishable by a maximum of 10 years in prison and a fine of up to $250,000, or twice the gross gain or loss from the offense. He is slated to be sentenced on May 7.</p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+				
+			
+								<div class="themonic-pagination"><div class='pagination'><ul><li><a href='https://krebsonsecurity.com/'>&laquo; First</a></li><li><a href='https://krebsonsecurity.com/page/25/' class='inactive'>&lsaquo; Previous</a></li><li><a href='https://krebsonsecurity.com/page/23/' class='inactive'>23</a></li><li><a href='https://krebsonsecurity.com/page/24/' class='inactive'>24</a></li><li><a href='https://krebsonsecurity.com/page/25/' class='inactive'>25</a></li><li class='current'><span class='currenttext'>26</span></li><li><a href='https://krebsonsecurity.com/page/27/' class='inactive'>27</a></li><li><a href='https://krebsonsecurity.com/page/28/' class='inactive'>28</a></li><li><a href='https://krebsonsecurity.com/page/29/' class='inactive'>29</a></li><li><a href='https://krebsonsecurity.com/page/27/' class='inactive'>Next &rsaquo;</a></li><a class='inactive' href='https://krebsonsecurity.com/page/209/'>Last &raquo;</a></ul></div></div>
+					<div style="display: block; clear: both;"></div>
+			
+		
+
+	
+
+		</div><!-- #content -->
+	</div><!-- #primary -->
+
+
+			<div id="secondary" class="widget-area" role="complementary">
+
+        <div id="sidebar_ad" class="widget themonic-ad5"><div class="a-statement">Advertisement</div><a href="https://info.knowbe4.com/phishing-forensics-krebs?utm_source=Krebs&amp;utm_medium=display&amp;utm_campaign=website&amp;utm_content=PhishingForensics">
+<img src="/b-knowbe4/16.jpg" />
+</a></div>
+
+                        <br><div class="widget themonic-ad1"><div class="a-statement">Advertisement</div><a href="https://www.akamai.com/blog/security/attacking-a-macro-security-problem-with-micro-segmentation?utm_source=krebsonsecurity&amp;utm_medium=display&amp;utm_id=GL_SecureWorkforce_Guardicore&amp;utm_campaign=F-MC-52610&amp;utm_content=Guardicore">
+<img src="/b-akamai/138.png">
+</a></div><br>
+
+			<aside id="custom_html-2" class="widget_text widget widget_custom_html"><p class="widget-title">Mailing List</p><div class="textwidget custom-html-widget"><a href="/subscribe/">Subscribe here</a></div></aside><aside id="search-2" class="widget widget_search"><p class="widget-title">Search KrebsOnSecurity</p><form role="search" method="get" id="searchform" class="searchform" action="https://krebsonsecurity.com/">
+				<div>
+					<label class="screen-reader-text" for="s">Search for:</label>
+					<input type="text" value="" name="s" id="s" />
+					<input type="submit" id="searchsubmit" value="Search" />
+				</div>
+			</form></aside>
+		<aside id="recent-posts-3" class="widget widget_recent_entries">
+		<p class="widget-title">Recent Posts</p>
+		<ul>
+											<li>
+					<a href="https://krebsonsecurity.com/2021/12/canada-charges-its-most-prolific-cybercriminal/">Canada Charges Its &#8220;Most Prolific Cybercriminal&#8221;</a>
+									</li>
+											<li>
+					<a href="https://krebsonsecurity.com/2021/12/who-is-the-network-access-broker-babam/">Who Is the Network Access Broker &#8216;Babam&#8217;?</a>
+									</li>
+											<li>
+					<a href="https://krebsonsecurity.com/2021/12/ubiquiti-developer-charged-with-extortion-causing-2020-breach/">Ubiquiti Developer Charged With Extortion, Causing 2020 &#8220;Breach&#8221;</a>
+									</li>
+											<li>
+					<a href="https://krebsonsecurity.com/2021/11/the-internet-is-held-together-with-spit-baling-wire/">The Internet is Held Together With Spit &#038; Baling Wire</a>
+									</li>
+											<li>
+					<a href="https://krebsonsecurity.com/2021/11/arrest-in-ransom-your-employer-email-scheme/">Arrest in &#8216;Ransom Your Employer&#8217; Email Scheme</a>
+									</li>
+					</ul>
+
+		</aside><aside id="text-2" class="widget widget_text">			<div class="textwidget"><a name="subscribe2"></a></div>
+		</aside><aside id="widget_sp_image-15" class="widget widget_sp_image"><p class="widget-title">Spam Nation</p><a href="https://www.amazon.com/Spam-Nation-Organized-Cybercrime-Epidemic-ebook/dp/B00L5QGBL0/ref=dp_kinw_strp_1" target="_blank" class="widget_sp_image-image-link" title="Spam Nation"><img width="266" height="404" alt="Spam Nation" class="attachment-266x404 aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2015/04/spamnation-nyt.png" /></a><div class="widget_sp_image-description" ><p>A New York Times Bestseller! </p>
+</div></aside><aside id="widget_sp_image-25" class="widget widget_sp_image"><p class="widget-title">Thinking of a Cybersecurity Career?</p><a href="https://krebsonsecurity.com/2020/07/thinking-of-a-cybersecurity-career-read-this/" target="_blank" class="widget_sp_image-image-link" title="Thinking of a Cybersecurity Career? Read This."><img width="625" height="424" alt="Thinking of a Cybersecurity Career?" class="attachment-full" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2020/07/codepeople.png 625w, https://krebsonsecurity.com/wp-content/uploads/2020/07/codepeople-580x393.png 580w" sizes="(max-width: 625px) 100vw, 625px" src="https://krebsonsecurity.com/wp-content/uploads/2020/07/codepeople.png" /></a><div class="widget_sp_image-description" ><p>Read this.</p>
+</div></aside><aside id="widget_sp_image-3" class="widget widget_sp_image"><p class="widget-title">All About Skimmers </p><a href="https://krebsonsecurity.com/all-about-skimmers/" target="_blank" class="widget_sp_image-image-link" title="All About Skimmers "><img width="299" height="232" alt="All About Skimmers" class="attachment-299x232 aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2010/08/skimgallery1.jpg" /></a><div class="widget_sp_image-description" ><p>Click image for my skimmer series.</p>
+</div></aside><aside id="categories-2" class="widget widget_categories"><p class="widget-title">Story Categories</p>
+			<ul>
+					<li class="cat-item cat-item-5"><a href="https://krebsonsecurity.com/category/sunshine/" title="Includes investigative blog posts meant to shine a light on the darker corners of the Internet.">A Little Sunshine</a>
+</li>
+	<li class="cat-item cat-item-2240"><a href="https://krebsonsecurity.com/category/all-about-skimmers/">All About Skimmers</a>
+</li>
+	<li class="cat-item cat-item-9085"><a href="https://krebsonsecurity.com/category/ashley-madison-breach/">Ashley Madison breach</a>
+</li>
+	<li class="cat-item cat-item-3191"><a href="https://krebsonsecurity.com/category/breadcrumbs/">Breadcrumbs</a>
+</li>
+	<li class="cat-item cat-item-3771"><a href="https://krebsonsecurity.com/category/data-breaches/" title="Stories about data breaches at retailers, corporations, governments and organizations of all sizes.">Data Breaches</a>
+</li>
+	<li class="cat-item cat-item-4624"><a href="https://krebsonsecurity.com/category/ddos-for-hire/">DDoS-for-Hire</a>
+</li>
+	<li class="cat-item cat-item-9173"><a href="https://krebsonsecurity.com/category/employment-fraud/">Employment Fraud</a>
+</li>
+	<li class="cat-item cat-item-2151"><a href="https://krebsonsecurity.com/category/how-to-break-into-security/" title="If you&#039;ve ever wanted career advice on how to make a shift into the security industry, look no further.">How to Break Into Security</a>
+</li>
+	<li class="cat-item cat-item-87"><a href="https://krebsonsecurity.com/category/latest-warnings/">Latest Warnings</a>
+</li>
+	<li class="cat-item cat-item-4071"><a href="https://krebsonsecurity.com/category/neer-do-well-news/">Ne&#039;er-Do-Well News</a>
+</li>
+	<li class="cat-item cat-item-9"><a href="https://krebsonsecurity.com/category/other/">Other</a>
+</li>
+	<li class="cat-item cat-item-1306"><a href="https://krebsonsecurity.com/category/pharma-wars/">Pharma Wars</a>
+</li>
+	<li class="cat-item cat-item-8240"><a href="https://krebsonsecurity.com/category/ransomware/">Ransomware</a>
+</li>
+	<li class="cat-item cat-item-599"><a href="https://krebsonsecurity.com/category/security-tools/">Security Tools</a>
+</li>
+	<li class="cat-item cat-item-8298"><a href="https://krebsonsecurity.com/category/sim-swapping/">SIM Swapping</a>
+</li>
+	<li class="cat-item cat-item-4079"><a href="https://krebsonsecurity.com/category/spam-nation/">Spam Nation</a>
+</li>
+	<li class="cat-item cat-item-1"><a href="https://krebsonsecurity.com/category/smallbizvictims/" title="Posts in this category will include new stories similar to those told in the Small Business Victims category on The Washington Post&#039;s Security Fix blog, which chronicled the methods organized cyber thieve are using to steal hundreds of thousands of dollars from dozens of small- to mid-sized companies around the country.">Target: Small Businesses</a>
+</li>
+	<li class="cat-item cat-item-5167"><a href="https://krebsonsecurity.com/category/tax-refund-fraud/">Tax Refund Fraud</a>
+</li>
+	<li class="cat-item cat-item-3"><a href="https://krebsonsecurity.com/category/comingstorm/" title="This category includes blog posts about computer and Internet security threats now and on the horizon.">The Coming Storm</a>
+</li>
+	<li class="cat-item cat-item-4"><a href="https://krebsonsecurity.com/category/patches/" title="Short posts on the latest security updates for widely-used software.
+">Time to Patch</a>
+</li>
+	<li class="cat-item cat-item-21"><a href="https://krebsonsecurity.com/category/web-fraud-2-0/">Web Fraud 2.0</a>
+</li>
+			</ul>
+
+			</aside><aside id="widget_sp_image-5" class="widget widget_sp_image"><p class="widget-title">The Value of a Hacked PC</p><a href="https://krebsonsecurity.com/2012/10/the-scrap-value-of-a-hacked-pc-revisited/" target="_blank" class="widget_sp_image-image-link" title="The Value of a Hacked PC"><img width="285" height="180" alt="valuehackedpc " class="attachment-285x180 aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2012/12/valuehackedpc-285x180.png" /></a><div class="widget_sp_image-description" ><p>Badguy uses for your PC</p>
+</div></aside><aside id="widget_sp_image-9" class="widget widget_sp_image"><p class="widget-title">Badguy Uses for Your Email </p><a href="https://krebsonsecurity.com/2013/06/the-value-of-a-hacked-email-account/" target="_self" class="widget_sp_image-image-link" title="Badguy Uses for Your Email "><img width="296" height="170" alt="Badguy Uses for Your Email " class="attachment-full aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2013/06/badguyemail.png 296w, https://krebsonsecurity.com/wp-content/uploads/2013/06/badguyemail-285x163.png 285w" sizes="(max-width: 296px) 100vw, 296px" src="https://krebsonsecurity.com/wp-content/uploads/2013/06/badguyemail.png" /></a><div class="widget_sp_image-description" ><p>Your email account may be worth far more than you imagine.</p>
+</div></aside><aside id="widget_sp_image-24" class="widget widget_sp_image"><a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&#038;hosted_button_id=MCCRKHWRX57HS" id="donate" target="_self" class="widget_sp_image-image-link"><img width="250" height="55" alt="Donate to Krebs On Security" class="attachment-medium aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2016/09/donatepaypal2-1.png" /></a></aside><aside id="most_popular_posts-3" class="widget widget_most_popular_posts">
+<p class="widget-title">Most Popular Posts</p>
+<ul>	<li><a href="https://krebsonsecurity.com/2018/07/sextortion-scam-uses-recipients-hacked-passwords/">Sextortion Scam Uses Recipient's Hacked Passwords</a> (1076)</li>
+	<li><a href="https://krebsonsecurity.com/2015/07/online-cheating-site-ashleymadison-hacked/">Online Cheating Site AshleyMadison Hacked</a> (798)</li>
+	<li><a href="https://krebsonsecurity.com/2013/12/sources-target-investigating-data-breach/">Sources: Target Investigating Data Breach</a> (620)</li>
+	<li><a href="https://krebsonsecurity.com/2020/11/trump-fires-security-chief-christopher-krebs/">Trump Fires Security Chief Christopher Krebs</a> (534)</li>
+	<li><a href="https://krebsonsecurity.com/2013/12/cards-stolen-in-target-breach-flood-underground-markets/">Cards Stolen in Target Breach Flood Underground Markets</a> (445)</li>
+	<li><a href="https://krebsonsecurity.com/2013/05/reports-liberty-reserve-founder-arrested-site-shuttered/">Reports: Liberty Reserve Founder Arrested, Site Shuttered</a> (416)</li>
+	<li><a href="https://krebsonsecurity.com/2015/08/was-the-ashley-madison-database-leaked/">Was the Ashley Madison Database Leaked?</a> (376)</li>
+	<li><a href="https://krebsonsecurity.com/2021/01/ddos-guard-to-forfeit-internet-space-occupied-by-parler/">DDoS-Guard To Forfeit Internet Space Occupied by Parler</a> (374)</li>
+	<li><a href="https://krebsonsecurity.com/2014/05/true-goodbye-using-truecrypt-is-not-secure/">True Goodbye: 'Using TrueCrypt Is Not Secure'</a> (363)</li>
+	<li><a href="https://krebsonsecurity.com/2015/08/who-hacked-ashley-madison/">Who Hacked Ashley Madison?</a> (361)</li>
+</ul>
+</aside>
+<aside id="media_image-2" class="widget widget_media_image"><p class="widget-title">Why So Many Top Hackers Hail from Russia</p><a href="https://krebsonsecurity.com/2017/06/why-so-many-top-hackers-hail-from-russia/"><img width="580" height="389" src="https://krebsonsecurity.com/wp-content/uploads/2017/06/computered-580x389.png" class="image wp-image-39684  attachment-medium size-medium" alt="" loading="lazy" style="max-width: 100%; height: auto;" srcset="https://krebsonsecurity.com/wp-content/uploads/2017/06/computered-580x389.png 580w, https://krebsonsecurity.com/wp-content/uploads/2017/06/computered-768x514.png 768w, https://krebsonsecurity.com/wp-content/uploads/2017/06/computered-940x630.png 940w, https://krebsonsecurity.com/wp-content/uploads/2017/06/computered.png 1551w" sizes="(max-width: 580px) 100vw, 580px" /></a></aside><aside id="widget_sp_image-11" class="widget widget_sp_image"><p class="widget-title">Category: Web Fraud 2.0</p><a href="https://krebsonsecurity.com/category/web-fraud-2-0/" target="_blank" class="widget_sp_image-image-link" title="Category: Web Fraud 2.0"><img width="227" height="400" alt="Criminnovations" class="attachment-medium aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2013/11/cybercrimeinnovations-227x400.png" /></a><div class="widget_sp_image-description" ><p>Innovations from the Underground</p>
+</div></aside><aside id="widget_sp_image-12" class="widget widget_sp_image"><a href="https://krebsonsecurity.com/2014/03/are-credit-monitoring-services-worth-it/" target="_blank" class="widget_sp_image-image-link"><img width="285" height="189" class="attachment-medium aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2014/03/shreddedID-copy-285x189.png 285w, https://krebsonsecurity.com/wp-content/uploads/2014/03/shreddedID-copy-600x399.png 600w, https://krebsonsecurity.com/wp-content/uploads/2014/03/shreddedID-copy.png 849w" sizes="(max-width: 285px) 100vw, 285px" src="https://krebsonsecurity.com/wp-content/uploads/2014/03/shreddedID-copy-285x189.png" /></a><div class="widget_sp_image-description" ><p>ID Protection Services Examined</p>
+</div></aside><aside id="widget_sp_image-13" class="widget widget_sp_image"><p class="widget-title">Is Antivirus Dead?</p><a href="https://krebsonsecurity.com/2014/05/antivirus-is-dead-long-live-antivirus/" target="_blank" class="widget_sp_image-image-link" title="Is Antivirus Dead?"><img width="285" height="161" alt="Is Antivirus Dead?" class="attachment-medium aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2014/05/cryptservices-285x161.png 285w, https://krebsonsecurity.com/wp-content/uploads/2014/05/cryptservices-600x339.png 600w, https://krebsonsecurity.com/wp-content/uploads/2014/05/cryptservices.png 945w" sizes="(max-width: 285px) 100vw, 285px" src="https://krebsonsecurity.com/wp-content/uploads/2014/05/cryptservices-285x161.png" /></a><div class="widget_sp_image-description" ><p>The reasons for its decline</p>
+</div></aside><aside id="widget_sp_image-14" class="widget widget_sp_image"><p class="widget-title">The Growing Tax Fraud Menace</p><a href="https://krebsonsecurity.com/category/tax-refund-fraud/" target="_blank" class="widget_sp_image-image-link" title="The Growing Tax Fraud Menace"><img width="285" height="285" alt="The Growing Tax Fraud Menace" class="attachment-medium aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2014/04/taxfraud-285x285.jpg 285w, https://krebsonsecurity.com/wp-content/uploads/2014/04/taxfraud-150x150.jpg 150w, https://krebsonsecurity.com/wp-content/uploads/2014/04/taxfraud-600x600.jpg 600w, https://krebsonsecurity.com/wp-content/uploads/2014/04/taxfraud.jpg 693w" sizes="(max-width: 285px) 100vw, 285px" src="https://krebsonsecurity.com/wp-content/uploads/2014/04/taxfraud-285x285.jpg" /></a><div class="widget_sp_image-description" ><p>File 'em Before the Bad Guys Can </p>
+</div></aside><aside id="widget_sp_image-17" class="widget widget_sp_image"><p class="widget-title">Inside a Carding Shop</p><a href="https://krebsonsecurity.com/2014/06/peek-inside-a-professional-carding-shop/" target="_blank" class="widget_sp_image-image-link" title="Inside a Carding Shop"><img width="194" height="340" alt="Inside a Carding Shop" class="attachment-medium aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2014/06/mcdumpalsjoined.png" /></a><div class="widget_sp_image-description" ><p>A crash course in carding. </p>
+</div></aside><aside id="widget_sp_image-18" class="widget widget_sp_image"><p class="widget-title">Beware Social Security Fraud</p><a href="https://krebsonsecurity.com/2013/09/crooks-hijack-retirement-funds-via-ssa-portal/" target="_blank" class="widget_sp_image-image-link" title="Beware Social Security Fraud"><img width="285" height="293" alt="Beware Social Security Fraud" class="attachment-full aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2016/09/myssn-285x293.png" /></a><div class="widget_sp_image-description" ><p>Sign up, or Be Signed Up! </p>
+</div></aside><aside id="widget_sp_image-2" class="widget widget_sp_image"><p class="widget-title">How Was Your Card Stolen?</p><a href="https://krebsonsecurity.com/2015/01/how-was-your-credit-card-stolen/" target="_blank" class="widget_sp_image-image-link" title="How Was Your Card Stolen?"><img width="285" height="285" alt="How Was Your Card Stolen?" class="attachment-full aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2016/09/carddominoes-285x285.jpg 285w, https://krebsonsecurity.com/wp-content/uploads/2016/09/carddominoes-285x285-150x150.jpg 150w" sizes="(max-width: 285px) 100vw, 285px" src="https://krebsonsecurity.com/wp-content/uploads/2016/09/carddominoes-285x285.jpg" /></a><div class="widget_sp_image-description" ><p>Finding out is not so easy. </p>
+</div></aside><aside id="widget_sp_image-22" class="widget widget_sp_image"><p class="widget-title">Krebs&#8217;s 3 Rules&#8230;</p><a href="https://krebsonsecurity.com/2011/05/krebss-3-basic-rules-for-online-safety/" target="_blank" class="widget_sp_image-image-link" title="Krebs&#8217;s 3 Rules&#8230;"><img width="300" height="300" alt="Krebs&#8217;s 3 Rules&#8230;" class="attachment-medium aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2011/05/three-300x300.jpg 300w, https://krebsonsecurity.com/wp-content/uploads/2011/05/three-150x150.jpg 150w, https://krebsonsecurity.com/wp-content/uploads/2011/05/three.jpg 347w" sizes="(max-width: 300px) 100vw, 300px" src="https://krebsonsecurity.com/wp-content/uploads/2011/05/three-300x300.jpg" /></a><div class="widget_sp_image-description" ><p>...For Online Safety. </p>
+</div></aside>		</div><!-- #secondary -->
+		</div><!-- #main .wrapper -->
+	
+	<div id="publisho-footer" class="widget-area">
+				<div class="footer-widget">
+                				</div>
+				<div class="footer-widget">
+								</div>
+				<div class="footer-widget">
+								</div>
+	</div>
+
+	<div class="site-wordpress">
+					&copy; Krebs on Security<br>
+	</div>
+	<!-- .site-info --><div class="clear"></div>
+</div><!-- #page -->
+
+<script type='text/javascript' src='https://krebsonsecurity.com/wp-content/themes/kos-mar2021/js/slicknav.js?ver=5.8.2' id='publisho-mobile-navigation-js'></script>
+<script type='text/javascript' src='https://krebsonsecurity.com/wp-includes/js/wp-embed.min.js?ver=5.8.2' id='wp-embed-js'></script>
+</body>
+</html>
+<!--
+Performance optimized by W3 Total Cache. Learn more: https://www.boldgrid.com/w3-total-cache/
+
+Object Caching 204/392 objects using memcached
+Page Caching using memcached 
+Database Caching 7/25 queries in 0.011 seconds using memcached
+
+Served from: krebsonsecurity.com @ 2021-12-10 15:34:56 by W3 Total Cache
+-->

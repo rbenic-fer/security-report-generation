@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<!--[if IE 7]>
+<html class="ie ie7" lang="en-US">
+<![endif]-->
+<!--[if IE 8]>
+<html class="ie ie8" lang="en-US">
+<![endif]-->
+<!--[if !(IE 7) | !(IE 8)  ]><!-->
+<html lang="en-US">
+<!--<![endif]-->
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width" />
+<link rel="profile" href="http://gmpg.org/xfn/11" />
+<!--[if lt IE 9]>
+<script src="https://krebsonsecurity.com/wp-content/themes/kos-mar2021/js/html5.js" type="text/javascript"></script>
+<![endif]-->
+<title>Krebs on Security &#8211; Page 60 &#8211; In-depth security news and investigation</title>
+<meta name='robots' content='max-image-preview:large' />
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="Krebs on Security &raquo; Feed" href="https://krebsonsecurity.com/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Krebs on Security &raquo; Comments Feed" href="https://krebsonsecurity.com/comments/feed/" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.1.0\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.1.0\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/krebsonsecurity.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=5.8.2"}};
+			!function(e,a,t){var n,r,o,i=a.createElement("canvas"),p=i.getContext&&i.getContext("2d");function s(e,t){var a=String.fromCharCode;p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,e),0,0);e=i.toDataURL();return p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,t),0,0),e===i.toDataURL()}function c(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(o=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},r=0;r<o.length;r++)t.supports[o[r]]=function(e){if(!p||!p.fillText)return!1;switch(p.textBaseline="top",p.font="600 32px Arial",e){case"flag":return s([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])?!1:!s([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!s([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]);case"emoji":return!s([10084,65039,8205,55357,56613],[10084,65039,8203,55357,56613])}return!1}(o[r]),t.supports.everything=t.supports.everything&&t.supports[o[r]],"flag"!==o[r]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[o[r]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(n=t.source||{}).concatemoji?c(n.concatemoji):n.wpemoji&&n.twemoji&&(c(n.twemoji),c(n.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+	<link rel='stylesheet' id='colorbox-theme1-css'  href='https://krebsonsecurity.com/wp-content/plugins/jquery-lightbox-for-native-galleries/colorbox/theme1/colorbox.css?ver=1.3.14' type='text/css' media='screen' />
+<link rel='stylesheet' id='wp-block-library-css'  href='https://krebsonsecurity.com/wp-includes/css/dist/block-library/style.min.css?ver=5.8.2' type='text/css' media='all' />
+<link rel='stylesheet' id='contact-form-7-css'  href='https://krebsonsecurity.com/wp-content/plugins/contact-form-7/includes/css/styles.css?ver=5.5.3' type='text/css' media='all' />
+<link rel='stylesheet' id='publisho-style-css'  href='https://krebsonsecurity.com/wp-content/themes/kos-mar2021/style.css?subver=1.2&#038;ver=5.8.2' type='text/css' media='all' />
+<style id='publisho-style-inline-css' type='text/css'>
+
+	.themonic-nav .current-menu-item > a, .themonic-nav .current-menu-ancestor > a, .themonic-nav .current_page_item > a, .themonic-nav .current_page_ancestor > a {
+		background: #cc6600;
+	}
+	.themonic-nav ul.nav-menu, .themonic-nav div.nav-menu > ul {
+		border-bottom: 5px solid #cc6600;
+	}
+	#site-navigation .topheadmenu a {
+    background: rgba(0, 0, 0, 0);
+	}
+	.themonic-nav li a:hover {
+		background: #cc6600;
+	}
+	.themonic-nav li:hover {
+		background: #cc6600;
+	}.wrapper .flexslider {margin: 0 0 30px;}.frontp .btm-wrap {
+    border-top: 1px solid #e9e9e9;
+	}
+	.entry-summary {
+    border-top: none;
+	}.frontp .btm-wrap { margin-bottom: 30px;}.site { font-size:14px;}.site { font-family:'Roboto', arial ;}
+</style>
+<link rel='stylesheet' id='publisho-custom-style-css'  href='https://krebsonsecurity.com/wp-content/themes/kos-mar2021/custom.css?subver=1.2&#038;ver=5.8.2' type='text/css' media='all' />
+<!--[if lt IE 9]>
+<link rel='stylesheet' id='publisho-ie-css'  href='https://krebsonsecurity.com/wp-content/themes/kos-mar2021/css/ie.css?ver=20160606' type='text/css' media='all' />
+<![endif]-->
+<link rel='stylesheet' id='fontawesome-css-css'  href='https://krebsonsecurity.com/wp-content/themes/kos-mar2021/fonts/font-awesome.min.css?ver=5.8.2' type='text/css' media='all' />
+<link rel='stylesheet' id='publisho_custom_fonts-css'  href='//fonts.googleapis.com/css?family=Roboto%3Aregular%2Citalic%2C500%26subset%3Dlatin%2C' type='text/css' media='screen' />
+<script type='text/javascript' src='https://krebsonsecurity.com/wp-includes/js/jquery/jquery.min.js?ver=3.6.0' id='jquery-core-js'></script>
+<script type='text/javascript' src='https://krebsonsecurity.com/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.3.2' id='jquery-migrate-js'></script>
+<script type='text/javascript' src='https://krebsonsecurity.com/wp-content/plugins/jquery-lightbox-for-native-galleries/colorbox/jquery.colorbox-min.js?ver=1.3.14' id='colorbox-js'></script>
+<link rel="https://api.w.org/" href="https://krebsonsecurity.com/wp-json/" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://krebsonsecurity.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://krebsonsecurity.com/wp-includes/wlwmanifest.xml" /> 
+<meta name="generator" content="WordPress 5.8.2" />
+<!-- JavaScript Pull-Quotes plugin v2.2 -->
+	<link rel="stylesheet" href="https://krebsonsecurity.com/wp-content/plugins/jspullquotes/resources/jspullquotes-core.css" type="text/css" />
+	<link rel="stylesheet" href="https://krebsonsecurity.com/wp-content/plugins/jspullquotes/resources/jspullquotes-default.css" type="text/css" />
+	<script type="text/javascript" src="https://krebsonsecurity.com/wp-content/plugins/jspullquotes/resources/jspullquotes.js"></script>
+	<script type="text/javascript">
+		var arrOptions = new Array("1", "1", "right", "1", "1", "blockquote", "pullquote", "pullquote pqRight");
+		pullQuoteOpts(arrOptions);
+	</script>
+<!-- end pull-quote additions -->
+<!-- jQuery Lightbox For Native Galleries v3.1.3 | http://www.viper007bond.com/wordpress-plugins/jquery-lightbox-for-native-galleries/ -->
+<script type="text/javascript">
+// <![CDATA[
+	jQuery(document).ready(function($){
+		$(".gallery").each(function(index, obj){
+			var galleryid = Math.floor(Math.random()*10000);
+			$(obj).find("a").colorbox({rel:galleryid, maxWidth:"95%", maxHeight:"95%"});
+		});
+		$("a.lightbox").colorbox({maxWidth:"95%", maxHeight:"95%"});
+	});
+// ]]>
+</script>
+<style type="text/css" id="custom-background-css">
+body.custom-background { background-color: #ffffff; }
+</style>
+	<link rel="me" href="https://twitter.com/briankrebs" /><meta name="twitter:widgets:link-color" content="#000000" /><meta name="twitter:widgets:border-color" content="#000000" /><meta name="twitter:partner" content="tfwp" />
+<meta name="twitter:card" content="summary" /><meta name="twitter:title" content="Krebs on Security" /><meta name="twitter:site" content="@briankrebs" /><meta name="twitter:description" content="In-depth security news and investigation" />
+</head>
+<body class="home blog paged custom-background paged-60 custom-background-white single-author frontp hfeed">
+<div id="page" class="site">
+	<!-- <div class="publisho-top-mobile-nav clear"></div> -->
+	<div class="themonic-logo themonic-ad3"><div class="a-statement">Advertisement</div><a href="https://www.cybereason.com/platform/anti-ransomware?utm_source=krebs&amp;utm_medium=display&amp;utm_campaign=q4">
+<img src="/b-cybereason/13.jpg">
+</a></div>
+	<div class="themonic-logo themonic-ad6"><div class="a-statement">Advertisement</div><a href="https://ww1.bugcrowd.com/ultimate-guide-ransomware-risk-disp/?utm_source=KrebsSecurity&amp;utm_medium=paid_advertising&amp;utm_campaign=banners&amp;utm_content=guides">
+<img src="/b-bugcrowd/2.png">
+</a></div>
+	<nav id="site-navigation" class="themonic-nav" role="navigation">
+	</nav><!-- #site-navigation -->
+	<div class="clear"></div>
+	<header id="masthead" class="site-header" role="banner">
+ 					<div class="desktop-social">
+						<div class="socialmedia">
+							<a href="http://twitter.com/briankrebs" target="_blank"><i class="fa fa-twitter"></i></a> 
+															<a class="rss" href="https://krebsonsecurity.com/feed/" target="_blank"><i class="fa fa-rss"></i></a>	
+									<a class="rss" href="https://www.linkedin.com/in/bkrebs/" target="_blank"><i class="fa fa-linkedin"></i></a>	
+								</div>
+				 	</div>
+																						   
+		
+		<div class="themonic-logo responsive-img-container">
+			<a href="https://krebsonsecurity.com/" title="Krebs on Security" rel="home"><img src="https://krebsonsecurity.com/wp-content/uploads/2021/03/kos-27-03-2021.jpg" alt="Krebs on Security"></a>
+		</div>
+
+					<div class="mobile-social">
+						<div class="socialmedia">
+							<a href="http://twitter.com/briankrebs" target="_blank"><i class="fa fa-twitter"></i></a> 
+															<a class="rss" href="https://krebsonsecurity.com/feed/" target="_blank"><i class="fa fa-rss"></i></a>	
+									<a class="rss" href="https://www.linkedin.com/in/bkrebs/" target="_blank"><i class="fa fa-linkedin"></i></a>	
+								</div>
+					</div>
+		
+				<!-- <div class="publisho-mobile-nav clear"></div> -->
+		<nav id="site-navigation" class="themonic-nav" role="navigation">
+			<a class="assistive-text" href="#content" title="Skip to content">Skip to content</a>
+			<div id="menu-top" class="nav-menu"><ul>
+<li ><a href="https://krebsonsecurity.com/">Home</a></li><li class="page_item page-item-2"><a href="https://krebsonsecurity.com/about/">About the Author</a></li>
+<li class="page_item page-item-645"><a href="https://krebsonsecurity.com/cpm/">Advertising/Speaking</a></li>
+</ul></div>
+		</nav><!-- #site-navigation -->
+		<div class="clear"></div>
+	</header><!-- #masthead -->
+	<div id="main" class="wrapper">
+		<div id="primary" class="site-content">
+	
+
+	
+		<div id="content" role="main">
+
+		<article id="post-40915" class="post-40915 post type-post status-publish format-standard hentry category-other tag-alston-bird tag-equifax tag-georgia-tech tag-informed-delivery tag-kba tag-knowledge-based-authentication tag-peter-swire tag-u-s-postal-service tag-usps">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2017/10/usps-informed-delivery-is-stalkers-dream/" title="Permalink to USPS &#8216;Informed Delivery&#8217; Is Stalker&#8217;s Dream" rel="bookmark">USPS &#8216;Informed Delivery&#8217; Is Stalker&#8217;s Dream</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">October 2, 2017</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2017/10/usps-informed-delivery-is-stalkers-dream/#comments">130 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>A free new service from the <strong>U.S. Postal Service</strong> that provides scanned images of incoming mail before it is slated to arrive at its destination address is raising eyebrows among security experts who worry about the service&#8217;s potential for misuse by private investigators, identity thieves, stalkers or abusive ex-partners. The USPS says it hopes to have changes in place by early next year that could help blunt some of those concerns.</p>
+<p>The service, dubbed &#8220;<strong>Informed Delivery</strong>,&#8221; has been available to select addresses in several states since 2014 under a targeted USPS pilot program, but it has since expanded to include many ZIP codes nationwide, according to the Postal Service. U.S. residents can tell if their address is eligible by visiting <a href="https://informeddelivery.usps.com" target="_blank">informeddelivery.usps.com</a>.</p>
+<div id="attachment_40983" style="width: 590px" class="wp-caption aligncenter"><img aria-describedby="caption-attachment-40983" loading="lazy" class="size-medium wp-image-40983" src="https://krebsonsecurity.com/wp-content/uploads/2017/10/informeddelivery-580x250.png" alt="Image: USPS" width="580" height="250" srcset="https://krebsonsecurity.com/wp-content/uploads/2017/10/informeddelivery-580x250.png 580w, https://krebsonsecurity.com/wp-content/uploads/2017/10/informeddelivery-768x331.png 768w, https://krebsonsecurity.com/wp-content/uploads/2017/10/informeddelivery.png 818w" sizes="(max-width: 580px) 100vw, 580px" /><p id="caption-attachment-40983" class="wp-caption-text">Image: USPS</p></div>
+<p>According to the USPS, some 6.3 million accounts have been created via the service so far. The Postal Service says consumer feedback has been overwhelmingly positive, particularly among residents who travel regularly and wish to keep close tabs on any mail being delivered while they&#8217;re on the road.</p>
+<p>But a review of the methods used by the USPS to validate new account signups suggests the service is wide open to abuse by a range of parties, mainly because of weak authentication and because it is not easy to opt out of the service.</p>
+<p>Signing up requires an eligible resident <a href="https://reg.usps.com/entreg/RegistrationPortalAction_input" target="_blank">to create a free user account</a> at USPS.com, which asks for the resident&#8217;s name, address and an email address. The final step in validating residents involves answering four so-called &#8220;knowledge-based authentication&#8221; or KBA questions. KrebsOnSecurity has <a href="https://krebsonsecurity.com/?s=kba&amp;x=0&amp;y=0" target="_blank">relentlessly assailed KBA</a> as an unreliable authentication method because so many answers to the multiple-guess questions are available on sites like <strong>Spokeo</strong> and <strong>Zillow</strong>, or via social networking profiles.</p>
+<p>Once signed up, a resident can view scanned images of the front of each piece of incoming mail in advance of its arrival. Unfortunately, because of the weak KBA questions (provided by <a href="https://krebsonsecurity.com/?s=equifax+breach&amp;x=0&amp;y=0" target="_blank">recently-breached</a> big-three credit bureau <strong>Equifax</strong>, no less) stalkers, jilted ex-partners, and private investigators also can see who you&#8217;re communicating with via the Postal mail.</p>
+<p>Perhaps this wouldn&#8217;t be such a big deal if the USPS notified residents by snail mail when someone signs up for the service at their address, but it doesn&#8217;t.</p>
+<p><strong>Peter Swire</strong>, a privacy and security expert at <strong>Georgia Tech</strong> and a senior counsel at the law firm of <strong>Alston &amp; Bird</strong>, said strong authentication relies on information collected from multiple channels &#8212; such as something you know (a password) and something you have (a mobile phone). In this case, however, the USPS has opted not to leverage a channel that it uniquely controls, namely the U.S. Mail system.</p>
+<p>&#8220;The whole service is based on a channel they control, and they should use that channel to verify people,&#8221; Swire said. &#8220;That increases user trust that it&#8217;s a good service. Multi-channel authentication is becoming the industry norm, and the U.S. Postal Service should catch up to that.&#8221;  <a href="https://krebsonsecurity.com/2017/10/usps-informed-delivery-is-stalkers-dream/#more-40915" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+	<div id="between_article_ad" class="themonic-ad5"><a href="https://ww1.bugcrowd.com/ultimate-guide-ransomware-risk-disp/?utm_source=KrebsSecurity&amp;utm_medium=paid_advertising&amp;utm_campaign=banners&amp;utm_content=guides">
+<img src="/b-bugcrowd/4.png">
+</a></div>	<article id="post-40935" class="post-40935 post type-post status-publish format-standard hentry category-other tag-credit-freeze tag-credit-lock tag-equifax-breach tag-paulino-do-rego-barros-jr tag-threatmetrix">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2017/09/heres-what-to-ask-the-former-equifax-ceo/" title="Permalink to Here’s What to Ask the Former Equifax CEO" rel="bookmark">Here’s What to Ask the Former Equifax CEO</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">September 29, 2017</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2017/09/heres-what-to-ask-the-former-equifax-ceo/#comments">178 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p><strong>Richard Smith </strong>&#8212; who resigned as chief executive of big-three credit bureau<strong> Equifax</strong> this week in the wake of <a href="https://krebsonsecurity.com/?s=equifax+breach&amp;x=0&amp;y=0" target="_blank">a data breach</a> that exposed 143 million Social Security numbers &#8212; is slated to testify in front of no fewer than four committees on Capitol Hill next week. If I were a lawmaker, here are some of the questions I&#8217;d ask when Mr. Smith goes to Washington.</p>
+<p><img loading="lazy" class="aligncenter size-medium wp-image-40944" src="https://krebsonsecurity.com/wp-content/uploads/2017/09/capitol-580x272.png" alt="capitol" width="580" height="272" srcset="https://krebsonsecurity.com/wp-content/uploads/2017/09/capitol-580x272.png 580w, https://krebsonsecurity.com/wp-content/uploads/2017/09/capitol-768x360.png 768w, https://krebsonsecurity.com/wp-content/uploads/2017/09/capitol-940x440.png 940w, https://krebsonsecurity.com/wp-content/uploads/2017/09/capitol.png 1095w" sizes="(max-width: 580px) 100vw, 580px" /></p>
+<p>Before we delve into the questions, a bit of background is probably in order. The new interim CEO of Equifax &#8212; <strong>Paulino do Rego Barros Jr.</strong> &#8212; took to <em>The Wall Street Journal</em> and <a href="https://www.bloomberg.com/news/articles/2017-09-27/equifax-will-offer-free-credit-freezes-for-life-new-ceo-says" target="_blank" rel="noopener">other media outlets</a> this week to publish a mea culpa on all the ways Equifax failed in responding to this breach (the title of <a href="https://www.wsj.com/articles/on-behalf-of-equifax-im-sorry-1506547253" target="_blank" rel="noopener">the op-ed in The Journal</a> was literally &#8220;I&#8217;m sorry&#8221;).</p>
+<p>&#8220;We were hacked,&#8221; Barros wrote. &#8220;That’s the simple fact. But we compounded the problem with insufficient support for consumers. Our website did not function as it should have, and our call center couldn’t manage the volume of calls we received. Answers to key consumer questions were too often delayed, incomplete or both.&#8221;</p>
+<p>Barros stated that Equifax was working to roll out a new system by Jan. 31, 2018 that would let consumers &#8220;easily lock and unlock access to their Equifax credit files.&#8221;</p>
+<p>&#8220;You will be able to do this at will,&#8221; he continued. &#8220;It will be reliable, safe, and simple. Most significantly, the service will be offered free, for life.&#8221;</p>
+<p>I have <a href="https://krebsonsecurity.com/2015/06/how-i-learned-to-stop-worrying-and-embrace-the-security-freeze/" target="_blank">argued for years</a> that all of the data points needed for identity thieves to open new lines of credit in your name and otherwise ruin your credit score are available for sale in the cybercrime underground. To be certain, the Equifax breach holds the prospect that ID thieves could update all that stolen data with newer records. I&#8217;ve argued that the only sane response to this sorry state of affairs is for consumers to freeze their files at the bureaus, which blocks potential creditors &#8212; and ID thieves &#8212; from trashing your credit file and credit score.</p>
+<p>Equifax is not the only bureau promoting one of these lock services. Since Equifax announced its breach on Sept. 7, big-three credit bureaus <strong>Trans Union</strong> and <strong>Experian</strong> have worked feverishly to steer consumers seeking freezes toward these locks instead, arguing that they are easier to use and allow consumers to lock and unlock their credit files with little more than the press of a button on a mobile phone app. Oh, and the locks are free, whereas the bureaus can (and do) charge consumers for placing and/or thawing a freeze (the laws freeze fee laws <a href="http://consumersunion.org/research/consumers-unions-guide-to-security-freeze-protection-2/" target="_blank">differ from state to state</a>).</p>
+<h4>CREDIT FREEZE VS. CREDIT LOCK</h4>
+<p>My first group of questions would center around security freezes or credit freezes, and the difference between those and these credit lock services being pushed hard by the bureaus. </p>
+<p>Currently, even consumer watchdog groups say they are uncertain about the difference between a freeze and a lock. See <a href="http://www.uspirg.org/news/usp/equifax%E2%80%99s-offer-free-%E2%80%9Clock%E2%80%9D-raises-questions-best-protection-still-credit-freezes-all-three" target="_blank">this press release</a> from Thursday by <strong>U.S. PIRG</strong>, the federation of state Public Interest Research Groups, for one such example.</p>
+<p>Also, I&#8217;m curious to know what percentage of Americans had a freeze prior to the breach, and how many froze their credit files (or attempted to do so) after Equifax announced the breach. The answers to these questions may help explain why the bureaus are now massively pushing their new credit lock offerings (i.e., perhaps they&#8217;re worried about the revenue hit they&#8217;ll take should a significant percentage of Americans decide to freeze their credit files).</p>
+<p>I suspect the pre-breach number is less than one percent. I base this guess loosely on some data I received from the head of security at Dropbox, who <a href="http://krebsonsecurity.com/2016/06/dropbox-smeared-in-week-of-megabreaches/" target="_blank">told KrebsOnSecurity last year</a> that less than one percent of its user base of 500 million registered users had chosen to turn on 2-factor authentication for their accounts. This extra security step can block thieves from accessing your account even if they steal your password, but many consumers simply don&#8217;t take advantage of such offerings because either they don&#8217;t know about them or they find them inconvenient.</p>
+<p>Bear in mind that while most two-factor offerings are free, most freezes involve fees, so I&#8217;d expect the number of pre-breach freezers to be a fraction of one percent. However, if only one half of one percent of Americans chose to freeze their credit files before Equifax announced its breach &#8212; and if the total number of Americans requesting a freeze post-breach rose to, say, one percent &#8212; that would still be a huge jump (and potentially a painful financial hit to Equifax and the other bureaus).</p>
+<p><img loading="lazy" class="aligncenter size-full wp-image-40941" src="https://krebsonsecurity.com/wp-content/uploads/2017/09/creditfreeze.png" alt="creditfreeze" width="521" height="214" /></p>
+<p>So without further ado, here are some questions I&#8217;d ask on the topic of credit locks and freezes:</p>
+<p>-Approximately how many credit files on Americans does Equifax currently maintain?</p>
+<p>-Prior to the Equifax breach, approximately how many Americans had chosen to freeze their credit files at Equifax?</p>
+<p>-Approximately how many total Americans today have requested a freeze from Equifax? This should include the company&#8217;s best estimate on the number of people who have requested a freeze but &#8212; because of the many failings of Equifax&#8217;s public response cited by Barros &#8212; were unable to do so via phone or the Internet.</p>
+<p>-Approximately how much does Equifax charge each time the company sells a credit check (i.e., a bank or other potential creditor performs a &#8220;pull&#8221; on a consumer credit file)?</p>
+<p>-On average, how many times per year does Equifax sell access to consumer&#8217;s credit file to a potential creditor?</p>
+<p>-Mr. Barros said Equifax will extend its offer of free credit freezes until the end of January 2018. Why not make them free indefinitely, just as the company says it plans to do with its credit lock service?</p>
+<p>-In what way does a consumer placing a freeze on their credit file limit Equifax&#8217;s ability to do business?</p>
+<p>-In what way does a consumer placing a lock on their credit file limit Equifax&#8217;s ability to do business?</p>
+<p>-If a lock accomplishes the same as a freeze, why create more terminology that only confuses consumers?</p>
+<p>-By agreeing to use Equifax&#8217;s lock service, will consumers also be opting in to any additional marketing arrangements, either via Equifax or any of its partners? <a href="https://krebsonsecurity.com/2017/09/heres-what-to-ask-the-former-equifax-ceo/#more-40935" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+	<div class="themonic-ad2"><div class="a-statement">Advertisement</div><a href="https://www.akamai.com/blog/security/attacking-a-macro-security-problem-with-micro-segmentation?utm_source=krebsonsecurity&amp;utm_medium=display&amp;utm_id=GL_SecureWorkforce_Guardicore&amp;utm_campaign=F-MC-52610&amp;utm_content=Guardicore">
+<img src="/b-akamai/140.png">
+</a></div>	<article id="post-40909" class="post-40909 post type-post status-publish format-standard hentry category-other tag-christi-woodworth tag-dan-berger tag-jokers-stash tag-national-association-of-federally-insured-credit-unions tag-sonic-drive-in-breach tag-visa">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2017/09/breach-at-sonic-drive-in-may-have-impacted-millions-of-credit-debit-cards/" title="Permalink to Breach at Sonic Drive-In May Have Impacted Millions of Credit, Debit Cards" rel="bookmark">Breach at Sonic Drive-In May Have Impacted Millions of Credit, Debit Cards</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">September 26, 2017</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2017/09/breach-at-sonic-drive-in-may-have-impacted-millions-of-credit-debit-cards/#comments">177 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p><strong>Sonic Drive-In</strong>, a fast-food chain with nearly 3,600 locations across 45 U.S. states, has acknowledged a breach affecting an unknown number of store payment systems. The ongoing breach may have led to a fire sale on millions of stolen credit and debit card accounts that are now being peddled in shadowy underground cybercrime stores, KrebsOnSecurity has learned.</p>
+<p><img loading="lazy" class="aligncenter size-medium wp-image-40917" src="https://krebsonsecurity.com/wp-content/uploads/2017/09/sonicdrivein-580x300.png" alt="sonicdrivein" width="580" height="300" srcset="https://krebsonsecurity.com/wp-content/uploads/2017/09/sonicdrivein-580x300.png 580w, https://krebsonsecurity.com/wp-content/uploads/2017/09/sonicdrivein-768x397.png 768w, https://krebsonsecurity.com/wp-content/uploads/2017/09/sonicdrivein.png 782w" sizes="(max-width: 580px) 100vw, 580px" /></p>
+<p>The first hints of a breach at Oklahoma City-based Sonic came last week when I began hearing from sources at multiple financial institutions who noticed a recent pattern of fraudulent transactions on cards that had all previously been used at Sonic.</p>
+<p>I directed several of these banking industry sources to have a look at a brand new batch of some five million credit and debit card accounts that were first put up for sale on Sept. 18 in a credit card theft bazaar <a href="https://krebsonsecurity.com/?s=joker%27s+stash&amp;x=0&amp;y=0" target="_blank">previously featured here</a> called Joker&#8217;s Stash:</p>
+<div id="attachment_40912" style="width: 590px" class="wp-caption aligncenter"><img aria-describedby="caption-attachment-40912" loading="lazy" class="size-medium wp-image-40912" src="https://krebsonsecurity.com/wp-content/uploads/2017/09/firetigerrr-580x581.png" alt="This batch of some five million cards put up for sale Sept. 26, 2017 on the popular carding site Joker's Stash has been tied to a breach at Sonic Drive-In" width="580" height="581" srcset="https://krebsonsecurity.com/wp-content/uploads/2017/09/firetigerrr-580x581.png 580w, https://krebsonsecurity.com/wp-content/uploads/2017/09/firetigerrr-150x150.png 150w, https://krebsonsecurity.com/wp-content/uploads/2017/09/firetigerrr-768x770.png 768w, https://krebsonsecurity.com/wp-content/uploads/2017/09/firetigerrr.png 902w" sizes="(max-width: 580px) 100vw, 580px" /><p id="caption-attachment-40912" class="wp-caption-text">This batch of some five million cards put up for sale today (Sept. 26, 2017) on the popular carding site Joker&#8217;s Stash has been tied to a breach at Sonic Drive-In. The first batch of these cards appear to have been uploaded for sale on Sept. 15.</p></div>
+<p>Sure enough, two sources who agreed to purchase a handful of cards from that batch of accounts on sale at Joker&#8217;s discovered they all had been recently used at Sonic locations.</p>
+<p>Armed with this information, I phoned Sonic, which responded within an hour that it was indeed investigating &#8220;a potential incident&#8221; at some Sonic locations.</p>
+<p>&#8220;Our credit card processor informed us last week of unusual activity regarding credit cards used at SONIC,&#8221; reads a statement the company issued to KrebsOnSecurity. &#8220;The security of our guests’ information is very important to SONIC. We are working to understand the nature and scope of this issue, as we know how important this is to our guests. We immediately engaged third-party forensic experts and law enforcement when we heard from our processor. While law enforcement limits the information we can share, we will communicate additional information as we are able.&#8221;</p>
+<p><strong>Christi Woodworth</strong>, vice president of public relations at Sonic, said the investigation is still in its early stages, and the company does not yet know how many or which of its stores may be impacted.</p>
+<p>The accounts apparently stolen from Sonic are part of a batch of cards that Joker&#8217;s Stash is calling &#8220;Firetigerrr,&#8221; and they are indexed by city, state and ZIP code. This geographic specificity allows potential buyers to purchase only cards that were stolen from Sonic customers who live near them, thus avoiding a common anti-fraud defense in which a financial institution might block out-of-state transactions from a known compromised card. <a href="https://krebsonsecurity.com/2017/09/breach-at-sonic-drive-in-may-have-impacted-millions-of-credit-debit-cards/#more-40909" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-40890" class="post-40890 post type-post status-publish format-standard hentry category-other tag-csaa-insurance tag-cyber-intelligence-centre tag-deloitte-breach tag-fedex tag-invesco tag-nick-hopkins tag-st-josephs-healthcare-system tag-the-guardian">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2017/09/source-deloitte-breach-affected-all-company-email-admin-accounts/" title="Permalink to Source: Deloitte Breach Affected All Company Email, Admin Accounts" rel="bookmark">Source: Deloitte Breach Affected All Company Email, Admin Accounts</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">September 25, 2017</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2017/09/source-deloitte-breach-affected-all-company-email-admin-accounts/#comments">92 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p><strong>Deloitte</strong>, one of the world&#8217;s &#8220;big four&#8221; accounting firms, has acknowledged a breach of its internal email systems, British news outlet <em>The Guardian</em> revealed today. Deloitte has sought to downplay the incident, saying it impacted &#8220;very few&#8221; clients. But according to a source close to the investigation, the breach dates back to at least the fall of 2016, and involves the compromise of all administrator accounts at the company as well as Deloitte&#8217;s entire internal email system.</p>
+<p><img loading="lazy" class="aligncenter size-medium wp-image-40896" src="https://krebsonsecurity.com/wp-content/uploads/2017/09/deloitte-580x364.png" alt="deloitte" width="580" height="364" srcset="https://krebsonsecurity.com/wp-content/uploads/2017/09/deloitte-580x364.png 580w, https://krebsonsecurity.com/wp-content/uploads/2017/09/deloitte-768x481.png 768w, https://krebsonsecurity.com/wp-content/uploads/2017/09/deloitte.png 812w" sizes="(max-width: 580px) 100vw, 580px" /></p>
+<p>In <a href="https://www.theguardian.com/business/2017/sep/25/deloitte-hit-by-cyber-attack-revealing-clients-secret-emails" target="_blank">a story</a> published Monday morning, <em>The Guardian</em> said a breach at Deloitte involved usernames, passwords and personal data on the accountancy&#8217;s top blue-chip clients.</p>
+<p>&#8220;The Guardian understands Deloitte clients across all of these sectors had material in the company email system that was breached,&#8221; The Guardian&#8217;s <strong>Nick Hopkins</strong> wrote. &#8220;The companies include household names as well as US government departments. So far, six of Deloitte’s clients have been told their information was &#8216;impacted&#8217; by the hack.&#8221;</p>
+<p>In a statement sent to KrebsOnSecurity, Deloitte acknowledged a &#8220;cyber incident&#8221; involving unauthorized access to its email platform.</p>
+<p>&#8220;The review of that platform is complete,&#8221; the statement reads. &#8220;Importantly, the review enabled us to understand precisely what information was at risk and what the hacker actually did and to determine that only very few clients were impacted [and] no disruption has occurred to client businesses, to Deloitte&#8217;s ability to continue to serve clients, or to consumers.&#8221;</p>
+<p>However, information shared by a person with direct knowledge of the incident said the company in fact does not yet know precisely when the intrusion occurred, or for how long the hackers were inside of its systems.</p>
+<p>This source, speaking on condition of anonymity, said the team investigating the breach focused their attention on a company office in Nashville known as the &#8220;Hermitage,&#8221; where the breach is thought to have begun.</p>
+<p>The source confirmed <em>The Guardian</em> reporting that current estimates put the intrusion sometime in the fall of 2016, and added that investigators still are not certain that they have completely evicted the intruders from the network.</p>
+<p>Indeed, it appears that Deloitte has known something was not right for some time. According to this source, the company sent out a &#8220;mandatory password reset&#8221; email on Oct. 13, 2016 to all Deloitte employees in the United States. The notice stated that employee passwords and personal identification numbers (PINs) needed to be changed by Oct. 17, 2016, and that employees who failed to do so would be unable to access email or other Deloitte applications. The message also included advice on how to pick complex passwords:</p>
+<div id="attachment_40895" style="width: 590px" class="wp-caption aligncenter"><img aria-describedby="caption-attachment-40895" loading="lazy" class="size-medium wp-image-40895" src="https://krebsonsecurity.com/wp-content/uploads/2017/09/deloittepwdreset-580x379.png" alt="A screen shot of the mandatory password reset email Deloitte sent to all U.S. employees in Oct. 2016, around the time sources say the breach was first discovered." width="580" height="379" srcset="https://krebsonsecurity.com/wp-content/uploads/2017/09/deloittepwdreset-580x379.png 580w, https://krebsonsecurity.com/wp-content/uploads/2017/09/deloittepwdreset-768x502.png 768w, https://krebsonsecurity.com/wp-content/uploads/2017/09/deloittepwdreset-940x614.png 940w, https://krebsonsecurity.com/wp-content/uploads/2017/09/deloittepwdreset.png 1041w" sizes="(max-width: 580px) 100vw, 580px" /><p id="caption-attachment-40895" class="wp-caption-text">A screen shot of the mandatory password reset message Deloitte sent to all U.S. employees in Oct. 2016, around the time sources say the breach was first discovered.</p></div>
+<p>The source told KrebsOnSecurity they were coming forward with information about the breach because, &#8220;I think it&#8217;s unfortunate how we have handled this and swept it under the rug. It wasn&#8217;t a small amount of emails like reported. They accessed the entire email database and all admin accounts. But we never notified our advisory clients or our cyber intel clients.&#8221; <a href="https://krebsonsecurity.com/2017/09/source-deloitte-breach-affected-all-company-email-admin-accounts/#more-40890" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-40877" class="post-40877 post type-post status-publish format-standard hentry category-other tag-cosmo-the-god tag-curtis-gervais tag-eric-taylor tag-probablyonion tag-rcmp tag-swatting tag-the-ottawa-citizen tag-u-s-ontario-court-justice-mitch-hoffman">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2017/09/canadian-man-gets-9-months-detention-for-serial-swattings-bomb-threats/" title="Permalink to Canadian Man Gets 9 Months Detention for Serial Swattings, Bomb Threats" rel="bookmark">Canadian Man Gets 9 Months Detention for Serial Swattings, Bomb Threats</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">September 25, 2017</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2017/09/canadian-man-gets-9-months-detention-for-serial-swattings-bomb-threats/#comments">57 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>A 19-year-old Canadian man was found guilty of making almost three dozen fraudulent calls to emergency services across North America in 2013 and 2014. The false alarms, two of which targeted this author &#8212; involved phoning in phony bomb threats and multiple attempts at &#8220;swatting&#8221; &#8212; a dangerous hoax in which the perpetrator spoofs a call about a hostage situation or other violent crime in progress in the hopes of tricking police into responding at a particular address with deadly force.</p>
+<p><strong>Curtis Gervais</strong> of Ottawa was 16 when he began his swatting spree, which prompted police departments across the United States and Canada to respond to fake bomb threats and active shooter reports at a number of schools and residences.</p>
+<p>Gervais, who taunted swatting targets using the Twitter accounts &#8220;ProbablyOnion&#8221; and &#8220;ProbablyOnion2,&#8221; got such a high off of his escapades that he hung out a for-hire shingle on Twitter, offering to swat anyone with the following tweet:</p>
+<p><img loading="lazy" class="aligncenter size-large wp-image-25893" src="https://krebsonsecurity.com/wp-content/uploads/2014/05/wantswat-600x81.png" alt="wantswat" width="600" height="81" srcset="https://krebsonsecurity.com/wp-content/uploads/2014/05/wantswat-600x81.png 600w, https://krebsonsecurity.com/wp-content/uploads/2014/05/wantswat-285x38.png 285w, https://krebsonsecurity.com/wp-content/uploads/2014/05/wantswat.png 856w" sizes="(max-width: 600px) 100vw, 600px" /></p>
+<p>Several Twitter users <a href="https://krebsonsecurity.com/wp-content/uploads/2014/05/po-montgomerycountyschools.png" target="_blank" rel="noopener">apparently</a> <a href="https://krebsonsecurity.com/wp-content/uploads/2014/05/po-northwesthighschool.png" target="_blank" rel="noopener">took</a> <a href="https://krebsonsecurity.com/wp-content/uploads/2014/05/po-mountainparkschool.png" target="_blank" rel="noopener">him</a> <a href="https://krebsonsecurity.com/wp-content/uploads/2014/05/po-freedomhigh-libertymiddle.png" target="_blank" rel="noopener">up</a> <a href="https://krebsonsecurity.com/wp-content/uploads/2014/05/po-watervlietjuniorhigh.png" target="_blank" rel="noopener">on</a> <a href="https://krebsonsecurity.com/wp-content/uploads/2014/05/po-melbournehighschool-fla.png" target="_blank" rel="noopener">that</a> <a href="https://krebsonsecurity.com/wp-content/uploads/2014/05/po-melbournehighschool-fla.png" target="_blank" rel="noopener">offer</a>. On March 9, 2014, @ProbablyOnion started sending me rude and annoying messages on Twitter. A month later (and several weeks after blocking him on Twitter), I received a phone call from the local police department. It was early in the morning on Apr. 10, and the cops wanted to know if everything was okay at our address.</p>
+<p>Since this was <a title="http://krebsonsecurity.com/2013/03/the-world-has-no-room-for-cowards/" href="http://krebsonsecurity.com/2013/03/the-world-has-no-room-for-cowards/" target="_blank">not the first time someone had called in a fake hostage situation at my home</a>, the call I received came from the police department’s non-emergency number, and they were unsurprised when I told them that the Krebs manor and all of its inhabitants were just fine.</p>
+<p>Minutes after my local police department received that fake notification, @ProbablyOnion was bragging on Twitter about swatting me, including me on his public messages: “You have 5 hostages? And you will kill 1 hostage every 6 times and the police have 25 minutes to get you $100k in clear plastic.” Another message read: “Good morning! Just dispatched a swat team to your house, they didn’t even call you this time, hahaha.”</p>
+<p><img loading="lazy" class="aligncenter size-large wp-image-25889" src="https://krebsonsecurity.com/wp-content/uploads/2014/05/po2-swatbk-600x362.png" alt="po2-swatbk" width="600" height="362" srcset="https://krebsonsecurity.com/wp-content/uploads/2014/05/po2-swatbk-600x362.png 600w, https://krebsonsecurity.com/wp-content/uploads/2014/05/po2-swatbk-285x172.png 285w, https://krebsonsecurity.com/wp-content/uploads/2014/05/po2-swatbk.png 820w" sizes="(max-width: 600px) 100vw, 600px" /></p>
+<p>I told this user privately that targeting an investigative reporter maybe wasn’t the brightest idea, and that he was likely to wind up in jail soon.  On May 7, @ProbablyOnion tried to get the swat team to visit my home again, and once again without success. “How’s your door?” he tweeted. I <a title="https://twitter.com/briankrebs/status/464109424144314369" href="https://twitter.com/briankrebs/status/464109424144314369" target="_blank">replied</a>: “Door’s fine, Curtis. But I’m guessing yours won’t be soon. Nice opsec!”</p>
+<p>I was referring to <a title="http://krebsonsecurity.com/wp-content/uploads/2014/05/pastebin_MzPsBM99_5-7-2014_dox.txt" href="http://krebsonsecurity.com/wp-content/uploads/2014/05/pastebin_MzPsBM99_5-7-2014_dox.txt" target="_blank">a document</a> that had just been leaked on <strong>Pastebin</strong>, which identified @ProbablyOnion as a 19-year-old <strong>Curtis Gervais</strong> from Ontario. @ProbablyOnion laughed it off but didn’t deny the accuracy of the information, except to <a title="https://twitter.com/ProbablyOnion2/status/464104029946400769" href="https://twitter.com/ProbablyOnion2/status/464104029946400769" target="_blank">tweet that the document got his age wrong</a>.</p>
+<p>A day later, @ProbablyOnion would <a title="https://twitter.com/ProbablyOnion2/status/464544500233539586" href="https://twitter.com/ProbablyOnion2/status/464544500233539586" target="_blank">post his final tweet</a> before being arrested: “Still awaiting for the horsies to bash down my door,” a taunting reference to the <strong>Royal Canadian Mounted Police</strong> (RCMP).</p>
+<p><a href="http://ottawacitizen.com/news/local-news/barrhaven-teen-hacker-plans-to-appeal-nine-month-sentence-in-swatting-case" target="_blank">A Sept. 14, 2017 article</a> in the <em>Ottawa Citizen</em> doesn&#8217;t name Gervais because it is against the law in Canada to name individuals charged with or convicted of crimes committed while they are a minor. But the story quite clearly refers to Gervais, who reportedly is now married and expecting a child. <a href="https://krebsonsecurity.com/2017/09/canadian-man-gets-9-months-detention-for-serial-swattings-bomb-threats/#more-40877" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-40849" class="post-40849 post type-post status-publish format-standard hentry category-other tag-credit-lock tag-credit-monitoring tag-equifax tag-equiphish tag-experian tag-trans-union tag-trustedid-com tag-trustedidpremier-com">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2017/09/equifax-or-equiphish/" title="Permalink to Equifax or Equiphish?" rel="bookmark">Equifax or Equiphish?</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">September 24, 2017</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2017/09/equifax-or-equiphish/#comments">164 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>More than a week after it said most people would be eligible to enroll in a free year of its <strong>TrustedID</strong> identity theft monitoring service, big three consumer credit bureau <strong>Equifax</strong> has begun sending out email notifications to people who were able to take the company up on its offer. But in yet another security stumble, the company appears to be training recipients to fall for phishing scams.</p>
+<p>Some people who signed up for the service after Equifax <a href="https://krebsonsecurity.com/2017/09/breach-at-equifax-may-impact-143m-americans/">announced Sept. 7</a> that it had lost control over Social Security numbers, dates of birth and other sensitive data on 143 million Americans are still waiting for the promised notice from Equifax. But as I <a href="https://twitter.com/briankrebs/status/911240841510912000" target="_blank">recently noted on Twitter</a>, other folks have received emails from Equifax over the past few days, and the messages do not exactly come across as having emanated from a company that cares much about trying to regain the public&#8217;s trust.</p>
+<p>Here&#8217;s a redacted example of an email Equifax sent out to one recipient recently:</p>
+<p><img loading="lazy" class="aligncenter size-full wp-image-40856" src="https://krebsonsecurity.com/wp-content/uploads/2017/09/equifaxcare.png" alt="equifaxcare" width="524" height="943" /></p>
+<p>As we can see, the email purports to have been sent from <strong>trustedid.com</strong>, a domain that Equifax has owned for almost four years. However, Equifax apparently decided it was time for a new &#8212; and perhaps snazzier &#8212; name: <strong>trustedidpremier.com</strong>.</p>
+<p>The above-pictured message says it was sent from one domain, and then asks the recipient to respond by clicking on a link to a completely different (but confusingly similar) domain.</p>
+<p>My guess is the reason Equifax registered trustedidpremier.com was to help people concerned about the breach to see whether they were one of the 143 million people affected (for more on how that worked out for them, see <a href="https://krebsonsecurity.com/2017/09/equifax-breach-response-turns-dumpster-fire/" target="_blank">Equifax Breach Response Turns Dumpster Fire</a>). I&#8217;d further surmise that Equifax was expecting (and received) so much interest in the service as a result of the breach that all the traffic from the wannabe customers might swamp the trustedid.com site and ruin things for the people who were already signed up for the service before Equifax announced the breach on Sept. 7.</p>
+<p>The problem with this dual-domain approach is that the domain trustedidpremier.com is only a few weeks old, so it had very little time to establish itself as a legitimate domain. As a result, in the first few hours after Equifax disclosed the breach the domain was actually flagged as a phishing site by multiple browsers because it was brand new and looked about as professionally designed as a phishing site.</p>
+<p>What&#8217;s more, there is nothing tying the domain registration records for trustedidpremier.com to Equifax: The domain is registered to a WHOIS privacy service, which masks information about who really owns the domain (again, not exactly something you might expect from an identity monitoring site). Anyone looking for assurances that the site perhaps was hosted on Internet address space controlled by and assigned to Equifax would also be disappointed: The site is hosted at Amazon.</p>
+<p>While there&#8217;s nothing wrong with that exactly, one might reasonably ask: Why didn&#8217;t Equifax just send the email from Equifax.com and host the ID theft monitoring service there as well? Wouldn&#8217;t that have considerably lessened any suspicion that this missive might be a phishing attempt?</p>
+<p>Perhaps, but you see while TrustedID is technically owned by Equifax Inc., its services are separate from Equifax and its terms of service are different from those provided by Equifax (almost certainly to separate Equifax from any consumer liability associated with its monitoring service).</p>
+<h4>THE BACKSTORY</h4>
+<p>What&#8217;s super-interesting about trustedid.com is that it didn&#8217;t always belong to Equifax. According to <a href="https://en.wikipedia.org/wiki/TrustedID" target="_blank">the site&#8217;s Wikipedia page</a>, TrustedID Inc. was purchased by Equifax in 2013, but it was founded in 2004 as an identity protection company which offered a service that let consumers automatically &#8220;freeze&#8221; their credit file at the major bureaus. A freeze prevents Equifax and the other major credit bureaus from selling an individual&#8217;s credit data without first getting consumer consent.</p>
+<p>By 2006, some 17 states offered consumers the ability to freeze their credit files, and the credit bureaus were starting to see the freeze as an existential threat to their businesses (in which they make slightly more than a dollar each time a potential creditor &#8212; or ID thief &#8212; asks to peek at your credit file).</p>
+<p>Other identity monitoring firms &#8212; such as <strong>LifeLock</strong> &#8212; were by then offering services that automated the placement of identity fraud controls &#8212; such as the &#8220;fraud alert,&#8221; a free service that consumers can request to block creditors from viewing their credit files.</p>
+<p>[Author&#8217;s note: Fraud alerts only last for 90 days, although you can renew them as often as you like. More importantly, <em>while lenders and service providers are supposed to seek and obtain your approval before granting credit in your name if you have a fraud alert on your file,</em> <i>they are not legally required to do this — and very often don’t.]</i></p>
+<p>Anyway, the era of identity monitoring services automating things like fraud alerts and freezes on behalf of consumers effectively died after a landmark lawsuit filed by big-three bureau <strong>Experian</strong> (<a href="https://krebsonsecurity.com/?s=experian+id+theft&amp;x=0&amp;y=0" target="_blank" rel="noopener">which has its own storied history of data breaches</a>). In 2008, Experian sued <strong>LifeLock, </strong>arguing its practice of automating fraud alerts violated the <a href="https://en.wikipedia.org/wiki/Fair_Credit_Reporting_Act" target="_blank">Fair Credit Reporting Act</a>.</p>
+<p>In 2009, a court found in favor of Experian, and that decision effectively killed such services &#8212; mainly because none of the banks wanted to distribute them and sell them as a service anymore. <a href="https://krebsonsecurity.com/2017/09/equifax-or-equiphish/#more-40849" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-40828" class="post-40828 post type-post status-publish format-standard hentry category-other tag-credit-freeze tag-equifax tag-experian">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2017/09/experian-site-can-give-anyone-your-credit-freeze-pin/" title="Permalink to Experian Site Can Give Anyone Your Credit Freeze PIN" rel="bookmark">Experian Site Can Give Anyone Your Credit Freeze PIN</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">September 21, 2017</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2017/09/experian-site-can-give-anyone-your-credit-freeze-pin/#comments">189 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>An alert reader recently pointed my attention to <a href="https://www.experian.com/ncaconline/freezepin" target="_blank">a free online service</a> offered by big-three credit bureau <strong>Experian</strong> that allows anyone to request the personal identification number (PIN) needed to unlock a consumer credit file that was previously frozen at Experian.</p>
+<div id="attachment_40829" style="width: 590px" class="wp-caption aligncenter"><img aria-describedby="caption-attachment-40829" loading="lazy" class="size-medium wp-image-40829" src="https://krebsonsecurity.com/wp-content/uploads/2017/09/experianunfreeze-580x511.png" alt="Experian's page for retrieving someone's credit freeze PIN requires little more information than has already been leaked by big-three bureau Equifax and a myriad other breaches." width="580" height="511" srcset="https://krebsonsecurity.com/wp-content/uploads/2017/09/experianunfreeze-580x511.png 580w, https://krebsonsecurity.com/wp-content/uploads/2017/09/experianunfreeze-768x677.png 768w, https://krebsonsecurity.com/wp-content/uploads/2017/09/experianunfreeze-940x828.png 940w, https://krebsonsecurity.com/wp-content/uploads/2017/09/experianunfreeze.png 1450w" sizes="(max-width: 580px) 100vw, 580px" /><p id="caption-attachment-40829" class="wp-caption-text">Experian&#8217;s page for retrieving someone&#8217;s credit freeze PIN requires little more information than has already been leaked by big-three bureau Equifax and a myriad other breaches.</p></div>
+<p>The first hurdle for instantly revealing anyone&#8217;s freeze PIN is to provide the person&#8217;s name, address, date of birth and Social Security number (all data that has been jeopardized in breaches 100 times over &#8212; including in <a href="https://krebsonsecurity.com/?s=equifax+breach&amp;x=0&amp;y=0" target="_blank">the recent Equifax breac</a>h &#8212; and that is broadly for sale in the cybercrime underground).</p>
+<p>After that, one just needs to input an email address to receive the PIN and swear that the information is true and belongs to the submitter. I&#8217;m certain this warning would deter all but the bravest of identity thieves!</p>
+<p>The final authorization check is that Experian asks you to answer four so-called &#8220;knowledge-based authentication&#8221; or KBA questions. As I have noted in countless stories published here previously, the problem with relying on KBA questions to authenticate consumers online is that so much of the information needed to successfully guess the answers to those multiple-choice questions is now indexed or exposed by search engines, social networks and third-party services online — both criminal and commercial.</p>
+<p>What’s more, many of the companies that provide and resell these types of KBA challenge/response questions <a href="https://krebsonsecurity.com/2013/09/data-broker-giants-hacked-by-id-theft-service/" target="_blank">have been hacked in the past</a> by criminals that run their own identity theft services.</p>
+<p>“Whenever I’m faced with KBA-type questions I find that database tools like Spokeo, Zillow, etc are my friend because they are more likely to know the answers for me than I am,” said <strong>Nicholas Weaver</strong>, a senior researcher in networking and security for the <a href="https://www.icsi.berkeley.edu/icsi/people/nweaver" target="_blank">International Computer Science Institute</a> (ICSI).</p>
+<p>The above quote from Mr. Weaver came in <a href="https://krebsonsecurity.com/2017/05/fraudsters-exploited-lax-security-at-equifaxs-talx-payroll-division/" target="_blank">a story from May 2017</a> which looked at how identity thieves were able to steal financial and personal data for over a year from <a href="https://en.wikipedia.org/wiki/Talx" target="_blank">TALX</a>, an Equifax subsidiary that provides online payroll, HR and tax services. Equifax says crooks were able to reset the 4-digit PIN given to customer employees as a password and then steal W-2 tax data after successfully answering KBA questions about those employees.</p>
+<p>In short: Crooks and identity thieves broadly have access to the data needed to reliably answer KBA questions on most consumers. That is why this offering from Experian completely undermines the entire point of placing a freeze.  <a href="https://krebsonsecurity.com/2017/09/experian-site-can-give-anyone-your-credit-freeze-pin/#more-40828" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-40806" class="post-40806 post type-post status-publish format-standard hentry category-other tag-credit-lock tag-elizabeth-warren tag-equifax-breach tag-experian tag-transunion tag-trueidentity">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2017/09/equifax-breach-setting-the-record-straight/" title="Permalink to Equifax Breach: Setting the Record Straight" rel="bookmark">Equifax Breach: Setting the Record Straight</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">September 20, 2017</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2017/09/equifax-breach-setting-the-record-straight/#comments">123 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p><strong>Bloomberg</strong> published a story this week citing three unnamed sources who told the publication that Equifax experienced a breach earlier this year which predated the intrusion that the big-three credit bureau announced on Sept. 7. To be clear, this earlier breach at Equifax is not a new finding and has been a matter of public record for months. Furthermore, it was first reported on this Web site in May 2017.</p>
+<p><img loading="lazy" class="alignright size-full wp-image-40756" src="https://krebsonsecurity.com/wp-content/uploads/2017/09/equihax.png" alt="equihax" width="249" height="232" />In <a href="https://krebsonsecurity.com/2017/09/breach-at-equifax-may-impact-143m-americans/" target="_blank">my initial Sept. 7 story</a> about the Equifax breach affecting more than 140 million Americans, I noted that this was hardly the first time Equifax or another major credit bureau has experienced a breach impacting a significant number of Americans.</p>
+<p>On May 17, KrebsOnSecurity reported that fraudsters <a href="https://krebsonsecurity.com/2017/05/fraudsters-exploited-lax-security-at-equifaxs-talx-payroll-division/" target="_blank">exploited lax security at Equifax’s TALX payroll division</a>, which provides online payroll, HR and tax services.</p>
+<p>That story was about how Equifax&#8217;s TALX division let customers who use the firm&#8217;s payroll management services authenticate to the service with little more than a 4-digit personal identification number (PIN).</p>
+<p>Identity thieves who specialize in perpetrating tax refund fraud figured out that they could reset the PINs of payroll managers at various companies just by answering some multiple-guess questions &#8212; known as &#8220;knowledge-based authentication&#8221; or KBA questions &#8212; such as previous addresses and dates that past home or car loans were granted.</p>
+<p>On Tuesday, Sept. 18, Bloomberg <a href="https://www.bloomberg.com/news/articles/2017-09-18/equifax-is-said-to-suffer-a-hack-earlier-than-the-date-disclosed" target="_blank">ran a piece</a> with reporting from no fewer than five journalists there who relied on information provided by three anonymous sources. Those sources reportedly spoke in broad terms about an earlier breach at Equifax, and told the publication that these two incidents were thought to have been perpetrated by the same group of hackers.</p>
+<p>The Bloomberg story did not name TALX. Only post-publication did Bloomberg reporters update the piece to include a statement from Equifax saying the breach was unrelated to the hack announced on Sept. 7, and that it had to do with a security incident involving a payroll-related service during the 2016 tax year.</p>
+<p>I have thus far seen zero evidence that these two incidents are related. Equifax has said the unauthorized access to customers’ employee tax records (we&#8217;ll call this &#8220;the March breach&#8221; from here on) happened between April 17, 2016 and March 29, 2017.</p>
+<p>The criminals responsible for unauthorized activity in the March breach were participating in an insidious but common form of cybercrime known as <a href="https://krebsonsecurity.com/?s=tax+refund+fraud&amp;x=0&amp;y=0" target="_blank">tax refund fraud</a>, which involves filing phony tax refund requests with the IRS and state tax authorities using the personal information from identity theft victims.</p>
+<p>My original report on the March breach was based on public breach disclosures that Equifax was required by law to file with several state attorneys general.</p>
+<p>Because the TALX incident exposed the tax and payroll records of its customers&#8217; employees, the victim customers were in turn required to notify their employees as well. That story referenced public breach disclosures from five companies that used TALX, including defense contractor giant <a href="https://oag.ca.gov/system/files/Northrop%20Grumman%20Individual%20Notification%20Letter_64772036_1_0.PDF?" target="_blank">Northrop Grumman</a>; staffing firm <a href="http://www.marylandattorneygeneral.gov/ID%20Theft%20Breach%20Notices/2017/itu-281065.pdf" target="_blank">Allegis Group</a>; <a href="http://www.doj.nh.gov/consumer/security-breaches/documents/saint-gobain-20170413.pdf" target="_blank">Saint-Gobain Corp</a>.; <a href="http://www.doj.nh.gov/consumer/security-breaches/documents/talx-20170515.pdf" target="_blank">Erickson Living</a>; and the <a href="http://www.louisvillecardinal.com/2017/04/hackers-steal-university-employee-tax-info/" target="_blank">University of Louisville</a>.</p>
+<p>When asked Tuesday about previous media coverage of the March breach, <a href="http://www.npr.org/sections/thetwo-way/2017/09/19/552124551/equifax-confirms-another-security-incident" target="_blank">Equifax pointed National Public Radio</a> (NPR) to <a href="https://krebsonsecurity.com/2017/05/fraudsters-exploited-lax-security-at-equifaxs-talx-payroll-division/" rel="noreferrer" data-ss1505960200="1">coverage in KrebsonSecurity</a>.</p>
+<p>One more thing before I move on to the analysis. For more information on why KBA is a woefully ineffective method of stopping fraudsters, see <a href="https://krebsonsecurity.com/2013/09/data-broker-giants-hacked-by-id-theft-service/" target="_blank">this story from 2013</a> about how some of the biggest vendors of these KBA questions were all hacked by criminals running an identity theft service online.</p>
+<p>Or, check out <a href="https://krebsonsecurity.com/?s=irs+get+transcript&amp;x=0&amp;y=0" target="_blank">these stories</a> about how tax refund fraudsters used weak KBA questions to steal personal data on hundreds of thousands of taxpayers directly from the <strong>Internal Revenue Service</strong>&#8216;s own Web site. It&#8217;s probably worth mentioning that Equifax provided those KBA questions as well.</p>
+<h4>ANALYSIS</h4>
+<p>Over the past two weeks, KrebsOnSecurity has received an unusually large number of inquiries from reporters at major publications who were seeking background interviews so that they could get up to speed on Equifax&#8217;s spotty security history (sadly, Bloomberg was not among them).</p>
+<p>These informational interviews &#8212; in which I agree to provide context and am asked to speak mainly on background &#8212; are not unusual; I sometimes field two or three of these requests a month, and very often more when time permits. And for the most part I am always happy to help fellow journalists make sure they get the facts straight before publishing them.</p>
+<p>But I do find it slightly disturbing that there appear to be so many reporters on the tech and security beats who apparently lack basic knowledge about what these companies do and their roles in perpetuating &#8212; not fighting &#8212; identity theft.</p>
+<p>It seems to me that some of the world&#8217;s most influential publications have for too long given Equifax and the rest of the credit reporting industry a free pass &#8212; perhaps because of the complexities involved in succinctly explaining the issues to consumers. Indeed, I would argue the mainstream media has largely failed to hold these companies&#8217; feet to the fire over a pattern of lax security and a complete disregard for securing the very sensitive consumer data that drives their core businesses.</p>
+<p>To be sure, Equifax has dug themselves into a giant public relations hole, and they just keep right on digging. On Sept. 8, I <a href="https://krebsonsecurity.com/2017/09/equifax-breach-response-turns-dumpster-fire/" target="_blank">published a story equating Equifax&#8217;s breach response to a dumpster fire</a>, noting that it could hardly have been more haphazard and ill-conceived.</p>
+<p>But I couldn&#8217;t have been more wrong. Since then, Equifax&#8217;s response to this incident has been even more astonishingly poor.</p>
+<h4>EQUIPHISH</h4>
+<p>On Tuesday, the official Equifax account on Twitter replied to a tweet requesting the Web address of the site that the company set up to give away its free one-year of credit monitoring service. That site is https://www.equifaxsecurity2017.com, but the company&#8217;s Twitter account told users to instead visit securityequifax2017[dot]com, which is currently blocked by multiple browsers as a phishing site.</p>
+<p><img loading="lazy" class="aligncenter size-medium wp-image-40815" src="https://krebsonsecurity.com/wp-content/uploads/2017/09/equiphish-580x240.png" alt="equiphish" width="580" height="240" srcset="https://krebsonsecurity.com/wp-content/uploads/2017/09/equiphish-580x240.png 580w, https://krebsonsecurity.com/wp-content/uploads/2017/09/equiphish-768x317.png 768w, https://krebsonsecurity.com/wp-content/uploads/2017/09/equiphish-940x388.png 940w, https://krebsonsecurity.com/wp-content/uploads/2017/09/equiphish.png 1264w" sizes="(max-width: 580px) 100vw, 580px" /></p>
+<p> <a href="https://krebsonsecurity.com/2017/09/equifax-breach-setting-the-record-straight/#more-40806" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-40773" class="post-40773 post type-post status-publish format-standard hentry category-other tag-apache-struts tag-cve-2017-5638 tag-equifax-breach tag-mastercard tag-visa tag-window-of-exposure">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2017/09/equifax-hackers-stole-200k-credit-card-accounts-in-one-fell-swoop/" title="Permalink to Equifax Hackers Stole 200k Credit Card Accounts in One Fell Swoop" rel="bookmark">Equifax Hackers Stole 200k Credit Card Accounts in One Fell Swoop</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">September 14, 2017</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2017/09/equifax-hackers-stole-200k-credit-card-accounts-in-one-fell-swoop/#comments">196 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p><strong>Visa</strong> and <strong>MasterCard</strong> are sending confidential alerts to financial institutions across the United States this week, warning them about more than 200,000 credit cards that were stolen in the epic data breach announced last week at big-three credit bureau <strong>Equifax</strong>. At first glance, the private notices obtained by KrebsOnSecurity appear to suggest that hackers initially breached Equifax starting in November 2016. But Equifax says the accounts were all stolen at the same time &#8212; when hackers accessed the company&#8217;s systems in mid-May 2017.</p>
+<p><img loading="lazy" class="aligncenter size-medium wp-image-40776" src="https://krebsonsecurity.com/wp-content/uploads/2017/09/equifax-hq-580x384.png" alt="equifax-hq" width="580" height="384" srcset="https://krebsonsecurity.com/wp-content/uploads/2017/09/equifax-hq-580x384.png 580w, https://krebsonsecurity.com/wp-content/uploads/2017/09/equifax-hq-768x509.png 768w, https://krebsonsecurity.com/wp-content/uploads/2017/09/equifax-hq.png 770w" sizes="(max-width: 580px) 100vw, 580px" /></p>
+<p>Both Visa and MasterCard frequently send alerts to card-issuing financial institutions with information about specific credit and debit cards that may have been compromised in a recent breach. But it is unusual for these alerts to state from which company the accounts were thought to have been pilfered.</p>
+<p>In this case, however, Visa and MasterCard were unambiguous, referring to Equifax specifically as the source of an e-commerce card breach.</p>
+<p>In a non-public alert sent this week to sources at multiple banks, Visa said the &#8220;window of exposure&#8221; for the cards stolen in the Equifax breach was between Nov. 10, 2016 and July 6, 2017. A similar alert from MasterCard included the same date range.</p>
+<p>&#8220;The investigation is ongoing and this information may be amended as new details arise,&#8221; Visa said in its confidential alert, linking to the press release Equifax initially posted about the breach on Sept. 7, 2017.</p>
+<p>The card giant said the data elements stolen included card account number, expiration date, and the cardholder&#8217;s name. Fraudsters can use this information to conduct e-commerce fraud at online merchants.</p>
+<p>It would be tempting to conclude from these alerts that the card breach at Equifax dates back to November 2016, and that perhaps the intruders then managed to install software capable of capturing customer credit card data in real-time as it was entered on one of Equifax&#8217;s Web sites.</p>
+<p>Indeed, that was my initial hunch in deciding to report out this story. But according to a statement from Equifax, the hacker(s) downloaded the data in one fell swoop in mid-May 2017.</p>
+<p>“The attacker accessed a storage table that contained historical credit card transaction related information,&#8221; the company said. &#8220;The dates that you provided in your e-mail appear to be the transaction dates. We have found no evidence during our investigation to indicate the presence of card harvesting malware, or access to the table before mid-May 2017.” <a href="https://krebsonsecurity.com/2017/09/equifax-hackers-stole-200k-credit-card-accounts-in-one-fell-swoop/#more-40773" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-40763" class="post-40763 post type-post status-publish format-standard hentry category-other tag-adobe tag-adobe-flash-player tag-ivanti tag-microsoft tag-patch-tuesday-september-2017 tag-shavlik">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2017/09/adobe-microsoft-plug-critical-security-holes/" title="Permalink to Adobe, Microsoft Plug Critical Security Holes" rel="bookmark">Adobe, Microsoft Plug Critical Security Holes</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">September 13, 2017</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2017/09/adobe-microsoft-plug-critical-security-holes/#comments">20 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p><strong>Adobe</strong> and <strong>Microsoft</strong> both on Tuesday released patches to plug critical security vulnerabilities in their products. Microsoft&#8217;s patch bundles fix close to 80 separate security problems in various versions of its <strong>Windows</strong> operating system and related software &#8212; including two vulnerabilities that already are being exploited in active attacks. Adobe&#8217;s new version of its <strong>Flash Player</strong> software tackles two flaws that malware or attackers could use to seize remote control over vulnerable computers with no help from users.</p>
+<p><img loading="lazy" class="alignright size-full wp-image-26837" src="https://krebsonsecurity.com/wp-content/uploads/2014/07/brokenwindows.png" alt="brokenwindows" width="229" height="240" /></p>
+<p>Of the two <a href="https://en.wikipedia.org/wiki/Zero-day_(computing)" target="_blank">zero-day flaws</a> being fixed this week, the one in Microsoft&#8217;s ubiquitous <strong>.NET Framework</strong> (<a href="https://portal.msrc.microsoft.com/en-US/security-guidance/advisory/CVE-2017-8759" target="_blank">CVE-2017-8759</a>) is perhaps the most concerning. Despite this flaw being actively exploited, it is somehow labeled by Microsoft as &#8220;important&#8221; rather than &#8220;critical&#8221; &#8212; the latter being the most dire designation.</p>
+<p>More than two dozen flaws Microsoft remedied with this patch batch come with a &#8220;critical&#8221; warning, which means they could be exploited without any assistance from Windows users &#8212; save for perhaps browsing to a hacked or malicious Web site.</p>
+<p>Regular readers here probably recall that I&#8217;ve often recommended installing .NET updates separately from any remaining Windows updates, mainly because in past instances in which I&#8217;ve experienced problems installing Windows updates, a .NET patch was usually involved.</p>
+<p>For the most part, Microsoft now bundles all security updates together in one big patch ball for regular home users &#8212; no longer letting people choose which patches to install. One exception is patches for the .NET Framework, and I stand by my recommendation to install the patch roll-ups separately, reboot, and then tackle the .NET updates. Your mileage may vary. <a href="https://krebsonsecurity.com/2017/09/adobe-microsoft-plug-critical-security-holes/#more-40763" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+				
+			
+								<div class="themonic-pagination"><div class='pagination'><ul><li><a href='https://krebsonsecurity.com/'>&laquo; First</a></li><li><a href='https://krebsonsecurity.com/page/59/' class='inactive'>&lsaquo; Previous</a></li><li><a href='https://krebsonsecurity.com/page/57/' class='inactive'>57</a></li><li><a href='https://krebsonsecurity.com/page/58/' class='inactive'>58</a></li><li><a href='https://krebsonsecurity.com/page/59/' class='inactive'>59</a></li><li class='current'><span class='currenttext'>60</span></li><li><a href='https://krebsonsecurity.com/page/61/' class='inactive'>61</a></li><li><a href='https://krebsonsecurity.com/page/62/' class='inactive'>62</a></li><li><a href='https://krebsonsecurity.com/page/63/' class='inactive'>63</a></li><li><a href='https://krebsonsecurity.com/page/61/' class='inactive'>Next &rsaquo;</a></li><a class='inactive' href='https://krebsonsecurity.com/page/209/'>Last &raquo;</a></ul></div></div>
+					<div style="display: block; clear: both;"></div>
+			
+		
+
+	
+
+		</div><!-- #content -->
+	</div><!-- #primary -->
+
+
+			<div id="secondary" class="widget-area" role="complementary">
+
+        <div id="sidebar_ad" class="widget themonic-ad5"><div class="a-statement">Advertisement</div><a href="https://securityscorecard.com/instant-security-scorecard?utm_source=krebs+on+security&amp;utm_medium=display&amp;utm_campaign=instant+scorecard&amp;utm_term=B&amp;utm_content=335x300">
+<img src="/b-securityscorecard/7.jpg">
+</a></div>
+
+                        <br><div class="widget themonic-ad1"><div class="a-statement">Advertisement</div><a href="https://www.akamai.com/blog/security/attacking-a-macro-security-problem-with-micro-segmentation?utm_source=krebsonsecurity&amp;utm_medium=display&amp;utm_id=GL_SecureWorkforce_Guardicore&amp;utm_campaign=F-MC-52610&amp;utm_content=Guardicore">
+<img src="/b-akamai/138.png">
+</a></div><br>
+
+			<aside id="custom_html-2" class="widget_text widget widget_custom_html"><p class="widget-title">Mailing List</p><div class="textwidget custom-html-widget"><a href="/subscribe/">Subscribe here</a></div></aside><aside id="search-2" class="widget widget_search"><p class="widget-title">Search KrebsOnSecurity</p><form role="search" method="get" id="searchform" class="searchform" action="https://krebsonsecurity.com/">
+				<div>
+					<label class="screen-reader-text" for="s">Search for:</label>
+					<input type="text" value="" name="s" id="s" />
+					<input type="submit" id="searchsubmit" value="Search" />
+				</div>
+			</form></aside>
+		<aside id="recent-posts-3" class="widget widget_recent_entries">
+		<p class="widget-title">Recent Posts</p>
+		<ul>
+											<li>
+					<a href="https://krebsonsecurity.com/2021/12/canada-charges-its-most-prolific-cybercriminal/">Canada Charges Its &#8220;Most Prolific Cybercriminal&#8221;</a>
+									</li>
+											<li>
+					<a href="https://krebsonsecurity.com/2021/12/who-is-the-network-access-broker-babam/">Who Is the Network Access Broker &#8216;Babam&#8217;?</a>
+									</li>
+											<li>
+					<a href="https://krebsonsecurity.com/2021/12/ubiquiti-developer-charged-with-extortion-causing-2020-breach/">Ubiquiti Developer Charged With Extortion, Causing 2020 &#8220;Breach&#8221;</a>
+									</li>
+											<li>
+					<a href="https://krebsonsecurity.com/2021/11/the-internet-is-held-together-with-spit-baling-wire/">The Internet is Held Together With Spit &#038; Baling Wire</a>
+									</li>
+											<li>
+					<a href="https://krebsonsecurity.com/2021/11/arrest-in-ransom-your-employer-email-scheme/">Arrest in &#8216;Ransom Your Employer&#8217; Email Scheme</a>
+									</li>
+					</ul>
+
+		</aside><aside id="text-2" class="widget widget_text">			<div class="textwidget"><a name="subscribe2"></a></div>
+		</aside><aside id="widget_sp_image-15" class="widget widget_sp_image"><p class="widget-title">Spam Nation</p><a href="https://www.amazon.com/Spam-Nation-Organized-Cybercrime-Epidemic-ebook/dp/B00L5QGBL0/ref=dp_kinw_strp_1" target="_blank" class="widget_sp_image-image-link" title="Spam Nation"><img width="266" height="404" alt="Spam Nation" class="attachment-266x404 aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2015/04/spamnation-nyt.png" /></a><div class="widget_sp_image-description" ><p>A New York Times Bestseller! </p>
+</div></aside><aside id="widget_sp_image-25" class="widget widget_sp_image"><p class="widget-title">Thinking of a Cybersecurity Career?</p><a href="https://krebsonsecurity.com/2020/07/thinking-of-a-cybersecurity-career-read-this/" target="_blank" class="widget_sp_image-image-link" title="Thinking of a Cybersecurity Career? Read This."><img width="625" height="424" alt="Thinking of a Cybersecurity Career?" class="attachment-full" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2020/07/codepeople.png 625w, https://krebsonsecurity.com/wp-content/uploads/2020/07/codepeople-580x393.png 580w" sizes="(max-width: 625px) 100vw, 625px" src="https://krebsonsecurity.com/wp-content/uploads/2020/07/codepeople.png" /></a><div class="widget_sp_image-description" ><p>Read this.</p>
+</div></aside><aside id="widget_sp_image-3" class="widget widget_sp_image"><p class="widget-title">All About Skimmers </p><a href="https://krebsonsecurity.com/all-about-skimmers/" target="_blank" class="widget_sp_image-image-link" title="All About Skimmers "><img width="299" height="232" alt="All About Skimmers" class="attachment-299x232 aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2010/08/skimgallery1.jpg" /></a><div class="widget_sp_image-description" ><p>Click image for my skimmer series.</p>
+</div></aside><aside id="categories-2" class="widget widget_categories"><p class="widget-title">Story Categories</p>
+			<ul>
+					<li class="cat-item cat-item-5"><a href="https://krebsonsecurity.com/category/sunshine/" title="Includes investigative blog posts meant to shine a light on the darker corners of the Internet.">A Little Sunshine</a>
+</li>
+	<li class="cat-item cat-item-2240"><a href="https://krebsonsecurity.com/category/all-about-skimmers/">All About Skimmers</a>
+</li>
+	<li class="cat-item cat-item-9085"><a href="https://krebsonsecurity.com/category/ashley-madison-breach/">Ashley Madison breach</a>
+</li>
+	<li class="cat-item cat-item-3191"><a href="https://krebsonsecurity.com/category/breadcrumbs/">Breadcrumbs</a>
+</li>
+	<li class="cat-item cat-item-3771"><a href="https://krebsonsecurity.com/category/data-breaches/" title="Stories about data breaches at retailers, corporations, governments and organizations of all sizes.">Data Breaches</a>
+</li>
+	<li class="cat-item cat-item-4624"><a href="https://krebsonsecurity.com/category/ddos-for-hire/">DDoS-for-Hire</a>
+</li>
+	<li class="cat-item cat-item-9173"><a href="https://krebsonsecurity.com/category/employment-fraud/">Employment Fraud</a>
+</li>
+	<li class="cat-item cat-item-2151"><a href="https://krebsonsecurity.com/category/how-to-break-into-security/" title="If you&#039;ve ever wanted career advice on how to make a shift into the security industry, look no further.">How to Break Into Security</a>
+</li>
+	<li class="cat-item cat-item-87"><a href="https://krebsonsecurity.com/category/latest-warnings/">Latest Warnings</a>
+</li>
+	<li class="cat-item cat-item-4071"><a href="https://krebsonsecurity.com/category/neer-do-well-news/">Ne&#039;er-Do-Well News</a>
+</li>
+	<li class="cat-item cat-item-9"><a href="https://krebsonsecurity.com/category/other/">Other</a>
+</li>
+	<li class="cat-item cat-item-1306"><a href="https://krebsonsecurity.com/category/pharma-wars/">Pharma Wars</a>
+</li>
+	<li class="cat-item cat-item-8240"><a href="https://krebsonsecurity.com/category/ransomware/">Ransomware</a>
+</li>
+	<li class="cat-item cat-item-599"><a href="https://krebsonsecurity.com/category/security-tools/">Security Tools</a>
+</li>
+	<li class="cat-item cat-item-8298"><a href="https://krebsonsecurity.com/category/sim-swapping/">SIM Swapping</a>
+</li>
+	<li class="cat-item cat-item-4079"><a href="https://krebsonsecurity.com/category/spam-nation/">Spam Nation</a>
+</li>
+	<li class="cat-item cat-item-1"><a href="https://krebsonsecurity.com/category/smallbizvictims/" title="Posts in this category will include new stories similar to those told in the Small Business Victims category on The Washington Post&#039;s Security Fix blog, which chronicled the methods organized cyber thieve are using to steal hundreds of thousands of dollars from dozens of small- to mid-sized companies around the country.">Target: Small Businesses</a>
+</li>
+	<li class="cat-item cat-item-5167"><a href="https://krebsonsecurity.com/category/tax-refund-fraud/">Tax Refund Fraud</a>
+</li>
+	<li class="cat-item cat-item-3"><a href="https://krebsonsecurity.com/category/comingstorm/" title="This category includes blog posts about computer and Internet security threats now and on the horizon.">The Coming Storm</a>
+</li>
+	<li class="cat-item cat-item-4"><a href="https://krebsonsecurity.com/category/patches/" title="Short posts on the latest security updates for widely-used software.
+">Time to Patch</a>
+</li>
+	<li class="cat-item cat-item-21"><a href="https://krebsonsecurity.com/category/web-fraud-2-0/">Web Fraud 2.0</a>
+</li>
+			</ul>
+
+			</aside><aside id="widget_sp_image-5" class="widget widget_sp_image"><p class="widget-title">The Value of a Hacked PC</p><a href="https://krebsonsecurity.com/2012/10/the-scrap-value-of-a-hacked-pc-revisited/" target="_blank" class="widget_sp_image-image-link" title="The Value of a Hacked PC"><img width="285" height="180" alt="valuehackedpc " class="attachment-285x180 aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2012/12/valuehackedpc-285x180.png" /></a><div class="widget_sp_image-description" ><p>Badguy uses for your PC</p>
+</div></aside><aside id="widget_sp_image-9" class="widget widget_sp_image"><p class="widget-title">Badguy Uses for Your Email </p><a href="https://krebsonsecurity.com/2013/06/the-value-of-a-hacked-email-account/" target="_self" class="widget_sp_image-image-link" title="Badguy Uses for Your Email "><img width="296" height="170" alt="Badguy Uses for Your Email " class="attachment-full aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2013/06/badguyemail.png 296w, https://krebsonsecurity.com/wp-content/uploads/2013/06/badguyemail-285x163.png 285w" sizes="(max-width: 296px) 100vw, 296px" src="https://krebsonsecurity.com/wp-content/uploads/2013/06/badguyemail.png" /></a><div class="widget_sp_image-description" ><p>Your email account may be worth far more than you imagine.</p>
+</div></aside><aside id="widget_sp_image-24" class="widget widget_sp_image"><a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&#038;hosted_button_id=MCCRKHWRX57HS" id="donate" target="_self" class="widget_sp_image-image-link"><img width="250" height="55" alt="Donate to Krebs On Security" class="attachment-medium aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2016/09/donatepaypal2-1.png" /></a></aside><aside id="most_popular_posts-3" class="widget widget_most_popular_posts">
+<p class="widget-title">Most Popular Posts</p>
+<ul>	<li><a href="https://krebsonsecurity.com/2018/07/sextortion-scam-uses-recipients-hacked-passwords/">Sextortion Scam Uses Recipient's Hacked Passwords</a> (1076)</li>
+	<li><a href="https://krebsonsecurity.com/2015/07/online-cheating-site-ashleymadison-hacked/">Online Cheating Site AshleyMadison Hacked</a> (798)</li>
+	<li><a href="https://krebsonsecurity.com/2013/12/sources-target-investigating-data-breach/">Sources: Target Investigating Data Breach</a> (620)</li>
+	<li><a href="https://krebsonsecurity.com/2020/11/trump-fires-security-chief-christopher-krebs/">Trump Fires Security Chief Christopher Krebs</a> (534)</li>
+	<li><a href="https://krebsonsecurity.com/2013/12/cards-stolen-in-target-breach-flood-underground-markets/">Cards Stolen in Target Breach Flood Underground Markets</a> (445)</li>
+	<li><a href="https://krebsonsecurity.com/2013/05/reports-liberty-reserve-founder-arrested-site-shuttered/">Reports: Liberty Reserve Founder Arrested, Site Shuttered</a> (416)</li>
+	<li><a href="https://krebsonsecurity.com/2015/08/was-the-ashley-madison-database-leaked/">Was the Ashley Madison Database Leaked?</a> (376)</li>
+	<li><a href="https://krebsonsecurity.com/2021/01/ddos-guard-to-forfeit-internet-space-occupied-by-parler/">DDoS-Guard To Forfeit Internet Space Occupied by Parler</a> (374)</li>
+	<li><a href="https://krebsonsecurity.com/2014/05/true-goodbye-using-truecrypt-is-not-secure/">True Goodbye: 'Using TrueCrypt Is Not Secure'</a> (363)</li>
+	<li><a href="https://krebsonsecurity.com/2015/08/who-hacked-ashley-madison/">Who Hacked Ashley Madison?</a> (361)</li>
+</ul>
+</aside>
+<aside id="media_image-2" class="widget widget_media_image"><p class="widget-title">Why So Many Top Hackers Hail from Russia</p><a href="https://krebsonsecurity.com/2017/06/why-so-many-top-hackers-hail-from-russia/"><img width="580" height="389" src="https://krebsonsecurity.com/wp-content/uploads/2017/06/computered-580x389.png" class="image wp-image-39684  attachment-medium size-medium" alt="" loading="lazy" style="max-width: 100%; height: auto;" srcset="https://krebsonsecurity.com/wp-content/uploads/2017/06/computered-580x389.png 580w, https://krebsonsecurity.com/wp-content/uploads/2017/06/computered-768x514.png 768w, https://krebsonsecurity.com/wp-content/uploads/2017/06/computered-940x630.png 940w, https://krebsonsecurity.com/wp-content/uploads/2017/06/computered.png 1551w" sizes="(max-width: 580px) 100vw, 580px" /></a></aside><aside id="widget_sp_image-11" class="widget widget_sp_image"><p class="widget-title">Category: Web Fraud 2.0</p><a href="https://krebsonsecurity.com/category/web-fraud-2-0/" target="_blank" class="widget_sp_image-image-link" title="Category: Web Fraud 2.0"><img width="227" height="400" alt="Criminnovations" class="attachment-medium aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2013/11/cybercrimeinnovations-227x400.png" /></a><div class="widget_sp_image-description" ><p>Innovations from the Underground</p>
+</div></aside><aside id="widget_sp_image-12" class="widget widget_sp_image"><a href="https://krebsonsecurity.com/2014/03/are-credit-monitoring-services-worth-it/" target="_blank" class="widget_sp_image-image-link"><img width="285" height="189" class="attachment-medium aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2014/03/shreddedID-copy-285x189.png 285w, https://krebsonsecurity.com/wp-content/uploads/2014/03/shreddedID-copy-600x399.png 600w, https://krebsonsecurity.com/wp-content/uploads/2014/03/shreddedID-copy.png 849w" sizes="(max-width: 285px) 100vw, 285px" src="https://krebsonsecurity.com/wp-content/uploads/2014/03/shreddedID-copy-285x189.png" /></a><div class="widget_sp_image-description" ><p>ID Protection Services Examined</p>
+</div></aside><aside id="widget_sp_image-13" class="widget widget_sp_image"><p class="widget-title">Is Antivirus Dead?</p><a href="https://krebsonsecurity.com/2014/05/antivirus-is-dead-long-live-antivirus/" target="_blank" class="widget_sp_image-image-link" title="Is Antivirus Dead?"><img width="285" height="161" alt="Is Antivirus Dead?" class="attachment-medium aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2014/05/cryptservices-285x161.png 285w, https://krebsonsecurity.com/wp-content/uploads/2014/05/cryptservices-600x339.png 600w, https://krebsonsecurity.com/wp-content/uploads/2014/05/cryptservices.png 945w" sizes="(max-width: 285px) 100vw, 285px" src="https://krebsonsecurity.com/wp-content/uploads/2014/05/cryptservices-285x161.png" /></a><div class="widget_sp_image-description" ><p>The reasons for its decline</p>
+</div></aside><aside id="widget_sp_image-14" class="widget widget_sp_image"><p class="widget-title">The Growing Tax Fraud Menace</p><a href="https://krebsonsecurity.com/category/tax-refund-fraud/" target="_blank" class="widget_sp_image-image-link" title="The Growing Tax Fraud Menace"><img width="285" height="285" alt="The Growing Tax Fraud Menace" class="attachment-medium aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2014/04/taxfraud-285x285.jpg 285w, https://krebsonsecurity.com/wp-content/uploads/2014/04/taxfraud-150x150.jpg 150w, https://krebsonsecurity.com/wp-content/uploads/2014/04/taxfraud-600x600.jpg 600w, https://krebsonsecurity.com/wp-content/uploads/2014/04/taxfraud.jpg 693w" sizes="(max-width: 285px) 100vw, 285px" src="https://krebsonsecurity.com/wp-content/uploads/2014/04/taxfraud-285x285.jpg" /></a><div class="widget_sp_image-description" ><p>File 'em Before the Bad Guys Can </p>
+</div></aside><aside id="widget_sp_image-17" class="widget widget_sp_image"><p class="widget-title">Inside a Carding Shop</p><a href="https://krebsonsecurity.com/2014/06/peek-inside-a-professional-carding-shop/" target="_blank" class="widget_sp_image-image-link" title="Inside a Carding Shop"><img width="194" height="340" alt="Inside a Carding Shop" class="attachment-medium aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2014/06/mcdumpalsjoined.png" /></a><div class="widget_sp_image-description" ><p>A crash course in carding. </p>
+</div></aside><aside id="widget_sp_image-18" class="widget widget_sp_image"><p class="widget-title">Beware Social Security Fraud</p><a href="https://krebsonsecurity.com/2013/09/crooks-hijack-retirement-funds-via-ssa-portal/" target="_blank" class="widget_sp_image-image-link" title="Beware Social Security Fraud"><img width="285" height="293" alt="Beware Social Security Fraud" class="attachment-full aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2016/09/myssn-285x293.png" /></a><div class="widget_sp_image-description" ><p>Sign up, or Be Signed Up! </p>
+</div></aside><aside id="widget_sp_image-2" class="widget widget_sp_image"><p class="widget-title">How Was Your Card Stolen?</p><a href="https://krebsonsecurity.com/2015/01/how-was-your-credit-card-stolen/" target="_blank" class="widget_sp_image-image-link" title="How Was Your Card Stolen?"><img width="285" height="285" alt="How Was Your Card Stolen?" class="attachment-full aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2016/09/carddominoes-285x285.jpg 285w, https://krebsonsecurity.com/wp-content/uploads/2016/09/carddominoes-285x285-150x150.jpg 150w" sizes="(max-width: 285px) 100vw, 285px" src="https://krebsonsecurity.com/wp-content/uploads/2016/09/carddominoes-285x285.jpg" /></a><div class="widget_sp_image-description" ><p>Finding out is not so easy. </p>
+</div></aside><aside id="widget_sp_image-22" class="widget widget_sp_image"><p class="widget-title">Krebs&#8217;s 3 Rules&#8230;</p><a href="https://krebsonsecurity.com/2011/05/krebss-3-basic-rules-for-online-safety/" target="_blank" class="widget_sp_image-image-link" title="Krebs&#8217;s 3 Rules&#8230;"><img width="300" height="300" alt="Krebs&#8217;s 3 Rules&#8230;" class="attachment-medium aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2011/05/three-300x300.jpg 300w, https://krebsonsecurity.com/wp-content/uploads/2011/05/three-150x150.jpg 150w, https://krebsonsecurity.com/wp-content/uploads/2011/05/three.jpg 347w" sizes="(max-width: 300px) 100vw, 300px" src="https://krebsonsecurity.com/wp-content/uploads/2011/05/three-300x300.jpg" /></a><div class="widget_sp_image-description" ><p>...For Online Safety. </p>
+</div></aside>		</div><!-- #secondary -->
+		</div><!-- #main .wrapper -->
+	
+	<div id="publisho-footer" class="widget-area">
+				<div class="footer-widget">
+                				</div>
+				<div class="footer-widget">
+								</div>
+				<div class="footer-widget">
+								</div>
+	</div>
+
+	<div class="site-wordpress">
+					&copy; Krebs on Security<br>
+	</div>
+	<!-- .site-info --><div class="clear"></div>
+</div><!-- #page -->
+
+<script type='text/javascript' src='https://krebsonsecurity.com/wp-content/themes/kos-mar2021/js/slicknav.js?ver=5.8.2' id='publisho-mobile-navigation-js'></script>
+<script type='text/javascript' src='https://krebsonsecurity.com/wp-includes/js/wp-embed.min.js?ver=5.8.2' id='wp-embed-js'></script>
+</body>
+</html>
+<!--
+Performance optimized by W3 Total Cache. Learn more: https://www.boldgrid.com/w3-total-cache/
+
+Object Caching 143/383 objects using memcached
+Page Caching using memcached 
+Database Caching 7/44 queries in 0.015 seconds using memcached
+
+Served from: krebsonsecurity.com @ 2021-12-10 14:41:22 by W3 Total Cache
+-->

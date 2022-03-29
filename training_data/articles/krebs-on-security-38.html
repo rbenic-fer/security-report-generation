@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<!--[if IE 7]>
+<html class="ie ie7" lang="en-US">
+<![endif]-->
+<!--[if IE 8]>
+<html class="ie ie8" lang="en-US">
+<![endif]-->
+<!--[if !(IE 7) | !(IE 8)  ]><!-->
+<html lang="en-US">
+<!--<![endif]-->
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width" />
+<link rel="profile" href="http://gmpg.org/xfn/11" />
+<!--[if lt IE 9]>
+<script src="https://krebsonsecurity.com/wp-content/themes/kos-mar2021/js/html5.js" type="text/javascript"></script>
+<![endif]-->
+<title>Krebs on Security &#8211; Page 38 &#8211; In-depth security news and investigation</title>
+<meta name='robots' content='max-image-preview:large' />
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="Krebs on Security &raquo; Feed" href="https://krebsonsecurity.com/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Krebs on Security &raquo; Comments Feed" href="https://krebsonsecurity.com/comments/feed/" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.1.0\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.1.0\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/krebsonsecurity.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=5.8.2"}};
+			!function(e,a,t){var n,r,o,i=a.createElement("canvas"),p=i.getContext&&i.getContext("2d");function s(e,t){var a=String.fromCharCode;p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,e),0,0);e=i.toDataURL();return p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,t),0,0),e===i.toDataURL()}function c(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(o=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},r=0;r<o.length;r++)t.supports[o[r]]=function(e){if(!p||!p.fillText)return!1;switch(p.textBaseline="top",p.font="600 32px Arial",e){case"flag":return s([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])?!1:!s([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!s([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]);case"emoji":return!s([10084,65039,8205,55357,56613],[10084,65039,8203,55357,56613])}return!1}(o[r]),t.supports.everything=t.supports.everything&&t.supports[o[r]],"flag"!==o[r]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[o[r]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(n=t.source||{}).concatemoji?c(n.concatemoji):n.wpemoji&&n.twemoji&&(c(n.twemoji),c(n.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+	<link rel='stylesheet' id='colorbox-theme1-css'  href='https://krebsonsecurity.com/wp-content/plugins/jquery-lightbox-for-native-galleries/colorbox/theme1/colorbox.css?ver=1.3.14' type='text/css' media='screen' />
+<link rel='stylesheet' id='wp-block-library-css'  href='https://krebsonsecurity.com/wp-includes/css/dist/block-library/style.min.css?ver=5.8.2' type='text/css' media='all' />
+<link rel='stylesheet' id='contact-form-7-css'  href='https://krebsonsecurity.com/wp-content/plugins/contact-form-7/includes/css/styles.css?ver=5.5.3' type='text/css' media='all' />
+<link rel='stylesheet' id='publisho-style-css'  href='https://krebsonsecurity.com/wp-content/themes/kos-mar2021/style.css?subver=1.2&#038;ver=5.8.2' type='text/css' media='all' />
+<style id='publisho-style-inline-css' type='text/css'>
+
+	.themonic-nav .current-menu-item > a, .themonic-nav .current-menu-ancestor > a, .themonic-nav .current_page_item > a, .themonic-nav .current_page_ancestor > a {
+		background: #cc6600;
+	}
+	.themonic-nav ul.nav-menu, .themonic-nav div.nav-menu > ul {
+		border-bottom: 5px solid #cc6600;
+	}
+	#site-navigation .topheadmenu a {
+    background: rgba(0, 0, 0, 0);
+	}
+	.themonic-nav li a:hover {
+		background: #cc6600;
+	}
+	.themonic-nav li:hover {
+		background: #cc6600;
+	}.wrapper .flexslider {margin: 0 0 30px;}.frontp .btm-wrap {
+    border-top: 1px solid #e9e9e9;
+	}
+	.entry-summary {
+    border-top: none;
+	}.frontp .btm-wrap { margin-bottom: 30px;}.site { font-size:14px;}.site { font-family:'Roboto', arial ;}
+</style>
+<link rel='stylesheet' id='publisho-custom-style-css'  href='https://krebsonsecurity.com/wp-content/themes/kos-mar2021/custom.css?subver=1.2&#038;ver=5.8.2' type='text/css' media='all' />
+<!--[if lt IE 9]>
+<link rel='stylesheet' id='publisho-ie-css'  href='https://krebsonsecurity.com/wp-content/themes/kos-mar2021/css/ie.css?ver=20160606' type='text/css' media='all' />
+<![endif]-->
+<link rel='stylesheet' id='fontawesome-css-css'  href='https://krebsonsecurity.com/wp-content/themes/kos-mar2021/fonts/font-awesome.min.css?ver=5.8.2' type='text/css' media='all' />
+<link rel='stylesheet' id='publisho_custom_fonts-css'  href='//fonts.googleapis.com/css?family=Roboto%3Aregular%2Citalic%2C500%26subset%3Dlatin%2C' type='text/css' media='screen' />
+<script type='text/javascript' src='https://krebsonsecurity.com/wp-includes/js/jquery/jquery.min.js?ver=3.6.0' id='jquery-core-js'></script>
+<script type='text/javascript' src='https://krebsonsecurity.com/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.3.2' id='jquery-migrate-js'></script>
+<script type='text/javascript' src='https://krebsonsecurity.com/wp-content/plugins/jquery-lightbox-for-native-galleries/colorbox/jquery.colorbox-min.js?ver=1.3.14' id='colorbox-js'></script>
+<link rel="https://api.w.org/" href="https://krebsonsecurity.com/wp-json/" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://krebsonsecurity.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://krebsonsecurity.com/wp-includes/wlwmanifest.xml" /> 
+<meta name="generator" content="WordPress 5.8.2" />
+<!-- JavaScript Pull-Quotes plugin v2.2 -->
+	<link rel="stylesheet" href="https://krebsonsecurity.com/wp-content/plugins/jspullquotes/resources/jspullquotes-core.css" type="text/css" />
+	<link rel="stylesheet" href="https://krebsonsecurity.com/wp-content/plugins/jspullquotes/resources/jspullquotes-default.css" type="text/css" />
+	<script type="text/javascript" src="https://krebsonsecurity.com/wp-content/plugins/jspullquotes/resources/jspullquotes.js"></script>
+	<script type="text/javascript">
+		var arrOptions = new Array("1", "1", "right", "1", "1", "blockquote", "pullquote", "pullquote pqRight");
+		pullQuoteOpts(arrOptions);
+	</script>
+<!-- end pull-quote additions -->
+<!-- jQuery Lightbox For Native Galleries v3.1.3 | http://www.viper007bond.com/wordpress-plugins/jquery-lightbox-for-native-galleries/ -->
+<script type="text/javascript">
+// <![CDATA[
+	jQuery(document).ready(function($){
+		$(".gallery").each(function(index, obj){
+			var galleryid = Math.floor(Math.random()*10000);
+			$(obj).find("a").colorbox({rel:galleryid, maxWidth:"95%", maxHeight:"95%"});
+		});
+		$("a.lightbox").colorbox({maxWidth:"95%", maxHeight:"95%"});
+	});
+// ]]>
+</script>
+<style type="text/css" id="custom-background-css">
+body.custom-background { background-color: #ffffff; }
+</style>
+	<link rel="me" href="https://twitter.com/briankrebs" /><meta name="twitter:widgets:link-color" content="#000000" /><meta name="twitter:widgets:border-color" content="#000000" /><meta name="twitter:partner" content="tfwp" />
+<meta name="twitter:card" content="summary" /><meta name="twitter:title" content="Krebs on Security" /><meta name="twitter:site" content="@briankrebs" /><meta name="twitter:description" content="In-depth security news and investigation" />
+</head>
+<body class="home blog paged custom-background paged-38 custom-background-white single-author frontp hfeed">
+<div id="page" class="site">
+	<!-- <div class="publisho-top-mobile-nav clear"></div> -->
+	<div class="themonic-logo themonic-ad3"><div class="a-statement">Advertisement</div><a href="https://go.infrascale.com/lp/get-ransomware-ebook-krebsonsecurity/?utm_source=banner&amp;utm_medium=display&amp;utm_campaign=krebsssecurity_influencer_1240_110">
+<img src="/b-infrascale/5.png">
+</a></div>
+	<div class="themonic-logo themonic-ad6"><div class="a-statement">Advertisement</div><a href="https://securityscorecard.com/instant-security-scorecard?utm_source=krebs+on+security&amp;utm_medium=display&amp;utm_campaign=instant+scorecard&amp;utm_term=B&amp;utm_content=1240x160">
+<img src="/b-securityscorecard/6.jpg">
+</a></div>
+	<nav id="site-navigation" class="themonic-nav" role="navigation">
+	</nav><!-- #site-navigation -->
+	<div class="clear"></div>
+	<header id="masthead" class="site-header" role="banner">
+ 					<div class="desktop-social">
+						<div class="socialmedia">
+							<a href="http://twitter.com/briankrebs" target="_blank"><i class="fa fa-twitter"></i></a> 
+															<a class="rss" href="https://krebsonsecurity.com/feed/" target="_blank"><i class="fa fa-rss"></i></a>	
+									<a class="rss" href="https://www.linkedin.com/in/bkrebs/" target="_blank"><i class="fa fa-linkedin"></i></a>	
+								</div>
+				 	</div>
+																						   
+		
+		<div class="themonic-logo responsive-img-container">
+			<a href="https://krebsonsecurity.com/" title="Krebs on Security" rel="home"><img src="https://krebsonsecurity.com/wp-content/uploads/2021/03/kos-27-03-2021.jpg" alt="Krebs on Security"></a>
+		</div>
+
+					<div class="mobile-social">
+						<div class="socialmedia">
+							<a href="http://twitter.com/briankrebs" target="_blank"><i class="fa fa-twitter"></i></a> 
+															<a class="rss" href="https://krebsonsecurity.com/feed/" target="_blank"><i class="fa fa-rss"></i></a>	
+									<a class="rss" href="https://www.linkedin.com/in/bkrebs/" target="_blank"><i class="fa fa-linkedin"></i></a>	
+								</div>
+					</div>
+		
+				<!-- <div class="publisho-mobile-nav clear"></div> -->
+		<nav id="site-navigation" class="themonic-nav" role="navigation">
+			<a class="assistive-text" href="#content" title="Skip to content">Skip to content</a>
+			<div id="menu-top" class="nav-menu"><ul>
+<li ><a href="https://krebsonsecurity.com/">Home</a></li><li class="page_item page-item-2"><a href="https://krebsonsecurity.com/about/">About the Author</a></li>
+<li class="page_item page-item-645"><a href="https://krebsonsecurity.com/cpm/">Advertising/Speaking</a></li>
+</ul></div>
+		</nav><!-- #site-navigation -->
+		<div class="clear"></div>
+	</header><!-- #masthead -->
+	<div id="main" class="wrapper">
+		<div id="primary" class="site-content">
+	
+
+	
+		<div id="content" role="main">
+
+		<article id="post-47080" class="post-47080 post type-post status-publish format-standard hentry category-data-breaches tag-buca-di-beppo-breach tag-chicken-guy-breach tag-davinci-breach tag-earl-enterprises tag-earl-of-sandwich-breach tag-jokers-stash tag-mixology-breach tag-planet-hollywood-breach tag-tequila-taqueria-breach">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2019/03/a-month-after-2-million-customer-cards-sold-online-buca-di-beppo-parent-admits-breach/" title="Permalink to A Month After 2 Million Customer Cards Sold Online, Buca di Beppo Parent Admits Breach" rel="bookmark">A Month After 2 Million Customer Cards Sold Online, Buca di Beppo Parent Admits Breach</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">March 29, 2019</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2019/03/a-month-after-2-million-customer-cards-sold-online-buca-di-beppo-parent-admits-breach/#comments">40 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>On Feb. 21, 2019, KrebsOnSecurity contacted Italian restaurant chain <strong>Buca di Beppo</strong> after discovering strong evidence that two million credit and debit card numbers belonging to the company&#8217;s customers were being sold in the cybercrime underground. Today, Buca&#8217;s parent firm announced it had remediated a 10-month breach of its payment systems at dozens of restaurants, including some locations of its other brands such as <strong>Earl of Sandwich</strong> and <strong>Planet Hollywood</strong>.</p>
+<div id="attachment_47087" style="width: 609px" class="wp-caption aligncenter"><a class="lightbox" href="https://krebsonsecurity.com/wp-content/uploads/2019/03/davincibreach.png"><img aria-describedby="caption-attachment-47087" loading="lazy" class="wp-image-47087" src="https://krebsonsecurity.com/wp-content/uploads/2019/03/davincibreach.png" alt="" width="599" height="400" /></a><p id="caption-attachment-47087" class="wp-caption-text">Some 2.1 million+ credit and debit card accounts stolen from dozens of Earl Enterprises restaurant locations went up for sale on a popular carding forum on Feb. 20, 2019.</p></div>
+<p>In a statement posted to its Web site today, Orlando, Fla. based hospitality firm <strong><a href="https://www.earlenterprise.com/" target="_blank" rel="noopener">Earl Enterprises</a></strong> said a data breach involving malware installed on its point-of-sale systems allowed cyber thieves to steal card details from customers between May 23, 2018 and March 18, 2019.</p>
+<p>Earl Enterprises did not respond to requests for specifics about how many customers total may have been impacted by the 10-month breach. The company&#8217;s statement directs concerned customers <a href="http://www.earlenterprise.com/incident/" target="_blank" rel="noopener">to an online tool</a> that allows one to look up breached locations by city and state.</p>
+<p>According to an analysis of that page, it appears the breach impacts virtually all 67 Buca di Beppo locations in the United States; a handful out of the total 31 Earl of Sandwich locations; and Planet Hollywood locations in Las Vegas, New York City and Orlando. Also impacted were <a href="http://tequilataquerialv.com/" target="_blank" rel="noopener">Tequila Taqueria</a> in Las Vegas; <a href="https://chickenguy.com/location/disney-springs/" target="_blank" rel="noopener">Chicken Guy!</a> in Disney Springs, Fla.; and <a href="http://mixology101la.com/" target="_blank" rel="noopener">Mixology</a> in Los Angeles.</p>
+<p>KrebsOnsecurity contacted the executive team at Buca di Beppo in late February after determining most of this restaurant&#8217;s locations were likely involved a data breach that first surfaced on <a href="https://krebsonsecurity.com/?s=joker%27s+stash&amp;x=0&amp;y=0" target="_blank" rel="noopener">Joker&#8217;s Stash</a>, an underground shop that sells huge new batches of freshly-stolen credit and debit cards on a regular basis. <a href="https://krebsonsecurity.com/2019/03/a-month-after-2-million-customer-cards-sold-online-buca-di-beppo-parent-admits-breach/#more-47080" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+	<div id="between_article_ad" class="themonic-ad5"><a href="https://www.iansresearch.com/resources/infosec-content-downloads/research-reports/2021-ciso-compensation-benchmark-research-study?utm_source=krebs&amp;utm_medium=display_ad&amp;utm_campaign=2021_ciso_comp_study">
+<img src="/b-ians/6.png">
+</a></div>	<article id="post-47021" class="post-47021 post type-post status-publish format-standard hentry category-sunshine category-neer-do-well-news category-comingstorm tag-brooke-donahue tag-eric-eoin-marques tag-fbi tag-firefox-zero-day tag-freedom-hosting tag-rte tag-the-irish-times tag-tor tag-tor-browser-bundle tag-vlad-tsrklevich tag-wired-com">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2019/03/alleged-child-porn-lord-faces-us-extradition/" title="Permalink to Alleged Child Porn Lord Faces US Extradition" rel="bookmark">Alleged Child Porn Lord Faces US Extradition</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">March 22, 2019</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2019/03/alleged-child-porn-lord-faces-us-extradition/#comments">94 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>In 2013, the <strong>FBI</strong> <a href="https://krebsonsecurity.com/2013/08/firefox-zero-day-used-in-child-porn-hunt/" target="_blank" rel="noopener">exploited a zero-day vulnerability in Firefox</a> to seize control over a Dark Web network of child pornography sites. The alleged owner of that ring &#8211; 33-year-old <a href="https://en.wikipedia.org/wiki/Freedom_Hosting" target="_blank" rel="noopener">Freedom Hosting</a> operator <strong>Eric Eoin Marques</strong> &#8211; was arrested in Ireland later that year on a U.S. warrant and has been in custody ever since. This week, Ireland&#8217;s Supreme Court cleared the way for Marques to be extradited to the United States.</p>
+<div id="attachment_47063" style="width: 602px" class="wp-caption aligncenter"><img aria-describedby="caption-attachment-47063" loading="lazy" class=" wp-image-47063" src="https://krebsonsecurity.com/wp-content/uploads/2019/03/marques.jpg" alt="" width="592" height="314" /><p id="caption-attachment-47063" class="wp-caption-text">Eric Eoin Marques. Photo: Irishtimes.com</p></div>
+<p>The FBI has called Marques the world&#8217;s largest facilitator of child porn. He is wanted on four charges linked to hidden child porn sites like &#8220;Lolita City&#8221; and &#8220;PedoEmpire,&#8221; which the government says were extremely violent, graphic and depicting the rape and torture of pre-pubescent children. Investigators allege that sites on Freedom Hosting had thousands of customers, and earned Marques more than $1.5 million.</p>
+<p>For years Freedom Hosting had developed a reputation as a safe haven for hosting child porn. Marques allegedly operated Freedom Hosting as a turnkey solution for Web sites that hide their true location using <a href="https://www.torproject.org/projects/torbrowser.html.en" target="_blank" rel="noopener">Tor</a>, an online anonymity tool.</p>
+<p>The sites could only be accessed using the Tor Browser Bundle, which is built on the Firefox Web browser. On Aug. 4, 2013, U.S. federal agents exploited a previously unknown vulnerability in Firefox version 17 that allowed them to identify the true Internet addresses and computer names of people using Tor Browser to visit the child porn sites at Freedom Hosting.</p>
+<p>Irish public media service RTE <a href="https://www.rte.ie/news/2013/0912/473824-eric-eoin-marques/" target="_blank" rel="noopener">reported in 2013</a> that Marques briefly regained access to one of his hosting servers even after the FBI had seized control over it and changed the password, briefly locking the feds out of the system.</p>
+<p>As <a href="https://www.wired.com/2013/09/freedom-hosting-fbi/" target="_blank" rel="noopener">Wired.com observed</a> at the time, &#8220;in addition to the wrestling match over Freedom Hosting&#8217;s servers, Marques allegedly dove for his laptop when the police raided him, in an effort to shut it down.&#8221;</p>
+<p>Marques, who holds dual Irish-US citizenship, was denied bail and held pending his nearly six-year appeal process to contest his extradition. FBI investigators told the courts they feared he would try to destroy evidence and/or flee the country. FBI agents testified that Marques had made inquiries about how to get a visa and entry into Russia and set up residence and citizenship there. <a href="https://krebsonsecurity.com/2019/03/alleged-child-porn-lord-faces-us-extradition/#more-47021" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+	<div class="themonic-ad2"><div class="a-statement">Advertisement</div><a href="https://www.akamai.com/blog/security/attacking-a-macro-security-problem-with-micro-segmentation?utm_source=krebsonsecurity&amp;utm_medium=display&amp;utm_id=GL_SecureWorkforce_Guardicore&amp;utm_campaign=F-MC-52610&amp;utm_content=Guardicore">
+<img src="/b-akamai/140.png">
+</a></div>	<article id="post-47007" class="post-47007 post type-post status-publish format-standard hentry category-sunshine category-comingstorm tag-facebook tag-plaintext-passwords tag-scott-renfro">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2019/03/facebook-stored-hundreds-of-millions-of-user-passwords-in-plain-text-for-years/" title="Permalink to Facebook Stored Hundreds of Millions of User Passwords in Plain Text for Years" rel="bookmark">Facebook Stored Hundreds of Millions of User Passwords in Plain Text for Years</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">March 21, 2019</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2019/03/facebook-stored-hundreds-of-millions-of-user-passwords-in-plain-text-for-years/#comments">208 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>Hundreds of millions of <strong>Facebook</strong> users had their account passwords stored in plain text and searchable by thousands of Facebook employees &#8212; in some cases going back to 2012, KrebsOnSecurity has learned. Facebook says an ongoing investigation has so far found no indication that employees have abused access to this data.</p>
+<p><img loading="lazy" class="aligncenter size-full wp-image-30789" src="https://krebsonsecurity.com/wp-content/uploads/2015/04/facebook_dislike_china_-_Google_Search.png" alt="" width="392" height="362" /></p>
+<p>Facebook is probing a series of security failures in which employees built applications that logged unencrypted password data for Facebook users and stored it in plain text on internal company servers. That&#8217;s according to a senior Facebook employee who is familiar with the investigation and who spoke on condition of anonymity because they were not authorized to speak to the press.</p>
+<p>The Facebook source said the investigation so far indicates between 200 million and 600 million Facebook users may have had their account passwords stored in plain text and searchable by more than 20,000 Facebook employees. The source said Facebook is still trying to determine how many passwords were exposed and for how long, but so far the inquiry has uncovered archives with plain text user passwords dating back to 2012.</p>
+<p>My Facebook insider said access logs showed some 2,000 engineers or developers made approximately nine million internal queries for data elements that contained plain text user passwords.</p>
+<p>&#8220;The longer we go into this analysis the more comfortable the legal people [at Facebook] are going with the lower bounds&#8221; of affected users, the source said. &#8220;Right now they&#8217;re working on an effort to reduce that number even more by only counting things we have currently in our data warehouse.&#8221;</p>
+<p>In an interview with KrebsOnSecurity, Facebook software engineer <strong>Scott Renfro</strong> said the company wasn&#8217;t ready to talk about specific numbers &#8212; such as the number of Facebook employees who could have accessed the data.</p>
+<p>Renfro said the company planned to alert affected Facebook users, but that no password resets would be required.</p>
+<p>&#8220;We&#8217;ve not found any cases so far in our investigations where someone was looking intentionally for passwords, nor have we found signs of misuse of this data,&#8221; Renfro said. &#8220;In this situation what we&#8217;ve found is these passwords were inadvertently logged but that there was no actual risk that&#8217;s come from this. We want to make sure we&#8217;re reserving those steps and only force a password change in cases where there&#8217;s definitely been signs of abuse.&#8221;</p>
+<p>A written statement from Facebook provided to KrebsOnSecurity says the company expects to notify &#8220;hundreds of millions of Facebook Lite users, tens of millions of other Facebook users, and tens of thousands of Instagram users.&#8221; Facebook Lite is a version of Facebook designed for <a href="https://www.howtogeek.com/348076/what%E2%80%99s-the-difference-between-facebook-and-facebook-lite/" target="_blank" rel="noopener">low speed connections and low-spec phones</a>.</p>
+<p> <a href="https://krebsonsecurity.com/2019/03/facebook-stored-hundreds-of-millions-of-user-passwords-in-plain-text-for-years/#more-47007" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-46369" class="post-46369 post type-post status-publish format-standard hentry category-sunshine category-security-tools category-sim-swapping tag-allison-nixon tag-flashpoint tag-sim-swap">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2019/03/why-phone-numbers-stink-as-identity-proof/" title="Permalink to Why Phone Numbers Stink As Identity Proof" rel="bookmark">Why Phone Numbers Stink As Identity Proof</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">March 17, 2019</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2019/03/why-phone-numbers-stink-as-identity-proof/#comments">86 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>Phone numbers stink for security and authentication. They stink because most of us have so much invested in these digits that they&#8217;ve become de facto identities. At the same time, when you lose control over a phone number &#8212; maybe it&#8217;s hijacked by fraudsters, you got separated or divorced, or you were way late on your phone bill payments &#8212; whoever inherits that number can then be you in a lot of places online.</p>
+<p><img loading="lazy" class="aligncenter wp-image-45226" src="https://krebsonsecurity.com/wp-content/uploads/2018/09/cell8.png" alt="" width="597" height="687" /></p>
+<p>How exactly did we get to the point where a single, semi-public and occasionally transient data point like a phone number can unlock access to such a large part of our online experience? KrebsOnSecurity spoke about this at length with <strong>Allison Nixon</strong>, director of security research at New York City-based cyber intelligence firm <a href="https://www.flashpoint-intel.com" target="_blank" rel="noopener">Flashpoint</a>.</p>
+<p>Nixon said much of her perspective on mobile identity is colored by the lens of her work, which has her identifying some of the biggest criminals involved in hijacking phone numbers <a href="https://krebsonsecurity.com/?s=SIM+swap&amp;x=0&amp;y=0" target="_blank" rel="noopener">via SIM swapping attacks</a>. Illegal SIM swaps allow fraudsters to hijack a target&#8217;s phone&#8217;s number and use it to steal financial data, passwords, cryptocurrencies and other items of value from victims.</p>
+<p>Nixon said countless companies have essentially built their customer authentication around the phone number, and that a great many sites still let users reset their passwords with nothing more than a one-time code texted to a phone number on the account. In this attack, the fraudster doesn&#8217;t need to know the victim&#8217;s password to hijack the account: He just needs to have access to the target&#8217;s mobile phone number.</p>
+<p>&#8220;As a consumer, I&#8217;m forced to use my phone number as an identity document, because sometimes that&#8217;s the only way to do business with a site online,&#8221; Nixon said. &#8220;But from that site&#8217;s side, when they see a password reset come in via that phone number, they have no way to know if that&#8217;s me. And there&#8217;s nothing anyone can do to stop it except to stop using phone numbers as identity documents.&#8221;</p>
+<p>Beyond SIM-swapping attacks, there are a number of ways that phone numbers can get transferred to new owners, Nixon said. The biggest reason is lack of payment for past phone bills. But maybe someone goes through a nasty divorce or separation, and can no longer access their phone or phone accounts. The account is sent to collections and closed, and the phone number gets released back into the general pool for reassignment after a period of time.</p>
+<p>Many major providers still let people reset their passwords with just a text message. Last week I went to regain access to a Yahoo account I hadn&#8217;t used in almost five years. Yahoo&#8217;s forgot password feature let me enter a phone number, and after entering a code sent to my phone I was able to read my email.</p>
+<p>So, if that Yahoo account is tied to a mobile number that you can receive text messages at, then you can assume control over the account. <a href="https://krebsonsecurity.com/2013/06/the-value-of-a-hacked-email-account/" target="_blank" rel="noopener">And every other account associated with that Yahoo account.</a> <em>Even if that phone number no longer belongs to the person who originally established the email account.</em></p>
+<p>This is exactly what happened recently to a reader who shared this account:</p>
+<blockquote><p>A while ago I bought a new phone number. I went on Yahoo! mail and typed in the phone number in the login. It asked me if I wanted to receive an SMS to gain access. I said yes, and it sent me a verification key or access code via SMS. I typed the code I received. I was surprised that I didn&#8217;t access my own email, but the email I accessed was actually the email of the previous owner of my new number.</p>
+<p>Yahoo! didn&#8217;t even ask me to type the email address, or the first and last name. It simply sent me the SMS, I typed the code I received, and without asking me to type an email or first and last name, it gave me access to the email of my number&#8217;s PREVIOUS OWNER. Didn&#8217;t ask for credentials or email address. This seriously needs to be revised. At minimum Yahoo! should ask me to type the email address or the first and last name before sending me an SMS which contains an access code.</p></blockquote>
+<p><strong>Brian Krebs (BK): </strong>You have your own experiences like this. Or sort of. You tell.</p>
+<p><strong>Allison Nixon (AN): </strong>Any threat intelligence company will have some kind of business function that requires purchasing burner phones fairly frequently, which involves getting new phone numbers. When you get new numbers, they are recycled from previous owners because there probably aren&#8217;t any new ones anymore. I get a lot of various text messages for password resets. One I kept getting was texts from this guy&#8217;s bank. Every time he got a deposit, I would get a text saying how much was deposited and some basic information about the account.</p>
+<p>I approached the bank because I was concerned that maybe this random person would be endangered by the security research we were going to be doing with this new number. I asked them to take him off the number, but they said there wasn&#8217;t anything they could do about it.</p>
+<p>One time I accidentally hijacked a random person&#8217;s account. I was trying to get my own account back at an online service provider, and I put a burner phone number into the site, went through the SMS password reset process, got the link and it said &#8216;Welcome Back&#8217; to some username I didn&#8217;t know. Then I clicked okay and was suddenly reading the private messages of the account.</p>
+<p>I realized I&#8217;d hijacked the account of the previous owner of the phone. It was unintentional, but also very clear that there was no technical reason I couldn&#8217;t hijack even more accounts associated with this number. This is a problem affecting <em>a ton</em> of service providers. This could have happened at many, many other web sites. <a href="https://krebsonsecurity.com/2019/03/why-phone-numbers-stink-as-identity-proof/#more-46369" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-46785" class="post-46785 post type-post status-publish format-standard hentry category-data-breaches tag-brute-force-light tag-citrix-breach tag-george-pappachen tag-password-spraying tag-resecurity tag-sizmek-inc">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2019/03/ad-network-sizmek-probes-account-breach/" title="Permalink to Ad Network Sizmek Probes Account Breach" rel="bookmark">Ad Network Sizmek Probes Account Breach</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">March 13, 2019</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2019/03/ad-network-sizmek-probes-account-breach/#comments">29 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>Online advertising firm <strong>Sizmek Inc.</strong> [<a href="https://www.marketbeat.com/stocks/NASDAQ/SZMK/" target="_blank" rel="noopener">NASDAQ: SZMK</a>] says it is investigating a security incident in which a hacker was reselling access to a user account with the ability to modify ads and analytics for a number of big-name advertisers.</p>
+<p>In a recent posting to a Russian-language cybercrime forum, an individual who&#8217;s been known to sell access to hacked online accounts kicked off an auction for &#8220;the admin panel of a big American ad platform.&#8221;</p>
+<p>&#8220;You can add new users to the ad system, edit existing ones and ad offers,&#8221; the seller wrote. The starting bid was $800.</p>
+<p>The seller included several screen shots of the ad company&#8217;s user panel. A few minutes on LinkedIn showed that many of these people are current or former employees of Sizmek.</p>
+<p>The seller also shared a screenshot of the ad network&#8217;s Alexa site rankings:</p>
+<div id="attachment_46921" style="width: 608px" class="wp-caption aligncenter"><img aria-describedby="caption-attachment-46921" loading="lazy" class=" wp-image-46921" src="https://krebsonsecurity.com/wp-content/uploads/2019/03/hackedadnetwork.jpg" alt="" width="598" height="310" /><p id="caption-attachment-46921" class="wp-caption-text">A screenshot of the Alexa ranking for the &#8220;big American ad network,&#8221; access to which was sold on a cybercrime forum.</p></div>
+<p>I checked <a href="https://www.alexa.com/siteinfo/sizmek.com" target="_blank" rel="noopener">Sizmek&#8217;s Alexa page</a> and at the time it almost mirrored the statistics shown in the screenshot above. Sizmek&#8217;s own <a href="https://www.globenewswire.com/news-release/2018/01/03/1281638/0/en/Sizmek-Announces-First-AI-Enabled-Adtech-Platform-Offering-Total-Transparency.html" target="_blank" rel="noopener">marketing boilerplate</a> says the company operates its ad platform in more than 70 countries, connecting more than 20,000 advertisers and 3,600 agencies to audiences around the world. The company is listed by market analysis firm <a href="https://www.datanyze.com/market-share/ad-servers" target="_blank" rel="noopener">Datanyze.com</a> as the world third-largest ad server network.</p>
+<p>After reaching out to a number of folks at Sizmek, I heard back from <strong>George Pappachen</strong>, the company&#8217;s general counsel.</p>
+<p>Pappachen said the account being resold on the dark web is a regular user account (not a all-powerful administrator account, despite the seller&#8217;s claim) for its <a href="https://www.sizmek.com/blog/goodbye-busywork-next-generation-sizmek-advertising-suite-is-here-to-make-you-more-efficient/" target="_blank" rel="noopener">Sizmek Advertising Suite</a> (SAS). Pappachen described Sizmek&#8217;s SAS product line as &#8220;a sizable and important one&#8221; for the company and a relatively new platform that has hundreds of users.</p>
+<p>He acknowledged that the purloined account had the ability to add or modify the advertising creatives that get run on customer ad campaigns. And Sizmek is used in ad campaigns for some of the biggest brands out there. Some of the companies shown in the screenshot of the panel shared by the dark web seller include PR firm <strong>Fleishman-Hillard</strong>, media giants <strong>Fox Broadcasting</strong>, <strong>Gannett</strong>, and <strong>Hearst Digital</strong>, as well as <strong>Kohler</strong>, and <strong>Pandora</strong>.</p>
+<div id="attachment_46923" style="width: 607px" class="wp-caption aligncenter"><a class="lightbox" href="https://krebsonsecurity.com/wp-content/uploads/2019/03/panel1.jpg"><img aria-describedby="caption-attachment-46923" loading="lazy" class="wp-image-46923" src="https://krebsonsecurity.com/wp-content/uploads/2019/03/panel1.jpg" alt="" width="597" height="271" /></a><p id="caption-attachment-46923" class="wp-caption-text">A screenshot shared by the dark web seller. Portions of this panel &#8212; access to a Sizmek user account &#8212; was likely translated by the Chrome Web browser, which has a built-in page translate function. As seen here, that function tends to translate items in the frame of the panel, but it leaves untouched the data inside those frames.</p></div>
+<p>Crooks who exploited this access could hijack existing ad campaigns running on some of the world&#8217;s top online properties, by inserting malicious scripts into the HTML code of ads that run on popular sites. Or they could hijack referral commissions destined for others and otherwise siphon ad profits from the system.</p>
+<p>&#8220;Or someone who is looking to sabotage our systems in a bigger way or allow malicious code to enter our systems,&#8221; Pappachen offered.</p>
+<p>Pappachen said Sizmek forced a password reset on all internal employees (&#8220;a few hundred&#8221;), and that the company is scrubbing its SAS user database for departed employees, partners and vendors whose accounts may have been hijacked.</p>
+<p>&#8220;We&#8217;re now doing some level of screening to see if there&#8217;s been any kind of intrusion we can detect,&#8221; Pappachen said. &#8220;It seemed like [the screenshots were accounts from] past employees. I think there were even a couple of vendors that had access to the system previously.&#8221; <a href="https://krebsonsecurity.com/2019/03/ad-network-sizmek-probes-account-breach/#more-46785" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-46905" class="post-46905 post type-post status-publish format-standard hentry category-patches tag-allan-liska tag-ask-woody tag-cve-2019-0797 tag-cve-2019-0808 tag-cve-2019-5786 tag-kaspersky-lab tag-patch-tuesday-march-2019 tag-qualys tag-sans-internet-storm-center tag-zdnet">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2019/03/patch-tuesday-march-2019-edition/" title="Permalink to Patch Tuesday, March 2019 Edition" rel="bookmark">Patch Tuesday, March 2019 Edition</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">March 13, 2019</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2019/03/patch-tuesday-march-2019-edition/#comments">47 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p><strong>Microsoft</strong> on Tuesday pushed out software updates to fix more than five dozen security vulnerabilities in its <strong>Windows</strong> operating systems, <strong>Internet Explorer</strong>, <strong>Edge</strong>, <strong>Office</strong> and <strong>Sharepoint</strong>. If you (ab)use Microsoft products, it&#8217;s time once again to start thinking about getting your patches on. Malware or bad guys can remotely exploit roughly one-quarter of the flaws fixed in today&#8217;s patch batch without any help from users.</p>
+<p><img loading="lazy" class="alignright size-full wp-image-26837" src="https://krebsonsecurity.com/wp-content/uploads/2014/07/brokenwindows.png" alt="" width="229" height="240" />One interesting patch from Microsoft this week comes in response to a <a href="https://en.wikipedia.org/wiki/Zero-day_(computing)" target="_blank" rel="noopener">zero-day</a> vulnerability (<a href="https://portal.msrc.microsoft.com/en-US/security-guidance/advisory/CVE-2019-0797" target="_blank" rel="noopener">CVE-2019-0797</a>) reported by researchers at <strong>Kaspersky Lab, </strong>who discovered the bug could be (and is being) exploited to install malicious software.</p>
+<p>Microsoft also addressed a zero day flaw (<a href="https://portal.msrc.microsoft.com/en-US/security-guidance/advisory/CVE-2019-0808" target="_blank" rel="noopener">CVE-2019-0808</a>) in Windows 7 and Windows Server 2008 that&#8217;s been abused in conjunction with a previously unknown weakness (CVE-2019-5786) in Google&#8217;s Chrome browser. A <a href="https://security.googleblog.com/2019/03/disclosing-vulnerabilities-to-protect.html">security alert</a> from Google last week said attackers were chaining the Windows and Chrome vulnerabilities to drop malicious code onto vulnerable systems.</p>
+<p>If you use Chrome, take a moment to make sure you have this update and that there isn&#8217;t an arrow to the right of your Chrome address bar signifying the availability of new update. If there is, close out and restart the browser; it should restore whatever windows you have open on restart. <a href="https://krebsonsecurity.com/2019/03/patch-tuesday-march-2019-edition/#more-46905" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-46789" class="post-46789 post type-post status-publish format-standard hentry category-all-about-skimmers tag-atm-skimmers tag-insert-skimmer">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2019/03/insert-skimmer-camera-cover-pin-stealer/" title="Permalink to Insert Skimmer + Camera Cover PIN Stealer" rel="bookmark">Insert Skimmer + Camera Cover PIN Stealer</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">March 10, 2019</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2019/03/insert-skimmer-camera-cover-pin-stealer/#comments">61 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>Very often the most clever component of your typical ATM skimming attack is the hidden pinhole camera used to record customers entering their PINs. These little video bandits can be hidden 100 different ways, but they&#8217;re frequently disguised as ATM security features &#8212; such as an extra PIN pad privacy cover, or <a href="https://krebsonsecurity.com/2011/12/pro-grade-3d-printer-made-atm-skimmer/" target="_blank" rel="noopener">an all-in-one skimmer over the green flashing card acceptance slot</a> at the ATM.</p>
+<p>And sometimes, the scammers just hijack the security camera built into the ATM itself.</p>
+<p>Below is the hidden back-end of a skimmer found last month placed over top of the customer-facing security camera at a drive-up bank ATM in Hurst, Texas. The camera components (shown below in green and red) were angled toward the cash&#8217;s machine&#8217;s PIN pad to record victims entering their PINs. Wish I had a picture of this thing attached to the ATM.</p>
+<div id="attachment_46877" style="width: 600px" class="wp-caption aligncenter"><img aria-describedby="caption-attachment-46877" loading="lazy" class=" wp-image-46877" src="https://krebsonsecurity.com/wp-content/uploads/2019/03/camskimmer.jpg" alt="" width="590" height="308" /><p id="caption-attachment-46877" class="wp-caption-text">This hidden camera was fixed to the underside of a fake lens cover for the skimmed ATM&#8217;s built-in security camera. Image: Hurst Police.</p></div>
+<p>The clever PIN grabber was paired with an &#8220;insert skimmer,&#8221; a wafer-thin, usually metallic and battery powered skimmer made to be fitted straight into the mouth of the ATM&#8217;s card acceptance slot, so that the card skimmer cannot be seen from outside of the compromised ATM.</p>
+<div id="attachment_46875" style="width: 377px" class="wp-caption aligncenter"><img aria-describedby="caption-attachment-46875" loading="lazy" class="size-full wp-image-46875" src="https://krebsonsecurity.com/wp-content/uploads/2019/03/insert-skim-inserted.jpg" alt="" width="367" height="526" /><p id="caption-attachment-46875" class="wp-caption-text">The insert skimmer, seen as inserted into the card acceptance device in the hacked ATM. Image: Hurst PD.</p></div>
+<p> <a href="https://krebsonsecurity.com/2019/03/insert-skimmer-camera-cover-pin-stealer/#more-46789" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-46823" class="post-46823 post type-post status-publish format-standard hentry category-sunshine category-latest-warnings category-security-tools category-comingstorm tag-credit-freeze-pin tag-experian tag-freeze-pin-bypass tag-kba tag-myequifax-com tag-nancy-bistritz-balkan tag-trans-union">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2019/03/myequifax-com-bypasses-credit-freeze-pin/" title="Permalink to MyEquifax.com Bypasses Credit Freeze PIN" rel="bookmark">MyEquifax.com Bypasses Credit Freeze PIN</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">March 8, 2019</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2019/03/myequifax-com-bypasses-credit-freeze-pin/#comments">104 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>Most people who have frozen their credit files with <strong>Equifax</strong> have been issued a numeric Personal Identification Number (PIN) which is supposed to be required before a freeze can be lifted or thawed. Unfortunately, if you don&#8217;t already have an account at the credit bureau&#8217;s new <a href="https://my.equifax.com" target="_blank" rel="noopener">myEquifax portal</a>, it may be simple for identity thieves to lift an existing credit freeze at Equifax and bypass the PIN armed with little more than your, name, Social Security number and birthday.</p>
+<p>Consumers in every U.S. state can now freeze their credit files for free with Equifax and two other major bureaus (<strong>Trans Union</strong> and <strong>Experian</strong>). A freeze makes it much harder for identity thieves to open new lines of credit in your name.</p>
+<p><img loading="lazy" class="aligncenter wp-image-46831" src="https://krebsonsecurity.com/wp-content/uploads/2019/03/myequifax.png" alt="" width="594" height="341" /></p>
+<p>In the wake of Equifax&#8217;s epic 2017 data breach impacting some 148 million Americans, many people did freeze their credit files at the big three in response. But Equifax has changed a few things since then.</p>
+<p>Seeking to manage my own credit freeze at equifax.com as I&#8217;d done in years past, I was steered toward creating an account at myequifax.com, which I was shocked to find I did not previously possess.</p>
+<p>Getting an account at myequifax.com was easy. In fact, it was too easy. The portal asked me for an email address and suggested a longish, randomized password, which I accepted. I chose an old email address that I knew wasn&#8217;t directly tied to my real-life identity.</p>
+<p>The next page asked me enter my SSN and date of birth, and to share a phone number (sharing was optional, so I didn&#8217;t). SSN and DOB data is widely available for sale in the cybercrime underground on almost all U.S. citizens. This has been the reality for years, and was so well before Equifax announced its big 2017 breach.</p>
+<p>myEquifax said it couldn&#8217;t verify that my email address belonged to the Brian Krebs at that SSN and DOB. It then asked a series of four security questions &#8212; so-called &#8220;knowledge-based authentication&#8221; or KBA questions designed to see if I could recall bits about my recent financial history.</p>
+<p>In general, the data being asked about in these KBA quizzes is culled from public records, meaning that this information likely is publicly available in some form &#8212; either digitally or in-person. Indeed, I have <a href="https://krebsonsecurity.com/2013/09/data-broker-giants-hacked-by-id-theft-service/" target="_blank" rel="noopener">long assailed the KBA industry</a> as creating a false sense of security that is easily bypassed by fraudsters.</p>
+<p>One potential problem with relying on KBA questions to authenticate consumers online is that so much of the information needed to successfully guess the answers to those multiple-choice questions is now indexed or exposed by search engines, social networks and third-party services online — both criminal and commercial.</p>
+<p>The first three multiple-guess questions myEquifax asked were about loans or debts that I have never owed. Thus, the answer to the first three KBA questions asked was, &#8220;none of the above.&#8221; The final question asked for the name of our last mortgage company. Again, information that is not hard to find.</p>
+<p>Satisfied with my answers, Equifax informed me that yes indeed I was Brian Krebs and that I could now manage my existing freeze with the company. After requesting a thaw, I was brought to a vintage Equifax page that looked nothing like myEquifax&#8217;s sunnier new online plumage.</p>
+<div id="attachment_46832" style="width: 606px" class="wp-caption aligncenter"><a class="lightbox" href="https://krebsonsecurity.com/wp-content/uploads/2019/03/equifax-PIN-needed.png"><img aria-describedby="caption-attachment-46832" loading="lazy" class="wp-image-46832" src="https://krebsonsecurity.com/wp-content/uploads/2019/03/equifax-PIN-needed.png" alt="" width="596" height="496" /></a><p id="caption-attachment-46832" class="wp-caption-text">Equifax&#8217;s site says it will require users requesting changes to an existing credit freeze to have access to their freeze PIN and be ready to supply it. But Equifax never actually asks for the PIN.</p></div>
+<p>This page informed me that if I previously secured a freeze of my credit file with Equifax and been given a PIN needed to undo that status in any way, that I should be ready to provide said information <em>if I was requesting changes via phone or email. </em></p>
+<p>In other words, <em>credit freezes and thaws requested via myEquifax don&#8217;t require users to supply any pre-existing PIN</em>.</p>
+<p>Fine, I said. Let&#8217;s do this.</p>
+<p>myEquifax then asked for the date range requested to thaw my credit freeze. Submit.</p>
+<p>&#8220;We&#8217;ve successfully processed your security freeze request!,&#8221; the site declared.</p>
+<p>This also was exclaimed in an email to the random old address I&#8217;d used at myEquifax, although the site never once made any attempt to validate that I had access to this inbox, something that could be done by simply sending a confirmation link that needs to be clicked to activate the account.</p>
+<p>In addition, I noticed Equifax added my old mobile number to my account, even though I never supplied this information and was not using this phone when I created the myEquifax account.</p>
+<div id="attachment_46833" style="width: 609px" class="wp-caption aligncenter"><a class="lightbox" href="https://krebsonsecurity.com/wp-content/uploads/2019/03/MYequifax-success.png"><img aria-describedby="caption-attachment-46833" loading="lazy" class="wp-image-46833" src="https://krebsonsecurity.com/wp-content/uploads/2019/03/MYequifax-success.png" alt="" width="599" height="324" /></a><p id="caption-attachment-46833" class="wp-caption-text">Successfully unfreezing (temporarily thawing) my credit freeze did not require me to ever supply my previously-issued freeze PIN from Equifax. Anyone who knew the vaguest and most knowable details about me could have done the same.</p></div>
+<p>myEquifax.com does not currently seek to verify the account by requesting confirmation via a phone call or text to the phone number associated with the account (also, recall that even providing a phone number was optional).</p>
+<p>Happily, I did discover then when I used a different computer and Internet address to try to open up another account under my name, date of birth and SSN, it informed me that a profile already existed for this information. This suggests that signing up at myEquifax is probably a good idea, given that the alternative is more risky.</p>
+<p>It was way too easy to create my account, but I&#8217;m not saying everyone will be able to create one online. In testing with several readers over the past 24 hours, myEquifax seems to be returning a lot more error pages at the KBA stage of the process now, prompting people to try again later or make a request via email or phone.</p>
+<p>Equifax spokesperson <strong>Nancy Bistritz-Balkan</strong> said not requiring a PIN for people with existing freezes was by design.</p>
+<p>&#8220;With myEquifax, we created an online experience that enables consumers to securely and conveniently manage security freezes and fraud alerts,&#8221; Bistritz-Balkan said..</p>
+<p>&#8220;We deployed an experience that embraces both security standards (using a multi-factor and layered approach to verify the consumer’s identity) and reflects specific consumer feedback on managing security freezes and fraud alerts online without the use of a PIN,&#8221; she continued. &#8220;The account set-up process, which involves the creation of a username and password, relies on both user inputs and other factors to securely establish, verify, and authenticate that the consumer’s identity is connected to the consumer every time.&#8221; <a href="https://krebsonsecurity.com/2019/03/myequifax-com-bypasses-credit-freeze-pin/#more-46823" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-46787" class="post-46787 post type-post status-publish format-standard hentry category-breadcrumbs category-data-breaches category-latest-warnings category-neer-do-well-news tag-arrestrecords-us-org tag-autohistorychecks-com tag-backgroundchecks-us-org tag-carhistory-us-org tag-carhistoryindex-com tag-carinfo2-com tag-carrecordusa-com tag-census-us-org tag-courtrecords-us-org tag-criminalrecords-us-org tag-deathcertificates-us-org tag-deathrecord-com tag-deathrecords-us-org tag-dmv-us-org tag-dmvinfocheck-com tag-dmvrecords-co tag-domaintools-com tag-homevalue-us-org tag-intel471-com tag-jailinmates-us-org tag-jason-oster tag-jesse-willms tag-memberreportaccess-com tag-mike-stef tag-mugshots-us-org tag-myfeeplan-com tag-myinfobill-com tag-penguin-marketing tag-peter-graver tag-phonelookup-us-org tag-police-us-org tag-prison-us-org tag-propertyrecord-com tag-propertysearch-us-org tag-publicrecords-us-org tag-reversephonelookup-us-org tag-taylor-clark tag-terra-marketing-group tag-the-atlantic tag-the-dark-overlord tag-trafficticket-us-org tag-vehiclehistoryreports-us-org tag-vehiclereportusa-com tag-vinsearchusa-org tag-warrantcheck-com">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2019/03/hackers-sell-access-to-bait-and-switch-empire/" title="Permalink to Hackers Sell Access to Bait-and-Switch Empire" rel="bookmark">Hackers Sell Access to Bait-and-Switch Empire</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">March 4, 2019</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2019/03/hackers-sell-access-to-bait-and-switch-empire/#comments">38 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>Cybercriminals are auctioning off access to customer information stolen from an online data broker behind a dizzying array of bait-and-switch Web sites that sell access to a vast range of data on U.S. consumers, including DMV and arrest records, genealogy reports, phone number lookups and people searches. In an ironic twist, the marketing empire that owns the hacked online properties appears to be run by a Canadian man who&#8217;s been sued for fraud by the <strong>U.S. Federal Trade Commission</strong>, <strong>Microsoft</strong> and <strong>Oprah Winfrey</strong>, to name a few.</p>
+<p>Earlier this week, a cybercriminal on a Dark Web forum posted an auction notice for access to a Web-based administrative panel for an unidentified &#8220;US Search center&#8221; that he claimed holds some four million customer records, including names, email addresses, passwords and phone numbers. The starting bid price for that auction was $800.</p>
+<p>Several screen shots shared by the seller suggested the customers in question had all purchased subscriptions to a variety of sites that aggregate and sell public records, such as <strong>dmv.us.org</strong>, <strong>carhistory.us.org</strong>, <strong>police.us.org</strong>, and <strong>criminalrecords.us.org</strong>.</p>
+<div id="attachment_46794" style="width: 605px" class="wp-caption aligncenter"><img aria-describedby="caption-attachment-46794" loading="lazy" class=" wp-image-46794" src="https://krebsonsecurity.com/wp-content/uploads/2019/03/mra-panel.jpg" alt="" width="595" height="599" /><p id="caption-attachment-46794" class="wp-caption-text">A (redacted) screen shot shared by the apparent hacker who was selling access to usernames and passwords for customers of multiple data-search Web sites.</p></div>
+<p>A few hours of online sleuthing showed that these sites and dozens of others with similar names all at one time shared several toll-free phone numbers for customer support. The results returned by searching on those numbers suggests a singular reason this network of data-search Web sites changed their support numbers so frequently: They quickly became associated with online reports of fraud by angry customers.</p>
+<p>That&#8217;s because countless people who were enticed to pay for reports generated by these services later complained that although the sites advertised access for just $1, they were soon hit with a series of much larger charges on their credit cards.</p>
+<p>Using historic Web site registration records obtained from <strong>Domaintools.com</strong> (a former advertiser on this site), KrebsOnSecurity discovered that all of the sites linked back to two related companies &#8212; Las Vegas, Nev.-based <a href="http://www.penguinmarketing.com/about/" target="_blank" rel="noopener">Penguin Marketing</a>, and <strong>Terra Marketing Group</strong> out of Alberta, Canada.</p>
+<p>Both of these entities are owned by <a href="https://www.linkedin.com/in/jessewillms" target="_blank" rel="noopener">Jesse Willms</a>, a man <em>The Atlantic</em> magazine described in <a href="https://www.theatlantic.com/magazine/archive/2014/01/the-dark-lord-of-the-internet/355726/" target="_blank" rel="noopener">an unflattering January 2014 profile</a> as &#8220;The Dark Lord of the Internet&#8221; [not to be confused with <a href="https://en.wikipedia.org/wiki/The_Dark_Overlord_(hackers)" target="_blank" rel="noopener">The Dark Overlord</a>].</p>
+<div id="attachment_46795" style="width: 605px" class="wp-caption aligncenter"><img aria-describedby="caption-attachment-46795" loading="lazy" class=" wp-image-46795" src="https://krebsonsecurity.com/wp-content/uploads/2019/03/jessewillms.jpg" alt="" width="595" height="373" /><p id="caption-attachment-46795" class="wp-caption-text">Jesse Willms&#8217; Linkedin profile.</p></div>
+<p>The Atlantic pointed to a sprawling lawsuit filed by the Federal Trade Commission, which <a href="https://www.ftc.gov/enforcement/cases-proceedings/102-3012/willms-jesse-et-al" target="_blank" rel="noopener">alleged</a> that between 2007 and 2011, Willms defrauded consumers of some $467 million by enticing them to sign up for &#8220;risk free&#8221; product trials and then billing their cards recurring fees for a litany of automatically enrolled services they hadn’t noticed in the fine print.</p>
+<p>&#8220;In just a few months, Willms’ companies could charge a consumer hundreds of dollars like this, and making the flurry of debits stop was such a convoluted process for those ensnared by one of his schemes that some customers just canceled their credit cards and opened new ones,&#8221; wrote The Atlantic&#8217;s <strong>Taylor Clark</strong>.</p>
+<p>Willms&#8217; various previous ventures reportedly extended far beyond selling access to public records. In fact, it&#8217;s likely everyone reading this story has at one time encountered an ad for one of his dodgy, bait-and-switch business schemes, The Atlantic noted:</p>
+<blockquote><p>&#8220;If you’ve used the Internet at all in the past six years, your cursor has probably lingered over ads for Willms’s Web sites more times than you’d suspect. His pitches generally fit in nicely with what have become the classics of the dubious-ad genre: tropes like photos of comely newscasters alongside fake headlines such as “Shocking Diet Secrets Exposed!”; too-good-to-be-true stories of a “local mom” who “earns $629/day working from home”; clusters of text links for miracle teeth whiteners and “loopholes” entitling you to government grants; and most notorious of all, eye-grabbing animations of disappearing “belly fat” coupled with a tagline promising the same results if you follow “1 weird old trick.” (A clue: the “trick” involves typing in 16 digits and an expiration date.)&#8221;</p></blockquote>
+<p>In a separate lawsuit, Microsoft accused Willms&#8217; businesses of trafficking in massive quantities of counterfeit copies of its software. Oprah Winfrey also sued a Willms-affiliated site (oprahsdietscecrets.com) for linking her to products and services she claimed she had never endorsed.</p>
+<p>KrebsOnSecurity reached out to multiple customers whose name, email address and cleartext passwords were exposed in the screenshot shared by the Dark Web auctioneer who apparently hacked Willms&#8217; Web sites. All three of those who responded shared roughly the same experience: They said they&#8217;d ordered reports for specific criminal background checks from the sites on the promise of a $1 risk-free fee, never found what they were looking for, and were subsequently hit by the same merchant for credit card charges ranging from $20 to $38. <a href="https://krebsonsecurity.com/2019/03/hackers-sell-access-to-bait-and-switch-empire/#more-46787" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-46761" class="post-46761 post type-post status-publish format-standard hentry category-ddos-for-hire category-neer-do-well-news tag-andrew-quez tag-betabooter tag-booter tag-booter-service tag-brian-martinez tag-databooter tag-exostress tag-instabooter tag-okservers-llc tag-polystress tag-quezstresser tag-rasbora tag-sergiy-usatyuk tag-stresser-service tag-zstress">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2019/02/booter-boss-interviewed-in-2014-pleads-guilty/" title="Permalink to Booter Boss Interviewed in 2014 Pleads Guilty" rel="bookmark">Booter Boss Interviewed in 2014 Pleads Guilty</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">February 28, 2019</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2019/02/booter-boss-interviewed-in-2014-pleads-guilty/#comments">45 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>A 20-year-old Illinois man has pleaded guilty to running multiple DDoS-for-hire services that launched millions of attacks over several years. The plea deal comes almost exactly five years after KrebsOnSecurity <a href="https://krebsonsecurity.com/2014/02/the-new-normal-200-400-gbps-ddos-attacks/" target="_blank" rel="noopener noreferrer">interviewed both the admitted felon and his father</a> and urged the latter to take a more active interest in his son&#8217;s online activities.</p>
+<p><strong>Sergiy P. Usatyuk </strong>of Orland Park, Ill. pleaded guilty this week to one count of conspiracy to cause damage to Internet-connected computers and for his role in owning, administering and supporting illegal &#8220;booter&#8221; or &#8220;stresser&#8221; services designed to knock Web sites offline, including <strong>exostress[.]in</strong>, <strong>quezstresser[.]com</strong>, <strong>betabooter[.]com</strong>, <strong>databooter[.]com</strong>, <strong>instabooter[.]com</strong>, <strong>polystress[.]com</strong> and <strong>zstress[.]net</strong>.</p>
+<p><div id="attachment_24871" style="width: 608px" class="wp-caption aligncenter"><a class="lightbox" href="https://krebsonsecurity.com/wp-content/uploads/2014/02/rasbora1.png"><img aria-describedby="caption-attachment-24871" loading="lazy" class="wp-image-24871" src="https://krebsonsecurity.com/wp-content/uploads/2014/02/rasbora1.png" alt="" width="598" height="310" srcset="https://krebsonsecurity.com/wp-content/uploads/2014/02/rasbora1.png 1215w, https://krebsonsecurity.com/wp-content/uploads/2014/02/rasbora1-285x148.png 285w, https://krebsonsecurity.com/wp-content/uploads/2014/02/rasbora1-600x311.png 600w" sizes="(max-width: 598px) 100vw, 598px" /></a><p id="caption-attachment-24871" class="wp-caption-text">Some of Rasbora&#8217;s posts on hackforums[.]net prior to our phone call in 2014. Most of these have since been deleted.</p></div>A U.S. Justice Department <a href="https://www.justice.gov/opa/pr/former-operator-illegal-booter-services-pleads-guilty-conspiracy-commit-computer-damage-and" target="_blank" rel="noopener noreferrer">press release on the guilty plea</a> says Usatyuk &#8212; operating under the hacker aliases &#8220;<strong>Andrew Quez</strong>&#8221; and &#8220;<strong>Brian Martinez</strong>&#8221; &#8212; admitted developing, controlling and operating the aforementioned booter services from around August 2015 through November 2017. But Usatyuk&#8217;s involvement in the DDoS-for-hire space very much predates that period.</p>
+<p>In February 2014, KrebsOnSecurity reached out to Usatyuk&#8217;s father <strong>Peter Usatyuk</strong>, an assistant professor at the University of Illinois at Chicago. I did so because a brief amount of sleuthing on Hackforums[.]net revealed that his then 15-year-old son Sergiy &#8212; who at the time went by the nicknames &#8220;<strong>Rasbora</strong>&#8221; and &#8220;<strong>Mr. Booter Master</strong>&#8221;  &#8212; was heavily involved in helping to launch crippling DDoS attacks.</p>
+<p>I phoned Usatyuk the elder because Sergiy&#8217;s alter egos had been posting evidence on Hackforums and elsewhere that he&#8217;d just hit KrebsOnSecurity.com with <a href="https://krebsonsecurity.com/2014/02/the-new-normal-200-400-gbps-ddos-attacks/" target="_blank" rel="noopener noreferrer">a 200 Gbps DDoS attack</a>, which was then considered a fairly impressive DDoS assault.</p>
+<p>&#8220;I am writing you after our phone conversation just to confirm that you may call evening time/weekend to talk to my son Sergio regarding to your reasons,&#8221; Peter Usatyuk wrote in an email to this author on Feb. 13, 2014. &#8220;I also have [a] major concern what my 15 yo son [is] doing. If you think that is any kind of illegal work, please, let me know.&#8221; <a href="https://krebsonsecurity.com/2019/02/booter-boss-interviewed-in-2014-pleads-guilty/#more-46761" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+				
+			
+								<div class="themonic-pagination"><div class='pagination'><ul><li><a href='https://krebsonsecurity.com/'>&laquo; First</a></li><li><a href='https://krebsonsecurity.com/page/37/' class='inactive'>&lsaquo; Previous</a></li><li><a href='https://krebsonsecurity.com/page/35/' class='inactive'>35</a></li><li><a href='https://krebsonsecurity.com/page/36/' class='inactive'>36</a></li><li><a href='https://krebsonsecurity.com/page/37/' class='inactive'>37</a></li><li class='current'><span class='currenttext'>38</span></li><li><a href='https://krebsonsecurity.com/page/39/' class='inactive'>39</a></li><li><a href='https://krebsonsecurity.com/page/40/' class='inactive'>40</a></li><li><a href='https://krebsonsecurity.com/page/41/' class='inactive'>41</a></li><li><a href='https://krebsonsecurity.com/page/39/' class='inactive'>Next &rsaquo;</a></li><a class='inactive' href='https://krebsonsecurity.com/page/209/'>Last &raquo;</a></ul></div></div>
+					<div style="display: block; clear: both;"></div>
+			
+		
+
+	
+
+		</div><!-- #content -->
+	</div><!-- #primary -->
+
+
+			<div id="secondary" class="widget-area" role="complementary">
+
+        <div id="sidebar_ad" class="widget themonic-ad5"><div class="a-statement">Advertisement</div><a href="https://www.extrahop.com/resources/papers/zero-trust/?">
+<img src="/b-extrahop/3.jpg" />
+</a></div>
+
+                        <br><div class="widget themonic-ad1"><div class="a-statement">Advertisement</div><a href="https://www.akamai.com/blog/security/attacking-a-macro-security-problem-with-micro-segmentation?utm_source=krebsonsecurity&amp;utm_medium=display&amp;utm_id=GL_SecureWorkforce_Guardicore&amp;utm_campaign=F-MC-52610&amp;utm_content=Guardicore">
+<img src="/b-akamai/138.png">
+</a></div><br>
+
+			<aside id="custom_html-2" class="widget_text widget widget_custom_html"><p class="widget-title">Mailing List</p><div class="textwidget custom-html-widget"><a href="/subscribe/">Subscribe here</a></div></aside><aside id="search-2" class="widget widget_search"><p class="widget-title">Search KrebsOnSecurity</p><form role="search" method="get" id="searchform" class="searchform" action="https://krebsonsecurity.com/">
+				<div>
+					<label class="screen-reader-text" for="s">Search for:</label>
+					<input type="text" value="" name="s" id="s" />
+					<input type="submit" id="searchsubmit" value="Search" />
+				</div>
+			</form></aside>
+		<aside id="recent-posts-3" class="widget widget_recent_entries">
+		<p class="widget-title">Recent Posts</p>
+		<ul>
+											<li>
+					<a href="https://krebsonsecurity.com/2021/12/canada-charges-its-most-prolific-cybercriminal/">Canada Charges Its &#8220;Most Prolific Cybercriminal&#8221;</a>
+									</li>
+											<li>
+					<a href="https://krebsonsecurity.com/2021/12/who-is-the-network-access-broker-babam/">Who Is the Network Access Broker &#8216;Babam&#8217;?</a>
+									</li>
+											<li>
+					<a href="https://krebsonsecurity.com/2021/12/ubiquiti-developer-charged-with-extortion-causing-2020-breach/">Ubiquiti Developer Charged With Extortion, Causing 2020 &#8220;Breach&#8221;</a>
+									</li>
+											<li>
+					<a href="https://krebsonsecurity.com/2021/11/the-internet-is-held-together-with-spit-baling-wire/">The Internet is Held Together With Spit &#038; Baling Wire</a>
+									</li>
+											<li>
+					<a href="https://krebsonsecurity.com/2021/11/arrest-in-ransom-your-employer-email-scheme/">Arrest in &#8216;Ransom Your Employer&#8217; Email Scheme</a>
+									</li>
+					</ul>
+
+		</aside><aside id="text-2" class="widget widget_text">			<div class="textwidget"><a name="subscribe2"></a></div>
+		</aside><aside id="widget_sp_image-15" class="widget widget_sp_image"><p class="widget-title">Spam Nation</p><a href="https://www.amazon.com/Spam-Nation-Organized-Cybercrime-Epidemic-ebook/dp/B00L5QGBL0/ref=dp_kinw_strp_1" target="_blank" class="widget_sp_image-image-link" title="Spam Nation"><img width="266" height="404" alt="Spam Nation" class="attachment-266x404 aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2015/04/spamnation-nyt.png" /></a><div class="widget_sp_image-description" ><p>A New York Times Bestseller! </p>
+</div></aside><aside id="widget_sp_image-25" class="widget widget_sp_image"><p class="widget-title">Thinking of a Cybersecurity Career?</p><a href="https://krebsonsecurity.com/2020/07/thinking-of-a-cybersecurity-career-read-this/" target="_blank" class="widget_sp_image-image-link" title="Thinking of a Cybersecurity Career? Read This."><img width="625" height="424" alt="Thinking of a Cybersecurity Career?" class="attachment-full" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2020/07/codepeople.png 625w, https://krebsonsecurity.com/wp-content/uploads/2020/07/codepeople-580x393.png 580w" sizes="(max-width: 625px) 100vw, 625px" src="https://krebsonsecurity.com/wp-content/uploads/2020/07/codepeople.png" /></a><div class="widget_sp_image-description" ><p>Read this.</p>
+</div></aside><aside id="widget_sp_image-3" class="widget widget_sp_image"><p class="widget-title">All About Skimmers </p><a href="https://krebsonsecurity.com/all-about-skimmers/" target="_blank" class="widget_sp_image-image-link" title="All About Skimmers "><img width="299" height="232" alt="All About Skimmers" class="attachment-299x232 aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2010/08/skimgallery1.jpg" /></a><div class="widget_sp_image-description" ><p>Click image for my skimmer series.</p>
+</div></aside><aside id="categories-2" class="widget widget_categories"><p class="widget-title">Story Categories</p>
+			<ul>
+					<li class="cat-item cat-item-5"><a href="https://krebsonsecurity.com/category/sunshine/" title="Includes investigative blog posts meant to shine a light on the darker corners of the Internet.">A Little Sunshine</a>
+</li>
+	<li class="cat-item cat-item-2240"><a href="https://krebsonsecurity.com/category/all-about-skimmers/">All About Skimmers</a>
+</li>
+	<li class="cat-item cat-item-9085"><a href="https://krebsonsecurity.com/category/ashley-madison-breach/">Ashley Madison breach</a>
+</li>
+	<li class="cat-item cat-item-3191"><a href="https://krebsonsecurity.com/category/breadcrumbs/">Breadcrumbs</a>
+</li>
+	<li class="cat-item cat-item-3771"><a href="https://krebsonsecurity.com/category/data-breaches/" title="Stories about data breaches at retailers, corporations, governments and organizations of all sizes.">Data Breaches</a>
+</li>
+	<li class="cat-item cat-item-4624"><a href="https://krebsonsecurity.com/category/ddos-for-hire/">DDoS-for-Hire</a>
+</li>
+	<li class="cat-item cat-item-9173"><a href="https://krebsonsecurity.com/category/employment-fraud/">Employment Fraud</a>
+</li>
+	<li class="cat-item cat-item-2151"><a href="https://krebsonsecurity.com/category/how-to-break-into-security/" title="If you&#039;ve ever wanted career advice on how to make a shift into the security industry, look no further.">How to Break Into Security</a>
+</li>
+	<li class="cat-item cat-item-87"><a href="https://krebsonsecurity.com/category/latest-warnings/">Latest Warnings</a>
+</li>
+	<li class="cat-item cat-item-4071"><a href="https://krebsonsecurity.com/category/neer-do-well-news/">Ne&#039;er-Do-Well News</a>
+</li>
+	<li class="cat-item cat-item-9"><a href="https://krebsonsecurity.com/category/other/">Other</a>
+</li>
+	<li class="cat-item cat-item-1306"><a href="https://krebsonsecurity.com/category/pharma-wars/">Pharma Wars</a>
+</li>
+	<li class="cat-item cat-item-8240"><a href="https://krebsonsecurity.com/category/ransomware/">Ransomware</a>
+</li>
+	<li class="cat-item cat-item-599"><a href="https://krebsonsecurity.com/category/security-tools/">Security Tools</a>
+</li>
+	<li class="cat-item cat-item-8298"><a href="https://krebsonsecurity.com/category/sim-swapping/">SIM Swapping</a>
+</li>
+	<li class="cat-item cat-item-4079"><a href="https://krebsonsecurity.com/category/spam-nation/">Spam Nation</a>
+</li>
+	<li class="cat-item cat-item-1"><a href="https://krebsonsecurity.com/category/smallbizvictims/" title="Posts in this category will include new stories similar to those told in the Small Business Victims category on The Washington Post&#039;s Security Fix blog, which chronicled the methods organized cyber thieve are using to steal hundreds of thousands of dollars from dozens of small- to mid-sized companies around the country.">Target: Small Businesses</a>
+</li>
+	<li class="cat-item cat-item-5167"><a href="https://krebsonsecurity.com/category/tax-refund-fraud/">Tax Refund Fraud</a>
+</li>
+	<li class="cat-item cat-item-3"><a href="https://krebsonsecurity.com/category/comingstorm/" title="This category includes blog posts about computer and Internet security threats now and on the horizon.">The Coming Storm</a>
+</li>
+	<li class="cat-item cat-item-4"><a href="https://krebsonsecurity.com/category/patches/" title="Short posts on the latest security updates for widely-used software.
+">Time to Patch</a>
+</li>
+	<li class="cat-item cat-item-21"><a href="https://krebsonsecurity.com/category/web-fraud-2-0/">Web Fraud 2.0</a>
+</li>
+			</ul>
+
+			</aside><aside id="widget_sp_image-5" class="widget widget_sp_image"><p class="widget-title">The Value of a Hacked PC</p><a href="https://krebsonsecurity.com/2012/10/the-scrap-value-of-a-hacked-pc-revisited/" target="_blank" class="widget_sp_image-image-link" title="The Value of a Hacked PC"><img width="285" height="180" alt="valuehackedpc " class="attachment-285x180 aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2012/12/valuehackedpc-285x180.png" /></a><div class="widget_sp_image-description" ><p>Badguy uses for your PC</p>
+</div></aside><aside id="widget_sp_image-9" class="widget widget_sp_image"><p class="widget-title">Badguy Uses for Your Email </p><a href="https://krebsonsecurity.com/2013/06/the-value-of-a-hacked-email-account/" target="_self" class="widget_sp_image-image-link" title="Badguy Uses for Your Email "><img width="296" height="170" alt="Badguy Uses for Your Email " class="attachment-full aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2013/06/badguyemail.png 296w, https://krebsonsecurity.com/wp-content/uploads/2013/06/badguyemail-285x163.png 285w" sizes="(max-width: 296px) 100vw, 296px" src="https://krebsonsecurity.com/wp-content/uploads/2013/06/badguyemail.png" /></a><div class="widget_sp_image-description" ><p>Your email account may be worth far more than you imagine.</p>
+</div></aside><aside id="widget_sp_image-24" class="widget widget_sp_image"><a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&#038;hosted_button_id=MCCRKHWRX57HS" id="donate" target="_self" class="widget_sp_image-image-link"><img width="250" height="55" alt="Donate to Krebs On Security" class="attachment-medium aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2016/09/donatepaypal2-1.png" /></a></aside><aside id="most_popular_posts-3" class="widget widget_most_popular_posts">
+<p class="widget-title">Most Popular Posts</p>
+<ul>	<li><a href="https://krebsonsecurity.com/2018/07/sextortion-scam-uses-recipients-hacked-passwords/">Sextortion Scam Uses Recipient's Hacked Passwords</a> (1076)</li>
+	<li><a href="https://krebsonsecurity.com/2015/07/online-cheating-site-ashleymadison-hacked/">Online Cheating Site AshleyMadison Hacked</a> (798)</li>
+	<li><a href="https://krebsonsecurity.com/2013/12/sources-target-investigating-data-breach/">Sources: Target Investigating Data Breach</a> (620)</li>
+	<li><a href="https://krebsonsecurity.com/2020/11/trump-fires-security-chief-christopher-krebs/">Trump Fires Security Chief Christopher Krebs</a> (534)</li>
+	<li><a href="https://krebsonsecurity.com/2013/12/cards-stolen-in-target-breach-flood-underground-markets/">Cards Stolen in Target Breach Flood Underground Markets</a> (445)</li>
+	<li><a href="https://krebsonsecurity.com/2013/05/reports-liberty-reserve-founder-arrested-site-shuttered/">Reports: Liberty Reserve Founder Arrested, Site Shuttered</a> (416)</li>
+	<li><a href="https://krebsonsecurity.com/2015/08/was-the-ashley-madison-database-leaked/">Was the Ashley Madison Database Leaked?</a> (376)</li>
+	<li><a href="https://krebsonsecurity.com/2021/01/ddos-guard-to-forfeit-internet-space-occupied-by-parler/">DDoS-Guard To Forfeit Internet Space Occupied by Parler</a> (374)</li>
+	<li><a href="https://krebsonsecurity.com/2014/05/true-goodbye-using-truecrypt-is-not-secure/">True Goodbye: 'Using TrueCrypt Is Not Secure'</a> (363)</li>
+	<li><a href="https://krebsonsecurity.com/2015/08/who-hacked-ashley-madison/">Who Hacked Ashley Madison?</a> (361)</li>
+</ul>
+</aside>
+<aside id="media_image-2" class="widget widget_media_image"><p class="widget-title">Why So Many Top Hackers Hail from Russia</p><a href="https://krebsonsecurity.com/2017/06/why-so-many-top-hackers-hail-from-russia/"><img width="580" height="389" src="https://krebsonsecurity.com/wp-content/uploads/2017/06/computered-580x389.png" class="image wp-image-39684  attachment-medium size-medium" alt="" loading="lazy" style="max-width: 100%; height: auto;" srcset="https://krebsonsecurity.com/wp-content/uploads/2017/06/computered-580x389.png 580w, https://krebsonsecurity.com/wp-content/uploads/2017/06/computered-768x514.png 768w, https://krebsonsecurity.com/wp-content/uploads/2017/06/computered-940x630.png 940w, https://krebsonsecurity.com/wp-content/uploads/2017/06/computered.png 1551w" sizes="(max-width: 580px) 100vw, 580px" /></a></aside><aside id="widget_sp_image-11" class="widget widget_sp_image"><p class="widget-title">Category: Web Fraud 2.0</p><a href="https://krebsonsecurity.com/category/web-fraud-2-0/" target="_blank" class="widget_sp_image-image-link" title="Category: Web Fraud 2.0"><img width="227" height="400" alt="Criminnovations" class="attachment-medium aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2013/11/cybercrimeinnovations-227x400.png" /></a><div class="widget_sp_image-description" ><p>Innovations from the Underground</p>
+</div></aside><aside id="widget_sp_image-12" class="widget widget_sp_image"><a href="https://krebsonsecurity.com/2014/03/are-credit-monitoring-services-worth-it/" target="_blank" class="widget_sp_image-image-link"><img width="285" height="189" class="attachment-medium aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2014/03/shreddedID-copy-285x189.png 285w, https://krebsonsecurity.com/wp-content/uploads/2014/03/shreddedID-copy-600x399.png 600w, https://krebsonsecurity.com/wp-content/uploads/2014/03/shreddedID-copy.png 849w" sizes="(max-width: 285px) 100vw, 285px" src="https://krebsonsecurity.com/wp-content/uploads/2014/03/shreddedID-copy-285x189.png" /></a><div class="widget_sp_image-description" ><p>ID Protection Services Examined</p>
+</div></aside><aside id="widget_sp_image-13" class="widget widget_sp_image"><p class="widget-title">Is Antivirus Dead?</p><a href="https://krebsonsecurity.com/2014/05/antivirus-is-dead-long-live-antivirus/" target="_blank" class="widget_sp_image-image-link" title="Is Antivirus Dead?"><img width="285" height="161" alt="Is Antivirus Dead?" class="attachment-medium aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2014/05/cryptservices-285x161.png 285w, https://krebsonsecurity.com/wp-content/uploads/2014/05/cryptservices-600x339.png 600w, https://krebsonsecurity.com/wp-content/uploads/2014/05/cryptservices.png 945w" sizes="(max-width: 285px) 100vw, 285px" src="https://krebsonsecurity.com/wp-content/uploads/2014/05/cryptservices-285x161.png" /></a><div class="widget_sp_image-description" ><p>The reasons for its decline</p>
+</div></aside><aside id="widget_sp_image-14" class="widget widget_sp_image"><p class="widget-title">The Growing Tax Fraud Menace</p><a href="https://krebsonsecurity.com/category/tax-refund-fraud/" target="_blank" class="widget_sp_image-image-link" title="The Growing Tax Fraud Menace"><img width="285" height="285" alt="The Growing Tax Fraud Menace" class="attachment-medium aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2014/04/taxfraud-285x285.jpg 285w, https://krebsonsecurity.com/wp-content/uploads/2014/04/taxfraud-150x150.jpg 150w, https://krebsonsecurity.com/wp-content/uploads/2014/04/taxfraud-600x600.jpg 600w, https://krebsonsecurity.com/wp-content/uploads/2014/04/taxfraud.jpg 693w" sizes="(max-width: 285px) 100vw, 285px" src="https://krebsonsecurity.com/wp-content/uploads/2014/04/taxfraud-285x285.jpg" /></a><div class="widget_sp_image-description" ><p>File 'em Before the Bad Guys Can </p>
+</div></aside><aside id="widget_sp_image-17" class="widget widget_sp_image"><p class="widget-title">Inside a Carding Shop</p><a href="https://krebsonsecurity.com/2014/06/peek-inside-a-professional-carding-shop/" target="_blank" class="widget_sp_image-image-link" title="Inside a Carding Shop"><img width="194" height="340" alt="Inside a Carding Shop" class="attachment-medium aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2014/06/mcdumpalsjoined.png" /></a><div class="widget_sp_image-description" ><p>A crash course in carding. </p>
+</div></aside><aside id="widget_sp_image-18" class="widget widget_sp_image"><p class="widget-title">Beware Social Security Fraud</p><a href="https://krebsonsecurity.com/2013/09/crooks-hijack-retirement-funds-via-ssa-portal/" target="_blank" class="widget_sp_image-image-link" title="Beware Social Security Fraud"><img width="285" height="293" alt="Beware Social Security Fraud" class="attachment-full aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2016/09/myssn-285x293.png" /></a><div class="widget_sp_image-description" ><p>Sign up, or Be Signed Up! </p>
+</div></aside><aside id="widget_sp_image-2" class="widget widget_sp_image"><p class="widget-title">How Was Your Card Stolen?</p><a href="https://krebsonsecurity.com/2015/01/how-was-your-credit-card-stolen/" target="_blank" class="widget_sp_image-image-link" title="How Was Your Card Stolen?"><img width="285" height="285" alt="How Was Your Card Stolen?" class="attachment-full aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2016/09/carddominoes-285x285.jpg 285w, https://krebsonsecurity.com/wp-content/uploads/2016/09/carddominoes-285x285-150x150.jpg 150w" sizes="(max-width: 285px) 100vw, 285px" src="https://krebsonsecurity.com/wp-content/uploads/2016/09/carddominoes-285x285.jpg" /></a><div class="widget_sp_image-description" ><p>Finding out is not so easy. </p>
+</div></aside><aside id="widget_sp_image-22" class="widget widget_sp_image"><p class="widget-title">Krebs&#8217;s 3 Rules&#8230;</p><a href="https://krebsonsecurity.com/2011/05/krebss-3-basic-rules-for-online-safety/" target="_blank" class="widget_sp_image-image-link" title="Krebs&#8217;s 3 Rules&#8230;"><img width="300" height="300" alt="Krebs&#8217;s 3 Rules&#8230;" class="attachment-medium aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2011/05/three-300x300.jpg 300w, https://krebsonsecurity.com/wp-content/uploads/2011/05/three-150x150.jpg 150w, https://krebsonsecurity.com/wp-content/uploads/2011/05/three.jpg 347w" sizes="(max-width: 300px) 100vw, 300px" src="https://krebsonsecurity.com/wp-content/uploads/2011/05/three-300x300.jpg" /></a><div class="widget_sp_image-description" ><p>...For Online Safety. </p>
+</div></aside>		</div><!-- #secondary -->
+		</div><!-- #main .wrapper -->
+	
+	<div id="publisho-footer" class="widget-area">
+				<div class="footer-widget">
+                				</div>
+				<div class="footer-widget">
+								</div>
+				<div class="footer-widget">
+								</div>
+	</div>
+
+	<div class="site-wordpress">
+					&copy; Krebs on Security<br>
+	</div>
+	<!-- .site-info --><div class="clear"></div>
+</div><!-- #page -->
+
+<script type='text/javascript' src='https://krebsonsecurity.com/wp-content/themes/kos-mar2021/js/slicknav.js?ver=5.8.2' id='publisho-mobile-navigation-js'></script>
+<script type='text/javascript' src='https://krebsonsecurity.com/wp-includes/js/wp-embed.min.js?ver=5.8.2' id='wp-embed-js'></script>
+</body>
+</html>
+<!--
+Performance optimized by W3 Total Cache. Learn more: https://www.boldgrid.com/w3-total-cache/
+
+Object Caching 286/391 objects using memcached
+Page Caching using memcached 
+Database Caching 7/22 queries in 0.009 seconds using memcached
+
+Served from: krebsonsecurity.com @ 2021-12-10 15:34:59 by W3 Total Cache
+-->

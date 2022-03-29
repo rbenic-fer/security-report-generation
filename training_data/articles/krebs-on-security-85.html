@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<!--[if IE 7]>
+<html class="ie ie7" lang="en-US">
+<![endif]-->
+<!--[if IE 8]>
+<html class="ie ie8" lang="en-US">
+<![endif]-->
+<!--[if !(IE 7) | !(IE 8)  ]><!-->
+<html lang="en-US">
+<!--<![endif]-->
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width" />
+<link rel="profile" href="http://gmpg.org/xfn/11" />
+<!--[if lt IE 9]>
+<script src="https://krebsonsecurity.com/wp-content/themes/kos-mar2021/js/html5.js" type="text/javascript"></script>
+<![endif]-->
+<title>Krebs on Security &#8211; Page 85 &#8211; In-depth security news and investigation</title>
+<meta name='robots' content='max-image-preview:large' />
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="Krebs on Security &raquo; Feed" href="https://krebsonsecurity.com/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Krebs on Security &raquo; Comments Feed" href="https://krebsonsecurity.com/comments/feed/" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.1.0\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.1.0\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/krebsonsecurity.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=5.8.2"}};
+			!function(e,a,t){var n,r,o,i=a.createElement("canvas"),p=i.getContext&&i.getContext("2d");function s(e,t){var a=String.fromCharCode;p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,e),0,0);e=i.toDataURL();return p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,t),0,0),e===i.toDataURL()}function c(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(o=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},r=0;r<o.length;r++)t.supports[o[r]]=function(e){if(!p||!p.fillText)return!1;switch(p.textBaseline="top",p.font="600 32px Arial",e){case"flag":return s([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])?!1:!s([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!s([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]);case"emoji":return!s([10084,65039,8205,55357,56613],[10084,65039,8203,55357,56613])}return!1}(o[r]),t.supports.everything=t.supports.everything&&t.supports[o[r]],"flag"!==o[r]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[o[r]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(n=t.source||{}).concatemoji?c(n.concatemoji):n.wpemoji&&n.twemoji&&(c(n.twemoji),c(n.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+	<link rel='stylesheet' id='colorbox-theme1-css'  href='https://krebsonsecurity.com/wp-content/plugins/jquery-lightbox-for-native-galleries/colorbox/theme1/colorbox.css?ver=1.3.14' type='text/css' media='screen' />
+<link rel='stylesheet' id='wp-block-library-css'  href='https://krebsonsecurity.com/wp-includes/css/dist/block-library/style.min.css?ver=5.8.2' type='text/css' media='all' />
+<link rel='stylesheet' id='contact-form-7-css'  href='https://krebsonsecurity.com/wp-content/plugins/contact-form-7/includes/css/styles.css?ver=5.5.3' type='text/css' media='all' />
+<link rel='stylesheet' id='publisho-style-css'  href='https://krebsonsecurity.com/wp-content/themes/kos-mar2021/style.css?subver=1.2&#038;ver=5.8.2' type='text/css' media='all' />
+<style id='publisho-style-inline-css' type='text/css'>
+
+	.themonic-nav .current-menu-item > a, .themonic-nav .current-menu-ancestor > a, .themonic-nav .current_page_item > a, .themonic-nav .current_page_ancestor > a {
+		background: #cc6600;
+	}
+	.themonic-nav ul.nav-menu, .themonic-nav div.nav-menu > ul {
+		border-bottom: 5px solid #cc6600;
+	}
+	#site-navigation .topheadmenu a {
+    background: rgba(0, 0, 0, 0);
+	}
+	.themonic-nav li a:hover {
+		background: #cc6600;
+	}
+	.themonic-nav li:hover {
+		background: #cc6600;
+	}.wrapper .flexslider {margin: 0 0 30px;}.frontp .btm-wrap {
+    border-top: 1px solid #e9e9e9;
+	}
+	.entry-summary {
+    border-top: none;
+	}.frontp .btm-wrap { margin-bottom: 30px;}.site { font-size:14px;}.site { font-family:'Roboto', arial ;}
+</style>
+<link rel='stylesheet' id='publisho-custom-style-css'  href='https://krebsonsecurity.com/wp-content/themes/kos-mar2021/custom.css?subver=1.2&#038;ver=5.8.2' type='text/css' media='all' />
+<!--[if lt IE 9]>
+<link rel='stylesheet' id='publisho-ie-css'  href='https://krebsonsecurity.com/wp-content/themes/kos-mar2021/css/ie.css?ver=20160606' type='text/css' media='all' />
+<![endif]-->
+<link rel='stylesheet' id='fontawesome-css-css'  href='https://krebsonsecurity.com/wp-content/themes/kos-mar2021/fonts/font-awesome.min.css?ver=5.8.2' type='text/css' media='all' />
+<link rel='stylesheet' id='publisho_custom_fonts-css'  href='//fonts.googleapis.com/css?family=Roboto%3Aregular%2Citalic%2C500%26subset%3Dlatin%2C' type='text/css' media='screen' />
+<script type='text/javascript' src='https://krebsonsecurity.com/wp-includes/js/jquery/jquery.min.js?ver=3.6.0' id='jquery-core-js'></script>
+<script type='text/javascript' src='https://krebsonsecurity.com/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.3.2' id='jquery-migrate-js'></script>
+<script type='text/javascript' src='https://krebsonsecurity.com/wp-content/plugins/jquery-lightbox-for-native-galleries/colorbox/jquery.colorbox-min.js?ver=1.3.14' id='colorbox-js'></script>
+<link rel="https://api.w.org/" href="https://krebsonsecurity.com/wp-json/" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://krebsonsecurity.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://krebsonsecurity.com/wp-includes/wlwmanifest.xml" /> 
+<meta name="generator" content="WordPress 5.8.2" />
+<!-- JavaScript Pull-Quotes plugin v2.2 -->
+	<link rel="stylesheet" href="https://krebsonsecurity.com/wp-content/plugins/jspullquotes/resources/jspullquotes-core.css" type="text/css" />
+	<link rel="stylesheet" href="https://krebsonsecurity.com/wp-content/plugins/jspullquotes/resources/jspullquotes-default.css" type="text/css" />
+	<script type="text/javascript" src="https://krebsonsecurity.com/wp-content/plugins/jspullquotes/resources/jspullquotes.js"></script>
+	<script type="text/javascript">
+		var arrOptions = new Array("1", "1", "right", "1", "1", "blockquote", "pullquote", "pullquote pqRight");
+		pullQuoteOpts(arrOptions);
+	</script>
+<!-- end pull-quote additions -->
+<!-- jQuery Lightbox For Native Galleries v3.1.3 | http://www.viper007bond.com/wordpress-plugins/jquery-lightbox-for-native-galleries/ -->
+<script type="text/javascript">
+// <![CDATA[
+	jQuery(document).ready(function($){
+		$(".gallery").each(function(index, obj){
+			var galleryid = Math.floor(Math.random()*10000);
+			$(obj).find("a").colorbox({rel:galleryid, maxWidth:"95%", maxHeight:"95%"});
+		});
+		$("a.lightbox").colorbox({maxWidth:"95%", maxHeight:"95%"});
+	});
+// ]]>
+</script>
+<style type="text/css" id="custom-background-css">
+body.custom-background { background-color: #ffffff; }
+</style>
+	<link rel="me" href="https://twitter.com/briankrebs" /><meta name="twitter:widgets:link-color" content="#000000" /><meta name="twitter:widgets:border-color" content="#000000" /><meta name="twitter:partner" content="tfwp" />
+<meta name="twitter:card" content="summary" /><meta name="twitter:title" content="Krebs on Security" /><meta name="twitter:site" content="@briankrebs" /><meta name="twitter:description" content="In-depth security news and investigation" />
+</head>
+<body class="home blog paged custom-background paged-85 custom-background-white single-author frontp hfeed">
+<div id="page" class="site">
+	<!-- <div class="publisho-top-mobile-nav clear"></div> -->
+	<div class="themonic-logo themonic-ad3"><div class="a-statement">Advertisement</div><a href="https://www.akamai.com/why-akamai/the-internet-of-possibilities?utm_source=krebsonsecurity&amp;utm_medium=display&amp;utm_campaign=F-MC-54978">
+<img src="/b-akamai/142.png">
+</a></div>
+	<div class="themonic-logo themonic-ad6"><div class="a-statement">Advertisement</div><a href="https://www.proofpoint.com/us/resources/awareness-materials/cybersecurity-awareness-month?utm_source=krebs&amp;utm_medium=2021cybersecurityawarenessmonth">
+<img src="/b-proofnam/19.png">
+</a></div>
+	<nav id="site-navigation" class="themonic-nav" role="navigation">
+	</nav><!-- #site-navigation -->
+	<div class="clear"></div>
+	<header id="masthead" class="site-header" role="banner">
+ 					<div class="desktop-social">
+						<div class="socialmedia">
+							<a href="http://twitter.com/briankrebs" target="_blank"><i class="fa fa-twitter"></i></a> 
+															<a class="rss" href="https://krebsonsecurity.com/feed/" target="_blank"><i class="fa fa-rss"></i></a>	
+									<a class="rss" href="https://www.linkedin.com/in/bkrebs/" target="_blank"><i class="fa fa-linkedin"></i></a>	
+								</div>
+				 	</div>
+																						   
+		
+		<div class="themonic-logo responsive-img-container">
+			<a href="https://krebsonsecurity.com/" title="Krebs on Security" rel="home"><img src="https://krebsonsecurity.com/wp-content/uploads/2021/03/kos-27-03-2021.jpg" alt="Krebs on Security"></a>
+		</div>
+
+					<div class="mobile-social">
+						<div class="socialmedia">
+							<a href="http://twitter.com/briankrebs" target="_blank"><i class="fa fa-twitter"></i></a> 
+															<a class="rss" href="https://krebsonsecurity.com/feed/" target="_blank"><i class="fa fa-rss"></i></a>	
+									<a class="rss" href="https://www.linkedin.com/in/bkrebs/" target="_blank"><i class="fa fa-linkedin"></i></a>	
+								</div>
+					</div>
+		
+				<!-- <div class="publisho-mobile-nav clear"></div> -->
+		<nav id="site-navigation" class="themonic-nav" role="navigation">
+			<a class="assistive-text" href="#content" title="Skip to content">Skip to content</a>
+			<div id="menu-top" class="nav-menu"><ul>
+<li ><a href="https://krebsonsecurity.com/">Home</a></li><li class="page_item page-item-2"><a href="https://krebsonsecurity.com/about/">About the Author</a></li>
+<li class="page_item page-item-645"><a href="https://krebsonsecurity.com/cpm/">Advertising/Speaking</a></li>
+</ul></div>
+		</nav><!-- #site-navigation -->
+		<div class="clear"></div>
+	</header><!-- #masthead -->
+	<div id="main" class="wrapper">
+		<div id="primary" class="site-content">
+	
+
+	
+		<div id="content" role="main">
+
+		<article id="post-33756" class="post-33756 post type-post status-publish format-standard hentry category-sunshine category-data-breaches tag-b-dan-berger tag-chip-and-pin tag-chip-and-signature tag-debit-card-fraud tag-emv tag-home-depot-breach tag-national-association-of-federal-credit-unions tag-target-breach tag-wendys-breach">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2016/03/credit-unions-feeling-pinch-in-wendys-breach/" title="Permalink to Credit Unions Feeling Pinch in Wendy&#8217;s Breach" rel="bookmark">Credit Unions Feeling Pinch in Wendy&#8217;s Breach</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">March 2, 2016</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2016/03/credit-unions-feeling-pinch-in-wendys-breach/#comments">95 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>A number of credit unions say they have experienced an unusually high level of debit card fraud from the breach at nationwide fast food chain Wendy&#8217;s, and that the losses so far eclipse those that came in the wake of huge card breaches at Target and Home Depot.</p>
+<p><img loading="lazy" class="alignright wp-image-34063" src="https://krebsonsecurity.com/wp-content/uploads/2016/03/wendysky-580x392.png" alt="wendysky" width="313" height="212" srcset="https://krebsonsecurity.com/wp-content/uploads/2016/03/wendysky-580x392.png 580w, https://krebsonsecurity.com/wp-content/uploads/2016/03/wendysky-768x518.png 768w, https://krebsonsecurity.com/wp-content/uploads/2016/03/wendysky.png 868w" sizes="(max-width: 313px) 100vw, 313px" />As <a href="http://krebsonsecurity.com/2016/01/wendys-probes-reports-of-credit-card-breach/" target="_blank">first noted</a> on this blog in January, Wendy&#8217;s is investigating a pattern of unusual card activity at some stores. In a <a href="http://ir.wendys.com/phoenix.zhtml?c=67548&amp;p=irol-newsArticle&amp;ID=2136634" target="_blank">preliminary 2015 annual report</a>, Wendy&#8217;s confirmed that malware designed to steal card data was found on some systems. The company says it doesn&#8217;t yet know the extent of the breach or how many customers may have been impacted.</p>
+<p>According to <strong>B. Dan Berger</strong>, CEO at the <a href="https://www.nafcu.org/" target="_blank">National Association of Federal Credit Unions</a>, many credit unions saw a huge increase in debit card fraud in the few weeks before the Wendy&#8217;s breach became public. He said much of that fraud activity was later tied to customers who&#8217;d patronized Wendy&#8217;s locations less than a month prior.</p>
+<p>&#8220;This is what we&#8217;ve heard from three different credit union CEOs in Ohio now: It&#8217;s more concentrated and the amounts hitting compromised debit accounts is much higher that what they were hit with after Home Depot or Target,&#8221; Berger said. &#8220;It seems to have been been [the work of] a sophisticated group, in terms of the timing and the accounts they targeted. They were targeting and draining debit accounts with lots of money in them.&#8221;</p>
+<p>Berger shared an email sent by one credit union CEO who asked not to be named in this story:</p>
+<blockquote><p>&#8220;Please take this Wendy’s story very seriously. We have been getting killed lately with debit card fraud. We have already hit half of our normal yearly fraud so far this year, and it is not even the end of January yet. After reading this, we reviewed activity on some of our accounts which had fraud on them. The first six we checked had all been to Wendy’s in the last quarter of 2015.&#8221;</p>
+<p>All I am suggesting is that we are experiencing much high[er] losses lately than we ever did after the Target or Home Depot problems. I think we may be end up with 5 to 10 times the loss on this breach, wherever it occurred. Accordingly, please put this story in the proper perspective.&#8221;</p></blockquote>
+<p>Wendy&#8217;s declined to comment for this story.</p>
+<p>Even if thieves don&#8217;t know the PIN assigned to a given debit card, very often banks and credit unions will let customers call in and change their PIN using automated systems that ask the caller to verify the cardholder&#8217;s identity by keying in static identifiers, like Social Security numbers, dates of birth and the card&#8217;s expiration date.</p>
+<p>Thieves can abuse these automated systems to reset the PIN on the victim&#8217;s debit card, and then use a counterfeit copy of the card to withdraw cash from the account at ATMs. As I reported in September 2014, <a href="http://krebsonsecurity.com/2014/09/in-wake-of-confirmed-breach-at-home-depot-banks-see-spike-in-pin-debit-card-fraud/" target="_blank">this is exactly what happened in the wake of the Home Depot breach</a>. <a href="https://krebsonsecurity.com/2016/03/credit-unions-feeling-pinch-in-wendys-breach/#more-33756" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+	<div id="between_article_ad" class="themonic-ad5"><a href="https://go.infrascale.com/lp/get-ransomware-ebook-krebsonsecurity/?utm_source=banner&amp;utm_medium=display&amp;utm_campaign=krebssecurity_influencer_300">
+<img src="/b-infrascale/8.png">
+</a></div>	<article id="post-34039" class="post-34039 post type-post status-publish format-standard hentry category-sunshine category-tax-refund-fraud tag-becky-wittrock tag-equifax tag-internal-revenue-service tag-ip-pin tag-irs tag-irs-get-transcript tag-quartz tag-tax-refund-fraud">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2016/03/thieves-nab-irs-pins-to-hijack-tax-refunds/" title="Permalink to Thieves Nab IRS PINs to Hijack Tax Refunds" rel="bookmark">Thieves Nab IRS PINs to Hijack Tax Refunds</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">March 1, 2016</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2016/03/thieves-nab-irs-pins-to-hijack-tax-refunds/#comments">93 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>Last year, KrebsOnSecurity <a href="http://krebsonsecurity.com/2015/08/irs-330k-taxpayers-hit-by-get-transcript-scam/" target="_blank">warned</a> that the <strong>Internal Revenue Service</strong>&#8216;s (IRS) solution for helping victims of tax refund fraud avoid being victimized two years in a row was vulnerable to compromise by identity thieves. According to a story shared by one reader, the crooks are well aware of this security weakness and are using it to revisit tax refund fraud on at least some victims two years running &#8212; despite the IRS&#8217;s added ID theft protections.</p>
+<p><img loading="lazy" class="alignright wp-image-34053" src="https://krebsonsecurity.com/wp-content/uploads/2016/03/irsbldg-580x740.png" alt="irsbldg" width="300" height="383" srcset="https://krebsonsecurity.com/wp-content/uploads/2016/03/irsbldg-580x740.png 580w, https://krebsonsecurity.com/wp-content/uploads/2016/03/irsbldg.png 666w" sizes="(max-width: 300px) 100vw, 300px" />Tax refund fraud affects hundreds of thousands &#8212; if not millions &#8212; of U.S. citizens annually. It starts when crooks submit your personal data to the IRS and claim a refund in your name, but have the money sent to an account or address you don&#8217;t control.</p>
+<p>Victims usually first learn of the crime after having their returns rejected because scammers beat them to it. Even those who are not required to file a return can be victims of refund fraud, as can those who are not actually due a refund from the IRS.</p>
+<p>The IRS’s preferred method of protecting tax refund victims from getting hit two years in a row — the <strong>Identity Protection (IP) PIN</strong> — has already been mailed to some 2.7 million tax ID theft victims. The six-digit PIN must be supplied on the following year’s tax application before the IRS will accept the return as valid.</p>
+<p>As I&#8217;ve noted in several stories here, the trouble with this approach is that the IRS allows IP PIN recipients to <a href="https://www.irs.gov/Individuals/Retrieve-Your-IP-PIN" target="_blank">retrieve their PIN</a> via the agency’s Web site, after supplying the answers to four easy-to-guess questions from consumer credit bureau <strong>Equifax</strong>.  These so-called knowledge-based authentication (KBA) or &#8220;out-of-wallet&#8221; questions focus on things such as previous address, loan amounts and dates and can be successfully enumerated with random guessing.  In many cases, the answers can be found by consulting free online services, such as Zillow and Facebook.</p>
+<p class="p1"><span class="s1"><strong>Becky Wittrock</strong>, a certified public accountant (CPA) from Sioux Falls, S.D., said she received an IP PIN in 2014 after crooks tried to impersonate her to the IRS. </span></p>
+<p class="p1"><span class="s1">Wittrock said she found out her IP PIN had been compromised by thieves this year after she tried to file her tax return on Feb. 25, 2016. Turns out, the crooks beat her to the punch by more than three weeks, filing a large refund request with the IRS on Feb. 2, 2016. </span></p>
+<p class="p1"><span class="s1">&#8220;So, last year I was devastated by this,&#8221; Wittrock said, &#8220;But this year I&#8217;m just pissed.&#8221;</span></p>
+<p class="p1">Wittrock said she called the toll-free number for the IRS that was printed on the identity theft literature she received from the year before.</p>
+<p class="p1"><span class="s1">&#8220;I tried to e-file this weekend and the return was rejected,&#8221; Wittrock said. &#8220;I received the PIN since I had IRS fraud on my 2014 return. <span class="pullquote pqleft">I called the IRS this morning and they stated that the fraudulent use of IP PINs is a big problem for them this year.&#8221;</span></span></p>
+<p class="p1"><span class="s1">Wittrock said that to verify herself to the IRS representative, she had to regurgitate a litany of static data points about herself, such as her name, address, Social Security number, birthday, how she filed the previous year (married/single/etc), whether she claimed any dependents and if so how many. </span></p>
+<p class="p1"><span class="s1">&#8220;The guy said, &#8216;Yes, I do see a return was filed under your name on Feb. 2, and that there was the correct IP PIN supplied&#8217;,&#8221; Wittrock recalled. &#8220;I asked him how can that be, and he said, &#8216;You’re not the first, we’ve had many cases of that this year.'&#8221;</span></p>
+<p class="p1"><span class="s1">According to Wittrock, the IRS representative shared that the agency wouldn&#8217;t be relying on IP PINs for long. </span></p>
+<p class="p1"><span class="s1">&#8220;He said, &#8216;We won’t be using the six digit PIN next year. We&#8217;re working on coming up with another method of verification&#8217;,&#8221; she recalled. &#8220;He also had thrown in something about [requiring] a driver&#8217;s license, which didn&#8217;t sound like a good solution to me.&#8221;</span> <a href="https://krebsonsecurity.com/2016/03/thieves-nab-irs-pins-to-hijack-tax-refunds/#more-34039" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+	<div class="themonic-ad2"><div class="a-statement">Advertisement</div><a href="https://www.akamai.com/why-akamai/the-internet-of-possibilities?utm_source=krebsonsecurity&amp;utm_medium=display&amp;utm_campaign=F-MC-54978">
+<img src="/b-akamai/145.png">
+</a></div>	<article id="post-33884" class="post-33884 post type-post status-publish format-standard hentry category-tax-refund-fraud tag-equifax tag-federal-trade-commission tag-gao tag-get-transcript-breach tag-government-accountability-office tag-ip-pin tag-irs tag-kba tag-knowledge-based-authentication tag-tax-refund-fraud">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2016/02/irs-390k-more-victims-of-irs-gov-weakness/" title="Permalink to IRS: 390K More Victims of IRS.Gov Weakness" rel="bookmark">IRS: 390K More Victims of IRS.Gov Weakness</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">February 26, 2016</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2016/02/irs-390k-more-victims-of-irs-gov-weakness/#comments">29 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>The <strong>U.S.</strong> <strong>Internal Revenue Service</strong> (IRS) today sharply revised previous estimates on the number of citizens that had their tax data stolen since 2014 thanks to a security weakness in the IRS&#8217;s own Web site. According to the IRS, at least 724,000 citizens had their personal and tax data stolen after crooks figured out how to abuse a (now defunct) IRS Web site feature called &#8220;Get Transcript&#8221; to steal victim&#8217;s prior tax data.</p>
+<p><img loading="lazy" class="alignright wp-image-25751" src="https://krebsonsecurity.com/wp-content/uploads/2014/04/taxfraud-285x285.jpg" alt="The Growing Tax Fraud Menace" width="253" height="253" srcset="https://krebsonsecurity.com/wp-content/uploads/2014/04/taxfraud-285x285.jpg 285w, https://krebsonsecurity.com/wp-content/uploads/2014/04/taxfraud-150x150.jpg 150w, https://krebsonsecurity.com/wp-content/uploads/2014/04/taxfraud-600x600.jpg 600w, https://krebsonsecurity.com/wp-content/uploads/2014/04/taxfraud.jpg 693w" sizes="(max-width: 253px) 100vw, 253px" />The number is more than double the figures the IRS released in August 2015, when it said some <a href="http://krebsonsecurity.com/2015/08/irs-330k-taxpayers-hit-by-get-transcript-scam/" target="_blank">334,000 taxpayers</a> had their data stolen via authentication weaknesses in the agency&#8217;s Get Transcript feature.</p>
+<p>Turns out, those August 2015 estimates were more than tripled from May 2015, when the IRS shut down its Get Transcript feature and announced it thought crooks had abused the Get Transcript feature to pull previous year&#8217;s tax data on just 110,000 citizens.</p>
+<p>In a statement released today, the IRS said a more comprehensive, nine-month review of the Get Transcript feature since its inception in January 2014 identified the &#8220;potential access of approximately 390,000 additional taxpayer accounts during the period from January 2014 through May 2015.&#8221;</p>
+<p>The IRS said an additional 295,000 taxpayer transcripts were targeted but access was not successful, and that mailings notifying these taxpayers will start February 29. The agency said it also is offering free credit monitoring through <strong>Equifax</strong> for affected consumers, and placing extra scrutiny on tax returns from citizens with affected SSNs.</p>
+<p>The criminal Get Transcript requests fuel refund fraud, which involves crooks claiming a large refund in the name of someone else and intercepting the payment. Victims usually first learn of the crime after having their returns rejected because scammers beat them to it. Even those who are not required to file a return can be victims of refund fraud, as can those who are not actually due a refund from the IRS.</p>
+<p>As <a href="http://krebsonsecurity.com/2015/03/sign-up-at-irs-gov-before-crooks-do-it-for-you/" target="_blank">I warned in March 2015</a>, the flawed Get Transcript function at issue required taxpayers who wished to obtain a copy of their most recent tax transcript had to provide the IRS&#8217;s site with the following information: The applicant’s name, date of birth, Social Security number and filing status. After that data was successfully supplied, the IRS used a service from credit bureau <strong>Equifax</strong> that asks four so-called “knowledge-based authentication” (KBA) questions. Anyone who succeeds in supplying the correct answers could see the applicant’s full tax transcript, including prior W2s, current W2s and more or less everything one would need to fraudulently file for a tax refund.</p>
+<p>These KBA questions — which involve multiple choice, “out of wallet” questions such as previous address, loan amounts and dates — can be successfully enumerated with random guessing. <em>But in practice it is far easier, as we can see from the fact that thieves were successfully able to navigate the multiple questions more than half of the times they tried. </em>The IRS said it identified some 1.3 million attempts to abuse the Get Transcript service since its inception in January 2014; in 724,000 of those cases the thieves succeeded in answering the KBA questions correctly.</p>
+<p>The IRS&#8217;s answer to tax refund victims &#8212; the Identity Protection (IP) PIN &#8212; is just as flawed as the now defunct Get Transcript system. These IP PINS, which the IRS has already mailed to some 2.7 million tax ID theft victims, must be supplied on the following year&#8217;s tax application before the IRS will accept the return.</p>
+<p>The only problem with this approach is that the IRS allows IP PIN recipients to <a href="https://www.irs.gov/Individuals/Retrieve-Your-IP-PIN" target="_blank">retrieve their PIN</a> via the agency’s Web site, after supplying the answers to the same type of KBA questions from Equifax that opened the Get Transcript feature to exploitation by fraudsters.  These KBA questions focus on things such as previous address, loan amounts and dates and can be successfully enumerated with random guessing.  In many cases, the answers can be found by consulting free online services, such as Zillow and Facebook.</p>
+<p>ID thieves understand this all to well, and even a relatively unsophisticated gang engaged in this activity can make millions via tax refund fraud. Last week, a federal grand jury in Oregon <a href="http://www.kdrv.com/news/local/Federal_Charges_Brought_in_Nationwide_Identity_Theft_and_IRS_Tax_Refund_Scheme.html" target="_blank">unsealed indictments against three men</a> accused of using the IRS&#8217;s Get Transcript feature to obtain 1,200 taxpayers transcripts. In total, the authorities allege the men filed over 2,900 false federal tax returns seeking over $25 million in fraudulent refunds.  The IRS says it rejected most of those claims, but that the gang managed to successfully obtain $4.7 million in illegal refunds.</p>
+<p> <a href="https://krebsonsecurity.com/2016/02/irs-390k-more-victims-of-irs-gov-weakness/#more-33884" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-33980" class="post-33980 post type-post status-publish format-standard hentry category-sunshine category-data-breaches category-latest-warnings category-comingstorm category-web-fraud-2-0 tag-akeeba-backup tag-alex-holden tag-claudio-marcel-kuenzler tag-coast-central-credit-union tag-hold-security tag-joomla tag-sfx-php tag-web-shell">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2016/02/breached-credit-union-comes-out-of-its-shell/" title="Permalink to Breached Credit Union Comes Out of its Shell" rel="bookmark">Breached Credit Union Comes Out of its Shell</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">February 25, 2016</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2016/02/breached-credit-union-comes-out-of-its-shell/#comments">61 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>Notifying people and companies about data breaches often can be a frustrating and thankless job. Despite my best efforts, sometimes a breach victim I&#8217;m alerting will come away convinced that I am not an investigative journalist but instead a scammer. This happened most recently this week, when I told a California credit union that its online banking site was compromised and apparently had been for nearly two months.</p>
+<p>On Feb. 23, I contacted <strong>Coast Central Credit Union</strong>, a financial institution based in Eureka, Calif. that serves more than 60,000 customers. I explained who I was, how they&#8217;d likely been hacked, how they could verify the hack, and how they could fix the problem. Two days later when I noticed the site was still hacked, I contacted the credit union again, only to find they still didn&#8217;t believe me.</p>
+<p>News of the compromise came to me via<strong> Alex Holden</strong>, a fellow lurker in the cybercrime underground and founder of <a href="http://www.holdsecurity.com" target="_blank">Hold Security </a>[full disclosure: While Holden&#8217;s site <a href="http://holdsecurity.com/about/advisory-board/" target="_blank">lists</a> me as an advisor to his company, I receive zero compensation for that role]. Holden told me that crooks had hacked the credit union&#8217;s site and retrofitted it with a &#8220;Web shell,&#8221; a simple backdoor program that allows an attacker to remotely control the Web site and server using nothing more than a Web browser.</p>
+<div id="attachment_33989" style="width: 590px" class="wp-caption aligncenter"><a href="https://krebsonsecurity.com/wp-content/uploads/2016/02/bankshell.png"><img aria-describedby="caption-attachment-33989" loading="lazy" class="lightbox wp-image-33989 size-medium" src="https://krebsonsecurity.com/wp-content/uploads/2016/02/bankshell-580x323.png" alt="A view of the credit union's hacked Web site via the Web shell. " width="580" height="323" srcset="https://krebsonsecurity.com/wp-content/uploads/2016/02/bankshell-580x323.png 580w, https://krebsonsecurity.com/wp-content/uploads/2016/02/bankshell-768x428.png 768w, https://krebsonsecurity.com/wp-content/uploads/2016/02/bankshell-940x523.png 940w" sizes="(max-width: 580px) 100vw, 580px" /></a><p id="caption-attachment-33989" class="wp-caption-text">A screen shot of the credit union&#8217;s hacked Web site via the Web shell.</p></div>
+<p>The credit union&#8217;s switchboard transferred me to a person in Coast Central&#8217;s tech department who gave his name only as &#8220;Vincent.&#8221; I told Vincent that the credit union&#8217;s site was very likely compromised, how he could verify it, etc. I also gave him my contact information, and urged him to escalate the issue. After all, I said, the intruders could use the Web shell program to upload malicious software that steals customer passwords directly from the credit union&#8217;s Web site. Vincent didn&#8217;t seem terribly alarmed about the news, and assured me that someone would be contacting me for more information.</p>
+<p>This afternoon I happened to reload the login page for the Web shell on the credit union&#8217;s site and noticed it was still available. A call to the main number revealed that Vincent wasn&#8217;t in, but that Patrick in IT would take my call. For better or worse, Patrick was deeply skeptical that I was not impersonating the author of this site.</p>
+<p>I commended him on his wariness and suggested several different ways he could independently verify my identity. When asked for a contact at the credit union that could speak to the media, Patrick said that person was him but declined to tell me his last name. He also refused to type in a Web address on his own employer&#8217;s Web site to verify the Web shell login page.</p>
+<p>&#8220;I hope you <em>do</em> write about this,&#8221; Patrick said doubtfully, after I told him that I&#8217;d probably put something up on the site today about the hack. &#8220;That would be funny.&#8221;</p>
+<div id="attachment_33999" style="width: 370px" class="wp-caption aligncenter"><img aria-describedby="caption-attachment-33999" loading="lazy" class="size-full wp-image-33999" src="https://krebsonsecurity.com/wp-content/uploads/2016/02/webshelllogin.png" alt="The login page for the Web shell that was removed today from Coast Central Credit Union's Web site." width="360" height="78" /><p id="caption-attachment-33999" class="wp-caption-text">The login page for the Web shell that was removed today from Coast Central Credit Union&#8217;s Web site.</p></div>
+<p>Exasperated, I told Patrick good luck and hung up. Thankfully, I did later hear from <strong>Ed Christians</strong>, vice president of information systems at Coast Central. Christians apologized for the runaround and said everyone in his department were regular readers of KrebsOnSecurity. &#8220;I was hoping I&#8217;d never get a call from you, but I guess I can cross that one off my list,&#8221; Christians said. &#8220;We&#8217;re going to get this thing taken down immediately.&#8221;</p>
+<p>The credit union has since disabled the Web shell and is continuing to investigate the extent and source of the breach. There is some evidence to suggest the site may have been hacked via an outdated version of <strong>Akeeba Backup &#8212;</strong> a <a href="https://www.joomla.org/" target="_blank">Joomla</a> component that allows users to create and manage complete backups of a Joomla-based website. Screen shots of the files listed by the Web shell planted on Coast Central Credit Union indeed indicate the presence of Akeeba Backup on the financial institution&#8217;s Web server.</p>
+<p>A Web search on one backdoor component that the intruders appear to have dropped on the credit union&#8217;s site on Dec. 29, 2015 &#8212; a file called &#8220;sfx.php&#8221; &#8212; turns up <a href="http://www.claudiokuenzler.com/blog/534/joomla-hacked-through-akeeba-backup-restore-joomlaupdate" target="_blank">this blog post</a> in which Swiss systems engineer <strong>Claudio Marcel Kuenzler</strong> described his investigation of a site that was hacked through the Akeeba Backup function.  <a href="https://krebsonsecurity.com/2016/02/breached-credit-union-comes-out-of-its-shell/#more-33980" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-33969" class="post-33969 post type-post status-publish format-standard hentry category-latest-warnings category-tax-refund-fraud category-comingstorm tag-knowbe4 tag-stu-sjouwerman tag-tax-refund-fraud tag-w-2">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2016/02/phishers-spoof-ceo-request-w2-forms/" title="Permalink to Phishers Spoof CEO, Request W2 Forms" rel="bookmark">Phishers Spoof CEO, Request W2 Forms</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">February 24, 2016</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2016/02/phishers-spoof-ceo-request-w2-forms/#comments">40 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>With tax filing season in the United States well underway, scammers who specialize in tax refund fraud have a new trick up their sleeves: Spoofing emails from a target organization&#8217;s CEO, asking human resources and accounting departments for employee W-2 information.</p>
+<p><strong><img loading="lazy" class="alignright size-full wp-image-30276" src="https://krebsonsecurity.com/wp-content/uploads/2015/03/athook.png" alt="athook" width="194" height="375" />Stu Sjouwerman</strong>, chief executive at security awareness training company <strong>KnowBe4</strong>, told KrebsOnSecurity that earlier this week his firm&#8217;s controller received an email designed to look like it was sent by Sjouwerman requesting a copy of all employee W-2 forms for this year (full disclosure: KnowBe4 is an advertiser on this site). The email read:</p>
+<p>&#8220;Alanna,</p>
+<p>I want you to send me the list of W-2 copy of employees wage and tax statement for 2015, I need them in PDF file type, you can send it as an attachment. Kindly prepare the lists and email them to me asap.</p>
+<p>Stu&#8221;x</p>
+<p>Turns out, KnowBe4 just hired a new chief financial officer. The controller answered that she didn&#8217;t have access to that information, but that the new CFO could help. Sjourwerman said an analysis of the <a href="https://support.google.com/mail/answer/29436?hl=en" target="_blank">email headers</a> showed the phishers used someone&#8217;s GoDaddy email server and the return address was not associated with the company.</p>
+<p>&#8220;Our CFO had just stepped through all of our awareness training and smelled something phishy,&#8221; Sjourwerman said. &#8220;The two of them walked up to me and asked if I had requested a PDF with all W-2&#8217;s. Obviously, I hadn&#8217;t, and congratulated them on a good catch. But imagine if we would have sent off those W-2&#8217;s! It would have opened up our employees to identity theft because the W-2&#8217;s have their full name, address, wages and Social Security number.&#8221;</p>
+<p><img loading="lazy" class="aligncenter size-medium wp-image-33974" src="https://krebsonsecurity.com/wp-content/uploads/2016/02/knowbe4phish-580x286.png" alt="knowbe4phish" width="580" height="286" srcset="https://krebsonsecurity.com/wp-content/uploads/2016/02/knowbe4phish-580x286.png 580w, https://krebsonsecurity.com/wp-content/uploads/2016/02/knowbe4phish-768x378.png 768w, https://krebsonsecurity.com/wp-content/uploads/2016/02/knowbe4phish-940x463.png 940w, https://krebsonsecurity.com/wp-content/uploads/2016/02/knowbe4phish.png 1166w" sizes="(max-width: 580px) 100vw, 580px" /></p>
+<p> <a href="https://krebsonsecurity.com/2016/02/phishers-spoof-ceo-request-w2-forms/#more-33969" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-33938" class="post-33938 post type-post status-publish format-standard hentry category-sunshine tag-apple tag-bruce-schneier tag-encryption tag-fbi tag-fisc tag-foreign-intelligence-surveillance-court tag-house-energy-commerce-committee tag-icsi tag-international-computer-science-institute tag-james-comey tag-joel-rose tag-nicholas-weaver tag-npr tag-nsa tag-rep-michael-mccaul tag-sen-mark-warner tag-syed-rizwan-farook tag-tim-cook">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2016/02/the-lowdown-on-the-apple-fbi-showdown/" title="Permalink to The Lowdown on the Apple-FBI Showdown" rel="bookmark">The Lowdown on the Apple-FBI Showdown</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">February 22, 2016</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2016/02/the-lowdown-on-the-apple-fbi-showdown/#comments">194 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>Many readers have asked for a primer summarizing the privacy and security issues at stake in the the dispute between <strong>Apple</strong> and the <strong>U.S. Justice Department</strong>, which last week convinced a judge in California to order Apple to unlock an iPhone used by one of assailants in the recent San Bernardino massacres. I don&#8217;t have much original reporting to contribute on this important debate, but I&#8217;m visiting it here because it&#8217;s a complex topic that deserves the broadest possible public scrutiny.</p>
+<div id="attachment_33957" style="width: 267px" class="wp-caption alignright"><img aria-describedby="caption-attachment-33957" loading="lazy" class=" wp-image-33957" src="https://krebsonsecurity.com/wp-content/uploads/2016/02/hungryapple.png" alt="Image: Elin Korneliussen" width="257" height="268" /><p id="caption-attachment-33957" class="wp-caption-text">Image: Elin Korneliussen (@elincello)</p></div>
+<p>A federal magistrate in California <a href="https://assets.documentcloud.org/documents/2714005/SB-Shooter-Order-Compelling-Apple-Asst-iPhone.pdf" target="_blank">approved an order</a> (PDF) granting the FBI permission to access to the data on the iPhone 5c belonging to the late terror suspect <strong>Syed</strong> <strong>Rizwan Farook</strong>, one of two individuals responsible for a <a href="https://en.wikipedia.org/wiki/2015_San_Bernardino_attack" target="_blank">mass shooting in San Bernadino on Dec. 2, 2015</a> in which 14 people were killed and many others were injured.</p>
+<p><strong>Apple CEO Tim Cook</strong> <a href="https://www.apple.com/customer-letter/" target="_blank">released a letter</a> to customers last week saying the company will appeal the order, citing customer privacy and security concerns.</p>
+<p>Most experts seem to agree that Apple is technically capable of complying with the court order. Indeed, as <strong>National Public Radio</strong> <a href="http://www.npr.org/2016/02/22/467602161/the-seeds-of-apples-standoff-with-doj-may-have-been-sown-in-brooklyn" target="_blank">notes in a segment this morning</a>, Apple has agreed to unlock phones in approximately 70 other cases involving requests from the government. However, something unexpected emerged in one of those cases &#8212; an iPhone tied to a Brooklyn, NY drug dealer who pleaded guilty to selling methamphetamine last year. <a href="https://krebsonsecurity.com/2016/02/the-lowdown-on-the-apple-fbi-showdown/#more-33938" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-33877" class="post-33877 post type-post status-publish format-standard hentry category-sunshine tag-ars-technica tag-dan-goodin tag-david-frink tag-dell-service-tag tag-dell-support-scam tag-lucy-thomson tag-peter-sullivan tag-service-tag-number tag-yosef-kaner">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2016/02/dell-to-customers-report-service-tag-scams/" title="Permalink to Dell to Customers: Report &#8216;Service Tag&#8217; Scams" rel="bookmark">Dell to Customers: Report &#8216;Service Tag&#8217; Scams</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">February 19, 2016</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2016/02/dell-to-customers-report-service-tag-scams/#comments">58 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>Computer maker <strong>Dell</strong> is asking for help in an ongoing probe into the source of customer information that appears to have somehow landed in the laps of fraudsters posing as Dell computer support technicians. KrebsOnSecurity readers continue to report being called by scammers posing as Dell support personnel who offer &#8220;proof&#8221; that they&#8217;re with Dell by rattling off the unique Dell &#8220;service tag&#8221; code printed on each Dell customer&#8217;s PC or laptop, as well as information from any previous (legitimate) service issues the customer may have had with Dell.</p>
+<div id="attachment_33929" style="width: 590px" class="wp-caption aligncenter"><img aria-describedby="caption-attachment-33929" loading="lazy" class="size-medium wp-image-33929" src="https://krebsonsecurity.com/wp-content/uploads/2016/02/dellwiki-580x429.png" alt="Image: Wikipedia" width="580" height="429" srcset="https://krebsonsecurity.com/wp-content/uploads/2016/02/dellwiki-580x429.png 580w, https://krebsonsecurity.com/wp-content/uploads/2016/02/dellwiki.png 716w" sizes="(max-width: 580px) 100vw, 580px" /><p id="caption-attachment-33929" class="wp-caption-text">Image: Wikipedia</p></div>
+<p>In January, <strong>Ars Technica&#8217;s</strong> <a href="http://arstechnica.com/author/dan-goodin/" target="_blank">Dan Goodin</a> wrote about a guy who&#8217;d been <a href="http://www.10zenmonkeys.com/2016/01/04/dell-computers-has-been-hacked/" target="_blank">complaining</a> to Dell for six months about the very same problem, in which the scammers try to convince the customer that their computer is infected and in need of professional services. Dell responded at the time that its customer&#8217;s data protection was a top priority, and it reminded customers that Dell doesn&#8217;t make unsolicited calls asking to charge to fix an issue they did not report or previously request help with unless they have signed up for premium support services.</p>
+<p>I first heard about this in December 2015 from Israeli resident <strong>Yosef Kaner</strong>, who reported receiving a phone call from someone with a thick Indian accent claiming to be from Dell technical support.</p>
+<p>&#8220;He said that they had been monitoring my computer usage for the past couple of weeks, and that I had downloaded a dangerous piece of software,&#8221; Kaner said. &#8220;He offered to help me remove said software. Understanding that this was a scam, I asked him for a callback number. He gave me one. He also, though, knew my name and gave me the Service Tag of my PC. I thanked him and hung up. Then I Googled the number he gave me. It was a known number from a known scam.&#8221;</p>
+<p>Almost every week this past month, I&#8217;ve received similar messages from other readers. Like this one, from <strong>Lucy Thomson</strong> of Washington, D.C. Thomson is the author of the <a href="http://www.amazon.com/Data-Breach-Encryption-Handbook-Thomson/dp/1604429895" target="_blank">ABA Data Breach and Encryption Handbook</a>, and a former Justice Department fraud prosecutor.</p>
+<p>&#8220;So I am not happy that Dell has had this breach and many people are potentially in jeopardy,&#8221; Thomson said. &#8220;I confirmed with two of the people who called on two different days, one who said he was in San Jose, CA and another who said he was in India, the nature of the PII and service records they have. All of it was correct and they have quite a bit of contact information and service records with specific dates of calls and service.&#8221;</p>
+<p>Thomson said she called 1-866-383-4713 (the real Dell&#8217;s support line) and told the technician about having received calls every day for the previous five days from people claiming to be Dell certified technicians or who worked for Dell.</p>
+<p>&#8220;I then told him they had all my PII and Dell service records for the computer I purchased from Dell in 2012,&#8221; Thomson recalled. &#8220;He said they had received calls &#8216;from people like you,&#8217; and &#8216;many customers have called.&#8217; In response to my question about why they had not sent data breach notifications, he said &#8216;The legal team is in charge. The legal team is working with the FBI on this.&#8217; He said that twice. At the end of the call he said &#8216;we are creating a platform so this will never happen again.'&#8221; <a href="https://krebsonsecurity.com/2016/02/dell-to-customers-report-service-tag-scams/#more-33877" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-33881" class="post-33881 post type-post status-publish format-standard hentry category-sunshine tag-abocom tag-david-qu tag-foscam tag-icsi tag-internet-of-things tag-iot tag-iotcplatform-com tag-nicholas-weaver tag-p2p tag-qnap tag-sans-internet-storm-center tag-swann-dvr tag-throughtek tag-xavier-mertens">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2016/02/this-is-why-people-fear-the-internet-of-things/" title="Permalink to This is Why People Fear the &#8216;Internet of Things&#8217;" rel="bookmark">This is Why People Fear the &#8216;Internet of Things&#8217;</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">February 18, 2016</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2016/02/this-is-why-people-fear-the-internet-of-things/#comments">149 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>Imagine buying an internet-enabled surveillance camera, network attached storage device, or home automation gizmo, only to find that it secretly and constantly phones home to a vast peer-to-peer (P2P) network run by the Chinese manufacturer of the hardware. Now imagine that the geek gear you bought doesn&#8217;t actually let you block this P2P communication without some serious networking expertise or hardware surgery that few users would attempt.</p>
+<div id="attachment_33904" style="width: 277px" class="wp-caption alignright"><img aria-describedby="caption-attachment-33904" loading="lazy" class=" wp-image-33904" src="https://krebsonsecurity.com/wp-content/uploads/2016/02/FI9286P.png" alt="The FI9286P, a Foscam camera that includes P2P communication by default." width="267" height="288" /><p id="caption-attachment-33904" class="wp-caption-text">The FI9286P, a Foscam camera that includes P2P communication by default.</p></div>
+<p>This is the nightmare &#8220;Internet of Things&#8221; (IoT) scenario for any system administrator: The IP cameras that you bought to secure your physical space suddenly turn into a vast cloud network designed to share your pictures and videos far and wide. The best part? It&#8217;s all plug-and-play, no configuration necessary!</p>
+<p>I first became aware of this bizarre experiment in how not to do IoT last week when a reader <a href="http://foscam.us/forum/foscam-dialing-out-to-suspect-hosts-t17699.html" target="_blank">sent a link to a lengthy discussion thread</a> on the support forum for <strong>Foscam,</strong> a Chinese firm that makes and sells security cameras. The thread was started by a Foscam user who noticed his IP camera was noisily and incessantly calling out to more than a dozen online hosts in almost as many countries.</p>
+<p>Turns out, this Focscam camera was one of several newer models the company makes that comes with peer-to-peer networking capabilities baked in. This fact is not exactly spelled out for the user (although <a href="http://www.amazon.com/s/ref=nb_sb_noss?url=search-alias%3Delectronics&amp;field-keywords=foscam+p2p" target="_blank">some of the models listed</a> do say &#8220;P2P&#8221; in the product name, <a href="http://www.amazon.com/review/RFM7GAPVPH6RD/ref=cm_cr_rev_detup_redir?_encoding=UTF8&amp;asin=B00I9M4HBO&amp;cdForum=Fx1BLJ13RLI7PNQ&amp;cdPage=1&amp;cdThread=Tx2YIXUHKRE2TPS&amp;newContentID=Mx2RJN1XPG6RJVR&amp;store=photo#Mx2RJN1XPG6RJVR" target="_blank">others do not</a>).</p>
+<p>But the bigger issue with these P2P -based cameras is that while the user interface for the camera has a setting to disable P2P traffic (it is enabled by default), Foscam admits that disabling the P2P option <a href="http://foscam.us/forum/foscam-dialing-out-to-suspect-hosts-t17699-40.html#p70740" target="_blank">doesn&#8217;t actually do anything</a> to stop the device from seeking out other P2P hosts online (see screenshot below).</p>
+<p>This is a concern because the P2P function built into Foscam P2P cameras is designed to punch through firewalls and can&#8217;t be switched off without <a href="http://foscam.us/forum/foscam-dialing-out-to-suspect-hosts-t17699-70.html#p71046" target="_blank">applying a firmware update plus an additional patch</a> that the company only released after repeated pleas from users on its support forum.</p>
+<div id="attachment_33902" style="width: 590px" class="wp-caption aligncenter"><img aria-describedby="caption-attachment-33902" loading="lazy" class="size-medium wp-image-33902" src="https://krebsonsecurity.com/wp-content/uploads/2016/02/foscamsettings-580x205.png" alt="Yeah, this setting doesn't work. P2P is still enabled even after you uncheck the box." width="580" height="205" srcset="https://krebsonsecurity.com/wp-content/uploads/2016/02/foscamsettings-580x205.png 580w, https://krebsonsecurity.com/wp-content/uploads/2016/02/foscamsettings-768x272.png 768w, https://krebsonsecurity.com/wp-content/uploads/2016/02/foscamsettings-940x333.png 940w, https://krebsonsecurity.com/wp-content/uploads/2016/02/foscamsettings.png 954w" sizes="(max-width: 580px) 100vw, 580px" /><p id="caption-attachment-33902" class="wp-caption-text">Yeah, this setting doesn&#8217;t work. P2P is still enabled even after you uncheck the box.</p></div>
+<p>One of the many hosts that Foscam users reported seeing in their firewall logs was <strong>iotcplatform.com</strong>, a domain registered to Chinese communications firm <strong>ThroughTek Co., Ltd. </strong>Turns out, this domain has shown up in firewall logs for a number of other curious tinkerers who cared to take a closer look at what their network attached storage and home automation toys were doing on their network.</p>
+<p>In January 2015, a contributing writer for the threat-tracking <strong>SANS Internet Storm Center</strong> wrote in <a href="https://isc.sans.edu/diary/IoT%3A+The+Rise+of+the+Machines+(Guest+Diary)/19173" target="_blank">IoT: The Rise of the Machines</a> that he found the same iotcplatform.com domain called out in network traffic generated by a Maginon SmartPlug he&#8217;d purchased (smart plugs are power receptacles into which you plug lights and other appliances you may wish to control remotely).</p>
+<p>What is the IOTC Plaform? According to ThroughTek, it&#8217;s a service developed to establish P2P communications between devices.</p>
+<p>&#8220;I read the documentation provided with the device as well as all the website pages and there is no mention of this service,&#8221; wrote <strong>Xavier Mertens</strong>, an incident handler and blogger for SANS. &#8220;Manufacturers should include some technical documentation about the network requirements (ex: to download firmware updates).&#8221;</p>
+<p>In another instance from May 2015, <a href="https://thecomputerperson.wordpress.com/2015/05/03/compromised-or-suspicious-swann-dvr-traffic/" target="_blank">this blogger noted similar communications traffic</a> emanating from a digital video recorder (DVR) device that&#8217;s sold in tandem with Internet-enabled surveillance cameras made by a company called <strong>Swann</strong>.</p>
+<p>Likewise, postings <a href="http://forum.qnap.com/viewtopic.php?f=45&amp;t=100575" target="_blank">from Dec. 2014</a> on the <strong>QNAP</strong> network attached storage (NAS) user forum indicate that some QNAP customers discovered mysterious traffic to iotcplatform.com and other Internet address requests that also were found in the Swann and Smart Plug traffic.</p>
+<p>What do all of these things have in common? A visit to ThroughTek&#8217;s Web lists <a href="http://www.throughtek.com/solution_casestudies.html" target="_blank">several &#8220;case studies&#8221; for its products</a>, including Swann, QNAP and a home automation company based in Taiwan called <strong>AboCom</strong>.</p>
+<p>ThroughTek did not respond to requests for comment. <span class="pullquote pqleft">A ThroughTek press release from October 2015 announced that the company&#8217;s P2P network &#8212; which it calls the <a href="http://forum.tutk.com/index.php?topic=2.0" target="_blank">Kalay Network</a> &#8212; had grown to support more than seven million connected devices</span> and 100 million &#8220;IoT connections.&#8221;</p>
+<p>I contacted Foscam to better understand the company&#8217;s relationship to ThroughTek, and to learn just how many Foscam devices now ship with ThroughTek&#8217;s built-in, always-on P2P technology. Foscam declined to say how many different models bundled the P2P technology, but it&#8217;s at least a dozen by my count of the models mentioned in the Foscam <a href="http://www.foscam.es/descarga/Camaras_IP_Foscam_de_interior_User_manual.pdf" target="_blank">user manual</a> and <a href="http://foscam.us/forum/foscam-dialing-out-to-suspect-hosts-t17699.html" target="_blank">discussion thread</a>. <a href="https://krebsonsecurity.com/2016/02/this-is-why-people-fear-the-internet-of-things/#more-33881" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-33843" class="post-33843 post type-post status-publish format-standard hentry category-sunshine category-comingstorm tag-allen-weinberg tag-charles-w-scharf tag-emv tag-europay tag-glenbrook-partners tag-mastercard tag-mastercard-and-visa tag-terry-crowley tag-transend tag-visa">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2016/02/the-great-emv-fake-out-no-chip-for-you/" title="Permalink to The Great EMV Fake-Out: No Chip For You!" rel="bookmark">The Great EMV Fake-Out: No Chip For You!</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">February 16, 2016</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2016/02/the-great-emv-fake-out-no-chip-for-you/#comments">248 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>Many banks are now issuing customers more secure chip-based credit cards, and most retailers now have card terminals in their checkout lanes that can handle the &#8220;dip&#8221; of chip-card transactions (as opposed to the usual swipe of the card&#8217;s magnetic stripe). But comparatively few retailers actually allow chip transactions: Most are still asking customers to swipe the stripe instead of dip the chip. This post will examine what&#8217;s going on here, why so many merchants are holding out on the dip, and where this all leaves consumers.</p>
+<p><strong><img loading="lazy" class="alignright wp-image-33866" src="https://krebsonsecurity.com/wp-content/uploads/2016/02/chiptrans.png" alt="chiptrans" width="293" height="269" />Visa</strong> <strong>CEO Charles W. Scharf</strong> <a href="http://s1.q4cdn.com/050606653/files/doc_financials/2016/Q1/Visa-Q1-2016-Corrected-Earnings-Transcript-1-28-16.pdf" target="_blank">said in an earnings call</a> late last month that more than 750,000 locations representing 17 percent of the U.S. face-to-face card-accepting merchant base are now enabled to handle chip-based transactions, also known as the <a href="https://en.wikipedia.org/wiki/EMV" target="_blank">EMV (&#8220;Europay, Mastercard and Visa&#8221;) payment standard</a>.</p>
+<p>Viewed another way, that means U.S. consumers currently can expect to find chip cards accepted in checkout lines at fewer than one in five brick-and-mortar merchants.</p>
+<p>Why are so many chip-capable checkout terminals already installed that have not been enabled to actually accept chip cards? <strong>Allen Weinberg</strong>, co-founder of Menlo Park, Calif. based management consulting firm <a href="http://glenbrook.com/" target="_blank">Glenbrook Partners</a>, examined this very question in <a href="http://paymentsviews.com/2016/02/09/fake-out-you-cant-put-your-card-in-that-emv-slot/" target="_blank">a recent column</a> that pointed to several factors holding retailers back from enabling dip-the-chip.</p>
+<h4>WHAT LIABILITY SHIFT?</h4>
+<p>New <strong>MasterCard</strong> and <strong>Visa</strong> rules that went into effect Oct. 1, 2015 put merchants on the hook to absorb 100 percent of the costs of fraud associated with transactions in which the customer presented a chip-based card yet was not asked or able to dip the chip. The chip cards encrypt the cardholder data and are far more expensive and difficult for card thieves to clone.</p>
+<p>Despite the increased risk of eating the entire loss from counterfeit card use in their stores, many merchants are taking a wait-and-see approach on enabling chip card transactions. <span class="pullquote pqleft">Weinberg said some merchants &#8212; particularly the larger ones &#8212; want to turn the often painful experience of training customers how to use the chip cards and terminals into someone else&#8217;s problem.</span></p>
+<p>&#8220;They see [chip cards] as just slowing down lines and chose to wait until consumers learned what to do &#8212; and do it quickly &#8212; at someone else&#8217;s store,&#8221; Weinberg wrote.</p>
+<p>Weinberg adds that for many larger merchants, switching on the chip readers also can be a big and expensive project. Part of the problem, he says, is that many integrated point of sale systems &#8212; particularly the electronic cash register software for these systems &#8212; were just not ready in time for the Oct. 2015 liability shift.</p>
+<p>&#8220;Even if the software was ahead of the game, they faced long certification queues at many acquirers,&#8221; Weinberg wrote. &#8220;I believe this is going to be a problem for a while.&#8221;</p>
+<p>Visa said based on recent client surveys it expects 50% of face-to-face card accepting merchants to have chip card transactions enabled by the end of this year. But even 50 percent adoption can mask a long tail of smaller merchants who will put off as long as they can the expensive software and hardware upgrades for accepting chip transactions.</p>
+<p>&#8220;My dry cleaner isn&#8217;t worried about someone using counterfeit cards at his cash register,&#8221; Weinberg said, noting that many businesses meanwhile discount the chances that hackers will siphon customer cards by sneaking malicious software onto point-of-sale devices &#8212; a problem that has lead to one breach after another at brand name retailers, restaurants and hotels over the past several  years. <a href="https://krebsonsecurity.com/2016/02/the-great-emv-fake-out-no-chip-for-you/#more-33843" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-33747" class="post-33747 post type-post status-publish format-standard hentry category-sunshine category-web-fraud-2-0 tag-awards-fraud tag-jen-johnson tag-kohls tag-kohls-cash-fraud tag-loyalty-fraud tag-points-fraud tag-suzanne-perry">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2016/02/fraudsters-tap-kohls-cash-for-cold-cash/" title="Permalink to Fraudsters Tap Kohl&#8217;s Cash for Cold Cash" rel="bookmark">Fraudsters Tap Kohl&#8217;s Cash for Cold Cash</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">February 11, 2016</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2016/02/fraudsters-tap-kohls-cash-for-cold-cash/#comments">70 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>Scam artists have been using hacked accounts from retailer <strong>Kohls.com</strong> to order high-priced, bulky merchandise that is then shipped to the victim&#8217;s home. While the crooks don&#8217;t get the stolen merchandise, the unauthorized purchases rack up valuable credits called &#8220;Kohl&#8217;s cash&#8221; that the thieves quickly redeem at Kohl&#8217;s locations for items that can be resold for cash or <a href="http://krebsonsecurity.com/2015/12/the-role-of-phony-returns-in-gift-card-fraud/" target="_blank">returned for gift cards</a>.</p>
+<p><img loading="lazy" class="alignright size-full wp-image-33837" src="https://krebsonsecurity.com/wp-content/uploads/2016/02/kohlscash.png" alt="kohlscash" width="264" height="205" />KrebsOnSecurity reader <strong>Suzanne Perry</strong>, a self-professed &#8220;shopaholic&#8221; from Gilbert, Penn., said she recently received an email from Kohls.com stating that the email address on her account had been changed. Recognizing this as a common indicator of a compromised account, Perry said she immediately went to Kohls.com &#8212; which confirmed her fears that her password had been changed.</p>
+<p>On a whim, Perry said she attempted to log in with the “updated” email address (the one the thief used) along with her existing password. Happily, the thieves had been too lazy to change the password.</p>
+<p>&#8220;Once I was logged in, I checked my order history to determine if any fraudulent orders were placed in the 20 minutes since I received the notification,&#8221; she said. &#8220;I wasn’t that surprised to see two online orders, totaling almost $700 each, but I was very surprised to see they were being shipped to my house and not some address I never heard of.&#8221;</p>
+<p>Perry said she then contacted Kohl&#8217;s and gave them the two order numbers and the fraudulent email address.</p>
+<p>&#8220;I explained what happened, and they were very helpful in canceling the orders, updating my email address, and resetting my password,&#8221; she said. &#8220;I told them I couldn’t understand why someone would hack into my account just to have a bunch of stuff shipped to my own address. I was trying to figure out what the criminal would possibly have to gain from the effort, but the service representative informed me that is actually a very common occurrence for them.&#8221;</p>
+<p>Turns out, the criminal wasn’t after the merchandise at all. Rather, the purpose of changing her email address was to drain the account&#8217;s stored Kohl&#8217;s cash, a form of rebate that Kohl&#8217;s offers customers &#8212; currently $10 for every $50 spent at the store. The two fraudulent orders yielded $220 in Kohls cash total, which is emailed once the order is confirmed (hence the need to change the victim&#8217;s email address).</p>
+<p>&#8220;Since the orders were being shipped to me, even though they were  above the threshold for what my typical online spending behavior is, no red flags were raised on their end,&#8221; Perry said.</p>
+<p>More interestingly, virtually all of the merchandise the thieves ordered to build up the account&#8217;s Kohl&#8217;s cash balance were bulky items: Three baby cribs, a stroller system and car seat, and a baby bath tub, among other items. Perry said Kohl&#8217;s told her that the thieves do this because they know bulky items usually take longer to return, and since Kohl&#8217;s revokes Kohl&#8217;s cash credits earned on items that are later returned, the thieves can spend the stolen Kohl&#8217;s credits as long as the owner of the hijacked account doesn&#8217;t return the fraudulently ordered items. <a href="https://krebsonsecurity.com/2016/02/fraudsters-tap-kohls-cash-for-cold-cash/#more-33747" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+				
+			
+								<div class="themonic-pagination"><div class='pagination'><ul><li><a href='https://krebsonsecurity.com/'>&laquo; First</a></li><li><a href='https://krebsonsecurity.com/page/84/' class='inactive'>&lsaquo; Previous</a></li><li><a href='https://krebsonsecurity.com/page/82/' class='inactive'>82</a></li><li><a href='https://krebsonsecurity.com/page/83/' class='inactive'>83</a></li><li><a href='https://krebsonsecurity.com/page/84/' class='inactive'>84</a></li><li class='current'><span class='currenttext'>85</span></li><li><a href='https://krebsonsecurity.com/page/86/' class='inactive'>86</a></li><li><a href='https://krebsonsecurity.com/page/87/' class='inactive'>87</a></li><li><a href='https://krebsonsecurity.com/page/88/' class='inactive'>88</a></li><li><a href='https://krebsonsecurity.com/page/86/' class='inactive'>Next &rsaquo;</a></li><a class='inactive' href='https://krebsonsecurity.com/page/209/'>Last &raquo;</a></ul></div></div>
+					<div style="display: block; clear: both;"></div>
+			
+		
+
+	
+
+		</div><!-- #content -->
+	</div><!-- #primary -->
+
+
+			<div id="secondary" class="widget-area" role="complementary">
+
+        <div id="sidebar_ad" class="widget themonic-ad5"><div class="a-statement">Advertisement</div><a href="https://www.iansresearch.com/resources/infosec-content-downloads/research-reports/2021-ciso-compensation-benchmark-research-study?utm_source=krebs&amp;utm_medium=display_ad&amp;utm_campaign=2021_ciso_comp_study">
+<img src="/b-ians/7.png">
+</a></div>
+
+                        <br><div class="widget themonic-ad1"><div class="a-statement">Advertisement</div><a href="https://www.akamai.com/why-akamai/the-internet-of-possibilities?utm_source=krebsonsecurity&amp;utm_medium=display&amp;utm_campaign=F-MC-54978">
+<img src="/b-akamai/146.png">
+</a></div><br>
+
+			<aside id="custom_html-2" class="widget_text widget widget_custom_html"><p class="widget-title">Mailing List</p><div class="textwidget custom-html-widget"><a href="/subscribe/">Subscribe here</a></div></aside><aside id="search-2" class="widget widget_search"><p class="widget-title">Search KrebsOnSecurity</p><form role="search" method="get" id="searchform" class="searchform" action="https://krebsonsecurity.com/">
+				<div>
+					<label class="screen-reader-text" for="s">Search for:</label>
+					<input type="text" value="" name="s" id="s" />
+					<input type="submit" id="searchsubmit" value="Search" />
+				</div>
+			</form></aside>
+		<aside id="recent-posts-3" class="widget widget_recent_entries">
+		<p class="widget-title">Recent Posts</p>
+		<ul>
+											<li>
+					<a href="https://krebsonsecurity.com/2021/12/canada-charges-its-most-prolific-cybercriminal/">Canada Charges Its &#8220;Most Prolific Cybercriminal&#8221;</a>
+									</li>
+											<li>
+					<a href="https://krebsonsecurity.com/2021/12/who-is-the-network-access-broker-babam/">Who Is the Network Access Broker &#8216;Babam&#8217;?</a>
+									</li>
+											<li>
+					<a href="https://krebsonsecurity.com/2021/12/ubiquiti-developer-charged-with-extortion-causing-2020-breach/">Ubiquiti Developer Charged With Extortion, Causing 2020 &#8220;Breach&#8221;</a>
+									</li>
+											<li>
+					<a href="https://krebsonsecurity.com/2021/11/the-internet-is-held-together-with-spit-baling-wire/">The Internet is Held Together With Spit &#038; Baling Wire</a>
+									</li>
+											<li>
+					<a href="https://krebsonsecurity.com/2021/11/arrest-in-ransom-your-employer-email-scheme/">Arrest in &#8216;Ransom Your Employer&#8217; Email Scheme</a>
+									</li>
+					</ul>
+
+		</aside><aside id="text-2" class="widget widget_text">			<div class="textwidget"><a name="subscribe2"></a></div>
+		</aside><aside id="widget_sp_image-15" class="widget widget_sp_image"><p class="widget-title">Spam Nation</p><a href="https://www.amazon.com/Spam-Nation-Organized-Cybercrime-Epidemic-ebook/dp/B00L5QGBL0/ref=dp_kinw_strp_1" target="_blank" class="widget_sp_image-image-link" title="Spam Nation"><img width="266" height="404" alt="Spam Nation" class="attachment-266x404 aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2015/04/spamnation-nyt.png" /></a><div class="widget_sp_image-description" ><p>A New York Times Bestseller! </p>
+</div></aside><aside id="widget_sp_image-25" class="widget widget_sp_image"><p class="widget-title">Thinking of a Cybersecurity Career?</p><a href="https://krebsonsecurity.com/2020/07/thinking-of-a-cybersecurity-career-read-this/" target="_blank" class="widget_sp_image-image-link" title="Thinking of a Cybersecurity Career? Read This."><img width="625" height="424" alt="Thinking of a Cybersecurity Career?" class="attachment-full" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2020/07/codepeople.png 625w, https://krebsonsecurity.com/wp-content/uploads/2020/07/codepeople-580x393.png 580w" sizes="(max-width: 625px) 100vw, 625px" src="https://krebsonsecurity.com/wp-content/uploads/2020/07/codepeople.png" /></a><div class="widget_sp_image-description" ><p>Read this.</p>
+</div></aside><aside id="widget_sp_image-3" class="widget widget_sp_image"><p class="widget-title">All About Skimmers </p><a href="https://krebsonsecurity.com/all-about-skimmers/" target="_blank" class="widget_sp_image-image-link" title="All About Skimmers "><img width="299" height="232" alt="All About Skimmers" class="attachment-299x232 aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2010/08/skimgallery1.jpg" /></a><div class="widget_sp_image-description" ><p>Click image for my skimmer series.</p>
+</div></aside><aside id="categories-2" class="widget widget_categories"><p class="widget-title">Story Categories</p>
+			<ul>
+					<li class="cat-item cat-item-5"><a href="https://krebsonsecurity.com/category/sunshine/" title="Includes investigative blog posts meant to shine a light on the darker corners of the Internet.">A Little Sunshine</a>
+</li>
+	<li class="cat-item cat-item-2240"><a href="https://krebsonsecurity.com/category/all-about-skimmers/">All About Skimmers</a>
+</li>
+	<li class="cat-item cat-item-9085"><a href="https://krebsonsecurity.com/category/ashley-madison-breach/">Ashley Madison breach</a>
+</li>
+	<li class="cat-item cat-item-3191"><a href="https://krebsonsecurity.com/category/breadcrumbs/">Breadcrumbs</a>
+</li>
+	<li class="cat-item cat-item-3771"><a href="https://krebsonsecurity.com/category/data-breaches/" title="Stories about data breaches at retailers, corporations, governments and organizations of all sizes.">Data Breaches</a>
+</li>
+	<li class="cat-item cat-item-4624"><a href="https://krebsonsecurity.com/category/ddos-for-hire/">DDoS-for-Hire</a>
+</li>
+	<li class="cat-item cat-item-9173"><a href="https://krebsonsecurity.com/category/employment-fraud/">Employment Fraud</a>
+</li>
+	<li class="cat-item cat-item-2151"><a href="https://krebsonsecurity.com/category/how-to-break-into-security/" title="If you&#039;ve ever wanted career advice on how to make a shift into the security industry, look no further.">How to Break Into Security</a>
+</li>
+	<li class="cat-item cat-item-87"><a href="https://krebsonsecurity.com/category/latest-warnings/">Latest Warnings</a>
+</li>
+	<li class="cat-item cat-item-4071"><a href="https://krebsonsecurity.com/category/neer-do-well-news/">Ne&#039;er-Do-Well News</a>
+</li>
+	<li class="cat-item cat-item-9"><a href="https://krebsonsecurity.com/category/other/">Other</a>
+</li>
+	<li class="cat-item cat-item-1306"><a href="https://krebsonsecurity.com/category/pharma-wars/">Pharma Wars</a>
+</li>
+	<li class="cat-item cat-item-8240"><a href="https://krebsonsecurity.com/category/ransomware/">Ransomware</a>
+</li>
+	<li class="cat-item cat-item-599"><a href="https://krebsonsecurity.com/category/security-tools/">Security Tools</a>
+</li>
+	<li class="cat-item cat-item-8298"><a href="https://krebsonsecurity.com/category/sim-swapping/">SIM Swapping</a>
+</li>
+	<li class="cat-item cat-item-4079"><a href="https://krebsonsecurity.com/category/spam-nation/">Spam Nation</a>
+</li>
+	<li class="cat-item cat-item-1"><a href="https://krebsonsecurity.com/category/smallbizvictims/" title="Posts in this category will include new stories similar to those told in the Small Business Victims category on The Washington Post&#039;s Security Fix blog, which chronicled the methods organized cyber thieve are using to steal hundreds of thousands of dollars from dozens of small- to mid-sized companies around the country.">Target: Small Businesses</a>
+</li>
+	<li class="cat-item cat-item-5167"><a href="https://krebsonsecurity.com/category/tax-refund-fraud/">Tax Refund Fraud</a>
+</li>
+	<li class="cat-item cat-item-3"><a href="https://krebsonsecurity.com/category/comingstorm/" title="This category includes blog posts about computer and Internet security threats now and on the horizon.">The Coming Storm</a>
+</li>
+	<li class="cat-item cat-item-4"><a href="https://krebsonsecurity.com/category/patches/" title="Short posts on the latest security updates for widely-used software.
+">Time to Patch</a>
+</li>
+	<li class="cat-item cat-item-21"><a href="https://krebsonsecurity.com/category/web-fraud-2-0/">Web Fraud 2.0</a>
+</li>
+			</ul>
+
+			</aside><aside id="widget_sp_image-5" class="widget widget_sp_image"><p class="widget-title">The Value of a Hacked PC</p><a href="https://krebsonsecurity.com/2012/10/the-scrap-value-of-a-hacked-pc-revisited/" target="_blank" class="widget_sp_image-image-link" title="The Value of a Hacked PC"><img width="285" height="180" alt="valuehackedpc " class="attachment-285x180 aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2012/12/valuehackedpc-285x180.png" /></a><div class="widget_sp_image-description" ><p>Badguy uses for your PC</p>
+</div></aside><aside id="widget_sp_image-9" class="widget widget_sp_image"><p class="widget-title">Badguy Uses for Your Email </p><a href="https://krebsonsecurity.com/2013/06/the-value-of-a-hacked-email-account/" target="_self" class="widget_sp_image-image-link" title="Badguy Uses for Your Email "><img width="296" height="170" alt="Badguy Uses for Your Email " class="attachment-full aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2013/06/badguyemail.png 296w, https://krebsonsecurity.com/wp-content/uploads/2013/06/badguyemail-285x163.png 285w" sizes="(max-width: 296px) 100vw, 296px" src="https://krebsonsecurity.com/wp-content/uploads/2013/06/badguyemail.png" /></a><div class="widget_sp_image-description" ><p>Your email account may be worth far more than you imagine.</p>
+</div></aside><aside id="widget_sp_image-24" class="widget widget_sp_image"><a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&#038;hosted_button_id=MCCRKHWRX57HS" id="donate" target="_self" class="widget_sp_image-image-link"><img width="250" height="55" alt="Donate to Krebs On Security" class="attachment-medium aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2016/09/donatepaypal2-1.png" /></a></aside><aside id="most_popular_posts-3" class="widget widget_most_popular_posts">
+<p class="widget-title">Most Popular Posts</p>
+<ul>	<li><a href="https://krebsonsecurity.com/2018/07/sextortion-scam-uses-recipients-hacked-passwords/">Sextortion Scam Uses Recipient's Hacked Passwords</a> (1076)</li>
+	<li><a href="https://krebsonsecurity.com/2015/07/online-cheating-site-ashleymadison-hacked/">Online Cheating Site AshleyMadison Hacked</a> (798)</li>
+	<li><a href="https://krebsonsecurity.com/2013/12/sources-target-investigating-data-breach/">Sources: Target Investigating Data Breach</a> (620)</li>
+	<li><a href="https://krebsonsecurity.com/2020/11/trump-fires-security-chief-christopher-krebs/">Trump Fires Security Chief Christopher Krebs</a> (534)</li>
+	<li><a href="https://krebsonsecurity.com/2013/12/cards-stolen-in-target-breach-flood-underground-markets/">Cards Stolen in Target Breach Flood Underground Markets</a> (445)</li>
+	<li><a href="https://krebsonsecurity.com/2013/05/reports-liberty-reserve-founder-arrested-site-shuttered/">Reports: Liberty Reserve Founder Arrested, Site Shuttered</a> (416)</li>
+	<li><a href="https://krebsonsecurity.com/2015/08/was-the-ashley-madison-database-leaked/">Was the Ashley Madison Database Leaked?</a> (376)</li>
+	<li><a href="https://krebsonsecurity.com/2021/01/ddos-guard-to-forfeit-internet-space-occupied-by-parler/">DDoS-Guard To Forfeit Internet Space Occupied by Parler</a> (374)</li>
+	<li><a href="https://krebsonsecurity.com/2014/05/true-goodbye-using-truecrypt-is-not-secure/">True Goodbye: 'Using TrueCrypt Is Not Secure'</a> (363)</li>
+	<li><a href="https://krebsonsecurity.com/2015/08/who-hacked-ashley-madison/">Who Hacked Ashley Madison?</a> (361)</li>
+</ul>
+</aside>
+<aside id="media_image-2" class="widget widget_media_image"><p class="widget-title">Why So Many Top Hackers Hail from Russia</p><a href="https://krebsonsecurity.com/2017/06/why-so-many-top-hackers-hail-from-russia/"><img width="580" height="389" src="https://krebsonsecurity.com/wp-content/uploads/2017/06/computered-580x389.png" class="image wp-image-39684  attachment-medium size-medium" alt="" loading="lazy" style="max-width: 100%; height: auto;" srcset="https://krebsonsecurity.com/wp-content/uploads/2017/06/computered-580x389.png 580w, https://krebsonsecurity.com/wp-content/uploads/2017/06/computered-768x514.png 768w, https://krebsonsecurity.com/wp-content/uploads/2017/06/computered-940x630.png 940w, https://krebsonsecurity.com/wp-content/uploads/2017/06/computered.png 1551w" sizes="(max-width: 580px) 100vw, 580px" /></a></aside><aside id="widget_sp_image-11" class="widget widget_sp_image"><p class="widget-title">Category: Web Fraud 2.0</p><a href="https://krebsonsecurity.com/category/web-fraud-2-0/" target="_blank" class="widget_sp_image-image-link" title="Category: Web Fraud 2.0"><img width="227" height="400" alt="Criminnovations" class="attachment-medium aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2013/11/cybercrimeinnovations-227x400.png" /></a><div class="widget_sp_image-description" ><p>Innovations from the Underground</p>
+</div></aside><aside id="widget_sp_image-12" class="widget widget_sp_image"><a href="https://krebsonsecurity.com/2014/03/are-credit-monitoring-services-worth-it/" target="_blank" class="widget_sp_image-image-link"><img width="285" height="189" class="attachment-medium aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2014/03/shreddedID-copy-285x189.png 285w, https://krebsonsecurity.com/wp-content/uploads/2014/03/shreddedID-copy-600x399.png 600w, https://krebsonsecurity.com/wp-content/uploads/2014/03/shreddedID-copy.png 849w" sizes="(max-width: 285px) 100vw, 285px" src="https://krebsonsecurity.com/wp-content/uploads/2014/03/shreddedID-copy-285x189.png" /></a><div class="widget_sp_image-description" ><p>ID Protection Services Examined</p>
+</div></aside><aside id="widget_sp_image-13" class="widget widget_sp_image"><p class="widget-title">Is Antivirus Dead?</p><a href="https://krebsonsecurity.com/2014/05/antivirus-is-dead-long-live-antivirus/" target="_blank" class="widget_sp_image-image-link" title="Is Antivirus Dead?"><img width="285" height="161" alt="Is Antivirus Dead?" class="attachment-medium aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2014/05/cryptservices-285x161.png 285w, https://krebsonsecurity.com/wp-content/uploads/2014/05/cryptservices-600x339.png 600w, https://krebsonsecurity.com/wp-content/uploads/2014/05/cryptservices.png 945w" sizes="(max-width: 285px) 100vw, 285px" src="https://krebsonsecurity.com/wp-content/uploads/2014/05/cryptservices-285x161.png" /></a><div class="widget_sp_image-description" ><p>The reasons for its decline</p>
+</div></aside><aside id="widget_sp_image-14" class="widget widget_sp_image"><p class="widget-title">The Growing Tax Fraud Menace</p><a href="https://krebsonsecurity.com/category/tax-refund-fraud/" target="_blank" class="widget_sp_image-image-link" title="The Growing Tax Fraud Menace"><img width="285" height="285" alt="The Growing Tax Fraud Menace" class="attachment-medium aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2014/04/taxfraud-285x285.jpg 285w, https://krebsonsecurity.com/wp-content/uploads/2014/04/taxfraud-150x150.jpg 150w, https://krebsonsecurity.com/wp-content/uploads/2014/04/taxfraud-600x600.jpg 600w, https://krebsonsecurity.com/wp-content/uploads/2014/04/taxfraud.jpg 693w" sizes="(max-width: 285px) 100vw, 285px" src="https://krebsonsecurity.com/wp-content/uploads/2014/04/taxfraud-285x285.jpg" /></a><div class="widget_sp_image-description" ><p>File 'em Before the Bad Guys Can </p>
+</div></aside><aside id="widget_sp_image-17" class="widget widget_sp_image"><p class="widget-title">Inside a Carding Shop</p><a href="https://krebsonsecurity.com/2014/06/peek-inside-a-professional-carding-shop/" target="_blank" class="widget_sp_image-image-link" title="Inside a Carding Shop"><img width="194" height="340" alt="Inside a Carding Shop" class="attachment-medium aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2014/06/mcdumpalsjoined.png" /></a><div class="widget_sp_image-description" ><p>A crash course in carding. </p>
+</div></aside><aside id="widget_sp_image-18" class="widget widget_sp_image"><p class="widget-title">Beware Social Security Fraud</p><a href="https://krebsonsecurity.com/2013/09/crooks-hijack-retirement-funds-via-ssa-portal/" target="_blank" class="widget_sp_image-image-link" title="Beware Social Security Fraud"><img width="285" height="293" alt="Beware Social Security Fraud" class="attachment-full aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2016/09/myssn-285x293.png" /></a><div class="widget_sp_image-description" ><p>Sign up, or Be Signed Up! </p>
+</div></aside><aside id="widget_sp_image-2" class="widget widget_sp_image"><p class="widget-title">How Was Your Card Stolen?</p><a href="https://krebsonsecurity.com/2015/01/how-was-your-credit-card-stolen/" target="_blank" class="widget_sp_image-image-link" title="How Was Your Card Stolen?"><img width="285" height="285" alt="How Was Your Card Stolen?" class="attachment-full aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2016/09/carddominoes-285x285.jpg 285w, https://krebsonsecurity.com/wp-content/uploads/2016/09/carddominoes-285x285-150x150.jpg 150w" sizes="(max-width: 285px) 100vw, 285px" src="https://krebsonsecurity.com/wp-content/uploads/2016/09/carddominoes-285x285.jpg" /></a><div class="widget_sp_image-description" ><p>Finding out is not so easy. </p>
+</div></aside><aside id="widget_sp_image-22" class="widget widget_sp_image"><p class="widget-title">Krebs&#8217;s 3 Rules&#8230;</p><a href="https://krebsonsecurity.com/2011/05/krebss-3-basic-rules-for-online-safety/" target="_blank" class="widget_sp_image-image-link" title="Krebs&#8217;s 3 Rules&#8230;"><img width="300" height="300" alt="Krebs&#8217;s 3 Rules&#8230;" class="attachment-medium aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2011/05/three-300x300.jpg 300w, https://krebsonsecurity.com/wp-content/uploads/2011/05/three-150x150.jpg 150w, https://krebsonsecurity.com/wp-content/uploads/2011/05/three.jpg 347w" sizes="(max-width: 300px) 100vw, 300px" src="https://krebsonsecurity.com/wp-content/uploads/2011/05/three-300x300.jpg" /></a><div class="widget_sp_image-description" ><p>...For Online Safety. </p>
+</div></aside>		</div><!-- #secondary -->
+		</div><!-- #main .wrapper -->
+	
+	<div id="publisho-footer" class="widget-area">
+				<div class="footer-widget">
+                				</div>
+				<div class="footer-widget">
+								</div>
+				<div class="footer-widget">
+								</div>
+	</div>
+
+	<div class="site-wordpress">
+					&copy; Krebs on Security<br>
+	</div>
+	<!-- .site-info --><div class="clear"></div>
+</div><!-- #page -->
+
+<script type='text/javascript' src='https://krebsonsecurity.com/wp-content/themes/kos-mar2021/js/slicknav.js?ver=5.8.2' id='publisho-mobile-navigation-js'></script>
+<script type='text/javascript' src='https://krebsonsecurity.com/wp-includes/js/wp-embed.min.js?ver=5.8.2' id='wp-embed-js'></script>
+</body>
+</html>
+<!--
+Performance optimized by W3 Total Cache. Learn more: https://www.boldgrid.com/w3-total-cache/
+
+Object Caching 227/377 objects using memcached
+Page Caching using memcached 
+Database Caching 7/25 queries in 0.037 seconds using memcached
+
+Served from: krebsonsecurity.com @ 2021-12-10 14:49:49 by W3 Total Cache
+-->

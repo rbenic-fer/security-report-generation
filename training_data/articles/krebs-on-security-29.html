@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<!--[if IE 7]>
+<html class="ie ie7" lang="en-US">
+<![endif]-->
+<!--[if IE 8]>
+<html class="ie ie8" lang="en-US">
+<![endif]-->
+<!--[if !(IE 7) | !(IE 8)  ]><!-->
+<html lang="en-US">
+<!--<![endif]-->
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width" />
+<link rel="profile" href="http://gmpg.org/xfn/11" />
+<!--[if lt IE 9]>
+<script src="https://krebsonsecurity.com/wp-content/themes/kos-mar2021/js/html5.js" type="text/javascript"></script>
+<![endif]-->
+<title>Krebs on Security &#8211; Page 29 &#8211; In-depth security news and investigation</title>
+<meta name='robots' content='max-image-preview:large' />
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="Krebs on Security &raquo; Feed" href="https://krebsonsecurity.com/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Krebs on Security &raquo; Comments Feed" href="https://krebsonsecurity.com/comments/feed/" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.1.0\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.1.0\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/krebsonsecurity.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=5.8.2"}};
+			!function(e,a,t){var n,r,o,i=a.createElement("canvas"),p=i.getContext&&i.getContext("2d");function s(e,t){var a=String.fromCharCode;p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,e),0,0);e=i.toDataURL();return p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,t),0,0),e===i.toDataURL()}function c(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(o=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},r=0;r<o.length;r++)t.supports[o[r]]=function(e){if(!p||!p.fillText)return!1;switch(p.textBaseline="top",p.font="600 32px Arial",e){case"flag":return s([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])?!1:!s([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!s([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]);case"emoji":return!s([10084,65039,8205,55357,56613],[10084,65039,8203,55357,56613])}return!1}(o[r]),t.supports.everything=t.supports.everything&&t.supports[o[r]],"flag"!==o[r]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[o[r]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(n=t.source||{}).concatemoji?c(n.concatemoji):n.wpemoji&&n.twemoji&&(c(n.twemoji),c(n.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+	<link rel='stylesheet' id='colorbox-theme1-css'  href='https://krebsonsecurity.com/wp-content/plugins/jquery-lightbox-for-native-galleries/colorbox/theme1/colorbox.css?ver=1.3.14' type='text/css' media='screen' />
+<link rel='stylesheet' id='wp-block-library-css'  href='https://krebsonsecurity.com/wp-includes/css/dist/block-library/style.min.css?ver=5.8.2' type='text/css' media='all' />
+<link rel='stylesheet' id='contact-form-7-css'  href='https://krebsonsecurity.com/wp-content/plugins/contact-form-7/includes/css/styles.css?ver=5.5.3' type='text/css' media='all' />
+<link rel='stylesheet' id='publisho-style-css'  href='https://krebsonsecurity.com/wp-content/themes/kos-mar2021/style.css?subver=1.2&#038;ver=5.8.2' type='text/css' media='all' />
+<style id='publisho-style-inline-css' type='text/css'>
+
+	.themonic-nav .current-menu-item > a, .themonic-nav .current-menu-ancestor > a, .themonic-nav .current_page_item > a, .themonic-nav .current_page_ancestor > a {
+		background: #cc6600;
+	}
+	.themonic-nav ul.nav-menu, .themonic-nav div.nav-menu > ul {
+		border-bottom: 5px solid #cc6600;
+	}
+	#site-navigation .topheadmenu a {
+    background: rgba(0, 0, 0, 0);
+	}
+	.themonic-nav li a:hover {
+		background: #cc6600;
+	}
+	.themonic-nav li:hover {
+		background: #cc6600;
+	}.wrapper .flexslider {margin: 0 0 30px;}.frontp .btm-wrap {
+    border-top: 1px solid #e9e9e9;
+	}
+	.entry-summary {
+    border-top: none;
+	}.frontp .btm-wrap { margin-bottom: 30px;}.site { font-size:14px;}.site { font-family:'Roboto', arial ;}
+</style>
+<link rel='stylesheet' id='publisho-custom-style-css'  href='https://krebsonsecurity.com/wp-content/themes/kos-mar2021/custom.css?subver=1.2&#038;ver=5.8.2' type='text/css' media='all' />
+<!--[if lt IE 9]>
+<link rel='stylesheet' id='publisho-ie-css'  href='https://krebsonsecurity.com/wp-content/themes/kos-mar2021/css/ie.css?ver=20160606' type='text/css' media='all' />
+<![endif]-->
+<link rel='stylesheet' id='fontawesome-css-css'  href='https://krebsonsecurity.com/wp-content/themes/kos-mar2021/fonts/font-awesome.min.css?ver=5.8.2' type='text/css' media='all' />
+<link rel='stylesheet' id='publisho_custom_fonts-css'  href='//fonts.googleapis.com/css?family=Roboto%3Aregular%2Citalic%2C500%26subset%3Dlatin%2C' type='text/css' media='screen' />
+<script type='text/javascript' src='https://krebsonsecurity.com/wp-includes/js/jquery/jquery.min.js?ver=3.6.0' id='jquery-core-js'></script>
+<script type='text/javascript' src='https://krebsonsecurity.com/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.3.2' id='jquery-migrate-js'></script>
+<script type='text/javascript' src='https://krebsonsecurity.com/wp-content/plugins/jquery-lightbox-for-native-galleries/colorbox/jquery.colorbox-min.js?ver=1.3.14' id='colorbox-js'></script>
+<link rel="https://api.w.org/" href="https://krebsonsecurity.com/wp-json/" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://krebsonsecurity.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://krebsonsecurity.com/wp-includes/wlwmanifest.xml" /> 
+<meta name="generator" content="WordPress 5.8.2" />
+<!-- JavaScript Pull-Quotes plugin v2.2 -->
+	<link rel="stylesheet" href="https://krebsonsecurity.com/wp-content/plugins/jspullquotes/resources/jspullquotes-core.css" type="text/css" />
+	<link rel="stylesheet" href="https://krebsonsecurity.com/wp-content/plugins/jspullquotes/resources/jspullquotes-default.css" type="text/css" />
+	<script type="text/javascript" src="https://krebsonsecurity.com/wp-content/plugins/jspullquotes/resources/jspullquotes.js"></script>
+	<script type="text/javascript">
+		var arrOptions = new Array("1", "1", "right", "1", "1", "blockquote", "pullquote", "pullquote pqRight");
+		pullQuoteOpts(arrOptions);
+	</script>
+<!-- end pull-quote additions -->
+<!-- jQuery Lightbox For Native Galleries v3.1.3 | http://www.viper007bond.com/wordpress-plugins/jquery-lightbox-for-native-galleries/ -->
+<script type="text/javascript">
+// <![CDATA[
+	jQuery(document).ready(function($){
+		$(".gallery").each(function(index, obj){
+			var galleryid = Math.floor(Math.random()*10000);
+			$(obj).find("a").colorbox({rel:galleryid, maxWidth:"95%", maxHeight:"95%"});
+		});
+		$("a.lightbox").colorbox({maxWidth:"95%", maxHeight:"95%"});
+	});
+// ]]>
+</script>
+<style type="text/css" id="custom-background-css">
+body.custom-background { background-color: #ffffff; }
+</style>
+	<link rel="me" href="https://twitter.com/briankrebs" /><meta name="twitter:widgets:link-color" content="#000000" /><meta name="twitter:widgets:border-color" content="#000000" /><meta name="twitter:partner" content="tfwp" />
+<meta name="twitter:card" content="summary" /><meta name="twitter:title" content="Krebs on Security" /><meta name="twitter:site" content="@briankrebs" /><meta name="twitter:description" content="In-depth security news and investigation" />
+</head>
+<body class="home blog paged custom-background paged-29 custom-background-white single-author frontp hfeed">
+<div id="page" class="site">
+	<!-- <div class="publisho-top-mobile-nav clear"></div> -->
+	<div class="themonic-logo themonic-ad3"><div class="a-statement">Advertisement</div><a href="https://securityscorecard.com/instant-security-scorecard?utm_source=krebs+on+security&amp;utm_medium=display&amp;utm_campaign=instant+scorecard&amp;utm_term=A&amp;utm_content=1240x110">
+<img src="/b-securityscorecard/1.jpg">
+</a></div>
+	<div class="themonic-logo themonic-ad6"><div class="a-statement">Advertisement</div><a href="https://www.cybereason.com/platform/anti-ransomware?utm_source=krebs&amp;utm_medium=display&amp;utm_campaign=q4">
+<img src="/b-cybereason/14.jpg">
+</a></div>
+	<nav id="site-navigation" class="themonic-nav" role="navigation">
+	</nav><!-- #site-navigation -->
+	<div class="clear"></div>
+	<header id="masthead" class="site-header" role="banner">
+ 					<div class="desktop-social">
+						<div class="socialmedia">
+							<a href="http://twitter.com/briankrebs" target="_blank"><i class="fa fa-twitter"></i></a> 
+															<a class="rss" href="https://krebsonsecurity.com/feed/" target="_blank"><i class="fa fa-rss"></i></a>	
+									<a class="rss" href="https://www.linkedin.com/in/bkrebs/" target="_blank"><i class="fa fa-linkedin"></i></a>	
+								</div>
+				 	</div>
+																						   
+		
+		<div class="themonic-logo responsive-img-container">
+			<a href="https://krebsonsecurity.com/" title="Krebs on Security" rel="home"><img src="https://krebsonsecurity.com/wp-content/uploads/2021/03/kos-27-03-2021.jpg" alt="Krebs on Security"></a>
+		</div>
+
+					<div class="mobile-social">
+						<div class="socialmedia">
+							<a href="http://twitter.com/briankrebs" target="_blank"><i class="fa fa-twitter"></i></a> 
+															<a class="rss" href="https://krebsonsecurity.com/feed/" target="_blank"><i class="fa fa-rss"></i></a>	
+									<a class="rss" href="https://www.linkedin.com/in/bkrebs/" target="_blank"><i class="fa fa-linkedin"></i></a>	
+								</div>
+					</div>
+		
+				<!-- <div class="publisho-mobile-nav clear"></div> -->
+		<nav id="site-navigation" class="themonic-nav" role="navigation">
+			<a class="assistive-text" href="#content" title="Skip to content">Skip to content</a>
+			<div id="menu-top" class="nav-menu"><ul>
+<li ><a href="https://krebsonsecurity.com/">Home</a></li><li class="page_item page-item-2"><a href="https://krebsonsecurity.com/about/">About the Author</a></li>
+<li class="page_item page-item-645"><a href="https://krebsonsecurity.com/cpm/">Advertising/Speaking</a></li>
+</ul></div>
+		</nav><!-- #site-navigation -->
+		<div class="clear"></div>
+	</header><!-- #masthead -->
+	<div id="main" class="wrapper">
+		<div id="primary" class="site-content">
+	
+
+	
+		<div id="content" role="main">
+
+		<article id="post-49592" class="post-49592 post type-post status-publish format-standard hentry category-all-about-skimmers tag-bluetooth-pump-skimmer tag-detective-matt-jogodka">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2019/11/hidden-cam-above-bluetooth-pump-skimmer/" title="Permalink to Hidden Cam Above Bluetooth Pump Skimmer" rel="bookmark">Hidden Cam Above Bluetooth Pump Skimmer</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">November 25, 2019</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2019/11/hidden-cam-above-bluetooth-pump-skimmer/#comments">95 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>Tiny hidden spy cameras are a common sight at ATMs that have been tampered with by crooks who specialize in retrofitting the machines with card skimmers. But until this past week I&#8217;d never heard of hidden cameras being used at gas pumps in tandem with Bluetooth-based card skimming devices.</p>
+<p>Apparently, I&#8217;m not alone.</p>
+<p>&#8220;I believe this is the first time I’ve seen a camera on a gas pump with a Bluetooth card skimmer,&#8221; said <strong>Detective Matt Jogodka </strong>of the Las Vegas Police Department, referring to the compromised fuel pump pictured below.</p>
+<div id="attachment_49597" style="width: 605px" class="wp-caption aligncenter"><img aria-describedby="caption-attachment-49597" loading="lazy" class=" wp-image-49597" src="https://krebsonsecurity.com/wp-content/uploads/2019/11/btpskimpanel.png" alt="" width="595" height="307" /><p id="caption-attachment-49597" class="wp-caption-text">The fake panel (horizontal) above the &#8220;This Sale&#8221; display obscures a tiny hidden camera angled toward the gas pump&#8217;s PIN pad.</p></div>
+<p>It may be difficult to tell from the angle of the photograph above, but the horizontal bar across the top of the machine (just above the &#8220;This Sale $&#8221; indicator) contains a hidden pinhole camera angled so as to record debit card users entering their PIN.</p>
+<p>Here&#8217;s a look at the fake panel removed from the compromised pump:</p>
+<div id="attachment_49598" style="width: 606px" class="wp-caption aligncenter"><img aria-describedby="caption-attachment-49598" loading="lazy" class=" wp-image-49598" src="https://krebsonsecurity.com/wp-content/uploads/2019/11/btpumpskimcamface.png" alt="" width="596" height="193" /><p id="caption-attachment-49598" class="wp-caption-text">A front view of the hidden camera panel.</p></div>
+<p>Jogodka said although this pump&#8217;s PIN pad is encrypted, the hidden camera sidesteps that security feature.</p>
+<p>&#8220;The PIN pad is encrypted, so this is a NEW way to capture the PIN,&#8221; Jogodka wrote in a message to a mailing list about skimming devices found on Arizona fuel pumps. &#8220;The camera was set on Motion, [to] save memory space and battery life. Sad for the suspect, it was recovered 2 hours after it was installed.&#8221; <a href="https://krebsonsecurity.com/2019/11/hidden-cam-above-bluetooth-pump-skimmer/#more-49592" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+	<div id="between_article_ad" class="themonic-ad5"><a href="https://go.infrascale.com/lp/get-ransomware-ebook-krebsonsecurity/?utm_source=banner&amp;utm_medium=display&amp;utm_campaign=krebssecurity_influencer_300">
+<img src="/b-infrascale/8.png">
+</a></div>	<article id="post-49619" class="post-49619 post type-post status-publish format-standard hentry category-data-breaches category-ransomware category-comingstorm tag-alex-holden tag-hold-security tag-karen-christianson tag-vcpi">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2019/11/110-nursing-homes-cut-off-from-health-records-in-ransomware-attack/" title="Permalink to 110 Nursing Homes Cut Off from Health Records in Ransomware Attack" rel="bookmark">110 Nursing Homes Cut Off from Health Records in Ransomware Attack</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">November 23, 2019</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2019/11/110-nursing-homes-cut-off-from-health-records-in-ransomware-attack/#comments">95 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>A ransomware outbreak has besieged a Wisconsin based IT company that provides cloud data hosting, security and access management to more than 100 nursing homes across the United States. The ongoing attack is preventing these care centers from accessing crucial patient medical records, and the IT company&#8217;s owner says she fears this incident could soon lead not only to the closure of her business, but also to the untimely demise of some patients.</p>
+<p><img loading="lazy" class="aligncenter wp-image-49623" src="https://krebsonsecurity.com/wp-content/uploads/2019/11/vcpi.png" alt="" width="596" height="297" /></p>
+<p>Milwaukee, Wisc. based <a href="https://www.vcpi.com" target="_blank" rel="noopener">Virtual Care Provider Inc.</a> (VCPI) provides IT consulting, Internet access, data storage and security services to some 110 nursing homes and acute-care facilities in 45 states. All told, VCPI is responsible for maintaining approximately 80,000 computers and servers that assist those facilities.</p>
+<p>At around 1:30 a.m. CT on Nov. 17, unknown attackers launched a ransomware strain known as <strong>Ryuk</strong> inside VCPI&#8217;s networks, encrypting all data the company hosts for its clients and demanding a whopping $14 million ransom in exchange for a digital key needed to unlock access to the files. Ryuk has made a name for itself targeting businesses that supply services to other companies — particularly cloud-data firms — with the ransom demands set according to the victim’s perceived ability to pay.</p>
+<p>In an interview with KrebsOnSecurity today, VCPI chief executive and owner <strong>Karen Christianson</strong> said the attack had affected virtually all of their core offerings, including Internet service and email, access to patient records, client billing and phone systems, and even VCPI&#8217;s own payroll operations that serve nearly 150 company employees.</p>
+<p>The care facilities that VCPI serves access their records and other systems outsourced to VCPI by using a <a href="https://www.citrix.com/networking/consolidate-remote-access.html" target="_blank" rel="noopener">Citrix-based</a> <a href="https://en.wikipedia.org/wiki/Virtual_private_network" target="_blank" rel="noopener">virtual private networking</a> (VPN) platform, and Christianson said restoring customer access to this functionality is the company&#8217;s top priority right now.</p>
+<p>&#8220;We have employees asking when we&#8217;re going to make payroll,&#8221; Christianson said. &#8220;But right now all we&#8217;re dealing with is getting electronic medical records back up and life-threatening situations handled first.&#8221;</p>
+<p>Christianson said her firm cannot afford to pay the ransom amount being demanded &#8212; roughly $14 million worth of Bitcoin &#8212; and said some clients will soon be in danger of having to shut their doors if VCPI can&#8217;t recover from the attack.</p>
+<p>&#8220;We&#8217;ve got some facilities where the nurses can&#8217;t get the drugs updated and the order put in so the drugs can arrive on time,&#8221; she said. &#8220;In another case, we have this one small assisted living place that is just a single unit that connects to billing. And if they don&#8217;t get their billing into Medicaid by December 5, they close their doors. Seniors that don&#8217;t have family to go to are then done. We have a lot of [clients] right now who are like, &#8216;Just give me my data,&#8217; but we can&#8217;t.&#8221; <a href="https://krebsonsecurity.com/2019/11/110-nursing-homes-cut-off-from-health-records-in-ransomware-attack/#more-49619" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+	<div class="themonic-ad2"><div class="a-statement">Advertisement</div><a href="https://www.akamai.com/blog/security/attacking-a-macro-security-problem-with-micro-segmentation?utm_source=krebsonsecurity&amp;utm_medium=display&amp;utm_id=GL_SecureWorkforce_Guardicore&amp;utm_campaign=F-MC-52610&amp;utm_content=Guardicore">
+<img src="/b-akamai/140.png">
+</a></div>	<article id="post-49609" class="post-49609 post type-post status-publish format-standard hentry category-ddos-for-hire category-neer-do-well-news tag-andrew-quez tag-brian-martinez tag-hackforums tag-rasbora tag-sergiy-p-usatyuk">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2019/11/ddos-for-hire-boss-gets-13-months-jail-time/" title="Permalink to DDoS-for-Hire Boss Gets 13 Months Jail Time" rel="bookmark">DDoS-for-Hire Boss Gets 13 Months Jail Time</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">November 20, 2019</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2019/11/ddos-for-hire-boss-gets-13-months-jail-time/#comments">46 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>A 21-year-old Illinois man was sentenced last week to 13 months in prison for running multiple DDoS-for-hire services that launched millions of attacks over several years. This individual&#8217;s sentencing comes more than five years after KrebsOnSecurity interviewed both the defendant and his father and urged the latter to take a more active interest in his son’s online activities.</p>
+<div id="attachment_49610" style="width: 604px" class="wp-caption aligncenter"><a class="lightbox" href="https://krebsonsecurity.com/wp-content/uploads/2019/11/databooter.png"><img aria-describedby="caption-attachment-49610" loading="lazy" class="wp-image-49610" src="https://krebsonsecurity.com/wp-content/uploads/2019/11/databooter.png" alt="" width="594" height="228" /></a><p id="caption-attachment-49610" class="wp-caption-text">A screenshot of databooter[.]com, circa 2017. Image: Cisco Talos.</p></div>
+<p>The jail time was handed down to <strong>Sergiy P. Usatyuk </strong>of Orland Park, Ill., who pleaded guilty in February to one count of conspiracy to cause damage to Internet-connected computers and owning, administering and supporting illegal “booter” or “stresser” services designed to knock Web sites offline, including <strong>exostress[.]in</strong>, <strong>quezstresser[.]com</strong>, <strong>betabooter[.]com</strong>, <strong>databooter[.]com</strong>, <strong>instabooter[.]com</strong>, <strong>polystress[.]com</strong> and <strong>zstress[.]net</strong>.</p>
+<p>According to the <strong>U.S. Justice Department,</strong> in just the first 13 months of the 27-month long conspiracy, Usatyuk&#8217;s booter users ordered approximately 3,829,812 DDoS attacks. As of September 12, 2017, ExoStresser advertised on its website that this one booter service had launched 1,367,610 DDoS attacks, and caused targets to suffer 109,186.4 hours of network downtime (-4,549 days).</p>
+<p>Usatyuk — operating under the hacker aliases “Andrew Quez” and “Brian Martinez,” among others — admitted developing, controlling and operating the aforementioned booter services from around August 2015 through November 2017. But Usatyuk’s involvement in the DDoS-for-hire space very much predates that period.</p>
+<p>In February 2014, KrebsOnSecurity reached out to Usatyuk’s father <strong>Peter Usatyuk</strong>, an assistant professor at the <strong>University of Illinois at Chicago</strong>. I did so because a brief amount of sleuthing on Hackforums[.]net revealed that his then 15-year-old son Sergiy — who at the time went by the nicknames “Rasbora” and “Mr. Booter Master” — was heavily involved in helping to launch crippling DDoS attacks.</p>
+<p>I phoned Usatyuk the elder because Sergiy’s alter egos had been posting evidence on Hackforums and elsewhere that he’d just hit KrebsOnSecurity.com with a 200 Gbps DDoS attack, which was then considered a fairly impressive DDoS assault.</p>
+<p>“I am writing you after our phone conversation just to confirm that you may call evening time/weekend to talk to my son Sergio regarding to your reasons,” Peter Usatyuk wrote in an email to this author on Feb. 13, 2014. “I also have [a] major concern what my 15 yo son [is] doing. If you think that is any kind of illegal work, please, let me know.” <a href="https://krebsonsecurity.com/2019/11/ddos-for-hire-boss-gets-13-months-jail-time/#more-49609" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-49503" class="post-49503 post type-post status-publish format-standard hentry category-data-breaches category-ransomware tag-greg-hartmann tag-laura-koester tag-national-veterinary-associates tag-nva-ransomware tag-robert-hill tag-ryuk">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2019/11/ransomware-bites-400-veterinary-hospitals/" title="Permalink to Ransomware Bites 400 Veterinary Hospitals" rel="bookmark">Ransomware Bites 400 Veterinary Hospitals</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">November 19, 2019</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2019/11/ransomware-bites-400-veterinary-hospitals/#comments">30 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p><strong>National Veterinary Associates</strong> (NVA), a California company that owns more than 700 animal care facilities around the globe, is still working to recover from a ransomware attack late last month that affected more than half of those properties, separating many veterinary practices from their patient records, payment systems and practice management software. NVA says it expects to have all facilities fully back up and running normally within the next week.</p>
+<p><img loading="lazy" class="aligncenter wp-image-49579" src="https://krebsonsecurity.com/wp-content/uploads/2019/11/nva700.png" alt="" width="596" height="378" /></p>
+<p>Agoura Hills, Calif.-based NVA bills itself as is the largest private owner of freestanding veterinary hospitals in the United States. The company&#8217;s <a href="https://www.nva.com/" target="_blank" rel="noopener">Web site</a> says it currently owns roughly 700 veterinary hospitals and animal boarding facilities in the United States, Canada, Australia and New Zealand.</p>
+<p>NVA said it discovered the ransomware outbreak on the morning of Sunday, Oct. 27, and soon after hired two outside security firms to investigate and remediate the attack. A source close to the investigation told KrebsOnSecurity that NVA was hit with <strong>Ryuk</strong>, a ransomware strain first spotted in August 2018 that targets mostly large organizations for a high-ransom return.</p>
+<p>NVA declined to answer questions about the malware, or whether the NVA paid the ransom demand.</p>
+<p>&#8220;It was ransomware, but we&#8217;ve been referring to it as a malware incident,&#8221; said <strong>Laura Koester</strong>, NVA&#8217;s chief marketing officer.</p>
+<p>Koester said because every NVA hospital runs their IT operations as they see fit, not all were affected. More importantly, she said, all of the NVA&#8217;s hospitals have remained open and able to see clients (animals in need of care), and access to patient records has been fully restored to all affected hospitals.</p>
+<p>&#8220;For a few days, some [pet owners] couldn&#8217;t do online bookings, and some hospitals had to look at different records for their patients,&#8221; Koester said. &#8220;But throughout this whole thing, if there was a sick animal, we saw them. No one closed their doors.&#8221;</p>
+<p>The source close to the investigation painted a slight less rosy picture of the situation at NVA, and said the company&#8217;s response has been complicated by the effects of wildfires surrounding its headquarters in Los Angeles County: A year ago, <a href="https://en.wikipedia.org/wiki/Woolsey_Fire" target="_blank" rel="noopener">a destructive wildfire in Los Angeles and Ventura Counties</a> burned almost 100,00 acres, destroyed more than 1,600 structures, killed three people and prompted the evacuation of nearly 300,000 people &#8212; including all residents of Agoura Hills.</p>
+<p>&#8220;The support center was scheduled to be closed on Friday Oct 25, 2019 due to poor air quality caused by wildfires to the north,&#8221; said the source, who asked to remain anonymous. &#8220;Around 2 am PT [Oct. 27], the Ryuk virus was unleashed at <span class="il">NVA</span>. Approximately 400 locations were infected. [Microsoft] Active Directory and Exchange servers were infected. Many of the infected locations immediately lost access to their Patient Information Management systems (PIMs). These locations were immediately unable to provide care.&#8221;</p>
+<p>The source shared internal communications from different NVA executives to their hospitals about the extent of the remediation efforts and possible source of the compromise, which seemed to suggest that at least some NVA properties have been struggling to accommodate patients. <a href="https://krebsonsecurity.com/2019/11/ransomware-bites-400-veterinary-hospitals/#more-49503" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-49519" class="post-49519 post type-post status-publish format-standard hentry category-sunshine category-neer-do-well-news tag-aleksei-burkov tag-cybereason tag-directconnection tag-evgeniy-mikhailovich-bogachev tag-fox-it tag-fraudcrew tag-k0pa tag-mazafaka tag-slavik tag-spamdot">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2019/11/why-were-the-russians-so-set-against-this-hacker-being-extradited/" title="Permalink to Why Were the Russians So Set Against This Hacker Being Extradited?" rel="bookmark">Why Were the Russians So Set Against This Hacker Being Extradited?</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">November 18, 2019</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2019/11/why-were-the-russians-so-set-against-this-hacker-being-extradited/#comments">48 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>The Russian government has for the past four years been fighting to keep 29-year-old alleged cybercriminal <strong>Aleksei Burkov</strong> from being extradited by Israel to the United States. When Israeli authorities turned down requests to send him back to Russia &#8212; supposedly to face separate hacking charges there &#8212; the Russians then imprisoned an Israeli woman for seven years on trumped-up drug charges in a bid to trade prisoners. That effort failed as well, and Burkov had his first appearance in a U.S. court last week. What follows are some clues that might explain why the Russians are so eager to reclaim this young man.</p>
+<div id="attachment_49530" style="width: 605px" class="wp-caption aligncenter"><img aria-describedby="caption-attachment-49530" loading="lazy" class=" wp-image-49530" src="https://krebsonsecurity.com/wp-content/uploads/2019/11/burkov-jerusalem-getty.png" alt="" width="595" height="375" /><p id="caption-attachment-49530" class="wp-caption-text">Aleksei Burkov, seated second from right, attends a hearing in Jerusalem in 2015. Andrei Shirokov / Tass via Getty Images.</p></div>
+<p>On the surface, <a href="https://krebsonsecurity.com/wp-content/uploads/2019/11/Burkov-Superceding.pdf" target="_blank" rel="noopener">the charges</a> the U.S. government has <a href="https://www.nbcnews.com/news/world/suspected-hacker-s-extradition-focuses-attention-israeli-american-russian-jail-n1079781" target="_blank" rel="noopener">leveled against Burkov</a> may seem fairly unremarkable: Prosecutors <a href="https://www.justice.gov/usao-edva/pr/russian-national-extradited-running-online-criminal-marketplace" target="_blank" rel="noopener">say</a> he ran a credit card fraud forum called <strong>CardPlanet</strong> that sold more than 150,000 stolen cards.</p>
+<p>However, a deep dive into the various pseudonyms allegedly used by Burkov suggests this individual may be one of the most connected and skilled malicious hackers ever apprehended by U.S. authorities, and that the Russian government is probably concerned that he simply knows too much.</p>
+<p>Burkov calls himself a specialist in information security and denies having committed the crimes for which he&#8217;s been charged. But according to denizens of several Russian-language cybercrime forums that have been following his case in the Israeli news media, Burkov was by all accounts an elite cybercrook who primarily operated under the hacker alias &#8220;<strong>K0pa</strong>.&#8221;</p>
+<p>This is the same nickname used by an individual who served as co-administrator of perhaps the most exclusive Russian-language hacking forums ever created, including <strong>Mazafaka</strong> and <strong>DirectConnection</strong>.</p>
+<div id="attachment_49526" style="width: 607px" class="wp-caption aligncenter"><a class="lightbox" href="https://krebsonsecurity.com/wp-content/uploads/2019/11/maza.png"><img aria-describedby="caption-attachment-49526" loading="lazy" class="wp-image-49526" src="https://krebsonsecurity.com/wp-content/uploads/2019/11/maza.png" alt="" width="597" height="226" /></a><p id="caption-attachment-49526" class="wp-caption-text">A screen shot from the Mazafaka cybercrime forum, circa 2011.</p></div>
+<p>Since their inception in the mid-aughts, both of these forums have been among the most difficult to join &#8212; admitting only native Russian speakers and requiring each applicant to furnish a non-refundable cash deposit and &#8220;vouches&#8221; or guarantees from at least three existing members. Also, neither forum was accessible or even visible to anyone without a special encryption certificate supplied by forum administrators that allowed the sites to load properly in a Web browser.</p>
+<div id="attachment_49525" style="width: 604px" class="wp-caption aligncenter"><a class="lightbox" href="https://krebsonsecurity.com/wp-content/uploads/2019/11/dc-ws.png"><img aria-describedby="caption-attachment-49525" loading="lazy" class="wp-image-49525" src="https://krebsonsecurity.com/wp-content/uploads/2019/11/dc-ws.png" alt="" width="594" height="320" /></a><p id="caption-attachment-49525" class="wp-caption-text">DirectConnection, circa 2011. The identity shown at the bottom of this screenshot &#8212; Severa &#8212; belonged to Peter Levashov, a prolific spammer who pleaded guilty in the United States last year to operating the Kelihos spam botnet.</p></div>
+<p>Notably, some of the world&#8217;s most-wanted cybercriminals were members of these two highly exclusive forums, and many of those individuals have already been arrested, extradited and tried for various cybercrime charges in the United States over the years. Those include convicted credit card fraudsters <a href="https://www.wired.com/2010/08/badb-rbs-worldpay-hack/" target="_blank" rel="noopener">Vladislav &#8220;Badb&#8221; Horohorin</a> and <a href="https://krebsonsecurity.com/?s=zo0mer&amp;x=0&amp;y=0" target="_blank" rel="noopener">Sergey &#8220;zo0mer&#8221; Kozerev</a>, as well as the infamous spammer and botnet master <a href="https://krebsonsecurity.com/?s=severa+waledac&amp;x=0&amp;y=0" target="_blank" rel="noopener">Peter &#8220;Severa&#8221; Levashov</a>.</p>
+<p>A user database obtained by KrebsOnSecurity several years back indicates K0pa relied on the same email address he used to register at Mazafaka and DirectConnection to register the user account &#8220;<strong>Botnet</strong>&#8221; on <strong>Spamdot</strong>, which for years was <a href="https://krebsonsecurity.com/2010/09/spam-affialite-program-spamit-com-to-close/" target="_blank" rel="noopener">the closely-guarded stomping ground</a> of the world&#8217;s most prolific spammers and virus writers, as well as hackers who created services catering to both professions.</p>
+<p>As a reporter for <em>The Washington Post</em> in 2008, I wrote about the core offering that K0pa/Botnet advertised on Spamdot and other exclusive forums: <a href="http://voices.washingtonpost.com/securityfix/2008/11/web_fraud_20_faking_your_inter.html" target="_blank" rel="noopener">A botnet-based anonymity service called <strong>FraudCrew</strong></a>. This service sold access to hacked computers, which FraudCrew customers used for the purposes of hiding their real location online while conducting cybercriminal activities.</p>
+<div id="attachment_49524" style="width: 603px" class="wp-caption aligncenter"><a class="lightbox" href="https://krebsonsecurity.com/wp-content/uploads/2019/11/fraudcrew.png"><img aria-describedby="caption-attachment-49524" loading="lazy" class="wp-image-49524" src="https://krebsonsecurity.com/wp-content/uploads/2019/11/fraudcrew.png" alt="" width="593" height="401" /></a><p id="caption-attachment-49524" class="wp-caption-text">FraudCrew, a botnet-based anonymity service offered by K0pa.</p></div>
+<p>K0pa also was a top staff member at <strong>Verified</strong>, among the oldest and most venerated of Russian language cybercrime forums. Specifically, K0pa&#8217;s role at Verified was in maintaining its blacklist, a dispute resolution process designed to weed out &#8220;dishonest&#8221; cybercriminals who seek only to rip off less experienced crooks. From this vantage point, K0pa would have held considerable sway on the forum, and almost certainly played a key role in vetting new applicants to the site. <a href="https://krebsonsecurity.com/2019/11/why-were-the-russians-so-set-against-this-hacker-being-extradited/#more-49519" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-49491" class="post-49491 post type-post status-publish format-standard hentry category-neer-do-well-news tag-australian-federal-police tag-blackshades-rat tag-john-revesz tag-luminositylink tag-nanocore-rat tag-orcus-rat tag-orcus-technologies tag-rcmp tag-royal-canadian-mounted-police tag-taylor-huddleston">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2019/11/orcus-rat-author-charged-in-malware-scheme/" title="Permalink to Orcus RAT Author Charged in Malware Scheme" rel="bookmark">Orcus RAT Author Charged in Malware Scheme</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">November 13, 2019</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2019/11/orcus-rat-author-charged-in-malware-scheme/#comments">33 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>In July 2016, KrebsOnSecurity <a href="https://krebsonsecurity.com/2016/07/canadian-man-is-author-of-popular-orcus-rat/" target="_blank" rel="noopener">published a story</a> identifying a Toronto man as the author of the <strong>Orcus RAT</strong>, a software product that’s been marketed on underground forums and used in countless malware attacks since its creation in 2015. This week, Canadian authorities criminally charged him with orchestrating an international malware scheme.</p>
+<div id="attachment_47154" style="width: 607px" class="wp-caption aligncenter"><img aria-describedby="caption-attachment-47154" loading="lazy" class="wp-image-47154" src="https://krebsonsecurity.com/wp-content/uploads/2019/04/orcusad.jpg" alt="" width="597" height="244" /><p id="caption-attachment-47154" class="wp-caption-text">An advertisement for Orcus RAT.</p></div>
+<p>The accused, 36-year-old <strong>John &#8220;Armada&#8221; Revesz</strong>, has maintained that Orcus is a legitimate &#8220;<strong>R</strong>emote <strong>A</strong>dministration <strong>T</strong>ool&#8221; aimed at helping system administrators remotely manage their computers, and that he&#8217;s not responsible for how licensed customers use his product.</p>
+<p>In my 2016 piece, however, several sources noted that Armada and his team were marketing it more like a <strong>R</strong>emote <strong>A</strong>ccess <strong>T</strong>rojan, providing ongoing technical support and help to customers who&#8217;d purchased Orcus but were having trouble figuring out how to infect new machines or hide their activities online.</p>
+<p>Follow-up reporting revealed that the list of features and plugins advertised for Orcus includes functionality that goes significantly beyond what one might see in a traditional remote administration tool, such as DDoS-for-hire capabilities, and the ability to disable the light indicator on webcams so as not to alert the target that the RAT is active.</p>
+<p>Canadian investigators don&#8217;t appear to be buying Revesz&#8217; claims. On Monday the <strong>Royal Canadian Mounted Police</strong> (RCMP) announced it had charged Revesz with operating an international malware distribution scheme under the company name &#8220;Orcus Technologies.&#8221;</p>
+<p>&#8220;An RCMP criminal investigation began in July 2016 after reports of a significant amount of computers were being infected with a &#8216;Remote Access Trojan&#8217; type of virus,&#8221; the agency said in <a href="http://www.rcmp-grc.gc.ca/en/news/2019/charges-laid-rcmp-relation-international-malware-virus" target="_blank" rel="noopener">a statement</a>.</p>
+<p>The RCMP filed the charges eight months after executing a search warrant at Revesz&#8217; home, where they seized several hard drives containing Orcus RAT customer names, financial transactions, and other information.</p>
+<p>&#8220;The evidence obtained shows that this virus has infected computers from around the world, making thousands of victims in multiple countries,&#8221; the RCMP said.</p>
+<p>Revesz did not respond to requests for comment. <a href="https://krebsonsecurity.com/2019/11/orcus-rat-author-charged-in-malware-scheme/#more-49491" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-49481" class="post-49481 post type-post status-publish format-standard hentry category-patches tag-adobe tag-cve-2019-1429 tag-cve-2019-1457 tag-internet-explorer-zero-day tag-macros tag-microsoft tag-office-for-mac tag-windows-7-end-of-life">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2019/11/patch-tuesday-november-2019-edition/" title="Permalink to Patch Tuesday, November 2019 Edition" rel="bookmark">Patch Tuesday, November 2019 Edition</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">November 12, 2019</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2019/11/patch-tuesday-november-2019-edition/#comments">64 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p><strong>Microsoft</strong> today released updates to plug security holes in its software, including patches to fix at least 74 weaknesses in various flavors of <strong>Windows</strong> and programs that run on top of it. The November updates include patches for a zero-day flaw in <strong>Internet Explorer</strong> that is currently being exploited in the wild, as well as a sneaky bug in certain versions of <strong>Office for Mac</strong> that bypasses security protections and was detailed publicly prior to today&#8217;s patches.</p>
+<p><img loading="lazy" class="alignright wp-image-26837" src="https://krebsonsecurity.com/wp-content/uploads/2014/07/brokenwindows.png" alt="" width="220" height="231" />More than a dozen of the flaws tackled in this month&#8217;s release are rated &#8220;critical,&#8221; meaning they involve weaknesses that could be exploited to install malware without any action on the part of the user, except for perhaps browsing to a hacked or malicious Web site or opening a booby-trapped file attachment.</p>
+<p>Perhaps the most concerning of those critical holes is a zero-day flaw in Internet <del>Exploder</del> Explorer (<a href="https://portal.msrc.microsoft.com/en-US/security-guidance/advisory/CVE-2019-1429" target="_blank" rel="noopener">CVE-2019-1429</a>) that has already seen active exploitation. Today&#8217;s updates also address two other critical vulnerabilities in the same Windows component that handles various <a href="https://encyclopedia2.thefreedictionary.com/Microsoft+Script+Engine" target="_blank" rel="noopener">scripting languages</a>.</p>
+<p>Microsoft also fixed a flaw in Microsoft Office for Mac (<a href="https://portal.msrc.microsoft.com/en-US/security-guidance/advisory/CVE-2019-1457" target="_blank" rel="noopener">CVE-2019-1457</a>) that could allow attackers to bypass security protections in some versions of the program.</p>
+<p>Macros are bits of computer code that can be embedded into Office files, and malicious macros are frequently used by malware purveyors to compromise Windows systems. Usually, this takes the form of a prompt urging the user to &#8220;enable macros&#8221; once they&#8217;ve opened a booby-trapped Office document delivered via email. Thus, Office has a feature called &#8220;disable all macros without notification.&#8221;</p>
+<p><img loading="lazy" class="aligncenter wp-image-28673" src="https://krebsonsecurity.com/wp-content/uploads/2014/11/macrosms.png" alt="" width="596" height="348" srcset="https://krebsonsecurity.com/wp-content/uploads/2014/11/macrosms.png 630w, https://krebsonsecurity.com/wp-content/uploads/2014/11/macrosms-285x166.png 285w, https://krebsonsecurity.com/wp-content/uploads/2014/11/macrosms-600x350.png 600w" sizes="(max-width: 596px) 100vw, 596px" /></p>
+<p>But Microsoft says all versions of Office still support an older type of macros that do not respect this setting, and can be used as <a href="https://krebsonsecurity.com/2019/02/payroll-provider-gives-extortionists-a-payday/" target="_blank" rel="noopener">a vector for pushing malware</a>. <strong>Will Dormann</strong> of the <a href="https://kb.cert.org/vuls/id/125336/" target="_blank" rel="noopener">CERT/CC has reported</a> that Office 2016 and 2019 for Mac will fail to prompt the user before executing these older macro types if the &#8220;Disable all macros without notification&#8221; setting is used. <a href="https://krebsonsecurity.com/2019/11/patch-tuesday-november-2019-edition/#more-49481" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-49405" class="post-49405 post type-post status-publish format-standard hentry category-sunshine tag-alex-holden tag-github tag-hold-security tag-orvis-password-exposure tag-orvis-com tag-pastebin tag-tucker-kimball">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2019/11/retailer-orvis-com-leaked-hundreds-of-internal-passwords-on-pastebin/" title="Permalink to Retailer Orvis.com Leaked Hundreds of Internal Passwords on Pastebin" rel="bookmark">Retailer Orvis.com Leaked Hundreds of Internal Passwords on Pastebin</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">November 11, 2019</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2019/11/retailer-orvis-com-leaked-hundreds-of-internal-passwords-on-pastebin/#comments">28 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p><strong><a href="https://www.orvis.com" target="_blank" rel="noopener">Orvis</a></strong>, a Vermont-based retailer that specializes in high-end fly fishing equipment and other sporting goods, leaked hundreds of internal passwords on <strong>Pastebin.com</strong> for several weeks last month, exposing credentials the company used to manage everything from firewalls and routers to administrator accounts and database servers, KrebsOnSecurity has learned. Orvis says the exposure was inadvertent, and that many of the credentials were already expired.</p>
+<p><img loading="lazy" class="aligncenter wp-image-49459" src="https://krebsonsecurity.com/wp-content/uploads/2019/11/orvis.png" alt="" width="594" height="445" /></p>
+<p>Based in Sunderland, VT. and founded in 1856, privately-held Orvis is the oldest mail-order retailer in the United States. The company has approximately 1,700 employees, 69 retail stores and 10 outlets in the US, and 18 retail stores in the UK.</p>
+<p>In late October, this author received a tip from Wisconsin-based security firm <a href="https://www.holdsecurity.com" target="_blank" rel="noopener">Hold Security</a> that a file containing a staggering number of internal usernames and passwords for Orvis had been posted to Pastebin. </p>
+<p>Reached for comment about the source of the document, Orvis spokesperson <strong>Tucker Kimball</strong> said it was only available for a day before the company had it removed from Pastebin.</p>
+<p>&#8220;The file contains old credentials, so many of the devices associated with the credentials are decommissioned and we took steps to address the remaining ones,&#8221; Kimball said. &#8220;We are leveraging our existing security tools to conduct an investigation to determine how this occurred.&#8221;</p>
+<p>However, according to Hold Security founder <strong>Alex Holden</strong>, this enormous passwords file was actually posted to Pastebin <em>on two separate occasions last month</em>, the first being on Oct. 4, and the second Oct. 22. That finding was corroborated by <a href="https://www.4iq.com" target="_blank" rel="noopener">4iq.com</a>, a company that aggregates information from leaked databases online.</p>
+<p>Orvis did not respond to follow-up requests for comment via phone and email; the last two email messages sent by KrebsOnSecurity to Orvis were returned simply as &#8220;blocked.&#8221;</p>
+<p>It&#8217;s not unusual for employees or contractors to post bits of sensitive data to public sites like Pastebin and <a href="https://www.github.com" target="_blank" rel="noopener">Github</a>, but the credentials file apparently published by someone working at or for Orvis is by far the most extreme example I&#8217;ve ever witnessed.</p>
+<p>For instance, included in the Pastebin files from Orvis were plaintext usernames and passwords for just about every kind of online service or security product the company has used, including:</p>
+<p>-Antivirus engines<br />
+-Data backup services<br />
+-Multiple firewall products<br />
+-Linux servers<br />
+-Cisco routers<br />
+-Netflow data<br />
+-Call recording services<br />
+-DNS controls<br />
+-Orvis wireless networks (public and private)<br />
+-Employee wireless phone services<br />
+-Oracle database servers<br />
+-Microsoft 365 services<br />
+-Microsoft Active Directory accounts and passwords<br />
+-Battery backup systems<br />
+-Security cameras<br />
+-Encryption certificates<br />
+-Mobile payment services<br />
+-Door and Alarm Codes<br />
+-FTP credentials<br />
+-Apple ID credentials<br />
+-Door controllers</p>
+<p>By all accounts, this was a comprehensive goof: <em>The Orvis credentials file even contained the combination to a locked safe in the company&#8217; server room.</em> <a href="https://krebsonsecurity.com/2019/11/retailer-orvis-com-leaked-hundreds-of-internal-passwords-on-pastebin/#more-49405" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-49338" class="post-49338 post type-post status-publish format-standard hentry category-sunshine category-comingstorm tag-department-of-health-and-human-services tag-hhs tag-leo-scanlon tag-owen-graduate-school-of-management tag-pbs tag-the-new-england-journal-of-medicine tag-vanderbilt-university tag-wannacry">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2019/11/study-ransomware-data-breaches-at-hospitals-tied-to-uptick-in-fatal-heart-attacks/" title="Permalink to Study: Ransomware, Data Breaches at Hospitals tied to Uptick in Fatal Heart Attacks" rel="bookmark">Study: Ransomware, Data Breaches at Hospitals tied to Uptick in Fatal Heart Attacks</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">November 7, 2019</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2019/11/study-ransomware-data-breaches-at-hospitals-tied-to-uptick-in-fatal-heart-attacks/#comments">53 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>Hospitals that have been hit by a data breach or ransomware attack can expect to see an increase in the death rate among heart patients in the following months or years because of cybersecurity remediation efforts, a new study posits. Health industry experts say the findings should prompt a larger review of how security &#8212; or the lack thereof &#8212; may be impacting patient outcomes.</p>
+<p><img loading="lazy" class="aligncenter size-full wp-image-49443" src="https://krebsonsecurity.com/wp-content/uploads/2019/11/ekg-fl.jpg" alt="" width="500" height="375" /></p>
+<p>Researchers at <strong>Vanderbilt University</strong>&#8216;s Owen Graduate School of Management took the <strong>Department of Health and Human Services</strong> (HHS) list of healthcare data breaches and used it to drill down on data about patient mortality rates at more than 3,000 Medicare-certified hospitals, about 10 percent of which had experienced a data breach.</p>
+<p>As <strong>PBS</strong> <a href="https://www.pbs.org/newshour/science/ransomware-and-other-data-breaches-linked-to-uptick-in-fatal-heart-attacks" target="_blank" rel="noopener">noted in its coverage</a> of the Vanderbilt study, after data breaches as many as 36 additional deaths per 10,000 heart attacks occurred annually at the hundreds of hospitals examined.</p>
+<p>The researchers found that for care centers that experienced a breach, it took an additional 2.7 minutes for suspected heart attack patients to receive an electrocardiogram.</p>
+<p>&#8220;Breach remediation efforts were associated with deterioration in timeliness of care and patient outcomes,&#8221; the authors found. &#8220;Remediation activity may introduce changes that delay, complicate or disrupt health IT and patient care processes.&#8221;</p>
+<p><strong>Leo Scanlon</strong>, former deputy chief information security officer at the HHS, said the findings in this report practically beg for a similar study to be done in the United Kingdom, whose healthcare system was particularly disrupted by the Wannacry virus, a global contagion in May 2017 that spread through a Microsoft Windows vulnerability prevalent in older healthcare systems.</p>
+<p>&#8220;The exploitation of cybersecurity vulnerabilities is killing people,&#8221; Scanlon told KrebsOnSecurity. &#8220;There is a lot of possible research that might be unleashed by this study. I believe that nothing less than a congressional investigation will give the subject the attention it deserves.&#8221;</p>
+<p>A <a href="https://www.nao.org.uk/wp-content/uploads/2017/10/Investigation-WannaCry-cyber-attack-and-the-NHS.pdf" target="_blank" rel="noopener">post-mortem on the impact of WannaCry</a> found the outbreak cost U.K. hospitals almost $100 million pounds and caused significant disruption to patient care, such as the cancellation of some 19,000 appointments &#8212; including operations &#8212; and the disruption of IT systems for at least a third of all <strong>U.K. National Health Service</strong> (NHS) hospitals and eight percent of general practitioners. In several cases, hospitals in the U.K. were forced to divert emergency room visitors to other hospitals.</p>
+<p>But what isn’t yet known is how Wannacry affected mortality rates among heart attack and stroke patients whose ambulances were diverted to other hospitals because of IT system outages related to the malware. Or how many hospitals and practices experienced delays in getting test results back needed to make critical healthcare decisions.</p>
+<p>Scanlon said although he&#8217;s asked around quite a bit over the years to see if any researchers have taken up the challenge of finding out, and that so far he hasn&#8217;t found anyone doing that analysis.</p>
+<p>&#8220;A colleague who is familiar with large scale healthcare data sets told me that unless you are associated with a research institution, it would be almost impossible to pry that kind of data out of the institutions that have it,&#8221; Scanlon said. &#8220;The problem is this data is hard to come by &#8212; nobody likes to admit that death can be attributable to a non-natural cause like this &#8212; and is otherwise considered sensitive at a very high and proprietary level by the institutions that have the facts.&#8221;</p>
+<p>A study published <a href="https://www.nejm.org/doi/full/10.1056/NEJMsa1614073" target="_blank" rel="noopener">in the April 2017 edition</a> of <em>The New England Journal of Medicine</em> would seem to suggest applying the approach used by the Vanderbilt researchers to measuring patient outcomes at U.K. hospitals in the wake of Wannacry might be worth carrying out.</p>
+<p>In the NEJM study, morbidity and mortality data was used to show that there is a measurable impact when ambulances and emergency response teams are removed from normal service and redirected to standby during public events like marathons and other potential targets of terrorism.</p>
+<p>The study found that &#8220;medicare beneficiaries who were admitted to marathon-affected hospitals with acute myocardial infarction or cardiac arrest on marathon dates had longer ambulance transport times before noon (4.4 minutes longer) and higher 30-day mortality than beneficiaries who were hospitalized on nonmarathon dates.&#8221; <a href="https://krebsonsecurity.com/2019/11/study-ransomware-data-breaches-at-hospitals-tied-to-uptick-in-fatal-heart-attacks/#more-49338" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-49409" class="post-49409 post type-post status-publish format-standard hentry category-sunshine category-comingstorm category-web-fraud-2-0 tag-credential-replay-attacks tag-digital-insight tag-intuit tag-mint tag-ncr-corp tag-quickbooks-online">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2019/11/ncr-barred-mint-quickbooks-from-banking-platform-during-account-takeover-storm/" title="Permalink to NCR Barred Mint, QuickBooks from Banking Platform During Account Takeover Storm" rel="bookmark">NCR Barred Mint, QuickBooks from Banking Platform During Account Takeover Storm</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">November 3, 2019</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2019/11/ncr-barred-mint-quickbooks-from-banking-platform-during-account-takeover-storm/#comments">43 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>Banking industry giant <strong>NCR Corp.</strong> [<a href="https://www.google.com/search?rlz=1C1SQJL_enUS858US858&amp;sxsrf=ACYBGNTT8RakelvmicXkMqpkUldtImdgMg:1572815817512&amp;q=NYSE:+NCR&amp;stick=H4sIAAAAAAAAAONgecRowS3w8sc9YSn9SWtOXmPU5OIKzsgvd80rySypFJLmYoOyBKX4uXj10_UNDZPNCouKTcpyeRaxcvpFBrtaKfg5BwEA0iv3ekkAAAA&amp;sa=X&amp;ved=2ahUKEwik_-XA-87lAhVkvFkKHfwDCXQQsRUwHnoECAgQAw&amp;biw=1920&amp;bih=937" target="_blank" rel="noopener">NYSE: NCR</a>] late last month took the unusual step of temporarily blocking third-party financial data aggregators <strong>Mint</strong> and <strong>QuickBooks Online</strong> from accessing <strong>Digital Insight</strong>, an online banking platform used by hundreds of financial institutions. That ban, which came in response to a series of bank account takeovers in which cybercriminals used aggregation sites to surveil and drain consumer accounts, has since been rescinded. But the incident raises fresh questions about the proper role of digital banking platforms in fighting password abuse.</p>
+<div id="attachment_49418" style="width: 606px" class="wp-caption aligncenter"><a class="lightbox" href="https://krebsonsecurity.com/wp-content/uploads/2019/11/ncr3rd.png"><img aria-describedby="caption-attachment-49418" loading="lazy" class="wp-image-49418" src="https://krebsonsecurity.com/wp-content/uploads/2019/11/ncr3rd.png" alt="" width="596" height="406" /></a><p id="caption-attachment-49418" class="wp-caption-text">Part of a communication NCR sent Oct. 25 to banks on its Digital Insight online banking platform.</p></div>
+<p>On Oct. 29, KrebsOnSecurity heard from a chief security officer at a U.S.-based credit union and Digital Insight customer who said his institution just had several dozen customer accounts hacked over the previous week.</p>
+<p>My banking source said the attackers appeared to automate the unauthorized logins, which took place over a week in several distinct 12-hour periods in which a new account was accessed every five to ten minutes.</p>
+<p>Most concerning, the source said, was that in many cases the aggregator service did not pass through prompts sent by the credit union&#8217;s site for multi-factor authentication, meaning the attackers could access customer accounts with nothing more than a username and password.</p>
+<p>&#8220;The weird part is sometimes the attackers are getting the multi-factor challenge, and sometimes they aren&#8217;t,&#8221; said the source, who added that he suspected a breach at Mint and/QuickBooks because NCR had just blocked the two companies from accessing bank Web sites on its platform.</p>
+<p>In a statement provided to KrebsOnSecurity, NCR said that on Friday, Oct. 25, the company notified Digital Insight customers &#8220;that the aggregation capabilities of certain third-party product were being temporarily suspended.&#8221;</p>
+<p>&#8220;The notification was sent while we investigated a report involving a single user and a third-party product that aggregates bank data,&#8221; reads their statement, which was sent to customers on Oct. 29. After confirming that the incident was contained, NCR restored connectivity that is used for account aggregation. &#8220;As we noted, the criminals are getting aggressive and creative in accessing tools to access online information, NCR continues to evaluate and proactively defend against these activities.&#8221;&#8221;</p>
+<p>What were these sophisticated methods? NCR wouldn&#8217;t say, but it seems clear the hacked accounts are tied to customers re-using their online banking passwords at other sites that got hacked.</p>
+<p>As I noted earlier this year in <a href="https://krebsonsecurity.com/2019/08/the-risk-of-weak-online-banking-passwords/" target="_blank" rel="noopener">The Risk of Weak Online Banking Passwords</a>, if you bank online and choose weak or re-used passwords, there’s a decent chance your account could be pilfered by cyberthieves — even if your bank offers multi-factor authentication as part of its login process. <a href="https://krebsonsecurity.com/2019/11/ncr-barred-mint-quickbooks-from-banking-platform-during-account-takeover-storm/#more-49409" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+				
+			
+								<div class="themonic-pagination"><div class='pagination'><ul><li><a href='https://krebsonsecurity.com/'>&laquo; First</a></li><li><a href='https://krebsonsecurity.com/page/28/' class='inactive'>&lsaquo; Previous</a></li><li><a href='https://krebsonsecurity.com/page/26/' class='inactive'>26</a></li><li><a href='https://krebsonsecurity.com/page/27/' class='inactive'>27</a></li><li><a href='https://krebsonsecurity.com/page/28/' class='inactive'>28</a></li><li class='current'><span class='currenttext'>29</span></li><li><a href='https://krebsonsecurity.com/page/30/' class='inactive'>30</a></li><li><a href='https://krebsonsecurity.com/page/31/' class='inactive'>31</a></li><li><a href='https://krebsonsecurity.com/page/32/' class='inactive'>32</a></li><li><a href='https://krebsonsecurity.com/page/30/' class='inactive'>Next &rsaquo;</a></li><a class='inactive' href='https://krebsonsecurity.com/page/209/'>Last &raquo;</a></ul></div></div>
+					<div style="display: block; clear: both;"></div>
+			
+		
+
+	
+
+		</div><!-- #content -->
+	</div><!-- #primary -->
+
+
+			<div id="secondary" class="widget-area" role="complementary">
+
+        <div id="sidebar_ad" class="widget themonic-ad5"><div class="a-statement">Advertisement</div><a href="https://securityscorecard.com/instant-security-scorecard?utm_source=krebs+on+security&amp;utm_medium=display&amp;utm_campaign=instant+scorecard&amp;utm_term=A&amp;utm_content=335x300">
+<img src="/b-securityscorecard/3.jpg">
+</a></div>
+
+                        <br><div class="widget themonic-ad1"><div class="a-statement">Advertisement</div><a href="https://www.akamai.com/blog/security/attacking-a-macro-security-problem-with-micro-segmentation?utm_source=krebsonsecurity&amp;utm_medium=display&amp;utm_id=GL_SecureWorkforce_Guardicore&amp;utm_campaign=F-MC-52610&amp;utm_content=Guardicore">
+<img src="/b-akamai/138.png">
+</a></div><br>
+
+			<aside id="custom_html-2" class="widget_text widget widget_custom_html"><p class="widget-title">Mailing List</p><div class="textwidget custom-html-widget"><a href="/subscribe/">Subscribe here</a></div></aside><aside id="search-2" class="widget widget_search"><p class="widget-title">Search KrebsOnSecurity</p><form role="search" method="get" id="searchform" class="searchform" action="https://krebsonsecurity.com/">
+				<div>
+					<label class="screen-reader-text" for="s">Search for:</label>
+					<input type="text" value="" name="s" id="s" />
+					<input type="submit" id="searchsubmit" value="Search" />
+				</div>
+			</form></aside>
+		<aside id="recent-posts-3" class="widget widget_recent_entries">
+		<p class="widget-title">Recent Posts</p>
+		<ul>
+											<li>
+					<a href="https://krebsonsecurity.com/2021/12/canada-charges-its-most-prolific-cybercriminal/">Canada Charges Its &#8220;Most Prolific Cybercriminal&#8221;</a>
+									</li>
+											<li>
+					<a href="https://krebsonsecurity.com/2021/12/who-is-the-network-access-broker-babam/">Who Is the Network Access Broker &#8216;Babam&#8217;?</a>
+									</li>
+											<li>
+					<a href="https://krebsonsecurity.com/2021/12/ubiquiti-developer-charged-with-extortion-causing-2020-breach/">Ubiquiti Developer Charged With Extortion, Causing 2020 &#8220;Breach&#8221;</a>
+									</li>
+											<li>
+					<a href="https://krebsonsecurity.com/2021/11/the-internet-is-held-together-with-spit-baling-wire/">The Internet is Held Together With Spit &#038; Baling Wire</a>
+									</li>
+											<li>
+					<a href="https://krebsonsecurity.com/2021/11/arrest-in-ransom-your-employer-email-scheme/">Arrest in &#8216;Ransom Your Employer&#8217; Email Scheme</a>
+									</li>
+					</ul>
+
+		</aside><aside id="text-2" class="widget widget_text">			<div class="textwidget"><a name="subscribe2"></a></div>
+		</aside><aside id="widget_sp_image-15" class="widget widget_sp_image"><p class="widget-title">Spam Nation</p><a href="https://www.amazon.com/Spam-Nation-Organized-Cybercrime-Epidemic-ebook/dp/B00L5QGBL0/ref=dp_kinw_strp_1" target="_blank" class="widget_sp_image-image-link" title="Spam Nation"><img width="266" height="404" alt="Spam Nation" class="attachment-266x404 aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2015/04/spamnation-nyt.png" /></a><div class="widget_sp_image-description" ><p>A New York Times Bestseller! </p>
+</div></aside><aside id="widget_sp_image-25" class="widget widget_sp_image"><p class="widget-title">Thinking of a Cybersecurity Career?</p><a href="https://krebsonsecurity.com/2020/07/thinking-of-a-cybersecurity-career-read-this/" target="_blank" class="widget_sp_image-image-link" title="Thinking of a Cybersecurity Career? Read This."><img width="625" height="424" alt="Thinking of a Cybersecurity Career?" class="attachment-full" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2020/07/codepeople.png 625w, https://krebsonsecurity.com/wp-content/uploads/2020/07/codepeople-580x393.png 580w" sizes="(max-width: 625px) 100vw, 625px" src="https://krebsonsecurity.com/wp-content/uploads/2020/07/codepeople.png" /></a><div class="widget_sp_image-description" ><p>Read this.</p>
+</div></aside><aside id="widget_sp_image-3" class="widget widget_sp_image"><p class="widget-title">All About Skimmers </p><a href="https://krebsonsecurity.com/all-about-skimmers/" target="_blank" class="widget_sp_image-image-link" title="All About Skimmers "><img width="299" height="232" alt="All About Skimmers" class="attachment-299x232 aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2010/08/skimgallery1.jpg" /></a><div class="widget_sp_image-description" ><p>Click image for my skimmer series.</p>
+</div></aside><aside id="categories-2" class="widget widget_categories"><p class="widget-title">Story Categories</p>
+			<ul>
+					<li class="cat-item cat-item-5"><a href="https://krebsonsecurity.com/category/sunshine/" title="Includes investigative blog posts meant to shine a light on the darker corners of the Internet.">A Little Sunshine</a>
+</li>
+	<li class="cat-item cat-item-2240"><a href="https://krebsonsecurity.com/category/all-about-skimmers/">All About Skimmers</a>
+</li>
+	<li class="cat-item cat-item-9085"><a href="https://krebsonsecurity.com/category/ashley-madison-breach/">Ashley Madison breach</a>
+</li>
+	<li class="cat-item cat-item-3191"><a href="https://krebsonsecurity.com/category/breadcrumbs/">Breadcrumbs</a>
+</li>
+	<li class="cat-item cat-item-3771"><a href="https://krebsonsecurity.com/category/data-breaches/" title="Stories about data breaches at retailers, corporations, governments and organizations of all sizes.">Data Breaches</a>
+</li>
+	<li class="cat-item cat-item-4624"><a href="https://krebsonsecurity.com/category/ddos-for-hire/">DDoS-for-Hire</a>
+</li>
+	<li class="cat-item cat-item-9173"><a href="https://krebsonsecurity.com/category/employment-fraud/">Employment Fraud</a>
+</li>
+	<li class="cat-item cat-item-2151"><a href="https://krebsonsecurity.com/category/how-to-break-into-security/" title="If you&#039;ve ever wanted career advice on how to make a shift into the security industry, look no further.">How to Break Into Security</a>
+</li>
+	<li class="cat-item cat-item-87"><a href="https://krebsonsecurity.com/category/latest-warnings/">Latest Warnings</a>
+</li>
+	<li class="cat-item cat-item-4071"><a href="https://krebsonsecurity.com/category/neer-do-well-news/">Ne&#039;er-Do-Well News</a>
+</li>
+	<li class="cat-item cat-item-9"><a href="https://krebsonsecurity.com/category/other/">Other</a>
+</li>
+	<li class="cat-item cat-item-1306"><a href="https://krebsonsecurity.com/category/pharma-wars/">Pharma Wars</a>
+</li>
+	<li class="cat-item cat-item-8240"><a href="https://krebsonsecurity.com/category/ransomware/">Ransomware</a>
+</li>
+	<li class="cat-item cat-item-599"><a href="https://krebsonsecurity.com/category/security-tools/">Security Tools</a>
+</li>
+	<li class="cat-item cat-item-8298"><a href="https://krebsonsecurity.com/category/sim-swapping/">SIM Swapping</a>
+</li>
+	<li class="cat-item cat-item-4079"><a href="https://krebsonsecurity.com/category/spam-nation/">Spam Nation</a>
+</li>
+	<li class="cat-item cat-item-1"><a href="https://krebsonsecurity.com/category/smallbizvictims/" title="Posts in this category will include new stories similar to those told in the Small Business Victims category on The Washington Post&#039;s Security Fix blog, which chronicled the methods organized cyber thieve are using to steal hundreds of thousands of dollars from dozens of small- to mid-sized companies around the country.">Target: Small Businesses</a>
+</li>
+	<li class="cat-item cat-item-5167"><a href="https://krebsonsecurity.com/category/tax-refund-fraud/">Tax Refund Fraud</a>
+</li>
+	<li class="cat-item cat-item-3"><a href="https://krebsonsecurity.com/category/comingstorm/" title="This category includes blog posts about computer and Internet security threats now and on the horizon.">The Coming Storm</a>
+</li>
+	<li class="cat-item cat-item-4"><a href="https://krebsonsecurity.com/category/patches/" title="Short posts on the latest security updates for widely-used software.
+">Time to Patch</a>
+</li>
+	<li class="cat-item cat-item-21"><a href="https://krebsonsecurity.com/category/web-fraud-2-0/">Web Fraud 2.0</a>
+</li>
+			</ul>
+
+			</aside><aside id="widget_sp_image-5" class="widget widget_sp_image"><p class="widget-title">The Value of a Hacked PC</p><a href="https://krebsonsecurity.com/2012/10/the-scrap-value-of-a-hacked-pc-revisited/" target="_blank" class="widget_sp_image-image-link" title="The Value of a Hacked PC"><img width="285" height="180" alt="valuehackedpc " class="attachment-285x180 aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2012/12/valuehackedpc-285x180.png" /></a><div class="widget_sp_image-description" ><p>Badguy uses for your PC</p>
+</div></aside><aside id="widget_sp_image-9" class="widget widget_sp_image"><p class="widget-title">Badguy Uses for Your Email </p><a href="https://krebsonsecurity.com/2013/06/the-value-of-a-hacked-email-account/" target="_self" class="widget_sp_image-image-link" title="Badguy Uses for Your Email "><img width="296" height="170" alt="Badguy Uses for Your Email " class="attachment-full aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2013/06/badguyemail.png 296w, https://krebsonsecurity.com/wp-content/uploads/2013/06/badguyemail-285x163.png 285w" sizes="(max-width: 296px) 100vw, 296px" src="https://krebsonsecurity.com/wp-content/uploads/2013/06/badguyemail.png" /></a><div class="widget_sp_image-description" ><p>Your email account may be worth far more than you imagine.</p>
+</div></aside><aside id="widget_sp_image-24" class="widget widget_sp_image"><a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&#038;hosted_button_id=MCCRKHWRX57HS" id="donate" target="_self" class="widget_sp_image-image-link"><img width="250" height="55" alt="Donate to Krebs On Security" class="attachment-medium aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2016/09/donatepaypal2-1.png" /></a></aside><aside id="most_popular_posts-3" class="widget widget_most_popular_posts">
+<p class="widget-title">Most Popular Posts</p>
+<ul>	<li><a href="https://krebsonsecurity.com/2018/07/sextortion-scam-uses-recipients-hacked-passwords/">Sextortion Scam Uses Recipient's Hacked Passwords</a> (1076)</li>
+	<li><a href="https://krebsonsecurity.com/2015/07/online-cheating-site-ashleymadison-hacked/">Online Cheating Site AshleyMadison Hacked</a> (798)</li>
+	<li><a href="https://krebsonsecurity.com/2013/12/sources-target-investigating-data-breach/">Sources: Target Investigating Data Breach</a> (620)</li>
+	<li><a href="https://krebsonsecurity.com/2020/11/trump-fires-security-chief-christopher-krebs/">Trump Fires Security Chief Christopher Krebs</a> (534)</li>
+	<li><a href="https://krebsonsecurity.com/2013/12/cards-stolen-in-target-breach-flood-underground-markets/">Cards Stolen in Target Breach Flood Underground Markets</a> (445)</li>
+	<li><a href="https://krebsonsecurity.com/2013/05/reports-liberty-reserve-founder-arrested-site-shuttered/">Reports: Liberty Reserve Founder Arrested, Site Shuttered</a> (416)</li>
+	<li><a href="https://krebsonsecurity.com/2015/08/was-the-ashley-madison-database-leaked/">Was the Ashley Madison Database Leaked?</a> (376)</li>
+	<li><a href="https://krebsonsecurity.com/2021/01/ddos-guard-to-forfeit-internet-space-occupied-by-parler/">DDoS-Guard To Forfeit Internet Space Occupied by Parler</a> (374)</li>
+	<li><a href="https://krebsonsecurity.com/2014/05/true-goodbye-using-truecrypt-is-not-secure/">True Goodbye: 'Using TrueCrypt Is Not Secure'</a> (363)</li>
+	<li><a href="https://krebsonsecurity.com/2015/08/who-hacked-ashley-madison/">Who Hacked Ashley Madison?</a> (361)</li>
+</ul>
+</aside>
+<aside id="media_image-2" class="widget widget_media_image"><p class="widget-title">Why So Many Top Hackers Hail from Russia</p><a href="https://krebsonsecurity.com/2017/06/why-so-many-top-hackers-hail-from-russia/"><img width="580" height="389" src="https://krebsonsecurity.com/wp-content/uploads/2017/06/computered-580x389.png" class="image wp-image-39684  attachment-medium size-medium" alt="" loading="lazy" style="max-width: 100%; height: auto;" srcset="https://krebsonsecurity.com/wp-content/uploads/2017/06/computered-580x389.png 580w, https://krebsonsecurity.com/wp-content/uploads/2017/06/computered-768x514.png 768w, https://krebsonsecurity.com/wp-content/uploads/2017/06/computered-940x630.png 940w, https://krebsonsecurity.com/wp-content/uploads/2017/06/computered.png 1551w" sizes="(max-width: 580px) 100vw, 580px" /></a></aside><aside id="widget_sp_image-11" class="widget widget_sp_image"><p class="widget-title">Category: Web Fraud 2.0</p><a href="https://krebsonsecurity.com/category/web-fraud-2-0/" target="_blank" class="widget_sp_image-image-link" title="Category: Web Fraud 2.0"><img width="227" height="400" alt="Criminnovations" class="attachment-medium aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2013/11/cybercrimeinnovations-227x400.png" /></a><div class="widget_sp_image-description" ><p>Innovations from the Underground</p>
+</div></aside><aside id="widget_sp_image-12" class="widget widget_sp_image"><a href="https://krebsonsecurity.com/2014/03/are-credit-monitoring-services-worth-it/" target="_blank" class="widget_sp_image-image-link"><img width="285" height="189" class="attachment-medium aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2014/03/shreddedID-copy-285x189.png 285w, https://krebsonsecurity.com/wp-content/uploads/2014/03/shreddedID-copy-600x399.png 600w, https://krebsonsecurity.com/wp-content/uploads/2014/03/shreddedID-copy.png 849w" sizes="(max-width: 285px) 100vw, 285px" src="https://krebsonsecurity.com/wp-content/uploads/2014/03/shreddedID-copy-285x189.png" /></a><div class="widget_sp_image-description" ><p>ID Protection Services Examined</p>
+</div></aside><aside id="widget_sp_image-13" class="widget widget_sp_image"><p class="widget-title">Is Antivirus Dead?</p><a href="https://krebsonsecurity.com/2014/05/antivirus-is-dead-long-live-antivirus/" target="_blank" class="widget_sp_image-image-link" title="Is Antivirus Dead?"><img width="285" height="161" alt="Is Antivirus Dead?" class="attachment-medium aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2014/05/cryptservices-285x161.png 285w, https://krebsonsecurity.com/wp-content/uploads/2014/05/cryptservices-600x339.png 600w, https://krebsonsecurity.com/wp-content/uploads/2014/05/cryptservices.png 945w" sizes="(max-width: 285px) 100vw, 285px" src="https://krebsonsecurity.com/wp-content/uploads/2014/05/cryptservices-285x161.png" /></a><div class="widget_sp_image-description" ><p>The reasons for its decline</p>
+</div></aside><aside id="widget_sp_image-14" class="widget widget_sp_image"><p class="widget-title">The Growing Tax Fraud Menace</p><a href="https://krebsonsecurity.com/category/tax-refund-fraud/" target="_blank" class="widget_sp_image-image-link" title="The Growing Tax Fraud Menace"><img width="285" height="285" alt="The Growing Tax Fraud Menace" class="attachment-medium aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2014/04/taxfraud-285x285.jpg 285w, https://krebsonsecurity.com/wp-content/uploads/2014/04/taxfraud-150x150.jpg 150w, https://krebsonsecurity.com/wp-content/uploads/2014/04/taxfraud-600x600.jpg 600w, https://krebsonsecurity.com/wp-content/uploads/2014/04/taxfraud.jpg 693w" sizes="(max-width: 285px) 100vw, 285px" src="https://krebsonsecurity.com/wp-content/uploads/2014/04/taxfraud-285x285.jpg" /></a><div class="widget_sp_image-description" ><p>File 'em Before the Bad Guys Can </p>
+</div></aside><aside id="widget_sp_image-17" class="widget widget_sp_image"><p class="widget-title">Inside a Carding Shop</p><a href="https://krebsonsecurity.com/2014/06/peek-inside-a-professional-carding-shop/" target="_blank" class="widget_sp_image-image-link" title="Inside a Carding Shop"><img width="194" height="340" alt="Inside a Carding Shop" class="attachment-medium aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2014/06/mcdumpalsjoined.png" /></a><div class="widget_sp_image-description" ><p>A crash course in carding. </p>
+</div></aside><aside id="widget_sp_image-18" class="widget widget_sp_image"><p class="widget-title">Beware Social Security Fraud</p><a href="https://krebsonsecurity.com/2013/09/crooks-hijack-retirement-funds-via-ssa-portal/" target="_blank" class="widget_sp_image-image-link" title="Beware Social Security Fraud"><img width="285" height="293" alt="Beware Social Security Fraud" class="attachment-full aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2016/09/myssn-285x293.png" /></a><div class="widget_sp_image-description" ><p>Sign up, or Be Signed Up! </p>
+</div></aside><aside id="widget_sp_image-2" class="widget widget_sp_image"><p class="widget-title">How Was Your Card Stolen?</p><a href="https://krebsonsecurity.com/2015/01/how-was-your-credit-card-stolen/" target="_blank" class="widget_sp_image-image-link" title="How Was Your Card Stolen?"><img width="285" height="285" alt="How Was Your Card Stolen?" class="attachment-full aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2016/09/carddominoes-285x285.jpg 285w, https://krebsonsecurity.com/wp-content/uploads/2016/09/carddominoes-285x285-150x150.jpg 150w" sizes="(max-width: 285px) 100vw, 285px" src="https://krebsonsecurity.com/wp-content/uploads/2016/09/carddominoes-285x285.jpg" /></a><div class="widget_sp_image-description" ><p>Finding out is not so easy. </p>
+</div></aside><aside id="widget_sp_image-22" class="widget widget_sp_image"><p class="widget-title">Krebs&#8217;s 3 Rules&#8230;</p><a href="https://krebsonsecurity.com/2011/05/krebss-3-basic-rules-for-online-safety/" target="_blank" class="widget_sp_image-image-link" title="Krebs&#8217;s 3 Rules&#8230;"><img width="300" height="300" alt="Krebs&#8217;s 3 Rules&#8230;" class="attachment-medium aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2011/05/three-300x300.jpg 300w, https://krebsonsecurity.com/wp-content/uploads/2011/05/three-150x150.jpg 150w, https://krebsonsecurity.com/wp-content/uploads/2011/05/three.jpg 347w" sizes="(max-width: 300px) 100vw, 300px" src="https://krebsonsecurity.com/wp-content/uploads/2011/05/three-300x300.jpg" /></a><div class="widget_sp_image-description" ><p>...For Online Safety. </p>
+</div></aside>		</div><!-- #secondary -->
+		</div><!-- #main .wrapper -->
+	
+	<div id="publisho-footer" class="widget-area">
+				<div class="footer-widget">
+                				</div>
+				<div class="footer-widget">
+								</div>
+				<div class="footer-widget">
+								</div>
+	</div>
+
+	<div class="site-wordpress">
+					&copy; Krebs on Security<br>
+	</div>
+	<!-- .site-info --><div class="clear"></div>
+</div><!-- #page -->
+
+<script type='text/javascript' src='https://krebsonsecurity.com/wp-content/themes/kos-mar2021/js/slicknav.js?ver=5.8.2' id='publisho-mobile-navigation-js'></script>
+<script type='text/javascript' src='https://krebsonsecurity.com/wp-includes/js/wp-embed.min.js?ver=5.8.2' id='wp-embed-js'></script>
+</body>
+</html>
+<!--
+Performance optimized by W3 Total Cache. Learn more: https://www.boldgrid.com/w3-total-cache/
+
+Object Caching 190/379 objects using memcached
+Page Caching using memcached 
+Database Caching 7/26 queries in 0.021 seconds using memcached
+
+Served from: krebsonsecurity.com @ 2021-12-10 15:34:56 by W3 Total Cache
+-->

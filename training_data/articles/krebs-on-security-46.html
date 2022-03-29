@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<!--[if IE 7]>
+<html class="ie ie7" lang="en-US">
+<![endif]-->
+<!--[if IE 8]>
+<html class="ie ie8" lang="en-US">
+<![endif]-->
+<!--[if !(IE 7) | !(IE 8)  ]><!-->
+<html lang="en-US">
+<!--<![endif]-->
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width" />
+<link rel="profile" href="http://gmpg.org/xfn/11" />
+<!--[if lt IE 9]>
+<script src="https://krebsonsecurity.com/wp-content/themes/kos-mar2021/js/html5.js" type="text/javascript"></script>
+<![endif]-->
+<title>Krebs on Security &#8211; Page 46 &#8211; In-depth security news and investigation</title>
+<meta name='robots' content='max-image-preview:large' />
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="Krebs on Security &raquo; Feed" href="https://krebsonsecurity.com/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Krebs on Security &raquo; Comments Feed" href="https://krebsonsecurity.com/comments/feed/" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.1.0\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.1.0\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/krebsonsecurity.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=5.8.2"}};
+			!function(e,a,t){var n,r,o,i=a.createElement("canvas"),p=i.getContext&&i.getContext("2d");function s(e,t){var a=String.fromCharCode;p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,e),0,0);e=i.toDataURL();return p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,t),0,0),e===i.toDataURL()}function c(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(o=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},r=0;r<o.length;r++)t.supports[o[r]]=function(e){if(!p||!p.fillText)return!1;switch(p.textBaseline="top",p.font="600 32px Arial",e){case"flag":return s([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])?!1:!s([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!s([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]);case"emoji":return!s([10084,65039,8205,55357,56613],[10084,65039,8203,55357,56613])}return!1}(o[r]),t.supports.everything=t.supports.everything&&t.supports[o[r]],"flag"!==o[r]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[o[r]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(n=t.source||{}).concatemoji?c(n.concatemoji):n.wpemoji&&n.twemoji&&(c(n.twemoji),c(n.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+	<link rel='stylesheet' id='colorbox-theme1-css'  href='https://krebsonsecurity.com/wp-content/plugins/jquery-lightbox-for-native-galleries/colorbox/theme1/colorbox.css?ver=1.3.14' type='text/css' media='screen' />
+<link rel='stylesheet' id='wp-block-library-css'  href='https://krebsonsecurity.com/wp-includes/css/dist/block-library/style.min.css?ver=5.8.2' type='text/css' media='all' />
+<link rel='stylesheet' id='contact-form-7-css'  href='https://krebsonsecurity.com/wp-content/plugins/contact-form-7/includes/css/styles.css?ver=5.5.3' type='text/css' media='all' />
+<link rel='stylesheet' id='publisho-style-css'  href='https://krebsonsecurity.com/wp-content/themes/kos-mar2021/style.css?subver=1.2&#038;ver=5.8.2' type='text/css' media='all' />
+<style id='publisho-style-inline-css' type='text/css'>
+
+	.themonic-nav .current-menu-item > a, .themonic-nav .current-menu-ancestor > a, .themonic-nav .current_page_item > a, .themonic-nav .current_page_ancestor > a {
+		background: #cc6600;
+	}
+	.themonic-nav ul.nav-menu, .themonic-nav div.nav-menu > ul {
+		border-bottom: 5px solid #cc6600;
+	}
+	#site-navigation .topheadmenu a {
+    background: rgba(0, 0, 0, 0);
+	}
+	.themonic-nav li a:hover {
+		background: #cc6600;
+	}
+	.themonic-nav li:hover {
+		background: #cc6600;
+	}.wrapper .flexslider {margin: 0 0 30px;}.frontp .btm-wrap {
+    border-top: 1px solid #e9e9e9;
+	}
+	.entry-summary {
+    border-top: none;
+	}.frontp .btm-wrap { margin-bottom: 30px;}.site { font-size:14px;}.site { font-family:'Roboto', arial ;}
+</style>
+<link rel='stylesheet' id='publisho-custom-style-css'  href='https://krebsonsecurity.com/wp-content/themes/kos-mar2021/custom.css?subver=1.2&#038;ver=5.8.2' type='text/css' media='all' />
+<!--[if lt IE 9]>
+<link rel='stylesheet' id='publisho-ie-css'  href='https://krebsonsecurity.com/wp-content/themes/kos-mar2021/css/ie.css?ver=20160606' type='text/css' media='all' />
+<![endif]-->
+<link rel='stylesheet' id='fontawesome-css-css'  href='https://krebsonsecurity.com/wp-content/themes/kos-mar2021/fonts/font-awesome.min.css?ver=5.8.2' type='text/css' media='all' />
+<link rel='stylesheet' id='publisho_custom_fonts-css'  href='//fonts.googleapis.com/css?family=Roboto%3Aregular%2Citalic%2C500%26subset%3Dlatin%2C' type='text/css' media='screen' />
+<script type='text/javascript' src='https://krebsonsecurity.com/wp-includes/js/jquery/jquery.min.js?ver=3.6.0' id='jquery-core-js'></script>
+<script type='text/javascript' src='https://krebsonsecurity.com/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.3.2' id='jquery-migrate-js'></script>
+<script type='text/javascript' src='https://krebsonsecurity.com/wp-content/plugins/jquery-lightbox-for-native-galleries/colorbox/jquery.colorbox-min.js?ver=1.3.14' id='colorbox-js'></script>
+<link rel="https://api.w.org/" href="https://krebsonsecurity.com/wp-json/" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://krebsonsecurity.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://krebsonsecurity.com/wp-includes/wlwmanifest.xml" /> 
+<meta name="generator" content="WordPress 5.8.2" />
+<!-- JavaScript Pull-Quotes plugin v2.2 -->
+	<link rel="stylesheet" href="https://krebsonsecurity.com/wp-content/plugins/jspullquotes/resources/jspullquotes-core.css" type="text/css" />
+	<link rel="stylesheet" href="https://krebsonsecurity.com/wp-content/plugins/jspullquotes/resources/jspullquotes-default.css" type="text/css" />
+	<script type="text/javascript" src="https://krebsonsecurity.com/wp-content/plugins/jspullquotes/resources/jspullquotes.js"></script>
+	<script type="text/javascript">
+		var arrOptions = new Array("1", "1", "right", "1", "1", "blockquote", "pullquote", "pullquote pqRight");
+		pullQuoteOpts(arrOptions);
+	</script>
+<!-- end pull-quote additions -->
+<!-- jQuery Lightbox For Native Galleries v3.1.3 | http://www.viper007bond.com/wordpress-plugins/jquery-lightbox-for-native-galleries/ -->
+<script type="text/javascript">
+// <![CDATA[
+	jQuery(document).ready(function($){
+		$(".gallery").each(function(index, obj){
+			var galleryid = Math.floor(Math.random()*10000);
+			$(obj).find("a").colorbox({rel:galleryid, maxWidth:"95%", maxHeight:"95%"});
+		});
+		$("a.lightbox").colorbox({maxWidth:"95%", maxHeight:"95%"});
+	});
+// ]]>
+</script>
+<style type="text/css" id="custom-background-css">
+body.custom-background { background-color: #ffffff; }
+</style>
+	<link rel="me" href="https://twitter.com/briankrebs" /><meta name="twitter:widgets:link-color" content="#000000" /><meta name="twitter:widgets:border-color" content="#000000" /><meta name="twitter:partner" content="tfwp" />
+<meta name="twitter:card" content="summary" /><meta name="twitter:title" content="Krebs on Security" /><meta name="twitter:site" content="@briankrebs" /><meta name="twitter:description" content="In-depth security news and investigation" />
+</head>
+<body class="home blog paged custom-background paged-46 custom-background-white single-author frontp hfeed">
+<div id="page" class="site">
+	<!-- <div class="publisho-top-mobile-nav clear"></div> -->
+	<div class="themonic-logo themonic-ad3"><div class="a-statement">Advertisement</div><a href="https://www.iansresearch.com/resources/infosec-content-downloads/research-reports/2021-ciso-compensation-benchmark-research-study?utm_source=krebs&amp;utm_medium=display_ad&amp;utm_campaign=2021_ciso_comp_study">
+<img src="/b-ians/5.png">
+</a></div>
+	<div class="themonic-logo themonic-ad6"><div class="a-statement">Advertisement</div><a href="https://go.infrascale.com/lp/get-ransomware-ebook-krebsonsecurity/?utm_source=banner&amp;utm_medium=display&amp;utm_campaign=krebssecurity_influencer_1240_160">
+<img src="/b-infrascale/6.png">
+</a></div>
+	<nav id="site-navigation" class="themonic-nav" role="navigation">
+	</nav><!-- #site-navigation -->
+	<div class="clear"></div>
+	<header id="masthead" class="site-header" role="banner">
+ 					<div class="desktop-social">
+						<div class="socialmedia">
+							<a href="http://twitter.com/briankrebs" target="_blank"><i class="fa fa-twitter"></i></a> 
+															<a class="rss" href="https://krebsonsecurity.com/feed/" target="_blank"><i class="fa fa-rss"></i></a>	
+									<a class="rss" href="https://www.linkedin.com/in/bkrebs/" target="_blank"><i class="fa fa-linkedin"></i></a>	
+								</div>
+				 	</div>
+																						   
+		
+		<div class="themonic-logo responsive-img-container">
+			<a href="https://krebsonsecurity.com/" title="Krebs on Security" rel="home"><img src="https://krebsonsecurity.com/wp-content/uploads/2021/03/kos-27-03-2021.jpg" alt="Krebs on Security"></a>
+		</div>
+
+					<div class="mobile-social">
+						<div class="socialmedia">
+							<a href="http://twitter.com/briankrebs" target="_blank"><i class="fa fa-twitter"></i></a> 
+															<a class="rss" href="https://krebsonsecurity.com/feed/" target="_blank"><i class="fa fa-rss"></i></a>	
+									<a class="rss" href="https://www.linkedin.com/in/bkrebs/" target="_blank"><i class="fa fa-linkedin"></i></a>	
+								</div>
+					</div>
+		
+				<!-- <div class="publisho-mobile-nav clear"></div> -->
+		<nav id="site-navigation" class="themonic-nav" role="navigation">
+			<a class="assistive-text" href="#content" title="Skip to content">Skip to content</a>
+			<div id="menu-top" class="nav-menu"><ul>
+<li ><a href="https://krebsonsecurity.com/">Home</a></li><li class="page_item page-item-2"><a href="https://krebsonsecurity.com/about/">About the Author</a></li>
+<li class="page_item page-item-645"><a href="https://krebsonsecurity.com/cpm/">Advertising/Speaking</a></li>
+</ul></div>
+		</nav><!-- #site-navigation -->
+		<div class="clear"></div>
+	</header><!-- #masthead -->
+	<div id="main" class="wrapper">
+		<div id="primary" class="site-content">
+	
+
+	
+		<div id="content" role="main">
+
+		<article id="post-44930" class="post-44930 post type-post status-publish format-standard hentry category-neer-do-well-news tag-9gigs_proxypipe tag-bad-packets-llc tag-daily-beast tag-ddos-for-hire tag-kenneth-schuchman tag-kenny-windwmx79outlook-com tag-kevin-poulsen tag-mirai tag-nexus-zeta tag-nexuszeta1337gmail-com tag-ogmemes123jabber-ru tag-paras-jha tag-proxypipe tag-robert-coelho tag-satori-botnet-author tag-stresser tag-troy-mursch tag-zetastress">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2018/09/alleged-satori-iot-botnet-operator-sought-media-spotlight-got-indicted/" title="Permalink to Alleged &#8216;Satori&#8217; IoT Botnet Operator Sought Media Spotlight, Got Indicted" rel="bookmark">Alleged &#8216;Satori&#8217; IoT Botnet Operator Sought Media Spotlight, Got Indicted</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">September 2, 2018</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2018/09/alleged-satori-iot-botnet-operator-sought-media-spotlight-got-indicted/#comments">39 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>A 20-year-old from Vancouver, Washington was indicted last week on federal hacking charges and for allegedly operating the &#8220;<strong>Satori</strong>&#8221; botnet, a malware strain unleashed last year that infected hundreds of thousands of wireless routers and other &#8220;Internet of Things&#8221; (IoT) devices. This outcome is hardly surprising given that the accused&#8217;s alleged alter ego has been relentless in seeking media attention for this global crime machine.</p>
+<div id="attachment_44948" style="width: 259px" class="wp-caption alignright"><img aria-describedby="caption-attachment-44948" loading="lazy" class=" wp-image-44948" src="https://krebsonsecurity.com/wp-content/uploads/2018/09/schuchman.png" alt="" width="249" height="220" /><p id="caption-attachment-44948" class="wp-caption-text">Schuchman, in an undated photo posted online and referenced in a &#8220;dox,&#8221; which alleged in Feb. 2018 that Schuchman was Nexus Zeta.</p></div>
+<p><em>The Daily Beast</em>&#8216;s <strong>Kevin Poulsen</strong> broke the <a href="https://www.thedailybeast.com/newbie-hacker-fingered-for-monster-botnet?ref=home" target="_blank" rel="noopener">news</a> last week that federal authorities in Alaska indicted <strong>Kenneth Currin Schuchman</strong> of Washington on two counts of violating the Computer Fraud and Abuse Act by using malware to damage computers between August and November 2017.</p>
+<p>The <a href="https://krebsonsecurity.com/wp-content/uploads/2018/09/Schuchman.pdf" target="_blank" rel="noopener">3-page indictment</a> (PDF) is incredibly sparse, and includes few details about the meat of the charges against Schuchman. But according to Poulsen, the charges are related to Schuchman&#8217;s alleged authorship and use of the Satori botnet. Satori, also known as &#8220;Masuta,&#8221; is a variant of <a href="https://en.wikipedia.org/wiki/Mirai_(malware)" target="_blank" rel="noopener">the Mirai botnet</a>, a powerful IoT malware strain that first came online in July 2016.</p>
+<p>&#8220;Despite the havoc he supposedly wreaked, the accused hacker doesn’t seem to have been terribly knowledgeable about hacking,&#8221; Poulsen notes.</p>
+<p>Schuchman reportedly went by the handle &#8220;<strong>Nexus Zeta</strong>,&#8221; the nickname used by a fairly inexperienced and clumsy ne&#8217;er-do-well who has tried on multiple occasions to get KrebsOnSecurity to write about the Satori botnet. In January 2018, Nexus Zeta changed the login page for his <a href="https://blog.newskysecurity.com/masuta-satori-creators-second-botnet-weaponizes-a-new-router-exploit-2ddc51cc52a7?gi=8e5a55eb1727" target="_blank" rel="noopener">botnet control panel</a> that he used to remotely control his hacked routers to include a friendly backhanded reference to this author:</p>
+<p><div id="attachment_44942" style="width: 608px" class="wp-caption aligncenter"><a class="lightbox" href="https://krebsonsecurity.com/wp-content/uploads/2018/09/masuta-krebs.png"><img aria-describedby="caption-attachment-44942" loading="lazy" class="wp-image-44942" src="https://krebsonsecurity.com/wp-content/uploads/2018/09/masuta-krebs.png" alt="" width="598" height="462" /></a><p id="caption-attachment-44942" class="wp-caption-text">The login prompt for Nexus Zeta&#8217;s IoT botnet included the message &#8220;Masuta is powered and hosted on Brian Kreb&#8217;s [sic] 4head.&#8221; To be precise, it&#8217;s a 5head.</p></div>This wasn&#8217;t the first time Nexus Zeta said hello. In late November 2017, he chatted me up on on Twitter and Jabber instant message for several days. Most of the communications came from two accounts: &#8220;<strong>9gigs_ProxyPipe</strong>&#8221; on Twitter, and <strong>ogmemes123@jabber.ru</strong> (9gigs_ProxyPipe would later change its Twitter alias to Nexus Zeta, and <a href="https://krebsonsecurity.com/wp-content/uploads/2018/09/imnexuszeta.png" target="_blank" rel="noopener">Nexus Zeta himself admitted</a> that 9gigs_ProxyPipe was his Twitter account.)</p>
+<p>In each case, this person wanted to talk about a new IoT botnet that he was &#8220;researching&#8221; and that he thought deserved special attention for its size and potential disruptive impact should it be used in a massive Distributed Denial-of-Service (DDoS) attack aimed at knocking a Web site offline &#8212; something for which Satori would soon become known.</p>
+<div id="attachment_44949" style="width: 608px" class="wp-caption aligncenter"><a class="lightbox" href="https://krebsonsecurity.com/wp-content/uploads/2018/09/ogmemes-jab.png"><img aria-describedby="caption-attachment-44949" loading="lazy" class="wp-image-44949" src="https://krebsonsecurity.com/wp-content/uploads/2018/09/ogmemes-jab.png" alt="" width="598" height="252" /></a><p id="caption-attachment-44949" class="wp-caption-text">A Jabber instant message conversation with Nexus Zeta on Nov. 29, 2017.</p></div>
+<p>Nexus Zeta&#8217;s Twitter nickname initially confused me because both 9gigs and ProxyPipe are names claimed by <strong>Robert Coelho</strong>, owner of <a href="https://www.proxypipe.com" target="_blank" rel="noopener">ProxyPipe</a> hosting (9gigs is a bit from one of Coelho&#8217;s Skype account names). Coelho&#8217;s sleuthing was quite instrumental in helping to <a href="https://krebsonsecurity.com/2017/01/who-is-anna-senpai-the-mirai-worm-author/" target="_blank" rel="noopener">unmask 21-year-old New Jersey resident <strong>Paras Jha</strong> as the author of the original Mirai IoT botnet</a> (Jha later <a href="https://krebsonsecurity.com/2017/12/mirai-iot-botnet-co-authors-plead-guilty/" target="_blank" rel="noopener">pleaded guilty to co-authoring and using Mirai</a> and is due to be sentenced this month in Alaska and New Jersey). &#8220;Ogmemes&#8221; is from a nickname used by Jha and his Mirai botnet co-author.</p>
+<p>On Nov. 28, 2017, 9gigs_ProxyPipe sent a <a href="https://twitter.com/9gigs_ProxyPipe/status/935543081549537281" target="_blank" rel="noopener">message</a> to the <a href="https://twitter.com/briankrebs" target="_blank" rel="noopener">KrebsOnSecurity Twitter account</a>:</p>
+<p>&#8220;I have some information in regards to an incredibly dangerous IoT botnet you may find interesting,&#8221; the Twitter message read. &#8220;Let me know how you would prefer to communicate assuming you are interested.&#8221;</p>
+<p>We connected on Jabber instant message. In our chats, Ogmemes123 said he couldn&#8217;t understand why nobody had noticed a botnet powered by a Mirai variant that had infected hundreds of thousands of IoT devices (he estimated the size of the botnet to be about 300,000-500,000 at the time). He also talked a lot about how close he was with Jha. <a href="https://twitter.com/9gigs_ProxyPipe/" target="_blank" rel="noopener">Nexus Zeta&#8217;s Twitter account profile photo</a> is a picture of Paras Jha. He also said he knew this new botnet was being used to attack ProxyPipe.</p>
+<p>Less than 24 hours after that tweet from Nexus Zeta, I heard from ProxyPipe&#8217;s Coelho. They were under attack from a new Mirai variant. <a href="https://krebsonsecurity.com/2018/09/alleged-satori-iot-botnet-operator-sought-media-spotlight-got-indicted/#more-44930" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+	<div id="between_article_ad" class="themonic-ad5"><a href="https://securityscorecard.com/instant-security-scorecard?utm_source=krebs+on+security&amp;utm_medium=display&amp;utm_campaign=instant+scorecard&amp;utm_term=B&amp;utm_content=300x300">
+<img src="/b-securityscorecard/8.jpg">
+</a></div>	<article id="post-44889" class="post-44889 post type-post status-publish format-standard hentry category-security-tools category-sim-swapping tag-authy tag-duo tag-facebook tag-google-authenticator tag-google-voice tag-instagram tag-sim-swap tag-t-mobile tag-two-factor-authentication tag-twofactorauth-org">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2018/08/instagrams-new-security-tools-are-a-welcome-step-but-not-enough/" title="Permalink to Instagram&#8217;s New Security Tools are a Welcome Step, But Not Enough" rel="bookmark">Instagram&#8217;s New Security Tools are a Welcome Step, But Not Enough</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">August 29, 2018</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2018/08/instagrams-new-security-tools-are-a-welcome-step-but-not-enough/#comments">42 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p><strong>Instagram</strong> users should soon have more secure options for protecting their accounts against Internet bad guys.  On Tuesday, the <strong>Facebook</strong>-owned social network said it is in the process of rolling out support for third-party authentication apps. Unfortunately, this welcome new security offering does nothing to block Instagram account takeovers when thieves manage to hijack a target&#8217;s mobile phone number &#8212; an increasingly common crime.</p>
+<div id="attachment_44899" style="width: 605px" class="wp-caption aligncenter"><a class="lightbox" href="https://krebsonsecurity.com/wp-content/uploads/2018/08/insta2fa.png"><img aria-describedby="caption-attachment-44899" loading="lazy" class="wp-image-44899" src="https://krebsonsecurity.com/wp-content/uploads/2018/08/insta2fa.png" alt="" width="595" height="513" /></a><p id="caption-attachment-44899" class="wp-caption-text">New two-factor authentication options Instagram says it is rolling out to users over the next few weeks.</p></div>
+<p>For years, security experts have warned that hackers are exploiting weak authentication at Instagram to commandeer accounts. Instagram has long offered users a security option to have a one-time code sent via text message to a mobile device, but these codes can be intercepted via several methods (more on that in a bit).</p>
+<p>The new authentication offering requires users to download a third-party app like <a href="https://www.authy.com" target="_blank" rel="noopener">Authy</a>, <a href="https://www.duo.com" target="_blank" rel="noopener">Duo</a> or <a href="https://www.google.com/landing/2step/" target="_blank" rel="noopener">Google Authenticator</a>, which generates a one-time code that needs to be entered after the user supplies a password.</p>
+<p>In <a href="https://instagram-press.com/blog/2018/08/28/new-tools-to-help-keep-instagram-safe/" target="_blank" rel="noopener">a blog post Tuesday</a>, Instagram said support for third-party authenticator apps &#8220;has begun to roll out and will be available to the global community in the coming weeks.</p>
+<p>Instagram put me on a whitelist of accounts to get an early peek at the new security feature, so these options probably aren&#8217;t yet available to most users. But there&#8217;s a screenshot below that shows the multi-factor options available in the mobile app. When these options do become more widely available, Instagram says people can use a third-party app to receive a one-time code. To do this:</p>
+<ol style="font-weight: 400;">
+<li>Go to your Settings.</li>
+<li>Scroll down and tap Two-Factor Authentication.</li>
+<li>If you haven&#8217;t already turned two-factor authentication on, tap Get Started.</li>
+<li>Tap next to Authentication App, then follow the on-screen instructions.</li>
+<li>Enter the confirmation code from the third party authentication app to complete the process.</li>
+</ol>
+<p>Note that if you have previously enabled SMS-based authentication, it is likely still enabled unless and until you disable it. The app also prompts users to save a series of recovery codes, which should be kept in a safe place in case one&#8217;s mobile device is ever lost.</p>
+<p><img loading="lazy" class="aligncenter size-full wp-image-44912" src="https://krebsonsecurity.com/wp-content/uploads/2018/08/ig2fa.png" alt="" width="472" height="498" /></p>
+<h4>WHAT IT DOESN&#8217;T FIX</h4>
+<p>Instagram has received quite a lot of bad press lately from publications reporting numerous people who had their accounts hijacked even though they had Instagram&#8217;s SMS authentication turned on. The thing is, many of those stories have been about people having their Instagram accounts hijacked because fraudsters were able to hijack their mobile phone number.</p>
+<p>In these cases, the fraudsters were able to hijack the Instagram accounts because <em>Instagram allows</em> <em>users to reset their account passwords with a single factor &#8212; using nothing more than a text message sent to a mobile number on file</em>. <em>And nothing in these new authentication offerings will change that for people who have shared their mobile number with Instagram.</em></p>
+<p>Criminals can and do exploit SMS-based password reset requests to hijack Instagram accounts by executing unauthorized &#8220;<a href="https://krebsonsecurity.com/?s=sim+swap&amp;x=0&amp;y=0" target="_blank" rel="noopener">SIM swaps</a>,&#8221; i.e., tricking the target&#8217;s mobile provider into transferring the phone number to a device or account they control and intercepting the password reset link sent via SMS. Once they hijack the target&#8217;s mobile number, they can then reset the password for the associated Instagram account.</p>
+<p>I asked Instagram if there was any way for people who have supplied the company with their phone number to turn off SMS-based password reset requests. I received this response from their PR folks:</p>
+<p>&#8220;I can confirm that disabling SMS two factor will not disable the ability to reset a password via SMS,&#8221; a spokesperson said via email. &#8220;We recommend that the community use a third-party app for authentication, in place of SMS authentication. We&#8217;ll continue to iterate and improve on this product to keep people safe on our platform.&#8221; <a href="https://krebsonsecurity.com/2018/08/instagrams-new-security-tools-are-a-welcome-step-but-not-enough/#more-44889" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+	<div class="themonic-ad2"><div class="a-statement">Advertisement</div><a href="https://www.akamai.com/?utm_source=krebsonsecurity&amp;utm_medium=display&amp;utm_id=GL_Platform&amp;utm_campaign=F-MC-52606&amp;utm_content=IDC_InfoBrief">
+<img src="/b-akamai/134.png">
+</a></div>	<article id="post-44744" class="post-44744 post type-post status-publish format-standard hentry category-data-breaches category-comingstorm tag-aite-group tag-allen-weinberg tag-fiserv tag-glenbrook-partners tag-julie-conroy tag-kristian-erik-hermansen tag-secureinternetbank-com">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2018/08/fiserv-flaw-exposed-customer-data-at-hundreds-of-banks/" title="Permalink to Fiserv Flaw Exposed Customer Data at Hundreds of Banks" rel="bookmark">Fiserv Flaw Exposed Customer Data at Hundreds of Banks</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">August 28, 2018</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2018/08/fiserv-flaw-exposed-customer-data-at-hundreds-of-banks/#comments">108 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p><strong>Fiserv, Inc.,</strong> a major provider of technology services to financial institutions, just fixed a glaring weakness in its Web platform that exposed personal and financial details of countless customers across hundreds of bank Web sites, KrebsOnSecurity has learned.</p>
+<p>Brookfield, Wisc.-based Fiserv [<a href="https://www.nasdaq.com/symbol/fisv" target="_blank" rel="noopener">NASDAQ:FISV</a>] is a Fortune 500 company with 24,000 employees and $5.7 billion in earnings last year. Its account and transaction processing systems power the Web sites for hundreds of financial institutions &#8212; mostly small community banks and credit unions. According to <a href="https://www.fedfis.com/" rel="noopener" target="_blank">FedFis.com</a>, Fiserv is by far the <a href="https://bankinnovation.net/2018/02/fiserv-has-largest-u-s-marketshare-of-top-bank-core-processors/" rel="noopener" target="_blank">top bank core processor</a>, with more than 37 percent market share.</p>
+<p><img loading="lazy" class="aligncenter wp-image-44816" src="https://krebsonsecurity.com/wp-content/uploads/2018/08/fiserve.png" alt="" width="597" height="302" /></p>
+<p>Two weeks ago this author heard from security researcher <a href="https://www.linkedin.com/in/kristianhermansen/" target="_blank" rel="noopener">Kristian Erik Hermansen</a>, who said he&#8217;d discovered something curious while logged in to an account at a tiny local bank that uses Fiserv&#8217;s platform.</p>
+<p>Hermansen had signed up to get email alerts any time a new transaction posted to his account, and he noticed the site assigned his alert a specific &#8220;event number.&#8221; Working on a hunch that these event numbers might be assigned sequentially and that other records might be available if requested directly, Hermansen requested the same page again but first edited the site&#8217;s code in his browser so that his event number was decremented by one digit.</p>
+<p>In an instant, he could then view and edit alerts previously set up by another bank customer, and could see that customer&#8217;s email address, phone number and full bank account number. </p>
+<p>Hermansen said a cybercriminal could abuse this access to enumerate all other accounts with activity alerts on file, and to add or delete phone numbers or email addresses to receive alerts about account transactions.</p>
+<p>This would allow any customer of the bank to spy on the daily transaction activity of other customers, and perhaps even target customers who signed up for high minimum balance alerts (e.g., &#8220;alert me when the available balance goes below $5,000&#8221;).</p>
+<p><span class="pullquote pqleft">&#8220;I shouldn&#8217;t be able to see this data,&#8221; Hermansen said. &#8220;Anytime you spend money that should be a private transaction between you and your bank, not available for everyone else to see.&#8221;</span></p>
+<p>Hermansen said he told his bank about what he found, and that he tried unsuccessfully to get the attention of different Fiserv employees, including the company&#8217;s CEO via LinkedIn. But he wasn&#8217;t sure whether the flaw he found existed in all bank sites running on Fiserv&#8217;s ebanking platform, or just his bank&#8217;s installation.</p>
+<p>Naturally, KrebsOnSecurity offered to help figure that out, and to get Fiserv&#8217;s attention, if warranted. Over the past week I signed up for accounts at two small local banks that each use Fiserv&#8217;s online banking platform.</p>
+<p>In both cases I was able to replicate Hermansen&#8217;s findings and view email addresses, phone numbers, partial account numbers and alert details for other customers of each bank just by editing a single digit in a Web page request. I was relieved to find I could not use my online account access at one bank to view transaction alerts I&#8217;d set up at a different Fiserv affiliated bank.</p>
+<p><div id="attachment_44822" style="width: 608px" class="wp-caption aligncenter"><a class="lightbox" href="https://krebsonsecurity.com/wp-content/uploads/2018/08/web13.png"><img aria-describedby="caption-attachment-44822" loading="lazy" class="wp-image-44822" src="https://krebsonsecurity.com/wp-content/uploads/2018/08/web13.png" alt="" width="598" height="277" /></a><p id="caption-attachment-44822" class="wp-caption-text">A single digit changed in a Web browser request caused someone else&#8217;s alerts to pop up in my account at this small local bank in Virginia.</p></div> <a href="https://krebsonsecurity.com/2018/08/fiserv-flaw-exposed-customer-data-at-hundreds-of-banks/#more-44744" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-44825" class="post-44825 post type-post status-publish format-standard hentry category-sunshine category-breadcrumbs tag-active-sun-network tag-adgenics tag-barbarich_viacheslav_yuryevich tag-cabo-networks tag-hicham-aallam tag-mtaexpert tag-rescator tag-ron-guilmette tag-sextortion tag-sift-logic tag-spamhaus tag-uscourtsgov tag-web-shield">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2018/08/whos-behind-the-screencam-extortion-scam/" title="Permalink to Who&#8217;s Behind the Screencam Extortion Scam?" rel="bookmark">Who&#8217;s Behind the Screencam Extortion Scam?</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">August 25, 2018</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2018/08/whos-behind-the-screencam-extortion-scam/#comments">36 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>The <a href="https://krebsonsecurity.com/2018/07/sextortion-scam-uses-recipients-hacked-passwords/" target="_blank" rel="noopener">sextortion email scam last month</a> that invoked a real password used by each recipient and threatened to release embarrassing Webcam videos almost certainly was not the work of one criminal or even one group of criminals. Rather, it&#8217;s likely that additional spammers and scammers piled on with their own versions of the phishing email after noticing that some recipients were actually paying up. The truth is we may never find out who&#8217;s responsible, but it&#8217;s still fun to follow some promising leads and see where they take us.</p>
+<p><img loading="lazy" class="aligncenter wp-image-44412" src="https://krebsonsecurity.com/wp-content/uploads/2018/07/sextortion.png" alt="" width="520" height="93" /></p>
+<p>On August 7, 2018, a user <a href="https://www.hmailserver.com/forum/viewtopic.php?f=7&amp;p=205651" target="_blank" rel="noopener">on the forum of free email service hMailServer</a> posted a copy of the sextortion email he received, noting that it included a password he&#8217;d formerly used online.</p>
+<p>Helpfully, this user pasted a great deal of information from the spam email message, including the domain name from which it was sent (<strong>williehowell-dot-com</strong>) and the Internet address of the server that sent the message (46.161.42.91).</p>
+<p>A look at the other domain names registered to this IP address block 46.161.42.x reveals some interesting patterns:</p>
+<p>46.161.42.51 mail25.uscourtsgov[.]com<br />
+46.161.42.52 mail24.uscourtsgov[.]com<br />
+46.161.42.53 mail23.uscourtsgov[.]com<br />
+46.161.42.54 mail22.uscourtsgov[.]com<br />
+46.161.42.55 mail21.uscourtsgov[.]com<br />
+46.161.42.56 mail20.uscourtsgov[.]com<br />
+46.161.42.57 mail19.uscourtsgov[.]com<br />
+46.161.42.58 mail18.uscourtsgov[.]com<br />
+46.161.42.59 mail17.uscourtsgov[.]com<br />
+46.161.42.60 mail16.uscourtsgov[.]com<br />
+46.161.42.61 mail15.uscourtsgov[.]com<br />
+46.161.42.62 mail14.uscourtsgov[.]com<br />
+46.161.42.63 mail13.uscourtsgov[.]com<br />
+46.161.42.64 mail12.uscourtsgov[.]com<br />
+46.161.42.65 mail11.uscourtsgov[.]com<br />
+46.161.42.66 mail10.uscourtsgov[.]com<br />
+46.161.42.67 mail9.uscourtsgov[.]com<br />
+46.161.42.68 mail8.uscourtsgov[.]com<br />
+46.161.42.69 mail7.uscourtsgov[.]com<br />
+46.161.42.70 mail6.uscourtsgov[.]com<br />
+46.161.42.71 mail5.uscourtsgov[.]com<br />
+46.161.42.72 mail4.uscourtsgov[.]com<br />
+46.161.42.73 mail3.uscourtsgov[.]com<br />
+46.161.42.74 mail2.uscourtsgov[.]com<br />
+46.161.42.75 mail1.uscourtsgov[.]com<br />
+46.161.42.76 mail[.]commarysmith[.]com<br />
+46.161.42.77 mail.joancooper[.]com<br />
+46.161.42.78 mail.florencewoods[.]com<br />
+46.161.42.79 mail.ednawest[.]com<br />
+46.161.42.80 mail.ethelwebb[.]com<br />
+46.161.42.81 mail.eleanorhunt[.]com<br />
+46.161.42.82 mail.sallypierce[.]com<br />
+46.161.42.83 mail.reginaberry[.]com<br />
+46.161.42.84 mail.junecarroll[.]com<br />
+46.161.42.85 mail.robertaharper[.]com<br />
+46.161.42.86 mail.reneelane[.]com<br />
+46.161.42.87 mail.almaaustin[.]com<br />
+46.161.42.88 mail.elsiekelley[.]com<br />
+46.161.42.89 mail.vickifields[.]com<br />
+46.161.42.90 mail.ellaoliver[.]com<br />
+46.161.42.91 mail.williehowell[.]com<br />
+46.161.42.92 mail.veramccoy[.]com<br />
+46.161.42.93 mail.agnesbishop[.]com<br />
+46.161.42.94 mail.tanyagilbert[.]com<br />
+46.161.42.95 mail.mattiehoffman[.]com<br />
+46.161.42.96 mail.hildahopkins[.]com<br />
+46.161.42.97 beckymiles[.]com<br />
+46.161.42.98 mail.fayenorris[.]com<br />
+46.161.42.99 mail.joannaleonard[.]com<br />
+46.161.42.100 mail.rosieweber[.]com<br />
+46.161.42.101 mail.candicemanning[.]com<br />
+46.161.42.102 mail.sherirowe[.]com<br />
+46.161.42.103 mail.leticiagoodman[.]com<br />
+46.161.42.104 mail.myrafrancis[.]com<br />
+46.161.42.105 mail.jasminemaxwell[.]com<br />
+46.161.42.106 mail.eloisefrench[.]com</p>
+<p>Search Google for <a href="https://scamwarners.com/forum/viewtopic.php?f=9&amp;p=371314" target="_blank" rel="noopener">any of those two-name domains above</a> (e.g., fayenorris-dot-com) and you&#8217;ll see virtually all of them were used in these sextortion emails, and most were registered at the end of May 2018 through domain registrar <strong>Namecheap</strong>.</p>
+<p>Notice the preponderance of the domain <strong>uscourtsgov-dot-com </strong>in the list above. <em>All of those two-name domains used <a href="https://www.geeksforgeeks.org/dns-domain-name-server/" target="_blank" rel="noopener">domain name servers</a> (DNS servers) from uscourtsgov-dot-com at the time these emails were sent</em>. In early June 2018, uscourtsgov-dot-com was associated with <a href="https://blog.comodo.com/pc-security/subpoena-new-variant-of-sigma-ransomware/" target="_blank" rel="noopener">a Sigma ransomware scam delivered via spam</a>. Victims who wanted their files back had to pay a bitcoin ransom.</p>
+<p>In the months just before either the password-laced sextortion scam or the uscourtsgov-dot-com ransomware scam, uscourtsgov-com was devoid of content, aside from a message promoting the spamming services of the web site <strong>mtaexpert-dot-info</strong>. Uscourtsgov-dot-com is now offline, but it was active as of two weeks ago. Here&#8217;s what its homepage looked like:</p>
+<div id="attachment_44828" style="width: 605px" class="wp-caption aligncenter"><a class="lightbox" href="https://krebsonsecurity.com/wp-content/uploads/2018/08/uscourtsgov4-18.png"><img aria-describedby="caption-attachment-44828" loading="lazy" class="wp-image-44828" src="https://krebsonsecurity.com/wp-content/uploads/2018/08/uscourtsgov4-18.png" alt="" width="595" height="97" /></a><p id="caption-attachment-44828" class="wp-caption-text">The domain uscourtsgov-dot-com was redirecting visitors to mtaexpert-dot-info for many months up to and including the sextortion email campaign. Image: Domaintools.com</p></div>
+<p>Interestingly, this same message promoting mtaexpert-dot-info appeared on the homepages of many other two-name domain names mentioned above (including fayenorris-dot-com):</p>
+<div id="attachment_44830" style="width: 603px" class="wp-caption aligncenter"><a class="lightbox" href="https://krebsonsecurity.com/wp-content/uploads/2018/08/fayenorris.png"><img aria-describedby="caption-attachment-44830" loading="lazy" class="wp-image-44830" src="https://krebsonsecurity.com/wp-content/uploads/2018/08/fayenorris.png" alt="" width="593" height="60" /></a><p id="caption-attachment-44830" class="wp-caption-text">Like uscourtsgov-dot-com, Fayenorris-dot-com also urged visitors to go to mtaexpert-dot-info.</p></div>
+<p> <a href="https://krebsonsecurity.com/2018/08/whos-behind-the-screencam-extortion-scam/#more-44825" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-44787" class="post-44787 post type-post status-publish format-standard hentry category-latest-warnings category-comingstorm category-patches tag-apache-software-foundation tag-apache-struts-vulnerability tag-equifax-breach tag-man-yue-mo tag-pavel-avgustinov tag-semmle">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2018/08/experts-urge-rapid-patching-of-struts-bug/" title="Permalink to Experts Urge Rapid Patching of &#8216;Struts&#8217; Bug" rel="bookmark">Experts Urge Rapid Patching of &#8216;Struts&#8217; Bug</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">August 23, 2018</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2018/08/experts-urge-rapid-patching-of-struts-bug/#comments">21 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>In September 2017, <strong>Equifax</strong> disclosed that a failure to patch one of its Internet servers against a pervasive software flaw &#8212; in a Web component known as <strong>Apache Struts</strong> &#8212; led to a breach that <a href="https://krebsonsecurity.com/2017/09/the-equifax-breach-what-you-should-know/" target="_blank" rel="noopener">exposed personal data on 147 million Americans</a>. Now security experts are warning that blueprints showing malicious hackers how to exploit a newly-discovered Apache Struts bug are available online, leaving countless organizations in a rush to apply new updates and plug the security hole before attackers can use it to wriggle inside.</p>
+<p><img loading="lazy" class="aligncenter wp-image-44794" src="https://krebsonsecurity.com/wp-content/uploads/2018/08/apache.png" alt="" width="596" height="336" /></p>
+<p>On Aug. 22, the <strong>Apache Software Foundation</strong> released software updates to fix <a href="https://cwiki.apache.org/confluence/display/WW/S2-057" target="_blank" rel="noopener">a critical vulnerability</a> in Apache Struts, a Web application platform used by an estimated 65 percent of Fortune 100 companies. Unfortunately, computer code that can be used to exploit the bug has since been posted online, meaning bad guys now have precise instructions on how to break into vulnerable, unpatched servers.</p>
+<p>Attackers can exploit a Web site running the vulnerable Apache Struts installation using nothing more than a Web browser. The bad guy simply needs to send the right request to the site and the Web server will run any command of the attacker&#8217;s choosing. At that point, the intruder could take any number of actions, such as adding or deleting files, or copying internal databases.</p>
+<p>An <a href="https://semmle.com/news/apache-struts-CVE-2018-11776" target="_blank" rel="noopener">alert</a> about the Apache security update was posted Wednesday by <strong>Semmle</strong>, the San Francisco software company whose researchers discovered the bug.</p>
+<p>&#8220;The widespread use of Struts by leading enterprises, along with the proven potential impact of this sort of vulnerability, illustrate the threat that this vulnerability poses,&#8221; the alert warns.</p>
+<p>&#8220;Critical remote code execution vulnerabilities like the one that affected Equifax and the one we announced today are incredibly dangerous for several reasons: Struts is used for publicly-accessible customer-facing websites, vulnerable systems are easily identified, and the flaw is easy to exploit,&#8221; wrote Semmle co-founder <strong>Pavel Avgustinov</strong>. &#8220;A hacker can find their way in within minutes, and exfiltrate data or stage further attacks from the compromised system. It’s crucially important to update affected systems immediately; to wait is to take an irresponsible risk.&#8221; <a href="https://krebsonsecurity.com/2018/08/experts-urge-rapid-patching-of-struts-bug/#more-44787" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-44746" class="post-44746 post type-post status-publish format-standard hentry category-neer-do-well-news category-sim-swapping tag-apple tag-att tag-bitpay tag-homeland-security-investigations tag-joel-ortiz tag-react-task-force tag-sim-swap tag-verizon tag-xzavyer-clemete-narvaez tag-xzavyer-narvaez tag-xzavyer-narvaezgmail-com">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2018/08/alleged-sim-swapper-arrested-in-california/" title="Permalink to Alleged SIM Swapper Arrested in California" rel="bookmark">Alleged SIM Swapper Arrested in California</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">August 22, 2018</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2018/08/alleged-sim-swapper-arrested-in-california/#comments">57 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>Authorities in Santa Clara, Calif. have arrested and charged a 19-year-old area man on suspicion hijacking mobile phone numbers as part of a scheme to steal large sums of bitcoin and other cryptocurrencies. The arrest is the third known law enforcement action this month targeting &#8220;SIM swappers,&#8221; individuals who specialize in stealing wireless phone numbers and hijacking online financial and social media accounts tied to those numbers.</p>
+<p><img loading="lazy" class="aligncenter size-full wp-image-44764" src="https://krebsonsecurity.com/wp-content/uploads/2018/08/simsmaller.png" alt="" width="517" height="281" /></p>
+<p><strong>Xzavyer Clemente Narvaez</strong> was arrested Aug. 17, 2018 by investigators working with Santa Clara County&#8217;s &#8220;<strong>REACT task force</strong>,&#8221; which says it&#8217;s targeting those involved in &#8220;the takeovers of cell phone, email and financial accounts resulting in the theft of cryptocurrency.&#8221;</p>
+<p>Prosecutors allege Narvaez used the proceeds of his crimes (estimated at &gt; $1 million in virtual currencies) to purchase luxury items, including <a href="https://www.cargurus.com/Cars/2018-McLaren-570S-Price-c27201" target="_blank" rel="noopener">a McLaren</a> &#8212; a $200,000 high-performance sports car. Investigators said they interviewed several alleged victims of Narvaez, including one man who reported being robbed of $150,000 in virtual currencies after his phone number was hijacked.</p>
+<p>A fraudulent SIM swap occurs when a victim&#8217;s cell phone service is redirected from <a href="https://en.wikipedia.org/wiki/Subscriber_identity_module" target="_blank" rel="noopener">a SIM card</a> under the control of the victim to one under the control of the suspect, without the knowledge or authorization of the victim account holder.</p>
+<p>When a victim experiences a fraudulent SIM swap, their phone suddenly has no service and all incoming calls and text messages are sent to the attacker&#8217;s device. This includes any one-time codes sent via text message or automated phone call that many companies use to supplement passwords for their online accounts.</p>
+<p>Narvaez came to law enforcement&#8217;s attention following the arrest of <strong>Joel Ortiz</strong>, a <a href="https://www.bostonglobe.com/business/2018/07/31/boston-school-valedictorian-arrested-cryptocurrency-theft/7p5MnBQKPlpz3V96IwGb5K/story.html" target="_blank" rel="noopener">gifted</a> 20-year-old college student from Boston who was <a href="https://motherboard.vice.com/en_us/article/a3q7mz/hacker-allegedly-stole-millions-bitcoin-sim-swapping" target="_blank" rel="noopener">charged in July 2018</a> with using SIM swaps to steal more than $5 million in cryptocurrencies from 40 victims.</p>
+<p>A redacted &#8220;statement of facts&#8221; in the case obtained by KrebsOnSecurity says records obtained from Google revealed that a cellular device used by Ortiz to commit SIM swaps had at one point been used to access the Google account identified as <strong>Xzavyer.Narvaez@gmail.com</strong>.</p>
+<p>That statement refers frequently to the term <a href="https://support.bell.ca/Mobility/Smartphones_and_mobile_internet/What_is_an_IMEI_number_and_how_can_I_find_mine" target="_blank" rel="noopener">IMEI</a>; this is the <strong>International Mobile Equipment Identity</strong> number, which is a unique identification number or serial number that all mobile phones and smartphones have.</p>
+<p>Prosecutors used data gathered from a large number of tech companies to put Narvaez&#8217;s phone in specific places near his home in <a href="https://www.google.com/maps/place/Tracy,+CA/@37.7185753,-121.7267412,10z/data=!4m5!3m4!1s0x809014590a55994d:0xe8466f79e0af1499!8m2!3d37.7396513!4d-121.4252227" target="_blank" rel="noopener">Tracy, Calif.</a> at the time his alleged victims reported having their phones hijacked. His alleged re-use of the same mobile device for multiple SIM hijacks ultimately gave him away:</p>
+<blockquote><p>&#8220;On 7/18/18, investigators received information from an AT&amp;T investigator regarding unauthorized SIM swaps conducted through an AT&amp;T authorized retailer. He reported that approximately 28 SIM swaps were conducted using the same employee ID number over an approximately two-week time period in November 2017. Records were obtained that included a list of IMEI numbers used to take over the victims&#8217; cell phone numbers.&#8221;</p>
+<p>&#8220;AT&amp;T provided call detail records pertaining to the IMEI numbers listed to conduct the SIM swaps. One of those IMEI numbers, ending in 3218, was used to take over the cell phone of a resident of Illinois. I contacted the victim who verified that some of his accounts had been &#8220;hacked&#8221; in late 2017 but said he did not suffer any financial loss. Sgt. Tarazi analyzed the AT&amp;T location data pertaining to that account takeover. That data indicated that on 7/27/17, when the victim from Illinois lost access to his accounts, the IMEI (ending in 3218) of the cell phone controlling the victim&#8217;s cell phone number was located in Tracy, California.&#8221;</p>
+<p>&#8220;The specific tower is located approximately 0.6 miles away from the address 360 Yosemite Drive in Tracy. Several &#8220;NELOS&#8221; records (GPS coordinates logged by AT&amp;T to estimate the location of devices on their network) indicate the phone was within 1000 meters of 360 Yosemite Drive in Tracy. AT&amp;T also provided call detail records pertaining to Narvaez&#8217; cell phone account, which was linked to him through financial services account records. Sgt. Tarazi examined those records and determined that Narvaez&#8217; own cell phone was connected to the same tower and sector during approximately the same time frame that the suspect device (ending in 3218) was connected to the victim&#8217;s account.&#8221;</p></blockquote>
+<p><strong>Apple</strong> responded to requests with records pertaining to customer accounts linked to that same suspect IMEI number. Those records identified three California residents whose Apple accounts were linked to that same IMEI number. <a href="https://krebsonsecurity.com/2018/08/alleged-sim-swapper-arrested-in-california/#more-44746" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-44670" class="post-44670 post type-post status-publish format-standard hentry category-sunshine category-data-breaches category-comingstorm tag-alm-trading-limited tag-cosmos-bank tag-hang-seng-bank tag-national-bank-of-blacksburg tag-reuters tag-rupay tag-tn-raghunatha tag-visa">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2018/08/indian-bank-hit-in-13-5m-cyberheist-after-fbi-atm-cashout-warning/" title="Permalink to Indian Bank Hit in $13.5M Cyberheist After FBI ATM Cashout Warning" rel="bookmark">Indian Bank Hit in $13.5M Cyberheist After FBI ATM Cashout Warning</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">August 17, 2018</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2018/08/indian-bank-hit-in-13-5m-cyberheist-after-fbi-atm-cashout-warning/#comments">34 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>On Sunday, Aug. 12, KrebsOnSecurity carried <a href="https://krebsonsecurity.com/2018/08/fbi-warns-of-unlimited-atm-cashout-blitz/" target="_blank" rel="noopener">an exclusive</a>: The <strong>FBI</strong> was warning banks about an imminent &#8220;ATM cashout&#8221; scheme about to unfold across the globe, thanks to a data breach at an unknown financial institution. On Aug. 14, a bank in India disclosed hackers had broken into its servers, stealing nearly $2 million in fraudulent bank transfers and $11.5 million unauthorized ATM withdrawals from cash machines in more than two dozen countries.</p>
+<p><img loading="lazy" class="aligncenter wp-image-44724" src="https://krebsonsecurity.com/wp-content/uploads/2018/08/atmdissolve.png" alt="" width="596" height="315" /></p>
+<p>The FBI put out its alert on Friday, Aug. 10. The criminals who hacked into Pune, India-based <a href="https://en.wikipedia.org/wiki/Cosmos_Bank" target="_blank" rel="noopener">Cosmos Bank</a> executed their two-pronged heist the following day, sending co-conspirators to fan out and withdraw a total of about $11.5 million from ATMs in 28 countries.</p>
+<p>The FBI warned it had intelligence indicating that criminals had breached an unknown payment provider&#8217;s network with malware to access bank customer card information and exploit network access, enabling large scale theft of funds from ATMs.</p>
+<p>Organized cybercrime gangs that coordinate these so-called &#8220;unlimited attacks&#8221; typically do so by hacking or phishing their way into a bank or payment card processor. Just prior to executing on ATM cashouts, the intruders will remove many fraud controls at the financial institution, such as maximum withdrawal amounts and any limits on the number of customer ATM transactions daily.</p>
+<p>The perpetrators alter account balances and security measures to make an unlimited amount of money available at the time of the transactions, allowing for large amounts of cash to be quickly removed from the ATM.</p>
+<p>My story about the FBI alert was breaking news on Sunday, but it was just a day short of useful to financial institutions impacted by the breach and associated ATM cashout blitz.</p>
+<p>But according to Indian news outlet <a href="https://www.dailypioneer.com/todays-newspaper/cosmos-cooperative-bank-loses-rs-94-cr-in-cyber-heist.html" target="_blank" rel="noopener">Dailypionneer.com</a>, there was a second attack carried out on August 13, when the Cosmos Bank hackers transferred nearly $2 million to the account of <strong>ALM Trading Limited</strong> at <strong>Hang Seng Bank</strong> in Hong Kong.</p>
+<p>&#8220;The bank came to know about the malware attack on its debit card payment system on August 11, when it was observed that unusually repeated transactions were taking place through ATM VISA and Rupay Card for nearly two hours,&#8221; writes <strong>TN Raghunatha</strong> for the Daily Pioneer. <a href="https://krebsonsecurity.com/2018/08/indian-bank-hit-in-13-5m-cyberheist-after-fbi-atm-cashout-warning/#more-44670" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-44676" class="post-44676 post type-post status-publish format-standard hentry category-neer-do-well-news category-sim-swapping category-comingstorm tag-allison-nixon tag-att tag-flashpoint tag-google-voice tag-instagram tag-joel-ortiz tag-michael-terpin tag-ogusers tag-sim-swapping tag-sprint tag-t-mobile tag-twitter tag-verizon">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2018/08/hanging-up-on-mobile-in-the-name-of-security/" title="Permalink to Hanging Up on Mobile in the Name of Security" rel="bookmark">Hanging Up on Mobile in the Name of Security</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">August 16, 2018</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2018/08/hanging-up-on-mobile-in-the-name-of-security/#comments">96 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>An entrepreneur and virtual currency investor is suing <strong>AT&amp;T</strong> for $224 million, claiming the wireless provider was negligent when it failed to prevent thieves from hijacking his mobile account and stealing millions of dollars in cryptocurrencies. Increasingly frequent, high-profile attacks like these are prompting some experts to say the surest way to safeguard one&#8217;s online accounts may be to disconnect them from the mobile providers entirely.</p>
+<p><img loading="lazy" class="aligncenter size-full wp-image-44711" src="https://krebsonsecurity.com/wp-content/uploads/2018/08/newsnip.png" alt="" width="419" height="586" /></p>
+<p>The claims come in <a href="https://www.reuters.com/article/us-cryptocurrency-at-t-lawsuit/us-investor-sues-att-for-224-million-over-loss-of-cryptocurrency-idUSKBN1L01AA" target="_blank" rel="noopener">a lawsuit</a> filed this week in Los Angeles on behalf of <strong>Michael Terpin</strong>, who co-founded the first angel investor group for bitcoin enthusiasts in 2013. Terpin alleges that crooks stole almost $24 million worth of cryptocurrency after fraudulently executing a &#8220;SIM swap&#8221; on his mobile phone account at AT&amp;T in early 2018.</p>
+<p>A SIM card is the tiny, removable chip in a mobile device that allows it to connect to the provider’s network. Customers can legitimately request a SIM swap when their existing SIM card has been damaged, or when they are switching to a different phone that requires a SIM card of another size.</p>
+<p>But SIM swaps are frequently abused by scam artists who trick mobile providers into tying a target’s service to a new SIM card and mobile phone that the attackers control. Unauthorized SIM swaps often are perpetrated by fraudsters who have already stolen or phished a target’s password, as many banks and online services rely on text messages to send users a one-time code that needs to be entered in addition to a password for online authentication.</p>
+<p>Terpin alleges that on January 7, 2018, someone requested an unauthorized SIM swap on his AT&amp;T account, causing his phone to go dead and sending all incoming texts and phone calls to a device the attackers controlled. Armed with that access, the intruders were able to reset credentials tied to his cryptocurrency accounts and siphon nearly $24 million worth of digital currencies.</p>
+<p>According to Terpin, this was the second time in six months someone had hacked his AT&amp;T number. On June 11, 2017, Terpin&#8217;s phone went dead. He soon learned his AT&amp;T password had been changed remotely after 11 attempts in AT&amp;T stores had failed. At the time, AT&amp;T suggested Terpin take advantage of the company&#8217;s &#8220;extra security&#8221; feature &#8212; a customer-specified six-digit PIN which is required before any account changes can be made.</p>
+<p>Terpin claims an investigation by AT&amp;T into the 2018 breach found that an employee at an AT&amp;T store in Norwich, Conn. somehow executed the SIM swap on his account without having to enter his &#8220;extra security&#8221; PIN, and that AT&amp;T knew or should have known that employees could bypass its customer security measures.</p>
+<p>Terpin is suing AT&amp;T for his $24 million worth of cryptocurrencies, plus $200 million in punitive damages. A copy of his complaint is <a href="https://krebsonsecurity.com/wp-content/uploads/2018/08/Complaint-as-Filed-3063362-1.pdf" target="_blank" rel="noopener">here</a> (PDF).</p>
+<p style="font-weight: 400;">AT&amp;T declined to comment on specific claims in the lawsuit, saying only in a statement that, &#8220;We dispute these allegations and look forward to presenting our case in court.&#8221;</p>
+<h4>AN &#8216;IDENTITY CRISIS&#8217;?</h4>
+<p>Mobile phone companies are a major weak point in authentication because so many companies have now built their entire procedure for authenticating customers on a process that involves sending a one-time code to the customer via SMS or automated phone call.</p>
+<p>In some cases, thieves executing SIM swaps have already phished or otherwise stolen a target&#8217;s bank or email password. But many major social media platforms &#8212; such as <strong>Instagram</strong> &#8212; <em>allow users to reset their passwords using nothing more than text-based (SMS) authentication</em>, meaning thieves can hijack those accounts just by having control over the target&#8217;s mobile phone number.</p>
+<p><strong>Allison Nixon</strong> is director of security research at <a href="https://www.flashpoint-intel.com" target="_blank" rel="noopener">Flashpoint</a>, a security company in New York City that has been closely tracking the murky underworld of communities that teach people how to hijack phone numbers assigned to customer accounts at all of the major mobile providers.</p>
+<p><span class="pullquote pqleft">Nixon calls the current SIM-jacking craze &#8220;a major identity crisis&#8221; for cybersecurity on multiple levels.</span></p>
+<p>&#8220;Phone numbers were never originally intended as an identity document, they were designed as a way to contact people,&#8221; Nixon said. &#8220;But because of all these other companies are building in security measures, a phone number has become an identity document.&#8221;</p>
+<p>In essence, mobile phone companies have become &#8220;critical infrastructure&#8221; for security precisely because so much is riding on who controls a given mobile number. At the same time, so little is needed to undo weak security controls put in place to prevent abuse.</p>
+<p>&#8220;The infrastructure wasn&#8217;t designed to withstand the kind of attacks happening now,&#8221; Nixon said. &#8220;The protocols need to be changed, and there are probably laws affecting the telecom companies that need to be reviewed in light of how these companies have evolved.&#8221;</p>
+<p>Unfortunately, with the major mobile providers so closely tied to your security, there is no way you can remove the most vulnerable chunks of this infrastructure &#8212; the mobile store employees who can be paid or otherwise bamboozled into helping these attacks succeed.</p>
+<p>No way, that is, unless you completely disconnect your mobile phone number from any sort of SMS-based authentication you currently use, and replace it with Internet-based telephone services that do not offer &#8220;helpful&#8221; customer support &#8212; such as <a href="https://voice.google.com/u/0/signup" target="_blank" rel="noopener">Google Voice</a>.</p>
+<p>Google Voice lets users choose a phone number that gets tied to their Google account, and any calls or messages to that number will be forwarded to your mobile number. But unlike phone numbers issued by the major mobile providers, Google Voice numbers can&#8217;t be stolen unless someone also hacks your Google password &#8212; in which case you likely have much bigger problems.</p>
+<p>With Google Voice, there is no customer service person who can be conned over the phone into helping out. There is no retail-store employee who will <a href="https://www.flashpoint-intel.com/blog/sim-swap-fraud-account-takeover/" target="_blank" rel="noopener">sell access to your SIM information for a paltry $80 payday</a>. <span class="pullquote pqright">In this view of security, customer service becomes a customer disservice.</span></p>
+<p>Mind you, this isn&#8217;t my advice. The above statement summarizes the arguments allegedly made by one of the most accomplished SIM swap thieves in the game today. On July 12, 2018, <a href="https://motherboard.vice.com/en_us/article/a3q7mz/hacker-allegedly-stole-millions-bitcoin-sim-swapping" target="_blank" rel="noopener">police in California arrested <strong>Joel Ortiz</strong></a>, a 20-year-old college student from Boston who&#8217;s accused of using SIM swaps to steal more than $5 million in cryptocurrencies from 40 victims.</p>
+<p>Ortiz allegedly had help from a number of unnamed accomplices who collectively targeted high-profile and wealthy people in the cryptocurrency space. In one of three brazen attacks at a bitcoin conference this year, Ortiz allegedly used his SIM swapping skills to steal more than $1.5 million from a cryptocurrency entrepreneur, including nearly $1 million the victim had crowdfunded.</p>
+<div id="attachment_44685" style="width: 603px" class="wp-caption aligncenter"><a class="lightbox" href="https://krebsonsecurity.com/wp-content/uploads/2018/08/joelortiz.png"><img aria-describedby="caption-attachment-44685" loading="lazy" class="wp-image-44685" src="https://krebsonsecurity.com/wp-content/uploads/2018/08/joelortiz.png" alt="" width="593" height="418" /></a><p id="caption-attachment-44685" class="wp-caption-text">A July 2018 posting from the &#8220;OG&#8221; Instagram account &#8220;0&#8221;, allegedly an account hijacked by Joel Ortiz (pictured holding an armload of Dom Perignon champagne).</p></div>
+<p>Ortiz reportedly was a core member of <strong>OGUsers[dot]com</strong>, a forum that&#8217;s grown wildly popular among criminals engaging in SIM swaps to steal cryptocurrency and hijack high-value social media accounts. OG is short for &#8220;original gangster,&#8221; and it refers to a type of &#8220;street cred&#8221; for possession of social media account names that are relatively short (between one and six characters). On ogusers[dot]com, Ortiz allegedly picked the username &#8220;j&#8221;. Short usernames are considered more valuable because they confer on the account holder the appearance of an early adopter on most social networks.</p>
+<p>Discussions on the Ogusers forum indicate Ortiz allegedly is the current occupant of perhaps the most OG username on Twitter &#8212; <a href="https://twitter.com/0" target="_blank" rel="noopener">an account represented by the number zero &#8220;0&#8221;.</a> The alias displayed on that twitter profile is &#8220;j0&#8221;. He also apparently controls <a href="https://www.instagram.com/0/" target="_blank" rel="noopener">the Instagram account by the same number</a>, as well as the <a href="https://www.instagram.com/t/" target="_blank" rel="noopener">Instagram account &#8220;t&#8221;</a>, which lists its alias as &#8220;Joel.&#8221;</p>
+<p>Shown below is <a href="https://webcache.googleusercontent.com/search?q=cache:8ZasZ_YIBqsJ:https://ogusers.com/Thread-Sim-Swap-prevention-guide+&amp;cd=2&amp;hl=en&amp;ct=clnk&amp;gl=us" target="_blank" rel="noopener">a cached snippet</a> from an Ogusers forum posting by &#8220;j&#8221; (allegedly Ortiz), advising people to remove their mobile phone number from all important multi-factor authentication options, and to replace it with something like Google Voice.</p>
+<div id="attachment_44683" style="width: 607px" class="wp-caption aligncenter"><a class="lightbox" href="https://krebsonsecurity.com/wp-content/uploads/2018/08/j-ogusers.png"><img aria-describedby="caption-attachment-44683" loading="lazy" class="wp-image-44683" src="https://krebsonsecurity.com/wp-content/uploads/2018/08/j-ogusers.png" alt="" width="597" height="198" /></a><p id="caption-attachment-44683" class="wp-caption-text">Ogusers SIM swapper &#8220;j&#8221; advises forum members on how not to become victims of SIM swapping. Click to enlarge.</p></div>
+<p> <a href="https://krebsonsecurity.com/2018/08/hanging-up-on-mobile-in-the-name-of-security/#more-44676" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-44576" class="post-44576 post type-post status-publish format-standard hentry category-patches tag-flash-player-30-0-0-154 tag-flash-player-update tag-foreshadow-bug tag-ivanti tag-jimmy-graham tag-microsoft-windows tag-patch-tuesday-august-2018 tag-qualys">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2018/08/patch-tuesday-august-2018-edition/" title="Permalink to Patch Tuesday, August 2018 Edition" rel="bookmark">Patch Tuesday, August 2018 Edition</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">August 15, 2018</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2018/08/patch-tuesday-august-2018-edition/#comments">22 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p><strong>Adobe </strong>and <strong>Microsoft</strong> each released security updates for their software on Tuesday. Adobe plugged five security holes in its <strong>Flash Player</strong> browser plugin. Microsoft pushed 17 updates to fix at least 60 vulnerabilities in Windows and other software, including two &#8220;<a href="https://en.wikipedia.org/wiki/Zero-day_(computing)" target="_blank" rel="noopener">zero-day</a>&#8221; flaws that attackers were already exploiting before Microsoft issued patches to fix them.</p>
+<p><img loading="lazy" class="alignright wp-image-26837" src="https://krebsonsecurity.com/wp-content/uploads/2014/07/brokenwindows.png" alt="" width="194" height="203" />According to security firm <strong>Ivanti</strong>, the first of the two zero-day flaws (<a href="https://portal.msrc.microsoft.com/en-US/security-guidance/advisory/CVE-2018-8373" target="_blank" rel="noopener">CVE-2018-8373</a>) is a critical flaw in <strong>Internet Explorer</strong> that attackers could use to foist malware on IE users who browse to hacked or booby-trapped sites. The other zero-day is a bug (<a href="https://portal.msrc.microsoft.com/en-US/security-guidance/advisory/CVE-2018-8414" target="_blank" rel="noopener">CVE-2018-8414</a>) in the Windows 10 shell that could allow an attacker to run code of his choice.</p>
+<p>Microsoft also patched more variants of the <a href="https://krebsonsecurity.com/2018/01/scary-chip-flaws-raise-spectre-of-meltdown/" target="_blank" rel="noopener">Meltdown/Spectre memory vulnerabilities</a>, collectively dubbed &#8220;<a href="https://foreshadowattack.eu/" target="_blank" rel="noopener">Foreshadow</a>&#8221; by a team of researchers who discovered and reported the <strong>Intel</strong>-based flaws. For more information about how Foreshadow works, check out their <a href="https://foreshadowattack.eu/foreshadow.pdf" target="_blank" rel="noopener">academic paper</a> (PDF), and/or the video below. Microsoft&#8217;s analysis is <a href="https://blogs.technet.microsoft.com/srd/2018/08/10/analysis-and-mitigation-of-l1-terminal-fault-l1tf/" target="_blank" rel="noopener">here</a>.</p>
+<p>One nifty little bug fixed in this patch batch is <a href="https://portal.msrc.microsoft.com/en-US/security-guidance/advisory/CVE-2018-8345" target="_blank" rel="noopener">CVE-2018-8345</a>. It addresses a problem in the way Windows handles shortcut files; ending in the “.lnk” extension, shortcut files are Windows components that link (hence the “lnk” extension) easy-to-recognize icons to specific executable programs, and are typically placed on the user’s Desktop or Start Menu.</p>
+<p>That description of a shortcut file was taken verbatim from the <a href="https://krebsonsecurity.com/2010/07/experts-warn-of-new-windows-shortcut-flaw/" target="_blank" rel="noopener">first widely read report</a> on what would later be dubbed the <a href="https://en.wikipedia.org/wiki/Stuxnet" target="_blank" rel="noopener">Stuxnet worm</a>, which also employed an exploit for a weakness in the way Windows handled shortcut (.lnk) files. According to security firm <a href="https://blog.qualys.com/laws-of-vulnerabilities/2018/08/14/august-patch-tuesday-63-vulns-l1tf-exchange-sql-active-attacks-on-ie-flaw" target="_blank" rel="noopener">Qualys</a>, this patch should be prioritized for both workstations and servers, as the user does not need to click the file to exploit. &#8220;Simply viewing a malicious LNK file can execute code as the logged-in user,&#8221; Qualys&#8217; <strong>Jimmy Graham</strong> wrote. <a href="https://krebsonsecurity.com/2018/08/patch-tuesday-august-2018-edition/#more-44576" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-44642" class="post-44642 post type-post status-publish format-standard hentry category-data-breaches category-neer-do-well-news tag-atm-cashout tag-fbi tag-national-bank-of-blacksburg tag-unlimited-atm-cashout">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2018/08/fbi-warns-of-unlimited-atm-cashout-blitz/" title="Permalink to FBI Warns of &#8216;Unlimited&#8217; ATM Cashout Blitz" rel="bookmark">FBI Warns of &#8216;Unlimited&#8217; ATM Cashout Blitz</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">August 12, 2018</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2018/08/fbi-warns-of-unlimited-atm-cashout-blitz/#comments">110 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>The <strong>Federal Bureau of Investigation</strong> (FBI) is warning banks that cybercriminals are preparing to carry out a highly choreographed, global fraud scheme known as an &#8220;ATM cash-out,&#8221; in which crooks hack a bank or payment card processor and use cloned cards at cash machines around the world to fraudulently withdraw millions of dollars in just a few hours.</p>
+<p class="p1"><img loading="lazy" class="alignright wp-image-30632" src="https://krebsonsecurity.com/wp-content/uploads/2015/04/fbilogo.png" alt="" width="249" height="250" srcset="https://krebsonsecurity.com/wp-content/uploads/2015/04/fbilogo.png 460w, https://krebsonsecurity.com/wp-content/uploads/2015/04/fbilogo-150x150.png 150w" sizes="(max-width: 249px) 100vw, 249px" />&#8220;The FBI has obtained unspecified reporting indicating cyber criminals are planning to conduct a global Automated Teller Machine (ATM) cash-out scheme in the coming days, likely associated with an unknown card issuer breach and commonly referred to as an &#8216;unlimited operation&#8217;,&#8221; reads a confidential alert the FBI shared with banks privately on Friday.</p>
+<p class="p1">The FBI said unlimited operations compromise a financial institution or payment card processor with malware to access bank customer card information and exploit network access, enabling large scale theft of funds from ATMs.</p>
+<p class="p1">&#8220;Historic compromises have included small-to-medium size financial institutions, likely due to less robust implementation of cyber security controls, budgets, or third-party vendor vulnerabilities,&#8221; the alert continues. &#8220;The FBI expects the ubiquity of this activity to continue or possibly increase in the near future.&#8221;</p>
+<p>Organized cybercrime gangs that coordinate unlimited attacks typically do so by hacking or phishing their way into a bank or payment card processor. Just prior to executing on ATM cashouts, the intruders will remove many fraud controls at the financial institution, such as maximum ATM withdrawal amounts and any limits on the number of customer ATM transactions daily.</p>
+<p>The perpetrators also alter account balances and security measures to make an unlimited amount of money available at the time of the transactions, allowing for large amounts of cash to be quickly removed from the ATM.</p>
+<p class="p1">&#8220;The cyber criminals typically create fraudulent copies of legitimate cards by sending stolen card data to co-conspirators who imprint the data on reusable magnetic strip cards, such as gift cards purchased at retail stores,&#8221; the FBI warned. &#8220;At a pre-determined time, the co-conspirators withdraw account funds from ATMs using these cards.&#8221;</p>
+<p class="p1">Virtually all ATM cashout operations are launched on weekends, often just after financial institutions begin closing for business on Saturday. Last month, KrebsOnSecurity <a href="https://krebsonsecurity.com/2018/07/hackers-breached-virginia-bank-twice-in-eight-months-stole-2-4m/" target="_blank" rel="noopener">broke a story</a> about an apparent unlimited operation used to extract a total of $2.4 million from accounts at the <strong>National Bank of Blacksburg</strong> in two separate ATM cashouts between May 2016 and January 2017.</p>
+<p>In both cases, the attackers managed to phish someone working at the Blacksburg, Virginia-based small bank. From there, the intruders compromised systems the bank used to manage credits and debits to customer accounts. <a href="https://krebsonsecurity.com/2018/08/fbi-warns-of-unlimited-atm-cashout-blitz/#more-44642" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+				
+			
+								<div class="themonic-pagination"><div class='pagination'><ul><li><a href='https://krebsonsecurity.com/'>&laquo; First</a></li><li><a href='https://krebsonsecurity.com/page/45/' class='inactive'>&lsaquo; Previous</a></li><li><a href='https://krebsonsecurity.com/page/43/' class='inactive'>43</a></li><li><a href='https://krebsonsecurity.com/page/44/' class='inactive'>44</a></li><li><a href='https://krebsonsecurity.com/page/45/' class='inactive'>45</a></li><li class='current'><span class='currenttext'>46</span></li><li><a href='https://krebsonsecurity.com/page/47/' class='inactive'>47</a></li><li><a href='https://krebsonsecurity.com/page/48/' class='inactive'>48</a></li><li><a href='https://krebsonsecurity.com/page/49/' class='inactive'>49</a></li><li><a href='https://krebsonsecurity.com/page/47/' class='inactive'>Next &rsaquo;</a></li><a class='inactive' href='https://krebsonsecurity.com/page/209/'>Last &raquo;</a></ul></div></div>
+					<div style="display: block; clear: both;"></div>
+			
+		
+
+	
+
+		</div><!-- #content -->
+	</div><!-- #primary -->
+
+
+			<div id="secondary" class="widget-area" role="complementary">
+
+        <div id="sidebar_ad" class="widget themonic-ad5"><div class="a-statement">Advertisement</div><a href="https://www.cybereason.com/platform/anti-ransomware?utm_source=krebs&amp;utm_medium=display&amp;utm_campaign=q4">
+<img src="/b-cybereason/15.jpg">
+</a></div>
+
+                        <br><div class="widget themonic-ad1"><div class="a-statement">Advertisement</div><a href="https://www.akamai.com/blog/security/attacking-a-macro-security-problem-with-micro-segmentation?utm_source=krebsonsecurity&amp;utm_medium=display&amp;utm_id=GL_SecureWorkforce_Guardicore&amp;utm_campaign=F-MC-52610&amp;utm_content=Guardicore">
+<img src="/b-akamai/138.png">
+</a></div><br>
+
+			<aside id="custom_html-2" class="widget_text widget widget_custom_html"><p class="widget-title">Mailing List</p><div class="textwidget custom-html-widget"><a href="/subscribe/">Subscribe here</a></div></aside><aside id="search-2" class="widget widget_search"><p class="widget-title">Search KrebsOnSecurity</p><form role="search" method="get" id="searchform" class="searchform" action="https://krebsonsecurity.com/">
+				<div>
+					<label class="screen-reader-text" for="s">Search for:</label>
+					<input type="text" value="" name="s" id="s" />
+					<input type="submit" id="searchsubmit" value="Search" />
+				</div>
+			</form></aside>
+		<aside id="recent-posts-3" class="widget widget_recent_entries">
+		<p class="widget-title">Recent Posts</p>
+		<ul>
+											<li>
+					<a href="https://krebsonsecurity.com/2021/12/canada-charges-its-most-prolific-cybercriminal/">Canada Charges Its &#8220;Most Prolific Cybercriminal&#8221;</a>
+									</li>
+											<li>
+					<a href="https://krebsonsecurity.com/2021/12/who-is-the-network-access-broker-babam/">Who Is the Network Access Broker &#8216;Babam&#8217;?</a>
+									</li>
+											<li>
+					<a href="https://krebsonsecurity.com/2021/12/ubiquiti-developer-charged-with-extortion-causing-2020-breach/">Ubiquiti Developer Charged With Extortion, Causing 2020 &#8220;Breach&#8221;</a>
+									</li>
+											<li>
+					<a href="https://krebsonsecurity.com/2021/11/the-internet-is-held-together-with-spit-baling-wire/">The Internet is Held Together With Spit &#038; Baling Wire</a>
+									</li>
+											<li>
+					<a href="https://krebsonsecurity.com/2021/11/arrest-in-ransom-your-employer-email-scheme/">Arrest in &#8216;Ransom Your Employer&#8217; Email Scheme</a>
+									</li>
+					</ul>
+
+		</aside><aside id="text-2" class="widget widget_text">			<div class="textwidget"><a name="subscribe2"></a></div>
+		</aside><aside id="widget_sp_image-15" class="widget widget_sp_image"><p class="widget-title">Spam Nation</p><a href="https://www.amazon.com/Spam-Nation-Organized-Cybercrime-Epidemic-ebook/dp/B00L5QGBL0/ref=dp_kinw_strp_1" target="_blank" class="widget_sp_image-image-link" title="Spam Nation"><img width="266" height="404" alt="Spam Nation" class="attachment-266x404 aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2015/04/spamnation-nyt.png" /></a><div class="widget_sp_image-description" ><p>A New York Times Bestseller! </p>
+</div></aside><aside id="widget_sp_image-25" class="widget widget_sp_image"><p class="widget-title">Thinking of a Cybersecurity Career?</p><a href="https://krebsonsecurity.com/2020/07/thinking-of-a-cybersecurity-career-read-this/" target="_blank" class="widget_sp_image-image-link" title="Thinking of a Cybersecurity Career? Read This."><img width="625" height="424" alt="Thinking of a Cybersecurity Career?" class="attachment-full" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2020/07/codepeople.png 625w, https://krebsonsecurity.com/wp-content/uploads/2020/07/codepeople-580x393.png 580w" sizes="(max-width: 625px) 100vw, 625px" src="https://krebsonsecurity.com/wp-content/uploads/2020/07/codepeople.png" /></a><div class="widget_sp_image-description" ><p>Read this.</p>
+</div></aside><aside id="widget_sp_image-3" class="widget widget_sp_image"><p class="widget-title">All About Skimmers </p><a href="https://krebsonsecurity.com/all-about-skimmers/" target="_blank" class="widget_sp_image-image-link" title="All About Skimmers "><img width="299" height="232" alt="All About Skimmers" class="attachment-299x232 aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2010/08/skimgallery1.jpg" /></a><div class="widget_sp_image-description" ><p>Click image for my skimmer series.</p>
+</div></aside><aside id="categories-2" class="widget widget_categories"><p class="widget-title">Story Categories</p>
+			<ul>
+					<li class="cat-item cat-item-5"><a href="https://krebsonsecurity.com/category/sunshine/" title="Includes investigative blog posts meant to shine a light on the darker corners of the Internet.">A Little Sunshine</a>
+</li>
+	<li class="cat-item cat-item-2240"><a href="https://krebsonsecurity.com/category/all-about-skimmers/">All About Skimmers</a>
+</li>
+	<li class="cat-item cat-item-9085"><a href="https://krebsonsecurity.com/category/ashley-madison-breach/">Ashley Madison breach</a>
+</li>
+	<li class="cat-item cat-item-3191"><a href="https://krebsonsecurity.com/category/breadcrumbs/">Breadcrumbs</a>
+</li>
+	<li class="cat-item cat-item-3771"><a href="https://krebsonsecurity.com/category/data-breaches/" title="Stories about data breaches at retailers, corporations, governments and organizations of all sizes.">Data Breaches</a>
+</li>
+	<li class="cat-item cat-item-4624"><a href="https://krebsonsecurity.com/category/ddos-for-hire/">DDoS-for-Hire</a>
+</li>
+	<li class="cat-item cat-item-9173"><a href="https://krebsonsecurity.com/category/employment-fraud/">Employment Fraud</a>
+</li>
+	<li class="cat-item cat-item-2151"><a href="https://krebsonsecurity.com/category/how-to-break-into-security/" title="If you&#039;ve ever wanted career advice on how to make a shift into the security industry, look no further.">How to Break Into Security</a>
+</li>
+	<li class="cat-item cat-item-87"><a href="https://krebsonsecurity.com/category/latest-warnings/">Latest Warnings</a>
+</li>
+	<li class="cat-item cat-item-4071"><a href="https://krebsonsecurity.com/category/neer-do-well-news/">Ne&#039;er-Do-Well News</a>
+</li>
+	<li class="cat-item cat-item-9"><a href="https://krebsonsecurity.com/category/other/">Other</a>
+</li>
+	<li class="cat-item cat-item-1306"><a href="https://krebsonsecurity.com/category/pharma-wars/">Pharma Wars</a>
+</li>
+	<li class="cat-item cat-item-8240"><a href="https://krebsonsecurity.com/category/ransomware/">Ransomware</a>
+</li>
+	<li class="cat-item cat-item-599"><a href="https://krebsonsecurity.com/category/security-tools/">Security Tools</a>
+</li>
+	<li class="cat-item cat-item-8298"><a href="https://krebsonsecurity.com/category/sim-swapping/">SIM Swapping</a>
+</li>
+	<li class="cat-item cat-item-4079"><a href="https://krebsonsecurity.com/category/spam-nation/">Spam Nation</a>
+</li>
+	<li class="cat-item cat-item-1"><a href="https://krebsonsecurity.com/category/smallbizvictims/" title="Posts in this category will include new stories similar to those told in the Small Business Victims category on The Washington Post&#039;s Security Fix blog, which chronicled the methods organized cyber thieve are using to steal hundreds of thousands of dollars from dozens of small- to mid-sized companies around the country.">Target: Small Businesses</a>
+</li>
+	<li class="cat-item cat-item-5167"><a href="https://krebsonsecurity.com/category/tax-refund-fraud/">Tax Refund Fraud</a>
+</li>
+	<li class="cat-item cat-item-3"><a href="https://krebsonsecurity.com/category/comingstorm/" title="This category includes blog posts about computer and Internet security threats now and on the horizon.">The Coming Storm</a>
+</li>
+	<li class="cat-item cat-item-4"><a href="https://krebsonsecurity.com/category/patches/" title="Short posts on the latest security updates for widely-used software.
+">Time to Patch</a>
+</li>
+	<li class="cat-item cat-item-21"><a href="https://krebsonsecurity.com/category/web-fraud-2-0/">Web Fraud 2.0</a>
+</li>
+			</ul>
+
+			</aside><aside id="widget_sp_image-5" class="widget widget_sp_image"><p class="widget-title">The Value of a Hacked PC</p><a href="https://krebsonsecurity.com/2012/10/the-scrap-value-of-a-hacked-pc-revisited/" target="_blank" class="widget_sp_image-image-link" title="The Value of a Hacked PC"><img width="285" height="180" alt="valuehackedpc " class="attachment-285x180 aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2012/12/valuehackedpc-285x180.png" /></a><div class="widget_sp_image-description" ><p>Badguy uses for your PC</p>
+</div></aside><aside id="widget_sp_image-9" class="widget widget_sp_image"><p class="widget-title">Badguy Uses for Your Email </p><a href="https://krebsonsecurity.com/2013/06/the-value-of-a-hacked-email-account/" target="_self" class="widget_sp_image-image-link" title="Badguy Uses for Your Email "><img width="296" height="170" alt="Badguy Uses for Your Email " class="attachment-full aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2013/06/badguyemail.png 296w, https://krebsonsecurity.com/wp-content/uploads/2013/06/badguyemail-285x163.png 285w" sizes="(max-width: 296px) 100vw, 296px" src="https://krebsonsecurity.com/wp-content/uploads/2013/06/badguyemail.png" /></a><div class="widget_sp_image-description" ><p>Your email account may be worth far more than you imagine.</p>
+</div></aside><aside id="widget_sp_image-24" class="widget widget_sp_image"><a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&#038;hosted_button_id=MCCRKHWRX57HS" id="donate" target="_self" class="widget_sp_image-image-link"><img width="250" height="55" alt="Donate to Krebs On Security" class="attachment-medium aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2016/09/donatepaypal2-1.png" /></a></aside><aside id="most_popular_posts-3" class="widget widget_most_popular_posts">
+<p class="widget-title">Most Popular Posts</p>
+<ul>	<li><a href="https://krebsonsecurity.com/2018/07/sextortion-scam-uses-recipients-hacked-passwords/">Sextortion Scam Uses Recipient's Hacked Passwords</a> (1076)</li>
+	<li><a href="https://krebsonsecurity.com/2015/07/online-cheating-site-ashleymadison-hacked/">Online Cheating Site AshleyMadison Hacked</a> (798)</li>
+	<li><a href="https://krebsonsecurity.com/2013/12/sources-target-investigating-data-breach/">Sources: Target Investigating Data Breach</a> (620)</li>
+	<li><a href="https://krebsonsecurity.com/2020/11/trump-fires-security-chief-christopher-krebs/">Trump Fires Security Chief Christopher Krebs</a> (534)</li>
+	<li><a href="https://krebsonsecurity.com/2013/12/cards-stolen-in-target-breach-flood-underground-markets/">Cards Stolen in Target Breach Flood Underground Markets</a> (445)</li>
+	<li><a href="https://krebsonsecurity.com/2013/05/reports-liberty-reserve-founder-arrested-site-shuttered/">Reports: Liberty Reserve Founder Arrested, Site Shuttered</a> (416)</li>
+	<li><a href="https://krebsonsecurity.com/2015/08/was-the-ashley-madison-database-leaked/">Was the Ashley Madison Database Leaked?</a> (376)</li>
+	<li><a href="https://krebsonsecurity.com/2021/01/ddos-guard-to-forfeit-internet-space-occupied-by-parler/">DDoS-Guard To Forfeit Internet Space Occupied by Parler</a> (374)</li>
+	<li><a href="https://krebsonsecurity.com/2014/05/true-goodbye-using-truecrypt-is-not-secure/">True Goodbye: 'Using TrueCrypt Is Not Secure'</a> (363)</li>
+	<li><a href="https://krebsonsecurity.com/2015/08/who-hacked-ashley-madison/">Who Hacked Ashley Madison?</a> (361)</li>
+</ul>
+</aside>
+<aside id="media_image-2" class="widget widget_media_image"><p class="widget-title">Why So Many Top Hackers Hail from Russia</p><a href="https://krebsonsecurity.com/2017/06/why-so-many-top-hackers-hail-from-russia/"><img width="580" height="389" src="https://krebsonsecurity.com/wp-content/uploads/2017/06/computered-580x389.png" class="image wp-image-39684  attachment-medium size-medium" alt="" loading="lazy" style="max-width: 100%; height: auto;" srcset="https://krebsonsecurity.com/wp-content/uploads/2017/06/computered-580x389.png 580w, https://krebsonsecurity.com/wp-content/uploads/2017/06/computered-768x514.png 768w, https://krebsonsecurity.com/wp-content/uploads/2017/06/computered-940x630.png 940w, https://krebsonsecurity.com/wp-content/uploads/2017/06/computered.png 1551w" sizes="(max-width: 580px) 100vw, 580px" /></a></aside><aside id="widget_sp_image-11" class="widget widget_sp_image"><p class="widget-title">Category: Web Fraud 2.0</p><a href="https://krebsonsecurity.com/category/web-fraud-2-0/" target="_blank" class="widget_sp_image-image-link" title="Category: Web Fraud 2.0"><img width="227" height="400" alt="Criminnovations" class="attachment-medium aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2013/11/cybercrimeinnovations-227x400.png" /></a><div class="widget_sp_image-description" ><p>Innovations from the Underground</p>
+</div></aside><aside id="widget_sp_image-12" class="widget widget_sp_image"><a href="https://krebsonsecurity.com/2014/03/are-credit-monitoring-services-worth-it/" target="_blank" class="widget_sp_image-image-link"><img width="285" height="189" class="attachment-medium aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2014/03/shreddedID-copy-285x189.png 285w, https://krebsonsecurity.com/wp-content/uploads/2014/03/shreddedID-copy-600x399.png 600w, https://krebsonsecurity.com/wp-content/uploads/2014/03/shreddedID-copy.png 849w" sizes="(max-width: 285px) 100vw, 285px" src="https://krebsonsecurity.com/wp-content/uploads/2014/03/shreddedID-copy-285x189.png" /></a><div class="widget_sp_image-description" ><p>ID Protection Services Examined</p>
+</div></aside><aside id="widget_sp_image-13" class="widget widget_sp_image"><p class="widget-title">Is Antivirus Dead?</p><a href="https://krebsonsecurity.com/2014/05/antivirus-is-dead-long-live-antivirus/" target="_blank" class="widget_sp_image-image-link" title="Is Antivirus Dead?"><img width="285" height="161" alt="Is Antivirus Dead?" class="attachment-medium aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2014/05/cryptservices-285x161.png 285w, https://krebsonsecurity.com/wp-content/uploads/2014/05/cryptservices-600x339.png 600w, https://krebsonsecurity.com/wp-content/uploads/2014/05/cryptservices.png 945w" sizes="(max-width: 285px) 100vw, 285px" src="https://krebsonsecurity.com/wp-content/uploads/2014/05/cryptservices-285x161.png" /></a><div class="widget_sp_image-description" ><p>The reasons for its decline</p>
+</div></aside><aside id="widget_sp_image-14" class="widget widget_sp_image"><p class="widget-title">The Growing Tax Fraud Menace</p><a href="https://krebsonsecurity.com/category/tax-refund-fraud/" target="_blank" class="widget_sp_image-image-link" title="The Growing Tax Fraud Menace"><img width="285" height="285" alt="The Growing Tax Fraud Menace" class="attachment-medium aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2014/04/taxfraud-285x285.jpg 285w, https://krebsonsecurity.com/wp-content/uploads/2014/04/taxfraud-150x150.jpg 150w, https://krebsonsecurity.com/wp-content/uploads/2014/04/taxfraud-600x600.jpg 600w, https://krebsonsecurity.com/wp-content/uploads/2014/04/taxfraud.jpg 693w" sizes="(max-width: 285px) 100vw, 285px" src="https://krebsonsecurity.com/wp-content/uploads/2014/04/taxfraud-285x285.jpg" /></a><div class="widget_sp_image-description" ><p>File 'em Before the Bad Guys Can </p>
+</div></aside><aside id="widget_sp_image-17" class="widget widget_sp_image"><p class="widget-title">Inside a Carding Shop</p><a href="https://krebsonsecurity.com/2014/06/peek-inside-a-professional-carding-shop/" target="_blank" class="widget_sp_image-image-link" title="Inside a Carding Shop"><img width="194" height="340" alt="Inside a Carding Shop" class="attachment-medium aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2014/06/mcdumpalsjoined.png" /></a><div class="widget_sp_image-description" ><p>A crash course in carding. </p>
+</div></aside><aside id="widget_sp_image-18" class="widget widget_sp_image"><p class="widget-title">Beware Social Security Fraud</p><a href="https://krebsonsecurity.com/2013/09/crooks-hijack-retirement-funds-via-ssa-portal/" target="_blank" class="widget_sp_image-image-link" title="Beware Social Security Fraud"><img width="285" height="293" alt="Beware Social Security Fraud" class="attachment-full aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2016/09/myssn-285x293.png" /></a><div class="widget_sp_image-description" ><p>Sign up, or Be Signed Up! </p>
+</div></aside><aside id="widget_sp_image-2" class="widget widget_sp_image"><p class="widget-title">How Was Your Card Stolen?</p><a href="https://krebsonsecurity.com/2015/01/how-was-your-credit-card-stolen/" target="_blank" class="widget_sp_image-image-link" title="How Was Your Card Stolen?"><img width="285" height="285" alt="How Was Your Card Stolen?" class="attachment-full aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2016/09/carddominoes-285x285.jpg 285w, https://krebsonsecurity.com/wp-content/uploads/2016/09/carddominoes-285x285-150x150.jpg 150w" sizes="(max-width: 285px) 100vw, 285px" src="https://krebsonsecurity.com/wp-content/uploads/2016/09/carddominoes-285x285.jpg" /></a><div class="widget_sp_image-description" ><p>Finding out is not so easy. </p>
+</div></aside><aside id="widget_sp_image-22" class="widget widget_sp_image"><p class="widget-title">Krebs&#8217;s 3 Rules&#8230;</p><a href="https://krebsonsecurity.com/2011/05/krebss-3-basic-rules-for-online-safety/" target="_blank" class="widget_sp_image-image-link" title="Krebs&#8217;s 3 Rules&#8230;"><img width="300" height="300" alt="Krebs&#8217;s 3 Rules&#8230;" class="attachment-medium aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2011/05/three-300x300.jpg 300w, https://krebsonsecurity.com/wp-content/uploads/2011/05/three-150x150.jpg 150w, https://krebsonsecurity.com/wp-content/uploads/2011/05/three.jpg 347w" sizes="(max-width: 300px) 100vw, 300px" src="https://krebsonsecurity.com/wp-content/uploads/2011/05/three-300x300.jpg" /></a><div class="widget_sp_image-description" ><p>...For Online Safety. </p>
+</div></aside>		</div><!-- #secondary -->
+		</div><!-- #main .wrapper -->
+	
+	<div id="publisho-footer" class="widget-area">
+				<div class="footer-widget">
+                				</div>
+				<div class="footer-widget">
+								</div>
+				<div class="footer-widget">
+								</div>
+	</div>
+
+	<div class="site-wordpress">
+					&copy; Krebs on Security<br>
+	</div>
+	<!-- .site-info --><div class="clear"></div>
+</div><!-- #page -->
+
+<script type='text/javascript' src='https://krebsonsecurity.com/wp-content/themes/kos-mar2021/js/slicknav.js?ver=5.8.2' id='publisho-mobile-navigation-js'></script>
+<script type='text/javascript' src='https://krebsonsecurity.com/wp-includes/js/wp-embed.min.js?ver=5.8.2' id='wp-embed-js'></script>
+</body>
+</html>
+<!--
+Performance optimized by W3 Total Cache. Learn more: https://www.boldgrid.com/w3-total-cache/
+
+Object Caching 224/399 objects using memcached
+Page Caching using memcached 
+Database Caching 7/25 queries in 0.010 seconds using memcached
+
+Served from: krebsonsecurity.com @ 2021-12-10 15:35:02 by W3 Total Cache
+-->

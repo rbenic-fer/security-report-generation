@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<!--[if IE 7]>
+<html class="ie ie7" lang="en-US">
+<![endif]-->
+<!--[if IE 8]>
+<html class="ie ie8" lang="en-US">
+<![endif]-->
+<!--[if !(IE 7) | !(IE 8)  ]><!-->
+<html lang="en-US">
+<!--<![endif]-->
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width" />
+<link rel="profile" href="http://gmpg.org/xfn/11" />
+<!--[if lt IE 9]>
+<script src="https://krebsonsecurity.com/wp-content/themes/kos-mar2021/js/html5.js" type="text/javascript"></script>
+<![endif]-->
+<title>Krebs on Security &#8211; Page 64 &#8211; In-depth security news and investigation</title>
+<meta name='robots' content='max-image-preview:large' />
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="Krebs on Security &raquo; Feed" href="https://krebsonsecurity.com/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Krebs on Security &raquo; Comments Feed" href="https://krebsonsecurity.com/comments/feed/" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.1.0\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.1.0\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/krebsonsecurity.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=5.8.2"}};
+			!function(e,a,t){var n,r,o,i=a.createElement("canvas"),p=i.getContext&&i.getContext("2d");function s(e,t){var a=String.fromCharCode;p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,e),0,0);e=i.toDataURL();return p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,t),0,0),e===i.toDataURL()}function c(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(o=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},r=0;r<o.length;r++)t.supports[o[r]]=function(e){if(!p||!p.fillText)return!1;switch(p.textBaseline="top",p.font="600 32px Arial",e){case"flag":return s([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])?!1:!s([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!s([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]);case"emoji":return!s([10084,65039,8205,55357,56613],[10084,65039,8203,55357,56613])}return!1}(o[r]),t.supports.everything=t.supports.everything&&t.supports[o[r]],"flag"!==o[r]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[o[r]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(n=t.source||{}).concatemoji?c(n.concatemoji):n.wpemoji&&n.twemoji&&(c(n.twemoji),c(n.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+	<link rel='stylesheet' id='colorbox-theme1-css'  href='https://krebsonsecurity.com/wp-content/plugins/jquery-lightbox-for-native-galleries/colorbox/theme1/colorbox.css?ver=1.3.14' type='text/css' media='screen' />
+<link rel='stylesheet' id='wp-block-library-css'  href='https://krebsonsecurity.com/wp-includes/css/dist/block-library/style.min.css?ver=5.8.2' type='text/css' media='all' />
+<link rel='stylesheet' id='contact-form-7-css'  href='https://krebsonsecurity.com/wp-content/plugins/contact-form-7/includes/css/styles.css?ver=5.5.3' type='text/css' media='all' />
+<link rel='stylesheet' id='publisho-style-css'  href='https://krebsonsecurity.com/wp-content/themes/kos-mar2021/style.css?subver=1.2&#038;ver=5.8.2' type='text/css' media='all' />
+<style id='publisho-style-inline-css' type='text/css'>
+
+	.themonic-nav .current-menu-item > a, .themonic-nav .current-menu-ancestor > a, .themonic-nav .current_page_item > a, .themonic-nav .current_page_ancestor > a {
+		background: #cc6600;
+	}
+	.themonic-nav ul.nav-menu, .themonic-nav div.nav-menu > ul {
+		border-bottom: 5px solid #cc6600;
+	}
+	#site-navigation .topheadmenu a {
+    background: rgba(0, 0, 0, 0);
+	}
+	.themonic-nav li a:hover {
+		background: #cc6600;
+	}
+	.themonic-nav li:hover {
+		background: #cc6600;
+	}.wrapper .flexslider {margin: 0 0 30px;}.frontp .btm-wrap {
+    border-top: 1px solid #e9e9e9;
+	}
+	.entry-summary {
+    border-top: none;
+	}.frontp .btm-wrap { margin-bottom: 30px;}.site { font-size:14px;}.site { font-family:'Roboto', arial ;}
+</style>
+<link rel='stylesheet' id='publisho-custom-style-css'  href='https://krebsonsecurity.com/wp-content/themes/kos-mar2021/custom.css?subver=1.2&#038;ver=5.8.2' type='text/css' media='all' />
+<!--[if lt IE 9]>
+<link rel='stylesheet' id='publisho-ie-css'  href='https://krebsonsecurity.com/wp-content/themes/kos-mar2021/css/ie.css?ver=20160606' type='text/css' media='all' />
+<![endif]-->
+<link rel='stylesheet' id='fontawesome-css-css'  href='https://krebsonsecurity.com/wp-content/themes/kos-mar2021/fonts/font-awesome.min.css?ver=5.8.2' type='text/css' media='all' />
+<link rel='stylesheet' id='publisho_custom_fonts-css'  href='//fonts.googleapis.com/css?family=Roboto%3Aregular%2Citalic%2C500%26subset%3Dlatin%2C' type='text/css' media='screen' />
+<script type='text/javascript' src='https://krebsonsecurity.com/wp-includes/js/jquery/jquery.min.js?ver=3.6.0' id='jquery-core-js'></script>
+<script type='text/javascript' src='https://krebsonsecurity.com/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.3.2' id='jquery-migrate-js'></script>
+<script type='text/javascript' src='https://krebsonsecurity.com/wp-content/plugins/jquery-lightbox-for-native-galleries/colorbox/jquery.colorbox-min.js?ver=1.3.14' id='colorbox-js'></script>
+<link rel="https://api.w.org/" href="https://krebsonsecurity.com/wp-json/" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://krebsonsecurity.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://krebsonsecurity.com/wp-includes/wlwmanifest.xml" /> 
+<meta name="generator" content="WordPress 5.8.2" />
+<!-- JavaScript Pull-Quotes plugin v2.2 -->
+	<link rel="stylesheet" href="https://krebsonsecurity.com/wp-content/plugins/jspullquotes/resources/jspullquotes-core.css" type="text/css" />
+	<link rel="stylesheet" href="https://krebsonsecurity.com/wp-content/plugins/jspullquotes/resources/jspullquotes-default.css" type="text/css" />
+	<script type="text/javascript" src="https://krebsonsecurity.com/wp-content/plugins/jspullquotes/resources/jspullquotes.js"></script>
+	<script type="text/javascript">
+		var arrOptions = new Array("1", "1", "right", "1", "1", "blockquote", "pullquote", "pullquote pqRight");
+		pullQuoteOpts(arrOptions);
+	</script>
+<!-- end pull-quote additions -->
+<!-- jQuery Lightbox For Native Galleries v3.1.3 | http://www.viper007bond.com/wordpress-plugins/jquery-lightbox-for-native-galleries/ -->
+<script type="text/javascript">
+// <![CDATA[
+	jQuery(document).ready(function($){
+		$(".gallery").each(function(index, obj){
+			var galleryid = Math.floor(Math.random()*10000);
+			$(obj).find("a").colorbox({rel:galleryid, maxWidth:"95%", maxHeight:"95%"});
+		});
+		$("a.lightbox").colorbox({maxWidth:"95%", maxHeight:"95%"});
+	});
+// ]]>
+</script>
+<style type="text/css" id="custom-background-css">
+body.custom-background { background-color: #ffffff; }
+</style>
+	<link rel="me" href="https://twitter.com/briankrebs" /><meta name="twitter:widgets:link-color" content="#000000" /><meta name="twitter:widgets:border-color" content="#000000" /><meta name="twitter:partner" content="tfwp" />
+<meta name="twitter:card" content="summary" /><meta name="twitter:title" content="Krebs on Security" /><meta name="twitter:site" content="@briankrebs" /><meta name="twitter:description" content="In-depth security news and investigation" />
+</head>
+<body class="home blog paged custom-background paged-64 custom-background-white single-author frontp hfeed">
+<div id="page" class="site">
+	<!-- <div class="publisho-top-mobile-nav clear"></div> -->
+	<div class="themonic-logo themonic-ad3"><div class="a-statement">Advertisement</div><a href="https://ninjio.com/lp46d-krebs/">
+<img src="/b-ninjio/9.png">
+</a>
+</div>
+	<div class="themonic-logo themonic-ad6"><div class="a-statement">Advertisement</div><a href="https://securityscorecard.com/instant-security-scorecard?utm_source=krebs+on+security&amp;utm_medium=display&amp;utm_campaign=instant+scorecard&amp;utm_term=A&amp;utm_content=1240x160">
+<img src="/b-securityscorecard/2.jpg">
+</a></div>
+	<nav id="site-navigation" class="themonic-nav" role="navigation">
+	</nav><!-- #site-navigation -->
+	<div class="clear"></div>
+	<header id="masthead" class="site-header" role="banner">
+ 					<div class="desktop-social">
+						<div class="socialmedia">
+							<a href="http://twitter.com/briankrebs" target="_blank"><i class="fa fa-twitter"></i></a> 
+															<a class="rss" href="https://krebsonsecurity.com/feed/" target="_blank"><i class="fa fa-rss"></i></a>	
+									<a class="rss" href="https://www.linkedin.com/in/bkrebs/" target="_blank"><i class="fa fa-linkedin"></i></a>	
+								</div>
+				 	</div>
+																						   
+		
+		<div class="themonic-logo responsive-img-container">
+			<a href="https://krebsonsecurity.com/" title="Krebs on Security" rel="home"><img src="https://krebsonsecurity.com/wp-content/uploads/2021/03/kos-27-03-2021.jpg" alt="Krebs on Security"></a>
+		</div>
+
+					<div class="mobile-social">
+						<div class="socialmedia">
+							<a href="http://twitter.com/briankrebs" target="_blank"><i class="fa fa-twitter"></i></a> 
+															<a class="rss" href="https://krebsonsecurity.com/feed/" target="_blank"><i class="fa fa-rss"></i></a>	
+									<a class="rss" href="https://www.linkedin.com/in/bkrebs/" target="_blank"><i class="fa fa-linkedin"></i></a>	
+								</div>
+					</div>
+		
+				<!-- <div class="publisho-mobile-nav clear"></div> -->
+		<nav id="site-navigation" class="themonic-nav" role="navigation">
+			<a class="assistive-text" href="#content" title="Skip to content">Skip to content</a>
+			<div id="menu-top" class="nav-menu"><ul>
+<li ><a href="https://krebsonsecurity.com/">Home</a></li><li class="page_item page-item-2"><a href="https://krebsonsecurity.com/about/">About the Author</a></li>
+<li class="page_item page-item-645"><a href="https://krebsonsecurity.com/cpm/">Advertising/Speaking</a></li>
+</ul></div>
+		</nav><!-- #site-navigation -->
+		<div class="clear"></div>
+	</header><!-- #masthead -->
+	<div id="main" class="wrapper">
+		<div id="primary" class="site-content">
+	
+
+	
+		<div id="content" role="main">
+
+		<article id="post-39792" class="post-39792 post type-post status-publish format-standard hentry category-other tag-bestbuy tag-binaryvision-co-il tag-bluecoat tag-danielkaye02gmail-com tag-deutsche-telekom tag-govrat tag-infoarmor tag-mirai tag-parkajacketsgmail-com tag-popopret tag-spdr tag-spdr01gmail-com tag-spider-man tag-symantec tag-vdos">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2017/07/who-is-the-govrat-author-and-mirai-botmaster-bestbuy/" title="Permalink to Who is the GovRAT Author and Mirai Botmaster &#8216;Bestbuy&#8217;?" rel="bookmark">Who is the GovRAT Author and Mirai Botmaster &#8216;Bestbuy&#8217;?</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">July 5, 2017</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2017/07/who-is-the-govrat-author-and-mirai-botmaster-bestbuy/#comments">37 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>In February 2017, authorities in the United Kingdom arrested a 29-year-old U.K. man on suspicion of knocking more than 900,000 Germans offline in an attack tied to <strong>Mirai</strong>, a malware strain that enslaves Internet of Things (IoT) devices like security cameras and Internet routers for use in large-scale cyberattacks. Investigators haven&#8217;t yet released the man&#8217;s name, but news reports suggest he may be better known by the hacker handle &#8220;<strong>Bestbuy</strong>.&#8221; This post will follow a trail of clues back to one likely real-life identity of Bestbuy.</p>
+<p>At the end of November 2016, a <a href="https://www.flashpoint-intel.com/blog/cybercrime/new-mirai-variant-involved-latest-deutsche-telekom-outage/" target="_blank">modified version of Mirai</a> began spreading across the networks of German ISP <strong>Deutsche Telekom</strong>. This version of the Mirai worm spread so quickly that the very act of scanning for new infectable hosts overwhelmed the devices doing the scanning, causing outages for more than 900,000 customers. The same botnet had previously been tied to <a href="https://motherboard.vice.com/en_us/article/nz7ky7/hackers-say-knocking-thousands-of-brits-offline-was-an-accident-mirai" target="_blank">attacks on U.K. broadband providers Post Office and Talk Talk</a>.</p>
+<p><img loading="lazy" class="aligncenter size-medium wp-image-39804" src="https://krebsonsecurity.com/wp-content/uploads/2017/07/dtoutage-580x678.png" alt="dtoutage" width="580" height="678" srcset="https://krebsonsecurity.com/wp-content/uploads/2017/07/dtoutage-580x678.png 580w, https://krebsonsecurity.com/wp-content/uploads/2017/07/dtoutage-768x898.png 768w, https://krebsonsecurity.com/wp-content/uploads/2017/07/dtoutage.png 794w" sizes="(max-width: 580px) 100vw, 580px" /></p>
+<p>Security firm <strong>Tripwire</strong> <a href="https://www.tripwire.com/state-of-security/security-data-protection/iot/peter-parker-just-hacked-900000-routers/" target="_blank">published a writeup</a> on that failed Mirai attack, noting that the domain names tied to servers used to coordinate the activities of the botnet were registered variously to a &#8220;Peter Parker&#8221; and &#8220;<strong>Spider man</strong>,&#8221; and to a street address in Israel (27 Hofit St). We&#8217;ll come back to Spider Man in a moment.</p>
+<p>According to multiple security firms, the Mirai botnet responsible for the Deutsche Telekom outage was controlled via servers at the Internet address <strong>62.113.238.138</strong>. <strong>Farsight Security</strong>, a company that maps which domain names are tied to which Internet addresses over time, reports that this address has <a href="https://krebsonsecurity.com/wp-content/uploads/2017/07/farsight-62-113-238-138.txt" target="_blank">hosted just nine domains</a>.</p>
+<p>The only one of those domains that is not related to Mirai is <strong>dyndn-web[dot]com</strong>, which according to <a href="https://www.bluecoat.com/es/node/18554" target="_blank">a 2015 report</a> from <strong>BlueCoat</strong> (now <strong>Symantec</strong>) was a domain tied to the use and sale of a keystroke logging remote access trojan (RAT) called &#8220;<strong>GovRAT</strong>.&#8221; The trojan is documented to have been used in numerous cyber espionage campaigns against governments, financial institutions, defense contractors and more than 100 corporations.</p>
+<p><a href="http://infoarmor.com/products-services/targeted-intelligence/resources/" target="_blank">Another report on GovRAT</a> &#8212; this one from security firm <strong>InfoArmor</strong> &#8212; shows that the GovRAT malware was sold on Dark Web cybercrime forums by a hacker or hackers who went by the nicknames BestBuy and &#8220;Popopret&#8221; (some experts believe these were just two different identities managed by the same cybercriminal).</p>
+<div id="attachment_39794" style="width: 590px" class="wp-caption aligncenter"><img aria-describedby="caption-attachment-39794" loading="lazy" class="size-medium wp-image-39794" src="https://krebsonsecurity.com/wp-content/uploads/2017/07/govrathell-580x249.png" alt="The hacker &quot;bestbuy&quot; selling his Govrat trojan on the dark web forum &quot;Hell.&quot; Image: InfoArmor." width="580" height="249" srcset="https://krebsonsecurity.com/wp-content/uploads/2017/07/govrathell-580x249.png 580w, https://krebsonsecurity.com/wp-content/uploads/2017/07/govrathell-768x329.png 768w, https://krebsonsecurity.com/wp-content/uploads/2017/07/govrathell-940x403.png 940w, https://krebsonsecurity.com/wp-content/uploads/2017/07/govrathell.png 1437w" sizes="(max-width: 580px) 100vw, 580px" /><p id="caption-attachment-39794" class="wp-caption-text">The hacker &#8220;bestbuy&#8221; selling his GovRAT trojan on the dark web forum &#8220;Hell.&#8221; Image: InfoArmor.</p></div>
+<p>GovRAT has been for sale on various other malware and exploit-related sites since at least 2014. On <strong>oday[dot]today</strong>, for example, GovRAT was sold by a user who picked the nickname <strong>Spdr</strong>, and who used the email address <strong>spdr01@gmail.com</strong>.</p>
+<p>Recall that the domains used to control the Mirai botnet that hit <strong>Deutsche Telekom</strong> all had some form of Spider Man in the domain registration records. Also, recall that the controller used to manage the GovRAT trojan and that Mirai botnet were both at one time hosted on the same server with just a handful of other (Mirai-related) domains.</p>
+<p>According to <a href="https://www.infoarmor.com/wp-content/uploads/2016/04/Advanced_Persistent_Threats_Code_Signing.pdf" target="_blank">a separate report</a> (PDF) from InfoArmor, GovRAT also was sold alongside a service that allows anyone to digitally sign their malware using code-signing certificates stolen from legitimate companies. InfoArmor said the digital signature it found related to the service was issued to an open source developer Singh Aditya, using the email address <strong>parkajackets@gmail.com</strong>.</p>
+<p>Interestingly, both of these email addresses &#8212; parkajackets@gmail.com and spdr01@gmail.com &#8212; were connected to similarly-named user accounts at vDOS, for years the largest DDoS-for-hire service (that is, until KrebsOnSecurity last fall <a href="https://krebsonsecurity.com/2016/09/alleged-vdos-proprietors-arrested-in-israel/" target="_blank">outed its proprietors</a> as two 18-year-old Israeli men). </p>
+<p>Last summer <a href="https://krebsonsecurity.com/2016/09/israeli-online-attack-service-vdos-earned-600000-in-two-years/" target="_blank">vDOS got massively hacked</a>, and a copy of its user and payments databases was shared with this author and with U.S. federal law enforcement agencies. The leaked database shows that both of those email addresses are tied to accounts on vDOS named &#8220;bestbuy&#8221; (bestbuy and bestbuy2).</p>
+<div id="attachment_39802" style="width: 590px" class="wp-caption aligncenter"><img aria-describedby="caption-attachment-39802" loading="lazy" class="size-medium wp-image-39802" src="https://krebsonsecurity.com/wp-content/uploads/2017/07/0daytoday-580x426.png" alt="Spdr01's sales listing for the GovRAT trojan on a malware and exploits site shows he used the email address spdr01@gmail.com" width="580" height="426" srcset="https://krebsonsecurity.com/wp-content/uploads/2017/07/0daytoday-580x426.png 580w, https://krebsonsecurity.com/wp-content/uploads/2017/07/0daytoday-768x564.png 768w, https://krebsonsecurity.com/wp-content/uploads/2017/07/0daytoday-940x691.png 940w, https://krebsonsecurity.com/wp-content/uploads/2017/07/0daytoday.png 1185w" sizes="(max-width: 580px) 100vw, 580px" /><p id="caption-attachment-39802" class="wp-caption-text">Spdr01&#8217;s sales listing for the GovRAT trojan on a malware and exploits site shows he used the email address spdr01@gmail.com</p></div>
+<p>The leaked vDOS database also contained detailed records of the Internet addresses that vDOS customers used to log in to the attack-for-hire service. Those logs show that the bestbuy and bestbuy2 accounts logged in repeatedly from several different IP addresses in the United Kingdom and in Hong Kong.</p>
+<p>The technical support logs from vDOS indicate that the reason the vDOS database shows two different accounts named &#8220;bestbuy&#8221; is the vDOS administrators banned the original &#8220;bestbuy&#8221; account after it was seen logged into the account from both the UK and Hong Kong. Bestbuy&#8217;s pleas to the vDOS administrators that he was not sharing the account and that the odd activity could be explained by his recent trip to Hong Kong did not move them to refund his money or reactivate his original account.</p>
+<p>A number of clues in the data above suggest that the person responsible for both this Mirai botnet and GovRAT had ties to Israel. For one thing, the email address spdr01@gmail.com was used to register at least three domain names, all of which are tied back to <a href="https://krebsonsecurity.com/wp-content/uploads/2017/07/domaintoolsreversewhoisonspdr01atgmaildotcom.txt" target="_blank">a large family in Israel</a>. What&#8217;s more, in several dark web postings, Bestbuy can be seen asking if anyone has any &#8220;weed for sale in Israel,&#8221; noting that he doesn&#8217;t want to risk receiving drugs in the mail.</p>
+<p>The domains tied to spdr01@gmail.com led down a very deep rabbit hole that ultimately went nowhere useful for this investigation. But it appears the nickname &#8220;spdr01&#8221; and email spdr01@gmail.com was used <a href="https://www.exploit-db.com/exploits/6323/" target="_blank">as early as 2008</a> by <a href="https://github.com/sensepost/autoDANE/blob/master/software/tomcat_check/tomcat-scan.nse" target="_blank">a core member</a> of the Israeli hacking forum and IRC chat room <strong>Binaryvision.co.il</strong>. <a href="https://krebsonsecurity.com/2017/07/who-is-the-govrat-author-and-mirai-botmaster-bestbuy/#more-39792" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+	<div id="between_article_ad" class="themonic-ad5"><a href="https://www.cybereason.com/live-attack-simulation-08-05-21?utm_source=krebs&amp;utm_medium=display&amp;utm_campaign=q4">
+<img src="/b-cybereason/12.jpg">
+</a></div>	<article id="post-39768" class="post-39768 post type-post status-publish format-standard hentry category-other tag-can-spam tag-dan-balsam tag-eff tag-electronic-frontier-foundation tag-ftc tag-joe-jerome tag-ron-guilmette">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2017/07/is-it-time-to-can-the-can-spam-act/" title="Permalink to Is it Time to Can the CAN-SPAM Act?" rel="bookmark">Is it Time to Can the CAN-SPAM Act?</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">July 2, 2017</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2017/07/is-it-time-to-can-the-can-spam-act/#comments">72 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>Regulators at the <strong>U.S. Federal Trade Commission</strong> (FTC) are asking for public comment on the effectiveness of the <strong>CAN-SPAM Act</strong>, a 14-year-old federal law that seeks to crack down on unsolicited commercial email. Judging from an unscientific survey by this author, the FTC is bound to get an earful.</p>
+<p><img loading="lazy" class="aligncenter size-medium wp-image-39769" src="https://krebsonsecurity.com/wp-content/uploads/2017/07/spamspamspam-580x453.png" alt="spamspamspam" width="580" height="453" srcset="https://krebsonsecurity.com/wp-content/uploads/2017/07/spamspamspam-580x453.png 580w, https://krebsonsecurity.com/wp-content/uploads/2017/07/spamspamspam-768x599.png 768w, https://krebsonsecurity.com/wp-content/uploads/2017/07/spamspamspam.png 829w" sizes="(max-width: 580px) 100vw, 580px" /></p>
+<p>Signed into law by <strong>President George W. Bush</strong> in 2003, the &#8220;<a href="https://en.wikipedia.org/wiki/CAN-SPAM_Act_of_2003" target="_blank">Controlling the Assault of Non-Solicited Pornography and Marketing Act</a>&#8221; was passed in response to a rapid increase in junk email marketing.</p>
+<p>The law makes it a misdemeanor to spoof the information in the &#8220;from:&#8221; field of any marketing message, and prohibits the sending of sexually-oriented spam without labeling it &#8220;sexually explicit.&#8221; The law also requires spammers to offer recipients a way to opt-out of receiving further messages, and to process unsubscribe requests within 10 business days.</p>
+<p>The &#8220;CAN&#8221; in CAN-SPAM was a play on the verb &#8220;to can,&#8221; as in &#8220;to put an end to,&#8221; or &#8220;to throw away,&#8221; but critics of the law often refer to it as the YOU-CAN-SPAM Act, charging that it essentially legalized spamming. That&#8217;s partly because the law does not require spammers to get permission before they send junk email. But also because the act prevents states from enacting stronger anti-spam protections, and it bars individuals from suing spammers except under laws not specific to email.</p>
+<p>Those same critics often argue that the law is rarely enforced, although <a href="https://www.ftc.gov/search/site/can-spam%20settle" target="_blank">a search on the FTC&#8217;s site</a> for CAN-SPAM press releases produces quite a few civil suits brought by the commission against marketers over the years. Nevertheless, any law affecting Internet commerce is bound to need a few tweaks over the years, and CAN-SPAM has been showing its age for some time now.</p>
+<p><strong>Ron Guilmette</strong>, an anti-spam activists whose work has been <a href="https://krebsonsecurity.com/?s=guilmette&amp;x=0&amp;y=0" target="_blank">profiled extensively on this blog</a>, didn&#8217;t sugar-coat it, calling CAN-SPAM &#8220;a travesty that was foisted upon the American people by a small handful of powerful companies, most notably AOL and Microsoft, and by their obedient lackeys in Congress.&#8221;</p>
+<p>According to Guilmette, the Act was deliberately fashioned so as to nullify California&#8217;s more restrictive anti-spam law, and it made it impossible for individual victims of spam to sue spam senders. Rather, he said, that right was reserved only for the same big companies that lobbied heavily for the passage of the CAN-SPAM Act.</p>
+<p><span class="pullquote pqleft">&#8220;The entire Act should be thrown out and replaced,&#8221; Guilmette said. &#8220;It hasn&#8217;t worked to control spam, and it has in fact only served to make the problem worse.&#8221;</span></p>
+<p>In the fix-it-don&#8217;t-junk-it camp is <strong>Joe Jerome</strong>, policy counsel for the <a href="https://www.eff.org" target="_blank">Electronic Frontier Foundation</a> (EFF), a nonprofit digital rights advocacy group. Jerome allowed that CAN-SPAM is far from perfect, but he said it has helped to set some ground rules.</p>
+<p>&#8220;In her announcement on this effort, Acting Chairman Ohlhausen hinted that regulations can be excessive, outdated, or unnecessary,&#8221; Jerome said. &#8220;Nothing can be further from the case with respect to spam. CAN-SPAM was largely ineffective in stopping absolutely bad, malicious spammers, but it&#8217;s been incredibly important in creating a baseline for commercial email senders. Advertising transparency and easy opt-outs should not be viewed as a burden on companies, and I&#8217;d worry that weakening CAN-SPAM would set us back. If anything, we need stronger standards around opt-outs and quicker turn-around time, not less.&#8221; <a href="https://krebsonsecurity.com/2017/07/is-it-time-to-can-the-can-spam-act/#more-39768" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+	<div class="themonic-ad2"><div class="a-statement">Advertisement</div><a href="https://www.akamai.com/blog/security/attacking-a-macro-security-problem-with-micro-segmentation?utm_source=krebsonsecurity&amp;utm_medium=display&amp;utm_id=GL_SecureWorkforce_Guardicore&amp;utm_campaign=F-MC-52610&amp;utm_content=Guardicore">
+<img src="/b-akamai/140.png">
+</a></div>	<article id="post-39745" class="post-39745 post type-post status-publish format-standard hentry category-other tag-atm-fraud-inspection-guide tag-barclays-bank tag-first-atm tag-ncr">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2017/06/so-you-think-you-can-spot-a-skimmer/" title="Permalink to So You Think You Can Spot a Skimmer?" rel="bookmark">So You Think You Can Spot a Skimmer?</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">June 30, 2017</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2017/06/so-you-think-you-can-spot-a-skimmer/#comments">47 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>This week marks the 50th anniversary of the automated teller machine &#8212; better known to most people as the ATM or cash machine. Thanks to the myriad methods thieves have devised to fleece unsuspecting cash machine users over the years, there are now more ways than ever to get ripped off at the ATM. Think you&#8217;re good at spotting the various scams? A newly released ATM fraud inspection guide may help you test your knowledge.</p>
+<p>The first cash machine opened for business on June 27, 1967 at a Barclays bank branch in Enfield, north London, but ATM transactions back then didn&#8217;t remotely resemble the way ATMs work today.</p>
+<div id="attachment_39746" style="width: 590px" class="wp-caption aligncenter"><img aria-describedby="caption-attachment-39746" loading="lazy" class="size-medium wp-image-39746" src="https://krebsonsecurity.com/wp-content/uploads/2017/06/1statm-580x380.png" alt="The first ATM was installed in Enfield, in North London, on June 27, 1967. Image: Barclays Bank." width="580" height="380" srcset="https://krebsonsecurity.com/wp-content/uploads/2017/06/1statm-580x380.png 580w, https://krebsonsecurity.com/wp-content/uploads/2017/06/1statm.png 641w" sizes="(max-width: 580px) 100vw, 580px" /><p id="caption-attachment-39746" class="wp-caption-text">The first ATM was installed in Enfield, in North London, on June 27, 1967. Image: Barclays Bank.</p></div>
+<p>The cash machines of 1967 relied not on plastic cards but instead on paper checks that the bank would send to customers in the mail. Customers would take those checks &#8212; which had little <a href="https://en.wikipedia.org/wiki/Punched_card" target="_blank">punched-card holes</a> printed across the surface &#8212; and feed them into the ATM, which would then validate the checks and dispense a small amount of cash.</p>
+<p>This week, Barclay&#8217;s turned the ATM at the same location into a gold color to mark its golden anniversary, dressing the machine with velvet ropes and a red carpet leading up to the machine&#8217;s PIN pad.</p>
+<div id="attachment_39747" style="width: 590px" class="wp-caption aligncenter"><img aria-describedby="caption-attachment-39747" loading="lazy" class="size-medium wp-image-39747" src="https://krebsonsecurity.com/wp-content/uploads/2017/06/goldatm-580x322.png" alt="The location of the world's first ATM, turned to gold to commemorate the cash machine's golden anniversary. Image: Barclays Bank." width="580" height="322" srcset="https://krebsonsecurity.com/wp-content/uploads/2017/06/goldatm-580x322.png 580w, https://krebsonsecurity.com/wp-content/uploads/2017/06/goldatm.png 701w" sizes="(max-width: 580px) 100vw, 580px" /><p id="caption-attachment-39747" class="wp-caption-text">The location of the world&#8217;s first ATM, turned to gold and commemorated with a plaque to mark the cash machine&#8217;s golden anniversary. Image: Barclays Bank.</p></div>
+<p>Chances are, the users of that gold ATM have little to worry about from skimmer scammers. But the rest of us practically need a skimming-specific dictionary to keep up with today&#8217;s increasingly ingenious thieves.</p>
+<p>These days there are an estimated three million ATMs around the globe, and a seemingly endless stream of innovative criminal skimming devices has introduced us over the years to a range of terms specific to cash machine scams like <a href="http://krebsonsecurity.com/2014/12/more-on-wiretapping-atm-skimmers/" target="_blank">wiretapping</a>, <a href="https://krebsonsecurity.com/2014/11/skimmer-innovation-wiretapping-atms/" target="_blank">eavesdropping</a>, <a href="https://krebsonsecurity.com/2012/11/beware-card-and-cash-trapping-at-the-atm/" target="_blank">card-trapping, cash-trapping</a>, <a href="https://krebsonsecurity.com/2013/12/the-biggest-skimmers-of-all-fake-atms/" target="_blank">false fascias</a>, <a href="https://krebsonsecurity.com/?s=shimming&amp;x=0&amp;y=0" target="_blank">shimming</a>, <a href="http://krebsonsecurity.com/2015/01/thieves-jackpot-atms-with-black-box-attack/" target="_blank">black box attacks</a>, <a href="https://krebsonsecurity.com/2015/11/gas-theft-gangs-fuel-pump-skimming-scams/" target="_blank">bladder bombs</a> (pump skimmers), <a href="http://krebsonsecurity.com/2014/12/more-on-wiretapping-atm-skimmers/" target="_blank">gas attacks</a>, and <a href="https://krebsonsecurity.com/2016/05/crooks-go-deep-with-deep-insert-skimmers/" target="_blank">deep insert skimmers</a>.</p>
+<p>Think you&#8217;ve got what it takes to spot the telltale signs of a skimmer? Then have a look at the <a href="https://www.ncr.com/sites/default/files/white_papers/17fin6542_atm_fraud_inspection_guide_rgb.pdf" target="_blank">ATM Fraud Inspection Guide</a> (PDF) from cash machine giant <strong>NCR Corp.</strong>, which briefly touches on the most common forms of ATM skimming and their telltale signs.</p>
+<p>For example, below are a few snippets from that guide showing different cash trapping devices made to siphon bills being dispensed from the ATM.</p>
+<div id="attachment_39748" style="width: 590px" class="wp-caption aligncenter"><img aria-describedby="caption-attachment-39748" loading="lazy" class="size-medium wp-image-39748" src="https://krebsonsecurity.com/wp-content/uploads/2017/06/cashtrapping-580x205.png" alt="Cash-trapping devices. Source: NCR." width="580" height="205" srcset="https://krebsonsecurity.com/wp-content/uploads/2017/06/cashtrapping-580x205.png 580w, https://krebsonsecurity.com/wp-content/uploads/2017/06/cashtrapping-768x272.png 768w, https://krebsonsecurity.com/wp-content/uploads/2017/06/cashtrapping-940x333.png 940w, https://krebsonsecurity.com/wp-content/uploads/2017/06/cashtrapping.png 1226w" sizes="(max-width: 580px) 100vw, 580px" /><p id="caption-attachment-39748" class="wp-caption-text">Cash-trapping devices. Source: NCR.</p></div>
+<p> <a href="https://krebsonsecurity.com/2017/06/so-you-think-you-can-spot-a-skimmer/#more-39745" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-39734" class="post-39734 post type-post status-publish format-standard hentry category-other tag-bitcoin tag-dla-piper tag-eternal-blue tag-group-ib tag-icsi tag-isaca tag-legal-week tag-maersk tag-microsoft-windows tag-ms17-010 tag-nicholas-weaver tag-petya tag-ransomware tag-shadow-brokers tag-symantec tag-uc-berkeley">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2017/06/petya-ransomware-outbreak-goes-global/" title="Permalink to &#8216;Petya&#8217; Ransomware Outbreak Goes Global" rel="bookmark">&#8216;Petya&#8217; Ransomware Outbreak Goes Global</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">June 27, 2017</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2017/06/petya-ransomware-outbreak-goes-global/#comments">87 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>A new strain of ransomware dubbed &#8220;<strong>Petya</strong>&#8221; is worming its way around the world with alarming speed. The malware is spreading using a vulnerability in <strong>Microsoft Windows</strong> that the software giant patched in March 2017 &#8212; the same bug that was exploited by the recent and prolific <a href="https://krebsonsecurity.com/?s=wannacry&amp;x=0&amp;y=0" target="_blank">WannaCry</a> ransomware strain.</p>
+<div id="attachment_39737" style="width: 590px" class="wp-caption alignright"><img aria-describedby="caption-attachment-39737" loading="lazy" class="size-medium wp-image-39737" src="https://krebsonsecurity.com/wp-content/uploads/2017/06/petya-580x335.png" alt="The ransom note that gets displayed on screens of Microsoft Windows computers infected with Petya." width="580" height="335" srcset="https://krebsonsecurity.com/wp-content/uploads/2017/06/petya-580x335.png 580w, https://krebsonsecurity.com/wp-content/uploads/2017/06/petya-768x444.png 768w, https://krebsonsecurity.com/wp-content/uploads/2017/06/petya-940x543.png 940w, https://krebsonsecurity.com/wp-content/uploads/2017/06/petya.png 1458w" sizes="(max-width: 580px) 100vw, 580px" /><p id="caption-attachment-39737" class="wp-caption-text">The ransom note that gets displayed on screens of Microsoft Windows computers infected with Petya.</p></div>
+<p>According to multiple news reports, Ukraine appears to be among the hardest hit by Petya. The country&#8217;s government, some domestic banks and largest power companies all warned today that they were dealing with fallout from Petya infections.</p>
+<p>Danish transport and energy firm <strong>Maersk</strong> said in <a href="http://www.maersk.com/en" target="_blank">a statement</a> on its Web site that &#8220;We can confirm that Maersk IT systems are down across multiple sites and business units due to a cyber attack.&#8221; In addition, Russian energy giant Rosneft <a href="https://twitter.com/RosneftRu/status/879665160012673024" target="_blank">said on Twitter</a> that it was facing a &#8220;powerful hacker attack.&#8221; However, neither company referenced ransomware or Petya.</p>
+<p>Security firm <strong>Symantec</strong> confirmed that Petya uses the &#8220;<a href="https://en.wikipedia.org/wiki/EternalBlue" target="_blank">Eternal Blue</a>&#8221; exploit, a digital weapon that was believed to have been developed by the <strong>U.S. National Security Agency</strong> and in April 2017 leaked online by a hacker group calling itself the <strong>Shadow Brokers</strong>.</p>
+<p>Microsoft <a href="https://krebsonsecurity.com/2017/03/adobe-microsoft-push-critical-security-fixes-10/" target="_blank">released a patch</a> for the Eternal Blue exploit in March (<a href="https://technet.microsoft.com/en-us/library/security/ms17-010.aspx" target="_blank">MS17-010</a>), but many businesses put off installing the fix. Many of those that procrastinated were hit with the WannaCry ransomware attacks in May. U.S. intelligence agencies assess with medium confidence that WannaCry was the work of North Korean hackers.</p>
+<p>Organizations and individuals who have not yet applied the Windows update for the Eternal Blue exploit should patch now. However, there are indications that Petya may have other tricks up its sleeve to spread inside of large networks. <a href="https://krebsonsecurity.com/2017/06/petya-ransomware-outbreak-goes-global/#more-39734" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-39489" class="post-39489 post type-post status-publish format-standard hentry category-other tag-do-not-call-registry tag-farsight-security tag-federal-communications-commission tag-federal-trade-commission tag-little-brook-media tag-martin-toha-voip-com tag-michael-lasala tag-national-association-of-credit-services-organizations tag-nomorobo tag-ringless-voicemails tag-robby-birnbaum tag-robocalls tag-system-admin-llc tag-truecaller">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2017/06/got-robocalled-dont-get-mad-get-busy/" title="Permalink to Got Robocalled? Don&#8217;t Get Mad; Get Busy." rel="bookmark">Got Robocalled? Don&#8217;t Get Mad; Get Busy.</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">June 25, 2017</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2017/06/got-robocalled-dont-get-mad-get-busy/#comments">201 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>Several times a week my cell phone receives the telephonic equivalent of spam: A robocall. On each occasion the call seems to come from a local number, but when I answer there is that telltale pause followed by an automated voice pitching some product or service. So when I heard from a reader who chose to hang on the line and see where one of these robocalls led him, I decided to dig deeper. This is the story of that investigation. Hopefully, it will inspire readers to do their own digging and help bury this annoying and intrusive practice.</p>
+<p><img loading="lazy" class="alignright size-full wp-image-39718" src="https://krebsonsecurity.com/wp-content/uploads/2017/06/robocall.png" alt="robocall" width="268" height="334" />The reader &#8212; Cedric (he asked to keep his last name out of this story) had grown increasingly aggravated with the calls as well, until one day he opted to play along by telling a white lie to the automated voice response system that called him: Yes, he said, yes he definitely was interested in credit repair services.</p>
+<p>&#8220;I lied about my name and played like I needed credit repair to buy a home,&#8221; Cedric said. &#8220;I eventually wound up speaking with a representative at creditfix.com.&#8221;</p>
+<p>The number that called Cedric &#8212; <a href="tel:(314)%20754-0123" target="_blank">314-754-0123</a> &#8212; was not in service when Cedric tried it back, suggesting it had been spoofed to make it look like it was coming from his local area. However, pivoting off of creditfix.com opened up some useful avenues of investigation.</p>
+<p>Creditfix is hosted on a server at the Internet address 208.95.62.8. According to records maintained by <strong>Farsight Security</strong> &#8212; a company that tracks which Internet addresses correspond to which domain names &#8212; that server hosts or recently hosted dozens of other Web sites (the full list is <a href="https://krebsonsecurity.com/wp-content/uploads/2017/06/DNSDB-208-95-62.8.txt" target="_blank">here</a>).</p>
+<p>Most of these domains appear tied to various credit repair services owned or run by a guy named <strong>Michael LaSala</strong> and registered to a mail drop in Las Vegas. Looking closer at who owns the 208.95.62.8 address, we find it is registered to <strong>System Admin, LLC</strong>, a Florida company that lists LaSala as a manager, according to <a href="http://search.sunbiz.org/Inquiry/CorporationSearch/SearchResultDetail?inquirytype=EntityName&amp;directionType=Initial&amp;searchNameOrder=SYSTEMADMIN%20L130000426810&amp;aggregateId=flal-l13000042681-f57d5a4a-99f9-4b44-881f-b575a29e40a6&amp;searchTerm=SystemAdmin%2C%20LLC&amp;listNameOrder=SYSTEMADMIN%20L130000426810" target="_blank">a lookup</a> at the Florida Secretary of State&#8217;s office.</p>
+<p>An Internet search for the company&#8217;s address turns up <a href="http://apps.fcc.gov/cgb/form499/499detail.cfm?FilerNum=831858" target="_blank">a filing</a> by System Admin LLC with the <strong>U.S. Federal Communications Commission </strong>(FCC).<strong> </strong>That filing shows that the CEO of System Admin is <strong>Martin Toha</strong>, an entrepreneur probably best known for founding <strong>voip.com</strong>, a voice-over-IP (VOIP) service that allows customers to make telephone calls over the Internet.</p>
+<p>Emails to the contact address at Creditfix.com elicited a response from a Sean in Creditfix&#8217;s compliance department. Sean told KrebsOnSecurity that mine was the second complaint his company had received about robocalls. Sean said he was convinced that his employer was scammed by a lead generation company that is using robocalls to quickly and illegally gin up referrals, which generate commissions for the lead generation firm.</p>
+<p>Creditfix said the robocall leads it received appear to have been referred by <strong>Little Brook Media</strong>, a marketing firm in New York City. Little Brook Media did not respond to multiple requests for comment.</p>
+<p>Robocalls are permitted for political candidates, but beyond that if the recording is a sales message and you haven&#8217;t given your written permission to get calls from the company on the other end, the call is illegal. According to the <strong>Federal Trade Commission </strong>(FTC), companies are using auto-dialers to send out thousands of phone calls every minute for an incredibly low cost. <a href="https://krebsonsecurity.com/2017/06/got-robocalled-dont-get-mad-get-busy/#more-39489" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-39699" class="post-39699 post type-post status-publish format-standard hentry category-other tag-bleepingcomputer-com tag-catalin-cimpanu tag-ceo-fraud tag-extortion tag-fbi tag-ic3-gov tag-internet-crime-complaint-center tag-ransomware">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2017/06/fbi-extortion-ceo-fraud-among-top-online-fraud-complaints-in-2016/" title="Permalink to FBI: Extortion, CEO Fraud Among Top Online Fraud Complaints in 2016" rel="bookmark">FBI: Extortion, CEO Fraud Among Top Online Fraud Complaints in 2016</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">June 23, 2017</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2017/06/fbi-extortion-ceo-fraud-among-top-online-fraud-complaints-in-2016/#comments">34 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>Online extortion, tech support scams and phishing attacks that spoof the boss were among the most costly cyber scams reported by consumers and businesses last year, according to new figures from the <strong>FBI&#8217;s Internet Crime Complaint Center</strong> (IC3).</p>
+<p>The IC3 report released Thursday correctly identifies some of the most prevalent and insidious forms of cybercrimes today, but the total financial losses tied to each crime type also underscore how infrequently victims actually report such crimes to law enforcement.</p>
+<div id="attachment_39701" style="width: 590px" class="wp-caption aligncenter"><img aria-describedby="caption-attachment-39701" loading="lazy" class="size-medium wp-image-39701" src="https://krebsonsecurity.com/wp-content/uploads/2017/06/2016ic3-580x603.png" alt="Source: Internet Crime Complaint Center (IC3)." width="580" height="603" srcset="https://krebsonsecurity.com/wp-content/uploads/2017/06/2016ic3-580x603.png 580w, https://krebsonsecurity.com/wp-content/uploads/2017/06/2016ic3-768x798.png 768w, https://krebsonsecurity.com/wp-content/uploads/2017/06/2016ic3.png 932w" sizes="(max-width: 580px) 100vw, 580px" /><p id="caption-attachment-39701" class="wp-caption-text">Source: Internet Crime Complaint Center (IC3).</p></div>
+<p>For example, the IC3 said it received 17,146 extortion-related complaints, with an adjusted financial loss totaling just over $15 million. In that category, the report identified 2,673 complaints identified as ransomware &#8212; malicious software that scrambles a victim&#8217;s most important files and holds them hostage unless and until the victim pays a ransom (usually in a virtual currency like Bitcoin).</p>
+<p>According to the IC3, the losses associated with those ransomware complaints totaled slightly more than $2.4 million. Writing for <a href="https://www.bleepingcomputer.com/forums/f/239/ransomware-help-tech-support/" target="_blank">BleepingComputer.com</a> &#8212; a tech support forum I&#8217;ve long recommended that helps countless ransomware victims &#8212; <strong>Catalin Cimpanu</strong> observes that the FBI&#8217;s ransomware numbers &#8220;are ridiculously small compared to what happens in the real world, where ransomware is one of today&#8217;s most prevalent cyber-threats.&#8221;</p>
+<p>&#8220;The only explanation is that people are paying ransoms, restoring from backups, or reinstalling PCs without filing a complaint with authorities,&#8221; Cimpanu writes.</p>
+<p>It&#8217;s difficult to know how what percentage of ransomware victims paid the ransom or were able to restore from backups, but one thing is for sure: Relatively few victims are reporting cyber fraud to federal investigators.</p>
+<p>The report notes that only an estimated 15 percent of the nation&#8217;s fraud victims report their crimes to law enforcement. For 2016, 298,728 complaints were received, with a total victim loss of $1.33 billion.</p>
+<p>If that 15 percent estimate is close to accurate, that means the real cost of cyber fraud for Americans last year was probably closer to $9 billion, and the losses from ransomware attacks upwards of $16 million. <a href="https://krebsonsecurity.com/2017/06/fbi-extortion-ceo-fraud-among-top-online-fraud-complaints-in-2016/#more-39699" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-39608" class="post-39608 post type-post status-publish format-standard hentry category-other tag-alan-paller tag-frost-sullivan tag-informatics tag-isaca tag-isc2 tag-microsoft tag-perm-state-national-research-university tag-stem-education tag-the-college-board tag-the-sans-institute">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2017/06/why-so-many-top-hackers-hail-from-russia/" title="Permalink to Why So Many Top Hackers Hail from Russia" rel="bookmark">Why So Many Top Hackers Hail from Russia</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">June 22, 2017</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2017/06/why-so-many-top-hackers-hail-from-russia/#comments">134 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>Conventional wisdom says one reason so many hackers seem to hail from Russia and parts of the former Soviet Union is that these countries have traditionally placed a much greater emphasis than educational institutions in the West on teaching information technology in middle and high schools, and yet they lack a Silicon Valley-like pipeline to help talented IT experts channel their skills into high-paying jobs. This post explores the first part of that assumption by examining a breadth of open-source data.</p>
+<p>The supply side of that conventional wisdom seems to be supported by an analysis of educational data from both the U.S. and Russia, which indicates there are several stark and important differences between how American students are taught and tested on IT subjects versus their counterparts in Eastern Europe.</p>
+<p><img loading="lazy" class="aligncenter size-medium wp-image-39684" src="https://krebsonsecurity.com/wp-content/uploads/2017/06/computered-580x389.png" alt="computered" width="580" height="389" srcset="https://krebsonsecurity.com/wp-content/uploads/2017/06/computered-580x389.png 580w, https://krebsonsecurity.com/wp-content/uploads/2017/06/computered-768x514.png 768w, https://krebsonsecurity.com/wp-content/uploads/2017/06/computered-940x630.png 940w, https://krebsonsecurity.com/wp-content/uploads/2017/06/computered.png 1551w" sizes="(max-width: 580px) 100vw, 580px" /></p>
+<p>Compared to the United States there are quite a few more high school students in Russia who choose to specialize in information technology subjects. One way to measure this is to look at the number of high school students in the two countries who opt to take the advanced placement exam for computer science.</p>
+<p>According to <a href="https://secure-media.collegeboard.org/digitalServices/pdf/research/2015/2015-Exam-Volume-Change.pdf" target="_blank">an analysis</a> (PDF) by <strong>The College Board</strong>, in the ten years between 2005 and 2016 a total of 270,000 high school students in the United States opted to take the national exam in computer science (the &#8220;<a href="https://secure-media.collegeboard.org/digitalServices/pdf/ap/ap-computer-science-principles-course-and-exam-description.pdf" target="_blank">Computer Science Advanced Placement</a>&#8221; exam).</p>
+<p>Compare that to the numbers from Russia: A <a href="http://www.cs.cmu.edu/~cfrieze/courses/a14-khenner.pdf" target="_blank">2014 study</a> (PDF) on computer science (called &#8220;Informatics&#8221; in Russia) by the <strong>Perm State National Research University</strong> found that roughly 60,000 Russian students register each year to take their nation&#8217;s equivalent to the AP exam &#8212; known as the &#8220;Unified National Examination.&#8221; Extrapolating that annual 60,000 number over ten years suggests that more than twice as many people in Russia &#8212; 600,000 &#8212; have taken the computer science exam at the high school level over the past decade.</p>
+<p>In &#8220;<a href="https://news.microsoft.com/download/presskits/citizenship/MSNTS.pdf" target="_blank">A National Talent Strategy</a>,&#8221; an in-depth analysis from <strong>Microsoft Corp.</strong> on the outlook for information technology careers, the authors warn that despite its critical and growing importance computer science is taught in only a small minority of U.S. schools. The Microsoft study notes that although there currently are just over 42,000 high schools in the United States, only 2,100 of them were certified to teach the AP computer science course in 2011.</p>
+<h4>A HEAD START</h4>
+<p>If more people in Russia than in America decide to take the computer science exam in secondary school, it may be because Russian students are required to study the subject beginning at a much younger age. Russia&#8217;s Federal Educational Standards (FES) mandate that informatics be compulsory in middle school, with any school free to choose to include it in their high school curriculum at a basic or advanced level.</p>
+<p>&#8220;In elementary school, elements of Informatics are taught within the core subjects &#8216;Mathematics&#8217; and &#8216;Technology,&#8221; the Perm University research paper notes. &#8220;Furthermore, each elementary school has the right to make [the] subject “Informatics” part of its curriculum.&#8221; <a href="https://krebsonsecurity.com/2017/06/why-so-many-top-hackers-hail-from-russia/#more-39608" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-39657" class="post-39657 post type-post status-publish format-standard hentry category-other tag-credit-card-breach tag-emv tag-experian tag-pos-malware tag-the-buckle-inc-breach tag-visa">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2017/06/credit-card-breach-at-buckle-stores/" title="Permalink to Credit Card Breach at Buckle Stores" rel="bookmark">Credit Card Breach at Buckle Stores</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">June 17, 2017</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2017/06/credit-card-breach-at-buckle-stores/#comments">59 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p><strong>The Buckle Inc.</strong>, a clothier that operates more than 450 stores in 44 U.S. states, disclosed Friday that its retail locations were hit by malicious software designed to steal customer credit card data. The disclosure came hours after KrebsOnSecurity contacted the company regarding reports from sources in the financial sector about a possible breach at the retailer.</p>
+<p><img loading="lazy" class="aligncenter size-full wp-image-39662" src="https://krebsonsecurity.com/wp-content/uploads/2017/06/buckle.png" alt="buckle" width="397" height="329" /></p>
+<p>On Friday morning, KrebsOnSecurity contacted The Buckle after receiving multiple tips from sources in the financial industry about a pattern of fraud on customer credit and debit cards which suggested a breach of point-of-sale systems at Buckle stores across the country.</p>
+<p>Later Friday evening, The Buckle Inc. released <a href="https://corporate.buckle.com/about/data-security-incident" target="_blank">a statement</a> saying that point-of-sale malware was indeed found installed on cash registers at Buckle retail stores, and that the company believes the malware was stealing customer credit card data between Oct. 28, 2016 and April 14, 2017. The Buckle said purchases made on its online store were not affected.</p>
+<p>As with the <a href="https://krebsonsecurity.com/2017/05/credit-card-breach-at-kmart-stores-again/" target="_blank">recent POS-malware based breach at Kmart</a>, The Buckle said all of its stores are equipped with EMV-capable card terminals, meaning the point-of-sale machines can accommodate newer, more secure chip-based credit and debit cards. The malware copies account data stored on the card’s magnetic stripe. Armed with that information, thieves can clone the cards and use them to buy high-priced merchandise from electronics stores and big box retailers. <a href="https://krebsonsecurity.com/2017/06/credit-card-breach-at-buckle-stores/#more-39657" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-39218" class="post-39218 post type-post status-publish format-standard hentry category-other tag-6500 tag-amateurmatch tag-cecash tag-cybererotica tag-deniro-marketing tag-farsight-security tag-nmap tag-scott-philips tag-scott-phillips tag-scottcecash-com tag-spamhaus tag-techcrunch tag-voice-media">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2017/06/inside-a-porn-pimping-spam-botnet/" title="Permalink to Inside a Porn-Pimping Spam Botnet" rel="bookmark">Inside a Porn-Pimping Spam Botnet</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">June 15, 2017</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2017/06/inside-a-porn-pimping-spam-botnet/#comments">20 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>For several months I&#8217;ve been poking at a decent-sized spam botnet that appears to be used mainly for promoting adult dating sites. Having hit a wall in my research, I decided it might be good to publish what I&#8217;ve unearthed so far to see if this dovetails with any other research out there.</p>
+<p>In late October 2016, an anonymous source shared with KrebsOnSecurity.com a list of nearly 100 URLs that &#8212; when loaded into a Firefox browser &#8212; each displayed what appeared to be a crude but otherwise effective text-based panel designed to report in real time how many &#8220;bots&#8221; were reporting in for duty.</p>
+<p><a href="http://imgur.com/a/IEhmX" target="_blank">Here&#8217;s a set of archived screenshots</a> of those counters illustrating how these various botnet controllers keep a running tab of how many &#8220;activebots&#8221; &#8212; hacked servers set up to relay spam &#8212; are sitting idly by and waiting for instructions.</p>
+<div id="attachment_39543" style="width: 590px" class="wp-caption aligncenter"><a class="lightbox" href="https://krebsonsecurity.com/wp-content/uploads/2017/05/pornspambotnetpanel.png"><img aria-describedby="caption-attachment-39543" loading="lazy" class="wp-image-39543 size-medium" src="https://krebsonsecurity.com/wp-content/uploads/2017/05/pornspambotnetpanel-580x210.png" alt=" " width="580" height="200" /></a><p id="caption-attachment-39543" class="wp-caption-text">One of the more than 100 panels linked to the same porn spamming operation. In October 2016, these 100 panels reported a total of 1.2 million active bots operating simultaneously.</p></div>
+<p>At the time, it was unclear to me how this apparent botnet was being used, and since then the total number of bots reporting in each day has shrunk considerably. During the week the above-linked screen shots were taken, this botnet had more than 1.2 million zombie machines or servers reporting each day (that screen shot archive includes roughly half of the panels found). These days, the total number of servers reporting in to this spam network fluctuates between 50,000 and 100,000.</p>
+<p>Thanks to a tip from an anti-spam activist who asked not to be named, I was able to see that the botnet appears to be busy promoting a seemingly endless network of adult dating Web sites connected to just two companies: <strong>CyberErotica</strong>, and <strong>Deniro Marketing LLC</strong> (a.k.a. <strong>AmateurMatch</strong>).</p>
+<p>As affiliate marketing programs go, CyberErotica stretches way back &#8212; perhaps to the beginning. According to <a href="https://techcrunch.com/2009/11/15/twitter-facebook-amazon-affiliate-marketing/" target="_blank">TechCrunch</a>, CyberErotica is said to have launched the first online affiliate marketing firm in 1994.</p>
+<p>In 2001, CyberErotica&#8217;s parent firm <strong>Voice Media</strong> <a href="https://www.ftc.gov/sites/default/files/documents/cases/2001/04/ftc.gov-voicemediaagree.htm" target="_blank">settled</a> a lawsuit with the U.S. Federal Trade Commission, which <a href="https://www.ftc.gov/sites/default/files/documents/cases/2001/05/ftc.gov-voicemediacmp.htm" target="_blank">alleged</a> that the adult affiliate program was misrepresenting its service as free while it dinged subscribers for monthly charges and made it difficult for them to cancel.</p>
+<p>In 2010, Deniro Marketing found itself the subject of <a href="https://www.courtlistener.com/docket/4177501/badella-v-deniro-marketing-llc/" target="_blank">a class-action lawsuit</a> that alleged the company employed spammers to promote an online dating service that was overrun with automated, fake profiles of young women. Those allegations ended in an undisclosed settlement after the judge in the case tossed out the spamming claim because the statute of limitations on those charges had expired.</p>
+<p>What&#8217;s unusual (and somewhat lame) about this botnet is that &#8212; through a variety of botnet reporting panels that are still displaying data &#8212; we can get live, real-time updates about the size and status of this crime machine. No authentication or credentials needed. So much for operational security!</p>
+<p>The &#8220;mind map&#8221; pictured below contains enough information for nearly anyone to duplicate this research, and includes the full Web address of the botnet reporting panels that are currently online and responding with live updates. I was unable to load these panels in a <strong>Google Chrome browser</strong> (perhaps the XML data on the page is missing some key components), but they loaded fine in <strong>Mozilla Firefox</strong>.</p>
+<p>But a note of caution: I&#8217;d strongly encourage anyone interested in following my research to take care before visiting these panels, preferably doing so from a disposable &#8220;virtual&#8221; machine that runs something other than Microsoft Windows.</p>
+<p>That&#8217;s because spammers are usually involved in the distribution of malicious software, and spammers who maintain vast networks of apparently compromised systems are almost always involved in creating or at least commissioning the creation of said malware. Worse, porn spammers are some of the lowest of the low, so it&#8217;s only prudent to behave as if any and all of their online assets are actively hostile or malicious.</p>
+<div id="attachment_39624" style="width: 590px" class="wp-caption aligncenter"><a class="lightbox" href="https://krebsonsecurity.com/wp-content/uploads/2017/06/pornspammerbotnet.png"><img aria-describedby="caption-attachment-39624" loading="lazy" class="wp-image-39624 size-medium" src="https://krebsonsecurity.com/wp-content/uploads/2017/06/pornspammerbotnet.png" alt=" " width="580" height="400" /></a><p id="caption-attachment-39624" class="wp-caption-text">A &#8220;mind map&#8221; tracing some of the research mentioned in this post.</p></div>
+<p> <a href="https://krebsonsecurity.com/2017/06/inside-a-porn-pimping-spam-botnet/#more-39218" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-39637" class="post-39637 post type-post status-publish format-standard hentry category-other tag-adobe-flash-player-update-june-2017 tag-cve-2017-8543 tag-edge tag-eric-doerr tag-internet-explorer tag-microsoft-patch-tuesday-june-2017 tag-shockwave-player-update">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2017/06/microsoft-adobe-ship-critical-fixes/" title="Permalink to Microsoft, Adobe Ship Critical Fixes" rel="bookmark">Microsoft, Adobe Ship Critical Fixes</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">June 13, 2017</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2017/06/microsoft-adobe-ship-critical-fixes/#comments">54 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p><strong>Microsoft</strong> today released security updates to fix almost a hundred flaws in its various <strong>Windows</strong> operating systems and related software. One bug is so serious that Microsoft is issuing patches for it on <strong>Windows XP</strong> and other operating systems the company no longer officially supports. Separately, <strong>Adobe</strong> has pushed critical updates for its <strong>Flash</strong> and <strong>Shockwave</strong> players, two programs most users would probably be better off without.</p>
+<p><img loading="lazy" class="alignright size-full wp-image-26837" src="https://krebsonsecurity.com/wp-content/uploads/2014/07/brokenwindows.png" alt="brokenwindows" width="229" height="240" />According to security firm <a href="https://blog.qualys.com/laws-of-vulnerabilities/2017/06/13/microsoft-fixes-94-security-issues-in-massive-june-update" target="_blank">Qualys</a>, 27 of the 94 security holes Microsoft patches with today&#8217;s release can be exploited remotely by malware or miscreants to seize complete control over vulnerable systems with little or no interaction on the part of the user.</p>
+<p>Microsoft this month is fixing <a href="http://CVE-2017-8543" target="_blank">another serious flaw</a> (CVE-2017-8543) present in most versions of Windows that resides in the feature of the operating system which handles file and printer sharing (also known as &#8220;<a href="https://en.wikipedia.org/wiki/Server_Message_Block" target="_blank">Server Message Block</a>&#8221; or the SMB service).</p>
+<p>SMB vulnerabilities can be extremely dangerous if left unpatched on a local (internal) corporate network. That&#8217;s because a single piece of malware that exploits this SMB flaw within a network could be used to replicate itself to all vulnerable systems very quickly.</p>
+<p>It is this very &#8220;wormlike&#8221; capability &#8212; a flaw in Microsoft&#8217;s SMB service &#8212; that was harnessed for spreading by <a href="https://krebsonsecurity.com/?s=wannacry&amp;x=0&amp;y=0" target="_blank">WannaCry</a>, the global ransomware contagion last month that held files for ransom at countless organizations and <a href="https://krebsonsecurity.com/2017/05/u-k-hospitals-hit-in-widespread-ransomware-attack/" target="_blank">shut down at least 16 hospitals</a> in the United Kingdom.</p>
+<p>According to Microsoft, this newer SMB flaw is already being exploited in the wild. The vulnerability affects <strong>Windows Server 2016</strong>, <strong>2012</strong>, <strong>2008</strong> as well as desktop systems like <strong>Windows 10</strong>, <strong>7</strong> and <strong>8.1</strong>.</p>
+<p>The SMB flaw &#8212; like the one that WannaCry leveraged &#8212; also affects older, unsupported versions of Windows such as <strong>Windows XP</strong> and <strong>Windows Server 2003</strong>. And, as with that SMB flaw, Microsoft has made the unusual decision to make fixes for this newer SMB bug available for those older versions. Users running XP or Server 2003 can get the update for this flaw <a href="https://support.microsoft.com/en-us/help/4025687/microsoft-security-advisory-4025685-guidance-for-older-platforms" target="_blank">here</a>.</p>
+<p>&#8220;Our decision today to release these security updates for platforms not in extended support should not be viewed as a departure from our standard servicing policies,&#8221; <a href="https://blogs.technet.microsoft.com/msrc/2017/06/13/june-2017-security-update-release/" target="_blank">wrote</a> <strong>Eric Doerr</strong>, general manager of Microsoft&#8217;s Security Response Center.</p>
+<p>&#8220;Based on an assessment of the current threat landscape by our security engineers, we made the decision to make updates available more broadly,&#8221; Doerr wrote. &#8220;As always, we recommend customers upgrade to the latest platforms. &#8220;The best protection is to be on a modern, up-to-date system that incorporates the latest defense-in-depth innovations. Older systems, even if fully up-to-date, lack the latest security features and advancements.&#8221;</p>
+<p>The default browsers on Windows &#8212; <strong>Internet Explorer</strong> or <strong>Edge</strong> &#8212; get their usual slew of updates this month for many of these critical, remotely exploitable bugs. Qualys says organizations using <strong>Microsoft Outlook</strong> should pay special attention to a newly patched bug in the popular mail program because attackers can send malicious email and take complete control over the recipient&#8217;s Windows machine when users merely view a specially crafted email in Outlook. <a href="https://krebsonsecurity.com/2017/06/microsoft-adobe-ship-critical-fixes/#more-39637" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+				
+			
+								<div class="themonic-pagination"><div class='pagination'><ul><li><a href='https://krebsonsecurity.com/'>&laquo; First</a></li><li><a href='https://krebsonsecurity.com/page/63/' class='inactive'>&lsaquo; Previous</a></li><li><a href='https://krebsonsecurity.com/page/61/' class='inactive'>61</a></li><li><a href='https://krebsonsecurity.com/page/62/' class='inactive'>62</a></li><li><a href='https://krebsonsecurity.com/page/63/' class='inactive'>63</a></li><li class='current'><span class='currenttext'>64</span></li><li><a href='https://krebsonsecurity.com/page/65/' class='inactive'>65</a></li><li><a href='https://krebsonsecurity.com/page/66/' class='inactive'>66</a></li><li><a href='https://krebsonsecurity.com/page/67/' class='inactive'>67</a></li><li><a href='https://krebsonsecurity.com/page/65/' class='inactive'>Next &rsaquo;</a></li><a class='inactive' href='https://krebsonsecurity.com/page/209/'>Last &raquo;</a></ul></div></div>
+					<div style="display: block; clear: both;"></div>
+			
+		
+
+	
+
+		</div><!-- #content -->
+	</div><!-- #primary -->
+
+
+			<div id="secondary" class="widget-area" role="complementary">
+
+        <div id="sidebar_ad" class="widget themonic-ad5"><div class="a-statement">Advertisement</div><a href="https://ninjio.com/lp46d-krebs/">
+<img src="/b-ninjio/12.png">
+</a></div>
+
+                        <br><div class="widget themonic-ad1"><div class="a-statement">Advertisement</div><a href="https://www.akamai.com/blog/security/attacking-a-macro-security-problem-with-micro-segmentation?utm_source=krebsonsecurity&amp;utm_medium=display&amp;utm_id=GL_SecureWorkforce_Guardicore&amp;utm_campaign=F-MC-52610&amp;utm_content=Guardicore">
+<img src="/b-akamai/138.png">
+</a></div><br>
+
+			<aside id="custom_html-2" class="widget_text widget widget_custom_html"><p class="widget-title">Mailing List</p><div class="textwidget custom-html-widget"><a href="/subscribe/">Subscribe here</a></div></aside><aside id="search-2" class="widget widget_search"><p class="widget-title">Search KrebsOnSecurity</p><form role="search" method="get" id="searchform" class="searchform" action="https://krebsonsecurity.com/">
+				<div>
+					<label class="screen-reader-text" for="s">Search for:</label>
+					<input type="text" value="" name="s" id="s" />
+					<input type="submit" id="searchsubmit" value="Search" />
+				</div>
+			</form></aside>
+		<aside id="recent-posts-3" class="widget widget_recent_entries">
+		<p class="widget-title">Recent Posts</p>
+		<ul>
+											<li>
+					<a href="https://krebsonsecurity.com/2021/12/canada-charges-its-most-prolific-cybercriminal/">Canada Charges Its &#8220;Most Prolific Cybercriminal&#8221;</a>
+									</li>
+											<li>
+					<a href="https://krebsonsecurity.com/2021/12/who-is-the-network-access-broker-babam/">Who Is the Network Access Broker &#8216;Babam&#8217;?</a>
+									</li>
+											<li>
+					<a href="https://krebsonsecurity.com/2021/12/ubiquiti-developer-charged-with-extortion-causing-2020-breach/">Ubiquiti Developer Charged With Extortion, Causing 2020 &#8220;Breach&#8221;</a>
+									</li>
+											<li>
+					<a href="https://krebsonsecurity.com/2021/11/the-internet-is-held-together-with-spit-baling-wire/">The Internet is Held Together With Spit &#038; Baling Wire</a>
+									</li>
+											<li>
+					<a href="https://krebsonsecurity.com/2021/11/arrest-in-ransom-your-employer-email-scheme/">Arrest in &#8216;Ransom Your Employer&#8217; Email Scheme</a>
+									</li>
+					</ul>
+
+		</aside><aside id="text-2" class="widget widget_text">			<div class="textwidget"><a name="subscribe2"></a></div>
+		</aside><aside id="widget_sp_image-15" class="widget widget_sp_image"><p class="widget-title">Spam Nation</p><a href="https://www.amazon.com/Spam-Nation-Organized-Cybercrime-Epidemic-ebook/dp/B00L5QGBL0/ref=dp_kinw_strp_1" target="_blank" class="widget_sp_image-image-link" title="Spam Nation"><img width="266" height="404" alt="Spam Nation" class="attachment-266x404 aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2015/04/spamnation-nyt.png" /></a><div class="widget_sp_image-description" ><p>A New York Times Bestseller! </p>
+</div></aside><aside id="widget_sp_image-25" class="widget widget_sp_image"><p class="widget-title">Thinking of a Cybersecurity Career?</p><a href="https://krebsonsecurity.com/2020/07/thinking-of-a-cybersecurity-career-read-this/" target="_blank" class="widget_sp_image-image-link" title="Thinking of a Cybersecurity Career? Read This."><img width="625" height="424" alt="Thinking of a Cybersecurity Career?" class="attachment-full" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2020/07/codepeople.png 625w, https://krebsonsecurity.com/wp-content/uploads/2020/07/codepeople-580x393.png 580w" sizes="(max-width: 625px) 100vw, 625px" src="https://krebsonsecurity.com/wp-content/uploads/2020/07/codepeople.png" /></a><div class="widget_sp_image-description" ><p>Read this.</p>
+</div></aside><aside id="widget_sp_image-3" class="widget widget_sp_image"><p class="widget-title">All About Skimmers </p><a href="https://krebsonsecurity.com/all-about-skimmers/" target="_blank" class="widget_sp_image-image-link" title="All About Skimmers "><img width="299" height="232" alt="All About Skimmers" class="attachment-299x232 aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2010/08/skimgallery1.jpg" /></a><div class="widget_sp_image-description" ><p>Click image for my skimmer series.</p>
+</div></aside><aside id="categories-2" class="widget widget_categories"><p class="widget-title">Story Categories</p>
+			<ul>
+					<li class="cat-item cat-item-5"><a href="https://krebsonsecurity.com/category/sunshine/" title="Includes investigative blog posts meant to shine a light on the darker corners of the Internet.">A Little Sunshine</a>
+</li>
+	<li class="cat-item cat-item-2240"><a href="https://krebsonsecurity.com/category/all-about-skimmers/">All About Skimmers</a>
+</li>
+	<li class="cat-item cat-item-9085"><a href="https://krebsonsecurity.com/category/ashley-madison-breach/">Ashley Madison breach</a>
+</li>
+	<li class="cat-item cat-item-3191"><a href="https://krebsonsecurity.com/category/breadcrumbs/">Breadcrumbs</a>
+</li>
+	<li class="cat-item cat-item-3771"><a href="https://krebsonsecurity.com/category/data-breaches/" title="Stories about data breaches at retailers, corporations, governments and organizations of all sizes.">Data Breaches</a>
+</li>
+	<li class="cat-item cat-item-4624"><a href="https://krebsonsecurity.com/category/ddos-for-hire/">DDoS-for-Hire</a>
+</li>
+	<li class="cat-item cat-item-9173"><a href="https://krebsonsecurity.com/category/employment-fraud/">Employment Fraud</a>
+</li>
+	<li class="cat-item cat-item-2151"><a href="https://krebsonsecurity.com/category/how-to-break-into-security/" title="If you&#039;ve ever wanted career advice on how to make a shift into the security industry, look no further.">How to Break Into Security</a>
+</li>
+	<li class="cat-item cat-item-87"><a href="https://krebsonsecurity.com/category/latest-warnings/">Latest Warnings</a>
+</li>
+	<li class="cat-item cat-item-4071"><a href="https://krebsonsecurity.com/category/neer-do-well-news/">Ne&#039;er-Do-Well News</a>
+</li>
+	<li class="cat-item cat-item-9"><a href="https://krebsonsecurity.com/category/other/">Other</a>
+</li>
+	<li class="cat-item cat-item-1306"><a href="https://krebsonsecurity.com/category/pharma-wars/">Pharma Wars</a>
+</li>
+	<li class="cat-item cat-item-8240"><a href="https://krebsonsecurity.com/category/ransomware/">Ransomware</a>
+</li>
+	<li class="cat-item cat-item-599"><a href="https://krebsonsecurity.com/category/security-tools/">Security Tools</a>
+</li>
+	<li class="cat-item cat-item-8298"><a href="https://krebsonsecurity.com/category/sim-swapping/">SIM Swapping</a>
+</li>
+	<li class="cat-item cat-item-4079"><a href="https://krebsonsecurity.com/category/spam-nation/">Spam Nation</a>
+</li>
+	<li class="cat-item cat-item-1"><a href="https://krebsonsecurity.com/category/smallbizvictims/" title="Posts in this category will include new stories similar to those told in the Small Business Victims category on The Washington Post&#039;s Security Fix blog, which chronicled the methods organized cyber thieve are using to steal hundreds of thousands of dollars from dozens of small- to mid-sized companies around the country.">Target: Small Businesses</a>
+</li>
+	<li class="cat-item cat-item-5167"><a href="https://krebsonsecurity.com/category/tax-refund-fraud/">Tax Refund Fraud</a>
+</li>
+	<li class="cat-item cat-item-3"><a href="https://krebsonsecurity.com/category/comingstorm/" title="This category includes blog posts about computer and Internet security threats now and on the horizon.">The Coming Storm</a>
+</li>
+	<li class="cat-item cat-item-4"><a href="https://krebsonsecurity.com/category/patches/" title="Short posts on the latest security updates for widely-used software.
+">Time to Patch</a>
+</li>
+	<li class="cat-item cat-item-21"><a href="https://krebsonsecurity.com/category/web-fraud-2-0/">Web Fraud 2.0</a>
+</li>
+			</ul>
+
+			</aside><aside id="widget_sp_image-5" class="widget widget_sp_image"><p class="widget-title">The Value of a Hacked PC</p><a href="https://krebsonsecurity.com/2012/10/the-scrap-value-of-a-hacked-pc-revisited/" target="_blank" class="widget_sp_image-image-link" title="The Value of a Hacked PC"><img width="285" height="180" alt="valuehackedpc " class="attachment-285x180 aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2012/12/valuehackedpc-285x180.png" /></a><div class="widget_sp_image-description" ><p>Badguy uses for your PC</p>
+</div></aside><aside id="widget_sp_image-9" class="widget widget_sp_image"><p class="widget-title">Badguy Uses for Your Email </p><a href="https://krebsonsecurity.com/2013/06/the-value-of-a-hacked-email-account/" target="_self" class="widget_sp_image-image-link" title="Badguy Uses for Your Email "><img width="296" height="170" alt="Badguy Uses for Your Email " class="attachment-full aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2013/06/badguyemail.png 296w, https://krebsonsecurity.com/wp-content/uploads/2013/06/badguyemail-285x163.png 285w" sizes="(max-width: 296px) 100vw, 296px" src="https://krebsonsecurity.com/wp-content/uploads/2013/06/badguyemail.png" /></a><div class="widget_sp_image-description" ><p>Your email account may be worth far more than you imagine.</p>
+</div></aside><aside id="widget_sp_image-24" class="widget widget_sp_image"><a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&#038;hosted_button_id=MCCRKHWRX57HS" id="donate" target="_self" class="widget_sp_image-image-link"><img width="250" height="55" alt="Donate to Krebs On Security" class="attachment-medium aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2016/09/donatepaypal2-1.png" /></a></aside><aside id="most_popular_posts-3" class="widget widget_most_popular_posts">
+<p class="widget-title">Most Popular Posts</p>
+<ul>	<li><a href="https://krebsonsecurity.com/2018/07/sextortion-scam-uses-recipients-hacked-passwords/">Sextortion Scam Uses Recipient's Hacked Passwords</a> (1076)</li>
+	<li><a href="https://krebsonsecurity.com/2015/07/online-cheating-site-ashleymadison-hacked/">Online Cheating Site AshleyMadison Hacked</a> (798)</li>
+	<li><a href="https://krebsonsecurity.com/2013/12/sources-target-investigating-data-breach/">Sources: Target Investigating Data Breach</a> (620)</li>
+	<li><a href="https://krebsonsecurity.com/2020/11/trump-fires-security-chief-christopher-krebs/">Trump Fires Security Chief Christopher Krebs</a> (534)</li>
+	<li><a href="https://krebsonsecurity.com/2013/12/cards-stolen-in-target-breach-flood-underground-markets/">Cards Stolen in Target Breach Flood Underground Markets</a> (445)</li>
+	<li><a href="https://krebsonsecurity.com/2013/05/reports-liberty-reserve-founder-arrested-site-shuttered/">Reports: Liberty Reserve Founder Arrested, Site Shuttered</a> (416)</li>
+	<li><a href="https://krebsonsecurity.com/2015/08/was-the-ashley-madison-database-leaked/">Was the Ashley Madison Database Leaked?</a> (376)</li>
+	<li><a href="https://krebsonsecurity.com/2021/01/ddos-guard-to-forfeit-internet-space-occupied-by-parler/">DDoS-Guard To Forfeit Internet Space Occupied by Parler</a> (374)</li>
+	<li><a href="https://krebsonsecurity.com/2014/05/true-goodbye-using-truecrypt-is-not-secure/">True Goodbye: 'Using TrueCrypt Is Not Secure'</a> (363)</li>
+	<li><a href="https://krebsonsecurity.com/2015/08/who-hacked-ashley-madison/">Who Hacked Ashley Madison?</a> (361)</li>
+</ul>
+</aside>
+<aside id="media_image-2" class="widget widget_media_image"><p class="widget-title">Why So Many Top Hackers Hail from Russia</p><a href="https://krebsonsecurity.com/2017/06/why-so-many-top-hackers-hail-from-russia/"><img width="580" height="389" src="https://krebsonsecurity.com/wp-content/uploads/2017/06/computered-580x389.png" class="image wp-image-39684  attachment-medium size-medium" alt="" loading="lazy" style="max-width: 100%; height: auto;" srcset="https://krebsonsecurity.com/wp-content/uploads/2017/06/computered-580x389.png 580w, https://krebsonsecurity.com/wp-content/uploads/2017/06/computered-768x514.png 768w, https://krebsonsecurity.com/wp-content/uploads/2017/06/computered-940x630.png 940w, https://krebsonsecurity.com/wp-content/uploads/2017/06/computered.png 1551w" sizes="(max-width: 580px) 100vw, 580px" /></a></aside><aside id="widget_sp_image-11" class="widget widget_sp_image"><p class="widget-title">Category: Web Fraud 2.0</p><a href="https://krebsonsecurity.com/category/web-fraud-2-0/" target="_blank" class="widget_sp_image-image-link" title="Category: Web Fraud 2.0"><img width="227" height="400" alt="Criminnovations" class="attachment-medium aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2013/11/cybercrimeinnovations-227x400.png" /></a><div class="widget_sp_image-description" ><p>Innovations from the Underground</p>
+</div></aside><aside id="widget_sp_image-12" class="widget widget_sp_image"><a href="https://krebsonsecurity.com/2014/03/are-credit-monitoring-services-worth-it/" target="_blank" class="widget_sp_image-image-link"><img width="285" height="189" class="attachment-medium aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2014/03/shreddedID-copy-285x189.png 285w, https://krebsonsecurity.com/wp-content/uploads/2014/03/shreddedID-copy-600x399.png 600w, https://krebsonsecurity.com/wp-content/uploads/2014/03/shreddedID-copy.png 849w" sizes="(max-width: 285px) 100vw, 285px" src="https://krebsonsecurity.com/wp-content/uploads/2014/03/shreddedID-copy-285x189.png" /></a><div class="widget_sp_image-description" ><p>ID Protection Services Examined</p>
+</div></aside><aside id="widget_sp_image-13" class="widget widget_sp_image"><p class="widget-title">Is Antivirus Dead?</p><a href="https://krebsonsecurity.com/2014/05/antivirus-is-dead-long-live-antivirus/" target="_blank" class="widget_sp_image-image-link" title="Is Antivirus Dead?"><img width="285" height="161" alt="Is Antivirus Dead?" class="attachment-medium aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2014/05/cryptservices-285x161.png 285w, https://krebsonsecurity.com/wp-content/uploads/2014/05/cryptservices-600x339.png 600w, https://krebsonsecurity.com/wp-content/uploads/2014/05/cryptservices.png 945w" sizes="(max-width: 285px) 100vw, 285px" src="https://krebsonsecurity.com/wp-content/uploads/2014/05/cryptservices-285x161.png" /></a><div class="widget_sp_image-description" ><p>The reasons for its decline</p>
+</div></aside><aside id="widget_sp_image-14" class="widget widget_sp_image"><p class="widget-title">The Growing Tax Fraud Menace</p><a href="https://krebsonsecurity.com/category/tax-refund-fraud/" target="_blank" class="widget_sp_image-image-link" title="The Growing Tax Fraud Menace"><img width="285" height="285" alt="The Growing Tax Fraud Menace" class="attachment-medium aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2014/04/taxfraud-285x285.jpg 285w, https://krebsonsecurity.com/wp-content/uploads/2014/04/taxfraud-150x150.jpg 150w, https://krebsonsecurity.com/wp-content/uploads/2014/04/taxfraud-600x600.jpg 600w, https://krebsonsecurity.com/wp-content/uploads/2014/04/taxfraud.jpg 693w" sizes="(max-width: 285px) 100vw, 285px" src="https://krebsonsecurity.com/wp-content/uploads/2014/04/taxfraud-285x285.jpg" /></a><div class="widget_sp_image-description" ><p>File 'em Before the Bad Guys Can </p>
+</div></aside><aside id="widget_sp_image-17" class="widget widget_sp_image"><p class="widget-title">Inside a Carding Shop</p><a href="https://krebsonsecurity.com/2014/06/peek-inside-a-professional-carding-shop/" target="_blank" class="widget_sp_image-image-link" title="Inside a Carding Shop"><img width="194" height="340" alt="Inside a Carding Shop" class="attachment-medium aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2014/06/mcdumpalsjoined.png" /></a><div class="widget_sp_image-description" ><p>A crash course in carding. </p>
+</div></aside><aside id="widget_sp_image-18" class="widget widget_sp_image"><p class="widget-title">Beware Social Security Fraud</p><a href="https://krebsonsecurity.com/2013/09/crooks-hijack-retirement-funds-via-ssa-portal/" target="_blank" class="widget_sp_image-image-link" title="Beware Social Security Fraud"><img width="285" height="293" alt="Beware Social Security Fraud" class="attachment-full aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2016/09/myssn-285x293.png" /></a><div class="widget_sp_image-description" ><p>Sign up, or Be Signed Up! </p>
+</div></aside><aside id="widget_sp_image-2" class="widget widget_sp_image"><p class="widget-title">How Was Your Card Stolen?</p><a href="https://krebsonsecurity.com/2015/01/how-was-your-credit-card-stolen/" target="_blank" class="widget_sp_image-image-link" title="How Was Your Card Stolen?"><img width="285" height="285" alt="How Was Your Card Stolen?" class="attachment-full aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2016/09/carddominoes-285x285.jpg 285w, https://krebsonsecurity.com/wp-content/uploads/2016/09/carddominoes-285x285-150x150.jpg 150w" sizes="(max-width: 285px) 100vw, 285px" src="https://krebsonsecurity.com/wp-content/uploads/2016/09/carddominoes-285x285.jpg" /></a><div class="widget_sp_image-description" ><p>Finding out is not so easy. </p>
+</div></aside><aside id="widget_sp_image-22" class="widget widget_sp_image"><p class="widget-title">Krebs&#8217;s 3 Rules&#8230;</p><a href="https://krebsonsecurity.com/2011/05/krebss-3-basic-rules-for-online-safety/" target="_blank" class="widget_sp_image-image-link" title="Krebs&#8217;s 3 Rules&#8230;"><img width="300" height="300" alt="Krebs&#8217;s 3 Rules&#8230;" class="attachment-medium aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2011/05/three-300x300.jpg 300w, https://krebsonsecurity.com/wp-content/uploads/2011/05/three-150x150.jpg 150w, https://krebsonsecurity.com/wp-content/uploads/2011/05/three.jpg 347w" sizes="(max-width: 300px) 100vw, 300px" src="https://krebsonsecurity.com/wp-content/uploads/2011/05/three-300x300.jpg" /></a><div class="widget_sp_image-description" ><p>...For Online Safety. </p>
+</div></aside>		</div><!-- #secondary -->
+		</div><!-- #main .wrapper -->
+	
+	<div id="publisho-footer" class="widget-area">
+				<div class="footer-widget">
+                				</div>
+				<div class="footer-widget">
+								</div>
+				<div class="footer-widget">
+								</div>
+	</div>
+
+	<div class="site-wordpress">
+					&copy; Krebs on Security<br>
+	</div>
+	<!-- .site-info --><div class="clear"></div>
+</div><!-- #page -->
+
+<script type='text/javascript' src='https://krebsonsecurity.com/wp-content/themes/kos-mar2021/js/slicknav.js?ver=5.8.2' id='publisho-mobile-navigation-js'></script>
+<script type='text/javascript' src='https://krebsonsecurity.com/wp-includes/js/wp-embed.min.js?ver=5.8.2' id='wp-embed-js'></script>
+</body>
+</html>
+<!--
+Performance optimized by W3 Total Cache. Learn more: https://www.boldgrid.com/w3-total-cache/
+
+Object Caching 209/401 objects using memcached
+Page Caching using memcached 
+Database Caching 7/22 queries in 0.018 seconds using memcached
+
+Served from: krebsonsecurity.com @ 2021-12-10 14:42:20 by W3 Total Cache
+-->

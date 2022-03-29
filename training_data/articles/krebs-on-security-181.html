@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<!--[if IE 7]>
+<html class="ie ie7" lang="en-US">
+<![endif]-->
+<!--[if IE 8]>
+<html class="ie ie8" lang="en-US">
+<![endif]-->
+<!--[if !(IE 7) | !(IE 8)  ]><!-->
+<html lang="en-US">
+<!--<![endif]-->
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width" />
+<link rel="profile" href="http://gmpg.org/xfn/11" />
+<!--[if lt IE 9]>
+<script src="https://krebsonsecurity.com/wp-content/themes/kos-mar2021/js/html5.js" type="text/javascript"></script>
+<![endif]-->
+<title>Krebs on Security &#8211; Page 181 &#8211; In-depth security news and investigation</title>
+<meta name='robots' content='max-image-preview:large' />
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="Krebs on Security &raquo; Feed" href="https://krebsonsecurity.com/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Krebs on Security &raquo; Comments Feed" href="https://krebsonsecurity.com/comments/feed/" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.1.0\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.1.0\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/krebsonsecurity.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=5.8.2"}};
+			!function(e,a,t){var n,r,o,i=a.createElement("canvas"),p=i.getContext&&i.getContext("2d");function s(e,t){var a=String.fromCharCode;p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,e),0,0);e=i.toDataURL();return p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,t),0,0),e===i.toDataURL()}function c(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(o=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},r=0;r<o.length;r++)t.supports[o[r]]=function(e){if(!p||!p.fillText)return!1;switch(p.textBaseline="top",p.font="600 32px Arial",e){case"flag":return s([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])?!1:!s([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!s([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]);case"emoji":return!s([10084,65039,8205,55357,56613],[10084,65039,8203,55357,56613])}return!1}(o[r]),t.supports.everything=t.supports.everything&&t.supports[o[r]],"flag"!==o[r]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[o[r]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(n=t.source||{}).concatemoji?c(n.concatemoji):n.wpemoji&&n.twemoji&&(c(n.twemoji),c(n.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+	<link rel='stylesheet' id='colorbox-theme1-css'  href='https://krebsonsecurity.com/wp-content/plugins/jquery-lightbox-for-native-galleries/colorbox/theme1/colorbox.css?ver=1.3.14' type='text/css' media='screen' />
+<link rel='stylesheet' id='wp-block-library-css'  href='https://krebsonsecurity.com/wp-includes/css/dist/block-library/style.min.css?ver=5.8.2' type='text/css' media='all' />
+<link rel='stylesheet' id='contact-form-7-css'  href='https://krebsonsecurity.com/wp-content/plugins/contact-form-7/includes/css/styles.css?ver=5.5.3' type='text/css' media='all' />
+<link rel='stylesheet' id='publisho-style-css'  href='https://krebsonsecurity.com/wp-content/themes/kos-mar2021/style.css?subver=1.2&#038;ver=5.8.2' type='text/css' media='all' />
+<style id='publisho-style-inline-css' type='text/css'>
+
+	.themonic-nav .current-menu-item > a, .themonic-nav .current-menu-ancestor > a, .themonic-nav .current_page_item > a, .themonic-nav .current_page_ancestor > a {
+		background: #cc6600;
+	}
+	.themonic-nav ul.nav-menu, .themonic-nav div.nav-menu > ul {
+		border-bottom: 5px solid #cc6600;
+	}
+	#site-navigation .topheadmenu a {
+    background: rgba(0, 0, 0, 0);
+	}
+	.themonic-nav li a:hover {
+		background: #cc6600;
+	}
+	.themonic-nav li:hover {
+		background: #cc6600;
+	}.wrapper .flexslider {margin: 0 0 30px;}.frontp .btm-wrap {
+    border-top: 1px solid #e9e9e9;
+	}
+	.entry-summary {
+    border-top: none;
+	}.frontp .btm-wrap { margin-bottom: 30px;}.site { font-size:14px;}.site { font-family:'Roboto', arial ;}
+</style>
+<link rel='stylesheet' id='publisho-custom-style-css'  href='https://krebsonsecurity.com/wp-content/themes/kos-mar2021/custom.css?subver=1.2&#038;ver=5.8.2' type='text/css' media='all' />
+<!--[if lt IE 9]>
+<link rel='stylesheet' id='publisho-ie-css'  href='https://krebsonsecurity.com/wp-content/themes/kos-mar2021/css/ie.css?ver=20160606' type='text/css' media='all' />
+<![endif]-->
+<link rel='stylesheet' id='fontawesome-css-css'  href='https://krebsonsecurity.com/wp-content/themes/kos-mar2021/fonts/font-awesome.min.css?ver=5.8.2' type='text/css' media='all' />
+<link rel='stylesheet' id='publisho_custom_fonts-css'  href='//fonts.googleapis.com/css?family=Roboto%3Aregular%2Citalic%2C500%26subset%3Dlatin%2C' type='text/css' media='screen' />
+<script type='text/javascript' src='https://krebsonsecurity.com/wp-includes/js/jquery/jquery.min.js?ver=3.6.0' id='jquery-core-js'></script>
+<script type='text/javascript' src='https://krebsonsecurity.com/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.3.2' id='jquery-migrate-js'></script>
+<script type='text/javascript' src='https://krebsonsecurity.com/wp-content/plugins/jquery-lightbox-for-native-galleries/colorbox/jquery.colorbox-min.js?ver=1.3.14' id='colorbox-js'></script>
+<link rel="https://api.w.org/" href="https://krebsonsecurity.com/wp-json/" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://krebsonsecurity.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://krebsonsecurity.com/wp-includes/wlwmanifest.xml" /> 
+<meta name="generator" content="WordPress 5.8.2" />
+<!-- JavaScript Pull-Quotes plugin v2.2 -->
+	<link rel="stylesheet" href="https://krebsonsecurity.com/wp-content/plugins/jspullquotes/resources/jspullquotes-core.css" type="text/css" />
+	<link rel="stylesheet" href="https://krebsonsecurity.com/wp-content/plugins/jspullquotes/resources/jspullquotes-default.css" type="text/css" />
+	<script type="text/javascript" src="https://krebsonsecurity.com/wp-content/plugins/jspullquotes/resources/jspullquotes.js"></script>
+	<script type="text/javascript">
+		var arrOptions = new Array("1", "1", "right", "1", "1", "blockquote", "pullquote", "pullquote pqRight");
+		pullQuoteOpts(arrOptions);
+	</script>
+<!-- end pull-quote additions -->
+<!-- jQuery Lightbox For Native Galleries v3.1.3 | http://www.viper007bond.com/wordpress-plugins/jquery-lightbox-for-native-galleries/ -->
+<script type="text/javascript">
+// <![CDATA[
+	jQuery(document).ready(function($){
+		$(".gallery").each(function(index, obj){
+			var galleryid = Math.floor(Math.random()*10000);
+			$(obj).find("a").colorbox({rel:galleryid, maxWidth:"95%", maxHeight:"95%"});
+		});
+		$("a.lightbox").colorbox({maxWidth:"95%", maxHeight:"95%"});
+	});
+// ]]>
+</script>
+<style type="text/css" id="custom-background-css">
+body.custom-background { background-color: #ffffff; }
+</style>
+	<link rel="me" href="https://twitter.com/briankrebs" /><meta name="twitter:widgets:link-color" content="#000000" /><meta name="twitter:widgets:border-color" content="#000000" /><meta name="twitter:partner" content="tfwp" />
+<meta name="twitter:card" content="summary" /><meta name="twitter:title" content="Krebs on Security" /><meta name="twitter:site" content="@briankrebs" /><meta name="twitter:description" content="In-depth security news and investigation" />
+</head>
+<body class="home blog paged custom-background paged-181 custom-background-white single-author frontp hfeed">
+<div id="page" class="site">
+	<!-- <div class="publisho-top-mobile-nav clear"></div> -->
+	<div class="themonic-logo themonic-ad3"><div class="a-statement">Advertisement</div><a href="https://securityscorecard.com/instant-security-scorecard?utm_source=krebs+on+security&amp;utm_medium=display&amp;utm_campaign=instant+scorecard&amp;utm_term=B&amp;utm_content=1240x110">
+<img src="/b-securityscorecard/5.jpg">
+</a></div>
+	<div class="themonic-logo themonic-ad6"><div class="a-statement">Advertisement</div><a href="https://securityscorecard.com/instant-security-scorecard?utm_source=krebs+on+security&amp;utm_medium=display&amp;utm_campaign=instant+scorecard&amp;utm_term=A&amp;utm_content=1240x160">
+<img src="/b-securityscorecard/2.jpg">
+</a></div>
+	<nav id="site-navigation" class="themonic-nav" role="navigation">
+	</nav><!-- #site-navigation -->
+	<div class="clear"></div>
+	<header id="masthead" class="site-header" role="banner">
+ 					<div class="desktop-social">
+						<div class="socialmedia">
+							<a href="http://twitter.com/briankrebs" target="_blank"><i class="fa fa-twitter"></i></a> 
+															<a class="rss" href="https://krebsonsecurity.com/feed/" target="_blank"><i class="fa fa-rss"></i></a>	
+									<a class="rss" href="https://www.linkedin.com/in/bkrebs/" target="_blank"><i class="fa fa-linkedin"></i></a>	
+								</div>
+				 	</div>
+																						   
+		
+		<div class="themonic-logo responsive-img-container">
+			<a href="https://krebsonsecurity.com/" title="Krebs on Security" rel="home"><img src="https://krebsonsecurity.com/wp-content/uploads/2021/03/kos-27-03-2021.jpg" alt="Krebs on Security"></a>
+		</div>
+
+					<div class="mobile-social">
+						<div class="socialmedia">
+							<a href="http://twitter.com/briankrebs" target="_blank"><i class="fa fa-twitter"></i></a> 
+															<a class="rss" href="https://krebsonsecurity.com/feed/" target="_blank"><i class="fa fa-rss"></i></a>	
+									<a class="rss" href="https://www.linkedin.com/in/bkrebs/" target="_blank"><i class="fa fa-linkedin"></i></a>	
+								</div>
+					</div>
+		
+				<!-- <div class="publisho-mobile-nav clear"></div> -->
+		<nav id="site-navigation" class="themonic-nav" role="navigation">
+			<a class="assistive-text" href="#content" title="Skip to content">Skip to content</a>
+			<div id="menu-top" class="nav-menu"><ul>
+<li ><a href="https://krebsonsecurity.com/">Home</a></li><li class="page_item page-item-2"><a href="https://krebsonsecurity.com/about/">About the Author</a></li>
+<li class="page_item page-item-645"><a href="https://krebsonsecurity.com/cpm/">Advertising/Speaking</a></li>
+</ul></div>
+		</nav><!-- #site-navigation -->
+		<div class="clear"></div>
+	</header><!-- #masthead -->
+	<div id="main" class="wrapper">
+		<div id="primary" class="site-content">
+	
+
+	
+		<div id="content" role="main">
+
+		<article id="post-7925" class="post-7925 post type-post status-publish format-standard hentry category-sunshine tag-anonymous tag-greg-hogulnd tag-hbgary tag-hbgary-federal tag-wikileaks">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2011/02/hbgary-federal-hacked-by-anonymous/" title="Permalink to HBGary Federal Hacked by Anonymous" rel="bookmark">HBGary Federal Hacked by Anonymous</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">February 7, 2011</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2011/02/hbgary-federal-hacked-by-anonymous/#comments">164 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>A company that is helping the federal government track down cyberactivists who have been attacking business which refused to support Wikileaks has itself been hacked by the very same activists.</p>
+<p>At the center of the storm is a leaderless and anarchic Internet group called <strong>Anonymous</strong>, which more recently has been coordinating attacks against Egyptian government Web sites. Late last month, authorities in the U.K. and the U.S. <a href="http://gawker.com/5745366/fbi-raids-dozens-in-pro+wikileaks-hacktivist-investigation" target="_blank">moved against at least 45 suspected Anonymous activists</a>. Then, on Saturday, the <em>Financial Times</em> ran <a href="http://uk.finance.yahoo.com/news/Cyberactivists-warned-arrest-ftimes-3487898538.html?x=0" target="_blank">a story</a> quoting <strong>Aaron Barr</strong>, the head of security services firm <strong>HBGary Federal</strong>, saying he had uncovered the identities of Anonymous&#8217; leaders using social networking sites. Barr said he planned to release his findings at a security conference in San Francisco next week.</p>
+<p><a class="lightbox" href="https://krebsonsecurity.com/wp-content/uploads/2011/02/hbgt.jpg"><img loading="lazy" class="alignleft size-medium wp-image-7928" title="hbgt" src="https://krebsonsecurity.com/wp-content/uploads/2011/02/hbgt-205x300.jpg" alt="" width="205" height="300" srcset="https://krebsonsecurity.com/wp-content/uploads/2011/02/hbgt-205x300.jpg 205w, https://krebsonsecurity.com/wp-content/uploads/2011/02/hbgt.jpg 441w" sizes="(max-width: 205px) 100vw, 205px" /></a>Anonymous responded by hacking into HBGary&#8217;s networks and posting archives of company executive emails on file-trading networks. The group also hacked the firm&#8217;s Web site and replaced it with <a href="http://img838.imageshack.us/img838/2294/internetsanon.jpg" target="_blank">a message</a> saying it was releasing Barr&#8217;s findings on its own because the group was confident Barr&#8217;s conclusions were wrong.</p>
+<p>&#8220;We&#8217;ve seen your internal documents, all of them, and do you know what we did? We laughed. Most of the information you&#8217;ve &#8216;extracted&#8217; is publicly available via our IRC networks,&#8221; the statement reads. &#8220;The personal details of Anonymous &#8216;members&#8217; you think you&#8217;ve acquired are, quite simply, nonsense. So why can&#8217;t you sell this information to the FBI like you intended? Because we&#8217;re going to give it to them for free.&#8221;</p>
+<p>I tuned into this conflict late Sunday evening, after HBGary President <strong>Penny Leavy</strong> had waded into Anonymous&#8217; public chat channel in an attempt to reason with the group. Earlier in the evening, Anonymous sympathizers hijacked several Twitter accounts belonging to HBGary employees, and used them to post offensive comments and personal information about the account holders.</p>
+<p>The topic of the IRC channel Leavy joined said it all: &#8220;Mission: Aaron Bratt FIRED. His salary donated to Bradley Manning Defense Fund. Simple.&#8221; Leavy said the group was planning to publish online the entire email archive belonging to<strong> Greg Hoglund</strong>, the security researcher in California who co-founded HBGary, which is part owner of HBGary Federal.</p>
+<p><a class="lightbox" href="https://krebsonsecurity.com/wp-content/uploads/2011/02/rootkit.jpg"><img loading="lazy" class="alignright size-medium wp-image-7927" title="rootkit" src="https://krebsonsecurity.com/wp-content/uploads/2011/02/rootkit-272x300.jpg" alt="" width="272" height="300" srcset="https://krebsonsecurity.com/wp-content/uploads/2011/02/rootkit-272x300.jpg 272w, https://krebsonsecurity.com/wp-content/uploads/2011/02/rootkit.jpg 518w" sizes="(max-width: 272px) 100vw, 272px" /></a>A snippet from that conversation:</p>
+<p>&#8220;[20:06:12] &lt;+Penny&gt; Guys, I can&#8217;t fire someone that owns a portion  of the company  What i can promise is we will have a meeting to discuss  next steps&#8221;</p>
+<p>In a phone interview late Sunday evening, Hoglund said that unlike the more traditional Web-site attacking activities of Anonymous, the hackers who infiltrated HBGary&#8217;s system showed real skills, even <a href="http://pastie.org/1535735" target="_blank">social engineering a network administrator</a> into giving them complete control over <strong>rootkit.com</strong>, a security research site Hoglund has long maintained.</p>
+<p>&#8220;They broke into one of HBGary&#8217;s servers that was used for tech support, and they got emails through compromising an insecure Web server at HBGary Federal,&#8221; Hoglund said. &#8220;They used that to get the credentials for Aaron, who happened to be an administrator on our email system, which is how they got into everything else. So it&#8217;s a case where the hackers break in on a non-important system, which is very common in hacking situations, and leveraged lateral movement to get onto systems of interest over time.&#8221;</p>
+<p>Hoglund said Anonymous had crossed a line, and that posting the company&#8217;s email online would expose internal, proprietary data that would likely cost HBGary millions of dollars. He added that Anonymous activists should be able to see &#8212; if they read the email they&#8217;ve stolen &#8212; that HBGary ultimately decided not to publicly name any of the members it had identified.</p>
+<p>&#8220;Before this, what these guys were doing was technically illegal, but it was in direct support of a government whistle blower. But now, we have a situation where they&#8217;re committing a federal crime, stealing private data and posting it on a torrent,&#8221; Hoglund said. &#8220;They didn&#8217;t just pick on any company, but we try to protect the US  government from hackers. They couldn&#8217;t have chosen a  worse company to pick on.&#8221;</p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+	<div id="between_article_ad" class="themonic-ad5"><a href="https://ww1.bugcrowd.com/ultimate-guide-ransomware-risk-disp/?utm_source=KrebsSecurity&amp;utm_medium=paid_advertising&amp;utm_campaign=banners&amp;utm_content=guides">
+<img src="/b-bugcrowd/4.png">
+</a></div>	<article id="post-7859" class="post-7859 post type-post status-publish format-standard hentry category-other tag-gribbodemon tag-monstr tag-nem tag-slavik tag-zeus">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2011/02/zeus-source-code-for-sale-got-100000/" title="Permalink to ZeuS Source Code for Sale. Got $100,000?" rel="bookmark">ZeuS Source Code for Sale. Got $100,000?</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">February 4, 2011</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2011/02/zeus-source-code-for-sale-got-100000/#comments">46 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>Late last year, online crime forums were abuzz with talk that development of the world&#8217;s most notorious banking Trojan &#8212; <strong>ZeuS</strong> &#8212; was being retired, after its maker <a href="http://krebsonsecurity.com/2010/10/spyeye-v-zeus-rivalry-ends-in-quiet-merger/" target="_blank">handed the malware&#8217;s secret blueprints to a rival developer</a>. The recipient of those plans &#8212; the author of the <strong>SpyEye</strong> <strong>Trojan</strong>&#8212; has been hard at work on a malware strain that <a href="http://krebsonsecurity.com/2011/02/revisiting-the-spyeyezeus-merger/" target="_blank">blends the two malware families</a>. But new evidence suggests that the source code for the latest ZeuS version may have also been given or sold to a third party who is now reselling it to the highest bidder in the criminal underground, a development that could soon guarantee the production of a whole new ZeuS lineage.</p>
+<p>Sources say the ZeuS author &#8212; known variously as &#8220;Slavik&#8221; and &#8220;Monstr&#8221; on criminal forums &#8212; gave the SpyEye author <strong>Gribodemon</strong> stewardship over the ZeuS code base, on the condition that Gribodemon agreed to provide ongoing support for existing ZeuS clients, a sizable user base that demands considerable care and attention. Sources also believe Slavik may have separately sold the code itself, ostensibly to the same individual shown in the screen shot below.</p>
+<p><a class="lightbox" href="https://krebsonsecurity.com/wp-content/uploads/2011/02/zeusforsale.jpg"><img loading="lazy" class="aligncenter size-full wp-image-7861" title="zeusforsale" src="https://krebsonsecurity.com/wp-content/uploads/2011/02/zeusforsale.jpg" alt="" width="600" height="472" srcset="https://krebsonsecurity.com/wp-content/uploads/2011/02/zeusforsale.jpg 771w, https://krebsonsecurity.com/wp-content/uploads/2011/02/zeusforsale-300x236.jpg 300w" sizes="(max-width: 600px) 100vw, 600px" /></a></p>
+<p>Established crime forums are built upon reputation, which is earned over a period of time by points awarded from other members for positive or negative transactions &#8212; much like eBay&#8217;s buyer and seller feedback system. The solicitation in the above screen shot is unlikely to be a fake: It indicates that the seller has been a member of this particular vetted crime forum since June 13, 2009, and has 18 positive reputation points and zero negative.</p>
+<p> <a href="https://krebsonsecurity.com/2011/02/zeus-source-code-for-sale-got-100000/#more-7859" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+	<div class="themonic-ad2"><div class="a-statement">Advertisement</div><a href="https://www.akamai.com/?utm_source=krebsonsecurity&amp;utm_medium=display&amp;utm_id=GL_Platform&amp;utm_campaign=F-MC-52606&amp;utm_content=IDC_InfoBrief">
+<img src="/b-akamai/134.png">
+</a></div>	<article id="post-7759" class="post-7759 post type-post status-publish format-standard hentry category-sunshine category-web-fraud-2-0 tag-aviv-raff tag-rsa tag-spyeye tag-spyzeus tag-trend-micro tag-zeus">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2011/02/revisiting-the-spyeyezeus-merger/" title="Permalink to Revisiting the SpyEye/ZeuS Merger" rel="bookmark">Revisiting the SpyEye/ZeuS Merger</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">February 3, 2011</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2011/02/revisiting-the-spyeyezeus-merger/#comments">28 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>In October 2010, I discovered that the authors of the SpyEye and ZeuS banking Trojans &#8212; once competitors in the market for botnet creation and management kits &#8212; were planning to kill further development of ZeuS <a href="http://krebsonsecurity.com/2010/10/spyeye-v-zeus-rivalry-ends-in-quiet-merger/" target="_blank">and fuse the two malware families into one supertrojan</a>. Initially, I heard some skepticism from folks in the security community about this. But three months later, security experts are starting to catch glimpses of this new hybrid Trojan in the wild, with the author(s) shipping a series of beta releases that include updated features on a nearly-daily basis.</p>
+<p>It probably didn&#8217;t help that the <a href="http://blogs.mcafee.com/mcafee-labs/the-first-combined-zeusspyeye-toolkit" target="_blank">first report</a> of a blended version of SpyEye/ZeuS (referred to as SpyZeuS for the remainder of this post) &#8212; detailed in a <strong>McAfee</strong> blog post &#8212; turned out to be <a href="http://blogs.rsa.com/rsafarl/fraud-news-flash-bogus-ad-for-zeus-spyeye-hybrid-trojan-published-in-underground-forum/" target="_blank">a scam</a>. But a little more a week ago, <strong>Trend Micro</strong> spotted <a href="http://blog.trendmicro.com/spyeyezeus-toolkit-v1-3-05-beta/" target="_blank">snapshots and details</a> of SpyZeuS components, noting that the author appears to have received help from other criminals in polishing this latest release; in particular, an add-on that grabs credit card numbers from hacked PCs, and a plugin designed to attack the anti-Trojan tool <a href="http://krebsonsecurity.com/2010/04/a-closer-look-at-rapport-from-trusteer/" target="_blank">Rapport</a> from <strong>Trusteer</strong>. (Trusteer&#8217;s <strong>Amit Klein</strong> addresses this component in a blog post <a href="http://www.trusteer.com/blog/alleged-newmerged-spyeye-and-rapport">here</a>). </p>
+<p><a href="http://blog.seculert.com/2011/01/fresh-new-hydra-head.html" target="_blank">Seculert</a>, a new threat alert service started by former <strong>RSA</strong> fraud expert <strong>Aviv Raff</strong>, includes some screen shots of the administrative panel of SpyZeuS that show the author trying to appeal to users of both Trojans, by allowing customers to control and update their botnets using either the traditional ZeuS or SpyEye Web interface.</p>
+<div id="attachment_7814" style="width: 605px" class="wp-caption aligncenter"><a href="https://krebsonsecurity.com/wp-content/uploads/2011/02/spyzeus.jpg"><img aria-describedby="caption-attachment-7814" loading="lazy" class="size-full wp-image-7814" title="spyzeus" src="https://krebsonsecurity.com/wp-content/uploads/2011/02/spyzeus.jpg" alt="" width="595" height="320" srcset="https://krebsonsecurity.com/wp-content/uploads/2011/02/spyzeus.jpg 1169w, https://krebsonsecurity.com/wp-content/uploads/2011/02/spyzeus-300x161.jpg 300w, https://krebsonsecurity.com/wp-content/uploads/2011/02/spyzeus-1024x551.jpg 1024w" sizes="(max-width: 595px) 100vw, 595px" /></a><p id="caption-attachment-7814" class="wp-caption-text">The hybrid SpyZeuS Trojan lets users interact with bots via the ZeuS control panel (left) or the SpyEye interface.</p></div>
+<p> <a href="https://krebsonsecurity.com/2011/02/revisiting-the-spyeyezeus-merger/#more-7759" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-7616" class="post-7616 post type-post status-publish format-standard hentry category-sunshine category-web-fraud-2-0 tag-claremont-technology-group tag-computer-sciences-corp tag-csc tag-egypt tag-emerson-process-management tag-fisher-rosemount-inc tag-hosni-mubarak tag-internet-identity tag-ipv4 tag-ipv6 tag-rod-rasmussen tag-suzanne-mubarak">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2011/02/spammers-hijack-internet-space-assigned-to-egyptian-presidents-wife/" title="Permalink to Spammers Hijack Internet Space Assigned to Egyptian President&#8217;s Wife" rel="bookmark">Spammers Hijack Internet Space Assigned to Egyptian President&#8217;s Wife</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">February 1, 2011</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2011/02/spammers-hijack-internet-space-assigned-to-egyptian-presidents-wife/#comments">18 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>Egyptian citizens calling for besieged <strong>President Hosni Mubarak </strong>to step down may have been <a href="http://krebsonsecurity.com/2011/01/egypt-unplugged-from-the-internet/" target="_blank">cut off from using the Web</a>, but spammers have been busy cutting the government off from its own Internet address space: Earlier this month, junk e-mail artists hijacked a large swath of Internet addresses assigned to Mubarak&#8217;s wife.</p>
+<p><a href="https://krebsonsecurity.com/wp-content/uploads/2011/01/smsec.jpg"><img loading="lazy" class="alignright size-full wp-image-7751" title="smsec" src="https://krebsonsecurity.com/wp-content/uploads/2011/01/smsec.jpg" alt="" width="249" height="179" /></a>According to <strong>Spamhaus.org</strong>, well known spammers commandeered a chunk of more than 4,000 IP addresses that were assigned years ago to Suzanne Mubarak and the <a href="http://www.spamhaus.org/sbl/sbl.lasso?query=SBL102595" target="_blank">Suzanne Mubarak Science Exploration Center</a>. Spamhaus reports that those addresses have been used recently to promote a variety of dodgy Web businesses, and that the hijacked block is under the control of an organization that has ties to alleged spammer <a href="http://www.spamhaus.org/rokso/listing.lasso?file=818">Michael Lindsay and iMedia Networks</a>. iMedia did not respond to requests for comment.</p>
+<p>The high profile land grab is the latest example of how spammers are becoming more brazen in their quest for non-blacklisted Internet address space from which to send spam, said <strong>Rod Rasmussen</strong>, president and chief technology officer of <a href="http://www.internetidentity.com" target="_blank">Internet Identity</a>.</p>
+<p>Rasmussen said Internet address space hijackers tend to target chunks of addresses assigned to governments and defense contractors, because those allocations are less likely to be reported missing, and very few of them are blocked by anti-spam tools.</p>
+<p>&#8220;The spammers doing this look for chunks of [Internet] space that are dormant, but most of all blocks of IP addresses that are whitelisted,&#8221; by anti-spam groups, Rasmussen said. &#8220;Their spam gets through anti-spam filters nicely after that, or least until the hijacking is detected.&#8221;</p>
+<div style="float: left; margin-right: 15px;"><script src="https://ipv6.he.net/v4ex/sidebar.js" type="text/javascript"></script></div>
+<p>Sometimes, the scammers are able to hijack IP space by snatching up expired domain names that were used to register the addresses years earlier. The attackers then send an e-mail from that domain to the regional Internet registry that assigned the block of IP, requesting whatever changes they need to assume control over the addresses.In other cases, spammers use forged letters and bogus corporate fronts to impersonate the rightful owner of the addresses.</p>
+<p>Another chunk of addresses that <a href="http://www.spamhaus.org/sbl/sbl.lasso?query=SBL101322" target="_blank">Spamhaus found were recently hijacked by spammers</a> &#8212; 255 IPs originally assigned in 1994 to the now defunct <strong>Claremont Technology Group</strong> &#8212; appears to have been stolen sometime after the organization let its domain <a href="http://krebsonsecurity.com/wp-content/uploads/2011/01/CLAREMONT.txt">claretech.com lapse</a>. That domain now redirects to Falls Church, Va. based government contractor Computer Sciences Corp (CSC), which acquired Claremont in 1998.</p>
+<p>Rasmussen believes we are likely to see a spike in this type hijacking activity as global supply of unassigned IPv4 addresses <a href="http://en.wikipedia.org/wiki/IPv4_address_exhaustion" target="_blank">continues to dwindle</a> and unallocated blocks become more valuable. Experts disagree on exactly when the pool of IPv4 addresses will be drained: Some says as <a href="http://www.potaroo.net/ispcol/2010-10/when.html" target="_blank">mid- to late 2011</a>, and others claim it&#8217;s <a href="http://ipv6.he.net/statistics/" target="_blank">only a few more days</a>.</p>
+<p> <a href="https://krebsonsecurity.com/2011/02/spammers-hijack-internet-space-assigned-to-egyptian-presidents-wife/#more-7616" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-7703" class="post-7703 post type-post status-publish format-standard hentry category-sunshine category-web-fraud-2-0 tag-chris-ch-russo tag-markus-frind tag-plentyoffish-com">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2011/01/plentyoffish-com-hacked-blames-messenger/" title="Permalink to PlentyofFish.com Hacked, Blames Messenger" rel="bookmark">PlentyofFish.com Hacked, Blames Messenger</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">January 31, 2011</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2011/01/plentyoffish-com-hacked-blames-messenger/#comments">89 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>Hackers have breached the database of online dating site <strong>PlentyOfFish.com</strong>, exposing the personal and password information on nearly 30 million users. In response, the company&#8217;s founder has implied that the editor of KrebsOnSecurity.com was involved in an elaborate extortion plot.</p>
+<p><a href="https://krebsonsecurity.com/wp-content/uploads/2011/01/pof.jpg"><img loading="lazy" class="alignright size-medium wp-image-7710" title="pof" src="https://krebsonsecurity.com/wp-content/uploads/2011/01/pof-300x56.jpg" alt="" width="300" height="56" srcset="https://krebsonsecurity.com/wp-content/uploads/2011/01/pof-300x56.jpg 300w, https://krebsonsecurity.com/wp-content/uploads/2011/01/pof.jpg 480w" sizes="(max-width: 300px) 100vw, 300px" /></a>Getting hacked is no fun. Learning that you&#8217;ve been hacked when a reporter calls is probably even less fun. But for better or worse, I have notified dozens of companies about various breaches over the years, and I&#8217;ve learned to read between the lines in how victims respond. Usually, when the company in question replies by implicating you in an alleged extortion scheme, two things become clear:</p>
+<p>1) You&#8217;re probably not going to get any real answers to your direct questions about the incident, and;</p>
+<p>2) The company almost certainly did have a serious breach.</p>
+<p> <a href="https://krebsonsecurity.com/2011/01/plentyoffish-com-hacked-blames-messenger/#more-7703" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-7653" class="post-7653 post type-post status-publish format-standard hentry category-sunshine category-all-about-skimmers category-web-fraud-2-0 tag-atm-skimmer tag-door-skimmer tag-1872">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2011/01/atm-skimmers-that-never-touch-the-atm/" title="Permalink to ATM Skimmers That Never Touch the ATM" rel="bookmark">ATM Skimmers That Never Touch the ATM</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">January 31, 2011</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2011/01/atm-skimmers-that-never-touch-the-atm/#comments">59 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>Media attention to crimes involving ATM skimmers may make consumers more likely to identify compromised cash machines, which involve cleverly disguised theft devices that sometimes appear off-color or out-of-place. Yet, many of today&#8217;s skimmer scams can swipe your card details and personal identification number while leaving the ATM itself completely untouched, making them far more difficult to spot.</p>
+<p>The most common of these off-ATM skimmers can be found near cash machines that are located in the antechamber of a bank or building lobby, where access is controlled by a key card lock that is activated when the customer swipes his or her ATM card. In these scams, the thieves remove the card swipe device attached to the outside door, add a skimmer, and then reattach the device to the door. The attackers then place a hidden camera just above or beside the ATM, so that the camera is angled to record unsuspecting customers entering their PINs.</p>
+<p>The crooks usually return later in the evening to remove the theft devices. Armed with skimmed card data and victim PINs, skimmer thieves are able to encode the information onto counterfeit cards and withdraw money from compromised accounts at ATMs across the country.</p>
+<p>On July 24, 2009, California police officers responded to a report that a customer had uncovered a camera hidden behind a mirror that was stuck to the wall above an ATM at a bank in Sherman Oaks, Calif. There were two ATMs in the lobby where the camera was found, and officers discovered that the thieves had placed an &#8220;Out of Order&#8221; sign on the ATM that did not have the camera pointed at its PIN pad. The sign was a simple ruse designed to trick all customers into using the cash machine that <em>was</em> compromised.</p>
+<p>Bank security cameras at the scene of the crime show the fake mirror installed over the ATM on the right.</p>
+<p><a class="lightbox" href="https://krebsonsecurity.com/wp-content/uploads/2011/01/mirrorskimcam.jpg"><img loading="lazy" class="aligncenter size-full wp-image-7659" title="mirrorskimcam" src="https://krebsonsecurity.com/wp-content/uploads/2011/01/mirrorskimcam.jpg" alt="" width="600" height="372" srcset="https://krebsonsecurity.com/wp-content/uploads/2011/01/mirrorskimcam.jpg 766w, https://krebsonsecurity.com/wp-content/uploads/2011/01/mirrorskimcam-300x186.jpg 300w" sizes="(max-width: 600px) 100vw, 600px" /></a></p>
+<p>Here&#8217;s a front view of the hidden camera, which probably would appear to most ATM users as nothing more than a parabolic mirror designed to give customers a view of anyone standing behind them.</p>
+<p><a class="lightbox" href="https://krebsonsecurity.com/wp-content/uploads/2011/01/mirror.jpg"><img loading="lazy" class="aligncenter size-full wp-image-7655" title="mirror" src="https://krebsonsecurity.com/wp-content/uploads/2011/01/mirror.jpg" alt="" width="434" height="280" srcset="https://krebsonsecurity.com/wp-content/uploads/2011/01/mirror.jpg 434w, https://krebsonsecurity.com/wp-content/uploads/2011/01/mirror-300x193.jpg 300w" sizes="(max-width: 434px) 100vw, 434px" /></a></p>
+<p>Behind the glass, however, was a battery-operated hidden camera. A tiny hole was cut out of the bottom of the mirror housing to enable the camera to record PIN entries.</p>
+<p><a class="lightbox" href="https://krebsonsecurity.com/wp-content/uploads/2011/01/mirrorback.jpg"><img loading="lazy" class="aligncenter size-full wp-image-7656" title="mirrorback" src="https://krebsonsecurity.com/wp-content/uploads/2011/01/mirrorback.jpg" alt="" width="580" height="355" srcset="https://krebsonsecurity.com/wp-content/uploads/2011/01/mirrorback.jpg 580w, https://krebsonsecurity.com/wp-content/uploads/2011/01/mirrorback-300x183.jpg 300w" sizes="(max-width: 580px) 100vw, 580px" /></a></p>
+<p>Below are several images showing the key card door lock that was compromised in this attack. The top left image shows the device as it would appear attached to the door securing access to the ATM lobby. The other two pictures show the skimmer device with the electronic components added by the thieves.</p>
+<p> <a href="https://krebsonsecurity.com/2011/01/atm-skimmers-that-never-touch-the-atm/#more-7653" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-7633" class="post-7633 post type-post status-publish format-standard hentry category-other tag-0day tag-ie tag-internet-explorer tag-microsoft tag-qualys tag-wolfgang-kandek">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2011/01/microsoft-exploit-published-for-windows-flaw/" title="Permalink to Microsoft: Exploit Published for Windows Flaw" rel="bookmark">Microsoft: Exploit Published for Windows Flaw</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">January 28, 2011</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2011/01/microsoft-exploit-published-for-windows-flaw/#comments">20 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>Microsoft warned today that hackers have published instructions for attacking a previously unknown security hole in all versions of Windows that could be exploited to siphon user data or trick users into installing malicious code.</p>
+<p>Redmond published <a href="http://www.microsoft.com/technet/security/advisory/2501696.mspx" target="_blank">an advisory</a> about a vulnerability in the way Windows handles <a href="http://en.wikipedia.org/wiki/MHTML" target="_blank">MHTML</a> code that could let attackers run Javascript code if the user is browsing a malicious site using <strong>Internet Explorer</strong>. As <strong>Wolfgang Kandek</strong>, chief technology officer at <a href="http://www.qualys.com" target="_blank">Qualys</a> notes, that means that IE is the only known exploit vehicle for this flaw, and that other browsers such as <strong>Firefox</strong> and <strong>Chrome</strong> are not affected in their default configuration because they don&#8217;t support MHTML without the installation of specific add-ons.</p>
+<p>Microsoft said it may issue a patch to fix the flaw, but that in the meantime IE users who are concerned about this threat can use a supplied &#8220;FixIt&#8221; tool to help shore up the way Windows handles MHTML documents. The enable that fix, visit <a href="http://blogs.technet.com/b/srd/archive/2011/01/28/more-information-about-the-mhtml-script-injection-vulnerability.aspx" target="_blank">this link</a> and click the FixIt icon.</p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-7618" class="post-7618 post type-post status-publish format-standard hentry category-sunshine tag-egypt">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2011/01/egypt-unplugged-from-the-internet/" title="Permalink to Egypt Unplugged from the Internet" rel="bookmark">Egypt Unplugged from the Internet</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">January 28, 2011</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2011/01/egypt-unplugged-from-the-internet/#comments">26 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>As many readers no doubt know, the Egyptian government on Thursday <a href="http://www.google.com/search?q=egypt&amp;ie=utf-8&amp;oe=utf-8&amp;aq=t&amp;rls=org.mozilla:en-US:official&amp;client=firefox-a#q=egypt&amp;oe=utf-8&amp;rls=org.mozilla:en-US:official&amp;client=firefox-a&amp;um=1&amp;ie=UTF-8&amp;tbo=u&amp;tbs=nws:1&amp;source=og&amp;sa=N&amp;hl=en&amp;tab=wn&amp;fp=cdde7568afd2b943" target="_blank">severed the nation&#8217;s ties with the rest of the Internet</a>, in an apparent effort to disrupt political protests calling for an end to the 30-year rule of Egyptian leader Hosni Mubarak.</p>
+<p>I&#8217;ve been tweeting about new developments as they arise, but I wanted to point to a few of the more dramatic graphs that different sources have drawn up to show the precipitous decline in Internet traffic and connectivity to and from Egypt as leaders there sought to isolate phone and computer networks from the rest of the world.</p>
+<p><strong>Arbor Networks</strong> put together this graphic, which shows what happens when 80 million people are disconnected from the Web all at once:</p>
+<p><a href="https://krebsonsecurity.com/wp-content/uploads/2011/01/egypt1.jpg"><img loading="lazy" class="aligncenter size-full wp-image-7619" title="egypt1" src="https://krebsonsecurity.com/wp-content/uploads/2011/01/egypt1.jpg" alt="" width="602" height="294" srcset="https://krebsonsecurity.com/wp-content/uploads/2011/01/egypt1.jpg 1017w, https://krebsonsecurity.com/wp-content/uploads/2011/01/egypt1-300x146.jpg 300w" sizes="(max-width: 602px) 100vw, 602px" /></a>The <a href="http://extraexploit.blogspot.com/2011/01/egypt-telecom-as-isolation-bgplay-show.html" target="_blank">Extraexploit blog</a> looked at the Internet routing situation around Egypt before and after the disconnection, using the handy (but tricky) tool available <a href="http://bgplay.routeviews.org/" target="_blank">here</a>. This Java-based tool charts the routing activity between and among separate networks on the Internet. The first image below shows what <a href="http://www.robtex.com/as/as8452.html#bgp" target="_blank">some of the main routes</a> to and from Egypt&#8217;s various networks looked like just before the incident.</p>
+<p><a href="https://krebsonsecurity.com/wp-content/uploads/2011/01/bgpegypt1.jpg"><img loading="lazy" class="aligncenter size-full wp-image-7620" title="bgpegypt1" src="https://krebsonsecurity.com/wp-content/uploads/2011/01/bgpegypt1.jpg" alt="" width="609" height="614" srcset="https://krebsonsecurity.com/wp-content/uploads/2011/01/bgpegypt1.jpg 609w, https://krebsonsecurity.com/wp-content/uploads/2011/01/bgpegypt1-150x150.jpg 150w, https://krebsonsecurity.com/wp-content/uploads/2011/01/bgpegypt1-297x300.jpg 297w" sizes="(max-width: 609px) 100vw, 609px" /></a>Check out the same route view from today, and it&#8217;s clear that Egypt has isolated itself from the rest of the Internet.</p>
+<p><a href="https://krebsonsecurity.com/wp-content/uploads/2011/01/bgpegypt2.jpg"><img loading="lazy" class="aligncenter size-full wp-image-7621" title="bgpegypt2" src="https://krebsonsecurity.com/wp-content/uploads/2011/01/bgpegypt2.jpg" alt="" width="584" height="622" srcset="https://krebsonsecurity.com/wp-content/uploads/2011/01/bgpegypt2.jpg 584w, https://krebsonsecurity.com/wp-content/uploads/2011/01/bgpegypt2-281x300.jpg 281w" sizes="(max-width: 584px) 100vw, 584px" /></a>As the folks at <strong>Renesys.com</strong> <a href="http://www.renesys.com/blog/2011/01/egypt-leaves-the-internet.shtml" target="_blank">wrote</a>, there are still a handful of Internet connections that remain live in Egypt, but the comments to that post suggest that those connections may have been left tightly in the grip of the Egyptian government. Link Egypt, Vodafone/Raya, Telecom Egypt, and Etisalat Misr &#8212; all have been blocked, Renesys found.</p>
+<p>In response to the Egyptian government&#8217;s crackdown on protesters there, Wikileaks <a href="http://blogs.forbes.com/andygreenberg/2011/01/28/wikileaks-drops-new-egypt-revelations-amid-protests-will-anyone-there-see-them/" target="_blank">released new State Department cables</a> that reveal human rights abuses and political arrests in the country. Too bad nobody in Egypt is going to be able to see those cables.</p>
+<p>Have you discovered a graphic that shows the network isolation of Egypt in a compelling way? Post a link in the comments below, please.</p>
+<p><strong>Update, 11:19 a.m.:</strong> A reader wrote in with a link to a decent graph maintained by <a href="http://stat.ripe.net/egypt/" target="_blank">RIPE</a> (French for &#8220;European IP Networks&#8221;), which shows the disconnection starting on Jan. 27.</p>
+<p><a class="lightbox" href="https://krebsonsecurity.com/wp-content/uploads/2011/01/ripeegypt.jpg"><img loading="lazy" class="aligncenter size-full wp-image-7630" title="ripeegypt" src="https://krebsonsecurity.com/wp-content/uploads/2011/01/ripeegypt.jpg" alt="" width="599" height="216" srcset="https://krebsonsecurity.com/wp-content/uploads/2011/01/ripeegypt.jpg 920w, https://krebsonsecurity.com/wp-content/uploads/2011/01/ripeegypt-300x108.jpg 300w" sizes="(max-width: 599px) 100vw, 599px" /></a></p>
+<p><strong>Update, Jan. 29, 7:34 p.m. ET:</strong> A relatively new data leak prevention firm called <strong>Unveillance</strong> sent a pointer to their <a href="http://www.unveillance.com/latest-news/malware-activity-from-the-country-of-egypt/" target="_blank">blog post</a>, which chronicled the disconnection of Egypt from a slightly different perspective: The drop in network activity from computer systems within Egypt that were infected with malicious software or controlling other infected hosts.</p>
+<p><a class="lightbox" href="https://krebsonsecurity.com/wp-content/uploads/2011/01/unveil.png"><img loading="lazy" class="aligncenter size-full wp-image-7639" title="unveil" src="https://krebsonsecurity.com/wp-content/uploads/2011/01/unveil.png" alt="" width="599" height="272" srcset="https://krebsonsecurity.com/wp-content/uploads/2011/01/unveil.png 972w, https://krebsonsecurity.com/wp-content/uploads/2011/01/unveil-300x136.png 300w" sizes="(max-width: 599px) 100vw, 599px" /></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-7522" class="post-7522 post type-post status-publish format-standard hentry category-sunshine category-web-fraud-2-0 tag-botnet tag-canadian-family-pharmacy tag-evapharmacy tag-healthcare-mall tag-my-canadian-pharmacy tag-oscommerce tag-peter-bennett tag-victoria-espinel">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2011/01/battling-the-zombie-web-site-armies/" title="Permalink to Battling the Zombie Web Site Armies" rel="bookmark">Battling the Zombie Web Site Armies</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">January 26, 2011</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2011/01/battling-the-zombie-web-site-armies/#comments">27 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p><strong>Peter Bennett</strong> first suspected his own Web site might have been turned into a spam-spewing zombie on the night of Nov. 11, when he discovered that a tiny program secretly uploaded to his site was forcing it to belch out ads for rogue Internet pharmacies.</p>
+<p>Bennett&#8217;s site had been silently &#8220;infected&#8221; via an unknown (at the time) vulnerability in a popular e-commerce software package. While most site owners probably would have just cleaned up the mess and moved on, Bennett &#8212; a longtime anti-spam vigilante &#8212; took the attack as a personal challenge.</p>
+<p><a href="https://krebsonsecurity.com/wp-content/uploads/2010/12/army.jpg"><img loading="lazy" class="alignright size-medium wp-image-7191" title="army" src="https://krebsonsecurity.com/wp-content/uploads/2010/12/army-300x196.jpg" alt="" width="300" height="196" srcset="https://krebsonsecurity.com/wp-content/uploads/2010/12/army-300x196.jpg 300w, https://krebsonsecurity.com/wp-content/uploads/2010/12/army.jpg 428w" sizes="(max-width: 300px) 100vw, 300px" /></a>&#8220;Spammers always know it is me attacking their resources in whatever form that takes,&#8221; Bennett said. &#8220;In other words, I make myself a target because I have a clue or two about server security and defense and just love taunting them to crank them up.&#8221;</p>
+<p>And taunt them he has. For years, the New Zealand resident was part of a ragtag band of anti-spam activists, or &#8220;antis,&#8221; that <a href="http://www.nzherald.co.nz/technology/news/article.cfm?c_id=5&amp;objectid=3519278" target="_blank">helped</a> to bring down infamous pill spammer <strong>Shane Atkinson</strong> and other junk e-mail purveyors. After taking a break from anti activity in 2007 to pursue other professional goals, Bennett &#8211; now 50 &#8211; seems eager to jump back into the fray.</p>
+<p>In the interim, however, spammers have been refining their techniques. Like reluctant conscripts in a global guerilla army, hundreds  &#8212; sometimes thousands &#8212; of legitimate Web sites are now enslaved each month and sold to criminals who use them to blast out spam and host spam sites. The attackers Bennett is tracking mainly pick on orphaned Web sites running Linux with insecure, unpatched software packages (Bennett says his site was hacked thanks to <a href=" http://www.exploit-db.com/exploits/15587/" target="_blank">a zero-day bug</a> in <a href="http://en.wikipedia.org/wiki/OsCommerce" target="_blank">OScommerce</a>, a popular e-commerce software program).</p>
+<p>Bennett found that his Web site was part of a larger botnet of at least 1,200 compromised sites that was being used to send roughly 25 million junk e-mail messages each day, although he said it appears the botnet is used for spam runs only intermittently.</p>
+<p>&#8220;They only run the botnet once a week or so at a time, and then shut it off,&#8221; Bennett said.</p>
+<div id="attachment_7578" style="width: 310px" class="wp-caption alignright"><a href="https://krebsonsecurity.com/wp-content/uploads/2011/01/evapharmacyad.jpg"><img aria-describedby="caption-attachment-7578" loading="lazy" class="size-medium wp-image-7578" title="evapharmacyad" src="https://krebsonsecurity.com/wp-content/uploads/2011/01/evapharmacyad-300x96.jpg" alt="" width="300" height="96" srcset="https://krebsonsecurity.com/wp-content/uploads/2011/01/evapharmacyad-300x96.jpg 300w, https://krebsonsecurity.com/wp-content/uploads/2011/01/evapharmacyad.jpg 446w" sizes="(max-width: 300px) 100vw, 300px" /></a><p id="caption-attachment-7578" class="wp-caption-text">An ad soliciting EvaPharmacy affiliates.</p></div>
+<p>The hacked sites in the botnet Bennett identified mainly advertise one of three types of rogue pill sites: <strong>MyCanadianPharmacy</strong>, <strong>Canadian Family Pharmacy</strong>, and <strong>Canadian Health&amp;Care Mall</strong>. The latter  has been <a href="http://www.legitscript.com/blogposts/107" target="_blank">tied to a pharmacy affiliate program called EvaPharmacy</a>, one of the few remaining pharmacy affiliate programs that pays members to promote fly-by-night pill sites via spam.</p>
+<p> <a href="https://krebsonsecurity.com/2011/01/battling-the-zombie-web-site-armies/#more-7522" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-7525" class="post-7525 post type-post status-publish format-standard hentry category-other tag-cecom-army-mil tag-cyberwar tag-department-of-defense-pharmacoeconomic-center tag-imperva tag-java tag-liberty-reserve tag-sql-injection">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2011/01/ready-for-cyberwar/" title="Permalink to Ready for Cyberwar?" rel="bookmark">Ready for Cyberwar?</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">January 21, 2011</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2011/01/ready-for-cyberwar/#comments">41 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>Amid all of the media and public fascination with threats like Stuxnet and weighty terms such as &#8220;cyberwar,&#8221; it&#8217;s easy to overlook the more humdrum and persistent security threats, such as Web site vulnerabilities. But none of these distractions should excuse U.S. military leaders from making sure their Web sites aren&#8217;t trivially hackable by script kiddies.</p>
+<p>Security vendor <strong>Imperva</strong> today <a href="http://blog.imperva.com/2011/01/major-websites-govmiledu-are-hacked-and-up-for-sale.html?utm_source=feedburner&amp;utm_medium=feed&amp;utm_campaign=Feed%3A+Imperviews+%28ImperViews%29" target="_blank">blogged</a> about a hacker who claims to have access to and control over several top dot-gov, dot-mil and dot-edu Web sites. I&#8217;ve seen some of the back-end evidence of his hacks, so it doesn&#8217;t seem like he&#8217;s making this up. Perhaps out of deference to the federal government, the Imperva folks blocked out the best part of that screen shot &#8212; the actual names of the Web site domains that this hacker is selling. For example, the hacker is advertising full control and root access to <strong>cecom.army.mil</strong>, a site whose stated purpose is &#8220;to develop, acquire, provide and sustain world-class&#8230;systems and Battle Command capabilities for the joint warfighter.&#8221; It can be yours, for just $499 (sorry, no credit cards accepted; only the virtual currency <a href="https://www.libertyreserve.com/en/login">Liberty Reserve</a>).</p>
+<p>Here is an unredacted (well, mostly) shot of that site:</p>
+<p><a href="https://krebsonsecurity.com/wp-content/uploads/2011/01/dotmilorggovsale1.jpg"><img loading="lazy" class="aligncenter size-full wp-image-7527" title="dotmilorggovsale1" src="https://krebsonsecurity.com/wp-content/uploads/2011/01/dotmilorggovsale1.jpg" alt="" width="600" height="681" srcset="https://krebsonsecurity.com/wp-content/uploads/2011/01/dotmilorggovsale1.jpg 668w, https://krebsonsecurity.com/wp-content/uploads/2011/01/dotmilorggovsale1-264x300.jpg 264w" sizes="(max-width: 600px) 100vw, 600px" /></a></p>
+<p> <a href="https://krebsonsecurity.com/2011/01/ready-for-cyberwar/#more-7525" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+				
+			
+								<div class="themonic-pagination"><div class='pagination'><ul><li><a href='https://krebsonsecurity.com/'>&laquo; First</a></li><li><a href='https://krebsonsecurity.com/page/180/' class='inactive'>&lsaquo; Previous</a></li><li><a href='https://krebsonsecurity.com/page/178/' class='inactive'>178</a></li><li><a href='https://krebsonsecurity.com/page/179/' class='inactive'>179</a></li><li><a href='https://krebsonsecurity.com/page/180/' class='inactive'>180</a></li><li class='current'><span class='currenttext'>181</span></li><li><a href='https://krebsonsecurity.com/page/182/' class='inactive'>182</a></li><li><a href='https://krebsonsecurity.com/page/183/' class='inactive'>183</a></li><li><a href='https://krebsonsecurity.com/page/184/' class='inactive'>184</a></li><li><a href='https://krebsonsecurity.com/page/182/' class='inactive'>Next &rsaquo;</a></li><a class='inactive' href='https://krebsonsecurity.com/page/209/'>Last &raquo;</a></ul></div></div>
+					<div style="display: block; clear: both;"></div>
+			
+		
+
+	
+
+		</div><!-- #content -->
+	</div><!-- #primary -->
+
+
+			<div id="secondary" class="widget-area" role="complementary">
+
+        <div id="sidebar_ad" class="widget themonic-ad5"><div class="a-statement">Advertisement</div><a href="https://securityscorecard.com/instant-security-scorecard?utm_source=krebs+on+security&amp;utm_medium=display&amp;utm_campaign=instant+scorecard&amp;utm_term=A&amp;utm_content=335x300">
+<img src="/b-securityscorecard/3.jpg">
+</a></div>
+
+                        <br><div class="widget themonic-ad1"><div class="a-statement">Advertisement</div><a href="https://www.akamai.com/why-akamai/the-internet-of-possibilities?utm_source=krebsonsecurity&amp;utm_medium=display&amp;utm_campaign=F-MC-54978">
+<img src="/b-akamai/146.png">
+</a></div><br>
+
+			<aside id="custom_html-2" class="widget_text widget widget_custom_html"><p class="widget-title">Mailing List</p><div class="textwidget custom-html-widget"><a href="/subscribe/">Subscribe here</a></div></aside><aside id="search-2" class="widget widget_search"><p class="widget-title">Search KrebsOnSecurity</p><form role="search" method="get" id="searchform" class="searchform" action="https://krebsonsecurity.com/">
+				<div>
+					<label class="screen-reader-text" for="s">Search for:</label>
+					<input type="text" value="" name="s" id="s" />
+					<input type="submit" id="searchsubmit" value="Search" />
+				</div>
+			</form></aside>
+		<aside id="recent-posts-3" class="widget widget_recent_entries">
+		<p class="widget-title">Recent Posts</p>
+		<ul>
+											<li>
+					<a href="https://krebsonsecurity.com/2021/12/canada-charges-its-most-prolific-cybercriminal/">Canada Charges Its &#8220;Most Prolific Cybercriminal&#8221;</a>
+									</li>
+											<li>
+					<a href="https://krebsonsecurity.com/2021/12/who-is-the-network-access-broker-babam/">Who Is the Network Access Broker &#8216;Babam&#8217;?</a>
+									</li>
+											<li>
+					<a href="https://krebsonsecurity.com/2021/12/ubiquiti-developer-charged-with-extortion-causing-2020-breach/">Ubiquiti Developer Charged With Extortion, Causing 2020 &#8220;Breach&#8221;</a>
+									</li>
+											<li>
+					<a href="https://krebsonsecurity.com/2021/11/the-internet-is-held-together-with-spit-baling-wire/">The Internet is Held Together With Spit &#038; Baling Wire</a>
+									</li>
+											<li>
+					<a href="https://krebsonsecurity.com/2021/11/arrest-in-ransom-your-employer-email-scheme/">Arrest in &#8216;Ransom Your Employer&#8217; Email Scheme</a>
+									</li>
+					</ul>
+
+		</aside><aside id="text-2" class="widget widget_text">			<div class="textwidget"><a name="subscribe2"></a></div>
+		</aside><aside id="widget_sp_image-15" class="widget widget_sp_image"><p class="widget-title">Spam Nation</p><a href="https://www.amazon.com/Spam-Nation-Organized-Cybercrime-Epidemic-ebook/dp/B00L5QGBL0/ref=dp_kinw_strp_1" target="_blank" class="widget_sp_image-image-link" title="Spam Nation"><img width="266" height="404" alt="Spam Nation" class="attachment-266x404 aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2015/04/spamnation-nyt.png" /></a><div class="widget_sp_image-description" ><p>A New York Times Bestseller! </p>
+</div></aside><aside id="widget_sp_image-25" class="widget widget_sp_image"><p class="widget-title">Thinking of a Cybersecurity Career?</p><a href="https://krebsonsecurity.com/2020/07/thinking-of-a-cybersecurity-career-read-this/" target="_blank" class="widget_sp_image-image-link" title="Thinking of a Cybersecurity Career? Read This."><img width="625" height="424" alt="Thinking of a Cybersecurity Career?" class="attachment-full" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2020/07/codepeople.png 625w, https://krebsonsecurity.com/wp-content/uploads/2020/07/codepeople-580x393.png 580w" sizes="(max-width: 625px) 100vw, 625px" src="https://krebsonsecurity.com/wp-content/uploads/2020/07/codepeople.png" /></a><div class="widget_sp_image-description" ><p>Read this.</p>
+</div></aside><aside id="widget_sp_image-3" class="widget widget_sp_image"><p class="widget-title">All About Skimmers </p><a href="https://krebsonsecurity.com/all-about-skimmers/" target="_blank" class="widget_sp_image-image-link" title="All About Skimmers "><img width="299" height="232" alt="All About Skimmers" class="attachment-299x232 aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2010/08/skimgallery1.jpg" /></a><div class="widget_sp_image-description" ><p>Click image for my skimmer series.</p>
+</div></aside><aside id="categories-2" class="widget widget_categories"><p class="widget-title">Story Categories</p>
+			<ul>
+					<li class="cat-item cat-item-5"><a href="https://krebsonsecurity.com/category/sunshine/" title="Includes investigative blog posts meant to shine a light on the darker corners of the Internet.">A Little Sunshine</a>
+</li>
+	<li class="cat-item cat-item-2240"><a href="https://krebsonsecurity.com/category/all-about-skimmers/">All About Skimmers</a>
+</li>
+	<li class="cat-item cat-item-9085"><a href="https://krebsonsecurity.com/category/ashley-madison-breach/">Ashley Madison breach</a>
+</li>
+	<li class="cat-item cat-item-3191"><a href="https://krebsonsecurity.com/category/breadcrumbs/">Breadcrumbs</a>
+</li>
+	<li class="cat-item cat-item-3771"><a href="https://krebsonsecurity.com/category/data-breaches/" title="Stories about data breaches at retailers, corporations, governments and organizations of all sizes.">Data Breaches</a>
+</li>
+	<li class="cat-item cat-item-4624"><a href="https://krebsonsecurity.com/category/ddos-for-hire/">DDoS-for-Hire</a>
+</li>
+	<li class="cat-item cat-item-9173"><a href="https://krebsonsecurity.com/category/employment-fraud/">Employment Fraud</a>
+</li>
+	<li class="cat-item cat-item-2151"><a href="https://krebsonsecurity.com/category/how-to-break-into-security/" title="If you&#039;ve ever wanted career advice on how to make a shift into the security industry, look no further.">How to Break Into Security</a>
+</li>
+	<li class="cat-item cat-item-87"><a href="https://krebsonsecurity.com/category/latest-warnings/">Latest Warnings</a>
+</li>
+	<li class="cat-item cat-item-4071"><a href="https://krebsonsecurity.com/category/neer-do-well-news/">Ne&#039;er-Do-Well News</a>
+</li>
+	<li class="cat-item cat-item-9"><a href="https://krebsonsecurity.com/category/other/">Other</a>
+</li>
+	<li class="cat-item cat-item-1306"><a href="https://krebsonsecurity.com/category/pharma-wars/">Pharma Wars</a>
+</li>
+	<li class="cat-item cat-item-8240"><a href="https://krebsonsecurity.com/category/ransomware/">Ransomware</a>
+</li>
+	<li class="cat-item cat-item-599"><a href="https://krebsonsecurity.com/category/security-tools/">Security Tools</a>
+</li>
+	<li class="cat-item cat-item-8298"><a href="https://krebsonsecurity.com/category/sim-swapping/">SIM Swapping</a>
+</li>
+	<li class="cat-item cat-item-4079"><a href="https://krebsonsecurity.com/category/spam-nation/">Spam Nation</a>
+</li>
+	<li class="cat-item cat-item-1"><a href="https://krebsonsecurity.com/category/smallbizvictims/" title="Posts in this category will include new stories similar to those told in the Small Business Victims category on The Washington Post&#039;s Security Fix blog, which chronicled the methods organized cyber thieve are using to steal hundreds of thousands of dollars from dozens of small- to mid-sized companies around the country.">Target: Small Businesses</a>
+</li>
+	<li class="cat-item cat-item-5167"><a href="https://krebsonsecurity.com/category/tax-refund-fraud/">Tax Refund Fraud</a>
+</li>
+	<li class="cat-item cat-item-3"><a href="https://krebsonsecurity.com/category/comingstorm/" title="This category includes blog posts about computer and Internet security threats now and on the horizon.">The Coming Storm</a>
+</li>
+	<li class="cat-item cat-item-4"><a href="https://krebsonsecurity.com/category/patches/" title="Short posts on the latest security updates for widely-used software.
+">Time to Patch</a>
+</li>
+	<li class="cat-item cat-item-21"><a href="https://krebsonsecurity.com/category/web-fraud-2-0/">Web Fraud 2.0</a>
+</li>
+			</ul>
+
+			</aside><aside id="widget_sp_image-5" class="widget widget_sp_image"><p class="widget-title">The Value of a Hacked PC</p><a href="https://krebsonsecurity.com/2012/10/the-scrap-value-of-a-hacked-pc-revisited/" target="_blank" class="widget_sp_image-image-link" title="The Value of a Hacked PC"><img width="285" height="180" alt="valuehackedpc " class="attachment-285x180 aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2012/12/valuehackedpc-285x180.png" /></a><div class="widget_sp_image-description" ><p>Badguy uses for your PC</p>
+</div></aside><aside id="widget_sp_image-9" class="widget widget_sp_image"><p class="widget-title">Badguy Uses for Your Email </p><a href="https://krebsonsecurity.com/2013/06/the-value-of-a-hacked-email-account/" target="_self" class="widget_sp_image-image-link" title="Badguy Uses for Your Email "><img width="296" height="170" alt="Badguy Uses for Your Email " class="attachment-full aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2013/06/badguyemail.png 296w, https://krebsonsecurity.com/wp-content/uploads/2013/06/badguyemail-285x163.png 285w" sizes="(max-width: 296px) 100vw, 296px" src="https://krebsonsecurity.com/wp-content/uploads/2013/06/badguyemail.png" /></a><div class="widget_sp_image-description" ><p>Your email account may be worth far more than you imagine.</p>
+</div></aside><aside id="widget_sp_image-24" class="widget widget_sp_image"><a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&#038;hosted_button_id=MCCRKHWRX57HS" id="donate" target="_self" class="widget_sp_image-image-link"><img width="250" height="55" alt="Donate to Krebs On Security" class="attachment-medium aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2016/09/donatepaypal2-1.png" /></a></aside><aside id="most_popular_posts-3" class="widget widget_most_popular_posts">
+<p class="widget-title">Most Popular Posts</p>
+<ul>	<li><a href="https://krebsonsecurity.com/2018/07/sextortion-scam-uses-recipients-hacked-passwords/">Sextortion Scam Uses Recipient's Hacked Passwords</a> (1076)</li>
+	<li><a href="https://krebsonsecurity.com/2015/07/online-cheating-site-ashleymadison-hacked/">Online Cheating Site AshleyMadison Hacked</a> (798)</li>
+	<li><a href="https://krebsonsecurity.com/2013/12/sources-target-investigating-data-breach/">Sources: Target Investigating Data Breach</a> (620)</li>
+	<li><a href="https://krebsonsecurity.com/2020/11/trump-fires-security-chief-christopher-krebs/">Trump Fires Security Chief Christopher Krebs</a> (534)</li>
+	<li><a href="https://krebsonsecurity.com/2013/12/cards-stolen-in-target-breach-flood-underground-markets/">Cards Stolen in Target Breach Flood Underground Markets</a> (445)</li>
+	<li><a href="https://krebsonsecurity.com/2013/05/reports-liberty-reserve-founder-arrested-site-shuttered/">Reports: Liberty Reserve Founder Arrested, Site Shuttered</a> (416)</li>
+	<li><a href="https://krebsonsecurity.com/2015/08/was-the-ashley-madison-database-leaked/">Was the Ashley Madison Database Leaked?</a> (376)</li>
+	<li><a href="https://krebsonsecurity.com/2021/01/ddos-guard-to-forfeit-internet-space-occupied-by-parler/">DDoS-Guard To Forfeit Internet Space Occupied by Parler</a> (374)</li>
+	<li><a href="https://krebsonsecurity.com/2014/05/true-goodbye-using-truecrypt-is-not-secure/">True Goodbye: 'Using TrueCrypt Is Not Secure'</a> (363)</li>
+	<li><a href="https://krebsonsecurity.com/2015/08/who-hacked-ashley-madison/">Who Hacked Ashley Madison?</a> (361)</li>
+</ul>
+</aside>
+<aside id="media_image-2" class="widget widget_media_image"><p class="widget-title">Why So Many Top Hackers Hail from Russia</p><a href="https://krebsonsecurity.com/2017/06/why-so-many-top-hackers-hail-from-russia/"><img width="580" height="389" src="https://krebsonsecurity.com/wp-content/uploads/2017/06/computered-580x389.png" class="image wp-image-39684  attachment-medium size-medium" alt="" loading="lazy" style="max-width: 100%; height: auto;" srcset="https://krebsonsecurity.com/wp-content/uploads/2017/06/computered-580x389.png 580w, https://krebsonsecurity.com/wp-content/uploads/2017/06/computered-768x514.png 768w, https://krebsonsecurity.com/wp-content/uploads/2017/06/computered-940x630.png 940w, https://krebsonsecurity.com/wp-content/uploads/2017/06/computered.png 1551w" sizes="(max-width: 580px) 100vw, 580px" /></a></aside><aside id="widget_sp_image-11" class="widget widget_sp_image"><p class="widget-title">Category: Web Fraud 2.0</p><a href="https://krebsonsecurity.com/category/web-fraud-2-0/" target="_blank" class="widget_sp_image-image-link" title="Category: Web Fraud 2.0"><img width="227" height="400" alt="Criminnovations" class="attachment-medium aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2013/11/cybercrimeinnovations-227x400.png" /></a><div class="widget_sp_image-description" ><p>Innovations from the Underground</p>
+</div></aside><aside id="widget_sp_image-12" class="widget widget_sp_image"><a href="https://krebsonsecurity.com/2014/03/are-credit-monitoring-services-worth-it/" target="_blank" class="widget_sp_image-image-link"><img width="285" height="189" class="attachment-medium aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2014/03/shreddedID-copy-285x189.png 285w, https://krebsonsecurity.com/wp-content/uploads/2014/03/shreddedID-copy-600x399.png 600w, https://krebsonsecurity.com/wp-content/uploads/2014/03/shreddedID-copy.png 849w" sizes="(max-width: 285px) 100vw, 285px" src="https://krebsonsecurity.com/wp-content/uploads/2014/03/shreddedID-copy-285x189.png" /></a><div class="widget_sp_image-description" ><p>ID Protection Services Examined</p>
+</div></aside><aside id="widget_sp_image-13" class="widget widget_sp_image"><p class="widget-title">Is Antivirus Dead?</p><a href="https://krebsonsecurity.com/2014/05/antivirus-is-dead-long-live-antivirus/" target="_blank" class="widget_sp_image-image-link" title="Is Antivirus Dead?"><img width="285" height="161" alt="Is Antivirus Dead?" class="attachment-medium aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2014/05/cryptservices-285x161.png 285w, https://krebsonsecurity.com/wp-content/uploads/2014/05/cryptservices-600x339.png 600w, https://krebsonsecurity.com/wp-content/uploads/2014/05/cryptservices.png 945w" sizes="(max-width: 285px) 100vw, 285px" src="https://krebsonsecurity.com/wp-content/uploads/2014/05/cryptservices-285x161.png" /></a><div class="widget_sp_image-description" ><p>The reasons for its decline</p>
+</div></aside><aside id="widget_sp_image-14" class="widget widget_sp_image"><p class="widget-title">The Growing Tax Fraud Menace</p><a href="https://krebsonsecurity.com/category/tax-refund-fraud/" target="_blank" class="widget_sp_image-image-link" title="The Growing Tax Fraud Menace"><img width="285" height="285" alt="The Growing Tax Fraud Menace" class="attachment-medium aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2014/04/taxfraud-285x285.jpg 285w, https://krebsonsecurity.com/wp-content/uploads/2014/04/taxfraud-150x150.jpg 150w, https://krebsonsecurity.com/wp-content/uploads/2014/04/taxfraud-600x600.jpg 600w, https://krebsonsecurity.com/wp-content/uploads/2014/04/taxfraud.jpg 693w" sizes="(max-width: 285px) 100vw, 285px" src="https://krebsonsecurity.com/wp-content/uploads/2014/04/taxfraud-285x285.jpg" /></a><div class="widget_sp_image-description" ><p>File 'em Before the Bad Guys Can </p>
+</div></aside><aside id="widget_sp_image-17" class="widget widget_sp_image"><p class="widget-title">Inside a Carding Shop</p><a href="https://krebsonsecurity.com/2014/06/peek-inside-a-professional-carding-shop/" target="_blank" class="widget_sp_image-image-link" title="Inside a Carding Shop"><img width="194" height="340" alt="Inside a Carding Shop" class="attachment-medium aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2014/06/mcdumpalsjoined.png" /></a><div class="widget_sp_image-description" ><p>A crash course in carding. </p>
+</div></aside><aside id="widget_sp_image-18" class="widget widget_sp_image"><p class="widget-title">Beware Social Security Fraud</p><a href="https://krebsonsecurity.com/2013/09/crooks-hijack-retirement-funds-via-ssa-portal/" target="_blank" class="widget_sp_image-image-link" title="Beware Social Security Fraud"><img width="285" height="293" alt="Beware Social Security Fraud" class="attachment-full aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2016/09/myssn-285x293.png" /></a><div class="widget_sp_image-description" ><p>Sign up, or Be Signed Up! </p>
+</div></aside><aside id="widget_sp_image-2" class="widget widget_sp_image"><p class="widget-title">How Was Your Card Stolen?</p><a href="https://krebsonsecurity.com/2015/01/how-was-your-credit-card-stolen/" target="_blank" class="widget_sp_image-image-link" title="How Was Your Card Stolen?"><img width="285" height="285" alt="How Was Your Card Stolen?" class="attachment-full aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2016/09/carddominoes-285x285.jpg 285w, https://krebsonsecurity.com/wp-content/uploads/2016/09/carddominoes-285x285-150x150.jpg 150w" sizes="(max-width: 285px) 100vw, 285px" src="https://krebsonsecurity.com/wp-content/uploads/2016/09/carddominoes-285x285.jpg" /></a><div class="widget_sp_image-description" ><p>Finding out is not so easy. </p>
+</div></aside><aside id="widget_sp_image-22" class="widget widget_sp_image"><p class="widget-title">Krebs&#8217;s 3 Rules&#8230;</p><a href="https://krebsonsecurity.com/2011/05/krebss-3-basic-rules-for-online-safety/" target="_blank" class="widget_sp_image-image-link" title="Krebs&#8217;s 3 Rules&#8230;"><img width="300" height="300" alt="Krebs&#8217;s 3 Rules&#8230;" class="attachment-medium aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2011/05/three-300x300.jpg 300w, https://krebsonsecurity.com/wp-content/uploads/2011/05/three-150x150.jpg 150w, https://krebsonsecurity.com/wp-content/uploads/2011/05/three.jpg 347w" sizes="(max-width: 300px) 100vw, 300px" src="https://krebsonsecurity.com/wp-content/uploads/2011/05/three-300x300.jpg" /></a><div class="widget_sp_image-description" ><p>...For Online Safety. </p>
+</div></aside>		</div><!-- #secondary -->
+		</div><!-- #main .wrapper -->
+	
+	<div id="publisho-footer" class="widget-area">
+				<div class="footer-widget">
+                				</div>
+				<div class="footer-widget">
+								</div>
+				<div class="footer-widget">
+								</div>
+	</div>
+
+	<div class="site-wordpress">
+					&copy; Krebs on Security<br>
+	</div>
+	<!-- .site-info --><div class="clear"></div>
+</div><!-- #page -->
+
+<script type='text/javascript' src='https://krebsonsecurity.com/wp-content/themes/kos-mar2021/js/slicknav.js?ver=5.8.2' id='publisho-mobile-navigation-js'></script>
+<script type='text/javascript' src='https://krebsonsecurity.com/wp-includes/js/wp-embed.min.js?ver=5.8.2' id='wp-embed-js'></script>
+</body>
+</html>
+<!--
+Performance optimized by W3 Total Cache. Learn more: https://www.boldgrid.com/w3-total-cache/
+
+Object Caching 187/399 objects using memcached
+Page Caching using memcached 
+Database Caching 7/30 queries in 0.017 seconds using memcached
+
+Served from: krebsonsecurity.com @ 2021-12-10 15:36:11 by W3 Total Cache
+-->

@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<!--[if IE 7]>
+<html class="ie ie7" lang="en-US">
+<![endif]-->
+<!--[if IE 8]>
+<html class="ie ie8" lang="en-US">
+<![endif]-->
+<!--[if !(IE 7) | !(IE 8)  ]><!-->
+<html lang="en-US">
+<!--<![endif]-->
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width" />
+<link rel="profile" href="http://gmpg.org/xfn/11" />
+<!--[if lt IE 9]>
+<script src="https://krebsonsecurity.com/wp-content/themes/kos-mar2021/js/html5.js" type="text/javascript"></script>
+<![endif]-->
+<title>Krebs on Security &#8211; Page 68 &#8211; In-depth security news and investigation</title>
+<meta name='robots' content='max-image-preview:large' />
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="Krebs on Security &raquo; Feed" href="https://krebsonsecurity.com/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Krebs on Security &raquo; Comments Feed" href="https://krebsonsecurity.com/comments/feed/" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.1.0\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.1.0\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/krebsonsecurity.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=5.8.2"}};
+			!function(e,a,t){var n,r,o,i=a.createElement("canvas"),p=i.getContext&&i.getContext("2d");function s(e,t){var a=String.fromCharCode;p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,e),0,0);e=i.toDataURL();return p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,t),0,0),e===i.toDataURL()}function c(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(o=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},r=0;r<o.length;r++)t.supports[o[r]]=function(e){if(!p||!p.fillText)return!1;switch(p.textBaseline="top",p.font="600 32px Arial",e){case"flag":return s([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])?!1:!s([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!s([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]);case"emoji":return!s([10084,65039,8205,55357,56613],[10084,65039,8203,55357,56613])}return!1}(o[r]),t.supports.everything=t.supports.everything&&t.supports[o[r]],"flag"!==o[r]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[o[r]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(n=t.source||{}).concatemoji?c(n.concatemoji):n.wpemoji&&n.twemoji&&(c(n.twemoji),c(n.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+	<link rel='stylesheet' id='colorbox-theme1-css'  href='https://krebsonsecurity.com/wp-content/plugins/jquery-lightbox-for-native-galleries/colorbox/theme1/colorbox.css?ver=1.3.14' type='text/css' media='screen' />
+<link rel='stylesheet' id='wp-block-library-css'  href='https://krebsonsecurity.com/wp-includes/css/dist/block-library/style.min.css?ver=5.8.2' type='text/css' media='all' />
+<link rel='stylesheet' id='contact-form-7-css'  href='https://krebsonsecurity.com/wp-content/plugins/contact-form-7/includes/css/styles.css?ver=5.5.3' type='text/css' media='all' />
+<link rel='stylesheet' id='publisho-style-css'  href='https://krebsonsecurity.com/wp-content/themes/kos-mar2021/style.css?subver=1.2&#038;ver=5.8.2' type='text/css' media='all' />
+<style id='publisho-style-inline-css' type='text/css'>
+
+	.themonic-nav .current-menu-item > a, .themonic-nav .current-menu-ancestor > a, .themonic-nav .current_page_item > a, .themonic-nav .current_page_ancestor > a {
+		background: #cc6600;
+	}
+	.themonic-nav ul.nav-menu, .themonic-nav div.nav-menu > ul {
+		border-bottom: 5px solid #cc6600;
+	}
+	#site-navigation .topheadmenu a {
+    background: rgba(0, 0, 0, 0);
+	}
+	.themonic-nav li a:hover {
+		background: #cc6600;
+	}
+	.themonic-nav li:hover {
+		background: #cc6600;
+	}.wrapper .flexslider {margin: 0 0 30px;}.frontp .btm-wrap {
+    border-top: 1px solid #e9e9e9;
+	}
+	.entry-summary {
+    border-top: none;
+	}.frontp .btm-wrap { margin-bottom: 30px;}.site { font-size:14px;}.site { font-family:'Roboto', arial ;}
+</style>
+<link rel='stylesheet' id='publisho-custom-style-css'  href='https://krebsonsecurity.com/wp-content/themes/kos-mar2021/custom.css?subver=1.2&#038;ver=5.8.2' type='text/css' media='all' />
+<!--[if lt IE 9]>
+<link rel='stylesheet' id='publisho-ie-css'  href='https://krebsonsecurity.com/wp-content/themes/kos-mar2021/css/ie.css?ver=20160606' type='text/css' media='all' />
+<![endif]-->
+<link rel='stylesheet' id='fontawesome-css-css'  href='https://krebsonsecurity.com/wp-content/themes/kos-mar2021/fonts/font-awesome.min.css?ver=5.8.2' type='text/css' media='all' />
+<link rel='stylesheet' id='publisho_custom_fonts-css'  href='//fonts.googleapis.com/css?family=Roboto%3Aregular%2Citalic%2C500%26subset%3Dlatin%2C' type='text/css' media='screen' />
+<script type='text/javascript' src='https://krebsonsecurity.com/wp-includes/js/jquery/jquery.min.js?ver=3.6.0' id='jquery-core-js'></script>
+<script type='text/javascript' src='https://krebsonsecurity.com/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.3.2' id='jquery-migrate-js'></script>
+<script type='text/javascript' src='https://krebsonsecurity.com/wp-content/plugins/jquery-lightbox-for-native-galleries/colorbox/jquery.colorbox-min.js?ver=1.3.14' id='colorbox-js'></script>
+<link rel="https://api.w.org/" href="https://krebsonsecurity.com/wp-json/" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://krebsonsecurity.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://krebsonsecurity.com/wp-includes/wlwmanifest.xml" /> 
+<meta name="generator" content="WordPress 5.8.2" />
+<!-- JavaScript Pull-Quotes plugin v2.2 -->
+	<link rel="stylesheet" href="https://krebsonsecurity.com/wp-content/plugins/jspullquotes/resources/jspullquotes-core.css" type="text/css" />
+	<link rel="stylesheet" href="https://krebsonsecurity.com/wp-content/plugins/jspullquotes/resources/jspullquotes-default.css" type="text/css" />
+	<script type="text/javascript" src="https://krebsonsecurity.com/wp-content/plugins/jspullquotes/resources/jspullquotes.js"></script>
+	<script type="text/javascript">
+		var arrOptions = new Array("1", "1", "right", "1", "1", "blockquote", "pullquote", "pullquote pqRight");
+		pullQuoteOpts(arrOptions);
+	</script>
+<!-- end pull-quote additions -->
+<!-- jQuery Lightbox For Native Galleries v3.1.3 | http://www.viper007bond.com/wordpress-plugins/jquery-lightbox-for-native-galleries/ -->
+<script type="text/javascript">
+// <![CDATA[
+	jQuery(document).ready(function($){
+		$(".gallery").each(function(index, obj){
+			var galleryid = Math.floor(Math.random()*10000);
+			$(obj).find("a").colorbox({rel:galleryid, maxWidth:"95%", maxHeight:"95%"});
+		});
+		$("a.lightbox").colorbox({maxWidth:"95%", maxHeight:"95%"});
+	});
+// ]]>
+</script>
+<style type="text/css" id="custom-background-css">
+body.custom-background { background-color: #ffffff; }
+</style>
+	<link rel="me" href="https://twitter.com/briankrebs" /><meta name="twitter:widgets:link-color" content="#000000" /><meta name="twitter:widgets:border-color" content="#000000" /><meta name="twitter:partner" content="tfwp" />
+<meta name="twitter:card" content="summary" /><meta name="twitter:title" content="Krebs on Security" /><meta name="twitter:site" content="@briankrebs" /><meta name="twitter:description" content="In-depth security news and investigation" />
+</head>
+<body class="home blog paged custom-background paged-68 custom-background-white single-author frontp hfeed">
+<div id="page" class="site">
+	<!-- <div class="publisho-top-mobile-nav clear"></div> -->
+	<div class="themonic-logo themonic-ad3"><div class="a-statement">Advertisement</div><a href="https://securityscorecard.com/instant-security-scorecard?utm_source=krebs+on+security&amp;utm_medium=display&amp;utm_campaign=instant+scorecard&amp;utm_term=A&amp;utm_content=1240x110">
+<img src="/b-securityscorecard/1.jpg">
+</a></div>
+	<div class="themonic-logo themonic-ad6"><div class="a-statement">Advertisement</div><a href="https://securityscorecard.com/instant-security-scorecard?utm_source=krebs+on+security&amp;utm_medium=display&amp;utm_campaign=instant+scorecard&amp;utm_term=B&amp;utm_content=1240x160">
+<img src="/b-securityscorecard/6.jpg">
+</a></div>
+	<nav id="site-navigation" class="themonic-nav" role="navigation">
+	</nav><!-- #site-navigation -->
+	<div class="clear"></div>
+	<header id="masthead" class="site-header" role="banner">
+ 					<div class="desktop-social">
+						<div class="socialmedia">
+							<a href="http://twitter.com/briankrebs" target="_blank"><i class="fa fa-twitter"></i></a> 
+															<a class="rss" href="https://krebsonsecurity.com/feed/" target="_blank"><i class="fa fa-rss"></i></a>	
+									<a class="rss" href="https://www.linkedin.com/in/bkrebs/" target="_blank"><i class="fa fa-linkedin"></i></a>	
+								</div>
+				 	</div>
+																						   
+		
+		<div class="themonic-logo responsive-img-container">
+			<a href="https://krebsonsecurity.com/" title="Krebs on Security" rel="home"><img src="https://krebsonsecurity.com/wp-content/uploads/2021/03/kos-27-03-2021.jpg" alt="Krebs on Security"></a>
+		</div>
+
+					<div class="mobile-social">
+						<div class="socialmedia">
+							<a href="http://twitter.com/briankrebs" target="_blank"><i class="fa fa-twitter"></i></a> 
+															<a class="rss" href="https://krebsonsecurity.com/feed/" target="_blank"><i class="fa fa-rss"></i></a>	
+									<a class="rss" href="https://www.linkedin.com/in/bkrebs/" target="_blank"><i class="fa fa-linkedin"></i></a>	
+								</div>
+					</div>
+		
+				<!-- <div class="publisho-mobile-nav clear"></div> -->
+		<nav id="site-navigation" class="themonic-nav" role="navigation">
+			<a class="assistive-text" href="#content" title="Skip to content">Skip to content</a>
+			<div id="menu-top" class="nav-menu"><ul>
+<li ><a href="https://krebsonsecurity.com/">Home</a></li><li class="page_item page-item-2"><a href="https://krebsonsecurity.com/about/">About the Author</a></li>
+<li class="page_item page-item-645"><a href="https://krebsonsecurity.com/cpm/">Advertising/Speaking</a></li>
+</ul></div>
+		</nav><!-- #site-navigation -->
+		<div class="clear"></div>
+	</header><!-- #masthead -->
+	<div id="main" class="wrapper">
+		<div id="primary" class="site-content">
+	
+
+	
+		<div id="content" role="main">
+
+		<article id="post-38802" class="post-38802 post type-post status-publish format-standard hentry category-other tag-dns-leak tag-eff tag-electronic-frontier-foundation tag-ipv6-leak tag-president-trump tag-searchinternethistory-com tag-tor tag-virtual-private-network tag-vpn">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2017/03/post-fcc-privacy-rules-should-you-vpn/" title="Permalink to Post-FCC Privacy Rules, Should You VPN?" rel="bookmark">Post-FCC Privacy Rules, Should You VPN?</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">March 30, 2017</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2017/03/post-fcc-privacy-rules-should-you-vpn/#comments">198 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>Many readers are understandably concerned about recent moves by the U.S. Congress that would roll back privacy rules barring broadband Internet service providers (ISPs) from sharing or selling customer browsing history, among other personal data. Some are concerned enough by this development that they&#8217;re looking at obfuscating all of their online browsing by paying for a subscription to a virtual private networking (VPN) service. This piece is intended to serve as a guidepost for those contemplating such a move.</p>
+<p><img loading="lazy" class="alignright wp-image-38809" src="https://krebsonsecurity.com/wp-content/uploads/2017/03/vpn-580x585.png" alt="vpn" width="255" height="258" srcset="https://krebsonsecurity.com/wp-content/uploads/2017/03/vpn-580x585.png 580w, https://krebsonsecurity.com/wp-content/uploads/2017/03/vpn.png 598w" sizes="(max-width: 255px) 100vw, 255px" />On Tuesday, the House approved a Senate resolution to roll back data privacy regulations enacted late last year at the <strong>Federal Communications Commission</strong> (FCC) that would block ISPs from selling to advertisers information about where you go and what you do online. <strong>President Trump</strong> has signaled his intent to sign the bill (<a href="https://www.congress.gov/bill/115th-congress/senate-joint-resolution/34" target="_blank">S.J. Res. 34</a>) into law soon.</p>
+<p>As shocking as this sounds, virtually nothing has changed about the privacy of the average American&#8217;s connection to the Internet as a result of this action by Congress, except perhaps a greater awareness that ISP customers don&#8217;t really have many privacy protections by default. The FCC rules hadn&#8217;t yet gone into effect, and traditional broadband providers successfully made the case to lawmakers that the new rules put them at a competitive disadvantage vis-a-vis purely Web-based rivals such as Facebook and Google.</p>
+<p>Nevertheless, this hasn&#8217;t stopped news outlets from breathlessly urging concerned citizens to reclaim their privacy by turning to VPN providers. And VPN providers have certainly capitalized on the news. One quite large (and savvy) VPN provider even took out <a href="https://twitter.com/courosa/status/846133691571056641" target="_blank">a full-page ad</a> in the <em>New York Times</em> listing the names of the Republican senators who voted to repeal the still-dormant regulations.</p>
+<p>I&#8217;m happy if this issue raises the general level of public awareness about privacy and the need for Internet users everywhere to take a more active role in preserving it. And VPNs can be a useful tool for protecting one&#8217;s privacy online. However, it&#8217;s important to understand the limitations of this technology, and to take the time to research providers before entrusting them with virtually all your browsing data &#8212; and possibly even compounding your privacy woes in the process.</p>
+<p>In case any readers are unclear on the technology, in a nutshell VPNs rely on specialized software that you download and install on your computer. Some VPN providers will supply customers with their own custom brand of VPN software, while others may simply assign customers a set user credentials and allow users to connect to the service via open-source VPN software like OpenVPN.</p>
+<p>Either way, the software creates an encrypted tunnel between your computer and the VPN provider, effectively blocking your ISP or anyone else on the network (aside from you and the VPN provider) from being able to tell which sites you are visiting or viewing the contents of your communications. A VPN service allows a customer in, say, New York City, to tunnel his traffic through one of several servers around the world, making it appear to any Web sites that his connection is coming from those servers, not from his ISP in New York.</p>
+<p>If you just want a VPN provider that will keep your ISP from snooping on your everyday browsing, virtually any provider can do that for you. But if you care about choosing from among VPN providers with integrity and those that provide reliable, comprehensive, trustworthy and affordable offerings, you&#8217;re going to want to do your homework before making a selection. And there are plenty of factors to consider.</p>
+<p>For better or worse, there are hundreds of VPN providers out there today. Simply searching the Web for &#8220;VPN&#8221; and &#8220;review&#8221; is hardly the best vetting approach, as a great many VPN companies offer &#8220;affiliate&#8221; programs that pay people a commission for each new customer they help sign up. I say this not to categorically discount VPN providers that offer affiliate programs, but more as a warning that such programs can skew search engine results in favor of larger providers.</p>
+<p>That&#8217;s because affiliate programs often create a perverse incentive for unscrupulous marketers to do things like manufacture phony VPN reviews by the virtual truckload, reviews that are aimed at steering as many people as possible to signing up with the service and earning them commissions. In my admittedly limited experience, this seems to have the effect of funneling search results toward VPN providers which spend a lot of money marketing their offerings and paying for affiliate programs.</p>
+<p>Also, good luck figuring out who owns and operates many of these companies. Again, from the admittedly few instances in which I&#8217;ve attempted to determine exactly who or what is at the helm of a specific VPN provider, I can say that this has not been a particularly fruitful endeavor.</p>
+<p>My bar for choosing a VPN provider has more to do with selecting one that makes an effort to ensure its customers understand how to use the service securely and safely, and to manage their customers&#8217; expectations about the limitations of using the service. Those include VPN companies that take the time to explain seemingly esoteric but important concepts, such as <a href="https://www.howtogeek.com/253475/how-to-see-if-your-vpn-is-leaking-your-personal-information/" target="_blank">DNS and IPv6 leaks</a>, and whether they keep any logs of customer activity. I also tend to put more stock in VPN providers that offer payment mechanisms which go beyond easily-traceable methods such as credit cards or PayPal, to offering more privacy-friendly payment options like Bitcoin (or even cash).</p>
+<p>Many VPN providers claim they keep zero records of customer activity. However, this is almost always untrue if you take the time to read the fine print. Also, some VPN services can&#8217;t truthfully make this claim because they merely resell network services offered by third-parties. Providers that are honest and up-front about what information they collect and keep and for how long carry more weight in my book.</p>
+<p>Most VPN providers will keep basic information about their customers, including any information supplied at the creation of the account, as well as the true Internet address of the customer and the times that customers connect and disconnect from the service. I&#8217;ve found that VPN providers which collect the minimum amount of information about their customers also tend to offer little or no customer support. This isn&#8217;t necessarily a bad thing, especially if you know what you&#8217;re doing and don&#8217;t need or want a lot of hand-holding. For my part, I would avoid any VPN provider which asks for personal information that isn&#8217;t required by the form of payment I choose.</p>
+<p>Then there are more practical, day-to-day considerations that may have little to do with privacy and anonymity. For example, some VPN providers pay a great deal of attention to privacy and security, but may not offer a huge number of servers and locations to chose from. This can present issues for people who frequently watch streaming video services that are restricted for use in specific countries. Other VPN providers may offer an impressive range of countries and/or states to chose from, but do not provide fast enough speeds to reliably satisfy data-intensive applications, such as streaming video. <a href="https://krebsonsecurity.com/2017/03/post-fcc-privacy-rules-should-you-vpn/#more-38802" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+	<div id="between_article_ad" class="themonic-ad5"><a href="https://www.extrahop.com/resources/papers/zero-trust/?">
+<img src="/b-extrahop/4.jpg" />
+</a></div>	<article id="post-38712" class="post-38712 post type-post status-publish format-standard hentry category-other tag-fbi tag-federal-bureau-of-investigation tag-itay-huri tag-perach-aroch tag-recorded-future tag-themarker-com tag-vdos tag-yarden-bidani">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2017/03/alleged-vdos-owners-poised-to-stand-trial/" title="Permalink to Alleged vDOS Owners Poised to Stand Trial" rel="bookmark">Alleged vDOS Owners Poised to Stand Trial</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">March 27, 2017</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2017/03/alleged-vdos-owners-poised-to-stand-trial/#comments">67 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>Police in Israel are recommending that the state attorney&#8217;s office indict and prosecute two 18-year-olds suspected of operating <strong>vDOS</strong>, until recently the most popular attack service for knocking Web sites offline.</p>
+<p>On Sept. 8, 2016, KrebsOnSecurity <a href="http://krebsonsecurity.com/2016/09/israeli-online-attack-service-vdos-earned-600000-in-two-years/" target="_blank">published a story</a> about the hacking of vDOS, a service that attracted tens of thousands of paying customers and facilitated countless distributed denial-of-service (DDoS) attacks over the four year period it was in business. That story named two young Israelis &#8212; <strong>Yarden Bidani</strong> and <strong>Itay Huri</strong> &#8212; as the likely owners and operators of vDOS, and within hours of its publication the two <a href="https://krebsonsecurity.com/2016/09/alleged-vdos-proprietors-arrested-in-israel/" target="_blank">were arrested by Israeli police</a>, placed on house arrest for 10 days, and forbidden from using the Internet for a month.</p>
+<div id="attachment_38757" style="width: 590px" class="wp-caption aligncenter"><img aria-describedby="caption-attachment-38757" loading="lazy" class="size-medium wp-image-38757" src="https://krebsonsecurity.com/wp-content/uploads/2017/03/vdos-front-580x392.png" alt="The front page of vDOS, when it was still online last year." width="580" height="392" srcset="https://krebsonsecurity.com/wp-content/uploads/2017/03/vdos-front-580x392.png 580w, https://krebsonsecurity.com/wp-content/uploads/2017/03/vdos-front.png 619w" sizes="(max-width: 580px) 100vw, 580px" /><p id="caption-attachment-38757" class="wp-caption-text">The front page of vDOS, when it was still online last year.</p></div>
+<p>After those restrictions came and went, some readers expressed surprise that there were no formal charges announced against either of the young men. This week, however, Israeli police sent letters to lawyers for both men stating that the official investigation was nearing completion and that they planned to urge government prosecutors to pursue criminal charges.</p>
+<p>The police are preparing to recommend prosecutors charge the men with computer fraud and extortion, alleging they caused more than six million shekels worth of damage (approximately USD $1.65 million).</p>
+<p>Bidani&#8217;s attorney <strong>Perach Aroch</strong> told KrebsOnSecurity that her client has not yet been officially charged with any crime. But she said once the investigation is complete the defense will have 30 days to review the evidence and to make arguments as to why the case should be dismissed.</p>
+<p>&#8220;They have to give us 30 days to see all the evidence and to try to convince them why they should not take this case to court,&#8221; Aroch said. &#8220;After that, [the prosecutors will] decide if it should go to trial.&#8221;</p>
+<div id="attachment_36294" style="width: 237px" class="wp-caption alignleft"><img aria-describedby="caption-attachment-36294" loading="lazy" class=" wp-image-36294" src="https://krebsonsecurity.com/wp-content/uploads/2016/09/yardbid-580x639.png" alt="18-year-old Yarden Bidani." width="227" height="250" srcset="https://krebsonsecurity.com/wp-content/uploads/2016/09/yardbid-580x639.png 580w, https://krebsonsecurity.com/wp-content/uploads/2016/09/yardbid-768x847.png 768w, https://krebsonsecurity.com/wp-content/uploads/2016/09/yardbid.png 800w" sizes="(max-width: 227px) 100vw, 227px" /><p id="caption-attachment-36294" class="wp-caption-text">18-year-old Yarden Bidani.</p></div>
+<p>The arrest of Bidani and Huri came after the police received information from the <strong>Federal Bureau of Investigation</strong> (FBI). But the United States apparently isn&#8217;t the only country weighing in on this case: According to <a href="http://www.themarker.com/technation/1.3952061" target="_blank">a story</a> published Sunday by Israeli news outlet <em>TheMarker.com</em>, the government of Sweden also is urging Israeli prosecutors to pursue formal charges.</p>
+<p>It&#8217;s unclear exactly why the Swedish government is so interested in this case, but the vDOS service has been implicated in a series high-profile attacks that brought down some of the country&#8217;s largest news media Web sites last year.</p>
+<p>Shortly after those attacks in March 2016, Somerville, Mass.-based security intelligence firm <strong>Recorded Future</strong> published <a href="https://www.recordedfuture.com/swedish-media-attacks/" target="_blank">an analysis</a> linking the assaults against Swedish media sites to vDOS and to &#8220;applej4ck,&#8221; the hacker nickname allegedly used by Bidani.</p>
+<p>In publicizing the news of vDOS&#8217;s hack last year, KrebsOnSecurity also published several months of attack logs from the vDOS service. However, those logs only dated back to May 2016.</p>
+<p>Itay Huri&#8217;s lawyer declined to comment for this story, but TheMarker&#8217;s <strong>Amitai Ziv</strong> obtained a statement from Huri&#8217;s attorney, who accused Israeli police of applying pressure and terror through the media instead of looking for the truth.</p>
+<p>Ziv said sources he&#8217;s spoken to believe the case will almost certainly go to trial.</p>
+<p>&#8220;Professionals involved in the case said the likelihood of indictments in the affair is very high,&#8221; he wrote.</p>
+<p>According to Bidani&#8217;s lawyer Aroch, the two former friends are now pointing the finger of blame at each other and are no longer speaking to one another.</p>
+<p><span class="pullquote pqright">&#8220;They each now accuse each other in things, so it’s a little bit of a problem,&#8221; Aroch said.</span></p>
+<p>Aroch said both Bidani and Huri are free to travel and even leave the country, although both men have had their bank and PayPal accounts frozen.</p>
+<p>Bidani and Huri allegedly started vDOS when they were 14 years old. By the time the service was shut down last September, it had attracted tens of thousands of customers who paid for attacks in PayPal (when vDOS&#8217;s PayPal accounts were shut down, the service briefly shifted to accepting payment via Bitcoin).</p>
+<p>My <a href="https://krebsonsecurity.com/2016/09/israeli-online-attack-service-vdos-earned-600000-in-two-years/" target="_blank">Sept. 2016 investigation</a> into the hacking of vDOS revealed that in just two of the four years the service was in operation, <em>it brought in revenues of more than $600,000.</em> <a href="https://krebsonsecurity.com/2017/03/alleged-vdos-owners-poised-to-stand-trial/#more-38712" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+	<div class="themonic-ad2"><div class="a-statement">Advertisement</div><a href="https://www.akamai.com/?utm_source=krebsonsecurity&amp;utm_medium=display&amp;utm_id=GL_Platform&amp;utm_campaign=F-MC-52606&amp;utm_content=IDC_InfoBrief">
+<img src="/b-akamai/134.png">
+</a></div>	<article id="post-38718" class="post-38718 post type-post status-publish format-standard hentry category-other tag-2fa tag-bgsu tag-bowling-green-state-university tag-irs tag-matt-haschak tag-multi-factor-authentication tag-phishing tag-tax-refund-fraud tag-two-factor-authentication">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2017/03/phishing-101-at-the-school-of-hard-knocks/" title="Permalink to Phishing 101 at the School of Hard Knocks" rel="bookmark">Phishing 101 at the School of Hard Knocks</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">March 24, 2017</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2017/03/phishing-101-at-the-school-of-hard-knocks/#comments">48 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>A recent, massive spike in sophisticated and successful phishing attacks is prompting many universities to speed up timetables for deploying mandatory two-factor authentication (2FA) &#8212; requiring a one-time code in addition to a password &#8212; for access to student and faculty services online. This is the story of one university that accelerated plans to require 2FA after witnessing nearly twice as many phishing victims in the first two-and-half months of this year than it saw in all of 2015.</p>
+<p><img loading="lazy" class="alignright size-full wp-image-38724" src="https://krebsonsecurity.com/wp-content/uploads/2017/03/bg.png" alt="bg" width="232" height="172" /><strong>Bowling Green State University</strong> in Ohio has more than 20,000 students and faculty, and like virtually any other mid-sized state school its Internet users are constantly under attack from scammers trying to phish login credentials for email and online services.</p>
+<p>BGSU had planned later this summer to make 2FA mandatory for access to the school&#8217;s portal &#8212; the primary place where students register for classes, pay bills, and otherwise manage their financial relationship to the university.</p>
+<p>That is, until a surge in successful phishing attacks resulted in several students having bank accounts and W-2 tax forms siphoned.</p>
+<p>On March 1, 2017 all BGSU account holders were required to change their passwords, and on March 15, 2017 two-factor authentication (<a href="https://duo.com/" target="_blank">Duo</a>) protection was placed in front of the MyBGSU portal [full disclosure: Duo is a longtime advertiser on KrebsOnSecurity].</p>
+<p><strong>Matt Haschak</strong>, director of IT security and infrastructure at BGSU, said the number of compromised accounts detected at BGSU has risen from 250 in calendar year 2015 to 1000 in 2016, and to <em>approximately 400 in the first 75 days of 2017</em>.</p>
+<p>Left unchecked, phishers are on track to steal credentials from nearly 10 percent of the BGSU student body by the end of this year. The university has offered 2FA options for its portal access since June 2016, but until this month few students or faculty were using it, Haschak said.</p>
+<p><span class="pullquote pqleft">&#8220;We saw very low adoption when it was voluntary,&#8221; he said. &#8220;And typically the people who adopted it were not my big security risks.&#8221;</span></p>
+<p>Haschak said it&#8217;s clear that the scale and size of the phishing problem is hardly unique to BGSU.</p>
+<p>&#8220;As I keep preaching to our campus community, this is not unique to BGSU,&#8221; Haschak said. &#8220;I&#8217;ve been talking a lot lately to my counterparts at universities in Ohio and elsewhere, and we’re all getting hit with these attacks very heavily right now. Some of the phishing scams are pretty good, but unfortunately some are god-awful, and I think people are just not thinking or they&#8217;re too busy in their day, they receive something on their phone and they just click it.&#8221;</p>
+<p>Last month, an especially tricky phishing scam fooled several students who are also employed at the university into giving away their BGSU portal passwords, after which the thieves changed the victims&#8217; direct deposit information so that their money went to accounts controlled by the phishers.</p>
+<p>In other scams, the phishers would change the routing number for a bank account tied to a portal user, and then cancel that student&#8217;s classes near the beginning of a semester &#8212; thus kicking off a fraudulent refund.</p>
+<p>One of the victims even had a <a href="https://krebsonsecurity.com/?s=tax+refund+fraud&amp;x=0&amp;y=0" target="_blank">fraudulent tax refund request</a> filed in her name with the IRS as a result, Haschak said.</p>
+<p>&#8220;They went in and looked at her W-2 information, which is also available via the portal,&#8221; he said. <a href="https://krebsonsecurity.com/2017/03/phishing-101-at-the-school-of-hard-knocks/#more-38718" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-38666" class="post-38666 post type-post status-publish format-standard hentry category-other tag-ebay-2fa tag-ebay-security tag-ebay-two-factor-authentication tag-national-institute-for-standards-and-technology tag-nist tag-paypal-2-factor-authentication tag-ryan-moore tag-ss7 tag-symantec tag-verisign">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2017/03/ebay-asks-users-to-downgrade-security/" title="Permalink to eBay Asks Users to Downgrade Security" rel="bookmark">eBay Asks Users to Downgrade Security</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">March 22, 2017</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2017/03/ebay-asks-users-to-downgrade-security/#comments">105 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>Last week, KrebsOnSecurity received an email from <strong>eBay</strong>. The company wanted me to switch from using a <a href="http://pages.ebay.com/securitykey/faq.html" target="_blank">hardware key fob</a> when logging into eBay to receiving a one-time code sent via text message. I found it remarkable that eBay, which at one time was well ahead of most e-commerce companies in providing more robust online authentication options, is now essentially trying to downgrade my login experience to a less-secure option.</p>
+<p><img loading="lazy" class="aligncenter size-medium wp-image-38694" src="https://krebsonsecurity.com/wp-content/uploads/2017/03/ebay2fa-580x533.png" alt="ebay2fa" width="580" height="533" srcset="https://krebsonsecurity.com/wp-content/uploads/2017/03/ebay2fa-580x533.png 580w, https://krebsonsecurity.com/wp-content/uploads/2017/03/ebay2fa.png 596w" sizes="(max-width: 580px) 100vw, 580px" />In early 2007, PayPal (then part of the same company as eBay) began offering its hardware token for a one-time $5 fee, and at the time the company was among very few that were pushing this second-factor (something you have) in addition to passwords for user authentication. In fact, I <a href="http://voices.washingtonpost.com/securityfix/2007/02/paypal_selling_antifraud_token.html" target="_blank">wrote about this development</a> back when I was a reporter at <em>The Washington Post</em>:</p>
+<p>&#8220;Armed with one of these keys, if you were to log on to your account from an unfamiliar computer and some invisible password stealing program were resident on the machine, the bad guys would still be required to know the numbers displayed on your token, which of course changes every 30 seconds. Likewise, if someone were to guess or otherwise finagle your PayPal password.&#8221;</p>
+<div id="attachment_38706" style="width: 494px" class="wp-caption aligncenter"><img aria-describedby="caption-attachment-38706" loading="lazy" class="size-full wp-image-38706" src="https://krebsonsecurity.com/wp-content/uploads/2017/03/paypalsecuritykey.png" alt="The PayPal security key." width="484" height="262" /><p id="caption-attachment-38706" class="wp-caption-text">The PayPal security key.</p></div>
+<p>I&#8217;ve still got the same hardware token I ordered when writing about that offering, and it&#8217;s been working well for the past decade. Now, eBay is asking me to switch from the key fob to text messages, the latter being a form of authentication that security experts say is less secure than other forms of two-factor authentication (2FA).</p>
+<p>The move by eBay comes just months after the <strong>National Institute for Standards and Technology</strong> (NIST) released <a href="https://pages.nist.gov/800-63-3/sp800-63b.html" target="_blank">a draft of new authentication guidelines</a> that appear to be phasing out the use of SMS-based two-factor authentication. NIST said one-time codes that are texted to users over a mobile phone are vulnerable to interception, noting that thieves can divert the target&#8217;s SMS messages and calls to another device (either by social engineering a customer service person at the phone company, or via more advanced attacks like <a href="https://www.google.com/search?q=ss7+attack&amp;oq=ss7+attack&amp;aqs=chrome.0.0l6.1527j0j7&amp;sourceid=chrome&amp;ie=UTF-8" target="_blank">SS7 hacks</a>). <a href="https://krebsonsecurity.com/2017/03/ebay-asks-users-to-downgrade-security/#more-38666" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-38672" class="post-38672 post type-post status-publish format-standard hentry category-other tag-fafsa tag-free-application-for-federal-financial-aid tag-get-transcript tag-irs tag-irs-data-retrieval-tool tag-the-wall-street-journal tag-u-s-department-of-education tag-w-2-phishing">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2017/03/student-aid-tool-held-key-for-tax-fraudsters/" title="Permalink to Student Aid Tool Held Key for Tax Fraudsters" rel="bookmark">Student Aid Tool Held Key for Tax Fraudsters</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">March 21, 2017</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2017/03/student-aid-tool-held-key-for-tax-fraudsters/#comments">36 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>Citing concerns over criminal activity and fraud, the <strong>U.S. Internal Revenue Service</strong> (IRS) has disabled an automated tool on its Web site that was used to help students and their families apply for federal financial aid. The removal of the tool has created unexpected hurdles for many families hoping to qualify for financial aid, but the action also eliminated a key source of data that fraudsters could use to conduct tax refund fraud.</p>
+<p>Last week, the IRS and the <strong>Department of Education</strong> said in a joint statement that they were temporarily shutting down the IRS&#8217;s <strong>Data Retrieval Tool. </strong>The service was designed to make it easier to complete the Education Department&#8217;s <a href="https://fafsa.ed.gov/" target="_blank">Free Application for Federal Student Aid</a> (FAFSA) &#8212; a lengthy form that serves as the starting point for students seeking federal financial assistance to pay for college or career school.</p>
+<div id="attachment_38676" style="width: 590px" class="wp-caption aligncenter"><img aria-describedby="caption-attachment-38676" loading="lazy" class="size-medium wp-image-38676" src="https://krebsonsecurity.com/wp-content/uploads/2017/03/fafsaportal-580x485.png" alt="The U.S. Department of Education's FAFSA federal student aid portal. A notice about the closure of the IRS's data retrieval tool can be seen in red at the bottom right of this image." width="580" height="485" srcset="https://krebsonsecurity.com/wp-content/uploads/2017/03/fafsaportal-580x485.png 580w, https://krebsonsecurity.com/wp-content/uploads/2017/03/fafsaportal-768x642.png 768w, https://krebsonsecurity.com/wp-content/uploads/2017/03/fafsaportal.png 772w" sizes="(max-width: 580px) 100vw, 580px" /><p id="caption-attachment-38676" class="wp-caption-text">The U.S. Department of Education&#8217;s FAFSA federal student aid portal. A notice about the closure of the IRS&#8217;s data retrieval tool can be seen in red at the bottom right of this image.</p></div>
+<p>In response to requests for comment, the IRS shared the following statement: &#8220;As part of a wider, ongoing effort at the IRS to protect the security of data, the IRS decided to temporarily suspend their Data Retrieval Tool (DRT) as a precautionary step following concerns that information from the tool could potentially be misused by identity thieves.&#8221;</p>
+<p>&#8220;The scope of the issue is being explored, and the IRS and FSA are jointly investigating the issue,&#8221; the statement continued. &#8220;At this point, we believe the issue is relatively isolated, and no additional action is needed by taxpayers or people using these applications. The IRS and FSA are actively working on a way to further strengthen the security of information provided by the DRT. We will provide additional information when we have a specific timeframe for returning the DRT or other details to share.&#8221;</p>
+<p>The removal of the IRS&#8217;s tool received relatively broad media coverage last week. For example, <a href="https://www.wsj.com/articles/online-tool-to-apply-for-college-aid-was-taken-down-due-to-criminal-activity-1489707771?mod=e2tw" target="_blank">a story</a> in <em>The Wall Street Journal</em> notes that the Treasury Inspector General for Tax Administration &#8212; which provides independent oversight of the IRS &#8212; &#8220;opened a criminal investigation into the potentially fraudulent use of the tool.&#8221;</p>
+<p>Nevertheless, I could not find a single publication that sought to explain precisely what information identity thieves were seeking from this now-defunct online resource. Two sources familiar with the matter but who asked to remain anonymous because they were not authorized to speak on the record told KrebsOnSecurity that identity thieves were using the IRS&#8217;s tool to look up the &#8220;adjusted gross income&#8221; (AGI), which is an individual or family&#8217;s total gross income minus specific deductions.</p>
+<p>Anyone completing a FAFSA application will need to enter the AGI as reported on the previous year&#8217;s income tax return of their parents or guardians. The AGI is listed on the IRS-1040 forms that taxpayers must file with the IRS each year. The IRS&#8217;s online tool was intended as a resource for students who needed to look up the AGI but didn&#8217;t have access to their parents&#8217; tax returns.</p>
+<p>Eligible FAFSA applicants could use the IRS&#8217;s data retrieval tool to populate relevant fields in the application with data pulled directly from the IRS. Countless college Web sites explain how the tool works in more detail; here&#8217;s <a href="http://www.shoreline.edu/apply-and-aid/financial-aid/forms/2016-2017/How-to-use-the--IRS-Data-Retrieval-Tool-on-the-FAFSA-application.pdf" target="_blank">one example</a> (PDF).</p>
+<p>As it happens, the AGI is also required <a href="https://www.irs.gov/individuals/electronic-filing-pin-request" target="_blank">to sign and validate electronic tax returns</a> filed with the IRS. Consequently, the IRS&#8217;s data retrieval tool would be a terrific resource to help identity thieves successfully file fraudulent tax refund requests with the agency.</p>
+<div id="attachment_38677" style="width: 590px" class="wp-caption aligncenter"><img aria-describedby="caption-attachment-38677" loading="lazy" class="size-medium wp-image-38677" src="https://krebsonsecurity.com/wp-content/uploads/2017/03/irs-agi-580x294.png" alt="A notice from the IRS states that the adjusted gross income (AGI) is needed to validate electronically-filed tax returns." width="580" height="294" srcset="https://krebsonsecurity.com/wp-content/uploads/2017/03/irs-agi-580x294.png 580w, https://krebsonsecurity.com/wp-content/uploads/2017/03/irs-agi-768x390.png 768w, https://krebsonsecurity.com/wp-content/uploads/2017/03/irs-agi.png 808w" sizes="(max-width: 580px) 100vw, 580px" /><p id="caption-attachment-38677" class="wp-caption-text">A notice from the IRS states that the adjusted gross income (AGI) is needed to validate electronically-filed tax returns.</p></div>
+<p> <a href="https://krebsonsecurity.com/2017/03/student-aid-tool-held-key-for-tax-fraudsters/#more-38672" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-38635" class="post-38635 post type-post status-publish format-standard hentry category-other tag-accenture tag-data-loss-prevention tag-defense-point-security tag-dlp tag-george-mckenzie tag-ip-pin tag-security-freeze tag-tax-refund-fraud tag-u-s-immigration-and-customs-enforcement tag-w-2-phishing">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2017/03/govt-cybersecurity-contractor-hit-in-w-2-phishing-scam/" title="Permalink to Govt. Cybersecurity Contractor Hit in W-2 Phishing Scam" rel="bookmark">Govt. Cybersecurity Contractor Hit in W-2 Phishing Scam</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">March 17, 2017</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2017/03/govt-cybersecurity-contractor-hit-in-w-2-phishing-scam/#comments">92 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>Just a friendly reminder that phishing scams which spoof the boss and request W-2 tax data on employees are intensifying as tax time nears. The latest victim shows that even cybersecurity experts can fall prey to these increasingly sophisticated attacks.</p>
+<p><img loading="lazy" class="alignright wp-image-37128" src="https://krebsonsecurity.com/wp-content/uploads/2016/12/athook.png" alt="athook" width="152" height="294" />On Thursday, March 16, the CEO of <strong>Defense Point Security, LLC </strong>&#8212; a Virginia company that bills itself as &#8220;the choice provider of cyber security services to the federal government&#8221; &#8212; told all employees that their W-2 tax data was handed directly to fraudsters after someone inside the company got caught in a phisher&#8217;s net.</p>
+<p>Alexandria, Va.-based <a href="https://defpoint.com/" target="_blank">Defense Point Security</a> (recently acquired by management consulting giant <strong>Accenture</strong>) informed current and former employees this week via email that all of the data from their annual W-2 tax forms &#8212; including name, Social Security Number, address, compensation, tax withholding amounts &#8212; were snared by a targeted spear phishing email.</p>
+<p>&#8220;I want to alert you that a Defense Point Security (DPS) team member was the victim of a targeted spear phishing email that resulted in the external release of IRS W-2 Forms for individuals who DPS employed in 2016,&#8221; Defense Point <strong>CEO George McKenzie</strong> wrote in the email alert to employees. &#8220;Unfortunately, your W-2 was among those released outside of DPS.&#8221;</p>
+<p>W-2 scams start with spear phishing emails usually directed at finance and HR personnel. The scam emails will spoof a request from the organization’s CEO (or someone similarly high up in the organization) and request all employee W-2 forms.</p>
+<p>Defense Point did not return calls or emails seeking comment. An Accenture spokesperson issued the following brief statement:  &#8220;Data protection and our employees are top priorities. Our leadership and security team are providing support to all impacted employees.”</p>
+<p>The email that went out to Defense Point employees Thursday does not detail when this incident occurred, to whom the information was sent, or how many employees were impacted. But a review of information about the company on <strong>LinkedIn</strong> suggests the breach letter likely was sent to around 200 to 300 employees nationwide (if we count past employees also).</p>
+<p>Among Defense Point&#8217;s more sensitive projects is the <strong>U.S.</strong> <strong>Immigration and Customs Enforcement </strong>(ICE) Security Operations Center (SOC) based out of Phoenix, Ariz. That SOC handles cyber incident response, vulnerability mitigation, incident handling and cybersecurity policy enforcement for the agency.</p>
+<p>Fraudsters who perpetrate tax refund fraud prize W-2 information because it contains virtually all of the data one would need to fraudulently file someone’s taxes and request a large refund in their name. Scammers in tax years past also have <a href="http://krebsonsecurity.com/2014/04/tax-fraud-gang-targeted-healthcare-firms/" target="_blank">massively phished online payroll management account credentials</a> used by corporate HR professionals. This year, they are going after <a href="https://krebsonsecurity.com/2017/01/shopping-for-w2s-tax-data-on-the-dark-web/" target="_blank">people who run tax preparation firms</a>, and W-2&#8217;s are now being openly sold in underground cybercrime stores.</p>
+<p>Tax refund fraud affects hundreds of thousands, if not millions, of U.S. citizens annually. Victims usually first learn of the crime after having their returns rejected because scammers beat them to it. Even those who are not required to file a return can be victims of refund fraud, as can those who are not actually due a refund from the IRS. <a href="https://krebsonsecurity.com/2017/03/govt-cybersecurity-contractor-hit-in-w-2-phishing-scam/#more-38635" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-38604" class="post-38604 post type-post status-publish format-standard hentry category-other tag-24x7-hospitality-technology tag-brians-dump tag-home-depot-breach tag-jr tag-pos-breach tag-poseidon tag-rescator tag-select-restaurants tag-target-breach tag-todd-baker">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2017/03/google-points-to-another-pos-vendor-breach/" title="Permalink to Google Points to Another POS Vendor Breach" rel="bookmark">Google Points to Another POS Vendor Breach</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">March 16, 2017</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2017/03/google-points-to-another-pos-vendor-breach/#comments">71 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>For the second time in the past nine months, Google has inadvertently but nonetheless correctly helped to identify the source of a large credit card breach &#8212; by assigning a &#8220;This site may be hacked&#8221; warning beneath the search results for the Web site of a victimized merchant.</p>
+<p>A little over a month ago, KrebsOnSecurity was contacted by multiple financial institutions whose anti-fraud teams were trying to trace the source of a great deal of fraud on cards that were all used at a handful of high-end restaurants around the country.</p>
+<p>Two of those fraud teams shared a list of restaurants that all affected cardholders had visited recently. A bit of searching online showed that nearly all of those establishments were run by <strong>Select Restaurants Inc.</strong>, a Cleveland, Ohio company that owns a number of well-known eateries nationwide, including Boston&#8217;s Top of the Hub; Parker&#8217;s Lighthouse in Long Beach, Calif.; the Rusty Scupper in Baltimore, Md.; Parkers Blue Ash Tavern in Cincinnati, Ohio; Parkers’ Restaurant &amp; Bar in Downers Grove, Illinois; Winberie’s Restaurant &amp; Bar with locations in Oak Park, Illinois and Princeton and Summit, New Jersey; and Black Powder Tavern in Valley Forge, PA.</p>
+<div id="attachment_38605" style="width: 590px" class="wp-caption aligncenter"><a class="lightbox" href="https://krebsonsecurity.com/wp-content/uploads/2017/03/selectrestgooglelisting.png"><img aria-describedby="caption-attachment-38605" loading="lazy" class="wp-image-38605 size-medium" src="https://krebsonsecurity.com/wp-content/uploads/2017/03/selectrestgooglelisting-580x322.png" alt="Google's search listing for Select Restaurants, which indicates Google thinks this site may be hacked." width="580" height="322" srcset="https://krebsonsecurity.com/wp-content/uploads/2017/03/selectrestgooglelisting-580x322.png 580w, https://krebsonsecurity.com/wp-content/uploads/2017/03/selectrestgooglelisting-768x426.png 768w, https://krebsonsecurity.com/wp-content/uploads/2017/03/selectrestgooglelisting.png 773w" sizes="(max-width: 580px) 100vw, 580px" /></a><p id="caption-attachment-38605" class="wp-caption-text">Google&#8217;s search listing for Select Restaurants, which indicates Google thinks this site may be hacked.</p></div>
+<p>Knowing very little about this company at the time, I ran a Google search for it and noticed that Google believes the site may be hacked (it still carries this message). This generally means some portion of the site was compromised by scammers who are trying to abuse the site&#8217;s search engine rankings to beef up the rankings for &#8220;spammy&#8221; sites &#8212; such as those peddling counterfeit prescription drugs and designer handbags.</p>
+<p>The &#8220;This site may be hacked&#8221; advisory is not quite as dire as Google&#8217;s &#8220;This site may harm your computer&#8221; warning &#8212; the latter usually means the site is actively trying to foist malware on the visitor&#8217;s computer. But in my experience it&#8217;s never a good sign when a business that accepts credit cards has one of these warnings attached to its search engine results.</p>
+<p>Case in point: I experienced this exact scenario last summer as I was <a href="https://krebsonsecurity.com/2016/06/banks-credit-card-breach-at-cicis-pizza/" target="_blank">reporting out the details on the breach at CiCi&#8217;s Pizza chain</a>. In researching that story, all signs were pointing to a point-of-sale (POS) terminal provider called <strong>Datapoint POS</strong>. Just like it did with Select Restaurants&#8217;s site, Google reported that Datapoint&#8217;s site appeared to be hacked.</p>
+<div id="attachment_35057" style="width: 590px" class="wp-caption aligncenter"><a class="lightbox" href="https://krebsonsecurity.com/wp-content/uploads/2016/06/datapoint.png"><img aria-describedby="caption-attachment-35057" loading="lazy" class="wp-image-35057 size-medium" src="https://krebsonsecurity.com/wp-content/uploads/2016/06/datapoint-580x330.png" alt="Google thinks Datapoint's Web site is trying to foist malicious software." width="580" height="330" srcset="https://krebsonsecurity.com/wp-content/uploads/2016/06/datapoint-580x330.png 580w, https://krebsonsecurity.com/wp-content/uploads/2016/06/datapoint.png 699w" sizes="(max-width: 580px) 100vw, 580px" /></a><p id="caption-attachment-35057" class="wp-caption-text">Google believed Datapoint&#8217;s Web site was hacked.</p></div>
+<p>Select Restaurants did not return messages seeking comment. But as with the breach at Cici&#8217;s Pizza chains, the breach involving Select Restaurant locations mentioned above appears to have been the result of an intrusion at the company&#8217;s POS vendor &#8212; Geneva, Ill. based <strong>24&#215;7 Hospitality Technology</strong>. 24&#215;7 handles credit and debit card transactions for thousands of hotels and restaurants.</p>
+<p>On Feb. 14, 24&#215;7 Hospitality sent a letter to customers warning that its systems recently were hacked by a &#8220;sophisticated network intrusion through a remote access application.&#8221; Translation: Someone guessed or phished the password that we use to remotely administer point-of-sale systems at its customer locations. 24&#215;7 said the attackers subsequently executed the <strong>PoSeidon</strong> malware variant, which is designed to siphon card data when cashiers swipe credit cards at an infected cash register (for more on PoSeidon, check out <a href="https://krebsonsecurity.com/2015/04/pos-providers-feel-brunt-of-poseidon-malware/" target="_blank">POS Providers Feel Brunt of PoSeidon Malware</a>).</p>
+<p>KrebsOnSecurity obtained a copy of <a href="https://krebsonsecurity.com/wp-content/uploads/2017/03/24-x7-Notice-to-Merchants-re-Impact-Start-Select-Restaurants-Cleve-1.pdf" target="_blank">the letter</a> (PDF) that 24&#215;7 Hospitality CEO <strong>Todd Baker, Jr.</strong> sent to Select Restaurants. That missive said even though the intruders apparently had access to all of 24&#215;7 customers&#8217; payment systems, not all of those systems were logged into by the hackers. Alas, this was probably little consolation for Select Restaurants, because the letter then goes on to say that the breach involves all of the restaurants listed on Select&#8217;s Web site, and that the breach appears to have extended from late October 2016 to mid-January 2017. <a href="https://krebsonsecurity.com/2017/03/google-points-to-another-pos-vendor-breach/#more-38604" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-38562" class="post-38562 post type-post status-publish format-standard hentry category-other tag-alexsey-alexseyevich-belan tag-central-intelligence-agency tag-cia tag-dmitry-dokuchaev tag-forb tag-igor-sushchin tag-karim-baratov tag-karim-taloverov tag-yahoo-hack">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2017/03/four-men-charged-with-hacking-500m-yahoo-accounts/" title="Permalink to Four Men Charged With Hacking 500M Yahoo Accounts" rel="bookmark">Four Men Charged With Hacking 500M Yahoo Accounts</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">March 15, 2017</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2017/03/four-men-charged-with-hacking-500m-yahoo-accounts/#comments">31 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p style="text-align: center;"><em>&#8220;Between two evils, I always pick the one I never tried before.&#8221; -Karim Baratov (paraphrasing <a href="https://en.wikiquote.org/wiki/Mae_West" target="_blank">Mae West</a>)</em></p>
+<p>The U.S. Justice Department today unsealed indictments against four men accused of hacking into a half-billion <strong>Yahoo</strong> email accounts. Two of the men named in the indictments worked for a unit of the Russian <strong>Federal Security Service</strong> (FSB) that serves as the FBI&#8217;s point of contact in Moscow on cybercrime cases. Here&#8217;s a look at the accused, starting with a 22-year-old who apparently did not try to hide his tracks.</p>
+<p>According to a <a href="https://www.justice.gov/opa/pr/us-charges-russian-fsb-officers-and-their-criminal-conspirators-hacking-yahoo-and-millions" target="_blank">press release</a> put out by the <strong>Justice Department</strong>, among those indicted was <strong>Karim Baratov</strong> (a.k.a. Kay, Karim Taloverov), a Canadian and Kazakh national who lives in Canada. Baratov is accused of being hired by the two FSB officer defendants in this case &#8212; <strong>Dmitry Dokuchaev, </strong>33, and <strong>Igor Sushchin</strong>, 43 &#8212; to hack into the email accounts of thousands of individuals.</p>
+<div id="attachment_38569" style="width: 590px" class="wp-caption aligncenter"><a class="lightbox" href="https://krebsonsecurity.com/wp-content/uploads/2017/03/mrkarim.png"><img aria-describedby="caption-attachment-38569" loading="lazy" class="wp-image-38569 size-medium" src="https://krebsonsecurity.com/wp-content/uploads/2017/03/mrkarim-580x348.png" alt="Karim Baratov, as pictured in 2014 on his own site, mr-karim.com." width="580" height="348" srcset="https://krebsonsecurity.com/wp-content/uploads/2017/03/mrkarim-580x348.png 580w, https://krebsonsecurity.com/wp-content/uploads/2017/03/mrkarim-768x461.png 768w, https://krebsonsecurity.com/wp-content/uploads/2017/03/mrkarim-940x564.png 940w, https://krebsonsecurity.com/wp-content/uploads/2017/03/mrkarim.png 1256w" sizes="(max-width: 580px) 100vw, 580px" /></a><p id="caption-attachment-38569" class="wp-caption-text">Karim Baratov (a.k.a. Karim Taloverov), as pictured in 2014 on his own site, mr-karim.com. The license plate on his BMW pictured here is Mr. Karim.</p></div>
+<p>Reading the Justice Department&#8217;s indictment, it would seem that Baratov was perhaps the least deeply involved in this alleged conspiracy. That may turn out to be true, but he also appears to have been the least careful about hiding his activities, leaving quite a long trail of email hacking services that took about 10 minutes of searching online to trace back to him specifically.</p>
+<p>Security professionals are fond of saying that any system is only as secure as its weakest link. It would not be at all surprising if Baratov was the weakest link in this conspiracy chain.</p>
+<p>A look at Mr. Baratov&#8217;s <a href="https://www.facebook.com/mrkarrrim" target="_blank">Facebook</a> and <a href="https://www.instagram.com/mrkarrrim/" target="_blank">Instagram</a> photos indicates he is heavily into high-performance sports cars. His <a href="https://krebsonsecurity.com/wp-content/uploads/2017/03/Screen-Shot-2017-03-16-at-8.55.17-AM.png" target="_blank">profile picture</a> shows two of his prized cars &#8212; a Mercedes and an Aston Martin &#8212; parked in the driveway of his single-family home in Ontario.</p>
+<p>A simple reverse WHOIS search at domaintools.com on the name Karim Baratov turns up <a href="https://krebsonsecurity.com/wp-content/uploads/2017/03/KarimBaratovDomains.txt" target="_blank">81 domains</a> registered to someone by this name in Ontario. Many of those domains include the names of big email providers like Google and Yandex, such as <strong>accounts-google[dot]net</strong> and <strong>www-yandex[dot]com</strong>.</p>
+<p>Other domains appear to be Web sites selling email hacking services. One of those is a domain registered to Baratov&#8217;s home address in Ancaster, Ontario called <strong>infotech-team[dot]com</strong>. A <a href="http://web.archive.org/web/20140301084455/http://infotech-team.com/" target="_blank">cached copy of that site</a> from archive.org shows this once was a service that offered &#8220;quality mail hacking to order, without changing the password.&#8221; The service charged roughly $60 per password.</p>
+<div id="attachment_38565" style="width: 590px" class="wp-caption aligncenter"><a class="lightbox" href="https://krebsonsecurity.com/wp-content/uploads/2017/03/info-tech-team.png"><img aria-describedby="caption-attachment-38565" loading="lazy" class="wp-image-38565 size-medium" src="https://krebsonsecurity.com/wp-content/uploads/2017/03/info-tech-team-580x447.png" alt="Archive.org's cache of infotech-team.com, an email hacking service registered to Baratov." width="580" height="447" srcset="https://krebsonsecurity.com/wp-content/uploads/2017/03/info-tech-team-580x447.png 580w, https://krebsonsecurity.com/wp-content/uploads/2017/03/info-tech-team-768x592.png 768w, https://krebsonsecurity.com/wp-content/uploads/2017/03/info-tech-team-940x724.png 940w, https://krebsonsecurity.com/wp-content/uploads/2017/03/info-tech-team.png 1219w" sizes="(max-width: 580px) 100vw, 580px" /></a><p id="caption-attachment-38565" class="wp-caption-text">Archive.org&#8217;s cache of infotech-team.com, an email hacking service registered to Baratov.</p></div>
+<p>The proprietors of Infotech-team[dot]com advertise the ability to steal email account passwords without actually changing the victim&#8217;s password. According to the Justice Department, Baratov&#8217;s service relied on &#8220;spear phishing&#8221; emails that targeted individuals with custom content and enticed the recipient into clicking a link.</p>
+<p><strong>Antimail[dot]org</strong> is another domain registered to Baratov that was active between 2013 and 2015. It advertises &#8220;quality-mail hacking to order!&#8221;:</p>
+<p><a class="lightbox" href="https://krebsonsecurity.com/wp-content/uploads/2017/03/antimail.png"><img loading="lazy" class="aligncenter wp-image-38566 size-medium" src="https://krebsonsecurity.com/wp-content/uploads/2017/03/antimail-580x351.png" alt="antimail" width="580" height="351" srcset="https://krebsonsecurity.com/wp-content/uploads/2017/03/antimail-580x351.png 580w, https://krebsonsecurity.com/wp-content/uploads/2017/03/antimail-768x465.png 768w, https://krebsonsecurity.com/wp-content/uploads/2017/03/antimail-940x570.png 940w, https://krebsonsecurity.com/wp-content/uploads/2017/03/antimail.png 1756w" sizes="(max-width: 580px) 100vw, 580px" /></a></p>
+<p>Another email hacking business registered to Baratov is <strong>xssmail[dot]com</strong>, which also has for several years advertised the ability to break into email accounts of virtually all of the major Webmail providers. XSS is short for &#8220;cross-site-scripting.&#8221; XSS attacks rely on vulnerabilities in Web sites that don&#8217;t properly parse data submitted by visitors in things like search forms or anyplace one might enter data on a Web site.</p>
+<p>In the context of phishing links, the user clicks the link and is actually taken to the domain he or she thinks she is visiting (e.g., yahoo.com) but the vulnerability allows the attacker to inject malicious code into the page that the victim is visiting.</p>
+<p>This can include fake login prompts that send any data the victim submits directly to the attacker. Alternatively, it could allow the attacker to steal &#8220;cookies,&#8221; text files that many sites place on visitors&#8217; computers to validate whether they have visited the site previously, as well as if they have authenticated to the site already.</p>
+<div id="attachment_38567" style="width: 590px" class="wp-caption aligncenter"><a class="lightbox" href="https://krebsonsecurity.com/wp-content/uploads/2017/03/xssmail.png"><img aria-describedby="caption-attachment-38567" loading="lazy" class="wp-image-38567 size-medium" src="https://krebsonsecurity.com/wp-content/uploads/2017/03/xssmail-580x377.png" alt="Archive.org's cache of xssmail.com" width="580" height="377" srcset="https://krebsonsecurity.com/wp-content/uploads/2017/03/xssmail-580x377.png 580w, https://krebsonsecurity.com/wp-content/uploads/2017/03/xssmail-768x499.png 768w, https://krebsonsecurity.com/wp-content/uploads/2017/03/xssmail-940x611.png 940w, https://krebsonsecurity.com/wp-content/uploads/2017/03/xssmail.png 1486w" sizes="(max-width: 580px) 100vw, 580px" /></a><p id="caption-attachment-38567" class="wp-caption-text">Archive.org&#8217;s cache of xssmail.com</p></div>
+<p>Perhaps instead of or in addition to using XSS attacks in targeted phishing emails, Baratov also knew about or had access to other cookie-stealing exploits collected by another accused in today&#8217;s indictments: Russian national <strong>Alexsey Alexseyevich Belan</strong>.</p>
+<p>According to government investigators, Belan has been on the FBI&#8217;s <a href="https://www.fbi.gov/wanted/cyber" target="_blank">Cyber Most Wanted</a> list since 2013 after breaking into and stealing credit card data from a number of e-commerce companies. In June 2013, Belan was arrested in a European country on request from the United States, but the FBI says he was able to escape to Russia before he could be extradited to the U.S. <a href="https://krebsonsecurity.com/2017/03/four-men-charged-with-hacking-500m-yahoo-accounts/#more-38562" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-38549" class="post-38549 post type-post status-publish format-standard hentry category-other tag-cve-2017-0008 tag-cve-2017-0037 tag-flash-player-update tag-ms17-006 tag-ms17-007 tag-ms17-013 tag-qualys tag-sans-internet-storm-center">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2017/03/adobe-microsoft-push-critical-security-fixes-10/" title="Permalink to Adobe, Microsoft Push Critical Security Fixes" rel="bookmark">Adobe, Microsoft Push Critical Security Fixes</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">March 14, 2017</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2017/03/adobe-microsoft-push-critical-security-fixes-10/#comments">26 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p><strong>Adobe</strong> and <strong>Microsoft</strong> each pushed out security updates for their products today. Adobe plugged at least seven security holes in its <strong>Flash Player</strong> software. Microsoft, which <a href="https://krebsonsecurity.com/2017/02/february-updates-from-adobe-microsoft/" target="_blank">delayed</a> last month&#8217;s Patch Tuesday until today, issued an unusually large number of update bundles (18) to fix dozens of flaws in <strong>Windows</strong> and associated software.</p>
+<p><img loading="lazy" class="alignright wp-image-26837" src="https://krebsonsecurity.com/wp-content/uploads/2014/07/brokenwindows.png" alt="brokenwindows" width="202" height="212" />Microsoft&#8217;s <a href="https://technet.microsoft.com/en-us/library/security/MS17-010" target="_blank">patch</a> to fix at least five critical bugs in the Windows file-sharing service is bound to make a great deal of companies nervous before they get around to deploying this week&#8217;s patches. Most organizations block internal file-sharing networks from talking directly to their Internet-facing networks, but these flaws could be exploited by a malicious computer worm to spread very quickly once inside an organization with a great many unpatched Windows systems.</p>
+<p>Another critical patch (<a href="https://technet.microsoft.com/en-us/library/security/MS17-013" target="_blank">MS17-013</a>) covers a slew of dangerous vulnerabilities in the way Windows handles certain image files. Malware or miscreants could exploit the flaws to foist malicious software without any action on the part the user, aside from perhaps just browsing to a hacked or booby-trapped Web site. <a href="https://krebsonsecurity.com/2017/03/adobe-microsoft-push-critical-security-fixes-10/#more-38549" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-38361" class="post-38361 post type-post status-publish format-standard hentry category-other tag-alexis-cadena tag-demoniox12 tag-ecuador tag-hostingyaa tag-icloud-phishing tag-jonatan-rodriguez tag-yantzaza">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2017/03/if-your-iphone-is-stolen-these-guys-may-try-to-iphish-you/" title="Permalink to If Your iPhone is Stolen, These Guys May Try to iPhish You" rel="bookmark">If Your iPhone is Stolen, These Guys May Try to iPhish You</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">March 14, 2017</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2017/03/if-your-iphone-is-stolen-these-guys-may-try-to-iphish-you/#comments">58 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>KrebsOnSecurity recently featured <a href="https://krebsonsecurity.com/2017/02/iphone-robbers-try-to-iphish-victims/" target="_blank">the story</a> of a Brazilian man who was peppered with phishing attacks trying to steal his Apple iCloud username and password after his wife&#8217;s phone was stolen in a brazen daylight mugging. Today, we&#8217;ll take an insider&#8217;s look at an Apple iCloud phishing gang that appears to work quite closely with organized crime rings &#8212; within the United States and beyond  &#8212; to remotely unlock and erase stolen Apple devices.</p>
+<p>Victims of iPhone theft can use the Find My iPhone feature to remotely locate, lock or erase their iPhone &#8212; just by visiting Apple&#8217;s site and entering their iCloud username and password. Likewise, an iPhone thief can use those iCloud credentials to remotely unlock the victim&#8217;s stolen iPhone, wipe the device, and resell it. As a result, iPhone thieves often subcontract the theft of those credentials to third-party iCloud phishing services. This story is about one of those services.</p>
+<div id="attachment_38528" style="width: 292px" class="wp-caption alignright"><a class="lightbox" href="https://krebsonsecurity.com/wp-content/uploads/2017/03/iserverlure.png"><img aria-describedby="caption-attachment-38528" loading="lazy" class="wp-image-38528" src="https://krebsonsecurity.com/wp-content/uploads/2017/03/iserverlure.png" alt="The iCloud account phishing text that John's friend received months after losing a family iPhone." width="282" height="311" /></a><p id="caption-attachment-38528" class="wp-caption-text">The iCloud account phishing text that John&#8217;s friend received months after losing a family iPhone.</p></div>
+<p>Recently, I heard from a security professional whose close friend received a targeted attempt to phish his Apple iCloud credentials. The phishing attack came several months after the friend&#8217;s child lost his phone at a public park in Virginia. The phish arrived via text message and claimed to have been sent from Apple. It said the device tied to his son&#8217;s phone number had been found, and that its precise location could be seen for the next 24 hours by clicking a link embedded in the text message.</p>
+<p>That security professional source &#8212; referred to as &#8220;John&#8221; for simplicity&#8217;s sake &#8212; declined to be named or credited in this story because some of the actions he took to gain the knowledge presented here may run afoul of U.S. computer fraud and abuse laws.</p>
+<p>John said his friend clicked on the link in the text message he received about his son&#8217;s missing phone and was presented with a fake iCloud login page: <strong>appleid-applemx[dot]us</strong>. A lookup on that domain indicates it is hosted on a server in Russia that is or was shared by at least 140 other domains &#8212; mostly other apparent iCloud phishing sites &#8212; such as <strong>accounticloud[dot]site</strong>; <strong>apple-appleid[dot]store</strong>; <strong>apple-devicefound[dot]org</strong>; and so on (a full list of the domains at that server <a href="https://krebsonsecurity.com/wp-content/uploads/2017/03/domainsatiphonephishingscam.txt" target="_blank">is available here</a>).</p>
+<p>While the phishing server may be hosted in Russia, its core users appear to be in a completely different part of the world. Examining the server more closely, John noticed that it was (mis)configured in a way that leaked data about various Internet addresses that were seen recently accessing the server, as well as the names of specific directories on the server that were being accessed.</p>
+<p>After monitoring that logging information for some time, my source discovered there were five Internet addresses that communicated with the server multiple times a day, and that those address corresponded to devices located in Argentina, Colombia, Ecuador and Mexico.</p>
+<p>He also found a file openly accessible on the Russian server which indicated that an application running on the server was constantly sending requests to imei24.com and imeidata.net &#8212; services that allow anyone to look up information about a mobile device by entering its unique <a href="https://en.wikipedia.org/wiki/International_Mobile_Equipment_Identity" target="_blank">International Mobile Equipment Identity (IMEI) number</a>. These services return a variety of information, including the make and model of the phone, whether Find My iPhone is enabled for the device, and whether the device has been locked or reported stolen.</p>
+<p>John said that as he was conducting additional reconnaissance of the Russian server, he tried to access &#8220;index.php&#8221; &#8212; which commonly takes one to a site&#8217;s home page &#8212; when his browser was redirected to &#8220;login.php&#8221; instead. The resulting page, pictured below, is a login page for an application called &#8220;iServer.&#8221; The login page displays a custom version of Apple&#8217;s trademarked logo as part of a pirate&#8217;s skull and crossbones motif, set against a background of bleeding orange flames.</p>
+<div id="attachment_38458" style="width: 588px" class="wp-caption aligncenter"><a class="lightbox" href="https://krebsonsecurity.com/wp-content/uploads/2017/03/iserverlogin.png"><img aria-describedby="caption-attachment-38458" loading="lazy" class="wp-image-38458 size-full" src="https://krebsonsecurity.com/wp-content/uploads/2017/03/iserverlogin.png" alt="The login page for an Apple iCloud credential phishing operation apparently used to unlock and remotely wipe stolen iPhones." width="578" height="581" srcset="https://krebsonsecurity.com/wp-content/uploads/2017/03/iserverlogin.png 578w, https://krebsonsecurity.com/wp-content/uploads/2017/03/iserverlogin-150x150.png 150w" sizes="(max-width: 578px) 100vw, 578px" /></a><p id="caption-attachment-38458" class="wp-caption-text">The login page for an Apple iCloud credential phishing operation apparently used to unlock and remotely wipe stolen iPhones.</p></div>
+<p>John told me that in addition to serving up that login page, the server also returned the HTML contents of the &#8220;index.php&#8221; he originally requested from the server. When he saved the contents of index.php to his computer and viewed it as a text file, he noticed it inexplicably included a list of some 137 user names, email addresses and expiration dates for various users who&#8217;d apparently paid a monthly fee to access the iCloud phishing service.</p>
+<p>&#8220;These appear to be &#8216;resellers&#8217; or people that have access to the crimeware server,&#8221; my source said of the user information listed in the server&#8217;s &#8220;index.php&#8221; file.</p>
+<p><a class="lightbox" href="https://krebsonsecurity.com/wp-content/uploads/2017/03/priceperreseller.png"><img loading="lazy" class="aligncenter wp-image-38499 size-medium" src="https://krebsonsecurity.com/wp-content/uploads/2017/03/priceperreseller-580x210.png" alt="priceperreseller" width="580" height="210" srcset="https://krebsonsecurity.com/wp-content/uploads/2017/03/priceperreseller-580x210.png 580w, https://krebsonsecurity.com/wp-content/uploads/2017/03/priceperreseller-768x278.png 768w, https://krebsonsecurity.com/wp-content/uploads/2017/03/priceperreseller-940x340.png 940w, https://krebsonsecurity.com/wp-content/uploads/2017/03/priceperreseller.png 1043w" sizes="(max-width: 580px) 100vw, 580px" /></a></p>
+<p>John told KrebsOnSecurity that with very little effort he was able to guess the password of at least two other users listed in that file. After John logged into the iCloud phishing service with those credentials, the service informed him that the account he was using was expired. John was then prompted to pay for at least one more month subscription access to the server to continue.</p>
+<p>Playing along, John said he clicked the &#8220;OK&#8221; button indicating he wished to renew his subscription, and was taken to a shopping cart hosted on the domain <strong>hostingyaa[dot]com</strong>. That payment form in turn was accepting PayPal payments for an account tied to an entity called <strong>HostingYaa LLC</strong>; viewing the HTML source on that payment page revealed the PayPal account was tied to the email address &#8220;<strong>admin@hostingyaa[dot]com</strong>.&#8221;</p>
+<p>According to the file coughed up by the Russian server, the first username in that user list &#8212; demoniox12 &#8212; is tied to an email address <strong>admin@lanzadorx.net</strong> and to a zero-dollar subscription to the phishing service. This strongly indicates the user in question is an administrator of this phishing service.</p>
+<p>A review of Lanzadorx[dot]net indicates that it is a phishing-as-a-service offering that advertises the ability to launch targeted phishing attacks at a variety of free online services, including accounts at Apple, Hotmail, Gmail and Yahoo, among others.</p>
+<p>A reverse WHOIS lookup ordered from Domaintools.com shows that the admin@lanzadorx.net email is linked to the registration data for exactly two domains &#8212; hostingyaa[dot]info and lanzadorx[dot]net [full disclosure: Domaintools is currently one of several advertisers on KrebsOnSecurity].</p>
+<p>Hostingyaa[dot]info is registered to a Dario Dorrego, one of the other zero-dollar accounts included near the top of the list of users that are authorized to access the iCloud phishing service. The site says Dorrego&#8217;s account corresponds to the email address <strong>dario@hostingyaa[dot]com</strong>. That name Dario Dorrego also appears in the site registration records for 31 other Web site domains, all of which are listed <a href="https://krebsonsecurity.com/wp-content/uploads/2017/03/ReverseWhoisOnDarioDorrego.txt" target="_blank">here</a>.</p>
+<p>John said he was able to guess the passwords for at least six other accounts on the iCloud phishing service, including one particularly interesting user and possible reseller of the service who picked the username &#8220;<strong>Jonatan</strong>.&#8221; Below is a look at the home screen for Jonatan&#8217;s account on this iCloud phishing service. We can see the system indicates Jonatan was able to obtain at least 65 &#8220;hacked IDs&#8221; through this service, and that he pays USD $80 per month for access to it.</p>
+<div id="attachment_38462" style="width: 590px" class="wp-caption aligncenter"><a class="lightbox" href="https://krebsonsecurity.com/wp-content/uploads/2017/03/homescreenhackedids.png"><img aria-describedby="caption-attachment-38462" loading="lazy" class="wp-image-38462 size-medium" src="https://krebsonsecurity.com/wp-content/uploads/2017/03/homescreenhackedids-580x474.png" alt="&quot;Jonatan,&quot; a user of this iCloud account credential phishing service. Note the left side panel indicates the number of records and hacked IDs recorded for Jonatan's profile." width="580" height="474" srcset="https://krebsonsecurity.com/wp-content/uploads/2017/03/homescreenhackedids-580x474.png 580w, https://krebsonsecurity.com/wp-content/uploads/2017/03/homescreenhackedids-768x628.png 768w, https://krebsonsecurity.com/wp-content/uploads/2017/03/homescreenhackedids-940x769.png 940w, https://krebsonsecurity.com/wp-content/uploads/2017/03/homescreenhackedids.png 972w" sizes="(max-width: 580px) 100vw, 580px" /></a><p id="caption-attachment-38462" class="wp-caption-text">&#8220;Jonatan,&#8221; a user of this iCloud account credential phishing service. Note the left side panel indicates the number of records and hacked IDs recorded for Jonatan&#8217;s profile.</p></div>
+<p> <a href="https://krebsonsecurity.com/2017/03/if-your-iphone-is-stolen-these-guys-may-try-to-iphish-you/#more-38361" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+				
+			
+								<div class="themonic-pagination"><div class='pagination'><ul><li><a href='https://krebsonsecurity.com/'>&laquo; First</a></li><li><a href='https://krebsonsecurity.com/page/67/' class='inactive'>&lsaquo; Previous</a></li><li><a href='https://krebsonsecurity.com/page/65/' class='inactive'>65</a></li><li><a href='https://krebsonsecurity.com/page/66/' class='inactive'>66</a></li><li><a href='https://krebsonsecurity.com/page/67/' class='inactive'>67</a></li><li class='current'><span class='currenttext'>68</span></li><li><a href='https://krebsonsecurity.com/page/69/' class='inactive'>69</a></li><li><a href='https://krebsonsecurity.com/page/70/' class='inactive'>70</a></li><li><a href='https://krebsonsecurity.com/page/71/' class='inactive'>71</a></li><li><a href='https://krebsonsecurity.com/page/69/' class='inactive'>Next &rsaquo;</a></li><a class='inactive' href='https://krebsonsecurity.com/page/209/'>Last &raquo;</a></ul></div></div>
+					<div style="display: block; clear: both;"></div>
+			
+		
+
+	
+
+		</div><!-- #content -->
+	</div><!-- #primary -->
+
+
+			<div id="secondary" class="widget-area" role="complementary">
+
+        <div id="sidebar_ad" class="widget themonic-ad5"><div class="a-statement">Advertisement</div><a href="https://info.knowbe4.com/phishing-forensics-krebs?utm_source=Krebs&amp;utm_medium=display&amp;utm_campaign=website&amp;utm_content=PhishingForensics">
+<img src="/b-knowbe4/16.jpg" />
+</a></div>
+
+                        <br><div class="widget themonic-ad1"><div class="a-statement">Advertisement</div><a href="https://www.akamai.com/why-akamai/the-internet-of-possibilities?utm_source=krebsonsecurity&amp;utm_medium=display&amp;utm_campaign=F-MC-54978">
+<img src="/b-akamai/146.png">
+</a></div><br>
+
+			<aside id="custom_html-2" class="widget_text widget widget_custom_html"><p class="widget-title">Mailing List</p><div class="textwidget custom-html-widget"><a href="/subscribe/">Subscribe here</a></div></aside><aside id="search-2" class="widget widget_search"><p class="widget-title">Search KrebsOnSecurity</p><form role="search" method="get" id="searchform" class="searchform" action="https://krebsonsecurity.com/">
+				<div>
+					<label class="screen-reader-text" for="s">Search for:</label>
+					<input type="text" value="" name="s" id="s" />
+					<input type="submit" id="searchsubmit" value="Search" />
+				</div>
+			</form></aside>
+		<aside id="recent-posts-3" class="widget widget_recent_entries">
+		<p class="widget-title">Recent Posts</p>
+		<ul>
+											<li>
+					<a href="https://krebsonsecurity.com/2021/12/canada-charges-its-most-prolific-cybercriminal/">Canada Charges Its &#8220;Most Prolific Cybercriminal&#8221;</a>
+									</li>
+											<li>
+					<a href="https://krebsonsecurity.com/2021/12/who-is-the-network-access-broker-babam/">Who Is the Network Access Broker &#8216;Babam&#8217;?</a>
+									</li>
+											<li>
+					<a href="https://krebsonsecurity.com/2021/12/ubiquiti-developer-charged-with-extortion-causing-2020-breach/">Ubiquiti Developer Charged With Extortion, Causing 2020 &#8220;Breach&#8221;</a>
+									</li>
+											<li>
+					<a href="https://krebsonsecurity.com/2021/11/the-internet-is-held-together-with-spit-baling-wire/">The Internet is Held Together With Spit &#038; Baling Wire</a>
+									</li>
+											<li>
+					<a href="https://krebsonsecurity.com/2021/11/arrest-in-ransom-your-employer-email-scheme/">Arrest in &#8216;Ransom Your Employer&#8217; Email Scheme</a>
+									</li>
+					</ul>
+
+		</aside><aside id="text-2" class="widget widget_text">			<div class="textwidget"><a name="subscribe2"></a></div>
+		</aside><aside id="widget_sp_image-15" class="widget widget_sp_image"><p class="widget-title">Spam Nation</p><a href="https://www.amazon.com/Spam-Nation-Organized-Cybercrime-Epidemic-ebook/dp/B00L5QGBL0/ref=dp_kinw_strp_1" target="_blank" class="widget_sp_image-image-link" title="Spam Nation"><img width="266" height="404" alt="Spam Nation" class="attachment-266x404 aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2015/04/spamnation-nyt.png" /></a><div class="widget_sp_image-description" ><p>A New York Times Bestseller! </p>
+</div></aside><aside id="widget_sp_image-25" class="widget widget_sp_image"><p class="widget-title">Thinking of a Cybersecurity Career?</p><a href="https://krebsonsecurity.com/2020/07/thinking-of-a-cybersecurity-career-read-this/" target="_blank" class="widget_sp_image-image-link" title="Thinking of a Cybersecurity Career? Read This."><img width="625" height="424" alt="Thinking of a Cybersecurity Career?" class="attachment-full" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2020/07/codepeople.png 625w, https://krebsonsecurity.com/wp-content/uploads/2020/07/codepeople-580x393.png 580w" sizes="(max-width: 625px) 100vw, 625px" src="https://krebsonsecurity.com/wp-content/uploads/2020/07/codepeople.png" /></a><div class="widget_sp_image-description" ><p>Read this.</p>
+</div></aside><aside id="widget_sp_image-3" class="widget widget_sp_image"><p class="widget-title">All About Skimmers </p><a href="https://krebsonsecurity.com/all-about-skimmers/" target="_blank" class="widget_sp_image-image-link" title="All About Skimmers "><img width="299" height="232" alt="All About Skimmers" class="attachment-299x232 aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2010/08/skimgallery1.jpg" /></a><div class="widget_sp_image-description" ><p>Click image for my skimmer series.</p>
+</div></aside><aside id="categories-2" class="widget widget_categories"><p class="widget-title">Story Categories</p>
+			<ul>
+					<li class="cat-item cat-item-5"><a href="https://krebsonsecurity.com/category/sunshine/" title="Includes investigative blog posts meant to shine a light on the darker corners of the Internet.">A Little Sunshine</a>
+</li>
+	<li class="cat-item cat-item-2240"><a href="https://krebsonsecurity.com/category/all-about-skimmers/">All About Skimmers</a>
+</li>
+	<li class="cat-item cat-item-9085"><a href="https://krebsonsecurity.com/category/ashley-madison-breach/">Ashley Madison breach</a>
+</li>
+	<li class="cat-item cat-item-3191"><a href="https://krebsonsecurity.com/category/breadcrumbs/">Breadcrumbs</a>
+</li>
+	<li class="cat-item cat-item-3771"><a href="https://krebsonsecurity.com/category/data-breaches/" title="Stories about data breaches at retailers, corporations, governments and organizations of all sizes.">Data Breaches</a>
+</li>
+	<li class="cat-item cat-item-4624"><a href="https://krebsonsecurity.com/category/ddos-for-hire/">DDoS-for-Hire</a>
+</li>
+	<li class="cat-item cat-item-9173"><a href="https://krebsonsecurity.com/category/employment-fraud/">Employment Fraud</a>
+</li>
+	<li class="cat-item cat-item-2151"><a href="https://krebsonsecurity.com/category/how-to-break-into-security/" title="If you&#039;ve ever wanted career advice on how to make a shift into the security industry, look no further.">How to Break Into Security</a>
+</li>
+	<li class="cat-item cat-item-87"><a href="https://krebsonsecurity.com/category/latest-warnings/">Latest Warnings</a>
+</li>
+	<li class="cat-item cat-item-4071"><a href="https://krebsonsecurity.com/category/neer-do-well-news/">Ne&#039;er-Do-Well News</a>
+</li>
+	<li class="cat-item cat-item-9"><a href="https://krebsonsecurity.com/category/other/">Other</a>
+</li>
+	<li class="cat-item cat-item-1306"><a href="https://krebsonsecurity.com/category/pharma-wars/">Pharma Wars</a>
+</li>
+	<li class="cat-item cat-item-8240"><a href="https://krebsonsecurity.com/category/ransomware/">Ransomware</a>
+</li>
+	<li class="cat-item cat-item-599"><a href="https://krebsonsecurity.com/category/security-tools/">Security Tools</a>
+</li>
+	<li class="cat-item cat-item-8298"><a href="https://krebsonsecurity.com/category/sim-swapping/">SIM Swapping</a>
+</li>
+	<li class="cat-item cat-item-4079"><a href="https://krebsonsecurity.com/category/spam-nation/">Spam Nation</a>
+</li>
+	<li class="cat-item cat-item-1"><a href="https://krebsonsecurity.com/category/smallbizvictims/" title="Posts in this category will include new stories similar to those told in the Small Business Victims category on The Washington Post&#039;s Security Fix blog, which chronicled the methods organized cyber thieve are using to steal hundreds of thousands of dollars from dozens of small- to mid-sized companies around the country.">Target: Small Businesses</a>
+</li>
+	<li class="cat-item cat-item-5167"><a href="https://krebsonsecurity.com/category/tax-refund-fraud/">Tax Refund Fraud</a>
+</li>
+	<li class="cat-item cat-item-3"><a href="https://krebsonsecurity.com/category/comingstorm/" title="This category includes blog posts about computer and Internet security threats now and on the horizon.">The Coming Storm</a>
+</li>
+	<li class="cat-item cat-item-4"><a href="https://krebsonsecurity.com/category/patches/" title="Short posts on the latest security updates for widely-used software.
+">Time to Patch</a>
+</li>
+	<li class="cat-item cat-item-21"><a href="https://krebsonsecurity.com/category/web-fraud-2-0/">Web Fraud 2.0</a>
+</li>
+			</ul>
+
+			</aside><aside id="widget_sp_image-5" class="widget widget_sp_image"><p class="widget-title">The Value of a Hacked PC</p><a href="https://krebsonsecurity.com/2012/10/the-scrap-value-of-a-hacked-pc-revisited/" target="_blank" class="widget_sp_image-image-link" title="The Value of a Hacked PC"><img width="285" height="180" alt="valuehackedpc " class="attachment-285x180 aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2012/12/valuehackedpc-285x180.png" /></a><div class="widget_sp_image-description" ><p>Badguy uses for your PC</p>
+</div></aside><aside id="widget_sp_image-9" class="widget widget_sp_image"><p class="widget-title">Badguy Uses for Your Email </p><a href="https://krebsonsecurity.com/2013/06/the-value-of-a-hacked-email-account/" target="_self" class="widget_sp_image-image-link" title="Badguy Uses for Your Email "><img width="296" height="170" alt="Badguy Uses for Your Email " class="attachment-full aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2013/06/badguyemail.png 296w, https://krebsonsecurity.com/wp-content/uploads/2013/06/badguyemail-285x163.png 285w" sizes="(max-width: 296px) 100vw, 296px" src="https://krebsonsecurity.com/wp-content/uploads/2013/06/badguyemail.png" /></a><div class="widget_sp_image-description" ><p>Your email account may be worth far more than you imagine.</p>
+</div></aside><aside id="widget_sp_image-24" class="widget widget_sp_image"><a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&#038;hosted_button_id=MCCRKHWRX57HS" id="donate" target="_self" class="widget_sp_image-image-link"><img width="250" height="55" alt="Donate to Krebs On Security" class="attachment-medium aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2016/09/donatepaypal2-1.png" /></a></aside><aside id="most_popular_posts-3" class="widget widget_most_popular_posts">
+<p class="widget-title">Most Popular Posts</p>
+<ul>	<li><a href="https://krebsonsecurity.com/2018/07/sextortion-scam-uses-recipients-hacked-passwords/">Sextortion Scam Uses Recipient's Hacked Passwords</a> (1076)</li>
+	<li><a href="https://krebsonsecurity.com/2015/07/online-cheating-site-ashleymadison-hacked/">Online Cheating Site AshleyMadison Hacked</a> (798)</li>
+	<li><a href="https://krebsonsecurity.com/2013/12/sources-target-investigating-data-breach/">Sources: Target Investigating Data Breach</a> (620)</li>
+	<li><a href="https://krebsonsecurity.com/2020/11/trump-fires-security-chief-christopher-krebs/">Trump Fires Security Chief Christopher Krebs</a> (534)</li>
+	<li><a href="https://krebsonsecurity.com/2013/12/cards-stolen-in-target-breach-flood-underground-markets/">Cards Stolen in Target Breach Flood Underground Markets</a> (445)</li>
+	<li><a href="https://krebsonsecurity.com/2013/05/reports-liberty-reserve-founder-arrested-site-shuttered/">Reports: Liberty Reserve Founder Arrested, Site Shuttered</a> (416)</li>
+	<li><a href="https://krebsonsecurity.com/2015/08/was-the-ashley-madison-database-leaked/">Was the Ashley Madison Database Leaked?</a> (376)</li>
+	<li><a href="https://krebsonsecurity.com/2021/01/ddos-guard-to-forfeit-internet-space-occupied-by-parler/">DDoS-Guard To Forfeit Internet Space Occupied by Parler</a> (374)</li>
+	<li><a href="https://krebsonsecurity.com/2014/05/true-goodbye-using-truecrypt-is-not-secure/">True Goodbye: 'Using TrueCrypt Is Not Secure'</a> (363)</li>
+	<li><a href="https://krebsonsecurity.com/2015/08/who-hacked-ashley-madison/">Who Hacked Ashley Madison?</a> (361)</li>
+</ul>
+</aside>
+<aside id="media_image-2" class="widget widget_media_image"><p class="widget-title">Why So Many Top Hackers Hail from Russia</p><a href="https://krebsonsecurity.com/2017/06/why-so-many-top-hackers-hail-from-russia/"><img width="580" height="389" src="https://krebsonsecurity.com/wp-content/uploads/2017/06/computered-580x389.png" class="image wp-image-39684  attachment-medium size-medium" alt="" loading="lazy" style="max-width: 100%; height: auto;" srcset="https://krebsonsecurity.com/wp-content/uploads/2017/06/computered-580x389.png 580w, https://krebsonsecurity.com/wp-content/uploads/2017/06/computered-768x514.png 768w, https://krebsonsecurity.com/wp-content/uploads/2017/06/computered-940x630.png 940w, https://krebsonsecurity.com/wp-content/uploads/2017/06/computered.png 1551w" sizes="(max-width: 580px) 100vw, 580px" /></a></aside><aside id="widget_sp_image-11" class="widget widget_sp_image"><p class="widget-title">Category: Web Fraud 2.0</p><a href="https://krebsonsecurity.com/category/web-fraud-2-0/" target="_blank" class="widget_sp_image-image-link" title="Category: Web Fraud 2.0"><img width="227" height="400" alt="Criminnovations" class="attachment-medium aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2013/11/cybercrimeinnovations-227x400.png" /></a><div class="widget_sp_image-description" ><p>Innovations from the Underground</p>
+</div></aside><aside id="widget_sp_image-12" class="widget widget_sp_image"><a href="https://krebsonsecurity.com/2014/03/are-credit-monitoring-services-worth-it/" target="_blank" class="widget_sp_image-image-link"><img width="285" height="189" class="attachment-medium aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2014/03/shreddedID-copy-285x189.png 285w, https://krebsonsecurity.com/wp-content/uploads/2014/03/shreddedID-copy-600x399.png 600w, https://krebsonsecurity.com/wp-content/uploads/2014/03/shreddedID-copy.png 849w" sizes="(max-width: 285px) 100vw, 285px" src="https://krebsonsecurity.com/wp-content/uploads/2014/03/shreddedID-copy-285x189.png" /></a><div class="widget_sp_image-description" ><p>ID Protection Services Examined</p>
+</div></aside><aside id="widget_sp_image-13" class="widget widget_sp_image"><p class="widget-title">Is Antivirus Dead?</p><a href="https://krebsonsecurity.com/2014/05/antivirus-is-dead-long-live-antivirus/" target="_blank" class="widget_sp_image-image-link" title="Is Antivirus Dead?"><img width="285" height="161" alt="Is Antivirus Dead?" class="attachment-medium aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2014/05/cryptservices-285x161.png 285w, https://krebsonsecurity.com/wp-content/uploads/2014/05/cryptservices-600x339.png 600w, https://krebsonsecurity.com/wp-content/uploads/2014/05/cryptservices.png 945w" sizes="(max-width: 285px) 100vw, 285px" src="https://krebsonsecurity.com/wp-content/uploads/2014/05/cryptservices-285x161.png" /></a><div class="widget_sp_image-description" ><p>The reasons for its decline</p>
+</div></aside><aside id="widget_sp_image-14" class="widget widget_sp_image"><p class="widget-title">The Growing Tax Fraud Menace</p><a href="https://krebsonsecurity.com/category/tax-refund-fraud/" target="_blank" class="widget_sp_image-image-link" title="The Growing Tax Fraud Menace"><img width="285" height="285" alt="The Growing Tax Fraud Menace" class="attachment-medium aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2014/04/taxfraud-285x285.jpg 285w, https://krebsonsecurity.com/wp-content/uploads/2014/04/taxfraud-150x150.jpg 150w, https://krebsonsecurity.com/wp-content/uploads/2014/04/taxfraud-600x600.jpg 600w, https://krebsonsecurity.com/wp-content/uploads/2014/04/taxfraud.jpg 693w" sizes="(max-width: 285px) 100vw, 285px" src="https://krebsonsecurity.com/wp-content/uploads/2014/04/taxfraud-285x285.jpg" /></a><div class="widget_sp_image-description" ><p>File 'em Before the Bad Guys Can </p>
+</div></aside><aside id="widget_sp_image-17" class="widget widget_sp_image"><p class="widget-title">Inside a Carding Shop</p><a href="https://krebsonsecurity.com/2014/06/peek-inside-a-professional-carding-shop/" target="_blank" class="widget_sp_image-image-link" title="Inside a Carding Shop"><img width="194" height="340" alt="Inside a Carding Shop" class="attachment-medium aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2014/06/mcdumpalsjoined.png" /></a><div class="widget_sp_image-description" ><p>A crash course in carding. </p>
+</div></aside><aside id="widget_sp_image-18" class="widget widget_sp_image"><p class="widget-title">Beware Social Security Fraud</p><a href="https://krebsonsecurity.com/2013/09/crooks-hijack-retirement-funds-via-ssa-portal/" target="_blank" class="widget_sp_image-image-link" title="Beware Social Security Fraud"><img width="285" height="293" alt="Beware Social Security Fraud" class="attachment-full aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2016/09/myssn-285x293.png" /></a><div class="widget_sp_image-description" ><p>Sign up, or Be Signed Up! </p>
+</div></aside><aside id="widget_sp_image-2" class="widget widget_sp_image"><p class="widget-title">How Was Your Card Stolen?</p><a href="https://krebsonsecurity.com/2015/01/how-was-your-credit-card-stolen/" target="_blank" class="widget_sp_image-image-link" title="How Was Your Card Stolen?"><img width="285" height="285" alt="How Was Your Card Stolen?" class="attachment-full aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2016/09/carddominoes-285x285.jpg 285w, https://krebsonsecurity.com/wp-content/uploads/2016/09/carddominoes-285x285-150x150.jpg 150w" sizes="(max-width: 285px) 100vw, 285px" src="https://krebsonsecurity.com/wp-content/uploads/2016/09/carddominoes-285x285.jpg" /></a><div class="widget_sp_image-description" ><p>Finding out is not so easy. </p>
+</div></aside><aside id="widget_sp_image-22" class="widget widget_sp_image"><p class="widget-title">Krebs&#8217;s 3 Rules&#8230;</p><a href="https://krebsonsecurity.com/2011/05/krebss-3-basic-rules-for-online-safety/" target="_blank" class="widget_sp_image-image-link" title="Krebs&#8217;s 3 Rules&#8230;"><img width="300" height="300" alt="Krebs&#8217;s 3 Rules&#8230;" class="attachment-medium aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2011/05/three-300x300.jpg 300w, https://krebsonsecurity.com/wp-content/uploads/2011/05/three-150x150.jpg 150w, https://krebsonsecurity.com/wp-content/uploads/2011/05/three.jpg 347w" sizes="(max-width: 300px) 100vw, 300px" src="https://krebsonsecurity.com/wp-content/uploads/2011/05/three-300x300.jpg" /></a><div class="widget_sp_image-description" ><p>...For Online Safety. </p>
+</div></aside>		</div><!-- #secondary -->
+		</div><!-- #main .wrapper -->
+	
+	<div id="publisho-footer" class="widget-area">
+				<div class="footer-widget">
+                				</div>
+				<div class="footer-widget">
+								</div>
+				<div class="footer-widget">
+								</div>
+	</div>
+
+	<div class="site-wordpress">
+					&copy; Krebs on Security<br>
+	</div>
+	<!-- .site-info --><div class="clear"></div>
+</div><!-- #page -->
+
+<script type='text/javascript' src='https://krebsonsecurity.com/wp-content/themes/kos-mar2021/js/slicknav.js?ver=5.8.2' id='publisho-mobile-navigation-js'></script>
+<script type='text/javascript' src='https://krebsonsecurity.com/wp-includes/js/wp-embed.min.js?ver=5.8.2' id='wp-embed-js'></script>
+</body>
+</html>
+<!--
+Performance optimized by W3 Total Cache. Learn more: https://www.boldgrid.com/w3-total-cache/
+
+Object Caching 183/423 objects using memcached
+Page Caching using memcached 
+Database Caching 5/28 queries in 0.022 seconds using memcached
+
+Served from: krebsonsecurity.com @ 2021-12-10 14:44:06 by W3 Total Cache
+-->

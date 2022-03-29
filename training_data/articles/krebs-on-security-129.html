@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<!--[if IE 7]>
+<html class="ie ie7" lang="en-US">
+<![endif]-->
+<!--[if IE 8]>
+<html class="ie ie8" lang="en-US">
+<![endif]-->
+<!--[if !(IE 7) | !(IE 8)  ]><!-->
+<html lang="en-US">
+<!--<![endif]-->
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width" />
+<link rel="profile" href="http://gmpg.org/xfn/11" />
+<!--[if lt IE 9]>
+<script src="https://krebsonsecurity.com/wp-content/themes/kos-mar2021/js/html5.js" type="text/javascript"></script>
+<![endif]-->
+<title>Krebs on Security &#8211; Page 129 &#8211; In-depth security news and investigation</title>
+<meta name='robots' content='max-image-preview:large' />
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="Krebs on Security &raquo; Feed" href="https://krebsonsecurity.com/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Krebs on Security &raquo; Comments Feed" href="https://krebsonsecurity.com/comments/feed/" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.1.0\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.1.0\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/krebsonsecurity.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=5.8.2"}};
+			!function(e,a,t){var n,r,o,i=a.createElement("canvas"),p=i.getContext&&i.getContext("2d");function s(e,t){var a=String.fromCharCode;p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,e),0,0);e=i.toDataURL();return p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,t),0,0),e===i.toDataURL()}function c(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(o=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},r=0;r<o.length;r++)t.supports[o[r]]=function(e){if(!p||!p.fillText)return!1;switch(p.textBaseline="top",p.font="600 32px Arial",e){case"flag":return s([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])?!1:!s([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!s([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]);case"emoji":return!s([10084,65039,8205,55357,56613],[10084,65039,8203,55357,56613])}return!1}(o[r]),t.supports.everything=t.supports.everything&&t.supports[o[r]],"flag"!==o[r]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[o[r]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(n=t.source||{}).concatemoji?c(n.concatemoji):n.wpemoji&&n.twemoji&&(c(n.twemoji),c(n.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+	<link rel='stylesheet' id='colorbox-theme1-css'  href='https://krebsonsecurity.com/wp-content/plugins/jquery-lightbox-for-native-galleries/colorbox/theme1/colorbox.css?ver=1.3.14' type='text/css' media='screen' />
+<link rel='stylesheet' id='wp-block-library-css'  href='https://krebsonsecurity.com/wp-includes/css/dist/block-library/style.min.css?ver=5.8.2' type='text/css' media='all' />
+<link rel='stylesheet' id='contact-form-7-css'  href='https://krebsonsecurity.com/wp-content/plugins/contact-form-7/includes/css/styles.css?ver=5.5.3' type='text/css' media='all' />
+<link rel='stylesheet' id='publisho-style-css'  href='https://krebsonsecurity.com/wp-content/themes/kos-mar2021/style.css?subver=1.2&#038;ver=5.8.2' type='text/css' media='all' />
+<style id='publisho-style-inline-css' type='text/css'>
+
+	.themonic-nav .current-menu-item > a, .themonic-nav .current-menu-ancestor > a, .themonic-nav .current_page_item > a, .themonic-nav .current_page_ancestor > a {
+		background: #cc6600;
+	}
+	.themonic-nav ul.nav-menu, .themonic-nav div.nav-menu > ul {
+		border-bottom: 5px solid #cc6600;
+	}
+	#site-navigation .topheadmenu a {
+    background: rgba(0, 0, 0, 0);
+	}
+	.themonic-nav li a:hover {
+		background: #cc6600;
+	}
+	.themonic-nav li:hover {
+		background: #cc6600;
+	}.wrapper .flexslider {margin: 0 0 30px;}.frontp .btm-wrap {
+    border-top: 1px solid #e9e9e9;
+	}
+	.entry-summary {
+    border-top: none;
+	}.frontp .btm-wrap { margin-bottom: 30px;}.site { font-size:14px;}.site { font-family:'Roboto', arial ;}
+</style>
+<link rel='stylesheet' id='publisho-custom-style-css'  href='https://krebsonsecurity.com/wp-content/themes/kos-mar2021/custom.css?subver=1.2&#038;ver=5.8.2' type='text/css' media='all' />
+<!--[if lt IE 9]>
+<link rel='stylesheet' id='publisho-ie-css'  href='https://krebsonsecurity.com/wp-content/themes/kos-mar2021/css/ie.css?ver=20160606' type='text/css' media='all' />
+<![endif]-->
+<link rel='stylesheet' id='fontawesome-css-css'  href='https://krebsonsecurity.com/wp-content/themes/kos-mar2021/fonts/font-awesome.min.css?ver=5.8.2' type='text/css' media='all' />
+<link rel='stylesheet' id='publisho_custom_fonts-css'  href='//fonts.googleapis.com/css?family=Roboto%3Aregular%2Citalic%2C500%26subset%3Dlatin%2C' type='text/css' media='screen' />
+<script type='text/javascript' src='https://krebsonsecurity.com/wp-includes/js/jquery/jquery.min.js?ver=3.6.0' id='jquery-core-js'></script>
+<script type='text/javascript' src='https://krebsonsecurity.com/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.3.2' id='jquery-migrate-js'></script>
+<script type='text/javascript' src='https://krebsonsecurity.com/wp-content/plugins/jquery-lightbox-for-native-galleries/colorbox/jquery.colorbox-min.js?ver=1.3.14' id='colorbox-js'></script>
+<link rel="https://api.w.org/" href="https://krebsonsecurity.com/wp-json/" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://krebsonsecurity.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://krebsonsecurity.com/wp-includes/wlwmanifest.xml" /> 
+<meta name="generator" content="WordPress 5.8.2" />
+<!-- JavaScript Pull-Quotes plugin v2.2 -->
+	<link rel="stylesheet" href="https://krebsonsecurity.com/wp-content/plugins/jspullquotes/resources/jspullquotes-core.css" type="text/css" />
+	<link rel="stylesheet" href="https://krebsonsecurity.com/wp-content/plugins/jspullquotes/resources/jspullquotes-default.css" type="text/css" />
+	<script type="text/javascript" src="https://krebsonsecurity.com/wp-content/plugins/jspullquotes/resources/jspullquotes.js"></script>
+	<script type="text/javascript">
+		var arrOptions = new Array("1", "1", "right", "1", "1", "blockquote", "pullquote", "pullquote pqRight");
+		pullQuoteOpts(arrOptions);
+	</script>
+<!-- end pull-quote additions -->
+<!-- jQuery Lightbox For Native Galleries v3.1.3 | http://www.viper007bond.com/wordpress-plugins/jquery-lightbox-for-native-galleries/ -->
+<script type="text/javascript">
+// <![CDATA[
+	jQuery(document).ready(function($){
+		$(".gallery").each(function(index, obj){
+			var galleryid = Math.floor(Math.random()*10000);
+			$(obj).find("a").colorbox({rel:galleryid, maxWidth:"95%", maxHeight:"95%"});
+		});
+		$("a.lightbox").colorbox({maxWidth:"95%", maxHeight:"95%"});
+	});
+// ]]>
+</script>
+<style type="text/css" id="custom-background-css">
+body.custom-background { background-color: #ffffff; }
+</style>
+	<link rel="me" href="https://twitter.com/briankrebs" /><meta name="twitter:widgets:link-color" content="#000000" /><meta name="twitter:widgets:border-color" content="#000000" /><meta name="twitter:partner" content="tfwp" />
+<meta name="twitter:card" content="summary" /><meta name="twitter:title" content="Krebs on Security" /><meta name="twitter:site" content="@briankrebs" /><meta name="twitter:description" content="In-depth security news and investigation" />
+</head>
+<body class="home blog paged custom-background paged-129 custom-background-white single-author frontp hfeed">
+<div id="page" class="site">
+	<!-- <div class="publisho-top-mobile-nav clear"></div> -->
+	<div class="themonic-logo themonic-ad3"><div class="a-statement">Advertisement</div><a href="https://www.area1security.com/2021-email-threat-report/?utm_medium=display&amp;utm_source=krebs&amp;utm_term=na&amp;utm_content=thumb&amp;utm_campaign=2021-Q4-Display-Krebs-2021-Email-Threat-Report">
+<img src="/b-area1/11.png">
+</a></div>
+	<div class="themonic-logo themonic-ad6"><div class="a-statement">Advertisement</div><a href="https://www.area1security.com/2021-email-threat-report/?utm_medium=display&amp;utm_source=krebs&amp;utm_term=na&amp;utm_content=thumb&amp;utm_campaign=2021-Q4-Display-Krebs-2021-Email-Threat-Report">
+<img src="/b-area1/12.png">
+</a></div>
+	<nav id="site-navigation" class="themonic-nav" role="navigation">
+	</nav><!-- #site-navigation -->
+	<div class="clear"></div>
+	<header id="masthead" class="site-header" role="banner">
+ 					<div class="desktop-social">
+						<div class="socialmedia">
+							<a href="http://twitter.com/briankrebs" target="_blank"><i class="fa fa-twitter"></i></a> 
+															<a class="rss" href="https://krebsonsecurity.com/feed/" target="_blank"><i class="fa fa-rss"></i></a>	
+									<a class="rss" href="https://www.linkedin.com/in/bkrebs/" target="_blank"><i class="fa fa-linkedin"></i></a>	
+								</div>
+				 	</div>
+																						   
+		
+		<div class="themonic-logo responsive-img-container">
+			<a href="https://krebsonsecurity.com/" title="Krebs on Security" rel="home"><img src="https://krebsonsecurity.com/wp-content/uploads/2021/03/kos-27-03-2021.jpg" alt="Krebs on Security"></a>
+		</div>
+
+					<div class="mobile-social">
+						<div class="socialmedia">
+							<a href="http://twitter.com/briankrebs" target="_blank"><i class="fa fa-twitter"></i></a> 
+															<a class="rss" href="https://krebsonsecurity.com/feed/" target="_blank"><i class="fa fa-rss"></i></a>	
+									<a class="rss" href="https://www.linkedin.com/in/bkrebs/" target="_blank"><i class="fa fa-linkedin"></i></a>	
+								</div>
+					</div>
+		
+				<!-- <div class="publisho-mobile-nav clear"></div> -->
+		<nav id="site-navigation" class="themonic-nav" role="navigation">
+			<a class="assistive-text" href="#content" title="Skip to content">Skip to content</a>
+			<div id="menu-top" class="nav-menu"><ul>
+<li ><a href="https://krebsonsecurity.com/">Home</a></li><li class="page_item page-item-2"><a href="https://krebsonsecurity.com/about/">About the Author</a></li>
+<li class="page_item page-item-645"><a href="https://krebsonsecurity.com/cpm/">Advertising/Speaking</a></li>
+</ul></div>
+		</nav><!-- #site-navigation -->
+		<div class="clear"></div>
+	</header><!-- #masthead -->
+	<div id="main" class="wrapper">
+		<div id="primary" class="site-content">
+	
+
+	
+		<div id="content" role="main">
+
+		<article id="post-24311" class="post-24311 post type-post status-publish format-standard hentry category-sunshine category-latest-warnings tag-ginger-reeder tag-neiman-marcus-breach tag-target tag-u-s-secret-service">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2014/01/hackers-steal-card-data-from-neiman-marcus/" title="Permalink to Hackers Steal Card Data from Neiman Marcus" rel="bookmark">Hackers Steal Card Data from Neiman Marcus</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">January 10, 2014</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2014/01/hackers-steal-card-data-from-neiman-marcus/#comments">126 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>Responding to inquiries about a possible data breach involving customer credit and debit card information, upscale retailer <strong>Neiman Marcus</strong> acknowledged today that it is working with the <strong>U.S. Secret Service</strong> to investigate a hacker break-in that has exposed an unknown number of customer cards.</p>
+<p><a href="https://krebsonsecurity.com/wp-content/uploads/2014/01/neiman.png"><img loading="lazy" class="alignright size-medium wp-image-24321" alt="neiman" src="https://krebsonsecurity.com/wp-content/uploads/2014/01/neiman-285x113.png" width="285" height="113" srcset="https://krebsonsecurity.com/wp-content/uploads/2014/01/neiman-285x113.png 285w, https://krebsonsecurity.com/wp-content/uploads/2014/01/neiman.png 313w" sizes="(max-width: 285px) 100vw, 285px" /></a>Earlier this week, I began hearing from sources in the financial industry about an increasing number of fraudulent credit and debit card charges that were being traced to cards that had been very recently used at brick-and-mortar stores run by the Dallas, Texas based high-end retail chain. Sources said that while it appears the fraud on those stolen cards was perpetrated at a variety of other stores, the common point of purchase among the compromised cards was Neiman Marcus.</p>
+<p>Today, I reached out to Neiman Marcus and received confirmation that the company is in fact investigating a breach that was uncovered in mid-December.</p>
+<p>Neiman Marcus spokesperson <strong>Ginger Reeder</strong> said the company does not yet know the cause, size or duration of the breach, noting that these are details being sought by a third-party forensics firm which has yet to complete its investigation. But she said there is no evidence that shoppers who purchased from the company&#8217;s online stores were affected by this breach.</p>
+<p>The entirety of the company&#8217;s formal statement is as follows:</p>
+<blockquote><p>&#8220;Neiman Marcus was informed by our credit card processor in mid-December of potentially unauthorized payment card activity that occurred following customer purchases at our Neiman Marcus Group stores.</p>
+<p>We informed federal law enforcement agencies and are working actively with the U.S. Secret Service, the payment brands, our credit card processor, a leading investigations, intelligence and risk management firm, and a leading forensics firm to investigate the situation. On January 1st, the forensics firm discovered evidence that the company was the victim of a criminal cyber-security intrusion and that some customers’ cards were possibly compromised as a result. We have begun to contain the intrusion and have taken significant steps to further enhance information security.</p>
+<p>The security of our customers’ information is always a priority and we sincerely regret any inconvenience. We are taking steps, where possible, to notify customers whose cards we know were used fraudulently after making a purchase at our store.&#8221;</p></blockquote>
+<p>The disclosure comes as many in the retail sector are seeking more information about the causes of <a title="http://krebsonsecurity.com/2013/12/sources-target-investigating-data-breach/" href="http://krebsonsecurity.com/2013/12/sources-target-investigating-data-breach/" target="_blank">the breach at nationwide retail giant Target</a>, which extended from around Thanksgiving 2013 to Dec. 15, and affected some 40 million customer debit and credit cards.</p>
+<p> <a href="https://krebsonsecurity.com/2014/01/hackers-steal-card-data-from-neiman-marcus/#more-24311" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+	<div id="between_article_ad" class="themonic-ad5"><a href="https://www.cybereason.com/live-attack-simulation-08-05-21?utm_source=krebs&amp;utm_medium=display&amp;utm_campaign=q4">
+<img src="/b-cybereason/12.jpg">
+</a></div>	<article id="post-24297" class="post-24297 post type-post status-publish format-standard hentry category-latest-warnings tag-40-million tag-70-million tag-target tag-target-data-breach tag-target-hack">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2014/01/target-names-emails-phone-numbers-on-up-to-70-million-customers-stolen/" title="Permalink to Target: Names, Emails, Phone Numbers on Up To 70 Million Customers Stolen" rel="bookmark">Target: Names, Emails, Phone Numbers on Up To 70 Million Customers Stolen</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">January 10, 2014</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2014/01/target-names-emails-phone-numbers-on-up-to-70-million-customers-stolen/#comments">190 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>Nationwide retail giant Target today disclosed that a data breach discovered last month exposed the names, mailing addresses, phone number and email addresses for up to 70 million individuals.</p>
+<p>The disclosure comes roughly three weeks after the company <a title="http://krebsonsecurity.com/2013/12/sources-target-investigating-data-breach/" href="http://krebsonsecurity.com/2013/12/sources-target-investigating-data-breach/" target="_blank">acknowledged</a> that hackers had broken in late last year and stolen approximately 40 million customer debit and credit card records.</p>
+<p>&#8220;As part of Target’s ongoing forensic investigation, it has been determined that certain guest information &#8212; separate from the payment card data previously disclosed &#8212; was taken during the data breach,&#8221; the company said in a statement released Friday morning.  &#8220;This theft is not a new breach, but was uncovered as part of the ongoing investigation. At this time, the investigation has determined that the stolen information includes names, mailing addresses, phone numbers or email addresses for up to 70 million individuals.&#8221;</p>
+<p>Target said much of the data is partial in nature, but that in cases where Target has an email address, it will attempt to contact affected guests with informational tips to guard against consumer scams. The retail giant was quick to note that its email communications would not ask customers to provide any personal information as part of that communication.</p>
+<p>Target Chairman <strong>Gregg Steinhafel</strong> apologized for any inconvenience that the breach may have caused customers, and said he wanted customers to know that &#8220;understanding and sharing the facts related to this incident is important to me and the entire Target team.&#8221;</p>
+<p>Nevertheless, the company still has not disclosed any details about how the attackers broke in. This lack of communication appears to have spooked many folks responsible for defending other retailers from such attacks, according to numerous interviews conducted by this reporter over the past few weeks.</p>
+<p> <a href="https://krebsonsecurity.com/2014/01/target-names-emails-phone-numbers-on-up-to-70-million-customers-stolen/#more-24297" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+	<div class="themonic-ad2"><div class="a-statement">Advertisement</div><a href="https://www.akamai.com/?utm_source=krebsonsecurity&amp;utm_medium=display&amp;utm_id=GL_Platform&amp;utm_campaign=F-MC-52606&amp;utm_content=IDC_InfoBrief">
+<img src="/b-akamai/134.png">
+</a></div>	<article id="post-24025" class="post-24025 post type-post status-publish format-standard hentry category-smallbizvictims tag-asprox-botnet tag-cyberheist tag-dincel-law-group tag-efficient-services-escrow-group tag-first-foundation-bank tag-gary-warner tag-julie-rogers tag-live-cd tag-malcovery">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2014/01/firm-bankrupted-by-cyberheist-sues-bank/" title="Permalink to Firm Bankrupted by Cyberheist Sues Bank" rel="bookmark">Firm Bankrupted by Cyberheist Sues Bank</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">January 8, 2014</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2014/01/firm-bankrupted-by-cyberheist-sues-bank/#comments">63 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>A California escrow firm that was forced out of business last year after a $1.5 million cyberheist is now suing its former bank to recoup the lost funds.</p>
+<p><a href="https://krebsonsecurity.com/wp-content/uploads/2010/01/cashole.jpg"><img loading="lazy" class="alignright size-medium wp-image-178" alt="cashole" src="https://krebsonsecurity.com/wp-content/uploads/2010/01/cashole-300x224.jpg" width="285" height="212" /></a>A state-appointed receiver for the now defunct Huntington Beach, Calif. based <strong>Efficient Services Escrow</strong> has filed suit against <strong>First Foundation Bank</strong>, alleging that the bank&#8217;s security procedures were not up to snuff, and that it failed to act in good faith when it processed three fraudulent international wire transfers totaling $1,558,439 between December 2012 and February 2013.</p>
+<p>The lawsuit, filed in the Superior Court  for Orange County, is the latest in a series of legal battles over whether banks can and should be held more accountable for losses stemming from account takeovers. In the United States, consumers have little to no liability if a computer infection from a banking Trojan leads to the emptying of their bank accounts &#8212; provided that victims alert their bank in a timely manner. Businesses of all sizes, however, enjoy no such protection, with many small business owners shockingly unaware of the risks of banking online.</p>
+<p>As I wrote in <a title="http://krebsonsecurity.com/2013/08/1-5-million-cyberheist-ruins-escrow-firm/" href="http://krebsonsecurity.com/2013/08/1-5-million-cyberheist-ruins-escrow-firm/" target="_blank">an August 2013 story</a>, the heist began in December 2012 with a $432,215 fraudulent wire sent from the accounts of Huntington Beach, Calif. based <strong>Efficient Services Escrow Group </strong>to a bank in Moscow. In January, the attackers struck again, sending two more fraudulent wires totaling $1.1 million to accounts in the <a title="https://en.wikipedia.org/wiki/Heilongjiang" href="https://en.wikipedia.org/wiki/Heilongjiang" target="_blank">Heilongjiang Province</a> of China, a northern region in China on the border with Russia.</p>
+<p>This same province was the subject of a <a title="http://krebsonsecurity.com/2011/04/fbi-20m-in-fraudulent-wire-transfers-to-china/" href="http://krebsonsecurity.com/2011/04/fbi-20m-in-fraudulent-wire-transfers-to-china/" target="_blank">2011 FBI alert on cyberheist activity</a>. The FBI warned that cyber thieves had in the previous year alone stolen approximately $20 million from small to mid-sized businesses through fraudulent wire transfers sent to Chinese economic and trade companies.</p>
+<p>Efficient Services and its bank were able to recover the wire to Russia, but the two wires to China totaling $1.1 million were long gone. Under California law, escrow and title companies are required to immediately report any lost funds. When Efficient reported the incident to state regulators, the <strong>California Department of Corporations</strong> gave the firm three days to come up with money to replace the stolen funds.</p>
+<p>Three days later, with Efficient no closer to recovering the funds, the state stepped in and shut the company down. As a result, Efficient was forced to lay off its entire staff of nine employees.</p>
+<p>On Dec. 6, the lawyer appointed to be Efficient&#8217;s receiver sued First Foundation in a bid to recover the outstanding $1.1 million on behalf of the firm&#8217;s former customers. The suit alleges that the bank&#8217;s security procedures were not &#8220;commercially reasonable,&#8221; and that the bank failed to act in &#8220;good faith&#8221; when it processed international wire transfers on behalf of the escrow firm.</p>
+<p>Like most U.S. states, California has adopted the <a title="http://www.law.cornell.edu/ucc/ucc.table.html" href="http://www.law.cornell.edu/ucc/ucc.table.html" target="_blank">Uniform Commercial Code</a> (UCC), which holds that a payment order received by the [bank] is “effective as the order of the customer, <em>whether or not authorized</em>, if the security procedure is a <em>commercially reasonable method </em>of providing security against unauthorized payment orders, and the bank proves that it <em>accepted the payment order in good faith</em> and in compliance with the security procedure and any written agreement or instruction of the customer restricting acceptance of payment orders issued in the name of the customer.”</p>
+<p>As evidenced by the dozens of stories in my series, <a title="http://krebsonsecurity.com/category/smallbizvictims/" href="http://krebsonsecurity.com/category/smallbizvictims/" target="_blank">Target: Small Businesses</a>, companies do not enjoy the same protections as consumers when banking online. If a banking Trojan infection results in cyber thieves emptying the bank accounts of a small business, that organization is essentially at the mercy of their financial institution, which very often in these situations disavows any responsibility for the breach, and may in fact stonewall the victim company as a result. That can leave victim organizations in a quandary: They can swallow their pride and chalk it up to a learning experience, or opt to sue the bank to recover their losses. Of course, suing your bank can be cost-prohibitive unless the loss is significantly larger than the amount the victim might expect to spend hiring lawyers to pursue the case on the often long road to settlement or trial.</p>
+<p>The plaintiffs in this case allege that part of the reason the bank&#8217;s security procedures were not commercially reasonable was that one component of the bank&#8217;s core security protection &#8212; the requirement that customers enter a code generated by a customer-supplied security token that changes every 32 seconds &#8212; had failed in the days leading up to the fraudulent transfers. I would argue that security tokens are a mere security speed bump whose effectiveness is easily bypassed by today&#8217;s cyber thieves. But in any case, this lawsuit claims that rather than address that failure, the bank simply chose to disable this feature for Efficient Services.</p>
+<p>First Foundation did not return calls seeking comment. But the bank did produce an incident report that is now public record, thanks to this lawsuit (see the &#8220;Exhibit J&#8221; section of <a title="http://krebsonsecurity.com/wp-content/uploads/2014/01/2013-12-06-file-endorsed-Complaintsmallpdf.com_.pdf" href="http://krebsonsecurity.com/wp-content/uploads/2014/01/2013-12-06-file-endorsed-Complaintsmallpdf.com_.pdf" target="_blank">this PDF case document</a>). The document states that the company had previously performed international wire transfers, and so it saw nothing unusual about half-million-dollar transfers to China. According to the plaintiffs, however, Efficient escrow had merely <em>inquired</em> about the possibility of international wires, yet had not actually performed wire transfers outside of the United States previously.</p>
+<p> <a href="https://krebsonsecurity.com/2014/01/firm-bankrupted-by-cyberheist-sues-bank/#more-24025" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-24238" class="post-24238 post type-post status-publish format-standard hentry category-sunshine category-breadcrumbs tag-9-84 tag-call-connect-india tag-callscs-in tag-cewcs-com tag-cewebcs-om tag-credorax-com tag-cs-casa-com tag-eduacc-in tag-eetsac-com tag-emil-darbinian tag-etosac-com tag-feosac-com tag-foculu-com tag-homecs-in tag-iawcs-com tag-iewcs-com tag-inc tag-insiderwebeducationpro-com tag-lasorea-limited tag-lasorea-ltd tag-levantos-venture-ltd tag-livecs-in tag-lukria-ltd tag-netcs-in tag-ntccs-in tag-ntsupp-com tag-onwsac-com tag-premcs-in tag-profcs-in tag-prospectacy-limited tag-quikcs-com tag-sacluc-com tag-sacsis-com tag-sergey-babayan tag-sewcs-com tag-suppcs-in tag-tdwcs-com tag-techcs-in tag-testohealth-labs-ltd tag-vagacs-com tag-walter-kosevoymail-com tag-webcs-in tag-webtutorialpro-com">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2014/01/deconstructing-the-9-84-credit-card-hustle/" title="Permalink to Deconstructing the $9.84 Credit Card Hustle" rel="bookmark">Deconstructing the $9.84 Credit Card Hustle</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">January 6, 2014</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2014/01/deconstructing-the-9-84-credit-card-hustle/#comments">74 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>Over the holidays, I heard from a number of readers who were seeing strange, unauthorized charges showing up on their credit and debit cards for $9.84. Many wondered whether this was the result of <a title="http://krebsonsecurity.com/2013/12/sources-target-investigating-data-breach/" href="http://krebsonsecurity.com/2013/12/sources-target-investigating-data-breach/" target="_blank">the Target breach</a>; I suppose I asked for this, having repeatedly advised readers to keep a close eye on their bank statements for bogus transactions. It&#8217;s still not clear how consumers&#8217; card numbers are being stolen here, but the fraud appears to stem from an elaborate network of affiliate schemes that stretch from Cyprus to India and the United Kingdom.</p>
+<p><a class="lightbox" href="https://krebsonsecurity.com/wp-content/uploads/2014/01/homecs.png"><img loading="lazy" class="alignright size-medium wp-image-24247" alt="homecs" src="https://krebsonsecurity.com/wp-content/uploads/2014/01/homecs-285x143.png" width="285" height="143" srcset="https://krebsonsecurity.com/wp-content/uploads/2014/01/homecs-285x143.png 285w, https://krebsonsecurity.com/wp-content/uploads/2014/01/homecs-600x303.png 600w, https://krebsonsecurity.com/wp-content/uploads/2014/01/homecs.png 1170w" sizes="(max-width: 285px) 100vw, 285px" /></a>One reader said the $9.84 charge on her card  came with a notation stating the site responsible was <strong>eetsac.com</strong>. I soon discovered that there are dozens of sites complaining about similar charges from similarly-constructed domains; for example, <a title="http://www.amazon.com/gp/help/customer/forums/ref=cm_cd_pg_oldest?ie=UTF8&amp;authToken=&amp;cdForum=Fx2NFGOONPZEXIP&amp;cdPage=1&amp;cdSort=newest&amp;cdThread=Tx2EME4IL59BUP4" href="http://www.amazon.com/gp/help/customer/forums/ref=cm_cd_pg_oldest?ie=UTF8&amp;authToken=&amp;cdForum=Fx2NFGOONPZEXIP&amp;cdPage=1&amp;cdSort=newest&amp;cdThread=Tx2EME4IL59BUP4" target="_blank">this 30-page thread at Amazon&#8217;s customer help forums</a> includes gripes from hundreds of people taken by this scam.</p>
+<p>I did a bit of digging into that eetsac.com domain, ordering a historic WHOIS report from <a title="http://www.domaintools.com" href="http://www.domaintools.com" target="_blank">domaintools.com</a>. The report shows that the domain eetsac.com was originally registered using the email address <strong>walter.kosevo@ymail.com</strong>. Domaintools also reports that this email address was used to register more than 230 other sites; a full list is available <a title="http://krebsonsecurity.com/wp-content/uploads/2014/01/sub10buckdomainchargers.csv" href="http://krebsonsecurity.com/wp-content/uploads/2014/01/sub10buckdomainchargers.csv" target="_blank">here</a> (CSV).</p>
+<p>A closer look at some of those domains reveals a few interesting facts. <strong>Callscs.in</strong>, for example, is a Web site for a call center and a domain that has been associated with these $9.84 fraudulent charges. Callscs.in lists as its local phone number 43114300. That number <a title="http://webcache.googleusercontent.com/search?q=cache:h9TkTIQvI3UJ:newdelhi.olx.in/urgent-opening-for-international-call-center-exe-day-shift-delhi-iid-524451692+&amp;cd=6&amp;hl=en&amp;ct=clnk&amp;gl=us" href="http://webcache.googleusercontent.com/search?q=cache:h9TkTIQvI3UJ:newdelhi.olx.in/urgent-opening-for-international-call-center-exe-day-shift-delhi-iid-524451692+&amp;cd=6&amp;hl=en&amp;ct=clnk&amp;gl=us" target="_blank">traces back to a call center in India</a>, <strong>Call Connect India, Inc.</strong>, which registers its physical address as Plot No 82, Sector 12 A, Dwarka. New Delhi &#8211; 110075.</p>
+<p><a class="lightbox" href="https://krebsonsecurity.com/wp-content/uploads/2014/01/iwep.png"><img loading="lazy" class="alignleft size-medium wp-image-24248" alt="iwep" src="https://krebsonsecurity.com/wp-content/uploads/2014/01/iwep-285x218.png" width="285" height="218" srcset="https://krebsonsecurity.com/wp-content/uploads/2014/01/iwep-285x218.png 285w, https://krebsonsecurity.com/wp-content/uploads/2014/01/iwep-600x459.png 600w, https://krebsonsecurity.com/wp-content/uploads/2014/01/iwep.png 872w" sizes="(max-width: 285px) 100vw, 285px" /></a>The next site like that one on the list &#8212; <strong>cewcs.com</strong> &#8212; references the domain <strong>insiderwebeducationpro.com</strong>, another domain on the list of sites registered to that ymail.com email address. The homepage of insiderwebeducationpro.com lists the following contact information:</p>
+<p>Copyright © 2014. All Rights Reserved &#8211; Lasorea Ltd</p>
+<p>Lasorea Ltd.<br />
+Site and billing supported by:cewcs.com cs@cewcs.com<br />
+Premier Business Centre 47-49 Park Royal Road<br />
+London UK NW107LQ<br />
+8555311090</p>
+<p>A search at companieshouse.gov.uk, a government site which maintains records about companies based in the United Kingdom, turned up <a title="http://krebsonsecurity.com/wp-content/uploads/2014/01/Lasorea-CertofInc.pdf" href="http://krebsonsecurity.com/wp-content/uploads/2014/01/Lasorea-CertofInc.pdf" target="_blank">incorporation records</a> (PDF) showing that Lasorea Ltd. was founded in January 2013 by <strong>Emil Darbinian</strong>, a 28-year-old <a title="http://cy.linkedin.com/pub/emil-darbinian/3a/887/55a" href="http://cy.linkedin.com/pub/emil-darbinian/3a/887/55a" target="_blank">self-described accountant</a> from Nicosia, Cyprus. Other records searches on Mr. Darbinian indicate he owns at least two other companies at the same address, including <a title="http://www.dellam.com/08074093-TESTOHEALTH%20LABS%20LTD" href="http://www.dellam.com/08074093-TESTOHEALTH%20LABS%20LTD" target="_blank">Testohealth Labs. Ltd</a> &#8212; which appears to be a <a title="http://www.192.com/atoz/business/london-nw10/computer-software-development/testohealth-labs-ltd/09d3d70da8dace92bc803ada6693201197bc621b/comp/" href="http://www.192.com/atoz/business/london-nw10/computer-software-development/testohealth-labs-ltd/09d3d70da8dace92bc803ada6693201197bc621b/comp/" target="_blank">software company</a> &#8212; and a firm called <a title="http://www.companieslist.co.uk/08323351-levantos-venture-limited" href="http://www.companieslist.co.uk/08323351-levantos-venture-limited" target="_blank">Levantos Venture Ltd</a>. Mr. Darbinian did not return messages seeking comment.</p>
+<p>Another domain on the list &#8212; <strong>etosac.com</strong> &#8212; is listed as the support and billing site for <strong>webtutorialpro.com</strong>, a site which bills itself as an &#8220;affiliate learning system.&#8221; In fact, of the 235 domains registered to walter.kosevo@ymail.com, all seem to be either affiliate programs of one kind (diet pills, work-at-home) or support/call center sites.</p>
+<div id="attachment_24249" style="width: 295px" class="wp-caption alignright"><a class="lightbox" href="https://krebsonsecurity.com/wp-content/uploads/2014/01/webtutorialpro.png"><img aria-describedby="caption-attachment-24249" loading="lazy" class="size-medium wp-image-24249" alt="Dozens of sites like this one are the source of the $9.84 charges." src="https://krebsonsecurity.com/wp-content/uploads/2014/01/webtutorialpro-285x226.png" width="285" height="226" srcset="https://krebsonsecurity.com/wp-content/uploads/2014/01/webtutorialpro-285x226.png 285w, https://krebsonsecurity.com/wp-content/uploads/2014/01/webtutorialpro-600x476.png 600w, https://krebsonsecurity.com/wp-content/uploads/2014/01/webtutorialpro.png 732w" sizes="(max-width: 285px) 100vw, 285px" /></a><p id="caption-attachment-24249" class="wp-caption-text">Dozens of sites like this one are the apparent source of the $9.84 charges.</p></div>
+<p>Webtutorialpro.com lists on its homepage a company named <strong>Lukria, Ltd.</strong>, and an address at the same London business park as Mr. Darbinian&#8217;s companies. If we step through the signup process to become an affiliate at Webtutorialpro.com, we can see that everything &#8212; from the &#8220;online store in a box&#8221; to &#8220;pay per click extreme&#8221; and the tutorial on &#8220;how to get FREE web traffic &#8212; all retail for&#8230;.wait for it&#8230;.$9.84!</p>
+<p>Lukria, according to <a title="http://krebsonsecurity.com/wp-content/uploads/2014/01/LukriaLtd-Babayan.pdf" href="http://krebsonsecurity.com/wp-content/uploads/2014/01/LukriaLtd-Babayan.pdf" target="_blank">incorporation documents</a> (PDF) purchased from companieshouse.co.uk, was created on the same day as Lasorea Ltd., and lists as its director a <strong>Sergey Babayan</strong>, also from Cyprus. According to the Facebook pages of both Mr. Darbinian and Mr. Babayan, the two men are friends. Mr. Babayan has not responded to requests for comment.</p>
+<p>Mr. Babayan&#8217;s Facebook profile says he works at a company called <strong>Prospectacy Limited, </strong>which LinkedIn says is an accounting firm in Nicosia, Cyprus. According to Prospectacy&#8217;s Web site, this company specializes in &#8220;corporate services,&#8221; including &#8220;company formation,&#8221; &#8220;banking,&#8221; and &#8220;virtual office&#8221; services. The company seems to be in the business of establishing offshore firms; according to a reverse WHOIS record lookup from domaintools.com, the email address used to register Prospectacy&#8217;s domain also was used to register at least ten other domains, including registerincyprus.com, registerinuk.com, setupincyprus.com and setupineu.com.</p>
+<p>A number of these affiliate sites include on their home page links to <strong>credorax.com</strong>, a <a title="http://blogs.wsj.com/venturecapital/2013/08/27/credorax-banks-40m-for-international-expansion/" href="http://blogs.wsj.com/venturecapital/2013/08/27/credorax-banks-40m-for-international-expansion/" target="_blank"><del>Southborough, Mass. based acquiring bank</del></a> Malta-based acquiring bank that is in the business of processing credit and debit card payments for merchants. It&#8217;s not clear whether either cewcs.com or insiderwebeducationpro.com use Credorax Inc. for payment processing, but it seems to suggest that by association. I reached out to Credorax to learn whether this site (and perhaps others that are the subject of this story) are customers, and will update this story if I hear back from them.</p>
+<p><strong>Update, 12:43 p.m. ET: </strong>I heard from <strong>Michael Burtscher, </strong>vice president of acquiring risk and fraud management at Credorax. Burtscher clarified that his company has offices in the U.S. but is based in Malta. Burtscher confirmed that Credorax had until recently helped to process cards for the network of sites named in this story, but that the company has severed that relationship. He declined to say when exactly the relationship ended, or indeed whether my information about the client&#8217;s identities was accurate. Burtscher would only say that Credorax terminated its relationship with the client in response to consumer complaints about the fraudulent charges. &#8220;This was one of those cases where when we onboarded them it looked like a legitimate account, but when we saw there were issues we decided to take action.&#8221;</p>
+<p> <a href="https://krebsonsecurity.com/2014/01/deconstructing-the-9-84-credit-card-hustle/#more-24238" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-24227" class="post-24227 post type-post status-publish format-standard hentry category-other tag-krebsonsecurity-birthday">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2013/12/happy-4th-birthday-krebsonsecurity-com/" title="Permalink to Happy 4th Birthday, KrebsOnSecurity.com!" rel="bookmark">Happy 4th Birthday, KrebsOnSecurity.com!</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">December 29, 2013</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2013/12/happy-4th-birthday-krebsonsecurity-com/#comments">109 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>Dec. 29 marks the 4th anniversary of KrebsOnSecurity.com! Below are a few highlights from this past year, and a taste of what readers can look forward to here in 2014.</p>
+<p><a href="https://krebsonsecurity.com/wp-content/uploads/2013/12/targets4.jpg"><img loading="lazy" class="alignright size-medium wp-image-24232" alt="targets4" src="https://krebsonsecurity.com/wp-content/uploads/2013/12/targets4-285x213.jpg" width="285" height="213" srcset="https://krebsonsecurity.com/wp-content/uploads/2013/12/targets4-285x213.jpg 285w, https://krebsonsecurity.com/wp-content/uploads/2013/12/targets4.jpg 400w" sizes="(max-width: 285px) 100vw, 285px" /></a></p>
+<p>If there was an important data breach in 2013, chances are that news of it first broke on this blog. Among KrebsOnSecurity&#8217;s biggest scoops this year were stories about breaches at <a title="http://krebsonsecurity.com/2013/10/adobe-to-announce-source-code-customer-data-breach/" href="http://krebsonsecurity.com/2013/10/adobe-to-announce-source-code-customer-data-breach/" target="_blank">Adobe</a>, <a title="http://krebsonsecurity.com/2013/02/security-firm-bit9-hacked-used-to-spread-malware/" href="http://krebsonsecurity.com/2013/02/security-firm-bit9-hacked-used-to-spread-malware/" target="_blank">Bit9</a>, <a title="http://krebsonsecurity.com/2013/10/experian-sold-consumer-data-to-id-theft-service/" href="http://krebsonsecurity.com/2013/10/experian-sold-consumer-data-to-id-theft-service/" target="_blank">Experian</a>, <a title="http://krebsonsecurity.com/2013/09/data-broker-giants-hacked-by-id-theft-service/" href="http://krebsonsecurity.com/2013/09/data-broker-giants-hacked-by-id-theft-service/" target="_blank">LexisNexis</a>, <a title="http://krebsonsecurity.com/2013/12/sources-target-investigating-data-breach/" href="http://krebsonsecurity.com/2013/12/sources-target-investigating-data-breach/" target="_blank">Target</a> and <a title="http://krebsonsecurity.com/2013/02/source-washington-post-also-broadly-infiltrated-by-chinese-hackers-in-2012/" href="http://krebsonsecurity.com/2013/02/source-washington-post-also-broadly-infiltrated-by-chinese-hackers-in-2012/" target="_blank">The Washington Post</a>.</p>
+<p>Some of these stories are ongoing and will unfurl reluctantly but gradually throughout 2014. Look for a more thorough explanation of what really happened when <strong>Experian</strong> sold more than a year&#8217;s worth of consumer credit data directly to an underground service marketed to identity thieves, for example. And of course, we will almost certainly learn more about the &#8220;how&#8221; and &#8220;who&#8221; of the massive attack on Target.</p>
+<p>The audience for this blog has grown tremendously in the past year. The site now attracts between 10,000 and 15,000 visitors per day. For the first time in its existence, KrebsOnSecuirty is on track to exceed more than 1 million pageviews this month (fittingly, this should come to pass sometime today).</p>
+<p>That growth would not have been possible without you, dear loyal readers. 2013 featured more blog posts and more in-depth investigations than perhaps any other year, but the real value in this site comes from the community that has sprung up around it. Readers submitted more than 10,000 comments this past year. More than two dozen of you also supported this site directly via the PayPal or Bitcoin donation links in the blog sidebar. Whichever way you supported this site in 2013, a hearty THANK YOU for your contribution and encouragement.</p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-24130" class="post-24130 post type-post status-publish format-standard hentry category-sunshine category-breadcrumbs category-data-breaches tag-andrew-hodrievski tag-andrewpurpled-biz tag-andrey-hodirevski tag-cheapdumpsdotorg tag-cihdotms tag-cprodotsu tag-darklifedotws tag-grabberzdotcom tag-hel tag-helkern tag-helkern_skype tag-icq-261333 tag-ikaikki tag-kaddafidothk tag-lampeduzadotla tag-octaviandotsu tag-purplexcite tag-rescator tag-rescatordotme tag-roothelkern-net-ua tag-target-data-breach tag-vordotcc tag-3628">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2013/12/whos-selling-credit-cards-from-target/" title="Permalink to Who&#8217;s Selling Credit Cards from Target?" rel="bookmark">Who&#8217;s Selling Credit Cards from Target?</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">December 24, 2013</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2013/12/whos-selling-credit-cards-from-target/#comments">269 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>The previous <a title="http://krebsonsecurity.com/2013/12/non-us-cards-used-at-target-fetch-premium/" href="http://krebsonsecurity.com/2013/12/non-us-cards-used-at-target-fetch-premium/" target="_blank">two</a> <a title="http://krebsonsecurity.com/2013/12/cards-stolen-in-target-breach-flood-underground-markets/" href="http://krebsonsecurity.com/2013/12/cards-stolen-in-target-breach-flood-underground-markets/" target="_blank">posts</a> on this blog have featured stories about banks buying back credit and debit card accounts stolen in the Target hack and that ended up for sale on <strong>rescator[dot]la</strong>, a popular underground store. Today&#8217;s post looks a bit closer at open-source information on a possible real-life identity for the proprietor of that online fraud shop.</p>
+<p>Rescator[dot]la is run by a miscreant who uses the nickname <strong>Rescator</strong>, and who is a top member of the Russian and English language crime forum <strong>Lampeduza[dot]la</strong>. He operates multiple online stores that sell stolen card data, including rescator[dot]la, <strong>kaddafi[dot]hk</strong>, <strong>octavian[dot]su</strong> and <strong>cheapdumps[dot]org</strong>. Rescator also maintains a presence on several other carding forums, most notably<strong> cpro[dot]su</strong> and <strong>vor[dot]cc</strong>.</p>
+<p><div id="attachment_24189" style="width: 610px" class="wp-caption aligncenter"><a class="lightbox" href="https://krebsonsecurity.com/wp-content/uploads/2013/12/rescator-pm-cpro.png"><img aria-describedby="caption-attachment-24189" loading="lazy" class="size-large wp-image-24189" src="https://krebsonsecurity.com/wp-content/uploads/2013/12/rescator-pm-cpro-600x153.png" alt="A private message on cpro[dot]su between Rescator and a member interested in his card shop. Notice the ad for Rescator's email flood service at the bottom." width="600" height="153" srcset="https://krebsonsecurity.com/wp-content/uploads/2013/12/rescator-pm-cpro-600x153.png 600w, https://krebsonsecurity.com/wp-content/uploads/2013/12/rescator-pm-cpro-285x72.png 285w, https://krebsonsecurity.com/wp-content/uploads/2013/12/rescator-pm-cpro.png 1136w" sizes="(max-width: 600px) 100vw, 600px" /></a><p id="caption-attachment-24189" class="wp-caption-text">A private message on cpro[dot]su between Rescator and a member interested in his card shop. Notice the ad for Rescator&#8217;s email flood service at the bottom; this will become important as you read on.</p></div>In an Aug. 2011 thread that has since been deleted, Rescator introduced himself to the existing members of vor[dot]cc, a fairly exclusive Russian carding forum. When new members join a carding community, it is customary for them to explain their expertise and list previous nicknames and forums on which they have established reputations.</p>
+<p><div id="attachment_24158" style="width: 610px" class="wp-caption aligncenter"><a class="lightbox" href="https://krebsonsecurity.com/wp-content/uploads/2013/12/vor-1edited.png"><img aria-describedby="caption-attachment-24158" loading="lazy" class="size-large wp-image-24158" src="https://krebsonsecurity.com/wp-content/uploads/2013/12/vor-1edited-600x414.png" alt="Rescator, a.k.a. &quot;Hel&quot; a.k.a. &quot;Helkern&quot; the onetime administrator of the Darklife forum, introduces himself to vor[dot]cc crime forum members." width="600" height="414" srcset="https://krebsonsecurity.com/wp-content/uploads/2013/12/vor-1edited-600x414.png 600w, https://krebsonsecurity.com/wp-content/uploads/2013/12/vor-1edited-285x197.png 285w, https://krebsonsecurity.com/wp-content/uploads/2013/12/vor-1edited.png 1089w" sizes="(max-width: 600px) 100vw, 600px" /></a><p id="caption-attachment-24158" class="wp-caption-text">Rescator, a.k.a. &#8220;Hel&#8221; a.k.a. &#8220;Helkern&#8221; the onetime administrator of the Darklife forum, introduces himself to vor[dot]cc crime forum members.</p></div>In the thread pictured above, we can see Rescator listing his bona fides and telling others he was &#8220;Hel,&#8221; one of three founders of <strong>darklife[dot]ws</strong>, a now-defunct hacker forum. In the screen shot below, Rescator clarifies that &#8220;Hel, in fact, is me.&#8221;</p>
+<div id="attachment_24159" style="width: 610px" class="wp-caption aligncenter"><a class="lightbox" href="https://krebsonsecurity.com/wp-content/uploads/2013/12/vor-2-xlated.png"><img aria-describedby="caption-attachment-24159" loading="lazy" class="size-large wp-image-24159" src="https://krebsonsecurity.com/wp-content/uploads/2013/12/vor-2-xlated-600x241.png" alt="Rescator says his former nickname was &quot;Hel,&quot; short for Helkern, the administrator of Darklife." width="600" height="241" srcset="https://krebsonsecurity.com/wp-content/uploads/2013/12/vor-2-xlated-600x241.png 600w, https://krebsonsecurity.com/wp-content/uploads/2013/12/vor-2-xlated-285x114.png 285w, https://krebsonsecurity.com/wp-content/uploads/2013/12/vor-2-xlated.png 1101w" sizes="(max-width: 600px) 100vw, 600px" /></a><p id="caption-attachment-24159" class="wp-caption-text">Rescator says his former nickname was &#8220;Hel,&#8221; short for Helkern, the administrator of Darklife.</p></div>
+<p>The only darklife member who matched that nickname was &#8220;Helkern,&#8221; one of darklife&#8217;s three founders. Darklife administrators were all young men who fancied themselves skilled hackers, and at one point the group hacked into the venerable and closely-guarded Russian hacking forum <strong>cih[dot]ms</strong> after guessing the password of an administrator there.</p>
+<p><div id="attachment_24160" style="width: 610px" class="wp-caption aligncenter"><a class="lightbox" href="https://krebsonsecurity.com/wp-content/uploads/2013/12/cihhacked.png"><img aria-describedby="caption-attachment-24160" loading="lazy" class="size-large wp-image-24160" src="https://krebsonsecurity.com/wp-content/uploads/2013/12/cihhacked-600x470.png" alt="Darklife admin &quot;Helkern&quot; brags to other members about hacking into cih[dot]ms, a more elite Russian hacking forum." width="600" height="470" srcset="https://krebsonsecurity.com/wp-content/uploads/2013/12/cihhacked-600x470.png 600w, https://krebsonsecurity.com/wp-content/uploads/2013/12/cihhacked-285x223.png 285w, https://krebsonsecurity.com/wp-content/uploads/2013/12/cihhacked.png 921w" sizes="(max-width: 600px) 100vw, 600px" /></a><p id="caption-attachment-24160" class="wp-caption-text">Darklife admin &#8220;Helkern&#8221; brags to other members about hacking into cih[dot]ms, a more elite Russian hacking forum.</p></div>In a counterattack documented in the entertaining thread that is still posted as a trophy of sorts at cih[dot]ms/old/epicfail, hackers from cih[dot]ms hacked into the Darklife forum, and posted personal photos of Helkern and fellow Darklife leaders, including these two of Helkern:</p>
+<p><a class="lightbox" href="https://krebsonsecurity.com/wp-content/uploads/2013/12/helkern1.png"><img loading="lazy" class="aligncenter size-large wp-image-24161" src="https://krebsonsecurity.com/wp-content/uploads/2013/12/helkern1-600x479.png" alt="helkern1" width="600" height="479" srcset="https://krebsonsecurity.com/wp-content/uploads/2013/12/helkern1-600x479.png 600w, https://krebsonsecurity.com/wp-content/uploads/2013/12/helkern1-285x227.png 285w, https://krebsonsecurity.com/wp-content/uploads/2013/12/helkern1.png 829w" sizes="(max-width: 600px) 100vw, 600px" /></a></p>
+<p>And a self-portrait of Helkern:</p>
+<p><a class="lightbox" href="https://krebsonsecurity.com/wp-content/uploads/2013/12/helkern-self.png"><img loading="lazy" class="aligncenter size-large wp-image-24162" src="https://krebsonsecurity.com/wp-content/uploads/2013/12/helkern-self-600x449.png" alt="helkern-self" width="600" height="449" srcset="https://krebsonsecurity.com/wp-content/uploads/2013/12/helkern-self-600x449.png 600w, https://krebsonsecurity.com/wp-content/uploads/2013/12/helkern-self-285x213.png 285w, https://krebsonsecurity.com/wp-content/uploads/2013/12/helkern-self.png 660w" sizes="(max-width: 600px) 100vw, 600px" /></a></p>
+<p>So if Helkern is Rescator, who is Helkern? If we check at some of the other Russian forums that Helkern was active in at the time that Darklife was online in 2008, we can see he was a fairly frequent contributor to the now-defunct <strong>Grabberz[dot]com</strong>; in <a title="http://webcache.googleusercontent.com/search?q=cache:-Fm7Qydw3VAJ:grabberz.com/showpost.php%3Fs%3D1f64afdc91825958dc61b73d1a5a6a08%26p%3D72356%26postcount%3D2+&amp;cd=1&amp;hl=en&amp;ct=clnk&amp;gl=us&amp;client=firefox-a" href="http://webcache.googleusercontent.com/search?q=cache:-Fm7Qydw3VAJ:grabberz.com/showpost.php%3Fs%3D1f64afdc91825958dc61b73d1a5a6a08%26p%3D72356%26postcount%3D2+&amp;cd=1&amp;hl=en&amp;ct=clnk&amp;gl=us&amp;client=firefox-a" target="_blank">this cached post</a>, Helkern can be seen pasting an exploit he developed for a remote SQL injection vulnerability. In it, he claims ownership of the ICQ instant messenger address <strong>261333</strong>.</p>
+<p> <a href="https://krebsonsecurity.com/2013/12/whos-selling-credit-cards-from-target/#more-24130" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-24132" class="post-24132 post type-post status-publish format-standard hentry category-other tag-barbarossa-base tag-rescator tag-target-breach tag-target-credit-card-breach tag-target-hack tag-tortuga">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2013/12/non-us-cards-used-at-target-fetch-premium/" title="Permalink to Non-US Cards Used At Target Fetch Premium" rel="bookmark">Non-US Cards Used At Target Fetch Premium</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">December 22, 2013</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2013/12/non-us-cards-used-at-target-fetch-premium/#comments">91 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>An underground service that is selling credit and debit card accounts stolen in a recent data breach at retail giant <strong>Target</strong> has stocked its virtual shelves with a new product: Hundreds of thousands of cards issued by non-U.S. banks that were used at Target across the United States during the retailer&#8217;s 19-day data breach. It&#8217;s not clear how quickly the non-U.S. cards are selling, but they seem to be fetching a much higher price than those issued by U.S. banks.</p>
+<p>On Dec. 20, this blog published <a title="http://krebsonsecurity.com/2013/12/cards-stolen-in-target-breach-flood-underground-markets/" href="http://krebsonsecurity.com/2013/12/cards-stolen-in-target-breach-flood-underground-markets/" target="_blank">a story</a> about the &#8220;card shop&#8221; <strong>rescator[dot]la</strong>. That piece explained how two different banks &#8212; a small, community bank and a large, top-10 bank &#8212; had bought back their customers&#8217; stolen cards from the fraud service and discovered that all of the purchased cards had been used at Target during the breach timeframe. The shop was selling data stolen from the magnetic stripe of each card, which thieves can re-encode onto new, counterfeit cards and use to go shopping in bricks-and-mortar stores for items than can easily be fenced or resold.</p>
+<p>As I wrote in that story, a key feature of this particular shop is that each card is assigned to a particular “base.” This term is underground slang that refers to an arbitrary code word chosen to describe all of the cards stolen from a specific merchant. In this case, my source at the big bank had said all of the cards his team purchased from this card shop that matched Target’s N0v. 27 – Dec. 15 breach window bore the base name <strong>Tortuga</strong>, which is Spanish for “tortoise” or “turtle&#8221; (also an island in the Caribbean <a title="http://pirates.wikia.com/wiki/Tortuga" href="http://pirates.wikia.com/wiki/Tortuga" target="_blank">long associated with pirates</a>). The small bank similarly found that all of the cards it purchased from the card shop also bore the Tortuga base name, and all had been used at Target.</p>
+<div id="attachment_24136" style="width: 295px" class="wp-caption alignleft"><a class="lightbox" href="https://krebsonsecurity.com/wp-content/uploads/2013/12/resc-base.png"><img aria-describedby="caption-attachment-24136" loading="lazy" class="size-medium wp-image-24136" alt="Cards stolen from non-US customers who shopped at Target are sold under the &quot;Barbarossa&quot; base." src="https://krebsonsecurity.com/wp-content/uploads/2013/12/resc-base-285x356.png" width="285" height="356" srcset="https://krebsonsecurity.com/wp-content/uploads/2013/12/resc-base-285x356.png 285w, https://krebsonsecurity.com/wp-content/uploads/2013/12/resc-base.png 504w" sizes="(max-width: 285px) 100vw, 285px" /></a><p id="caption-attachment-24136" class="wp-caption-text">Cards stolen from non-US customers who shopped at Target are sold under the &#8220;Barbarossa&#8221; base.</p></div>
+<p>On Friday, the proprietor of this card shop announced the availability of a new base &#8212; &#8220;<strong>Barbarossa</strong>&#8221; &#8212; which consists of more than 330,000 debit and credit cards issued by banks in Europe, Asia, Latin America and Canada [side note: one Russian expert I spoke with said Barbarossa was probably a reference to <a title="http://en.wikipedia.org/wiki/Operation_Barbarossa" href="http://en.wikipedia.org/wiki/Operation_Barbarossa" target="_blank">Operation Barbarossa</a>, the code name for Germany&#8217;s invasion of the Soviet Union during World War II].</p>
+<p>According to one large bank in the U.S. that purchased a sampling of cards across several countries &#8212; <em>all of the cards in the Barbarossa base also were used at Target during the breach timeframe</em>.</p>
+<p>As with cards sold under the Tortuga base, debit and credit cards for sale as part of the Barbarossa base list the country of origin for the issuing bank, and then directly underneath include the state, city and ZIP code of the Target store from which the card numbers were stolen.</p>
+<p>When I first became aware that this card shop was selling only cards stolen from Target stores, I noticed a discussion on a related crime forum wherein customers of this shop seemed very enthusiastic about this ZIP code feature. I couldn&#8217;t figure out what the big deal was: I&#8217;d assumed the state, city and ZIP described the bank that issued the card.</p>
+<p>Later, I learned from a fraud expert that this feature is included because it allows customers of the shop to buy cards issued to cardholders that live nearby. This lets crooks who want to use the cards for in-store fraud avoid any knee-jerk fraud defenses in which a financial institution might block transactions that occur outside the legitimate cardholder&#8217;s immediate geographic region.</p>
+<div id="attachment_24138" style="width: 610px" class="wp-caption aligncenter"><a class="lightbox" href="https://krebsonsecurity.com/wp-content/uploads/2013/12/barb-all.png"><img aria-describedby="caption-attachment-24138" loading="lazy" class="size-large wp-image-24138" alt="Non-U.S. cards used at Target generally fetch higher prices than U.S. cards, between $67 and $100 apiece. " src="https://krebsonsecurity.com/wp-content/uploads/2013/12/barb-all-600x310.png" width="600" height="310" srcset="https://krebsonsecurity.com/wp-content/uploads/2013/12/barb-all-600x310.png 600w, https://krebsonsecurity.com/wp-content/uploads/2013/12/barb-all-285x147.png 285w, https://krebsonsecurity.com/wp-content/uploads/2013/12/barb-all.png 1229w" sizes="(max-width: 600px) 100vw, 600px" /></a><p id="caption-attachment-24138" class="wp-caption-text">Non-U.S. cards used at Target generally fetch higher prices than U.S. cards, between $67 and $100 apiece.</p></div>
+<p>The cards for sale in the Barbarossa base vary widely in price from $23.62 per card to as high as $135 per card. The prices seem to be influenced by a number of factors, including the issuing bank, the type of card (debit or credit), how soon the card expires, and whether the card bears a special notation that often indicates a higher credit limit, such as a Platinum card.</p>
+<p> <a href="https://krebsonsecurity.com/2013/12/non-us-cards-used-at-target-fetch-premium/#more-24132" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-24093" class="post-24093 post type-post status-publish format-standard hentry category-other tag-atm tag-bins tag-bitcoin tag-card-shop tag-dumps tag-litecoin tag-mastercard tag-moneygram tag-perfectmoney tag-pin tag-target tag-target-credit-card-hack tag-target-data-breach tag-tortuga tag-tortuga-base tag-visa tag-webmoney tag-western-union">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2013/12/cards-stolen-in-target-breach-flood-underground-markets/" title="Permalink to Cards Stolen in Target Breach Flood Underground Markets" rel="bookmark">Cards Stolen in Target Breach Flood Underground Markets</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">December 20, 2013</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2013/12/cards-stolen-in-target-breach-flood-underground-markets/#comments">445 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>Credit and debit card accounts stolen in a recent data breach at retail giant Target have been flooding underground black markets in recent weeks, selling in batches of one million cards and going for anywhere from $20 to more than $100 per card, KrebsOnSecurity has learned.</p>
+<p><a class="lightbox" href="https://krebsonsecurity.com/wp-content/uploads/2013/12/targetgoboom.jpg"><img loading="lazy" class="alignright size-medium wp-image-24111" alt="targetgoboom" src="https://krebsonsecurity.com/wp-content/uploads/2013/12/targetgoboom-285x213.jpg" width="285" height="213" srcset="https://krebsonsecurity.com/wp-content/uploads/2013/12/targetgoboom-285x213.jpg 285w, https://krebsonsecurity.com/wp-content/uploads/2013/12/targetgoboom.jpg 400w" sizes="(max-width: 285px) 100vw, 285px" /></a></p>
+<p>Prior to <a title="http://krebsonsecurity.com/2013/12/sources-target-investigating-data-breach/" href="http://krebsonsecurity.com/2013/12/sources-target-investigating-data-breach/" target="_blank">breaking the story of the Target breach</a> on Wednesday, Dec. 18, I spoke with a fraud analyst at a major bank who said his team had independently confirmed that Target had been breached after buying a huge chunk of the bank&#8217;s card accounts from a well-known &#8220;card shop&#8221; &#8212; an online store advertised in cybercrime forums as a place where thieves can reliably buy stolen credit and debit cards.</p>
+<p>There are literally hundreds of these shady stores selling stolen credit and debit cards from virtually every bank and country. But this store has earned a special reputation for selling quality &#8220;dumps,&#8221; data stolen from the magnetic stripe on the backs of credit and debit cards. Armed with that information, thieves can effectively clone the cards and use them in stores. If the dumps are from debit cards and the thieves also have access to the PINs for those cards, they can use the cloned cards at ATMs to pull cash out of the victim&#8217;s bank account.</p>
+<p>At least two sources at major banks said they&#8217;d heard from the credit card companies: More than a million of their cards were thought to have been compromised in the Target breach. One of those institutions noticed that one card shop in particular had recently alerted its loyal customers about a huge new batch of more than a million quality dumps that had been added to the online store. Suspecting that the advertised cache of new dumps were actually stolen in the Target breach, fraud investigators with the bank browsed this card shop&#8217;s wares and effectively bought back hundreds of the bank&#8217;s own cards.</p>
+<p>When the bank examined the common point of purchase among all the dumps it had bought from the shady card shop, it found that all of them had been used in Target stores nationwide between Nov. 27 and Dec. 15. Subsequent buys of new cards added to that same shop returned the same result.</p>
+<p>On Dec. 19, Target would confirm that crooks had stolen 40 million debit and credit cards from stores nationwide in a breach that extended from Nov. 27 to Dec. 15. Not long after that announcement, I pinged a source at a small community bank in New England to see whether his institution had been notified by <strong>Visa</strong> or <strong>MasterCard</strong> about specific cards that were potentially compromised in the Target breach.</p>
+<p>This institution has issued a grand total of more than 120,000 debit and credit cards to its customers, but my source told me the tiny bank had not yet heard anything from the card associations about specific cards that might have been compromised as a result of the Target breach. My source was anxious to determine how many of the bank&#8217;s cards were most at risk of being used for fraud, and how many should be proactively canceled and re-issued to customers. The bank wasn&#8217;t exactly chomping at the bit to re-issue the cards; that process costs around $3 to $5 per card, but more importantly it didn&#8217;t want to unnecessarily re-issue cards at a time when many of its customers would be racing around to buy last-minute Christmas gifts and traveling for the holidays.</p>
+<p>On the other hand, this bank had identified nearly 6,000 customer cards &#8212; <em>almost 5 percent of all cards issued to customers</em> &#8212; that had been used at Target stores nationwide during the breach window described by the retailer.</p>
+<p>&#8220;Nobody has notified us,&#8221; my source said. &#8220;Law enforcement hasn&#8217;t said anything, our statewide banking associations haven’t sent anything out&#8230;nothing. Our senior legal counsel today was asking me if we have positive confirmation from the card associations about affected cards, but so far we haven&#8217;t gotten anything.&#8221;</p>
+<p>When I mentioned that a big bank I&#8217;d spoken with had found a 100 percent overlap with the Target breach window after purchasing its available cards off a particular black market card shop called <strong>rescator[dot]la</strong>, my source at the small bank asked would I be willing to advise his fraud team on how to do the same?</p>
+<p><span style="text-decoration: underline;">CARD SHOPPING</span></p>
+<p>Ultimately, I agreed to help in exchange for permission to write about the bank&#8217;s experience without actually naming the institution. The first step in finding any of the bank&#8217;s cards for sale was to browse the card shop&#8217;s remarkably efficient and customer-friendly Web site and search for the bank&#8217;s &#8220;BINs&#8221;; the <strong>B</strong>ank <strong>I</strong>dentification <strong>N</strong>umber is merely the first six digits of a debit or credit card, and each bank has its own unique BIN or multiple BINs.</p>
+<div id="attachment_24103" style="width: 610px" class="wp-caption aligncenter"><a class="lightbox" href="https://krebsonsecurity.com/wp-content/uploads/2013/12/binpage.png"><img aria-describedby="caption-attachment-24103" loading="lazy" class="size-large wp-image-24103" alt="According to the &quot;base&quot; name, this &quot;Dumps&quot; shop sells only cards stolen in the Target breach. " src="https://krebsonsecurity.com/wp-content/uploads/2013/12/binpage-600x337.png" width="600" height="337" srcset="https://krebsonsecurity.com/wp-content/uploads/2013/12/binpage-600x337.png 600w, https://krebsonsecurity.com/wp-content/uploads/2013/12/binpage-285x160.png 285w, https://krebsonsecurity.com/wp-content/uploads/2013/12/binpage.png 1266w" sizes="(max-width: 600px) 100vw, 600px" /></a><p id="caption-attachment-24103" class="wp-caption-text">According to the &#8220;base&#8221; name for all stolen cards sold at this card shop, the proprietor sells only cards stolen in the Target breach.</p></div>
+<p>A quick search on the card shop for the bank&#8217;s BINs revealed nearly 100 of its customers&#8217;s cards for sale, a mix of MasterCard dumps ranging in price from $26.60 to $44.80 apiece. As one can imagine, this store doesn&#8217;t let customers pay for purchases with credit cards; rather, customers can &#8220;add money&#8221; to their accounts using a variety of irreversible payment mechanisms, including virtual currencies like <strong>Bitcoin</strong>, <strong>Litecoin</strong>, <strong>WebMoney</strong> and <strong>PerfectMoney</strong>, as well as the more traditional wire transfers via <strong>Western Union</strong> and <strong>MoneyGram</strong>.</p>
+<p>With my source&#8217;s newly registered account funded via wire transfer to the tune of USD $450, it was time to go shopping. My source wasn&#8217;t prepared to buy up all of the available cards that match his institution&#8217;s BINs, so he opted to start with a batch of 20 or so of the more recently-issued cards for sale.</p>
+<p> <a href="https://krebsonsecurity.com/2013/12/cards-stolen-in-target-breach-flood-underground-markets/#more-24093" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-24054" class="post-24054 post type-post status-publish format-standard hentry category-other tag-target-black-friday-breach tag-target-data-breach">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2013/12/sources-target-investigating-data-breach/" title="Permalink to Sources: Target Investigating Data Breach" rel="bookmark">Sources: Target Investigating Data Breach</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">December 18, 2013</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2013/12/sources-target-investigating-data-breach/#comments">620 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>Nationwide retail giant <strong>Target</strong> is investigating a data breach potentially involving millions of customer credit and debit card records, multiple reliable sources tell KrebsOnSecurity. The sources said the breach appears to have begun on or around Black Friday 2013 &#8212; by far the busiest shopping day the year.</p>
+<p><a href="https://krebsonsecurity.com/wp-content/uploads/2013/12/target.png"><img loading="lazy" class="alignright size-full wp-image-24057" alt="target" src="https://krebsonsecurity.com/wp-content/uploads/2013/12/target.png" width="176" height="216" /></a></p>
+<p><strong>Update, Dec. 19: 8:20 a.m. ET:</strong> Target released <a title="http://pressroom.target.com/news/target-confirms-unauthorized-access-to-payment-card-data-in-u-s-stores" href="http://pressroom.target.com/news/target-confirms-unauthorized-access-to-payment-card-data-in-u-s-stores" target="_blank" rel="noopener noreferrer">a statement</a> this morning confirming a breach, saying that 40 million credit and debit card accounts may have been impacted between Nov. 27 and Dec. 15, 2013.</p>
+<p><em>Original story;</em></p>
+<p>According to sources at two different top 10 credit card issuers, the breach extends to nearly all Target locations nationwide, and involves the theft of data stored on the magnetic stripe of cards used at the stores.</p>
+<p>Minneapolis, Minn. based<strong> Target Brands Inc.</strong> has not responded to multiple requests for comment. Representatives from<strong> MasterCard</strong> and <strong>Visa</strong> also could not be immediately reached for comment.</p>
+<p>Both sources said the breach was initially thought to have extended from just after Thanksgiving 2013 to Dec. 6. But over the past few days, investigators have unearthed evidence that the breach extended at least an additional week &#8212; possibly as far as Dec. 15. According to sources, the breach affected an unknown number of Target customers who shopped at the company&#8217;s bricks-and-mortar stores during that timeframe.</p>
+<p>&#8220;The breach window is definitely expanding,&#8221; said one anti-fraud analyst at a top ten U.S. bank card issuer who asked to remain anonymous. &#8220;We can&#8217;t say for sure that all stores were impacted, but we do see customers all over the U.S. that were victimized.&#8221;</p>
+<p>There are no indications at this time that the breach affected customers who shopped at Target&#8217;s online stores. The type of data stolen &#8212; also known as &#8220;track data&#8221; &#8212; allows crooks to create counterfeit cards by encoding the information onto any card with a magnetic stripe. If the thieves also were able to intercept PIN data for debit transactions, they would theoretically be able to reproduce stolen debit cards and use them to withdraw cash from ATMs.<br />
+ <a href="https://krebsonsecurity.com/2013/12/sources-target-investigating-data-breach/#more-24054" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-24029" class="post-24029 post type-post status-publish format-standard hentry category-other tag-atm-skimmer tag-bank-of-brazil tag-gsm">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2013/12/the-biggest-skimmers-of-all-fake-atms/" title="Permalink to The Biggest Skimmers of All: Fake ATMs" rel="bookmark">The Biggest Skimmers of All: Fake ATMs</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">December 18, 2013</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2013/12/the-biggest-skimmers-of-all-fake-atms/#comments">42 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>This blog has spotlighted some <a title="http://krebsonsecurity.com/all-about-skimmers/" href="http://krebsonsecurity.com/all-about-skimmers/" target="_blank">incredibly elaborate and minaturized ATM skimmers</a>, fraud devices that thieves attach to ATMs in a bid to steal card data and PINs. But a skimmer discovered in Brazil last month takes this sort of fraud to another level, using a completely fake ATM designed to be stacked directly on top of a legitimate, existing cash machine.</p>
+<p>On Saturday, Nov. 23, a customer at a <strong>Bank of Brazil</strong> branch in <a title="http://en.wikipedia.org/wiki/Curitiba" href="http://en.wikipedia.org/wiki/Curitiba" target="_blank">Curitiba, Brazil </a>approached the cash machine pictured below, dipped his ATM card in the machine&#8217;s slot, and entered his PIN, hoping to get a printed statement of his bank balance.</p>
+<div id="attachment_24031" style="width: 610px" class="wp-caption aligncenter"><a href="https://krebsonsecurity.com/wp-content/uploads/2013/12/BoBATMfront.png"><img aria-describedby="caption-attachment-24031" loading="lazy" class="size-large wp-image-24031" alt="A completely fake ATM discovered in Brazil, designed to sit directly on top of the real cash machine." src="https://krebsonsecurity.com/wp-content/uploads/2013/12/BoBATMfront-600x415.png" width="600" height="415" srcset="https://krebsonsecurity.com/wp-content/uploads/2013/12/BoBATMfront-600x415.png 600w, https://krebsonsecurity.com/wp-content/uploads/2013/12/BoBATMfront-285x197.png 285w, https://krebsonsecurity.com/wp-content/uploads/2013/12/BoBATMfront.png 881w" sizes="(max-width: 600px) 100vw, 600px" /></a><p id="caption-attachment-24031" class="wp-caption-text">A completely fake ATM discovered in Brazil, designed to sit directly on top of the real cash machine.</p></div>
+<p>When the transaction failed, the customer became suspicious and discovered that this ATM wasn&#8217;t a cash machine at all, but a complete fake designed to be seated directly on top of the real cash machine. Here&#8217;s what the legitimate ATM that was underneath looked like.</p>
+<div id="attachment_24032" style="width: 610px" class="wp-caption aligncenter"><a href="https://krebsonsecurity.com/wp-content/uploads/2013/12/RealBoBATM.png"><img aria-describedby="caption-attachment-24032" loading="lazy" class="size-large wp-image-24032" alt="The real ATM." src="https://krebsonsecurity.com/wp-content/uploads/2013/12/RealBoBATM-600x392.png" width="600" height="392" srcset="https://krebsonsecurity.com/wp-content/uploads/2013/12/RealBoBATM-600x392.png 600w, https://krebsonsecurity.com/wp-content/uploads/2013/12/RealBoBATM-285x186.png 285w, https://krebsonsecurity.com/wp-content/uploads/2013/12/RealBoBATM.png 924w" sizes="(max-width: 600px) 100vw, 600px" /></a><p id="caption-attachment-24032" class="wp-caption-text">The real ATM underneath.</p></div>
+<p>When the cops arrived, they pulled the fake ATM off the real cash machine. Here is the fake ATM, set down on the floor.</p>
+<p><a href="https://krebsonsecurity.com/wp-content/uploads/2013/12/FakeATMfloor.png"><img loading="lazy" class="aligncenter size-large wp-image-24034" alt="FakeATMfloor" src="https://krebsonsecurity.com/wp-content/uploads/2013/12/FakeATMfloor-600x439.png" width="600" height="439" srcset="https://krebsonsecurity.com/wp-content/uploads/2013/12/FakeATMfloor-600x439.png 600w, https://krebsonsecurity.com/wp-content/uploads/2013/12/FakeATMfloor-285x208.png 285w, https://krebsonsecurity.com/wp-content/uploads/2013/12/FakeATMfloor.png 836w" sizes="(max-width: 600px) 100vw, 600px" /></a></p>
+<p> <a href="https://krebsonsecurity.com/2013/12/the-biggest-skimmers-of-all-fake-atms/#more-24029" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+				
+			
+								<div class="themonic-pagination"><div class='pagination'><ul><li><a href='https://krebsonsecurity.com/'>&laquo; First</a></li><li><a href='https://krebsonsecurity.com/page/128/' class='inactive'>&lsaquo; Previous</a></li><li><a href='https://krebsonsecurity.com/page/126/' class='inactive'>126</a></li><li><a href='https://krebsonsecurity.com/page/127/' class='inactive'>127</a></li><li><a href='https://krebsonsecurity.com/page/128/' class='inactive'>128</a></li><li class='current'><span class='currenttext'>129</span></li><li><a href='https://krebsonsecurity.com/page/130/' class='inactive'>130</a></li><li><a href='https://krebsonsecurity.com/page/131/' class='inactive'>131</a></li><li><a href='https://krebsonsecurity.com/page/132/' class='inactive'>132</a></li><li><a href='https://krebsonsecurity.com/page/130/' class='inactive'>Next &rsaquo;</a></li><a class='inactive' href='https://krebsonsecurity.com/page/209/'>Last &raquo;</a></ul></div></div>
+					<div style="display: block; clear: both;"></div>
+			
+		
+
+	
+
+		</div><!-- #content -->
+	</div><!-- #primary -->
+
+
+			<div id="secondary" class="widget-area" role="complementary">
+
+        <div id="sidebar_ad" class="widget themonic-ad5"><div class="a-statement">Advertisement</div><a href="https://securityscorecard.com/instant-security-scorecard?utm_source=krebs+on+security&amp;utm_medium=display&amp;utm_campaign=instant+scorecard&amp;utm_term=B&amp;utm_content=335x300">
+<img src="/b-securityscorecard/7.jpg">
+</a></div>
+
+                        <br><div class="widget themonic-ad1"><div class="a-statement">Advertisement</div><a href="https://www.akamai.com/why-akamai/the-internet-of-possibilities?utm_source=krebsonsecurity&amp;utm_medium=display&amp;utm_campaign=F-MC-54978">
+<img src="/b-akamai/146.png">
+</a></div><br>
+
+			<aside id="custom_html-2" class="widget_text widget widget_custom_html"><p class="widget-title">Mailing List</p><div class="textwidget custom-html-widget"><a href="/subscribe/">Subscribe here</a></div></aside><aside id="search-2" class="widget widget_search"><p class="widget-title">Search KrebsOnSecurity</p><form role="search" method="get" id="searchform" class="searchform" action="https://krebsonsecurity.com/">
+				<div>
+					<label class="screen-reader-text" for="s">Search for:</label>
+					<input type="text" value="" name="s" id="s" />
+					<input type="submit" id="searchsubmit" value="Search" />
+				</div>
+			</form></aside>
+		<aside id="recent-posts-3" class="widget widget_recent_entries">
+		<p class="widget-title">Recent Posts</p>
+		<ul>
+											<li>
+					<a href="https://krebsonsecurity.com/2021/12/canada-charges-its-most-prolific-cybercriminal/">Canada Charges Its &#8220;Most Prolific Cybercriminal&#8221;</a>
+									</li>
+											<li>
+					<a href="https://krebsonsecurity.com/2021/12/who-is-the-network-access-broker-babam/">Who Is the Network Access Broker &#8216;Babam&#8217;?</a>
+									</li>
+											<li>
+					<a href="https://krebsonsecurity.com/2021/12/ubiquiti-developer-charged-with-extortion-causing-2020-breach/">Ubiquiti Developer Charged With Extortion, Causing 2020 &#8220;Breach&#8221;</a>
+									</li>
+											<li>
+					<a href="https://krebsonsecurity.com/2021/11/the-internet-is-held-together-with-spit-baling-wire/">The Internet is Held Together With Spit &#038; Baling Wire</a>
+									</li>
+											<li>
+					<a href="https://krebsonsecurity.com/2021/11/arrest-in-ransom-your-employer-email-scheme/">Arrest in &#8216;Ransom Your Employer&#8217; Email Scheme</a>
+									</li>
+					</ul>
+
+		</aside><aside id="text-2" class="widget widget_text">			<div class="textwidget"><a name="subscribe2"></a></div>
+		</aside><aside id="widget_sp_image-15" class="widget widget_sp_image"><p class="widget-title">Spam Nation</p><a href="https://www.amazon.com/Spam-Nation-Organized-Cybercrime-Epidemic-ebook/dp/B00L5QGBL0/ref=dp_kinw_strp_1" target="_blank" class="widget_sp_image-image-link" title="Spam Nation"><img width="266" height="404" alt="Spam Nation" class="attachment-266x404 aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2015/04/spamnation-nyt.png" /></a><div class="widget_sp_image-description" ><p>A New York Times Bestseller! </p>
+</div></aside><aside id="widget_sp_image-25" class="widget widget_sp_image"><p class="widget-title">Thinking of a Cybersecurity Career?</p><a href="https://krebsonsecurity.com/2020/07/thinking-of-a-cybersecurity-career-read-this/" target="_blank" class="widget_sp_image-image-link" title="Thinking of a Cybersecurity Career? Read This."><img width="625" height="424" alt="Thinking of a Cybersecurity Career?" class="attachment-full" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2020/07/codepeople.png 625w, https://krebsonsecurity.com/wp-content/uploads/2020/07/codepeople-580x393.png 580w" sizes="(max-width: 625px) 100vw, 625px" src="https://krebsonsecurity.com/wp-content/uploads/2020/07/codepeople.png" /></a><div class="widget_sp_image-description" ><p>Read this.</p>
+</div></aside><aside id="widget_sp_image-3" class="widget widget_sp_image"><p class="widget-title">All About Skimmers </p><a href="https://krebsonsecurity.com/all-about-skimmers/" target="_blank" class="widget_sp_image-image-link" title="All About Skimmers "><img width="299" height="232" alt="All About Skimmers" class="attachment-299x232 aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2010/08/skimgallery1.jpg" /></a><div class="widget_sp_image-description" ><p>Click image for my skimmer series.</p>
+</div></aside><aside id="categories-2" class="widget widget_categories"><p class="widget-title">Story Categories</p>
+			<ul>
+					<li class="cat-item cat-item-5"><a href="https://krebsonsecurity.com/category/sunshine/" title="Includes investigative blog posts meant to shine a light on the darker corners of the Internet.">A Little Sunshine</a>
+</li>
+	<li class="cat-item cat-item-2240"><a href="https://krebsonsecurity.com/category/all-about-skimmers/">All About Skimmers</a>
+</li>
+	<li class="cat-item cat-item-9085"><a href="https://krebsonsecurity.com/category/ashley-madison-breach/">Ashley Madison breach</a>
+</li>
+	<li class="cat-item cat-item-3191"><a href="https://krebsonsecurity.com/category/breadcrumbs/">Breadcrumbs</a>
+</li>
+	<li class="cat-item cat-item-3771"><a href="https://krebsonsecurity.com/category/data-breaches/" title="Stories about data breaches at retailers, corporations, governments and organizations of all sizes.">Data Breaches</a>
+</li>
+	<li class="cat-item cat-item-4624"><a href="https://krebsonsecurity.com/category/ddos-for-hire/">DDoS-for-Hire</a>
+</li>
+	<li class="cat-item cat-item-9173"><a href="https://krebsonsecurity.com/category/employment-fraud/">Employment Fraud</a>
+</li>
+	<li class="cat-item cat-item-2151"><a href="https://krebsonsecurity.com/category/how-to-break-into-security/" title="If you&#039;ve ever wanted career advice on how to make a shift into the security industry, look no further.">How to Break Into Security</a>
+</li>
+	<li class="cat-item cat-item-87"><a href="https://krebsonsecurity.com/category/latest-warnings/">Latest Warnings</a>
+</li>
+	<li class="cat-item cat-item-4071"><a href="https://krebsonsecurity.com/category/neer-do-well-news/">Ne&#039;er-Do-Well News</a>
+</li>
+	<li class="cat-item cat-item-9"><a href="https://krebsonsecurity.com/category/other/">Other</a>
+</li>
+	<li class="cat-item cat-item-1306"><a href="https://krebsonsecurity.com/category/pharma-wars/">Pharma Wars</a>
+</li>
+	<li class="cat-item cat-item-8240"><a href="https://krebsonsecurity.com/category/ransomware/">Ransomware</a>
+</li>
+	<li class="cat-item cat-item-599"><a href="https://krebsonsecurity.com/category/security-tools/">Security Tools</a>
+</li>
+	<li class="cat-item cat-item-8298"><a href="https://krebsonsecurity.com/category/sim-swapping/">SIM Swapping</a>
+</li>
+	<li class="cat-item cat-item-4079"><a href="https://krebsonsecurity.com/category/spam-nation/">Spam Nation</a>
+</li>
+	<li class="cat-item cat-item-1"><a href="https://krebsonsecurity.com/category/smallbizvictims/" title="Posts in this category will include new stories similar to those told in the Small Business Victims category on The Washington Post&#039;s Security Fix blog, which chronicled the methods organized cyber thieve are using to steal hundreds of thousands of dollars from dozens of small- to mid-sized companies around the country.">Target: Small Businesses</a>
+</li>
+	<li class="cat-item cat-item-5167"><a href="https://krebsonsecurity.com/category/tax-refund-fraud/">Tax Refund Fraud</a>
+</li>
+	<li class="cat-item cat-item-3"><a href="https://krebsonsecurity.com/category/comingstorm/" title="This category includes blog posts about computer and Internet security threats now and on the horizon.">The Coming Storm</a>
+</li>
+	<li class="cat-item cat-item-4"><a href="https://krebsonsecurity.com/category/patches/" title="Short posts on the latest security updates for widely-used software.
+">Time to Patch</a>
+</li>
+	<li class="cat-item cat-item-21"><a href="https://krebsonsecurity.com/category/web-fraud-2-0/">Web Fraud 2.0</a>
+</li>
+			</ul>
+
+			</aside><aside id="widget_sp_image-5" class="widget widget_sp_image"><p class="widget-title">The Value of a Hacked PC</p><a href="https://krebsonsecurity.com/2012/10/the-scrap-value-of-a-hacked-pc-revisited/" target="_blank" class="widget_sp_image-image-link" title="The Value of a Hacked PC"><img width="285" height="180" alt="valuehackedpc " class="attachment-285x180 aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2012/12/valuehackedpc-285x180.png" /></a><div class="widget_sp_image-description" ><p>Badguy uses for your PC</p>
+</div></aside><aside id="widget_sp_image-9" class="widget widget_sp_image"><p class="widget-title">Badguy Uses for Your Email </p><a href="https://krebsonsecurity.com/2013/06/the-value-of-a-hacked-email-account/" target="_self" class="widget_sp_image-image-link" title="Badguy Uses for Your Email "><img width="296" height="170" alt="Badguy Uses for Your Email " class="attachment-full aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2013/06/badguyemail.png 296w, https://krebsonsecurity.com/wp-content/uploads/2013/06/badguyemail-285x163.png 285w" sizes="(max-width: 296px) 100vw, 296px" src="https://krebsonsecurity.com/wp-content/uploads/2013/06/badguyemail.png" /></a><div class="widget_sp_image-description" ><p>Your email account may be worth far more than you imagine.</p>
+</div></aside><aside id="widget_sp_image-24" class="widget widget_sp_image"><a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&#038;hosted_button_id=MCCRKHWRX57HS" id="donate" target="_self" class="widget_sp_image-image-link"><img width="250" height="55" alt="Donate to Krebs On Security" class="attachment-medium aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2016/09/donatepaypal2-1.png" /></a></aside><aside id="most_popular_posts-3" class="widget widget_most_popular_posts">
+<p class="widget-title">Most Popular Posts</p>
+<ul>	<li><a href="https://krebsonsecurity.com/2018/07/sextortion-scam-uses-recipients-hacked-passwords/">Sextortion Scam Uses Recipient's Hacked Passwords</a> (1076)</li>
+	<li><a href="https://krebsonsecurity.com/2015/07/online-cheating-site-ashleymadison-hacked/">Online Cheating Site AshleyMadison Hacked</a> (798)</li>
+	<li><a href="https://krebsonsecurity.com/2013/12/sources-target-investigating-data-breach/">Sources: Target Investigating Data Breach</a> (620)</li>
+	<li><a href="https://krebsonsecurity.com/2020/11/trump-fires-security-chief-christopher-krebs/">Trump Fires Security Chief Christopher Krebs</a> (534)</li>
+	<li><a href="https://krebsonsecurity.com/2013/12/cards-stolen-in-target-breach-flood-underground-markets/">Cards Stolen in Target Breach Flood Underground Markets</a> (445)</li>
+	<li><a href="https://krebsonsecurity.com/2013/05/reports-liberty-reserve-founder-arrested-site-shuttered/">Reports: Liberty Reserve Founder Arrested, Site Shuttered</a> (416)</li>
+	<li><a href="https://krebsonsecurity.com/2015/08/was-the-ashley-madison-database-leaked/">Was the Ashley Madison Database Leaked?</a> (376)</li>
+	<li><a href="https://krebsonsecurity.com/2021/01/ddos-guard-to-forfeit-internet-space-occupied-by-parler/">DDoS-Guard To Forfeit Internet Space Occupied by Parler</a> (374)</li>
+	<li><a href="https://krebsonsecurity.com/2014/05/true-goodbye-using-truecrypt-is-not-secure/">True Goodbye: 'Using TrueCrypt Is Not Secure'</a> (363)</li>
+	<li><a href="https://krebsonsecurity.com/2015/08/who-hacked-ashley-madison/">Who Hacked Ashley Madison?</a> (361)</li>
+</ul>
+</aside>
+<aside id="media_image-2" class="widget widget_media_image"><p class="widget-title">Why So Many Top Hackers Hail from Russia</p><a href="https://krebsonsecurity.com/2017/06/why-so-many-top-hackers-hail-from-russia/"><img width="580" height="389" src="https://krebsonsecurity.com/wp-content/uploads/2017/06/computered-580x389.png" class="image wp-image-39684  attachment-medium size-medium" alt="" loading="lazy" style="max-width: 100%; height: auto;" srcset="https://krebsonsecurity.com/wp-content/uploads/2017/06/computered-580x389.png 580w, https://krebsonsecurity.com/wp-content/uploads/2017/06/computered-768x514.png 768w, https://krebsonsecurity.com/wp-content/uploads/2017/06/computered-940x630.png 940w, https://krebsonsecurity.com/wp-content/uploads/2017/06/computered.png 1551w" sizes="(max-width: 580px) 100vw, 580px" /></a></aside><aside id="widget_sp_image-11" class="widget widget_sp_image"><p class="widget-title">Category: Web Fraud 2.0</p><a href="https://krebsonsecurity.com/category/web-fraud-2-0/" target="_blank" class="widget_sp_image-image-link" title="Category: Web Fraud 2.0"><img width="227" height="400" alt="Criminnovations" class="attachment-medium aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2013/11/cybercrimeinnovations-227x400.png" /></a><div class="widget_sp_image-description" ><p>Innovations from the Underground</p>
+</div></aside><aside id="widget_sp_image-12" class="widget widget_sp_image"><a href="https://krebsonsecurity.com/2014/03/are-credit-monitoring-services-worth-it/" target="_blank" class="widget_sp_image-image-link"><img width="285" height="189" class="attachment-medium aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2014/03/shreddedID-copy-285x189.png 285w, https://krebsonsecurity.com/wp-content/uploads/2014/03/shreddedID-copy-600x399.png 600w, https://krebsonsecurity.com/wp-content/uploads/2014/03/shreddedID-copy.png 849w" sizes="(max-width: 285px) 100vw, 285px" src="https://krebsonsecurity.com/wp-content/uploads/2014/03/shreddedID-copy-285x189.png" /></a><div class="widget_sp_image-description" ><p>ID Protection Services Examined</p>
+</div></aside><aside id="widget_sp_image-13" class="widget widget_sp_image"><p class="widget-title">Is Antivirus Dead?</p><a href="https://krebsonsecurity.com/2014/05/antivirus-is-dead-long-live-antivirus/" target="_blank" class="widget_sp_image-image-link" title="Is Antivirus Dead?"><img width="285" height="161" alt="Is Antivirus Dead?" class="attachment-medium aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2014/05/cryptservices-285x161.png 285w, https://krebsonsecurity.com/wp-content/uploads/2014/05/cryptservices-600x339.png 600w, https://krebsonsecurity.com/wp-content/uploads/2014/05/cryptservices.png 945w" sizes="(max-width: 285px) 100vw, 285px" src="https://krebsonsecurity.com/wp-content/uploads/2014/05/cryptservices-285x161.png" /></a><div class="widget_sp_image-description" ><p>The reasons for its decline</p>
+</div></aside><aside id="widget_sp_image-14" class="widget widget_sp_image"><p class="widget-title">The Growing Tax Fraud Menace</p><a href="https://krebsonsecurity.com/category/tax-refund-fraud/" target="_blank" class="widget_sp_image-image-link" title="The Growing Tax Fraud Menace"><img width="285" height="285" alt="The Growing Tax Fraud Menace" class="attachment-medium aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2014/04/taxfraud-285x285.jpg 285w, https://krebsonsecurity.com/wp-content/uploads/2014/04/taxfraud-150x150.jpg 150w, https://krebsonsecurity.com/wp-content/uploads/2014/04/taxfraud-600x600.jpg 600w, https://krebsonsecurity.com/wp-content/uploads/2014/04/taxfraud.jpg 693w" sizes="(max-width: 285px) 100vw, 285px" src="https://krebsonsecurity.com/wp-content/uploads/2014/04/taxfraud-285x285.jpg" /></a><div class="widget_sp_image-description" ><p>File 'em Before the Bad Guys Can </p>
+</div></aside><aside id="widget_sp_image-17" class="widget widget_sp_image"><p class="widget-title">Inside a Carding Shop</p><a href="https://krebsonsecurity.com/2014/06/peek-inside-a-professional-carding-shop/" target="_blank" class="widget_sp_image-image-link" title="Inside a Carding Shop"><img width="194" height="340" alt="Inside a Carding Shop" class="attachment-medium aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2014/06/mcdumpalsjoined.png" /></a><div class="widget_sp_image-description" ><p>A crash course in carding. </p>
+</div></aside><aside id="widget_sp_image-18" class="widget widget_sp_image"><p class="widget-title">Beware Social Security Fraud</p><a href="https://krebsonsecurity.com/2013/09/crooks-hijack-retirement-funds-via-ssa-portal/" target="_blank" class="widget_sp_image-image-link" title="Beware Social Security Fraud"><img width="285" height="293" alt="Beware Social Security Fraud" class="attachment-full aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2016/09/myssn-285x293.png" /></a><div class="widget_sp_image-description" ><p>Sign up, or Be Signed Up! </p>
+</div></aside><aside id="widget_sp_image-2" class="widget widget_sp_image"><p class="widget-title">How Was Your Card Stolen?</p><a href="https://krebsonsecurity.com/2015/01/how-was-your-credit-card-stolen/" target="_blank" class="widget_sp_image-image-link" title="How Was Your Card Stolen?"><img width="285" height="285" alt="How Was Your Card Stolen?" class="attachment-full aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2016/09/carddominoes-285x285.jpg 285w, https://krebsonsecurity.com/wp-content/uploads/2016/09/carddominoes-285x285-150x150.jpg 150w" sizes="(max-width: 285px) 100vw, 285px" src="https://krebsonsecurity.com/wp-content/uploads/2016/09/carddominoes-285x285.jpg" /></a><div class="widget_sp_image-description" ><p>Finding out is not so easy. </p>
+</div></aside><aside id="widget_sp_image-22" class="widget widget_sp_image"><p class="widget-title">Krebs&#8217;s 3 Rules&#8230;</p><a href="https://krebsonsecurity.com/2011/05/krebss-3-basic-rules-for-online-safety/" target="_blank" class="widget_sp_image-image-link" title="Krebs&#8217;s 3 Rules&#8230;"><img width="300" height="300" alt="Krebs&#8217;s 3 Rules&#8230;" class="attachment-medium aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2011/05/three-300x300.jpg 300w, https://krebsonsecurity.com/wp-content/uploads/2011/05/three-150x150.jpg 150w, https://krebsonsecurity.com/wp-content/uploads/2011/05/three.jpg 347w" sizes="(max-width: 300px) 100vw, 300px" src="https://krebsonsecurity.com/wp-content/uploads/2011/05/three-300x300.jpg" /></a><div class="widget_sp_image-description" ><p>...For Online Safety. </p>
+</div></aside>		</div><!-- #secondary -->
+		</div><!-- #main .wrapper -->
+	
+	<div id="publisho-footer" class="widget-area">
+				<div class="footer-widget">
+                				</div>
+				<div class="footer-widget">
+								</div>
+				<div class="footer-widget">
+								</div>
+	</div>
+
+	<div class="site-wordpress">
+					&copy; Krebs on Security<br>
+	</div>
+	<!-- .site-info --><div class="clear"></div>
+</div><!-- #page -->
+
+<script type='text/javascript' src='https://krebsonsecurity.com/wp-content/themes/kos-mar2021/js/slicknav.js?ver=5.8.2' id='publisho-mobile-navigation-js'></script>
+<script type='text/javascript' src='https://krebsonsecurity.com/wp-includes/js/wp-embed.min.js?ver=5.8.2' id='wp-embed-js'></script>
+</body>
+</html>
+<!--
+Performance optimized by W3 Total Cache. Learn more: https://www.boldgrid.com/w3-total-cache/
+
+Object Caching 190/443 objects using memcached
+Page Caching using memcached 
+Database Caching 7/31 queries in 0.012 seconds using memcached
+
+Served from: krebsonsecurity.com @ 2021-12-10 14:51:40 by W3 Total Cache
+-->

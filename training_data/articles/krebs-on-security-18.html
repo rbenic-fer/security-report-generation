@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<!--[if IE 7]>
+<html class="ie ie7" lang="en-US">
+<![endif]-->
+<!--[if IE 8]>
+<html class="ie ie8" lang="en-US">
+<![endif]-->
+<!--[if !(IE 7) | !(IE 8)  ]><!-->
+<html lang="en-US">
+<!--<![endif]-->
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width" />
+<link rel="profile" href="http://gmpg.org/xfn/11" />
+<!--[if lt IE 9]>
+<script src="https://krebsonsecurity.com/wp-content/themes/kos-mar2021/js/html5.js" type="text/javascript"></script>
+<![endif]-->
+<title>Krebs on Security &#8211; Page 18 &#8211; In-depth security news and investigation</title>
+<meta name='robots' content='max-image-preview:large' />
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="Krebs on Security &raquo; Feed" href="https://krebsonsecurity.com/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Krebs on Security &raquo; Comments Feed" href="https://krebsonsecurity.com/comments/feed/" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.1.0\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.1.0\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/krebsonsecurity.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=5.8.2"}};
+			!function(e,a,t){var n,r,o,i=a.createElement("canvas"),p=i.getContext&&i.getContext("2d");function s(e,t){var a=String.fromCharCode;p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,e),0,0);e=i.toDataURL();return p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,t),0,0),e===i.toDataURL()}function c(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(o=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},r=0;r<o.length;r++)t.supports[o[r]]=function(e){if(!p||!p.fillText)return!1;switch(p.textBaseline="top",p.font="600 32px Arial",e){case"flag":return s([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])?!1:!s([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!s([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]);case"emoji":return!s([10084,65039,8205,55357,56613],[10084,65039,8203,55357,56613])}return!1}(o[r]),t.supports.everything=t.supports.everything&&t.supports[o[r]],"flag"!==o[r]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[o[r]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(n=t.source||{}).concatemoji?c(n.concatemoji):n.wpemoji&&n.twemoji&&(c(n.twemoji),c(n.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+	<link rel='stylesheet' id='colorbox-theme1-css'  href='https://krebsonsecurity.com/wp-content/plugins/jquery-lightbox-for-native-galleries/colorbox/theme1/colorbox.css?ver=1.3.14' type='text/css' media='screen' />
+<link rel='stylesheet' id='wp-block-library-css'  href='https://krebsonsecurity.com/wp-includes/css/dist/block-library/style.min.css?ver=5.8.2' type='text/css' media='all' />
+<link rel='stylesheet' id='contact-form-7-css'  href='https://krebsonsecurity.com/wp-content/plugins/contact-form-7/includes/css/styles.css?ver=5.5.3' type='text/css' media='all' />
+<link rel='stylesheet' id='publisho-style-css'  href='https://krebsonsecurity.com/wp-content/themes/kos-mar2021/style.css?subver=1.2&#038;ver=5.8.2' type='text/css' media='all' />
+<style id='publisho-style-inline-css' type='text/css'>
+
+	.themonic-nav .current-menu-item > a, .themonic-nav .current-menu-ancestor > a, .themonic-nav .current_page_item > a, .themonic-nav .current_page_ancestor > a {
+		background: #cc6600;
+	}
+	.themonic-nav ul.nav-menu, .themonic-nav div.nav-menu > ul {
+		border-bottom: 5px solid #cc6600;
+	}
+	#site-navigation .topheadmenu a {
+    background: rgba(0, 0, 0, 0);
+	}
+	.themonic-nav li a:hover {
+		background: #cc6600;
+	}
+	.themonic-nav li:hover {
+		background: #cc6600;
+	}.wrapper .flexslider {margin: 0 0 30px;}.frontp .btm-wrap {
+    border-top: 1px solid #e9e9e9;
+	}
+	.entry-summary {
+    border-top: none;
+	}.frontp .btm-wrap { margin-bottom: 30px;}.site { font-size:14px;}.site { font-family:'Roboto', arial ;}
+</style>
+<link rel='stylesheet' id='publisho-custom-style-css'  href='https://krebsonsecurity.com/wp-content/themes/kos-mar2021/custom.css?subver=1.2&#038;ver=5.8.2' type='text/css' media='all' />
+<!--[if lt IE 9]>
+<link rel='stylesheet' id='publisho-ie-css'  href='https://krebsonsecurity.com/wp-content/themes/kos-mar2021/css/ie.css?ver=20160606' type='text/css' media='all' />
+<![endif]-->
+<link rel='stylesheet' id='fontawesome-css-css'  href='https://krebsonsecurity.com/wp-content/themes/kos-mar2021/fonts/font-awesome.min.css?ver=5.8.2' type='text/css' media='all' />
+<link rel='stylesheet' id='publisho_custom_fonts-css'  href='//fonts.googleapis.com/css?family=Roboto%3Aregular%2Citalic%2C500%26subset%3Dlatin%2C' type='text/css' media='screen' />
+<script type='text/javascript' src='https://krebsonsecurity.com/wp-includes/js/jquery/jquery.min.js?ver=3.6.0' id='jquery-core-js'></script>
+<script type='text/javascript' src='https://krebsonsecurity.com/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.3.2' id='jquery-migrate-js'></script>
+<script type='text/javascript' src='https://krebsonsecurity.com/wp-content/plugins/jquery-lightbox-for-native-galleries/colorbox/jquery.colorbox-min.js?ver=1.3.14' id='colorbox-js'></script>
+<link rel="https://api.w.org/" href="https://krebsonsecurity.com/wp-json/" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://krebsonsecurity.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://krebsonsecurity.com/wp-includes/wlwmanifest.xml" /> 
+<meta name="generator" content="WordPress 5.8.2" />
+<!-- JavaScript Pull-Quotes plugin v2.2 -->
+	<link rel="stylesheet" href="https://krebsonsecurity.com/wp-content/plugins/jspullquotes/resources/jspullquotes-core.css" type="text/css" />
+	<link rel="stylesheet" href="https://krebsonsecurity.com/wp-content/plugins/jspullquotes/resources/jspullquotes-default.css" type="text/css" />
+	<script type="text/javascript" src="https://krebsonsecurity.com/wp-content/plugins/jspullquotes/resources/jspullquotes.js"></script>
+	<script type="text/javascript">
+		var arrOptions = new Array("1", "1", "right", "1", "1", "blockquote", "pullquote", "pullquote pqRight");
+		pullQuoteOpts(arrOptions);
+	</script>
+<!-- end pull-quote additions -->
+<!-- jQuery Lightbox For Native Galleries v3.1.3 | http://www.viper007bond.com/wordpress-plugins/jquery-lightbox-for-native-galleries/ -->
+<script type="text/javascript">
+// <![CDATA[
+	jQuery(document).ready(function($){
+		$(".gallery").each(function(index, obj){
+			var galleryid = Math.floor(Math.random()*10000);
+			$(obj).find("a").colorbox({rel:galleryid, maxWidth:"95%", maxHeight:"95%"});
+		});
+		$("a.lightbox").colorbox({maxWidth:"95%", maxHeight:"95%"});
+	});
+// ]]>
+</script>
+<style type="text/css" id="custom-background-css">
+body.custom-background { background-color: #ffffff; }
+</style>
+	<link rel="me" href="https://twitter.com/briankrebs" /><meta name="twitter:widgets:link-color" content="#000000" /><meta name="twitter:widgets:border-color" content="#000000" /><meta name="twitter:partner" content="tfwp" />
+<meta name="twitter:card" content="summary" /><meta name="twitter:title" content="Krebs on Security" /><meta name="twitter:site" content="@briankrebs" /><meta name="twitter:description" content="In-depth security news and investigation" />
+</head>
+<body class="home blog paged custom-background paged-18 custom-background-white single-author frontp hfeed">
+<div id="page" class="site">
+	<!-- <div class="publisho-top-mobile-nav clear"></div> -->
+	<div class="themonic-logo themonic-ad3"><div class="a-statement">Advertisement</div><a href="https://securityscorecard.com/instant-security-scorecard?utm_source=krebs+on+security&amp;utm_medium=display&amp;utm_campaign=instant+scorecard&amp;utm_term=A&amp;utm_content=1240x110">
+<img src="/b-securityscorecard/1.jpg">
+</a></div>
+	<div class="themonic-logo themonic-ad6"><div class="a-statement">Advertisement</div><a href="https://www.area1security.com/2021-email-threat-report/?utm_medium=display&amp;utm_source=krebs&amp;utm_term=na&amp;utm_content=thumb&amp;utm_campaign=2021-Q4-Display-Krebs-2021-Email-Threat-Report">
+<img src="/b-area1/12.png">
+</a></div>
+	<nav id="site-navigation" class="themonic-nav" role="navigation">
+	</nav><!-- #site-navigation -->
+	<div class="clear"></div>
+	<header id="masthead" class="site-header" role="banner">
+ 					<div class="desktop-social">
+						<div class="socialmedia">
+							<a href="http://twitter.com/briankrebs" target="_blank"><i class="fa fa-twitter"></i></a> 
+															<a class="rss" href="https://krebsonsecurity.com/feed/" target="_blank"><i class="fa fa-rss"></i></a>	
+									<a class="rss" href="https://www.linkedin.com/in/bkrebs/" target="_blank"><i class="fa fa-linkedin"></i></a>	
+								</div>
+				 	</div>
+																						   
+		
+		<div class="themonic-logo responsive-img-container">
+			<a href="https://krebsonsecurity.com/" title="Krebs on Security" rel="home"><img src="https://krebsonsecurity.com/wp-content/uploads/2021/03/kos-27-03-2021.jpg" alt="Krebs on Security"></a>
+		</div>
+
+					<div class="mobile-social">
+						<div class="socialmedia">
+							<a href="http://twitter.com/briankrebs" target="_blank"><i class="fa fa-twitter"></i></a> 
+															<a class="rss" href="https://krebsonsecurity.com/feed/" target="_blank"><i class="fa fa-rss"></i></a>	
+									<a class="rss" href="https://www.linkedin.com/in/bkrebs/" target="_blank"><i class="fa fa-linkedin"></i></a>	
+								</div>
+					</div>
+		
+				<!-- <div class="publisho-mobile-nav clear"></div> -->
+		<nav id="site-navigation" class="themonic-nav" role="navigation">
+			<a class="assistive-text" href="#content" title="Skip to content">Skip to content</a>
+			<div id="menu-top" class="nav-menu"><ul>
+<li ><a href="https://krebsonsecurity.com/">Home</a></li><li class="page_item page-item-2"><a href="https://krebsonsecurity.com/about/">About the Author</a></li>
+<li class="page_item page-item-645"><a href="https://krebsonsecurity.com/cpm/">Advertising/Speaking</a></li>
+</ul></div>
+		</nav><!-- #site-navigation -->
+		<div class="clear"></div>
+	</header><!-- #masthead -->
+	<div id="main" class="wrapper">
+		<div id="primary" class="site-content">
+	
+
+	
+		<div id="content" role="main">
+
+		<article id="post-52687" class="post-52687 post type-post status-publish format-standard hentry category-sunshine category-patches tag-bernardo-quintero tag-cve-2020-1464 tag-glueball tag-peleg-hadar tag-safebreach-labs tag-securityinbits-com tag-tal-beery tag-zengo">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2020/08/microsoft-put-off-fixing-zero-day-for-2-years/" title="Permalink to Microsoft Put Off Fixing Zero Day for 2 Years" rel="bookmark">Microsoft Put Off Fixing Zero Day for 2 Years</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">August 17, 2020</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2020/08/microsoft-put-off-fixing-zero-day-for-2-years/#comments">53 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>A security flaw in the way <strong>Microsoft Windows</strong> guards users against malicious files was actively exploited in malware attacks for two years before last week, when Microsoft finally issued a software update to correct the problem.</p>
+<p><img loading="lazy" class="aligncenter wp-image-52701" src="https://krebsonsecurity.com/wp-content/uploads/2020/08/zeroday.png" alt="" width="594" height="393" srcset="https://krebsonsecurity.com/wp-content/uploads/2020/08/zeroday.png 636w, https://krebsonsecurity.com/wp-content/uploads/2020/08/zeroday-580x383.png 580w" sizes="(max-width: 594px) 100vw, 594px" /></p>
+<p>One of the 120 security holes <a href="https://krebsonsecurity.com/2020/08/microsoft-patch-tuesday-august-2020-edition/" target="_blank" rel="noopener noreferrer">Microsoft fixed on Aug. 11&#8217;s Patch Tuesday</a> was <a href="https://portal.msrc.microsoft.com/en-US/security-guidance/advisory/CVE-2020-1464" target="_blank" rel="noopener noreferrer">CVE-2020-1464</a>, a problem with the way every supported version of Windows validates digital signatures for computer programs.</p>
+<p><a href="https://en.wikipedia.org/wiki/Code_signing" target="_blank" rel="noopener noreferrer">Code signing</a> is the method of using a certificate-based digital signature to sign executable files and scripts in order to verify the author&#8217;s identity and ensure that the code has not been changed or corrupted since it was signed by the author.</p>
+<p>Microsoft said an attacker could use this &#8220;spoofing vulnerability&#8221; to bypass security features intended to prevent improperly signed files from being loaded. Microsoft&#8217;s advisory makes no mention of security researchers having told the company about the flaw, which Microsoft acknowledged was actively being exploited.</p>
+<p>In fact, CVE-2020-1464 was first spotted in attacks used in the wild back in August 2018. And several researchers informed Microsoft about the weakness over the past 18 months.</p>
+<p><strong>Bernardo Quintero</strong> is the manager at <a href="https://www.virustotal.com" target="_blank" rel="noopener noreferrer">VirusTotal</a>, a service owned by Google that scans any submitted files against dozens of antivirus services and displays the results. On Jan. 15, 2019, Quintero <a href="https://blog.virustotal.com/2019/01/distribution-of-malicious-jar-appended.html" target="_blank" rel="noopener noreferrer">published a blog post</a> outlining how Windows keeps the Authenticode signature valid after appending any content to the end of Windows Installer files (those ending in .MSI) signed by any software developer.</p>
+<p>Quintero said this weakness would be particularly acute if an attacker were to use it to hide a malicious <strong>Java</strong> file (.jar). And, he said, this exact attack vector was indeed detected in a malware sample sent to VirusTotal.</p>
+<p>&#8220;In short, an attacker can append a malicious JAR to a MSI file signed by a trusted software developer (like Microsoft Corporation, Google Inc. or any other well-known developer), and the resulting file can be renamed with the .jar extension and will have a valid signature according Microsoft Windows,&#8221; Quintero wrote.</p>
+<p>But according to Quintero, while Microsoft&#8217;s security team validated his findings, the company chose not to address the problem at the time.</p>
+<p>&#8220;Microsoft has decided that it will not be fixing this issue in the current versions of Windows and agreed we are able to blog about this case and our findings publicly,&#8221; his blog post concluded.</p>
+<p><strong>Tal Be&#8217;ery</strong>, founder of <a href="https://zengo.com/" target="_blank" rel="noopener noreferrer">Zengo</a>, and <strong>Peleg Hadar</strong>, senior security researcher at <a href="https://safebreach.com/safebreach-labs" target="_blank" rel="noopener noreferrer">SafeBreach Labs</a>, penned <a href="https://medium.com/@TalBeerySec/glueball-the-story-of-cve-2020-1464-50091a1f98bd" target="_blank" rel="noopener noreferrer">a blog post on Sunday</a> that pointed to a file uploaded to VirusTotal in August 2018 that abused the spoofing weakness, which has been dubbed <strong>GlueBall</strong>. The last time that August 2018 file was scanned at VirusTotal (Aug 14, 2020), it was <a href="https://www.virustotal.com/gui/file/dd71284ac6be9758a5046740168164ae76f743579e24929e0a840afd6f2d0d8e/detection" target="_blank" rel="noopener noreferrer">detected as a malicious Java trojan by 28 of 59 antivirus programs</a>.</p>
+<p> <a href="https://krebsonsecurity.com/2020/08/microsoft-put-off-fixing-zero-day-for-2-years/#more-52687" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+	<div id="between_article_ad" class="themonic-ad5"><a href="https://securityscorecard.com/instant-security-scorecard?utm_source=krebs+on+security&amp;utm_medium=display&amp;utm_campaign=instant+scorecard&amp;utm_term=B&amp;utm_content=300x300">
+<img src="/b-securityscorecard/8.jpg">
+</a></div>	<article id="post-52666" class="post-52666 post type-post status-publish format-standard hentry category-ransomware tag-accretive-health tag-defray-ransomware tag-proofpoint tag-r1-rcm-ransomware tag-trend-micro">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2020/08/medical-debt-collection-firm-r1-rcm-hit-in-ransomware-attack/" title="Permalink to Medical Debt Collection Firm R1 RCM Hit in Ransomware Attack" rel="bookmark">Medical Debt Collection Firm R1 RCM Hit in Ransomware Attack</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">August 14, 2020</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2020/08/medical-debt-collection-firm-r1-rcm-hit-in-ransomware-attack/#comments">69 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p><strong>R1 RCM Inc.</strong> [<a href="https://www.nasdaq.com/market-activity/stocks/rcm" target="_blank" rel="noopener noreferrer">NASDAQ:RCM</a>], one of the nation&#8217;s largest medical debt collection companies, has been hit in a ransomware attack.</p>
+<p><img loading="lazy" class="aligncenter wp-image-52669" src="https://krebsonsecurity.com/wp-content/uploads/2020/08/r1rcm.png" alt="" width="597" height="199" srcset="https://krebsonsecurity.com/wp-content/uploads/2020/08/r1rcm.png 1200w, https://krebsonsecurity.com/wp-content/uploads/2020/08/r1rcm-580x193.png 580w, https://krebsonsecurity.com/wp-content/uploads/2020/08/r1rcm-940x313.png 940w, https://krebsonsecurity.com/wp-content/uploads/2020/08/r1rcm-768x256.png 768w" sizes="(max-width: 597px) 100vw, 597px" /></p>
+<p>Formerly known as <a href="https://www.nytimes.com/topic/company/accretive-health-inc" target="_blank" rel="noopener noreferrer">Accretive Health Inc.</a>, Chicago-based R1 RCM brought in revenues of $1.18 billion in 2019. The company has more than 19,000 employees and contracts with at least 750 healthcare organizations nationwide.</p>
+<p>R1 RCM acknowledged taking down its systems in response to a ransomware attack, but otherwise declined to comment for this story.</p>
+<p>The &#8220;RCM&#8221; portion of its name refers to &#8220;revenue cycle management,&#8221; an industry which tracks profits throughout the life cycle of each patient, including patient registration, insurance and benefit verification, medical treatment documentation, and bill preparation and collection from patients.</p>
+<p>The company has access to a wealth of personal, financial and medical information on tens of millions of patients, including names, dates of birth, Social Security numbers, billing information and medical diagnostic data.</p>
+<p>It&#8217;s unclear when the intruders first breached R1&#8217;s networks, but the ransomware was unleashed more than a week ago, right around the time the company was <a href="https://ir.r1rcm.com/press-releases/press-release-details/2020/R1-RCM-Reports-Second-Quarter-2020-Results/default.aspx" target="_blank" rel="noopener noreferrer">set to release its 2nd quarter financial results for 2020</a>.</p>
+<p>R1 RCM declined to discuss the strain of ransomware it is battling or how it was compromised. Sources close to the investigation tell KrebsOnSecurity the malware is known as <strong>Defray.</strong> <a href="https://krebsonsecurity.com/2020/08/medical-debt-collection-firm-r1-rcm-hit-in-ransomware-attack/#more-52666" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+	<div class="themonic-ad2"><div class="a-statement">Advertisement</div><a href="https://www.akamai.com/?utm_source=krebsonsecurity&amp;utm_medium=display&amp;utm_id=GL_Platform&amp;utm_campaign=F-MC-52606&amp;utm_content=IDC_InfoBrief">
+<img src="/b-akamai/134.png">
+</a></div>	<article id="post-52197" class="post-52197 post type-post status-publish format-standard has-post-thumbnail hentry category-security-tools tag-chexsystems tag-credit-freeze tag-equifax tag-experian tag-informed-delivery tag-innovis tag-nctue tag-plant-your-flag tag-sim-swapping tag-trans-union">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2020/08/why-where-you-should-you-plant-your-flag/" title="Permalink to Why &#038; Where You Should Plant Your Flag" rel="bookmark">Why &#038; Where You Should Plant Your Flag</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">August 12, 2020</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2020/08/why-where-you-should-you-plant-your-flag/#comments">122 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>Several stories here have highlighted the importance of creating accounts online tied to your various identity, financial and communications services before identity thieves do it for you. This post examines some of the key places where everyone should plant their virtual flags.</p>
+<p><img loading="lazy" class="aligncenter wp-image-52661" src="https://krebsonsecurity.com/wp-content/uploads/2020/08/pfv2.png" alt="" width="589" height="403" /></p>
+<p>As <a href="https://krebsonsecurity.com/2018/06/plant-your-flag-mark-your-territory/" target="_blank" rel="noopener noreferrer">KrebsOnSecurity observed back in 2018</a>, many people &#8212; particularly older folks &#8212; proudly declare they avoid using the Web to manage various accounts tied to their personal and financial data — including everything from utilities and mobile phones to retirement benefits and online banking services. From that story:</p>
+<blockquote><p>&#8220;The reasoning behind this strategy is as simple as it is alluring: What’s not put online can’t be hacked. But increasingly, adherents to this mantra are finding out the hard way that if you don’t plant your flag online, fraudsters and identity thieves may do it for you.&#8221;</p>
+<p>&#8220;The crux of the problem is that while most types of customer accounts these days can be managed online, the process of tying one’s account number to a specific email address and/or mobile device typically involves supplying personal data that can easily be found or purchased online — such as Social Security numbers, birthdays and addresses.&#8221;</p></blockquote>
+<p>In short, although you may not be required to create online accounts to manage your affairs at your ISP, the U.S. Postal Service, the credit bureaus or the Social Security Administration, it&#8217;s a good idea to do so for several reasons.</p>
+<p>Most importantly, the majority of the entities I&#8217;ll discuss here allow just one registrant per person/customer. Thus, even if you have no intention of using that account, establishing one will be far easier than trying to dislodge an impostor who gets there first using your identity data and an email address they control.</p>
+<p>Also, the cost of planting your flag is virtually nil apart from your investment of time. In contrast, failing to plant one&#8217;s flag can allow ne&#8217;er-do-wells to create a great deal of mischief for you, whether it be misdirecting your service or benefits elsewhere, or canceling them altogether.</p>
+<p>Before we dive into the list, a couple of important caveats. Adding multi-factor authentication (MFA) at these various providers (where available) and/or establishing a customer-specific personal identification number (PIN) also can help secure online access. For those who can’t be convinced to use a password manager, even writing down all of the account details and passwords on a slip of paper can be helpful, provided the document is secured in a safe place.</p>
+<p>Perhaps the most important place to enable MFA is with your email accounts. Armed with access to your inbox, <a href="https://krebsonsecurity.com/2013/06/the-value-of-a-hacked-email-account/" target="_blank" rel="noopener noreferrer">thieves can then reset the password for any other service or account that is tied to that email address</a>.</p>
+<p>People who don’t take advantage of these added safeguards may find it far more difficult to regain access when their account gets hacked, because <a href="https://krebsonsecurity.com/2020/06/turn-on-mfa-before-crooks-do-it-for-you/" target="_blank" rel="noopener noreferrer">increasingly thieves will enable multi-factor options and tie the account to a device they control</a>.</p>
+<p>Secondly, guard the security of your mobile phone account as best you can (doing so <a href="https://krebsonsecurity.com/2016/08/a-life-or-death-case-of-identity-theft/" target="_blank" rel="noopener noreferrer">might just save your life</a>). The passwords for countless online services can be reset merely by entering a one-time code sent via text message to the phone number on file for the customer&#8217;s account.</p>
+<p>And thanks to the increasing prevalence of a crime known as <a href="https://krebsonsecurity.com/?s=sim+swapping&amp;x=0&amp;y=0" target="_blank" rel="noopener noreferrer">SIM swapping</a>, thieves may be able to upend your personal and financial life simply by tricking someone at your mobile service provider into diverting your calls and texts to a device they control.</p>
+<p>Most mobile providers offer customers the option of placing a PIN or secret passphrase on their accounts to lessen the likelihood of such attacks succeeding, but these protections also usually fail when the attackers are social engineering some $12-an-hour employee at a mobile phone store.</p>
+<p>Your best option is to reduce your overall reliance on your phone number for added authentication at any online service. Many sites now offer MFA options that are app-based and not tied to your mobile service, and this is your best option for MFA wherever possible. <a href="https://krebsonsecurity.com/2020/08/why-where-you-should-you-plant-your-flag/#more-52197" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-52627" class="post-52627 post type-post status-publish format-standard hentry category-latest-warnings category-other category-patches tag-adobe-acrobat tag-adobe-reader tag-black-hat tag-cve-2020-1048 tag-cve-2020-1337 tag-cve-2020-1380 tag-cve-2020-1464 tag-cve-2020-1472 tag-dustin-childs tag-internet-explorer-zero-day tag-microsoft-patch-tuesday-august-2020 tag-satnam-narang tag-tenable tag-trend-micro-zero-day-initiative">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2020/08/microsoft-patch-tuesday-august-2020-edition/" title="Permalink to Microsoft Patch Tuesday, August 2020 Edition" rel="bookmark">Microsoft Patch Tuesday, August 2020 Edition</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">August 11, 2020</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2020/08/microsoft-patch-tuesday-august-2020-edition/#comments">49 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p><strong>Microsoft</strong> today released updates to plug at least 120 security holes in its <strong>Windows</strong> operating systems and supported software, including two newly discovered vulnerabilities that are actively being exploited. Yes, good people of the Windows world, it&#8217;s time once again to backup and patch up!</p>
+<p><img loading="lazy" class="aligncenter size-full wp-image-52647" src="https://krebsonsecurity.com/wp-content/uploads/2020/08/windowsec.png" alt="" width="579" height="425" />At least 17 of the bugs squashed in August&#8217;s patch batch address vulnerabilities Microsoft rates as &#8220;critical,&#8221; meaning they can be exploited by miscreants or malware to gain complete, remote control over an affected system with little or no help from users. This is the sixth month in a row Microsoft has shipped fixes for more than 100 flaws in its products.</p>
+<p>The most concerning of these appears to be <a href="https://portal.msrc.microsoft.com/en-US/security-guidance/advisory/CVE-2020-1380" target="_blank" rel="noopener noreferrer">CVE-2020-1380</a>, which is a weaknesses in <strong>Internet Explorer</strong> that could result in system compromise just by browsing with IE to a hacked or malicious website. Microsoft&#8217;s advisory says this flaw is currently being exploited in active attacks.</p>
+<p>The other flaw enjoying active exploitation is <a href="https://portal.msrc.microsoft.com/en-US/security-guidance/advisory/CVE-2020-1464" target="_blank" rel="noopener noreferrer">CVE-2020-1464</a>, which is a &#8220;spoofing&#8221; bug in virtually all supported versions of Windows that allows an attacker to bypass Windows security features and load improperly signed files. For more on this flaw, see <a href="https://krebsonsecurity.com/2020/08/microsoft-put-off-fixing-zero-day-for-2-years/" target="_blank" rel="noopener noreferrer">Microsoft Put Off Fixing Zero for 2 Years</a>.</p>
+<p><strong>Trend Micro&#8217;s Zero Day Initiative</strong> points to another fix &#8212; <a href="https://portal.msrc.microsoft.com/en-US/security-guidance/advisory/CVE-2020-1472" target="_blank" rel="noopener noreferrer">CVE-2020-1472</a> &#8212; which involves a critical issue in <strong>Windows Server</strong> versions that could let an unauthenticated attacker gain administrative access to a Windows domain controller and run an application of their choosing. A domain controller is a server that responds to security authentication requests in a Windows environment, and a compromised domain controller can give attackers the keys to the kingdom inside a corporate network.</p>
+<p>&#8220;It’s rare to see a Critical-rated elevation of privilege bug, but this one deserves it,&#8221; said ZDI&#8217;S <strong>Dustin Childs</strong>. &#8220;What’s worse is that there is not a full fix available.&#8221;</p>
+<p>Perhaps the most &#8220;<a href="https://en.wikipedia.org/wiki/Leet" target="_blank" rel="noopener noreferrer">elite</a>&#8221; vulnerability addressed this month earned the distinction of being named <a href="https://portal.msrc.microsoft.com/en-US/security-guidance/advisory/CVE-2020-1337" target="_blank" rel="noopener noreferrer">CVE-2020-1337</a>, and refers to a security hole in the <strong>Windows Print Spooler</strong> service that could allow an attacker or malware to escalate their privileges on a system if they were already logged on as a regular (non-administrator) user.</p>
+<p><strong>Satnam Narang</strong> at <strong>Tenable</strong> notes that CVE-2020-1337 is a patch bypass for <a href="https://portal.msrc.microsoft.com/en-US/security-guidance/advisory/CVE-2020-1048" target="_blank" rel="noopener noreferrer">CVE-2020-1048</a>, another Windows Print Spooler vulnerability that was patched in May 2020. Narang said researchers found that the patch for CVE-2020-1048 was incomplete and presented their findings for CVE-2020-1337 at the <strong>Black Hat</strong> security conference earlier this month. More information on CVE-2020-1337, including a video demonstration of a proof-of-concept exploit, is available <a href="https://voidsec.com/cve-2020-1337-printdemon-is-dead-long-live-printdemon/" target="_blank" rel="noopener noreferrer">here</a>. <a href="https://krebsonsecurity.com/2020/08/microsoft-patch-tuesday-august-2020-edition/#more-52627" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-52594" class="post-52594 post type-post status-publish format-standard hentry category-data-breaches category-employment-fraud category-comingstorm tag-covid-19 tag-derek-dubner tag-economic-injury-disaster-loan tag-idi-data tag-interactive-data-llc tag-international-computer-science-institute tag-nicholas-weaver tag-uc-berkeley">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2020/08/hacked-data-broker-accounts-fueled-phony-covid-loans-unemployment-claims/" title="Permalink to Hacked Data Broker Accounts Fueled Phony COVID Loans, Unemployment Claims" rel="bookmark">Hacked Data Broker Accounts Fueled Phony COVID Loans, Unemployment Claims</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">August 6, 2020</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2020/08/hacked-data-broker-accounts-fueled-phony-covid-loans-unemployment-claims/#comments">42 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>A group of thieves thought to be responsible for collecting millions in fraudulent small business loans and unemployment insurance benefits from COVID-19 economic relief efforts gathered personal data on people and businesses they were impersonating by leveraging several compromised accounts at a little-known U.S. consumer data broker, KrebsOnSecurity has learned.</p>
+<p><img loading="lazy" class="aligncenter wp-image-52613" src="https://krebsonsecurity.com/wp-content/uploads/2020/08/covidfraud.png" alt="" width="597" height="338" srcset="https://krebsonsecurity.com/wp-content/uploads/2020/08/covidfraud.png 648w, https://krebsonsecurity.com/wp-content/uploads/2020/08/covidfraud-580x328.png 580w" sizes="(max-width: 597px) 100vw, 597px" /></p>
+<p>In June, KrebsOnSecurity was contacted by a cybersecurity researcher who discovered that a group of scammers was sharing highly detailed personal and financial records on Americans via a free web-based email service that allows anyone who knows an account&#8217;s username to view all email sent to that account &#8212; without the need of a password.</p>
+<p>The source, who asked not to be identified in this story, said he&#8217;s been monitoring the group&#8217;s communications for several weeks and sharing the information with state and federal authorities in a bid to disrupt their fraudulent activity.</p>
+<p>The source said the group appears to consist of several hundred individuals who collectively have stolen tens of millions of dollars from U.S. state and federal treasuries via phony loan applications with the <strong>U.S. Small Business Administration</strong> (SBA) and through <a href="https://krebsonsecurity.com/?s=unemployment+insurance&amp;x=0&amp;y=0" target="_blank" rel="noopener noreferrer">fraudulent unemployment insurance claims made against several states</a>.</p>
+<p>KrebsOnSecurity reviewed dozens of emails the fraud group exchanged, and noticed that a great many consumer records they shared carried a notation indicating they were cut and pasted from the output of queries made at <strong>Interactive Data LLC</strong>, a Florida-based data analytics company.</p>
+<p>Interactive Data, also known as <a href="https://www.ididata.com/" target="_blank" rel="noopener noreferrer">IDIdata.com,</a> markets access to a &#8220;massive data repository&#8221; on U.S. consumers to a range of clients, including law enforcement officials, debt recovery professionals, and anti-fraud and compliance personnel at a variety of organizations.</p>
+<p>The consumer dossiers obtained from IDI and shared by the fraudsters include a staggering amount of sensitive data, including:</p>
+<p>-full Social Security number and date of birth;<br />
+-current and all known previous physical addresses;<br />
+-all known current and past mobile and home phone numbers;<br />
+-the names of any relatives and known associates;<br />
+-all known associated email addresses<br />
+-IP addresses and dates tied to the consumer&#8217;s online activities;<br />
+-vehicle registration, and property ownership information<br />
+-available lines of credit and amounts, and dates they were opened<br />
+-bankruptcies, liens, judgments, foreclosures and business affiliations</p>
+<p>Reached via phone, <a href="https://www.marketscreener.com/business-leaders/Derek-Dubner-0FF5XY-E/biography/" target="_blank" rel="noopener noreferrer">IDI Holdings CEO Derek Dubner</a> acknowledged that a review of the consumer records sampled from the fraud group&#8217;s shared communications indicates &#8220;a handful&#8221; of authorized IDI customer accounts had been compromised.</p>
+<p>&#8220;We identified a handful of legitimate businesses who are customers that may have experienced a breach,&#8221; Dubner said.</p>
+<p><a class="lightbox" href="https://krebsonsecurity.com/wp-content/uploads/2020/08/idi.png"><img loading="lazy" class="aligncenter wp-image-52609" src="https://krebsonsecurity.com/wp-content/uploads/2020/08/idi.png" alt="" width="595" height="435" srcset="https://krebsonsecurity.com/wp-content/uploads/2020/08/idi.png 1114w, https://krebsonsecurity.com/wp-content/uploads/2020/08/idi-580x424.png 580w, https://krebsonsecurity.com/wp-content/uploads/2020/08/idi-940x687.png 940w, https://krebsonsecurity.com/wp-content/uploads/2020/08/idi-768x561.png 768w" sizes="(max-width: 595px) 100vw, 595px" /></a></p>
+<p>Dubner said all customers are required to use multi-factor authentication, and that everyone applying for access to its services undergoes a rigorous vetting process.</p>
+<p>&#8220;We absolutely credential businesses and have several ways do that and exceed the gold standard, which is following some of the credit bureau guidelines,&#8221; he said. &#8220;We validate the identity of those applying [for access], check with the applicant&#8217;s state licensor and individual licenses.&#8221;</p>
+<p>Citing an ongoing law enforcement investigation into the matter, Dubner declined to say if the company knew for how long the handful of customer accounts were compromised, or how many consumer records were looked up via those stolen accounts.</p>
+<p>&#8220;We are communicating with law enforcement about it,&#8221; he said. &#8220;There isn&#8217;t much more I can share because we don&#8217;t want to impede the investigation.&#8221;</p>
+<p>The source told KrebsOnSecurity he&#8217;s identified more than 2,000 people whose SSNs, DoBs and other data were used by the fraud gang to file for unemployment insurance benefits and SBA loans, and that a single payday can land the thieves $20,000 or more. In addition, he said, it seems clear that the fraudsters are recycling stolen identities to file phony unemployment insurance claims in multiple states. <a href="https://krebsonsecurity.com/2020/08/hacked-data-broker-accounts-fueled-phony-covid-loans-unemployment-claims/#more-52594" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-52574" class="post-52574 post type-post status-publish format-standard hentry category-sunshine category-neer-do-well-news tag-andrew-warren tag-christopher-c-nash tag-graham-clark tag-gregg-bennett tag-sim-swapping tag-zoom-bombing">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2020/08/porn-clip-disrupts-virtual-court-hearing-for-alleged-twitter-hacker/" title="Permalink to Porn Clip Disrupts Virtual Court Hearing for Alleged Twitter Hacker" rel="bookmark">Porn Clip Disrupts Virtual Court Hearing for Alleged Twitter Hacker</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">August 5, 2020</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2020/08/porn-clip-disrupts-virtual-court-hearing-for-alleged-twitter-hacker/#comments">51 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>Perhaps fittingly, a Web-streamed court hearing for the 17-year-old alleged mastermind of the July 15 mass hack against <strong>Twitter</strong> was cut short this morning after mischief makers injected a pornographic video clip into the proceeding.</p>
+<div id="attachment_52527" style="width: 236px" class="wp-caption alignright"><img aria-describedby="caption-attachment-52527" loading="lazy" class=" wp-image-52527" src="https://krebsonsecurity.com/wp-content/uploads/2020/07/gclark.png" alt="" width="226" height="265" /><p id="caption-attachment-52527" class="wp-caption-text">17-year-old Graham Clark of Tampa, Fla. was among those charged in the July 15 Twitter hack. Image: Hillsborough County Sheriff&#8217;s Office.</p></div>
+<p>The incident occurred at a bond hearing held via the videoconferencing service <strong>Zoom</strong> by the Hillsborough County, Fla. criminal court in the case of <strong>Graham Clark</strong>. The 17-year-old from Tampa was arrested earlier this month on suspicion of social engineering his way into Twitter&#8217;s internal computer systems and tweeting out a bitcoin scam through the accounts of high-profile Twitter users.</p>
+<p>Notice of the hearing was available via public records filed with the Florida state attorney&#8217;s office. The notice specified the Zoom meeting time and ID number, essentially allowing anyone to participate in the proceeding.</p>
+<p>Even before the hearing officially began it was clear that the event would likely be &#8220;zoom bombed.&#8221; That&#8217;s because while participants were muted by default, they were free to unmute their microphones and transmit their own video streams to the channel.</p>
+<p>Sure enough, less than a minute had passed before one attendee not party to the case interrupted a discussion between Clark&#8217;s attorney and the judge by streaming a live video of himself adjusting his face mask. Just a few minutes later, someone began interjecting loud music.</p>
+<p>It became clear that presiding <strong>Judge Christopher C. Nash</strong> was personally in charge of administering the video hearing when, after roughly 15 seconds worth of random chatter interrupted the prosecution&#8217;s response, Nash told participants he was removing the troublemakers as quickly as he could.</p>
+<div id="attachment_52577" style="width: 235px" class="wp-caption alignleft"><img aria-describedby="caption-attachment-52577" loading="lazy" class=" wp-image-52577" src="https://krebsonsecurity.com/wp-content/uploads/2020/08/judgenash.png" alt="" width="225" height="221" srcset="https://krebsonsecurity.com/wp-content/uploads/2020/08/judgenash.png 800w, https://krebsonsecurity.com/wp-content/uploads/2020/08/judgenash-580x571.png 580w, https://krebsonsecurity.com/wp-content/uploads/2020/08/judgenash-768x756.png 768w" sizes="(max-width: 225px) 100vw, 225px" /><p id="caption-attachment-52577" class="wp-caption-text">Judge Nash, visibly annoyed immediately after one of the many disruptions to today&#8217;s hearing.</p></div>
+<p>What transpired a minute later was almost inevitable given the permissive settings of this particular Zoom conference call: Someone streamed a graphic video clip from Pornhub for approximately 15 seconds before Judge Nash abruptly terminated the broadcast.</p>
+<p>With the ongoing pestilence that is the COVID-19 pandemic, the nation&#8217;s state and federal courts have largely been forced to conduct proceedings remotely via videoconferencing services. While Zoom and others do offer settings that can prevent participants from injecting their own audio and video into the stream unless invited to do so, those settings evidently were not enabled in today&#8217;s meeting.</p>
+<p>At issue before the court today was a defense motion to modify the amount of the defendant&#8217;s bond, which has been set at $750,000. The prosecution had argued that Clark should be required to show that any funds used toward securing that bond were gained lawfully, and were not merely the proceeds from his alleged participation in the Twitter bitcoin scam or some other form of cybercrime.</p>
+<div id="attachment_52580" style="width: 238px" class="wp-caption alignright"><img aria-describedby="caption-attachment-52580" loading="lazy" class=" wp-image-52580" src="https://krebsonsecurity.com/wp-content/uploads/2020/08/image-2.png" alt="" width="228" height="224" srcset="https://krebsonsecurity.com/wp-content/uploads/2020/08/image-2.png 778w, https://krebsonsecurity.com/wp-content/uploads/2020/08/image-2-580x569.png 580w, https://krebsonsecurity.com/wp-content/uploads/2020/08/image-2-768x753.png 768w" sizes="(max-width: 228px) 100vw, 228px" /><p id="caption-attachment-52580" class="wp-caption-text">Florida State Attorney Andrew Warren&#8217;s reaction as a Pornhub clip began streaming to everyone in today&#8217;s Zoom proceeding.</p></div>
+<p>Mr. Clark&#8217;s attorneys disagreed, and spent most of the uninterrupted time in today&#8217;s hearing explaining why their client could safely be released under a much smaller bond and close supervision restrictions.</p>
+<p>On Sunday, The New York Times <a href="https://www.nytimes.com/2020/08/02/technology/florida-teenager-twitter-hack.html" target="_blank" rel="noopener noreferrer">published an in-depth look into Clark&#8217;s wayward path</a> from a small-time cheater and hustler in online games like Minecraft to big-boy schemes involving <a href="https://krebsonsecurity.com/?s=sim+swapping&amp;x=0&amp;y=0" target="_blank" rel="noopener noreferrer">SIM swapping</a>, a form of fraud that involves social engineering employees at mobile phone companies to gain control over a target&#8217;s phone number and any financial, email and social media accounts associated with that number.</p>
+<p>According to The Times, Clark was suspected of being involved in a 2019 SIM swapping incident which led to the theft of 164 bitcoins from <strong>Gregg Bennett</strong>, a tech investor in the Seattle area. That theft would have been worth around $856,000 at the time; these days 164 bitcoins is worth approximately $1.8 million.</p>
+<p>The Times said that soon after the theft, Bennett received an extortion note signed by Scrim, one of the hacker handles alleged to have been used by Clark. From that story:</p>
+<blockquote><p>&#8220;We just want the remainder of the funds in the Bittrex,&#8221; Scrim wrote, referring to the Bitcoin exchange from which the coins had been taken. &#8220;We are always one step ahead and this is your easiest option.&#8221;</p>
+<p>In April, the Secret Service seized 100 Bitcoins from Mr. Clark, according to government forfeiture documents. A few weeks later, Mr. Bennett received a letter from the Secret Service saying they had recovered 100 of his Bitcoins, citing the same code that was assigned to the coins seized from Mr. Clark.</p></blockquote>
+<p>Florida prosecutor Darrell Dirks was in the middle of explaining to the judge that investigators are still in the process of discovering the extent of Clark&#8217;s alleged illegal hacking activities since the Secret Service returned the 100 bitcoin when the porn clip was injected into the Zoom conference.</p>
+<p>Ultimately, Judge Nash decided to keep the bond amount as is, but to remove the condition that Clark prove the source of the funds.</p>
+<p>Clark has been charged with 30 felony counts and is being tried as an adult. Federal prosecutors also have <a href="https://krebsonsecurity.com/2020/07/three-charged-in-july-15-twitter-compromise/" target="_blank" rel="noopener noreferrer">charged two other young men suspected of playing roles in the Twitter hack</a>, including a 22-year-old from Orlando, Fla. and a 19-year-old from the United Kingdom.</p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-52325" class="post-52325 post type-post status-publish format-standard hentry category-sunshine category-data-breaches tag-call-protect tag-jolly-roger-telephone-company tag-nomorobo tag-riip-digital tag-robocalls tag-seth-heyman tag-spamhaus tag-tcpa tag-telephone-consumer-protection-act tag-the-blacklist-alliance tag-truecaller">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2020/08/robocall-legal-advocate-leaks-customer-data/" title="Permalink to Robocall Legal Advocate Leaks Customer Data" rel="bookmark">Robocall Legal Advocate Leaks Customer Data</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">August 3, 2020</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2020/08/robocall-legal-advocate-leaks-customer-data/#comments">66 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>A California company that helps telemarketing firms avoid getting sued for violating a federal law that seeks to curb robocalls has leaked the phone numbers, email addresses and passwords of all its customers, as well as the mobile phone numbers and other data on people who have hired lawyers to go after telemarketers.</p>
+<p><img loading="lazy" class="size-full wp-image-52557 aligncenter" src="https://krebsonsecurity.com/wp-content/uploads/2020/08/robocalls.png" alt="" width="477" height="312" /></p>
+<p><a href="https://www.blacklistalliance.com" target="_blank" rel="noopener noreferrer">The Blacklist Alliance</a> provides technologies and services to marketing firms concerned about lawsuits under the <a href="https://en.wikipedia.org/wiki/Telephone_Consumer_Protection_Act_of_1991" target="_blank" rel="noopener noreferrer">Telephone Consumer Protection Act</a> (TCPA), a 1991 law that restricts the making of telemarketing calls through the use of automatic telephone dialing systems and artificial or prerecorded voice messages. The TCPA prohibits contact with consumers &#8212; even via text messages &#8212; unless the company has &#8220;prior express consent&#8221; to contact the consumer.</p>
+<p>With statutory damages of $500 to $1,500 per call, the TCPA has prompted a flood of lawsuits over the years. From the telemarketer&#8217;s perspective, the TCPA can present something of a legal minefield in certain situations, such as when a phone number belonging to someone who&#8217;d previously given consent gets reassigned to another subscriber.</p>
+<p>Enter The Blacklist Alliance, which promises to help marketers avoid TCPA legal snares set by &#8220;professional plaintiffs and class action attorneys seeking to cash in on the TCPA.&#8221; According to the Blacklist, one of the &#8220;dirty tricks&#8221; used by TCPA &#8220;frequent filers&#8221; includes &#8220;phone flipping,&#8221; or registering multiple prepaid cell phone numbers to receive calls intended for the person to whom a number was previously registered.</p>
+<p>Lawyers representing TCPA claimants typically redact their clients&#8217; personal information from legal filings to protect them from retaliation and to keep their contact information private. The Blacklist Alliance researches TCPA cases to uncover the phone numbers of plaintiffs and sells this data in the form of list-scrubbing services to telemarketers.</p>
+<p>&#8220;TCPA predators operate like malware,&#8221; The Blacklist explains on its website. &#8220;Our Litigation Firewall isolates the infection and protects you from harm. Scrub against active plaintiffs, pre litigation complainers, active attorneys, attorney associates, and more. Use our robust API to seamlessly scrub these high-risk numbers from your outbound campaigns and inbound calls, or adjust your suppression settings to fit your individual requirements and appetite for risk.&#8221;</p>
+<p>Unfortunately for the Blacklist paying customers and for people represented by attorneys filing TCPA lawsuits, the Blacklist&#8217;s own Web site until late last week leaked reams of data to anyone with a Web browser. Thousands of documents, emails, spreadsheets, images and the names tied to countless mobile phone numbers all could be viewed or downloaded without authentication from the domain theblacklist.click.</p>
+<p>The directory also included all 388 Blacklist customer API keys, as well as each customer&#8217;s phone number, employer, username and password (scrambled with the relatively weak <a href="https://en.wikipedia.org/wiki/MD5" target="_blank" rel="noopener noreferrer">MD5 password hashing algorithm</a>).</p>
+<p><img loading="lazy" class="alignright wp-image-52559" src="https://krebsonsecurity.com/wp-content/uploads/2020/08/robocall2.png" alt="" width="249" height="310" />The leaked Blacklist customer database points to various companies you might expect to see using automated calling systems to generate business, including real estate and life insurance providers, credit repair companies and a long list of online advertising firms and individual digital marketing specialists.</p>
+<p>The very first account in the leaked Blacklist user database corresponds to its CEO <a href="https://www.linkedin.com/in/seth-heyman-971b5b24/" target="_blank" rel="noopener noreferrer">Seth Heyman</a>, an attorney in southern California. Mr. Heyman did not respond to multiple requests for comment, although The Blacklist stopped leaking its database not long after that contact request.</p>
+<p>Two other accounts marked as administrators were among the third and sixth registered users in the database; those correspond to two individuals at <strong>Riip Digital</strong>, a California-based email marketing concern that serves a <a href="http://sites.riip.com/" target="_blank" rel="noopener noreferrer">diverse range of clients</a> in the lead generation business, from <a href="http://sites.riip.com/sites/Debt_003/" target="_blank" rel="noopener noreferrer">debt relief</a> and <a href="http://sites.riip.com/sites/TimeShare/" target="_blank" rel="noopener noreferrer">timeshare companies</a>, to <a href="http://sites.riip.com/sites/r2d/" target="_blank" rel="noopener noreferrer">real estate firms</a> and <a href="http://sites.riip.com/sites/SuperCBD/" target="_blank" rel="noopener noreferrer">CBD vendors</a>.</p>
+<p>Riip Digital did not respond to requests for comment. But According to <strong>Spamhaus</strong>, an anti-spam group relied upon by many Internet service providers (ISPs) to block unsolicited junk email, the company has <a href="https://www.spamhaus.org/rokso/evidence/ROK10959/lead-research-group-riip-digital-inc.-throughput-inc./main-info" target="_blank" rel="noopener noreferrer">a storied history</a> of so-called &#8220;snowshoe spamming,&#8221; which involves junk email purveyors who try to avoid spam filters and blacklists by spreading their spam-sending systems across a broad swath of domains and Internet addresses. <a href="https://krebsonsecurity.com/2020/08/robocall-legal-advocate-leaks-customer-data/#more-52325" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-52521" class="post-52521 post type-post status-publish format-standard hentry category-neer-do-well-news category-other tag-chaewon tag-ever-so-anxious tag-graham-clark tag-mason-sheppard tag-nima-fazeli tag-ogusers tag-plugwalkjoe tag-rolex tag-twitter-hack tag-u-s-justice-department tag-wfla">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2020/07/three-charged-in-july-15-twitter-compromise/" title="Permalink to Three Charged in July 15 Twitter Compromise" rel="bookmark">Three Charged in July 15 Twitter Compromise</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">July 31, 2020</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2020/07/three-charged-in-july-15-twitter-compromise/#comments">53 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>Three individuals have been charged for their alleged roles in the July 15 hack on <strong>Twitter</strong>, an incident that resulted in Twitter profiles for some of the world&#8217;s most recognizable celebrities, executives and public figures sending out tweets advertising a bitcoin scam.</p>
+<div id="attachment_52296" style="width: 563px" class="wp-caption aligncenter"><img aria-describedby="caption-attachment-52296" loading="lazy" class="size-full wp-image-52296" src="https://krebsonsecurity.com/wp-content/uploads/2020/07/bezos-hack.png" alt="" width="553" height="683" /><p id="caption-attachment-52296" class="wp-caption-text">Amazon CEO Jeff Bezos&#8217;s Twitter account on the afternoon of July 15.</p></div>
+<p><strong>Nima &#8220;Rolex&#8221; Fazeli</strong>, a 22-year-old from Orlando, Fla., was charged in a criminal complaint in Northern California with aiding and abetting intentional access to a protected computer.</p>
+<p><strong>Mason &#8220;Chaewon&#8221; Sheppard</strong>, a 19-year-old from Bognor Regis, U.K., also was charged in California with conspiracy to commit wire fraud, money laundering and unauthorized access to a computer.</p>
+<p>A <strong>U.S. Justice Department</strong> <a href="https://www.justice.gov/usao-ndca/pr/three-individuals-charged-alleged-roles-twitter-hack" target="_blank" rel="noopener noreferrer">statement on the matter</a> does not name the third defendant charged in the case, saying juvenile proceedings in federal court are sealed to protect the identity of the youth. But an NBC News affiliate in Tampa <a href="https://www.wfla.com/news/hillsborough-county/tampa-teen-accused-of-being-mastermind-behind-twitter-hack-that-targeted-high-profile-accounts/" target="_blank" rel="noopener noreferrer">reported today</a> that authorities had arrested 17-year-old <strong>Graham Clark</strong> as the alleged mastermind of the hack.</p>
+<div id="attachment_52527" style="width: 255px" class="wp-caption alignright"><img aria-describedby="caption-attachment-52527" loading="lazy" class=" wp-image-52527" src="https://krebsonsecurity.com/wp-content/uploads/2020/07/gclark.png" alt="" width="245" height="287" /><p id="caption-attachment-52527" class="wp-caption-text">17-year-old Graham Clark of Tampa, Fla. was among those charged in the July 15 Twitter hack. Image: Hillsborough County Sheriff&#8217;s Office.</p></div>
+<p><strong>Wfla.com</strong> said Clark was hit with 30 felony charges, including organized fraud, communications fraud, one count of fraudulent use of personal information with over $100,000 or 30 or more victims, 10 counts of fraudulent use of personal information and one count of access to a computer or electronic device without authority. Clark&#8217;s arrest report is available <a href="https://krebsonsecurity.com/wp-content/uploads/2020/07/twt_arrest_report.pdf" target="_blank" rel="noopener noreferrer">here</a> (PDF). A <a href="https://www.sao13th.com/2020/07/hillsborough-state-attorneys-office-tapped-to-prosecute-worldwide-bit-con-hack-of-prominent-twitter-users/" target="_blank" rel="noopener noreferrer">statement</a> from prosecutors in Florida says Clark will be charged as an adult.</p>
+<p>On Thursday, Twitter <a href="https://twitter.com/TwitterSupport/status/1289000138300563457" target="_blank" rel="noopener noreferrer">released more details</a> about how the hack went down, saying the intruders &#8220;targeted a small number of employees through a phone spear phishing attack,&#8221; that &#8220;relies on a significant and concerted attempt to mislead certain employees and exploit human vulnerabilities to gain access to our internal systems.&#8221;</p>
+<p>By targeting specific Twitter employees, the perpetrators were able to gain access to internal Twitter tools. From there, Twitter said, the attackers targeted 130 Twitter accounts, tweeting from 45 of them, accessing the direct messages of 36 accounts, and downloading the Twitter data of seven.</p>
+<p>Among the accounts compromised were democratic presidential candidate <strong>Joe Biden</strong>, <strong>Amazon CEO Jeff Bezos</strong>, <strong>President Barack Obama</strong>, <strong>Tesla CEO Elon Musk</strong>, former New York Mayor <strong>Michael Bloomberg</strong> and investment mogul <strong>Warren Buffett</strong>.</p>
+<p>The hacked Twitter accounts were made to send tweets suggesting they were giving away bitcoin, and that anyone who sent bitcoin to a specified account would be sent back double the amount they gave. All told, the bitcoin accounts associated with the scam received more than 400 transfers totaling more than $100,000.</p>
+<p>Sheppard&#8217;s alleged alias Chaewon was mentioned twice in stories here since the July 15 incident. On July 16, KrebsOnSecurity <a href="https://krebsonsecurity.com/2020/07/whos-behind-wednesdays-epic-twitter-hack/" target="_blank" rel="noopener noreferrer">wrote</a> that just before the Twitter hack took place, a member of the <a href="https://krebsonsecurity.com/?s=ogusers&amp;x=0&amp;y=0" target="_blank" rel="noopener noreferrer">social media account hacking forum OGUsers</a> named Chaewon advertised they could change email address tied to <em>any</em> Twitter account for $250, and provide direct access to accounts for between $2,000 and $3,000 apiece.</p>
+<div id="attachment_52281" style="width: 607px" class="wp-caption aligncenter"><a class="lightbox" href="https://krebsonsecurity.com/wp-content/uploads/2020/07/chaewon.png"><img aria-describedby="caption-attachment-52281" loading="lazy" class="wp-image-52281" src="https://krebsonsecurity.com/wp-content/uploads/2020/07/chaewon.png" alt="" width="597" height="325" srcset="https://krebsonsecurity.com/wp-content/uploads/2020/07/chaewon.png 1518w, https://krebsonsecurity.com/wp-content/uploads/2020/07/chaewon-580x316.png 580w, https://krebsonsecurity.com/wp-content/uploads/2020/07/chaewon-940x511.png 940w, https://krebsonsecurity.com/wp-content/uploads/2020/07/chaewon-768x418.png 768w" sizes="(max-width: 597px) 100vw, 597px" /></a><p id="caption-attachment-52281" class="wp-caption-text">The OGUsers forum user &#8220;Chaewon&#8221; taking requests to modify the email address tied to any twitter account.</p></div>
+<p>On July 17, <em>The New York Times</em> <a href="https://www.nytimes.com/2020/07/17/technology/twitter-hackers-interview.html?action=click&amp;module=Top%20Stories&amp;pgtype=Homepage" target="_blank" rel="noopener noreferrer">ran a story</a> that featured interviews with several people involved in the attack. The young men told The Times they weren&#8217;t responsible for the Twitter bitcoin scam and had only brokered the purchase of accounts from the Twitter hacker &#8212; who they referred to only as &#8220;Kirk.&#8221;</p>
+<p>One of those interviewed by The Times used the alias &#8220;Ever So Anxious,&#8221; and said he was a 19-year from the U.K. In <a href="https://krebsonsecurity.com/2020/07/twitter-hacking-for-profit-and-the-lols/" target="_blank" rel="noopener noreferrer">my follow-up story on July 22</a>, it emerged that Ever So Anxious was in fact Chaewon.</p>
+<p>The person who shared that information was the principal subject of <a href="https://krebsonsecurity.com/2020/07/whos-behind-wednesdays-epic-twitter-hack/" target="_blank" rel="noopener noreferrer">my July 16 post</a>, which followed clues from tweets sent by one of the accounts claimed during the Twitter compromise back to a 21-year-old from the U.K. who uses the nickname <strong>PlugWalkJoe</strong>.</p>
+<p>That individual shared a series of screenshots showing he had been in communications with Chaewon/Ever So Anxious just prior to the Twitter hack, and had asked him to secure several desirable Twitter usernames from the Twitter hacker. He added that Chaewon/Ever So Anxious also was known as &#8220;Mason.&#8221;</p>
+<div id="attachment_52337" style="width: 412px" class="wp-caption aligncenter"><img aria-describedby="caption-attachment-52337" loading="lazy" class="size-full wp-image-52337" src="https://krebsonsecurity.com/wp-content/uploads/2020/07/beyondkirk.png" alt="" width="402" height="540" /><p id="caption-attachment-52337" class="wp-caption-text">The negotiations over highly-prized Twitter usernames took place just prior to the hijacked celebrity accounts tweeting out bitcoin scams. PlugWalkJoe is pictured here chatting with Ever So Anxious/Chaewon/Mason using his Discord username &#8220;Beyond Insane.&#8221;</p></div>
+<p>On July 22, KrebsOnSecurity interviewed Mason/Chaewon/Ever So Anxious, who confirmed that PlugWalkJoe had indeed asked him to ask Kirk to change the profile picture and display name for a specific Twitter account on July 15. Mason/Chaewon/Ever So Anxious acknowledged that while he did act as a &#8220;middleman&#8221; between Kirk and others seeking to claim desirable Twitter usernames, he had nothing to do with the hijacking of the VIP Twitter accounts for the bitcoin scam that same day.</p>
+<p>&#8220;Encountering Kirk was the worst mistake I&#8217;ve ever made due to the fact it has put me in issues I had nothing to do with,&#8221; he said. &#8220;If I knew Kirk was going to do what he did, or if even from the start if I knew he was a hacker posing as a rep I would not have wanted to be a middleman.&#8221;</p>
+<p>Another individual who told The Times he worked with Ever So Anxious/Chaewon/Mason in communicating with Kirk said he went by the nickname &#8220;lol.&#8221; On July 22, KrebsOnSecurity identified lol as a young man who went to high school in Danville, Calif.</p>
+<p>Federal investigators did not mention lol by his nickname or his real name, but the charging document against Sheppard says that on July 21 federal agents executed a search warrant at a residence in Northern California to question a juvenile who assisted Kirk and Chaewon in selling access to Twitter accounts. According to that document, the juvenile and Chaewon had discussed turning themselves in to authorities after the Twitter hack became publicly known.</p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-52499" class="post-52499 post type-post status-publish format-standard hentry category-all-about-skimmers category-latest-warnings category-comingstorm tag-chip-cards tag-cvv tag-cyber-rd-labs tag-emv tag-gemini-advisory tag-icvv tag-key-food-breach tag-pos-malware tag-shimmers tag-skimmers tag-stas-alforov tag-visa">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2020/07/is-your-chip-card-secure-much-depends-on-where-you-bank/" title="Permalink to Is Your Chip Card Secure? Much Depends on Where You Bank" rel="bookmark">Is Your Chip Card Secure? Much Depends on Where You Bank</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">July 30, 2020</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2020/07/is-your-chip-card-secure-much-depends-on-where-you-bank/#comments">44 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>Chip-based credit and debit cards are designed to make it infeasible for skimming devices or malware to clone your card when you pay for something by dipping the chip instead of swiping the stripe. But a recent series of malware attacks on U.S.-based merchants suggest thieves are exploiting weaknesses in how certain financial institutions have implemented the technology to sidestep key chip card security features and effectively create usable, counterfeit cards.</p>
+<div id="attachment_52510" style="width: 607px" class="wp-caption aligncenter"><img aria-describedby="caption-attachment-52510" loading="lazy" class=" wp-image-52510" src="https://krebsonsecurity.com/wp-content/uploads/2020/07/chipcard.png" alt="" width="597" height="375" srcset="https://krebsonsecurity.com/wp-content/uploads/2020/07/chipcard.png 807w, https://krebsonsecurity.com/wp-content/uploads/2020/07/chipcard-580x364.png 580w, https://krebsonsecurity.com/wp-content/uploads/2020/07/chipcard-768x482.png 768w" sizes="(max-width: 597px) 100vw, 597px" /><p id="caption-attachment-52510" class="wp-caption-text">A chip-based credit card. Image: Wikipedia.</p></div>
+<p>Traditional payment cards encode cardholder account data in plain text on a magnetic stripe, which can be read and recorded by skimming devices or malicious software surreptitiously installed in payment terminals. That data can then be encoded onto anything else with a magnetic stripe and used to place fraudulent transactions.</p>
+<p>Newer, chip-based cards employ a technology known as <a href="https://en.wikipedia.org/wiki/EMV#:~:text=EMV%20is%20a%20payment%20method,companies%20which%20created%20the%20standard." target="_blank" rel="noopener noreferrer">EMV</a> that encrypts the account data stored in the chip. The technology causes a unique encryption key &#8212; referred to as a token or &#8220;cryptogram&#8221; &#8212; to be generated each time the chip card interacts with a chip-capable payment terminal.</p>
+<p>Virtually all chip-based cards still have much of the same data that&#8217;s stored in the chip encoded on a magnetic stripe on the back of the card. This is largely for reasons of backward compatibility since many merchants &#8212; particularly those in the United States &#8212; <a href="https://krebsonsecurity.com/2020/07/heres-why-credit-card-fraud-is-still-a-thing/" target="_blank" rel="noopener noreferrer">still have not fully implemented chip card readers</a>. This dual functionality also allows cardholders to swipe the stripe if for some reason the card&#8217;s chip or a merchant&#8217;s EMV-enabled terminal has malfunctioned.</p>
+<p>But there are important differences between the cardholder data stored on EMV chips versus magnetic stripes. One of those is a component in the chip known as an integrated circuit card verification value or “iCVV” for short — also known as a “dynamic CVV.”</p>
+<p>The iCVV differs from the card verification value (CVV) stored on the physical magnetic stripe, and protects against the copying of magnetic-stripe data from the chip and the use of that data to create counterfeit magnetic stripe cards. Both the iCVV and CVV values are unrelated to the three-digit security code that is visibly printed on the back of a card, which is used mainly for e-commerce transactions or for card verification over the phone.</p>
+<p>The appeal of the EMV approach is that even if a skimmer or malware manages to intercept the transaction information when a chip card is dipped, the data is only valid for that one transaction and should not allow thieves to conduct fraudulent payments with it going forward.</p>
+<p>However, for EMV&#8217;s security protections to work, the back-end systems deployed by card-issuing financial institutions are supposed to check that when a chip card is dipped into a chip reader, only the iCVV is presented; and conversely, that only the CVV is presented when the card is swiped. If somehow these do not align for a given transaction type, the financial institution is supposed to decline the transaction.</p>
+<p><em>The trouble is that not all financial institutions have properly set up their systems this way.</em> Unsurprisingly, thieves have known about this weakness for years. In 2017, I wrote about <a href="https://krebsonsecurity.com/2017/01/atm-shimmers-target-chip-based-cards/" target="_blank" rel="noopener noreferrer">the increasing prevalence of &#8220;shimmers,&#8221;</a> high-tech card skimming devices made to intercept data from chip card transactions.</p>
+<div id="attachment_37813" style="width: 603px" class="wp-caption aligncenter"><img aria-describedby="caption-attachment-37813" loading="lazy" class=" wp-image-37813" src="https://krebsonsecurity.com/wp-content/uploads/2017/01/ca-shim2.png" alt="" width="593" height="424" srcset="https://krebsonsecurity.com/wp-content/uploads/2017/01/ca-shim2.png 969w, https://krebsonsecurity.com/wp-content/uploads/2017/01/ca-shim2-580x415.png 580w, https://krebsonsecurity.com/wp-content/uploads/2017/01/ca-shim2-768x549.png 768w, https://krebsonsecurity.com/wp-content/uploads/2017/01/ca-shim2-940x672.png 940w" sizes="(max-width: 593px) 100vw, 593px" /><p id="caption-attachment-37813" class="wp-caption-text">A close-up of a shimmer found on a Canadian ATM. Source: RCMP.</p></div>
+<p>More recently, researchers at <strong>Cyber R&amp;D Labs</strong> <a href="https://www.cyberdlab.com/insights/it-only-takes-a-minute-to-clone-a-credit-card-thanks-to-a-50-year-old-problem" target="_blank" rel="noopener noreferrer">published a paper</a> detailing how they tested 11 chip card implementations from 10 different banks in Europe and the U.S. The researchers found they could harvest data from four of them and create cloned magnetic stripe cards that were successfully used to place transactions.</p>
+<p>There are now strong indications the same method detailed by Cyber R&amp;D Labs is being used by point-of-sale (POS) malware to capture EMV transaction data that can then be resold and used to fabricate magnetic stripe copies of chip-based cards.</p>
+<p>Earlier this month, the world&#8217;s largest payment card network <strong>Visa</strong> <a href="http://click.broadcasts.visa.com/xfm/?40254/0/e72e19883ebb78a475570ab6dd5275ad/lonew" target="_blank" rel="noopener noreferrer">released a security alert</a> regarding a recent merchant compromise in which known POS malware families were apparently modified to target EMV chip-enabled POS terminals.</p>
+<p>&#8220;The implementation of secure acceptance technology, such as EMV® Chip, significantly reduced the usability of the payment account data by threat actors as the available data only included personal account number (PAN), integrated circuit card verification value (iCVV) and expiration date,&#8221; Visa wrote. &#8220;Thus, provided iCVV is validated properly, the risk of counterfeit fraud was minimal. Additionally, many of the merchant locations employed point-to-point encryption (P2PE) which encrypted the PAN data and further reduced the risk to the payment accounts processed as EMV® Chip.&#8221;</p>
+<p>Visa did not name the merchant in question, but something similar seems to have happened at <strong>Key Food Stores Co-Operative Inc.</strong>, a supermarket chain in the northeastern United States. Key Food initially disclosed a card breach in March 2020, but two weeks ago <a href="https://www.keyfood.com/store/keyFood/en/protectingourcustomers?state=NY&amp;city=Albertson" target="_blank" rel="noopener noreferrer">updated its advisory</a> to clarify that EMV transaction data also was intercepted.</p>
+<p>&#8220;The POS devices at the store locations involved were EMV enabled,&#8221; Key Food explained. &#8220;For EMV transactions at these locations, we believe only the card number and expiration date would have been found by the malware (but not the cardholder name or internal verification code).&#8221;</p>
+<p><a class="lightbox" href="https://krebsonsecurity.com/wp-content/uploads/2020/07/visaalert.png"><img loading="lazy" class="aligncenter wp-image-52508" src="https://krebsonsecurity.com/wp-content/uploads/2020/07/visaalert.png" alt="" width="590" height="420" srcset="https://krebsonsecurity.com/wp-content/uploads/2020/07/visaalert.png 674w, https://krebsonsecurity.com/wp-content/uploads/2020/07/visaalert-580x413.png 580w" sizes="(max-width: 590px) 100vw, 590px" /></a></p>
+<p>While Key Food&#8217;s statement may be technically accurate, it glosses over the reality that the stolen EMV data could still be used by fraudsters to create magnetic stripe versions of EMV cards presented at the compromised store registers in cases where the card-issuing bank hadn&#8217;t implemented EMV correctly. <a href="https://krebsonsecurity.com/2020/07/is-your-chip-card-secure-much-depends-on-where-you-bank/#more-52499" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+		<article id="post-51973" class="post-51973 post type-post status-publish format-standard hentry category-sunshine category-data-breaches tag-briansclub-hack tag-damon-mccoy tag-mastercard tag-new-york-university-tandon-school-of-engineering tag-usaa tag-visa">
+				<header class="entry-header">
+						<h2 class="entry-title">
+				<a href="https://krebsonsecurity.com/2020/07/heres-why-credit-card-fraud-is-still-a-thing/" title="Permalink to Here&#8217;s Why Credit Card Fraud is Still a Thing" rel="bookmark">Here&#8217;s Why Credit Card Fraud is Still a Thing</a>
+			</h2>
+					<div class="clear"></div>
+	<div class="btm-wrap">
+	<div class="below-title-meta">
+		<div class="adt">
+			
+			
+				
+				<span class="date updated">July 29, 2020</span>
+					
+        </div>
+		<div class="adt-comment">
+		<span><a class="link-comments" href="https://krebsonsecurity.com/2020/07/heres-why-credit-card-fraud-is-still-a-thing/#comments">49 Comments</a></span> 
+        </div>    <div class="clear"></div>	   
+    </div><!-- below title meta end -->
+	</div>
+		
+						</header><!-- .entry-header -->
+		
+							<div class="entry-content">
+												<p>Most of the civilized world years ago shifted to requiring computer chips in payment cards that make it far more expensive and difficult for thieves to clone and use them for fraud. One notable exception is the United States, which is still lurching toward this goal. Here&#8217;s a look at the havoc that lag has wrought, as seen through the purchasing patterns at one of the underground&#8217;s biggest stolen card shops that was hacked last year.</p>
+<p>In October 2019, someone hacked <strong>BriansClub</strong>, a popular stolen card bazaar that uses this author&#8217;s likeness and name in its marketing. Whoever compromised the shop siphoned data on millions of card accounts that were acquired over four years through various illicit means from legitimate, hacked businesses around the globe &#8212; but mostly from U.S. merchants. That database <a href="https://krebsonsecurity.com/2019/10/briansclub-hack-rescues-26m-stolen-cards/" target="_blank" rel="noopener noreferrer">was leaked to KrebsOnSecurity</a>, which in turn shared it with multiple sources that help fight payment card fraud.</p>
+<div id="attachment_49240" style="width: 603px" class="wp-caption aligncenter"><img aria-describedby="caption-attachment-49240" loading="lazy" class=" wp-image-49240" src="https://krebsonsecurity.com/wp-content/uploads/2019/10/briansdump.gif" alt="" width="593" height="38" /><p id="caption-attachment-49240" class="wp-caption-text">An ad for BriansClub has been using my name and likeness for years to peddle millions of stolen credit cards.</p></div>
+<p>Among the recipients was <strong>Damon McCoy</strong>, an associate professor at <strong>New York University&#8217;s Tandon School of Engineering</strong> [full disclosure: NYU has been a longtime advertiser on this blog]. McCoy&#8217;s work in probing the credit card systems used by some of the world&#8217;s biggest purveyors of junk email greatly enriched the data that informed <a href="https://www.amazon.com/Spam-Nation-Organized-Cybercrime-Epidemic-ebook/dp/B00L5QGBL0/ref=dp_kinw_strp_1" target="_blank" rel="noopener noreferrer">my 2014 book <em>Spam Nation</em></a>, and I wanted to make sure he and his colleagues had a crack at the BriansClub data as well.</p>
+<p>McCoy and fellow NYU researchers found BriansClub earned close to $104 million in gross revenue from 2015 to early 2019, and listed over 19 million unique card numbers for sale. Around 97% of the inventory was stolen magnetic stripe data, commonly used to produce counterfeit cards for in-person payments.</p>
+<p>&#8220;What surprised me most was there are still a lot of people swiping their cards for transactions here,&#8221; McCoy said.</p>
+<p>In 2015, the major credit card associations instituted new rules that made it riskier and potentially more expensive for U.S. merchants to continue allowing customers to swipe the stripe instead of dip the chip. Complicating this transition was the fact that many card-issuing U.S. banks took years to replace their customer card stocks with chip-enabled cards, and countless retailers dragged their feet in updating their payment terminals to accept chip-based cards.</p>
+<p>Indeed, three years later the <strong>U.S. Federal Reserve</strong> <a href="https://www.federalreserve.gov/newsevents/pressreleases/files/2019-payments-study-20191219.pdf" target="_blank" rel="noopener noreferrer">estimated</a> (PDF) that 43.3 percent of in-person card payments were still being processed by reading the magnetic stripe instead of the chip. This might not have been such a big deal if payment terminals at many of those merchants weren&#8217;t also compromised with malicious software that copied the data when customers swiped their cards.</p>
+<p>Following the 2015 liability shift, more than 84 percent of the non-chip cards advertised by BriansClub were sold, versus just 35 percent of chip-based cards during the same time period.</p>
+<p>&#8220;All cards without a chip were in much higher demand,&#8221; McCoy said.</p>
+<p>Perhaps surprisingly, McCoy and his fellow NYU researchers found BriansClub customers purchased only 40% of its overall inventory. But what they did buy supports the notion that crooks generally gravitate toward cards issued by financial institutions that are perceived as having fewer or more lax protections against fraud.</p>
+<div id="attachment_52471" style="width: 261px" class="wp-caption alignright"><a class="lightbox" href="https://krebsonsecurity.com/wp-content/uploads/2020/07/bc-issuers.png"><img aria-describedby="caption-attachment-52471" loading="lazy" class="wp-image-52471" src="https://krebsonsecurity.com/wp-content/uploads/2020/07/bc-issuers.png" alt="" width="251" height="406" /></a><p id="caption-attachment-52471" class="wp-caption-text">Source: NYU.</p></div>
+<p>While the top 10 largest card issuers in the United States accounted for nearly half of the accounts put up for sale at BriansClub, only 32 percent of those accounts were sold &#8212; and at a roughly half the median price of those issued by small- and medium-sized institutions.</p>
+<p>In contrast, more than half of the stolen cards issued by small and medium-sized institutions were purchased from the fraud shop. This was true even though by the end of 2018, 91 percent of cards for sale from medium-sized institutions were chip-based, and 89 percent from smaller banks and credit unions. Nearly all cards issued by the top ten largest U.S. card issuers (98 percent) were chip-enabled by that time.</p>
+<h4>REGION LOCK</h4>
+<p>The researchers found BriansClub customers strongly preferred cards issued by financial institutions in specific regions of the United States, specifically Colorado, Nevada, and South Carolina.</p>
+<p>&#8220;For whatever reason, those regions were perceived as having lower anti-fraud systems or those that were not as effective,&#8221; McCoy said.</p>
+<p>Cards compromised from merchants in South Carolina were in especially high demand, with fraudsters willing to spend twice as much on those cards per capita than any other state &#8212; roughly $1 per resident.</p>
+<p>That sales trend also was reflected in the support tickets filed by BriansClub customers, who frequently were informed that cards tied to the southeastern United States were less likely to be restricted for use outside of the region.</p>
+<div id="attachment_52481" style="width: 607px" class="wp-caption aligncenter"><a class="lightbox" href="https://krebsonsecurity.com/wp-content/uploads/2020/07/bc-us-supply-spending.png"><img aria-describedby="caption-attachment-52481" loading="lazy" class="wp-image-52481" src="https://krebsonsecurity.com/wp-content/uploads/2020/07/bc-us-supply-spending.png" alt="" width="597" height="121" srcset="https://krebsonsecurity.com/wp-content/uploads/2020/07/bc-us-supply-spending.png 1016w, https://krebsonsecurity.com/wp-content/uploads/2020/07/bc-us-supply-spending-580x118.png 580w, https://krebsonsecurity.com/wp-content/uploads/2020/07/bc-us-supply-spending-940x191.png 940w, https://krebsonsecurity.com/wp-content/uploads/2020/07/bc-us-supply-spending-768x156.png 768w" sizes="(max-width: 597px) 100vw, 597px" /></a><p id="caption-attachment-52481" class="wp-caption-text">Image: NYU.</p></div>
+<p>McCoy said the lack of region locking also made stolen cards issued by banks in China something of a hot commodity, even though these cards demanded much higher prices (often more than $100 per account): The NYU researchers found virtually all available Chinese cards were sold soon after they were put up for sale. Ditto for the relatively few corporate and business cards for sale.</p>
+<p>A lack of region locks may also have caused card thieves to gravitate toward buying up as many cards as they could from <strong>USAA</strong>, a savings bank that caters to active and former military service members and their immediate families. More than 83 percent of the available USAA cards were sold between 2015 and 2019, the researchers found.</p>
+<p>Although Visa cards made up more than half of accounts put up for sale (12.1 million), just 36 percent were sold. MasterCards were the second most-plentiful (3.72 million), and yet more than 54 percent of them sold.</p>
+<p><strong>American Express</strong> and <strong>Discover</strong>, which unlike Visa and MasterCard are so-called &#8220;closed loop&#8221; networks that do not rely on third-party financial institutions to issue cards and manage fraud on them, saw 28.8 percent and 33 percent of their stolen cards purchased, respectively. <a href="https://krebsonsecurity.com/2020/07/heres-why-credit-card-fraud-is-still-a-thing/#more-51973" class="more-link">Continue reading <span class="meta-nav">&rarr;</span></a></p>
+											</div><!-- .entry-content -->
+		
+			
+	
+	<footer class="entry-meta">
+		
+					
+	</footer>
+
+	</article><!-- #post -->
+				
+			
+								<div class="themonic-pagination"><div class='pagination'><ul><li><a href='https://krebsonsecurity.com/'>&laquo; First</a></li><li><a href='https://krebsonsecurity.com/page/17/' class='inactive'>&lsaquo; Previous</a></li><li><a href='https://krebsonsecurity.com/page/15/' class='inactive'>15</a></li><li><a href='https://krebsonsecurity.com/page/16/' class='inactive'>16</a></li><li><a href='https://krebsonsecurity.com/page/17/' class='inactive'>17</a></li><li class='current'><span class='currenttext'>18</span></li><li><a href='https://krebsonsecurity.com/page/19/' class='inactive'>19</a></li><li><a href='https://krebsonsecurity.com/page/20/' class='inactive'>20</a></li><li><a href='https://krebsonsecurity.com/page/21/' class='inactive'>21</a></li><li><a href='https://krebsonsecurity.com/page/19/' class='inactive'>Next &rsaquo;</a></li><a class='inactive' href='https://krebsonsecurity.com/page/209/'>Last &raquo;</a></ul></div></div>
+					<div style="display: block; clear: both;"></div>
+			
+		
+
+	
+
+		</div><!-- #content -->
+	</div><!-- #primary -->
+
+
+			<div id="secondary" class="widget-area" role="complementary">
+
+        <div id="sidebar_ad" class="widget themonic-ad5"><div class="a-statement">Advertisement</div><a href="https://securityscorecard.com/instant-security-scorecard?utm_source=krebs+on+security&amp;utm_medium=display&amp;utm_campaign=instant+scorecard&amp;utm_term=A&amp;utm_content=335x300">
+<img src="/b-securityscorecard/3.jpg">
+</a></div>
+
+                        <br><div class="widget themonic-ad1"><div class="a-statement">Advertisement</div><a href="https://www.akamai.com/blog/security/attacking-a-macro-security-problem-with-micro-segmentation?utm_source=krebsonsecurity&amp;utm_medium=display&amp;utm_id=GL_SecureWorkforce_Guardicore&amp;utm_campaign=F-MC-52610&amp;utm_content=Guardicore">
+<img src="/b-akamai/138.png">
+</a></div><br>
+
+			<aside id="custom_html-2" class="widget_text widget widget_custom_html"><p class="widget-title">Mailing List</p><div class="textwidget custom-html-widget"><a href="/subscribe/">Subscribe here</a></div></aside><aside id="search-2" class="widget widget_search"><p class="widget-title">Search KrebsOnSecurity</p><form role="search" method="get" id="searchform" class="searchform" action="https://krebsonsecurity.com/">
+				<div>
+					<label class="screen-reader-text" for="s">Search for:</label>
+					<input type="text" value="" name="s" id="s" />
+					<input type="submit" id="searchsubmit" value="Search" />
+				</div>
+			</form></aside>
+		<aside id="recent-posts-3" class="widget widget_recent_entries">
+		<p class="widget-title">Recent Posts</p>
+		<ul>
+											<li>
+					<a href="https://krebsonsecurity.com/2021/12/canada-charges-its-most-prolific-cybercriminal/">Canada Charges Its &#8220;Most Prolific Cybercriminal&#8221;</a>
+									</li>
+											<li>
+					<a href="https://krebsonsecurity.com/2021/12/who-is-the-network-access-broker-babam/">Who Is the Network Access Broker &#8216;Babam&#8217;?</a>
+									</li>
+											<li>
+					<a href="https://krebsonsecurity.com/2021/12/ubiquiti-developer-charged-with-extortion-causing-2020-breach/">Ubiquiti Developer Charged With Extortion, Causing 2020 &#8220;Breach&#8221;</a>
+									</li>
+											<li>
+					<a href="https://krebsonsecurity.com/2021/11/the-internet-is-held-together-with-spit-baling-wire/">The Internet is Held Together With Spit &#038; Baling Wire</a>
+									</li>
+											<li>
+					<a href="https://krebsonsecurity.com/2021/11/arrest-in-ransom-your-employer-email-scheme/">Arrest in &#8216;Ransom Your Employer&#8217; Email Scheme</a>
+									</li>
+					</ul>
+
+		</aside><aside id="text-2" class="widget widget_text">			<div class="textwidget"><a name="subscribe2"></a></div>
+		</aside><aside id="widget_sp_image-15" class="widget widget_sp_image"><p class="widget-title">Spam Nation</p><a href="https://www.amazon.com/Spam-Nation-Organized-Cybercrime-Epidemic-ebook/dp/B00L5QGBL0/ref=dp_kinw_strp_1" target="_blank" class="widget_sp_image-image-link" title="Spam Nation"><img width="266" height="404" alt="Spam Nation" class="attachment-266x404 aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2015/04/spamnation-nyt.png" /></a><div class="widget_sp_image-description" ><p>A New York Times Bestseller! </p>
+</div></aside><aside id="widget_sp_image-25" class="widget widget_sp_image"><p class="widget-title">Thinking of a Cybersecurity Career?</p><a href="https://krebsonsecurity.com/2020/07/thinking-of-a-cybersecurity-career-read-this/" target="_blank" class="widget_sp_image-image-link" title="Thinking of a Cybersecurity Career? Read This."><img width="625" height="424" alt="Thinking of a Cybersecurity Career?" class="attachment-full" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2020/07/codepeople.png 625w, https://krebsonsecurity.com/wp-content/uploads/2020/07/codepeople-580x393.png 580w" sizes="(max-width: 625px) 100vw, 625px" src="https://krebsonsecurity.com/wp-content/uploads/2020/07/codepeople.png" /></a><div class="widget_sp_image-description" ><p>Read this.</p>
+</div></aside><aside id="widget_sp_image-3" class="widget widget_sp_image"><p class="widget-title">All About Skimmers </p><a href="https://krebsonsecurity.com/all-about-skimmers/" target="_blank" class="widget_sp_image-image-link" title="All About Skimmers "><img width="299" height="232" alt="All About Skimmers" class="attachment-299x232 aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2010/08/skimgallery1.jpg" /></a><div class="widget_sp_image-description" ><p>Click image for my skimmer series.</p>
+</div></aside><aside id="categories-2" class="widget widget_categories"><p class="widget-title">Story Categories</p>
+			<ul>
+					<li class="cat-item cat-item-5"><a href="https://krebsonsecurity.com/category/sunshine/" title="Includes investigative blog posts meant to shine a light on the darker corners of the Internet.">A Little Sunshine</a>
+</li>
+	<li class="cat-item cat-item-2240"><a href="https://krebsonsecurity.com/category/all-about-skimmers/">All About Skimmers</a>
+</li>
+	<li class="cat-item cat-item-9085"><a href="https://krebsonsecurity.com/category/ashley-madison-breach/">Ashley Madison breach</a>
+</li>
+	<li class="cat-item cat-item-3191"><a href="https://krebsonsecurity.com/category/breadcrumbs/">Breadcrumbs</a>
+</li>
+	<li class="cat-item cat-item-3771"><a href="https://krebsonsecurity.com/category/data-breaches/" title="Stories about data breaches at retailers, corporations, governments and organizations of all sizes.">Data Breaches</a>
+</li>
+	<li class="cat-item cat-item-4624"><a href="https://krebsonsecurity.com/category/ddos-for-hire/">DDoS-for-Hire</a>
+</li>
+	<li class="cat-item cat-item-9173"><a href="https://krebsonsecurity.com/category/employment-fraud/">Employment Fraud</a>
+</li>
+	<li class="cat-item cat-item-2151"><a href="https://krebsonsecurity.com/category/how-to-break-into-security/" title="If you&#039;ve ever wanted career advice on how to make a shift into the security industry, look no further.">How to Break Into Security</a>
+</li>
+	<li class="cat-item cat-item-87"><a href="https://krebsonsecurity.com/category/latest-warnings/">Latest Warnings</a>
+</li>
+	<li class="cat-item cat-item-4071"><a href="https://krebsonsecurity.com/category/neer-do-well-news/">Ne&#039;er-Do-Well News</a>
+</li>
+	<li class="cat-item cat-item-9"><a href="https://krebsonsecurity.com/category/other/">Other</a>
+</li>
+	<li class="cat-item cat-item-1306"><a href="https://krebsonsecurity.com/category/pharma-wars/">Pharma Wars</a>
+</li>
+	<li class="cat-item cat-item-8240"><a href="https://krebsonsecurity.com/category/ransomware/">Ransomware</a>
+</li>
+	<li class="cat-item cat-item-599"><a href="https://krebsonsecurity.com/category/security-tools/">Security Tools</a>
+</li>
+	<li class="cat-item cat-item-8298"><a href="https://krebsonsecurity.com/category/sim-swapping/">SIM Swapping</a>
+</li>
+	<li class="cat-item cat-item-4079"><a href="https://krebsonsecurity.com/category/spam-nation/">Spam Nation</a>
+</li>
+	<li class="cat-item cat-item-1"><a href="https://krebsonsecurity.com/category/smallbizvictims/" title="Posts in this category will include new stories similar to those told in the Small Business Victims category on The Washington Post&#039;s Security Fix blog, which chronicled the methods organized cyber thieve are using to steal hundreds of thousands of dollars from dozens of small- to mid-sized companies around the country.">Target: Small Businesses</a>
+</li>
+	<li class="cat-item cat-item-5167"><a href="https://krebsonsecurity.com/category/tax-refund-fraud/">Tax Refund Fraud</a>
+</li>
+	<li class="cat-item cat-item-3"><a href="https://krebsonsecurity.com/category/comingstorm/" title="This category includes blog posts about computer and Internet security threats now and on the horizon.">The Coming Storm</a>
+</li>
+	<li class="cat-item cat-item-4"><a href="https://krebsonsecurity.com/category/patches/" title="Short posts on the latest security updates for widely-used software.
+">Time to Patch</a>
+</li>
+	<li class="cat-item cat-item-21"><a href="https://krebsonsecurity.com/category/web-fraud-2-0/">Web Fraud 2.0</a>
+</li>
+			</ul>
+
+			</aside><aside id="widget_sp_image-5" class="widget widget_sp_image"><p class="widget-title">The Value of a Hacked PC</p><a href="https://krebsonsecurity.com/2012/10/the-scrap-value-of-a-hacked-pc-revisited/" target="_blank" class="widget_sp_image-image-link" title="The Value of a Hacked PC"><img width="285" height="180" alt="valuehackedpc " class="attachment-285x180 aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2012/12/valuehackedpc-285x180.png" /></a><div class="widget_sp_image-description" ><p>Badguy uses for your PC</p>
+</div></aside><aside id="widget_sp_image-9" class="widget widget_sp_image"><p class="widget-title">Badguy Uses for Your Email </p><a href="https://krebsonsecurity.com/2013/06/the-value-of-a-hacked-email-account/" target="_self" class="widget_sp_image-image-link" title="Badguy Uses for Your Email "><img width="296" height="170" alt="Badguy Uses for Your Email " class="attachment-full aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2013/06/badguyemail.png 296w, https://krebsonsecurity.com/wp-content/uploads/2013/06/badguyemail-285x163.png 285w" sizes="(max-width: 296px) 100vw, 296px" src="https://krebsonsecurity.com/wp-content/uploads/2013/06/badguyemail.png" /></a><div class="widget_sp_image-description" ><p>Your email account may be worth far more than you imagine.</p>
+</div></aside><aside id="widget_sp_image-24" class="widget widget_sp_image"><a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&#038;hosted_button_id=MCCRKHWRX57HS" id="donate" target="_self" class="widget_sp_image-image-link"><img width="250" height="55" alt="Donate to Krebs On Security" class="attachment-medium aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2016/09/donatepaypal2-1.png" /></a></aside><aside id="most_popular_posts-3" class="widget widget_most_popular_posts">
+<p class="widget-title">Most Popular Posts</p>
+<ul>	<li><a href="https://krebsonsecurity.com/2018/07/sextortion-scam-uses-recipients-hacked-passwords/">Sextortion Scam Uses Recipient's Hacked Passwords</a> (1076)</li>
+	<li><a href="https://krebsonsecurity.com/2015/07/online-cheating-site-ashleymadison-hacked/">Online Cheating Site AshleyMadison Hacked</a> (798)</li>
+	<li><a href="https://krebsonsecurity.com/2013/12/sources-target-investigating-data-breach/">Sources: Target Investigating Data Breach</a> (620)</li>
+	<li><a href="https://krebsonsecurity.com/2020/11/trump-fires-security-chief-christopher-krebs/">Trump Fires Security Chief Christopher Krebs</a> (534)</li>
+	<li><a href="https://krebsonsecurity.com/2013/12/cards-stolen-in-target-breach-flood-underground-markets/">Cards Stolen in Target Breach Flood Underground Markets</a> (445)</li>
+	<li><a href="https://krebsonsecurity.com/2013/05/reports-liberty-reserve-founder-arrested-site-shuttered/">Reports: Liberty Reserve Founder Arrested, Site Shuttered</a> (416)</li>
+	<li><a href="https://krebsonsecurity.com/2015/08/was-the-ashley-madison-database-leaked/">Was the Ashley Madison Database Leaked?</a> (376)</li>
+	<li><a href="https://krebsonsecurity.com/2021/01/ddos-guard-to-forfeit-internet-space-occupied-by-parler/">DDoS-Guard To Forfeit Internet Space Occupied by Parler</a> (374)</li>
+	<li><a href="https://krebsonsecurity.com/2014/05/true-goodbye-using-truecrypt-is-not-secure/">True Goodbye: 'Using TrueCrypt Is Not Secure'</a> (363)</li>
+	<li><a href="https://krebsonsecurity.com/2015/08/who-hacked-ashley-madison/">Who Hacked Ashley Madison?</a> (361)</li>
+</ul>
+</aside>
+<aside id="media_image-2" class="widget widget_media_image"><p class="widget-title">Why So Many Top Hackers Hail from Russia</p><a href="https://krebsonsecurity.com/2017/06/why-so-many-top-hackers-hail-from-russia/"><img width="580" height="389" src="https://krebsonsecurity.com/wp-content/uploads/2017/06/computered-580x389.png" class="image wp-image-39684  attachment-medium size-medium" alt="" loading="lazy" style="max-width: 100%; height: auto;" srcset="https://krebsonsecurity.com/wp-content/uploads/2017/06/computered-580x389.png 580w, https://krebsonsecurity.com/wp-content/uploads/2017/06/computered-768x514.png 768w, https://krebsonsecurity.com/wp-content/uploads/2017/06/computered-940x630.png 940w, https://krebsonsecurity.com/wp-content/uploads/2017/06/computered.png 1551w" sizes="(max-width: 580px) 100vw, 580px" /></a></aside><aside id="widget_sp_image-11" class="widget widget_sp_image"><p class="widget-title">Category: Web Fraud 2.0</p><a href="https://krebsonsecurity.com/category/web-fraud-2-0/" target="_blank" class="widget_sp_image-image-link" title="Category: Web Fraud 2.0"><img width="227" height="400" alt="Criminnovations" class="attachment-medium aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2013/11/cybercrimeinnovations-227x400.png" /></a><div class="widget_sp_image-description" ><p>Innovations from the Underground</p>
+</div></aside><aside id="widget_sp_image-12" class="widget widget_sp_image"><a href="https://krebsonsecurity.com/2014/03/are-credit-monitoring-services-worth-it/" target="_blank" class="widget_sp_image-image-link"><img width="285" height="189" class="attachment-medium aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2014/03/shreddedID-copy-285x189.png 285w, https://krebsonsecurity.com/wp-content/uploads/2014/03/shreddedID-copy-600x399.png 600w, https://krebsonsecurity.com/wp-content/uploads/2014/03/shreddedID-copy.png 849w" sizes="(max-width: 285px) 100vw, 285px" src="https://krebsonsecurity.com/wp-content/uploads/2014/03/shreddedID-copy-285x189.png" /></a><div class="widget_sp_image-description" ><p>ID Protection Services Examined</p>
+</div></aside><aside id="widget_sp_image-13" class="widget widget_sp_image"><p class="widget-title">Is Antivirus Dead?</p><a href="https://krebsonsecurity.com/2014/05/antivirus-is-dead-long-live-antivirus/" target="_blank" class="widget_sp_image-image-link" title="Is Antivirus Dead?"><img width="285" height="161" alt="Is Antivirus Dead?" class="attachment-medium aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2014/05/cryptservices-285x161.png 285w, https://krebsonsecurity.com/wp-content/uploads/2014/05/cryptservices-600x339.png 600w, https://krebsonsecurity.com/wp-content/uploads/2014/05/cryptservices.png 945w" sizes="(max-width: 285px) 100vw, 285px" src="https://krebsonsecurity.com/wp-content/uploads/2014/05/cryptservices-285x161.png" /></a><div class="widget_sp_image-description" ><p>The reasons for its decline</p>
+</div></aside><aside id="widget_sp_image-14" class="widget widget_sp_image"><p class="widget-title">The Growing Tax Fraud Menace</p><a href="https://krebsonsecurity.com/category/tax-refund-fraud/" target="_blank" class="widget_sp_image-image-link" title="The Growing Tax Fraud Menace"><img width="285" height="285" alt="The Growing Tax Fraud Menace" class="attachment-medium aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2014/04/taxfraud-285x285.jpg 285w, https://krebsonsecurity.com/wp-content/uploads/2014/04/taxfraud-150x150.jpg 150w, https://krebsonsecurity.com/wp-content/uploads/2014/04/taxfraud-600x600.jpg 600w, https://krebsonsecurity.com/wp-content/uploads/2014/04/taxfraud.jpg 693w" sizes="(max-width: 285px) 100vw, 285px" src="https://krebsonsecurity.com/wp-content/uploads/2014/04/taxfraud-285x285.jpg" /></a><div class="widget_sp_image-description" ><p>File 'em Before the Bad Guys Can </p>
+</div></aside><aside id="widget_sp_image-17" class="widget widget_sp_image"><p class="widget-title">Inside a Carding Shop</p><a href="https://krebsonsecurity.com/2014/06/peek-inside-a-professional-carding-shop/" target="_blank" class="widget_sp_image-image-link" title="Inside a Carding Shop"><img width="194" height="340" alt="Inside a Carding Shop" class="attachment-medium aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2014/06/mcdumpalsjoined.png" /></a><div class="widget_sp_image-description" ><p>A crash course in carding. </p>
+</div></aside><aside id="widget_sp_image-18" class="widget widget_sp_image"><p class="widget-title">Beware Social Security Fraud</p><a href="https://krebsonsecurity.com/2013/09/crooks-hijack-retirement-funds-via-ssa-portal/" target="_blank" class="widget_sp_image-image-link" title="Beware Social Security Fraud"><img width="285" height="293" alt="Beware Social Security Fraud" class="attachment-full aligncenter" style="max-width: 100%;" src="https://krebsonsecurity.com/wp-content/uploads/2016/09/myssn-285x293.png" /></a><div class="widget_sp_image-description" ><p>Sign up, or Be Signed Up! </p>
+</div></aside><aside id="widget_sp_image-2" class="widget widget_sp_image"><p class="widget-title">How Was Your Card Stolen?</p><a href="https://krebsonsecurity.com/2015/01/how-was-your-credit-card-stolen/" target="_blank" class="widget_sp_image-image-link" title="How Was Your Card Stolen?"><img width="285" height="285" alt="How Was Your Card Stolen?" class="attachment-full aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2016/09/carddominoes-285x285.jpg 285w, https://krebsonsecurity.com/wp-content/uploads/2016/09/carddominoes-285x285-150x150.jpg 150w" sizes="(max-width: 285px) 100vw, 285px" src="https://krebsonsecurity.com/wp-content/uploads/2016/09/carddominoes-285x285.jpg" /></a><div class="widget_sp_image-description" ><p>Finding out is not so easy. </p>
+</div></aside><aside id="widget_sp_image-22" class="widget widget_sp_image"><p class="widget-title">Krebs&#8217;s 3 Rules&#8230;</p><a href="https://krebsonsecurity.com/2011/05/krebss-3-basic-rules-for-online-safety/" target="_blank" class="widget_sp_image-image-link" title="Krebs&#8217;s 3 Rules&#8230;"><img width="300" height="300" alt="Krebs&#8217;s 3 Rules&#8230;" class="attachment-medium aligncenter" style="max-width: 100%;" srcset="https://krebsonsecurity.com/wp-content/uploads/2011/05/three-300x300.jpg 300w, https://krebsonsecurity.com/wp-content/uploads/2011/05/three-150x150.jpg 150w, https://krebsonsecurity.com/wp-content/uploads/2011/05/three.jpg 347w" sizes="(max-width: 300px) 100vw, 300px" src="https://krebsonsecurity.com/wp-content/uploads/2011/05/three-300x300.jpg" /></a><div class="widget_sp_image-description" ><p>...For Online Safety. </p>
+</div></aside>		</div><!-- #secondary -->
+		</div><!-- #main .wrapper -->
+	
+	<div id="publisho-footer" class="widget-area">
+				<div class="footer-widget">
+                				</div>
+				<div class="footer-widget">
+								</div>
+				<div class="footer-widget">
+								</div>
+	</div>
+
+	<div class="site-wordpress">
+					&copy; Krebs on Security<br>
+	</div>
+	<!-- .site-info --><div class="clear"></div>
+</div><!-- #page -->
+
+<script type='text/javascript' src='https://krebsonsecurity.com/wp-content/themes/kos-mar2021/js/slicknav.js?ver=5.8.2' id='publisho-mobile-navigation-js'></script>
+<script type='text/javascript' src='https://krebsonsecurity.com/wp-includes/js/wp-embed.min.js?ver=5.8.2' id='wp-embed-js'></script>
+</body>
+</html>
+<!--
+Performance optimized by W3 Total Cache. Learn more: https://www.boldgrid.com/w3-total-cache/
+
+Object Caching 255/440 objects using memcached
+Page Caching using memcached 
+Database Caching 7/33 queries in 0.024 seconds using memcached
+
+Served from: krebsonsecurity.com @ 2021-12-10 15:34:54 by W3 Total Cache
+-->
