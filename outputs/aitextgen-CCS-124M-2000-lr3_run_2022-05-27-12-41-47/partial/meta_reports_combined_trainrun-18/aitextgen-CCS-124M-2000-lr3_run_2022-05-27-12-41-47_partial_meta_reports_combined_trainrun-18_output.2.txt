@@ -1,0 +1,141 @@
+The contents of................................ disk including the partitioning scheme, all partitions
+and even unpartitioned areas while a logical copy on disk level is just a copy of one logical
+partition.
+33
+
+Digital Forensics Guide
+
+A digital forensic analyst should typically aim for a full physical copy of a whole disk because it
+includes deleted and formerly allocated areas. However, when dealing with encryption a logical
+copy of the unlocked data is preferred to a physical copy of the encrypted data. There can also be
+situations during a search and seizure operation where creating a physical copy might not be
+possible, out-of-scope or simply not covered by the warrant or other authority.
+Both, the physical and the logical copy can be written in different ways. Either they are cloned,
+which means that the data is directly copied bit-by-bit from one storage medium to another, or
+they are written as an image file, which means that all data is copied bit-by-bit from one storage
+medium into one or more image files on a target medium. The latter technique is the more
+common one as writing the data into an image file offers some advantages as laid out in the
+following chapter.
+3.2.1.7 Forensic image formats
+Besides a raw image (raw/dd) that contains all data of the original medium within a raw file there
+are a few commonly accepted forensic image formats available. Those forensic imaging formats
+have in common that they are not able to be easily manipulated due to built-in checksums and
+case metadata. The most common formats are the Expert Witness Format (EWF(x)01) and
+the Advanced Forensic Format (AFF). They include features like:
+
+
+Compression of data
+
+
+
+Encryption of data
+
+
+
+Error-Checks
+
+
+
+Case Metadata
+
+
+
+Hash sums
+
+
+
+Hash sums
+
+
+
+Splitting the image in chunks
+
+In addition to that, different forensic software solutions come with their own propitiatory image
+formats with similar features. However, a forensic image format should be chosen that is supported
+by the largest variety of software.
+Special attention should be given to the image format when the image is to be analysed in a
+different
+====================
+The contents of................................ disk were:
+
+sti
+
+tu
+
+Directory of Attachines
+
+c.
+
+Key fingerprint
+= AF19
+FA27
+2F94 998D FDB5 DE3D F8B5 06E4 A169 4E46
+
+©
+
+SA
+
+File Timings Explained
+
+©
+
+SA
+
+NS
+
+In
+
+The Hard disk was installed into the external caddie and connected to the USB port
+of the investigators patched laptop. The Linux dd command was used to copy
+portions of the /dev directory in an attempt to identify which directory the drive had
+been mounted to. This had proved in the investigators experience to be the best
+method as the /dev directory used by the kernel varied between devices. The procedure involved using dd with the syntax below:
+
+©
+
+#/ dd if=/dev/sda of=/tmp/mount_test1
+This was executed and allowed to run for several seconds before being interrupted
+and the output file being examined with vi. If the output file was blank a different
+/dev/ folder would b selected. Success was often being achieved within 2
+guesses.
+Once the correct directory was identified a dcfldd18 command was executed to
+image the whole drive.
+
+27 of 57
+© SANS Institute 2005
+
+Author retains full rights
+
+Item 35 – Imaging in progress
+
+igh
+ts.
+
+The dcfldd command (written by the Defence Computer Forensics Laboratory as
+indicated by the ‘dcfl’ bit inform of the dd) was used image process as it is an
+improvement over the native dd command. The labs basically modified the native
+dd command so it performs an MD5 hash of the HDD as it images it (in the above
+screenshot it is the ‘hashlog’) and it also displays the counters showing the
+progress of the execution.
+
+05
+,A
+
+ut
+
+ho
+
+rr
+
+eta
+
+ins
+
+fu
+ll r
+
+Once the whole disk image had been performed an md5 hash was taken of the
+source drive and this was compared with dcfldd hashlog. As these were found to
+be exactly the same the investigator has assumed the image to be a bit-for-bit
+
+====================
