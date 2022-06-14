@@ -1,0 +1,324 @@
+Log entry found: Firewall (Type: Firewall) blocked. [Blocked network traffic protocol 
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+====================
+Log entry found: Firewall (Type: Firewall) blocked. [Blocked network traffic protocol                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+====================
+Log entry found: Firewall (Type: Firewall) blocked. [Blocked network traffic protocol   
+(type: [default] Network)]
+
+How is that blocking happening? How does it block firewalls? Is this something I'm doing that should work, or if it's the correct way to do it? Thanks.
+
+A:
+
+In the firewall configuration file you will find this:
+firewall:
+    [type: [default] Network]
+    [allow-on-ip]
+    [allow-on-domain]
+    [allow-on-hostname]
+    [allow-on-hostname-name]
+    [allow-on-password]
+    [allow-on-port]
+    [allow-on-max-ip-length]
+    [allow-on-max-domain-size]
+    [allow-on-max-ip-length-allowed]
+    [allow-on-server]
+    [allow-on-ssl]
+    [allow-on-ssl-enabled]
+    [allow-on-ssl-name]
+    [allow-on-ssl-password]
+    [allow-on-ssl-cert]
+    [allow-on-ssl-cert-name]
+
+In this section I'm using the "allowed-on-ip" as the first parameter in the "firewall":
+firewall:
+    [type: [default] Network]
+    [allow-on-ip]
+    [allow-on-domain]
+    [allow-on-hostname]
+    [allow-on-hostname-name]
+    [allow-on-port]
+    [allow-on-max-ip-length]
+    [allow-on-max-domain-size]
+    [allow-on-max-ip-length-allowed]
+    [allow-on-max-domain-size-allowed]
+    [allow-on-server]
+    [allow-on-ssl]
+    [allow-on-ssl-enabled]
+    [allow-on-ssl-name]
+    [allow-on-ssl-password]
+    [allow-on-ssl-cert]
+    [allow-on-ssl-cert-name]
+
+In this case I'm using the ip="127.0.0.1" from the "allowed-on-ip" in the "firewall" section as the first parameter.
+
+
+====================
+Log entry found: Firewall (Type: Firewall) blocked. [Blocked network traffic protocol iphone]
+<thesi> jcw, that is correct. I think you should check for a firewall for a few months before you try to update the firewalls.
+<mwenni> hey! so do i just need to run apt-get update && apt-get upgrade when it is run on another host but that fails?
+<mwenni> or is it worth upgrading to a newer machine and then having to wait 2 weeks after upgrade if it fails?
+<kalikiana> mwenni: i've not tried the upgrade-reboot but i've been hoping to have a similar setup with a new machine, but I think it is a bit premature to say, and in the interest of keeping things running, you could try apt-get update -f when the upgrade is done.
+<thesi> mwenni: that's fine. The problem was that I have no internet and I didn't receive any notification of my new machine, I was trying to update the firewalls, and as soon as I was done updating everything started working right away.
+<mwenni> kalikiana, you'll have to reboot and try again, if that isn't the case, then you will have to run apt-get upgrade -f when it is done
+<mwenni> ok, but I was wondering if the firewall was blocking anything?
+<kalikiana> mwenni: ok. so the firewall is blocking a lot of traffic? I've already had a couple days to try and set it up in the firewall, but that just made things a little fuzzy for me.
+<kalikiana> mwenni: yes
+<mwenni> kalikiana, what you should do is set a "broadcom netfilter" on the server running the firewalls (if they are running on a different network) so that it is not blocking anything
+<kalikiana> i have to reboot again and try to upgrade
+<mwenni> kalikiana, is there any way to know that if the firewall was blocking things before the firewalls were running?
+<kalikiana> mwenni: it is, if I'm running the server on a newer machine, you could try and upgrade in that case
+<mwenni> kalikiana, it will work fine if you try and reboot and try again
+<mwenni> kalikiana, the firewall will be blocking a lot of traffic on the old machine
+<kalikiana> mwenni: but I have to reboot again, so I might be running the upgrade on another machine now
+<mwenni> kalikiana, but if you try to restart, try to login again and try again
+<mwenni> ok
+<kalikiana> mwenni: I don't know if it works, I'll try it and see if it works
+<mwenni> ok. I am running on a new machine, so I'm not sure how I should do it.
+<mwenni> you should reboot again and try to do the upgrade again
+<mwenni> if it's a problem then you should reboot again and try again
+<kalikiana> mwenni: ok. I am running on a new machine, so I'm not sure how I should do it.
+<mwenni> kalikiana, it's fine, you should reboot again and try again
+<kalikiana> mwenni: ok, you will have to reboot again to restart the server.
+<kalikiana> mwenni: but if you try to do it again
+<kalikiana> i think that is a bad idea, since it's probably going to break my security
+<kalikiana> mwenni: I would run the upgrade again with the old machine if it was working fine, but then I'd start back again with a new machine
+<kalikiana> mwenni: if it's a problem then you can use apt-get upgrade -f when you are done
+<mwenni> kalikiana, then you should reboot and try again, or else you'll have to reboot again
+<mwenni> kalikiana, ok. it would work again, I'll run the upgrade again, I think
+<kalikiana> mwenni: ok. then, you can reboot again, or you
+====================
+Log entry found: Firewall (Type: Firewall) blocked. [Blocked network traffic protocol  [IP 4.0/255.255.255.0  [4.0/255.255.255.0]  ]  ]  |
+| [Blocked network traffic protocol [IP 4.0/255.255.255.0  [4.0/255.255.255.0]  ]  
+| [Blocked network traffic protocol [IP 4.0/255.255.255.0  [4.0/255.255.255.0]  ]  
+| [Blocked network traffic protocol [IP 4.0/255.255.255.0  [4.0/255.255.255.0]  ]  
+| [Blocked network traffic protocol [IP 4.0/255.255.255.0  [4.0/255.255.255.0]  ]  
+| [Blocked network traffic protocol [IP 4.0/255.255.255.0  [4.0/255.255.255.0]  ]  
+| [Blocked network traffic protocol [IP 4.0/255.255.255.0  [4.0/255.255.255.0]  ]  
+| [Blocked network traffic protocol [IP 4.0/255.255.255.0  [4.0/255.255.255.0]  ]  
+| [Blocked network traffic protocol [IP 4.0/255.255.255.0  [4.0/255.255.255.0]  ]  
+| [Blocked network traffic protocol [IP 4.0/255.255.255.0  [4.0/255.255.255.0]  ]  
+| [Blocked network traffic protocol [IP 4.0/255.255.255.0  [4.0/255.255.255.0]  ]  
+| [Blocked network traffic protocol [IP 4.0/255.255.255.0  [4.0/255.255.255.0]  ]  
+| [Blocked network traffic protocol [IP 4.0/255.255.255.0  [4.0/255.255.255.0]  ]  
+| [Blocked network traffic protocol [IP 4.0/255.255.255.0  [4.0/255.255.255.0]  ]  
+| [Blocked network traffic protocol [IP 4.0/255.255.255.0  [4.0/255.255.255.0]  ]  
+| [Blocked network traffic protocol [IP 4.0/255.255.255.0  [4.0/255.255.255.0]  ]  
+| [Blocked network traffic protocol [IP 4.0/255.255.255.0  [4.0/255.255.255.0]  ]  
+| [Blocked network traffic protocol [IP 4.0/255.255.255.0  [4.0/255.255.255.0]  ]  
+| [Blocked network traffic protocol [IP 4.0/255.255.255.0  [4.0/255.255.255.0]  ]  
+| [Blocked network traffic protocol [IP 4.0/255.255.255.0  [4.0/255.255.255.0]  ]  
+| [Blocked network traffic protocol [IP 4.0/255.255.255.0  [4.0/255.255.255.0]  ]  
+| [Blocked network traffic protocol [IP 4.0/255.255.255.0  [4.0/255.255.255.0]  ]  
+| [Blocked network traffic protocol [IP 4.0/255.255.255.0  [4.0/255.255.255.0]  ]  
+| [Blocked network traffic protocol [IP 4.0/255.255.255.0  [4.0/255.255.255.0]  ]  
+| [Blocked network traffic protocol [IP 4.0/255.255.255.0  [4.0/255.255.255.0]  ]  
+| [Blocked network traffic protocol [IP
+====================
+Log entry found: Firewall (Type: Firewall) blocked. [Blocked network traffic protocol                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+====================
+Log entry found: Firewall (Type: Firewall) blocked. [Blocked network traffic protocol 
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+====================
+Log entry found: Firewall (Type: Firewall) blocked. [Blocked network traffic protocol irc.]
+
+**Warning:** If the server is blocking traffic from the Internet to its own IP address, the connection will fail.
+
+### Error log information
+
+**Error Log:**
+
+---
+
+* [**Firewall Server Failure**] Firewall (HTTP Request, Not Found)
+
+* [**Error 404 Not Found**] Failed to receive any requests for "http://:4547/" to "http://:4547/" or "http://:4547/"
+
+* [**Error 404 Not Found**] Firewall (HTTP Request, Not Found)
+
+* [**Firewall Server Not Detected**] Firewall (HTTP Request, Not Found)
+
+* [**Error 404 Not Found**] Firewall (HTTP Request, Not Found)
+
+* [**Error 404 Not Found**] Firewall (HTTP Request, Not Found)
+
+* [**Error 404 Not Found**] Firewall (HTTP Request, Not Found)
+
+* [**Firewall Server Found**] Firewall (HTTP Request, Not Found)
+
+* [**Error 404 Not Found**] Firewall (HTTP Request, Not Found)
+
+* [**Error 404 Not Found**] Firewall (HTTP Request, Not Found)
+
+* [**Error 404 Not Found**] Firewall (HTTP Request, Not Found)
+
+* [**Error 404 Not Found**] Firewall (HTTP Request, Not Found)
+
+* [**Error 404 Not Found**] Firewall (HTTP Request, Not Found)
+
+### Error log warning log
+
+**Error Log:**
+
+---
+
+* [**Firewall Server Failed**] Firewall (HTTP Request, Not Found)
+
+* [**Http Request Connection Request Failed**] Firewall (HTTP Request, Not Found)
+
+* [**Http Request Access Denied**] Request Access Denied
+
+* [**Http Request Access Denied**] Access Denied
+
+* [**Http Request Denied**] Denied
+
+* [**Http Request Denied**] Denied
+
+* [**Http Request Denied**] Denied
+
+* [**Http Request Denied**] Denied
+
+* [**Http Request Denied**] Denied
+
+* [**Http Request Denied**] Denied
+
+* [**Http Request Denied**] Denied
+
+* [**Http Request Denied**] Denied
+
+* [**Http Request Denied**] Denied
+
+* [**Http Request Denied**] Denied
+
+* [**Http Request Denied**] Denied
+
+* [**Http Request Denied**] Denied
+
+### Error message
+
+**Error Message:**
+
+---
+
+* [**Http Request Denied**] Firewall (HTTP Request, Not Found)
+
+* [**Http Request Denied**] Request Denied
+
+* [**Http Request Denied**] Denied
+
+* [**Http Request Denied**] Denied
+
+* [**Http Request Denied**] Denied
+
+* [**Http Request Denied**] Denied
+
+* [**Http Request Denied**] Denied
+
+* [**Http Request Denied**] Denied
+
+* [**Http Request Denied**] Denied
+
+* [**Http Request Denied**] Denied
+
+* [**Http Request Denied**] Denied
+
+* [**Http Request Denied**] Denied
+
+* [**Http Request Denied**] Denied
+
+* [**Http Request Denied**] Denied
+
+* [**Http Request Denied**] Denied
+
+* [**Http Request Denied**] Denied
+
+* [**Http Request Denied**] Denied
+
+* [**Http Request Denied**] Denied
+
+* [**Http Request Denied**] Denied
+
+* [**Http Request Denied**] Denied
+
+* [**Http Request Denied**] Denied
+
+* [**Http Request Denied**] Denied
+
+* [**Http Request Denied**] Denied
+
+* [**Http Request Denied**] Denied
+
+* [**Http Request Denied**] Denied
+
+### Error log warning log
+
+**Error Log:**
+
+---
+
+* [**Http Request Denied**] Firewall (HTTP Request, Not Found)
+
+* [**Http Request Denied**] Request Denied
+
+* [**Http Request
+====================
+Log entry found: Firewall (Type: Firewall) blocked. [Blocked network traffic protocol 
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+====================
+Log entry found: Firewall (Type: Firewall) blocked. [Blocked network traffic protocol 
+in Firewall (type: Firewall)] The [Blocked network traffic protocol 
+in Firewall (type: Firewall)] The [Blocked network traffic protocol 
+in Firewall (type: Firewall)] The [Blocked network traffic protocol 
+in Firewall (type: Firewall)] The [Blocked network traffic protocol 
+in Firewall (type: Firewall)] The [Blocked network traffic protocol 
+in Firewall (type: Firewall)] The [Blocked network traffic protocol 
+in Firewall (type: Firewall)] The [Blocked network traffic protocol 
+in Firewall (type: Firewall)] The [Blocked network traffic protocol 
+in Firewall (type: Firewall)] The [Blocked network traffic protocol 
+in Firewall (type: Firewall)] The [Blocked network traffic protocol 
+in Firewall (type: Firewall)] The [Blocked network traffic protocol 
+in Firewall (type: Firewall)] The [Blocked network traffic protocol 
+in Firewall (type: Firewall)] The [Blocked network traffic protocol 
+in Firewall (type: Firewall)] The [Blocked network traffic protocol 
+in Firewall (type: Firewall)] The [Blocked network traffic protocol 
+in Firewall (type: Firewall)] The [Blocked network traffic protocol 
+in Firewall (type: Firewall)] The [Blocked network traffic protocol 
+in Firewall (type: Firewall)] The [Blocked network traffic protocol 
+in Firewall (type: Firewall)] The [Blocked network traffic protocol 
+in Firewall (type: Firewall)] The [Blocked network traffic protocol 
+in Firewall (type: Firewall)] The [Blocked network traffic protocol 
+in Firewall (type: Firewall)] The [Blocked network traffic protocol 
+in Firewall (type: Firewall)] The [Blocked network traffic protocol 
+in Firewall (type: Firewall)] The [Blocked network traffic protocol 
+in Firewall (type: Firewall)] The [Blocked network traffic protocol 
+in Firewall (type: Firewall)] The [Blocked network traffic protocol 
+in Firewall (type: Firewall)] The [Blocked network traffic protocol 
+in Firewall (type: Firewall)] The [Blocked network traffic protocol 
+in Firewall (type: Firewall)] The [Blocked network traffic protocol 
+in Firewall (type: Firewall)] The [Blocked network traffic protocol 
+in Firewall (type: Firewall)] The [Blocked network traffic protocol 
+in Firewall (type: Firewall)] The [Blocked network traffic protocol 
+in Firewall (type: Firewall)] The [Blocked network traffic protocol 
+in Firewall (type: Firewall)] The [Blocked network traffic protocol 
+in Firewall (type: Firewall)] The [Blocked network traffic protocol 
+in Firewall (type: Firewall)] The [Blocked network traffic protocol 
+in Firewall (type: Firewall)] The [Blocked network traffic protocol 
+in Firewall (type: Firewall)] The [Blocked network traffic protocol 
+in Firewall (type: Firewall)] The [Blocked network traffic protocol 
+in Firewall (type: Firewall)] The [Blocked network traffic protocol 
+in Firewall (type: Firewall)] The [Blocked network traffic protocol 
+in Firewall (type: Firewall)] The [Blocked network traffic protocol 
+in Firewall (type: Firewall)] The [Blocked network traffic protocol 
+in Firewall (type: Firewall)] The [Blocked network traffic protocol 
+in Firewall (type: Firewall)] The [Blocked network traffic protocol 
+in Firewall (type: Firewall)] The [Blocked network traffic protocol 
+in Firewall (type: Firewall)] The [Blocked network traffic protocol 
+in Firewall (type: Firewall)] The [Blocked network traffic protocol 
+in Firewall (type: Firewall)] The [Blocked network traffic protocol 
+in Firewall (type: Firewall)] The [Blocked network traffic protocol 
+in Firewall (type: Firewall)] The [Blocked network traffic protocol 
+in Firewall (type: Firewall)] The [Blocked network traffic protocol 
+in Firewall (type: Firewall)] The [Blocked network traffic protocol 
+in Firewall (type: Firewall)] The [Blocked network traffic protocol 
+in Firewall (type:
+====================
